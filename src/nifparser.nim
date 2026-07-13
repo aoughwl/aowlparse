@@ -15,18 +15,28 @@ import std/[syncio, os]
 import nifbuilder
 import tokens, lexer, parser
 
-proc parseToFile(inp, outp, fileField: string; curly: bool; opts: LexOptions) =
-  var src = ""
-  try:
-    src = readFile(inp)
-  except:
-    write stderr, "cannot read file: " & inp & "\n"
+proc runParse(src, outp, fileField: string; toStdout, strict, curly: bool;
+              opts: LexOptions; maxDepth: int) =
+  ## Tokenize `src`, parse it, and emit the NIF to `outp` (or stdout). When
+  ## `strict` is set and the lexer counted any unknown/illegal byte, exit 1.
+  var errors = 0
+  let toks = tokenize(src, opts, errors)
+  var ps = initParser(toks, fileField, curly, maxDepth)
+  if toStdout:
+    # nifbuilder can target a file or an in-memory buffer; for stdout we build
+    # in memory then stream the bytes out.
+    var b = nifbuilder.open(4096)
+    parseModule(ps, b)
+    let s = b.extract()
+    write stdout, s
+  else:
+    var b = nifbuilder.open(outp)
+    parseModule(ps, b)
+    b.close()
+  if strict and errors > 0:
+    write stderr, "nifparser: " & $errors &
+      " unknown/illegal byte(s) in input [--strict]\n"
     quit 1
-  let toks = tokenize(src, opts)
-  var ps = initParser(toks, fileField, curly)
-  var b = nifbuilder.open(outp)
-  parseModule(ps, b)
-  b.close()
 
 proc usage() =
   write stderr, "nifparser — Nim source -> NIF (nifler-compatible)\n"
@@ -40,6 +50,33 @@ proc usage() =
   write stderr, "  --indent-width:N   advisory: warn when a line's indent isn't a multiple\n"
   write stderr, "                       of N columns (default 0 = disabled; never affects\n"
   write stderr, "                       parsing — the off-side rule stays relative)\n"
+  write stderr, "  --indent-consistency  advisory: derive the indent step from the first\n"
+  write stderr, "                       deeper line, then warn on any indent not a multiple\n"
+  write stderr, "                       of it (default off; never affects parsing)\n"
+  write stderr, "  --tab-stops:MODE   tab column advance when tabs permitted (default hard):\n"
+  write stderr, "                       hard    additive (col += tab-width)\n"
+  write stderr, "                       round   advance to next multiple of tab-width\n"
+  write stderr, "  --final-newline:require  warn if the source lacks a terminating newline\n"
+  write stderr, "                       (default off)\n"
+  write stderr, "  --newline:MODE     assert an EOL convention (default any):\n"
+  write stderr, "                       any     accept any line ending (current behavior)\n"
+  write stderr, "                       lf      warn on any non-LF line ending\n"
+  write stderr, "                       crlf    warn on any non-CRLF line ending\n"
+  write stderr, "  --trailing-whitespace:warn  warn on any line with spaces/tabs before its\n"
+  write stderr, "                       newline (default off; advisory only)\n"
+  write stderr, "  --bom:MODE         leading UTF-8 BOM handling (default: legacy skip):\n"
+  write stderr, "                       strip   consume a BOM without shifting line-1 columns\n"
+  write stderr, "                       reject  warn/error on a leading BOM\n"
+  write stderr, "  --doc-comments:MODE  standalone doc comments (default on):\n"
+  write stderr, "                       on      emit as a (comment) node (nifler behavior)\n"
+  write stderr, "                       off     drop standalone doc comments entirely\n"
+  write stderr, "  --strict           exit non-zero if the lexer hit an unknown/illegal byte\n"
+  write stderr, "                       (default off: such bytes are skipped, exit 0)\n"
+  write stderr, "  --max-depth:N      abort with non-zero exit if parse nesting exceeds N\n"
+  write stderr, "                       (default 0 = unlimited)\n"
+  write stderr, "  --stdin            read source from stdin (also: input arg `-`)\n"
+  write stderr, "  --stdout           write NIF to stdout (also: output arg `-`)\n"
+  write stderr, "  --filename:PATH    line-info path to record for stdin (default `stdin`)\n"
   quit 1
 
 proc hasPrefix(s, pre: string): bool =
@@ -77,11 +114,24 @@ proc main() =
   var params: seq[string] = @[]
   var curly = false
   var opts = defaultLexOptions
+  var strict = false
+  var maxDepth = 0
+  var useStdin = false
+  var useStdout = false
+  var filenameOverride = ""
   let cli = commandLineParams()
   for ci in 0 ..< cli.len:
     let a = cli[ci]
     if a == "--curly":
       curly = true
+    elif a == "--strict":
+      strict = true
+    elif a == "--stdin":
+      useStdin = true
+    elif a == "--stdout":
+      useStdout = true
+    elif a == "--indent-consistency":
+      opts.indentConsistency = true
     elif hasPrefix(a, "--tabs:"):
       case afterColon(a)
       of "spaces": opts.tabPolicy = tpSpaces
@@ -96,26 +146,104 @@ proc main() =
     elif hasPrefix(a, "--indent-width:"):
       opts.indentWidth = parseIntOr(afterColon(a), opts.indentWidth)
       if opts.indentWidth < 0: opts.indentWidth = 0
+    elif hasPrefix(a, "--tab-stops:"):
+      case afterColon(a)
+      of "hard": opts.tabStops = tsHard
+      of "round": opts.tabStops = tsRound
+      else:
+        write stderr, "unknown --tab-stops mode: " & afterColon(a) & "\n"
+        usage()
+    elif hasPrefix(a, "--final-newline:"):
+      case afterColon(a)
+      of "require": opts.finalNewlineRequire = true
+      else:
+        write stderr, "unknown --final-newline mode: " & afterColon(a) & "\n"
+        usage()
+    elif hasPrefix(a, "--newline:"):
+      case afterColon(a)
+      of "any": opts.newlinePolicy = nlAny
+      of "lf": opts.newlinePolicy = nlLf
+      of "crlf": opts.newlinePolicy = nlCrlf
+      else:
+        write stderr, "unknown --newline mode: " & afterColon(a) & "\n"
+        usage()
+    elif hasPrefix(a, "--trailing-whitespace:"):
+      case afterColon(a)
+      of "warn": opts.trailingWhitespaceWarn = true
+      else:
+        write stderr, "unknown --trailing-whitespace mode: " & afterColon(a) & "\n"
+        usage()
+    elif hasPrefix(a, "--bom:"):
+      case afterColon(a)
+      of "strip": opts.bomPolicy = bomStrip
+      of "reject": opts.bomPolicy = bomReject
+      else:
+        write stderr, "unknown --bom mode: " & afterColon(a) & "\n"
+        usage()
+    elif hasPrefix(a, "--doc-comments:"):
+      case afterColon(a)
+      of "on": opts.docComments = true
+      of "off": opts.docComments = false
+      else:
+        write stderr, "unknown --doc-comments mode: " & afterColon(a) & "\n"
+        usage()
+    elif hasPrefix(a, "--max-depth:"):
+      maxDepth = parseIntOr(afterColon(a), maxDepth)
+      if maxDepth < 0: maxDepth = 0
+    elif hasPrefix(a, "--filename:"):
+      filenameOverride = afterColon(a)
     else:
       params.add a
-  if params.len < 2:
+  if params.len < 1:
     usage()
   let action = params[0]
   if action != "p" and action != "parse":
     write stderr, "unknown command: " & action & "\n"
     usage()
-  let inp = params[1]
-  var outp = ""
-  if params.len >= 3:
-    outp = params[2]
-    let n = outp.len
-    if n < 4 or outp[n-4 .. n-1] != ".nif":
-      outp = outp & ".nif"
+  # Positional args after the action: [input] [output]. `-` at either slot means
+  # stdin/stdout, mirroring the `--stdin`/`--stdout` flags.
+  var inputArg = ""
+  var outputArg = ""
+  if params.len >= 2: inputArg = params[1]
+  if params.len >= 3: outputArg = params[2]
+  if inputArg == "-": useStdin = true
+  if outputArg == "-": useStdout = true
+  if not useStdin and inputArg == "":
+    write stderr, "no input file (use a path, `-`, or --stdin)\n"
+    usage()
+  # Read the source.
+  var src = ""
+  if useStdin:
+    try:
+      src = readAll(stdin)
+    except:
+      write stderr, "cannot read from stdin\n"
+      quit 1
   else:
-    outp = inp & ".p.nif"
+    try:
+      src = readFile(inputArg)
+    except:
+      write stderr, "cannot read file: " & inputArg & "\n"
+      quit 1
   # `fileField` is the path written into NIF line-info suffixes. nifler uses the
-  # cwd-relative path (portablePaths); the harness invokes both tools with the
-  # same relative path, so pass the input arg through verbatim.
-  parseToFile(inp, outp, inp, curly, opts)
+  # cwd-relative path; pass the input arg through verbatim for files. For stdin
+  # use `--filename:` if given, else the placeholder `stdin`.
+  var fileField = inputArg
+  if useStdin:
+    fileField = if filenameOverride.len > 0: filenameOverride else: "stdin"
+  # Resolve the output target.
+  var outp = ""
+  if not useStdout:
+    if outputArg != "" and outputArg != "-":
+      outp = outputArg
+      let n = outp.len
+      if n < 4 or outp[n-4 .. n-1] != ".nif":
+        outp = outp & ".nif"
+    elif useStdin:
+      # No output path and reading stdin → default to stdout.
+      useStdout = true
+    else:
+      outp = inputArg & ".p.nif"
+  runParse(src, outp, fileField, useStdout, strict, curly, opts, maxDepth)
 
 main()
