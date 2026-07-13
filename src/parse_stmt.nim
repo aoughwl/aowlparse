@@ -321,6 +321,58 @@ proc parseFor(ps: var Parser; b: var Builder; kwIdx: int; pl, pc: int32): int =
   result = ps.emitBody(b, colon, refIndent, firstVar.line, firstVar.col)
   b.endTree()
 
+proc parseTryExpr(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32) =
+  ## `try: X except: Y` in EXPRESSION position: bodies are bare expressions,
+  ## not `(stmts …)` (that shape is only for statement-position try).
+  let kw = ps.tok(int(lo))
+  b.addTree "try"
+  ps.emitInfo(b, kw.line, kw.col, pl, pc, false)
+  # depth-0 `except`/`finally` branch keyword positions in (lo, hi)
+  var branches: seq[int] = @[]
+  block:
+    var d = 0
+    var i = int(lo) + 1
+    while i < int(hi):
+      let t = ps.tok(i)
+      if isOpenBracket(t.kind): inc d
+      elif isCloseBracket(t.kind):
+        if d > 0: dec d
+      elif d == 0 and t.kind == tkKeyword and (t.s == "except" or t.s == "finally"):
+        branches.add i
+      inc i
+  let firstBranch = if branches.len > 0: branches[0] else: int(hi)
+  let colon = ps.findColon(int(lo), firstBranch)
+  if colon >= 0 and colon + 1 < firstBranch:
+    ps.parseExprRange(b, int32(colon + 1), int32(firstBranch), kw.line, kw.col)
+  else:
+    b.addEmpty
+  for bi in 0 ..< branches.len:
+    let bp = branches[bi]
+    let br = ps.tok(bp)
+    let bEnd = if bi + 1 < branches.len: branches[bi+1] else: int(hi)
+    let bcolon = ps.findColon(bp, bEnd)
+    if br.s == "except":
+      b.addTree "except"
+      ps.emitInfo(b, br.line, br.col, kw.line, kw.col, false)
+      if bcolon > bp + 1:
+        ps.parseExprRange(b, int32(bp + 1), int32(bcolon), br.line, br.col)  # exc type
+      else:
+        b.addEmpty
+      if bcolon >= 0 and bcolon + 1 < bEnd:
+        ps.parseExprRange(b, int32(bcolon + 1), int32(bEnd), br.line, br.col)
+      else:
+        b.addEmpty
+      b.endTree()
+    else:
+      b.addTree "fin"
+      ps.emitInfo(b, br.line, br.col, kw.line, kw.col, false)
+      if bcolon >= 0 and bcolon + 1 < bEnd:
+        ps.parseExprRange(b, int32(bcolon + 1), int32(bEnd), br.line, br.col)
+      else:
+        b.addEmpty
+      b.endTree()
+  b.endTree()
+
 proc parseTry(ps: var Parser; b: var Builder; kwIdx: int; pl, pc: int32): int =
   let kw = ps.tok(kwIdx)
   let refIndent = kw.col

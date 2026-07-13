@@ -235,8 +235,9 @@ proc parsePrimaryRange(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32) =
       ps.parseIfExpr(b, lo, hi, pl, pc)
       return
     of "try":
-      # `try: A except: B` in expression position → `(try …)`.
-      discard ps.parseTry(b, int(lo), pl, pc)
+      # `try: A except: B` in expression position → `(try A (except . B))`
+      # with BARE bodies (not `(stmts …)`).
+      ps.parseTryExpr(b, lo, hi, pl, pc)
       return
     of "proc", "func", "iterator":
       # anonymous routine expression (lambda): `proc (x): T = body`.

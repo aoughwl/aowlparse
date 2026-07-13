@@ -24,8 +24,9 @@ proc parseTypeDef(ps: var Parser; b: var Builder; nameIdx, typeKwCol: int; pl, p
 # --- helpers -----------------------------------------------------------------
 
 proc isPrefixTypeKw(s: string): bool =
-  s == "ref" or s == "ptr" or s == "var" or s == "out" or
-  s == "distinct" or s == "static"
+  # NB: `static`/`sink`/`lent` are NOT here — nifler renders `static[int]` as
+  # `(at static int)` and `static int` / `lent T` as `(cmd …)`, not a prefix tag.
+  s == "ref" or s == "ptr" or s == "var" or s == "out" or s == "distinct"
 
 proc prefixTypeTag(s: string): string =
   if s == "var": "mut"
@@ -79,6 +80,30 @@ proc parseTypeRange(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32) =
   # inline tuple type
   if first.kind == tkKeyword and first.s == "tuple":
     parseTupleInline(ps, b, lo, hi, pl, pc)
+    return
+  # parenthesized anonymous tuple type: `(string, int)` → `(tup string int)`,
+  # `(line: int32, col: int32)` → `(tup (kv line int32) …)`.
+  if first.kind == tkParLe and ps.matchClose(int(lo)) == int(hi) - 1:
+    let rb = int(hi) - 1
+    b.addTree "tup"
+    ps.emitInfo(b, first.line, first.col, pl, pc, false)
+    let elems = ps.splitArgs(int(lo) + 1, rb)
+    for ei in 0 ..< elems.len:
+      let eLo = elems[ei]
+      let eHi = if ei + 1 < elems.len: elems[ei+1] - 1 else: rb
+      if eLo >= eHi: continue
+      let colon = ps.depth0Colon(eLo, eHi)
+      if colon >= 0:
+        let nm = ps.tok(eLo)
+        b.addTree "kv"
+        ps.emitInfo(b, nm.line, nm.col, first.line, first.col, false)
+        b.addIdent nm.s
+        ps.emitInfo(b, nm.line, nm.col, nm.line, nm.col, false)
+        parseTypeRange(ps, b, int32(colon + 1), int32(eHi), nm.line, nm.col)
+        b.endTree()
+      else:
+        parseTypeRange(ps, b, int32(eLo), int32(eHi), first.line, first.col)
+    b.endTree()
     return
   # top-level binary operator (e.g. `T | U`) → infix
   let sp = ps.findSplit(int(lo), int(hi))
@@ -175,22 +200,35 @@ proc parseTupleInline(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32) =
   while lb < int(hi) and ps.tok(lb).kind != tkBracketLe: inc lb
   if lb < int(hi):
     let rb = ps.matchClose(lb)
-    let groups = ps.splitArgs(lb + 1, rb)
-    for gi in 0 ..< groups.len:
-      let gLo = groups[gi]
-      let gHi = if gi + 1 < groups.len: groups[gi+1] - 1 else: rb
-      # names up to ':'
-      var ci = gLo
+    # A field group is `name (, name)* : type` — the type is shared (duplicated
+    # into each `kv`). Groups are delimited by the comma AFTER a type, so we
+    # cannot just split on every comma (that would strip the type off all but
+    # the last name of a shared-type group like `a, b: int`).
+    var i = lb + 1
+    while i < rb:
       var names: seq[Token] = @[]
-      while ci < gHi and (ps.tok(ci).kind == tkIdent or ps.tok(ci).kind == tkKeyword):
-        names.add ps.tok(ci)
-        inc ci
-        if ci < gHi and ps.tok(ci).kind == tkComma: inc ci
+      while i < rb and (ps.tok(i).kind == tkIdent or ps.tok(i).kind == tkKeyword):
+        names.add ps.tok(i)
+        inc i
+        if i < rb and ps.tok(i).kind == tkComma: inc i
         else: break
       var tLo = -1
-      var tHi = gHi
-      if ci < gHi and ps.tok(ci).kind == tkColon:
-        tLo = ci + 1
+      var tHi = rb
+      if i < rb and ps.tok(i).kind == tkColon:
+        tLo = i + 1
+        # type runs to the next depth-0 comma (= group boundary) or `]`
+        var d = 0
+        var k = tLo
+        while k < rb:
+          let kk = ps.tok(k)
+          if isOpenBracket(kk.kind): inc d
+          elif isCloseBracket(kk.kind):
+            if d > 0: dec d
+          elif d == 0 and kk.kind == tkComma: break
+          inc k
+        tHi = k
+        i = k
+      if i < rb and ps.tok(i).kind == tkComma: inc i
       for nm in names:
         b.addTree "kv"
         ps.emitInfo(b, nm.line, nm.col, kw.line, kw.col, false)
@@ -201,6 +239,7 @@ proc parseTupleInline(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32) =
         else:
           b.addEmpty
         b.endTree()
+      if names.len == 0: inc i     # progress guard on unexpected tokens
   b.endTree()
 
 proc parseProcType(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32) =
