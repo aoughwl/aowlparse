@@ -216,7 +216,7 @@ proc parseTupleInline(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32) =
       var tHi = rb
       if i < rb and ps.tok(i).kind == tkColon:
         tLo = i + 1
-        # type runs to the next depth-0 comma (= group boundary) or `]`
+        # type runs to the next depth-0 group separator (`,` or `;`) or `]`
         var d = 0
         var k = tLo
         while k < rb:
@@ -224,11 +224,11 @@ proc parseTupleInline(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32) =
           if isOpenBracket(kk.kind): inc d
           elif isCloseBracket(kk.kind):
             if d > 0: dec d
-          elif d == 0 and kk.kind == tkComma: break
+          elif d == 0 and (kk.kind == tkComma or kk.kind == tkSemicolon): break
           inc k
         tHi = k
         i = k
-      if i < rb and ps.tok(i).kind == tkComma: inc i
+      if i < rb and (ps.tok(i).kind == tkComma or ps.tok(i).kind == tkSemicolon): inc i
       for nm in names:
         b.addTree "kv"
         ps.emitInfo(b, nm.line, nm.col, kw.line, kw.col, false)

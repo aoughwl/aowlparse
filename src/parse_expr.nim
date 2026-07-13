@@ -296,7 +296,11 @@ proc parsePrimaryRange(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32) =
       var isObj = false
       if starts.len > 0:
         let a0Hi = if starts.len > 1: starts[1] - 1 else: rp
-        isObj = ps.depth0Colon(starts[0], a0Hi) >= 0
+        # `(oconstr …)` only when the first arg is a named field `name: value`
+        # (head is a plain ident). A colon inside an `if`/`case` expression arg
+        # (`open(if c: a else: b)`) is NOT a named field → keep it a `call`.
+        isObj = ps.tok(starts[0]).kind == tkIdent and
+                ps.depth0Colon(starts[0], a0Hi) >= 0
       b.addTree(if isObj: "oconstr" else: "call")
       ps.emitInfo(b, opTok.line, opTok.col, pl, pc, false)   # node = '(' pos
       ps.parsePrimaryRange(b, lo, int32(k), opTok.line, opTok.col)
