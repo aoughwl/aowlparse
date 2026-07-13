@@ -423,10 +423,28 @@ proc parseSection(ps: var Parser; b: var Builder; kwIdx: int; pl, pc: int32;
     ps.parseSectionDef(b, kwIdx + 1, hi, tag, pl, pc)
     result = hi
 
+proc parsePragmaStmt(ps: var Parser; b: var Builder; braceIdx: int; pl, pc: int32): int =
+  ## A statement that starts with `{.` is a pragma statement, NOT a `{ }` set.
+  ## `{.pragmas.}: body` → `(pragmax (pragmas …) (stmts …))`; a bare
+  ## `{.pragmas.}` (e.g. `{.push ….}`) is just the `(pragmas …)` node.
+  let brace = ps.tok(braceIdx)
+  let rb = ps.matchClose(braceIdx)          # closing `}`
+  if ps.tok(rb + 1).kind == tkColon:
+    b.addTree "pragmax"
+    ps.emitInfo(b, brace.line, brace.col, pl, pc, false)   # pragmax = '{' pos
+    discard ps.parsePragmas(b, braceIdx, brace.line, brace.col)
+    result = ps.emitBody(b, rb + 1, brace.col, brace.line, brace.col)
+    b.endTree()
+  else:
+    result = ps.parsePragmas(b, braceIdx, pl, pc)
+
 proc parseStmt(ps: var Parser; b: var Builder; startIdx: int; pl, pc: int32): int =
   ## Emit one statement starting at token `startIdx`. Returns the index of the
   ## first token AFTER the statement.
   let t = ps.tok(startIdx)
+  # `{. …` at statement position is a pragma statement, not a set constructor.
+  if t.kind == tkCurlyLe and ps.tok(startIdx + 1).kind == tkDot:
+    return ps.parsePragmaStmt(b, startIdx, pl, pc)
   if t.kind == tkKeyword:
     case t.s
     of "proc": return ps.parseRoutine(b, startIdx, pl, pc, "proc")

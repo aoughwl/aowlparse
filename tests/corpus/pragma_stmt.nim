@@ -1,0 +1,3 @@
+proc bar() =
+  {.gcsafe.}:
+    discard
