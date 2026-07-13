@@ -384,7 +384,6 @@ proc lexNumber(lx: var Lexer): Token =
     # integer / unsigned suffix (i8/i16/i32/i64/u/u8/u16/u32/u64)
     result.suffix = sufl
 
-  result.base = int32(base)
   if isFloat:
     result.kind = tkFloatLit
     if floatText.len == 0: floatText = digits
@@ -417,17 +416,42 @@ proc lexIdent(lx: var Lexer): Token =
   if isKeyword(s):
     result.kind = tkKeyword
 
+const QuoteMergeChars = OperatorChars + {'(', ')', '[', ']', '{', '}'} - {':'}
+
 proc lexBackquotedIdent(lx: var Lexer): Token =
-  ## `` `foo` `` accent-quoted identifier — kept as a single identifier token
-  ## carrying the inner spelling (operators inside are preserved verbatim).
+  ## `` `foo bar` `` accent-quoted identifier. Nifler keeps this structural:
+  ## `(quoted <pieces>)`. The pieces follow the classic Nim `accQuoted` rule
+  ## (parser.nim:388): a maximal run of operator-like tokens (`tkOpr/tkDot/`
+  ## `tkDotDot/tkEquals/tkParLe..tkParDotRi`) coalesces into ONE piece, while
+  ## each ident/keyword/literal is its own piece. So `` `[]=` `` → one piece,
+  ## `` `value=` `` → `value`, `=`, `` `foo bar` `` → `foo`, `bar`.
   result = startToken(lx, tkIdent)
+  result.quoted = true
   advance lx # opening backtick
   var s = ""
+  var parts: seq[string] = @[]
   while lx.pos < lx.n and lx.cur != '`' and lx.cur != '\n':
-    s.add lx.cur
-    advance lx
+    let c = lx.cur
+    if c == ' ' or c == '\t':
+      advance lx
+    elif c in QuoteMergeChars:
+      var run = ""
+      while lx.pos < lx.n and lx.cur in QuoteMergeChars:
+        run.add lx.cur; s.add lx.cur; advance lx
+      parts.add run
+    elif isIdentStart(c) or isDigit(c):
+      var word = ""
+      while lx.pos < lx.n and isIdentCont(lx.cur):
+        word.add lx.cur; s.add lx.cur; advance lx
+      parts.add word
+    else:
+      # unknown byte inside backticks: attach to a lone piece
+      var one = ""
+      one.add c; s.add c; advance lx
+      parts.add one
   if lx.cur == '`': advance lx
   result.s = s
+  result.parts = parts
 
 proc skipBlockComment(lx: var Lexer) =
   ## `#[ ... ]#`, nesting-aware.
@@ -442,6 +466,19 @@ proc skipBlockComment(lx: var Lexer) =
     else:
       advance lx
 
+proc skipDocBlockComment(lx: var Lexer) =
+  ## `##[ ... ]##` doc block comment, nesting-aware (nests on `##[`, closes on
+  ## `]##`). Matches the classic lexer's `skipMultiLineComment(isDoc=true)`.
+  advance lx; advance lx; advance lx # '##['
+  var depth = 1
+  while lx.pos < lx.n and depth > 0:
+    if lx.cur == '#' and lx.peek(1) == '#' and lx.peek(2) == '[':
+      advance lx; advance lx; advance lx; inc depth
+    elif lx.cur == ']' and lx.peek(1) == '#' and lx.peek(2) == '#':
+      advance lx; advance lx; advance lx; dec depth
+    else:
+      advance lx
+
 proc tokenize*(src: string): seq[Token] =
   ## Produce the full token list terminated by a `tkEof`. Whitespace and
   ## comments are consumed; the off-side `indent` field marks first-on-line
@@ -449,6 +486,7 @@ proc tokenize*(src: string): seq[Token] =
   var lx = initLexer(src)
   result = @[]
   while lx.pos < lx.n:
+    let before = result.len
     let c = lx.cur
     if c == ' ' or c == '\t' or c == '\r':
       advance lx
@@ -457,6 +495,40 @@ proc tokenize*(src: string): seq[Token] =
     elif c == '#':
       if lx.peek(1) == '[':
         skipBlockComment(lx)
+      elif lx.peek(1) == '#' and lx.peek(2) == '[':
+        # `##[ … ]##` doc block comment. Like a standalone `##` doc comment,
+        # nifler emits a line-leading one as `(comment)` and drops a trailing
+        # one. We skip the whole (possibly nested) block, keeping only a
+        # line-leading token.
+        let standalone = lx.atLineStart
+        let t = startToken(lx, tkComment)
+        skipDocBlockComment(lx)
+        lx.atLineStart = false
+        if standalone: result.add t
+      elif lx.peek(1) == '#':
+        # `##` doc comment. Nifler makes a standalone one (at statement position,
+        # i.e. first token on its line) an `nkCommentStmt` → `(comment)`; a
+        # trailing one attaches to the preceding node's `.comment` and is dropped
+        # (structurally invisible). So we only keep line-leading doc comments as
+        # tokens; trailing ones are skipped like a plain `#`. Regular `#` below.
+        let standalone = lx.atLineStart
+        let t = startToken(lx, tkComment)
+        # The classic Nim lexer (`scanComment`) coalesces a run of consecutive
+        # `##` lines (no blank/code line between) into ONE comment token, so it
+        # is a single `nkCommentStmt`. Consume the whole run. Content is dropped
+        # (we emit a bare `(comment)`), so only the SPAN matters here.
+        while true:
+          while lx.pos < lx.n and lx.cur != '\n':
+            advance lx
+          if lx.cur != '\n': break
+          var k = 1
+          while lx.peek(k) == ' ' or lx.peek(k) == '\t': inc k
+          if lx.peek(k) == '#' and lx.peek(k+1) == '#':
+            while k > 0: advance lx; dec k   # step over the newline + indentation
+          else:
+            break
+        lx.atLineStart = false
+        if standalone: result.add t
       else:
         while lx.pos < lx.n and lx.cur != '\n':
           advance lx
@@ -504,6 +576,14 @@ proc tokenize*(src: string): seq[Token] =
       let t = startToken(lx, tkColon); lx.atLineStart = false; advance lx; result.add t
     elif c == '.' and lx.peek(1) notin OperatorChars and not isDigit(lx.peek(1)):
       let t = startToken(lx, tkDot); lx.atLineStart = false; advance lx; result.add t
+    elif c == '*' and lx.peek(1) == ':' and lx.peek(2) notin OperatorChars:
+      # `*:` is two tokens (`var v*: int`): the export `*` then the colon.
+      # Matches the classic Nim lexer's special case.
+      var t = startToken(lx, tkOperator)
+      t.s = "*"
+      advance lx
+      lx.atLineStart = false
+      result.add t
     elif c in OperatorChars:
       let t = lexOperator(lx)
       lx.atLineStart = false
@@ -511,6 +591,10 @@ proc tokenize*(src: string): seq[Token] =
     else:
       # Unknown byte: skip it.
       advance lx
+    # Record the end column of whatever token this iteration produced (lx now
+    # sits at the char just past it). Powers whitespace/adjacency checks.
+    if result.len > before:
+      result[result.len - 1].endCol = lx.col
   var eof = initToken(tkEof, lx.line, lx.col)
   eof.indent = 0
   result.add eof

@@ -4,3 +4,6 @@
 *.p.nif
 *.deps.nif
 __pycache__/
+/webtest/nc/
+/webtest/.*.tmp
+/nimcache_check/
