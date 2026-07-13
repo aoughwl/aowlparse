@@ -770,11 +770,10 @@ proc parseOneStmt(ps: var Parser; b: var Builder; startIdx: int; pl, pc: int32;
   if hiLimit < 0:
     let lineHi = ps.lineEnd(startIdx)
     let pcolon = ps.depth0Colon(startIdx, lineHi)
-    # Only a `:` that is the LAST token on the head line (an indented block
-    # follows) — the unambiguous do-block form. Guard against assignment RHS.
-    if pcolon == lineHi - 1 and pcolon > startIdx and
-       ps.tok(lineHi).indent > ps.tok(startIdx).col and
-       ps.findAssign(startIdx, pcolon) < 0:
+    # A depth-0 `:` in a non-keyword statement is a command/do-block body,
+    # `foo a: body` / `x.build y: body` (inline or on following lines). Guard
+    # against an assignment RHS (`x = …`).
+    if pcolon > startIdx and ps.findAssign(startIdx, pcolon) < 0:
       # exclude a colon owned by an unparenthesized if/when/case EXPRESSION in
       # the head (`x = if c: a`, `echo if c: a else: b`) — that is not a block.
       var cf = false
