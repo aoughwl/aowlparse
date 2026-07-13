@@ -30,7 +30,10 @@ proc parseCommand(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32) =
       ps.parseArg(b, int32(aLo), int32(aHi), callee.line, callee.col)
   b.endTree()
 
-proc parseExprStmt(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32) =
+proc parseExprStmt(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32): int =
+  ## Returns the consumed index (may extend past `hi` for a multi-line
+  ## control-flow assignment RHS, e.g. `x = if c:` with body on later lines).
+  result = int(hi)
   # A command call: bare-ident callee, then a space-separated argument that
   # begins a new expression and is NOT a binary operator (`a and b`). Operators
   # *inside* the argument are fine (`assert x == y`). Checked BEFORE assignment
@@ -50,7 +53,14 @@ proc parseExprStmt(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32) =
     b.addTree "asgn"
     ps.emitInfo(b, op.line, op.col, pl, pc, false)
     ps.parseExprRange(b, lo, int32(eqi), op.line, op.col)
-    ps.parseExprRange(b, int32(eqi) + 1, hi, op.line, op.col)
+    let rt = ps.tok(eqi + 1)
+    # multi-line control-flow RHS (`= if c:` / `= try:` with body on later lines)
+    if rt.kind == tkKeyword and ps.tok(int(hi) - 1).kind == tkColon and
+       (rt.s == "if" or rt.s == "when" or rt.s == "try" or
+        rt.s == "case" or rt.s == "block"):
+      result = ps.parseCtrlFlowValue(b, eqi + 1, op.line, op.col)
+    else:
+      ps.parseExprRange(b, int32(eqi) + 1, hi, op.line, op.col)
     b.endTree()
     return
   ps.parseExprRange(b, lo, hi, pl, pc)
@@ -787,8 +797,8 @@ proc parseOneStmt(ps: var Parser; b: var Builder; startIdx: int; pl, pc: int32;
   var bound = ps.lineEnd(startIdx)
   if hiLimit >= 0 and hiLimit < bound: bound = hiLimit
   let hi = ps.semiEnd(startIdx, bound)
-  ps.parseExprStmt(b, int32(startIdx), int32(hi), pl, pc)
-  result = hi
+  let consumed = ps.parseExprStmt(b, int32(startIdx), int32(hi), pl, pc)
+  result = if consumed > hi: consumed else: hi
 
 proc parseStmt(ps: var Parser; b: var Builder; startIdx: int; pl, pc: int32;
                hiLimit: int): int =
