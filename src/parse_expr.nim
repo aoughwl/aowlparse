@@ -178,10 +178,18 @@ proc parsePrimaryRange(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32) =
   if t.kind == tkOperator and t.s == "-" and int(lo) + 2 == int(hi):
     let n = ps.tok(int(lo) + 1)
     if (n.kind == tkIntLit or n.kind == tkFloatLit) and
-       n.line == t.line and n.col == t.col + 1 and n.suffix.len == 0:
+       n.line == t.line and n.col == t.col + 1:
+      let suf = n.suffix
       if n.kind == tkIntLit:
         let v = -n.iVal
-        if v > 2147483647'i64 or v < -2147483648'i64:
+        if suf.len > 0:
+          # `-N'suffix` folds to `(suf -N "suffix")`, like the leaf `(suf …)`.
+          b.addTree "suf"
+          ps.emitInfo(b, t.line, t.col, pl, pc, false)
+          if suf[0] == 'u': b.addUIntLit uint64(v) else: b.addIntLit v
+          b.addStrLit suf
+          b.endTree()
+        elif v > 2147483647'i64 or v < -2147483648'i64:
           b.addTree "suf"
           ps.emitInfo(b, t.line, t.col, pl, pc, false)
           b.addIntLit v
@@ -191,7 +199,14 @@ proc parsePrimaryRange(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32) =
           b.addIntLit v
           ps.emitInfo(b, t.line, t.col, pl, pc, false)
       else:
-        b.addFloatLit(-n.fVal, t.col - pc, t.line - pl, "")
+        if suf.len > 0:
+          b.addTree "suf"
+          ps.emitInfo(b, t.line, t.col, pl, pc, false)
+          b.addFloatLit(-n.fVal)
+          b.addStrLit suf
+          b.endTree()
+        else:
+          b.addFloatLit(-n.fVal, t.col - pc, t.line - pl, "")
       return
   # --- `ident"…"` generalized call-string-literal (adjacent, no space) ---
   if (t.kind == tkIdent or t.kind == tkKeyword) and int(lo) + 2 == int(hi):
