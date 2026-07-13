@@ -235,9 +235,9 @@ proc parsePrimaryRange(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32) =
       ps.parseIfExpr(b, lo, hi, pl, pc)
       return
     of "try":
-      # `try: A except: B` in expression position → `(try A (except . B))`
-      # with BARE bodies (not `(stmts …)`).
-      ps.parseTryExpr(b, lo, hi, pl, pc)
+      # `try: A except: B` as a direct expression is stmts-wrapped, like the
+      # statement form (only the parenthesized StmtListExpr result is bare).
+      discard ps.parseTry(b, int(lo), pl, pc)
       return
     of "proc", "func", "iterator":
       # anonymous routine expression (lambda): `proc (x): T = body`.
@@ -375,8 +375,13 @@ proc parsePrimaryRange(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32) =
         discard ps.parseStmt(b, segLo, inner.line, inner.col, semis[si])
         segLo = semis[si] + 1
       b.endTree()   # stmts
-      # result expression = the final segment
-      ps.parseExprRange(b, int32(segLo), int32(rpIdx), t.line, t.col)
+      # result expression = the final segment. As the result of a parenthesized
+      # StmtListExpr, control-flow gets BARE bodies (not `(stmts …)`).
+      let rt = ps.tok(segLo)
+      if rt.kind == tkKeyword and rt.s == "try":
+        ps.parseTryExpr(b, int32(segLo), int32(rpIdx), t.line, t.col)
+      else:
+        ps.parseExprRange(b, int32(segLo), int32(rpIdx), t.line, t.col)
       b.endTree()   # expr
     else:
       let starts = ps.splitArgs(int(lo) + 1, rpIdx)
