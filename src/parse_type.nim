@@ -32,6 +32,12 @@ proc prefixTypeTag(s: string): string =
 proc typeExprEnd(ps: var Parser; lo: int): int =
   ## End (exclusive) of an inline type expression starting at `lo`. Stops at a
   ## depth-0 `,` `;` `:` `)` `]` `}` `{` (pragma) or `=`, or a new logical line.
+  ## Exception: a `proc`/`iterator` TYPE owns the return colon after its param
+  ## parens (`proc (a): int`) — that `:` must not end the type, else the `=`
+  ## default that follows is dropped.
+  let procType = ps.tok(lo).kind == tkKeyword and
+                 (ps.tok(lo).s == "proc" or ps.tok(lo).s == "iterator")
+  var retPending = false          # proc param parens closed; the next `:` is the return
   var depth = 0
   var i = lo
   let startLine = ps.tok(lo).line
@@ -44,8 +50,11 @@ proc typeExprEnd(ps: var Parser; lo: int): int =
     elif isCloseBracket(t.kind):
       if depth == 0: break
       dec depth
+      if depth == 0 and procType and t.kind == tkParRi: retPending = true
     elif depth == 0:
-      if t.kind == tkComma or t.kind == tkSemicolon or t.kind == tkColon:
+      if t.kind == tkColon and retPending:
+        retPending = false        # consume the proc return colon, keep scanning
+      elif t.kind == tkComma or t.kind == tkSemicolon or t.kind == tkColon:
         break
       elif t.kind == tkOperator and t.s == "=":
         break

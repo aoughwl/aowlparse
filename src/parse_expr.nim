@@ -55,9 +55,14 @@ proc findPostfix(ps: Parser; lo, hi: int; kind: var int): int =
 
 proc parseArg(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32) =
   ## One comma-delimited element: `k: v` -> `(kv k v)`, `k = v` -> `(vv k v)`,
-  ## else a plain expression. `if`/`case`-led args keep their own colons.
+  ## else a plain expression. Keyword-led args whose own syntax owns a depth-0
+  ## `:`/`=` keep it: `if`/`case` expressions, and anonymous `proc`/`func`/
+  ## `iterator` literals (`sort(proc (a): int = …)` — the return `:` and default
+  ## `=` are the routine's, not a `kv`/`vv` pair).
   let head = ps.tok(int(lo))
-  let guardKw = head.kind == tkKeyword and (head.s == "if" or head.s == "case")
+  let guardKw = head.kind == tkKeyword and
+                (head.s == "if" or head.s == "case" or head.s == "proc" or
+                 head.s == "func" or head.s == "iterator")
   if not guardKw:
     let ci = ps.depth0Colon(int(lo), int(hi))
     if ci >= 0:
