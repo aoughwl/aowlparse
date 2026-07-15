@@ -573,10 +573,12 @@ proc parseExprRangeImpl(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32) =
      head.s == "iterator"):
     ps.parsePrimaryRange(b, lo, hi, pl, pc)
     return
-  let split = ps.findSplit(int(lo), int(hi))
-  if split < 0:
-    # command call in expression position (`let x = foo bar`, `move n`): a bare
-    # ident callee primary followed by a space-separated, non-operator argument.
+  # A command call whose callee starts at `lo` binds LOOSER than binary operators
+  # — `f a & b` is `f(a & b)`, not `(f a) & b` — so it must be recognised BEFORE
+  # the operator split. (A command on the RHS of an operator, `p & f a`, is found
+  # by the recursive parse of that operand; the `startsArg` guard rejects `p`'s
+  # spaced binary operator so it does not masquerade as a command here.)
+  block cmdLead:
     let ce = ps.cmdCalleeEnd(int(lo), int(hi))
     if head.kind == tkIdent and ce < int(hi) and ps.startsArg(ce, int(hi)):
       let callee = ps.tok(int(lo))
@@ -585,8 +587,10 @@ proc parseExprRangeImpl(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32) =
       ps.parseExprRange(b, lo, int32(ce), callee.line, callee.col)
       ps.parseArgList(b, int32(ce), hi, callee.line, callee.col)
       b.endTree()
-    else:
-      ps.parsePrimaryRange(b, lo, hi, pl, pc)
+      return
+  let split = ps.findSplit(int(lo), int(hi))
+  if split < 0:
+    ps.parsePrimaryRange(b, lo, hi, pl, pc)
   else:
     let op = ps.tok(split)
     b.addTree "infix"
