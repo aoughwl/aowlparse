@@ -130,16 +130,19 @@ proc parseTypeRangeImpl(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32) =
   block:
     let ce = ps.cmdCalleeEnd(int(lo), int(hi))
     if ps.tok(int(lo)).kind == tkIdent and ce < int(hi) and ps.startsArg(ce, int(hi)):
-      let callee = ps.tok(int(lo))
+      # A command in TYPE position (`lent T`, `sink seq[int]`) is an
+      # expression-context command: nkCommand.info = the FIRST ARGUMENT, so the
+      # callee gets a negative delta back (like parse_expr's value commands).
+      let arg0 = ps.tok(ce)
       b.addTree "cmd"
-      ps.emitInfo(b, callee.line, callee.col, pl, pc, false)
-      parseTypeRange(ps, b, lo, int32(ce), callee.line, callee.col)
+      ps.emitInfo(b, arg0.line, arg0.col, pl, pc, false)
+      parseTypeRange(ps, b, lo, int32(ce), arg0.line, arg0.col)
       let starts = ps.splitArgs(ce, int(hi))
       for ai in 0 ..< starts.len:
         let aLo = starts[ai]
         let aHi = if ai + 1 < starts.len: starts[ai+1] - 1 else: int(hi)
         if aLo < aHi:
-          parseTypeRange(ps, b, int32(aLo), int32(aHi), callee.line, callee.col)
+          parseTypeRange(ps, b, int32(aLo), int32(aHi), arg0.line, arg0.col)
       b.endTree()
       return
   # postfix bracket → `(at base args...)`
@@ -451,17 +454,22 @@ proc emitFieldLine(ps: var Parser; b: var Builder; fi, lineHi: int;
     vLo = j + 1
   for ni in 0 ..< names.len:
     let nm = names[ni]
+    # An exported field `name*` is nkPostfix; nifler anchors the fld node at the
+    # name-node's info — the `*` position for a postfix, which sits directly after
+    # the name (no space), i.e. at nm.endCol. The name then gets a negative delta
+    # back. (Same rule as exported const/let/var members; see parseSectionDef.)
+    let aCol = if exports[ni]: nm.endCol else: nm.col
     b.addTree "fld"
-    ps.emitInfo(b, nm.line, nm.col, kl, kc, false)
-    ps.emitName(b, nm, nm.line, nm.col)   # field name atom, or `(quoted …)`
+    ps.emitInfo(b, nm.line, aCol, kl, kc, false)
+    ps.emitName(b, nm, nm.line, aCol)   # field name atom, or `(quoted …)`
     if exports[ni]: b.addRaw " x" else: b.addEmpty
-    ps.emitPragmaSlot(b, firstPragLo, firstPragHi, nm.line, nm.col)
+    ps.emitPragmaSlot(b, firstPragLo, firstPragHi, nm.line, aCol)
     if tLo >= 0:
-      parseTypeRange(ps, b, int32(tLo), int32(tHi), nm.line, nm.col)
+      parseTypeRange(ps, b, int32(tLo), int32(tHi), nm.line, aCol)
     else:
       b.addEmpty
     if vLo >= 0:
-      ps.parseExprRange(b, int32(vLo), int32(lineHi), nm.line, nm.col)
+      ps.parseExprRange(b, int32(vLo), int32(lineHi), nm.line, aCol)
     else:
       b.addEmpty
     b.endTree()
