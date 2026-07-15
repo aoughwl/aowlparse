@@ -533,28 +533,33 @@ proc lexBackquotedIdent(lx: var Lexer): Token =
   advance lx # opening backtick
   var s = ""
   var parts: seq[string] = @[]
+  var partCols: seq[int32] = @[]
   while lx.pos < lx.n and lx.cur != '`' and lx.cur != '\n':
     let c = lx.cur
     if c == ' ' or c == '\t':
       advance lx
     elif c in QuoteMergeChars:
+      partCols.add lx.col
       var run = ""
       while lx.pos < lx.n and lx.cur in QuoteMergeChars:
         run.add lx.cur; s.add lx.cur; advance lx
       parts.add run
     elif isIdentStart(c) or isDigit(c):
+      partCols.add lx.col
       var word = ""
       while lx.pos < lx.n and isIdentCont(lx.cur):
         word.add lx.cur; s.add lx.cur; advance lx
       parts.add word
     else:
       # unknown byte inside backticks: attach to a lone piece
+      partCols.add lx.col
       var one = ""
       one.add c; s.add c; advance lx
       parts.add one
   if lx.cur == '`': advance lx
   result.s = s
   result.parts = parts
+  result.partCols = partCols
 
 proc skipBlockComment(lx: var Lexer) =
   ## `#[ ... ]#`, nesting-aware.

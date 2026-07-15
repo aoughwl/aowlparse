@@ -50,6 +50,7 @@ type
     indent*: int32   ## column if first token on its line, else -1
     quoted*: bool    ## accent-quoted identifier (`` `foo bar` ``)
     parts*: seq[string]  ## child pieces of an accent-quoted ident (accQuoted rule)
+    partCols*: seq[int32]  ## 0-based source column of each piece (for line-info)
 
 const
   Keywords* = [

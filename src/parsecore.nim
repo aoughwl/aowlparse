@@ -120,8 +120,12 @@ proc emitName(ps: Parser; b: var Builder; t: Token; pl, pc: int32) =
   if t.quoted:
     b.addTree "quoted"
     ps.emitInfo(b, t.line, t.col, pl, pc, false)
-    for p in t.parts:
-      b.addIdent p
+    # each piece carries line-info at its real source column, relative to the
+    # `quoted` node (nifler: `` `value=` `` → `value@1 =@6`).
+    for i in 0 ..< t.parts.len:
+      b.addIdent t.parts[i]
+      let pcol = if i < t.partCols.len: t.partCols[i] else: t.col
+      ps.emitInfo(b, t.line, pcol, t.line, t.col, false)
     b.endTree()
   else:
     b.addIdent t.s
@@ -175,7 +179,8 @@ proc precedenceOf(t: Token): int =
 proc startsExpr(t: Token): bool =
   case t.kind
   of tkIdent, tkKeyword, tkIntLit, tkFloatLit, tkStrLit, tkRStrLit,
-     tkTripleStrLit, tkCharLit, tkParLe, tkBracketLe, tkCurlyLe:
+     tkTripleStrLit, tkCharLit, tkParLe, tkBracketLe, tkCurlyLe,
+     tkOperator:   # a leading operator is a prefix: `return -1`, `return @[…]`
     true
   else:
     false
@@ -306,6 +311,7 @@ proc splitArgs(ps: Parser; lo, hi: int): seq[int] =
 # parse_expr.nim implements:
 proc parseExprRange(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32)
 proc parsePrimaryRange(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32)
+proc parseCaseExpr(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32)
 # parse_stmt.nim implements:
 proc parseStmt(ps: var Parser; b: var Builder; startIdx: int; pl, pc: int32;
                hiLimit: int): int

@@ -319,8 +319,7 @@ proc emitTypevarGroup(ps: var Parser; b: var Builder; gLo, gHi: int;
   for nm in names:
     b.addTree "typevar"
     ps.emitInfo(b, nm.line, nm.col, tvL, tvC, false)        # typevar node = name pos
-    b.addIdent nm.s
-    ps.emitInfo(b, nm.line, nm.col, nm.line, nm.col, false)
+    ps.emitName(b, nm, nm.line, nm.col)   # typevar name, or `(quoted …)`
     b.addEmpty                                              # export (always .)
     b.addEmpty                                              # pragma
     if cLo >= 0:
@@ -421,8 +420,7 @@ proc emitFieldLine(ps: var Parser; b: var Builder; fi, lineHi: int;
     let nm = names[ni]
     b.addTree "fld"
     ps.emitInfo(b, nm.line, nm.col, kl, kc, false)
-    b.addIdent nm.s
-    ps.emitInfo(b, nm.line, nm.col, nm.line, nm.col, false)
+    ps.emitName(b, nm, nm.line, nm.col)   # field name atom, or `(quoted …)`
     if exports[ni]: b.addRaw " x" else: b.addEmpty
     ps.emitPragmaSlot(b, firstPragLo, firstPragHi, nm.line, nm.col)
     if tLo >= 0:
@@ -626,8 +624,7 @@ proc parseEnum(ps: var Parser; b: var Builder; enumIdx, defIndent: int;
     let nodeTok = if vLo >= 0: ps.tok(vLo) else: nameTok
     b.addTree "efld"
     ps.emitInfo(b, nodeTok.line, nodeTok.col, kw.line, kw.col, false)
-    b.addIdent nameTok.s
-    ps.emitInfo(b, nameTok.line, nameTok.col, nodeTok.line, nodeTok.col, false)
+    ps.emitName(b, nameTok, nodeTok.line, nodeTok.col)   # efld name, or `(quoted …)`
     b.addEmpty                                             # export: always .
     ps.emitPragmaSlot(b, pragLo, pragHi, nodeTok.line, nodeTok.col)
     b.addEmpty                                             # type: always .
@@ -701,8 +698,7 @@ proc parseTypeDef(ps: var Parser; b: var Builder; nameIdx, typeKwCol: int;
   b.addTree "type"
   ps.emitInfo(b, eqTok.line, eqTok.col, pl, pc, false)     # type node = '=' pos
   # name
-  b.addIdent nameTok.s
-  ps.emitInfo(b, nameTok.line, nameTok.col, eqTok.line, eqTok.col, false)
+  ps.emitName(b, nameTok, eqTok.line, eqTok.col)   # type name, or `(quoted …)`
   # export
   if hasExport: b.addRaw " x" else: b.addEmpty
   # generics
@@ -816,8 +812,7 @@ proc parseParams(ps: var Parser; b: var Builder; lpIdx: int; pl, pc: int32): int
       let nm = names[ni]
       b.addTree "param"
       ps.emitInfo(b, nm.line, nm.col, lp.line, lp.col, false)
-      b.addIdent nm.s
-      ps.emitInfo(b, nm.line, nm.col, nm.line, nm.col, false)
+      ps.emitName(b, nm, nm.line, nm.col)   # param name atom, or `(quoted …)`
       if exports[ni]: b.addRaw " x" else: b.addEmpty
       ps.emitPragmaSlot(b, firstPragLo, firstPragHi, nm.line, nm.col)
       if tLo >= 0:
@@ -872,8 +867,18 @@ proc parseRoutine(ps: var Parser; b: var Builder; kwIdx: int; pl, pc: int32;
   if ps.tok(i).kind == tkParLe:
     i = ps.parseParams(b, i, kw.line, kw.col)
   else:
-    b.addEmpty  # params slot
-    b.addEmpty  # return type slot
+    # no param parens (`proc main =`, `proc main: int =`): nifler still emits an
+    # empty `(params)` node (positioned where the params would begin), then the
+    # return type sibling if a `:` follows.
+    let at = ps.tok(i)
+    b.addTree "params"
+    ps.emitInfo(b, at.line, at.col, kw.line, kw.col, false)
+    b.endTree()
+    if ps.tok(i).kind == tkColon:
+      inc i
+      i = ps.parseType(b, i, at.line, at.col)                 # ret parent = params pos
+    else:
+      b.addEmpty  # return type slot
   # pragmas: `{.` … `.}`. In curly mode a bare `{` (no leading dot) is a block
   # BODY, not pragmas — leave it for the body handler below.
   if ps.tok(i).kind == tkCurlyLe and

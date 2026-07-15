@@ -316,8 +316,7 @@ proc parseFor(ps: var Parser; b: var Builder; kwIdx: int; pl, pc: int32): int =
     for ai in 0 ..< starts.len:
       let v = ps.tok(starts[ai])
       b.addTree "let"
-      b.addIdent v.s
-      ps.emitInfo(b, v.line, v.col, firstVar.line, firstVar.col, false)  # name rel for node
+      ps.emitName(b, v, firstVar.line, firstVar.col)   # loop var, or `(quoted …)`
       b.addEmpty 4   # export, pragma, type, value
       b.endTree()
     b.endTree()
@@ -328,8 +327,7 @@ proc parseFor(ps: var Parser; b: var Builder; kwIdx: int; pl, pc: int32): int =
     for ai in 0 ..< starts.len:
       let v = ps.tok(starts[ai])
       b.addTree "let"
-      b.addIdent v.s
-      ps.emitInfo(b, v.line, v.col, firstVar.line, firstVar.col, false)
+      ps.emitName(b, v, firstVar.line, firstVar.col)   # loop var, or `(quoted …)`
       b.addEmpty      # export marker
       b.addEmpty      # pragma
       b.addEmpty 2    # type, value
@@ -437,8 +435,7 @@ proc parseBlock(ps: var Parser; b: var Builder; kwIdx: int; pl, pc: int32): int 
   let colon = ps.findColon(kwIdx, hi)
   if kwIdx + 1 < colon and ps.tok(kwIdx + 1).kind == tkIdent:
     let lbl = ps.tok(kwIdx + 1)
-    b.addIdent lbl.s
-    ps.emitInfo(b, lbl.line, lbl.col, kw.line, kw.col, false)   # label rel block node
+    ps.emitName(b, lbl, kw.line, kw.col)   # block label, or `(quoted …)`
   else:
     b.addEmpty
   result = ps.emitBody(b, colon, refIndent, kw.line, kw.col)
@@ -453,8 +450,7 @@ proc parseBreakLike(ps: var Parser; b: var Builder; kwIdx: int; pl, pc: int32;
   ps.emitInfo(b, kw.line, kw.col, pl, pc, false)
   if kwIdx + 1 < hi and ps.tok(kwIdx + 1).kind == tkIdent:
     let lbl = ps.tok(kwIdx + 1)
-    b.addIdent lbl.s
-    ps.emitInfo(b, lbl.line, lbl.col, kw.line, kw.col, false)
+    ps.emitName(b, lbl, kw.line, kw.col)   # break/continue label, or `(quoted …)`
   else:
     b.addEmpty
   b.endTree()
@@ -510,8 +506,7 @@ proc parseSectionDef(ps: var Parser; b: var Builder; lo, hi: int; tag: string;
     for ai in 0 ..< starts.len:
       let v = ps.tok(starts[ai])
       b.addTree tag         # section tag (var/let/const)
-      b.addIdent v.s
-      ps.emitInfo(b, v.line, v.col, lp.line, lp.col, false)  # name rel '(' node
+      ps.emitName(b, v, lp.line, lp.col)   # unpack var, or `(quoted …)`
       b.addEmpty            # export
       b.addEmpty            # pragma
       b.addEmpty 2          # type, value
@@ -520,8 +515,11 @@ proc parseSectionDef(ps: var Parser; b: var Builder; lo, hi: int; tag: string;
     b.endTree()  # unpackdecl
     return
   # `name1, name2, … [{.pragma.}] [: type] [= value]`
-  let colon = ps.findColon(lo, hi)
+  var colon = ps.findColon(lo, hi)
   let assign = ps.findAssign(lo, hi)
+  # a `:` AFTER the `=` is part of the value (e.g. `= if c in {A}: x else: y`),
+  # not a type annotation — the type colon must precede the assignment.
+  if assign >= 0 and colon > assign: colon = -1
   let boundary = if colon >= 0: colon elif assign >= 0: assign else: hi
   # optional `{.pragma.}` after the name list (before `:`/`=`)
   var pragLo = -1
@@ -549,8 +547,7 @@ proc parseSectionDef(ps: var Parser; b: var Builder; lo, hi: int; tag: string;
     let nTok = ps.tok(nameStarts[ni])
     b.addTree tag
     ps.emitInfo(b, nTok.line, nTok.col, pl, pc, false)       # section node = name pos
-    b.addIdent nTok.s
-    ps.emitInfo(b, nTok.line, nTok.col, nTok.line, nTok.col, false)  # name rel itself → none
+    ps.emitName(b, nTok, nTok.line, nTok.col)   # name atom, or `(quoted …)`
     # export marker `*`
     if nameStarts[ni] + 1 < nameEnd and ps.tok(nameStarts[ni] + 1).kind == tkOperator and
        ps.tok(nameStarts[ni] + 1).s == "*":
