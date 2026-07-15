@@ -76,6 +76,34 @@ proc parseImportLike(ps: var Parser; b: var Builder; kwIdx: int; pl, pc: int32;
                      tag: string): int =
   let kw = ps.tok(kwIdx)
   let hi = ps.semiEnd(kwIdx, ps.lineEnd(kwIdx))
+  # `import M except a, b` → `(importexcept M a b)`: a depth-0 `except` after the
+  # module turns the section into an exclusion list (mirrors the classic parser's
+  # import→importexcept transition). The module before `except` is one expr.
+  if (tag == "import" or tag == "export"):
+    var d = 0
+    var exceptIdx = -1
+    var j = kwIdx + 1
+    while j < hi:
+      let t = ps.tok(j)
+      if isOpenBracket(t.kind): inc d
+      elif isCloseBracket(t.kind):
+        if d > 0: dec d
+      elif d == 0 and t.kind == tkKeyword and t.s == "except":
+        exceptIdx = j; break
+      inc j
+    if exceptIdx >= 0:
+      b.addTree(if tag == "import": "importexcept" else: "exportexcept")
+      ps.emitInfo(b, kw.line, kw.col, pl, pc, false)
+      if kwIdx + 1 < exceptIdx:
+        ps.parseExprRange(b, int32(kwIdx + 1), int32(exceptIdx), kw.line, kw.col)
+      let estarts = ps.splitArgs(exceptIdx + 1, hi)
+      for ai in 0 ..< estarts.len:
+        let aLo = estarts[ai]
+        let aHi = if ai + 1 < estarts.len: estarts[ai+1] - 1 else: hi
+        if aLo < aHi:
+          ps.parseExprRange(b, int32(aLo), int32(aHi), kw.line, kw.col)
+      b.endTree()
+      return hi
   b.addTree tag
   ps.emitInfo(b, kw.line, kw.col, pl, pc, false)
   let starts = ps.splitArgs(kwIdx + 1, hi)
@@ -321,17 +349,31 @@ proc parseFor(ps: var Parser; b: var Builder; kwIdx: int; pl, pc: int32): int =
       b.endTree()
     b.endTree()
   else:
-    # flat: one `(let name . . . .)` per loop var
+    # flat: one `(let name . . . .)` per loop var, but a loop var that is itself a
+    # `(a, b)` tuple becomes a nested `(unpacktup (let a …) …)` — e.g. the mixed
+    # `for i, (a, b) in pairs`.
     b.addTree "unpackflat"
     let starts = ps.splitArgs(kwIdx + 1, inIdx)
     for ai in 0 ..< starts.len:
       let v = ps.tok(starts[ai])
-      b.addTree "let"
-      ps.emitName(b, v, firstVar.line, firstVar.col)   # loop var, or `(quoted …)`
-      b.addEmpty      # export marker
-      b.addEmpty      # pragma
-      b.addEmpty 2    # type, value
-      b.endTree()
+      if v.kind == tkParLe:
+        let rp = ps.matchClose(starts[ai])
+        b.addTree "unpacktup"
+        let inner = ps.splitArgs(starts[ai] + 1, rp)
+        for bi in 0 ..< inner.len:
+          let iv = ps.tok(inner[bi])
+          b.addTree "let"
+          ps.emitName(b, iv, firstVar.line, firstVar.col)
+          b.addEmpty 4   # export, pragma, type, value
+          b.endTree()
+        b.endTree()
+      else:
+        b.addTree "let"
+        ps.emitName(b, v, firstVar.line, firstVar.col)   # loop var, or `(quoted …)`
+        b.addEmpty      # export marker
+        b.addEmpty      # pragma
+        b.addEmpty 2    # type, value
+        b.endTree()
     b.endTree()
   # body LAST (parent = for node)
   result = ps.emitBody(b, colon, refIndent, firstVar.line, firstVar.col)
@@ -498,7 +540,15 @@ proc parseSectionDef(ps: var Parser; b: var Builder; lo, hi: int; tag: string;
     b.addTree "unpackdecl"
     ps.emitInfo(b, lp.line, lp.col, pl, pc, false)          # unpackdecl = '(' pos
     if assign >= 0 and assign + 1 < hi:
-      ps.parseExprRange(b, int32(assign + 1), int32(hi), lp.line, lp.col)  # value
+      let vt = ps.tok(assign + 1)
+      # multi-line control-flow value (`let (a, b) = if c: … else: …` with the
+      # branches on later indented lines): route through the statement parser so
+      # the whole construct — including a trailing `else` — is consumed.
+      if vt.kind == tkKeyword and (vt.s == "try" or vt.s == "if" or
+         vt.s == "when" or vt.s == "case" or vt.s == "block"):
+        result = ps.parseCtrlFlowValue(b, assign + 1, lp.line, lp.col)
+      else:
+        ps.parseExprRange(b, int32(assign + 1), int32(hi), lp.line, lp.col)  # value
     else:
       b.addEmpty
     b.addTree "unpacktup"   # no line-info
