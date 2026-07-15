@@ -15,12 +15,120 @@ import std/[syncio, os]
 import nifbuilder
 import tokens, lexer, parser
 
-proc runParse(src, outp, fileField: string; toStdout, strict, curly: bool;
-              opts: LexOptions; maxDepth: int) =
-  ## Tokenize `src`, parse it, and emit the NIF to `outp` (or stdout). When
-  ## `strict` is set and the lexer counted any unknown/illegal byte, exit 1.
+type
+  DiagFormat = enum dfText, dfJson, dfOff
+
+proc closerFor(k: TokKind): char =
+  case k
+  of tkParLe: ')'
+  of tkBracketLe: ']'
+  else: '}'
+
+proc openerFor(k: TokKind): char =
+  case k
+  of tkParLe: '('
+  of tkBracketLe: '['
+  else: '{'
+
+proc matchesClose(open, close: TokKind): bool =
+  (open == tkParLe and close == tkParRi) or
+  (open == tkBracketLe and close == tkBracketRi) or
+  (open == tkCurlyLe and close == tkCurlyRi)
+
+proc checkBrackets(toks: seq[Token]): seq[Diagnostic] =
+  ## Structural check the range-splitter itself never reports: unbalanced or
+  ## mismatched `()`/`[]`/`{}`. A stack of opens is matched against each close;
+  ## a wrong or surplus close, and every open left unclosed at EOF, becomes a
+  ## `sevError` diagnostic with the offending token's span. Purely a validator —
+  ## it does not affect the emitted NIF (the parser stays best-effort).
+  result = @[]
+  var stack: seq[Token] = @[]
+  for t in toks:
+    case t.kind
+    of tkParLe, tkBracketLe, tkCurlyLe:
+      stack.add t
+    of tkParRi, tkBracketRi, tkCurlyRi:
+      if stack.len == 0:
+        result.add Diagnostic(severity: sevError, code: "unmatched-close",
+          message: "unmatched '" & closerFor(t.kind) & "'",
+          line: t.line, col: t.col, endCol: t.col + 1)
+      elif not matchesClose(stack[stack.len - 1].kind, t.kind):
+        let top = stack[stack.len - 1]
+        result.add Diagnostic(severity: sevError, code: "mismatched-bracket",
+          message: "'" & closerFor(t.kind) & "' does not match '" &
+                   openerFor(top.kind) & "' opened at " & $top.line & ":" & $top.col,
+          line: t.line, col: t.col, endCol: t.col + 1)
+        stack.setLen(stack.len - 1)
+      else:
+        stack.setLen(stack.len - 1)
+    else: discard
+  for t in stack:
+    result.add Diagnostic(severity: sevError, code: "unclosed-bracket",
+      message: "unclosed '" & openerFor(t.kind) & "'",
+      line: t.line, col: t.col, endCol: t.col + 1)
+
+proc sevName(s: Severity): string =
+  case s
+  of sevError: "error"
+  of sevWarn: "warning"
+  of sevHint: "hint"
+
+proc jsonEscape(s: string): string =
+  result = ""
+  for c in s:
+    case c
+    of '"': result.add "\\\""
+    of '\\': result.add "\\\\"
+    of '\n': result.add "\\n"
+    of '\t': result.add "\\t"
+    of '\r': result.add "\\r"
+    else:
+      if c < ' ': result.add "\\u" & ["0000","0001","0002","0003","0004","0005",
+        "0006","0007","0008","0009","000A","000B","000C","000D","000E","000F",
+        "0010","0011","0012","0013","0014","0015","0016","0017","0018","0019",
+        "001A","001B","001C","001D","001E","001F"][int(c)]
+      else: result.add c
+
+proc renderDiags(diags: seq[Diagnostic]; fileField: string; fmt: DiagFormat;
+                 dest: File) =
+  ## Emit diagnostics in the requested shape. `dfText` is a compiler-style
+  ## `file:line:col: severity[code]: message` line each; `dfJson` is a single
+  ## array of `{severity,code,message,line,col,endCol}` objects for editors.
+  case fmt
+  of dfOff: discard
+  of dfText:
+    for d in diags:
+      write dest, fileField & ":" & $d.line & ":" & $(d.col + 1) & ": " &
+        sevName(d.severity) & "[" & d.code & "]: " & d.message & "\n"
+  of dfJson:
+    var s = "["
+    for i in 0 ..< diags.len:
+      let d = diags[i]
+      if i > 0: s.add ","
+      s.add "{\"severity\":\"" & sevName(d.severity) & "\",\"code\":\"" &
+        d.code & "\",\"message\":\"" & jsonEscape(d.message) &
+        "\",\"line\":" & $d.line & ",\"col\":" & $d.col &
+        ",\"endCol\":" & $d.endCol & "}"
+    s.add "]\n"
+    write dest, s
+
+proc collectDiags(src: string; opts: LexOptions): (seq[Token], seq[Diagnostic]) =
+  ## Tokenise and gather ALL diagnostics — the lexer's (unknown bytes, unclosed
+  ## strings, style/portability warnings) plus the structural bracket check.
+  ## Recoverable: tokens are returned regardless so the caller can still emit NIF.
   var errors = 0
   let toks = tokenize(src, opts, errors)
+  var diags = gLexDiags
+  for d in checkBrackets(toks): diags.add d
+  result = (toks, diags)
+
+proc runParse(src, outp, fileField: string; toStdout, strict, curly: bool;
+              opts: LexOptions; maxDepth: int; diagFmt: DiagFormat) =
+  ## Tokenize `src`, parse it, and emit the NIF to `outp` (or stdout). Diagnostics
+  ## (lexer + bracket check) are rendered to stderr in `diagFmt`; parsing is never
+  ## aborted by them. With `strict`, any `sevError` diagnostic exits non-zero.
+  let (toks, diags) = collectDiags(src, opts)
+  renderDiags(diags, fileField, diagFmt, stderr)
   var ps = initParser(toks, fileField, curly, maxDepth)
   if toStdout:
     # nifbuilder can target a file or an in-memory buffer; for stdout we build
@@ -33,14 +141,30 @@ proc runParse(src, outp, fileField: string; toStdout, strict, curly: bool;
     var b = nifbuilder.open(outp)
     parseModule(ps, b)
     b.close()
-  if strict and errors > 0:
-    write stderr, "nifparser: " & $errors &
-      " unknown/illegal byte(s) in input [--strict]\n"
-    quit 1
+  if strict:
+    var nErr = 0
+    for d in diags:
+      if d.severity == sevError: inc nErr
+    if nErr > 0:
+      write stderr, "nifparser: " & $nErr & " error(s) in input [--strict]\n"
+      quit 1
+
+proc runCheck(src, fileField: string; opts: LexOptions; diagFmt: DiagFormat): int =
+  ## Lint-only mode (`nifparser check`): emit diagnostics to STDOUT (text or json,
+  ## default text) and no NIF. Returns the process exit code — 1 if any error-level
+  ## diagnostic was found, else 0. This is the "better errors than nifler" surface:
+  ## recoverable, multi-error, machine-readable, and it never aborts on the first.
+  let (_, diags) = collectDiags(src, opts)
+  let fmt = if diagFmt == dfOff: dfText else: diagFmt
+  renderDiags(diags, fileField, fmt, stdout)
+  for d in diags:
+    if d.severity == sevError: return 1
+  return 0
 
 proc usage() =
   write stderr, "nifparser — Nim source -> NIF (nifler-compatible)\n"
   write stderr, "usage: nifparser [OPTIONS] p <in.nim> [out.p.nif]\n"
+  write stderr, "       nifparser [OPTIONS] check <in.nim>   # lint only: diagnostics, no NIF\n"
   write stderr, "  --curly            experimental: also accept `{ … }` block bodies\n"
   write stderr, "  --tabs:MODE        indentation whitespace policy (default spaces):\n"
   write stderr, "                       spaces  spaces only (classic-Nim stance)\n"
@@ -77,6 +201,10 @@ proc usage() =
   write stderr, "  --stdin            read source from stdin (also: input arg `-`)\n"
   write stderr, "  --stdout           write NIF to stdout (also: output arg `-`)\n"
   write stderr, "  --filename:PATH    line-info path to record for stdin (default `stdin`)\n"
+  write stderr, "  --diagnostics:MODE   how diagnostics are rendered (default text):\n"
+  write stderr, "                       text  compiler-style file:line:col lines\n"
+  write stderr, "                       json  a JSON array (for editors/tools)\n"
+  write stderr, "                       off   suppress diagnostics\n"
   write stderr, "  --portable-paths:on|off\n"
   write stderr, "                       record the source path relative to cwd with '/'\n"
   write stderr, "                       separators (default on; matches nifler)\n"
@@ -123,6 +251,7 @@ proc main() =
   var useStdout = false
   var filenameOverride = ""
   var portablePaths = true   # nifler default: relativize the source path to cwd
+  var diagFmt = dfText       # how diagnostics are rendered (text|json|off)
   let cli = commandLineParams()
   for ci in 0 ..< cli.len:
     let a = cli[ci]
@@ -203,12 +332,20 @@ proc main() =
       else:
         write stderr, "unknown --portable-paths mode: " & afterColon(a) & "\n"
         usage()
+    elif hasPrefix(a, "--diagnostics:"):
+      case afterColon(a)
+      of "text": diagFmt = dfText
+      of "json": diagFmt = dfJson
+      of "off": diagFmt = dfOff
+      else:
+        write stderr, "unknown --diagnostics mode: " & afterColon(a) & "\n"
+        usage()
     else:
       params.add a
   if params.len < 1:
     usage()
   let action = params[0]
-  if action != "p" and action != "parse":
+  if action != "p" and action != "parse" and action != "check":
     write stderr, "unknown command: " & action & "\n"
     usage()
   # Positional args after the action: [input] [output]. `-` at either slot means
@@ -250,6 +387,9 @@ proc main() =
       fileField = relativePath(absolutePath(inputArg), getCurrentDir(), '/')
     except:
       discard   # unresolvable path → keep the arg verbatim
+  # `check` is lint-only: diagnostics to stdout, no NIF, exit 1 on any error.
+  if action == "check":
+    quit runCheck(src, fileField, opts, diagFmt)
   # Resolve the output target.
   var outp = ""
   if not useStdout:
@@ -263,6 +403,6 @@ proc main() =
       useStdout = true
     else:
       outp = inputArg & ".p.nif"
-  runParse(src, outp, fileField, useStdout, strict, curly, opts, maxDepth)
+  runParse(src, outp, fileField, useStdout, strict, curly, opts, maxDepth, diagFmt)
 
 main()

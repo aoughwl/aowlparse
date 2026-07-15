@@ -95,10 +95,34 @@ type
     errors: int              ## unknown/illegal bytes seen (drives --strict)
     prevIndent: int32        ## indent column of the previous first-on-line token
     indentUnit: int32        ## derived indentation step (--indent-consistency)
+    diags: seq[Diagnostic]   ## structured, recoverable diagnostics (see Diagnostic)
 
 proc initLexer(src: string; opts: LexOptions): Lexer =
   Lexer(src: src, n: src.len, pos: 0, line: 1, col: 0, atLineStart: true,
-        opts: opts, errors: 0, prevIndent: 0, indentUnit: 0)
+        opts: opts, errors: 0, prevIndent: 0, indentUnit: 0, diags: @[])
+
+template addDiag(lx: var Lexer; sev: Severity; dcode, dmsg: string;
+                 dline, dcol, dend: int32) =
+  ## Record one structured diagnostic. This is the single seam every check funnels
+  ## through — adding a new lexer/parser check is just another `addDiag` call, and
+  ## `sevError` diagnostics also bump the `--strict` error count. Never aborts.
+  ## A template (not a proc) so a call may read `lx.*` fields in its arguments
+  ## without tripping nimony's var-parameter alias check; params are prefixed so
+  ## template substitution does not clash with the `Diagnostic` field labels.
+  lx.diags.add Diagnostic(severity: sev, code: dcode, message: dmsg,
+                          line: dline, col: dcol, endCol: dend)
+  if sev == sevError: inc lx.errors
+
+var gLexDiags*: seq[Diagnostic] = @[]
+  ## Diagnostics from the most recent `tokenize` (nifparser is single-shot per
+  ## file, so a module accumulator is enough; the CLI reads it after tokenising).
+  ## Parser-level checks append here too — see `checkBrackets`.
+
+proc toHex2(b: uint8): string =
+  const hex = "0123456789ABCDEF"
+  result = newString(2)
+  result[0] = hex[int(b shr 4)]
+  result[1] = hex[int(b and 0x0F)]
 
 proc cur(lx: Lexer): char =
   if lx.pos < lx.n: lx.src[lx.pos] else: '\0'
@@ -162,9 +186,9 @@ proc startToken(lx: var Lexer; kind: TokKind): Token =
     # recorded indent, so parsing (the relative off-side rule) is untouched.
     if lx.opts.indentWidth > 0 and lx.col > 0 and
        (int(lx.col) mod lx.opts.indentWidth) != 0:
-      write stderr, "nifparser: indentation of " & $lx.col &
-        " column(s) at line " & $lx.line & " is not a multiple of --indent-width:" &
-        $lx.opts.indentWidth & "\n"
+      lx.addDiag(sevHint, "indent-width",
+                 "indentation of " & $lx.col & " column(s) is not a multiple of " &
+                 "--indent-width:" & $lx.opts.indentWidth, lx.line, 0, lx.col)
     # Advisory: --indent-consistency. The indentation *step* is auto-derived from
     # the first line that indents deeper than its predecessor; thereafter any
     # first-on-line token whose column is not a whole multiple of that derived
@@ -174,10 +198,10 @@ proc startToken(lx: var Lexer; kind: TokKind): Token =
       if lx.indentUnit == 0 and lx.col > lx.prevIndent:
         lx.indentUnit = lx.col - lx.prevIndent
       if lx.indentUnit > 0 and lx.col > 0 and (lx.col mod lx.indentUnit) != 0:
-        write stderr, "nifparser: indentation of " & $lx.col &
-          " column(s) at line " & $lx.line &
-          " is not a multiple of the file's indent step (" & $lx.indentUnit &
-          ") [--indent-consistency]\n"
+        lx.addDiag(sevHint, "indent-consistency",
+                   "indentation of " & $lx.col & " column(s) is not a multiple of " &
+                   "the file's indent step (" & $lx.indentUnit & ") [--indent-consistency]",
+                   lx.line, 0, lx.col)
       lx.prevIndent = lx.col
 
 # ---------------------------------------------------------------------------
@@ -328,6 +352,11 @@ proc lexString(lx: var Lexer): Token =
       s.add lx.cur
       advance lx
   if lx.cur == '"': advance lx
+  else:
+    # ran into a newline or EOF before the closing quote (recoverable — we keep
+    # the text scanned so far and carry on lexing the next line).
+    lx.addDiag(sevError, "unterminated-string", "unterminated string literal",
+               result.line, result.col, lx.col)
   result.s = s
 
 proc lexRawOrTriple(lx: var Lexer): Token =
@@ -600,8 +629,8 @@ proc tokenize*(src: string; opts: LexOptions; errors: var int): seq[Token] =
   if lx.opts.bomPolicy != bomDefault and lx.n >= 3 and
      src[0] == '\xEF' and src[1] == '\xBB' and src[2] == '\xBF':
     if lx.opts.bomPolicy == bomReject:
-      write stderr, "nifparser: leading UTF-8 BOM rejected [--bom:reject]\n"
-      inc lx.errors
+      lx.addDiag(sevError, "bom-rejected",
+                 "leading UTF-8 BOM rejected [--bom:reject]", 1, 0, 0)
     # Both strip and reject consume the 3 BOM bytes WITHOUT advancing the column,
     # so line-1 indentation/columns are unaffected (fixes the latent col-shift of
     # the legacy unknown-byte skip). The default (bomDefault) path is untouched.
@@ -616,8 +645,8 @@ proc tokenize*(src: string; opts: LexOptions; errors: var int): seq[Token] =
         if c == ' ': lx.sawSpaceInIndent = true
         elif c == '\t': lx.sawTabInIndent = true
         if lx.sawSpaceInIndent and lx.sawTabInIndent and not lx.warnedMixThisLine:
-          write stderr, "nifparser: line " & $lx.line &
-            " mixes tabs and spaces in its indentation\n"
+          lx.addDiag(sevWarn, "mixed-indent",
+                     "indentation mixes tabs and spaces", lx.line, 0, lx.col)
           lx.warnedMixThisLine = true
       advance lx
     elif c == '\n':
@@ -626,17 +655,20 @@ proc tokenize*(src: string; opts: LexOptions; errors: var int): seq[Token] =
       if lx.opts.newlinePolicy != nlAny or lx.opts.trailingWhitespaceWarn:
         let isCrlf = lx.pos > 0 and lx.src[lx.pos - 1] == '\r'
         if lx.opts.newlinePolicy == nlLf and isCrlf:
-          write stderr, "nifparser: line " & $lx.line &
-            " ends with CRLF, expected LF [--newline:lf]\n"
+          lx.addDiag(sevWarn, "line-ending",
+                     "line ends with CRLF, expected LF [--newline:lf]",
+                     lx.line, lx.col, lx.col)
         elif lx.opts.newlinePolicy == nlCrlf and not isCrlf:
-          write stderr, "nifparser: line " & $lx.line &
-            " ends with LF, expected CRLF [--newline:crlf]\n"
+          lx.addDiag(sevWarn, "line-ending",
+                     "line ends with LF, expected CRLF [--newline:crlf]",
+                     lx.line, lx.col, lx.col)
         if lx.opts.trailingWhitespaceWarn:
           var j = lx.pos - 1
           if j >= 0 and lx.src[j] == '\r': dec j
           if j >= 0 and (lx.src[j] == ' ' or lx.src[j] == '\t'):
-            write stderr, "nifparser: trailing whitespace on line " & $lx.line &
-              " [--trailing-whitespace:warn]\n"
+            lx.addDiag(sevWarn, "trailing-whitespace",
+                       "trailing whitespace [--trailing-whitespace:warn]",
+                       lx.line, lx.col, lx.col)
       advance lx
     elif c == '#':
       if lx.peek(1) == '[':
@@ -735,8 +767,10 @@ proc tokenize*(src: string; opts: LexOptions; errors: var int): seq[Token] =
       lx.atLineStart = false
       result.add t
     else:
-      # Unknown/illegal byte: skip it (counted for --strict).
-      inc lx.errors
+      # Unknown/illegal byte: record it and skip (recoverable — we keep lexing).
+      lx.addDiag(sevError, "unknown-byte",
+                 "unknown/illegal byte 0x" & toHex2(uint8(c)) & " skipped",
+                 lx.line, lx.col, lx.col)
       advance lx
     # Record the end column of whatever token this iteration produced (lx now
     # sits at the char just past it). Powers whitespace/adjacency checks.
@@ -744,12 +778,14 @@ proc tokenize*(src: string; opts: LexOptions; errors: var int): seq[Token] =
       result[result.len - 1].endCol = lx.col
   # --- final-newline check (advisory) -----------------------------------------
   if lx.opts.finalNewlineRequire and lx.n > 0 and src[lx.n - 1] != '\n':
-    write stderr, "nifparser: source does not end with a newline " &
-      "[--final-newline:require]\n"
+    lx.addDiag(sevWarn, "missing-final-newline",
+               "source does not end with a newline [--final-newline:require]",
+               lx.line, lx.col, lx.col)
   var eof = initToken(tkEof, lx.line, lx.col)
   eof.indent = 0
   result.add eof
   errors = lx.errors
+  gLexDiags = lx.diags
 
 proc tokenize*(src: string; opts: LexOptions): seq[Token] =
   ## Overload without an error out-param (diagnostics still emitted).
