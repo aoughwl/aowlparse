@@ -179,13 +179,15 @@ proc parseTypeRangeImpl(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32) =
       parseTypeRange(ps, b, int32(d) + 1, hi, dt.line, dt.col)
       b.endTree()
       return
-  # atom: a type name (ident/keyword), or a literal in type-arg position
-  # (`array[4, byte]`, `array['a'..'z', T]`) which the expression emitter renders
-  # correctly (an int literal must not be `addIdent`-escaped to `\34`).
+  # atom: a single type name (ident/keyword, or `(quoted …)` for a backtick
+  # operand like `varargs[string, ` $ `]`). Anything else that fell through the
+  # type-specific forms is an EXPRESSION in type-arg position — a literal
+  # (`array[4, byte]`) or a call/range bound (`array[succ(low(X))..high(X), T]`)
+  # — which the expression emitter renders correctly (an int must not be
+  # `addIdent`-escaped to `\34`, a call must keep its arguments).
   let t = ps.tok(int(lo))
-  if t.kind == tkIdent or t.kind == tkKeyword:
-    b.addIdent t.s
-    ps.emitInfo(b, t.line, t.col, pl, pc, false)
+  if int(lo) + 1 >= int(hi) and (t.kind == tkIdent or t.kind == tkKeyword):
+    ps.emitName(b, t, pl, pc)
   else:
     ps.parseExprRange(b, lo, hi, pl, pc)
 
