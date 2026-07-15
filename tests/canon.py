@@ -89,6 +89,14 @@ def tokenize(text: str):
             buf.append('"')
             if j < n:
                 j += 1  # consume closing quote
+            # A string literal is complete at its closing quote; a raw `@`/`~`
+            # line-info suffix may follow it directly (`"…"@L`) exactly as it may
+            # follow an ident. Consume it so two parsers that agree on structure
+            # but place the string's position node differently still compare equal.
+            while j < n and text[j] in "@~":
+                j += 1
+                while j < n and text[j] in _INFO:
+                    j += 1
             toks.append("".join(buf))
             i = j
             continue
