@@ -901,7 +901,9 @@ proc parseOneStmt(ps: var Parser; b: var Builder; startIdx: int; pl, pc: int32;
     # against an assignment RHS (`x = …`).
     if pcolon > startIdx and ps.findAssign(startIdx, pcolon) < 0:
       # exclude a colon owned by an unparenthesized if/when/case EXPRESSION in
-      # the head (`x = if c: a`, `echo if c: a else: b`) — that is not a block.
+      # the head (`x = if c: a`, `echo if c: a else: b`), or by an anonymous
+      # routine's return type (`xs.sort proc (a): int = …` — the `: int` is the
+      # proc return, not a block) — neither is a postExprBlock.
       var cf = false
       var d = 0
       var k = startIdx
@@ -912,7 +914,8 @@ proc parseOneStmt(ps: var Parser; b: var Builder; startIdx: int; pl, pc: int32;
           if d > 0: dec d
         elif d == 0 and t.kind == tkKeyword and
              (t.s == "if" or t.s == "when" or t.s == "case" or
-              t.s == "elif" or t.s == "else" or t.s == "of"):
+              t.s == "elif" or t.s == "else" or t.s == "of" or
+              t.s == "proc" or t.s == "func" or t.s == "iterator"):
           cf = true; break
         inc k
       if not cf:
