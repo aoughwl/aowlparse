@@ -210,7 +210,25 @@ proc emitBody(ps: var Parser; b: var Builder; colonIdx: int; refIndent: int32;
     # of `let x = try:` sits mid-line so its keyword column is not its indent.
     let bodyRef = first.indent - 1
     while ps.tok(i).kind != tkEof and ps.tok(i).indent > bodyRef:
-      i = ps.parseStmt(b, i, first.line, first.col, -1)
+      # An inline branch keyword (`else`/`elif`/…) can follow the body on its own
+      # line: `if c:\n  callBody() else: x`. Bound this statement at that keyword
+      # so it is not swallowed as a command arg — the caller picks up the branch.
+      var stmtHi = -1
+      block:
+        var d = 0
+        var k = i
+        let lend = ps.lineEnd(i)
+        while k < lend:
+          let kk = ps.tok(k)
+          if isOpenBracket(kk.kind): inc d
+          elif isCloseBracket(kk.kind):
+            if d > 0: dec d
+          elif d == 0 and k > i and kk.kind == tkKeyword and kk.indent < 0 and
+               (kk.s == "elif" or kk.s == "else" or kk.s == "of" or
+                kk.s == "except" or kk.s == "finally"):
+            stmtHi = k; break
+          inc k
+      i = ps.parseStmt(b, i, first.line, first.col, int32(stmtHi))
   b.endTree()
   result = i
 

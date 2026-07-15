@@ -84,6 +84,13 @@ proc parseArg(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32) =
      (head.s == "ref" or head.s == "ptr" or head.s == "var" or head.s == "out"):
     parseTypeRange(ps, b, lo, hi, pl, pc)
     return
+  # an anonymous tuple TYPE as a generic arg (`initTable[string, tuple[a: int]]`):
+  # `tuple[…]` is a tuple type, not `(at tuple …)` bracket-indexing, so the type
+  # parser must own it.
+  if head.kind == tkKeyword and head.s == "tuple" and int(lo) + 1 < int(hi) and
+     ps.tok(int(lo) + 1).kind == tkBracketLe:
+    parseTypeRange(ps, b, lo, hi, pl, pc)
+    return
   ps.parseExprRange(b, lo, hi, pl, pc)
 
 proc parseArgList(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32) =
