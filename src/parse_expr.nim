@@ -393,8 +393,7 @@ proc parsePrimaryRangeImpl(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32
       ps.emitInfo(b, opTok.line, opTok.col, pl, pc, false)   # dot node = '.' pos
       ps.parsePrimaryRange(b, lo, int32(k), opTok.line, opTok.col)
       let r = ps.tok(k + 1)
-      b.addIdent r.s
-      ps.emitInfo(b, r.line, r.col, opTok.line, opTok.col, false)
+      ps.emitName(b, r, opTok.line, opTok.col)   # field name, or `(quoted …)`
       b.endTree()
     of pkAt:
       let rp = ps.matchClose(k)

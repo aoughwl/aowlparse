@@ -347,18 +347,24 @@ proc parseGenerics(ps: var Parser; b: var Builder; lbIdx: int; pl, pc: int32): i
   let rb = ps.matchClose(lbIdx)
   b.addTree "typevars"
   ps.emitInfo(b, lb.line, lb.col, pl, pc, false)           # typevars node = '[' pos
-  # split groups on ';'
+  # Split into param groups on `;`, and on a `,` that follows a depth-0 `:`
+  # constraint (`[T: A, L: B]` = two params) — a `,` BEFORE any `:` builds a
+  # shared-constraint name list (`[T, U: C]` = one group).
   var gstart = lbIdx + 1
   var i = lbIdx + 1
   var depth = 0
+  var seenColon = false
   while i < rb:
     let k = ps.tok(i).kind
     if isOpenBracket(k): inc depth
     elif isCloseBracket(k):
       if depth > 0: dec depth
-    elif depth == 0 and ps.tok(i).kind == tkSemicolon:
+    elif depth == 0 and (k == tkSemicolon or (k == tkComma and seenColon)):
       ps.emitTypevarGroup(b, gstart, i, lb.line, lb.col)
       gstart = i + 1
+      seenColon = false
+    elif depth == 0 and k == tkColon:
+      seenColon = true
     inc i
   if gstart < rb:
     ps.emitTypevarGroup(b, gstart, rb, lb.line, lb.col)
