@@ -783,6 +783,39 @@ proc parsePostExprBlock(ps: var Parser; b: var Builder; headLo, colonIdx: int;
   ## `:` block becomes a `(stmts …)` argument appended to the call/command.
   let head = ps.tok(headLo)
   let refIndent = head.col
+  # `do` block: `expr do (params) -> ret: body` → `(call <callee> (do (params …)
+  # ret (stmts body)))`. Detect a depth-0 `do` keyword introducing the block.
+  block doBlock:
+    var d = 0
+    var doIdx = -1
+    var k = headLo
+    while k < colonIdx:
+      let t = ps.tok(k)
+      if isOpenBracket(t.kind): inc d
+      elif isCloseBracket(t.kind):
+        if d > 0: dec d
+      elif d == 0 and t.kind == tkKeyword and t.s == "do":
+        doIdx = k; break
+      inc k
+    if doIdx > headLo and ps.tok(doIdx + 1).kind == tkParLe:
+      let dk = ps.tok(doIdx)
+      b.addTree "call"
+      ps.emitInfo(b, head.line, head.col, pl, pc, false)
+      # callee before `do`: `foo(x)` splits into callee+args, else a bare expr.
+      if ps.tok(doIdx - 1).kind == tkParRi:
+        let rparen = doIdx - 1
+        let lparen = ps.matchOpen(rparen)
+        ps.parseExprRange(b, int32(headLo), int32(lparen), head.line, head.col)
+        ps.parseArgList(b, int32(lparen + 1), int32(rparen), head.line, head.col)
+      else:
+        ps.parseExprRange(b, int32(headLo), int32(doIdx), head.line, head.col)
+      b.addTree "do"
+      ps.emitInfo(b, dk.line, dk.col, head.line, head.col, false)
+      discard ps.parseParams(b, doIdx + 1, dk.line, dk.col)   # (params …) + ret type
+      result = ps.emitBody(b, colonIdx, refIndent, dk.line, dk.col)
+      b.endTree()   # do
+      b.endTree()   # call
+      return
   let ce = ps.cmdCalleeEnd(headLo, colonIdx)
   if head.kind == tkIdent and ce < colonIdx and ps.startsArg(ce, colonIdx):
     # command with space-separated args: `foo a, b: body` → `(cmd callee args… (stmts))`

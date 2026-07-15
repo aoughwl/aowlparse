@@ -860,9 +860,11 @@ proc parseParams(ps: var Parser; b: var Builder; lpIdx: int; pl, pc: int32): int
     if i < rpIdx and (ps.tok(i).kind == tkComma or ps.tok(i).kind == tkSemicolon):
       inc i
   b.endTree()  # close params
-  # return type sibling
+  # return type sibling — introduced by `:` (proc/param types) or `->` (`do`
+  # blocks, `sort do (a, b) -> int:`).
   var j = rpIdx + 1
-  if ps.tok(j).kind == tkColon:
+  if ps.tok(j).kind == tkColon or
+     (ps.tok(j).kind == tkOperator and ps.tok(j).s == "->"):
     inc j
     j = ps.parseType(b, j, lp.line, lp.col)                 # ret parent = params node
   else:
