@@ -353,6 +353,15 @@ proc parseProcType(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32) =
     else:
       b.addEmpty                                            # pragmas
     b.addEmpty 2                                            # exceptions, body
+  elif int(lo) + 1 < int(hi) and ps.tok(int(lo) + 1).kind == tkCurlyLe:
+    # a bare `proc`/`iterator` type WITH a trailing `{.pragma.}` (no params):
+    # `iterator {.closure.}` → `(itertype .... . (pragmas closure) ..)` — 4 empties,
+    # an empty params slot (no return), the pragmas, then exceptions+body.
+    ps.emitInfo(b, kw.line, kw.col, pl, pc, false)
+    b.addEmpty 4                                           # name export pattern generics
+    b.addEmpty                                             # params slot (no return)
+    discard ps.parsePragmas(b, int(lo) + 1, kw.line, kw.col)
+    b.addEmpty 2                                           # exceptions, body
   else:
     # a BARE `proc`/`iterator` type (`(proc)`, no params) → `(proctype)` with no
     # children — nifler emits an empty node, not 8 empty slots.
