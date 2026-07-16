@@ -225,7 +225,16 @@ proc lineEnd(ps: Parser; startIdx: int): int =
     if depth == 0 and i > startIdx:
       let prev = ps.tok(i - 1)
       if t.line != prev.line and not continuesLine(prev):
-        break
+        # A DEEPER-indented `elif`/`else` on the next line continues an if/case
+        # EXPRESSION (`return if c: a⏎   else: b`). A STATEMENT's `else` aligns
+        # with its `if` (same indent), so the strict `>` keeps if-statements —
+        # whose bodies lineEnd must not swallow — terminating correctly.
+        let startIndent = ps.tok(startIdx).indent
+        if t.kind == tkKeyword and (t.s == "elif" or t.s == "else") and
+           startIndent >= 0 and t.indent > startIndent:
+          discard        # continuation: fall through without breaking
+        else:
+          break
     if isOpenBracket(t.kind): inc depth
     elif isCloseBracket(t.kind):
       if depth > 0: dec depth
