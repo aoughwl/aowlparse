@@ -637,7 +637,14 @@ proc parsePrimaryRangeImpl(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32
       b.endTree()   # expr
     else:
       let starts = ps.splitArgs(int(lo) + 1, rpIdx)
-      let tag = if starts.len > 1: "tup" else: "par"
+      # `par` ONLY for exactly one plain (non-named, no trailing-comma) element;
+      # empty `()`, multi-element, a single named field `(a: 1)`, or a trailing
+      # comma `(1,)` are all tuple constructors -> `tup`.
+      var tag = "tup"
+      if starts.len == 1:
+        let trailComma = rpIdx > int(lo) + 1 and ps.tok(rpIdx - 1).kind == tkComma
+        let named = ps.depth0Colon(starts[0], rpIdx) >= 0
+        if not trailComma and not named: tag = "par"
       b.addTree tag
       ps.emitInfo(b, t.line, t.col, pl, pc, false)
       ps.parseArgList(b, int32(int(lo) + 1), int32(rpIdx), t.line, t.col)
@@ -655,7 +662,10 @@ proc parsePrimaryRangeImpl(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32
     let isTab = ps.depth0Colon(int(lo) + 1, rpIdx) >= 0
     b.addTree(if isTab: "tabconstr" else: "curly")
     ps.emitInfo(b, t.line, t.col, pl, pc, false)
-    ps.parseArgList(b, int32(int(lo) + 1), int32(rpIdx), t.line, t.col)
+    # empty table constructor `{:}` has a lone colon and no elements
+    let emptyTab = isTab and rpIdx == int(lo) + 2 and ps.tok(int(lo) + 1).kind == tkColon
+    if not emptyTab:
+      ps.parseArgList(b, int32(int(lo) + 1), int32(rpIdx), t.line, t.col)
     b.endTree()
   of tkIdent, tkKeyword:
     ps.emitName(b, t, pl, pc)

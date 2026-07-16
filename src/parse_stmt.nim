@@ -349,6 +349,13 @@ proc parseCase(ps: var Parser; b: var Builder; kwIdx: int; pl, pc: int32): int =
       b.endTree()  # ranges
       i = ps.emitBody(b, bcolon, refIndent, br.line, br.col)
       b.endTree()  # of
+    elif br.s == "elif":
+      b.addTree "elif"
+      ps.emitInfo(b, br.line, br.col, kw.line, kw.col, false)
+      let cEnd = if bcolon >= 0: bcolon else: bhi
+      ps.parseExprRange(b, int32(i + 1), int32(cEnd), br.line, br.col)  # condition
+      i = ps.emitBody(b, bcolon, refIndent, br.line, br.col)
+      b.endTree()  # elif
     else:
       b.addTree "else"
       ps.emitInfo(b, br.line, br.col, kw.line, kw.col, false)

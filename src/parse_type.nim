@@ -78,19 +78,11 @@ proc parseTypeRangeImpl(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32) =
     b.addEmpty
     return
   let first = ps.tok(int(lo))
-  # prefix type keywords: ref/ptr/var(->mut)/out/distinct/static
-  if first.kind == tkKeyword and isPrefixTypeKw(first.s):
-    b.addTree prefixTypeTag(first.s)
-    ps.emitInfo(b, first.line, first.col, pl, pc, false)
-    # a BARE keyword with no operand (`ptr` alone, e.g. `nil (ptr)`) → `(ptr)`
-    # with no child; nifler emits an empty node, not `(ptr .)`.
-    if int(lo) + 1 < int(hi):
-      parseTypeRange(ps, b, lo + 1, hi, first.line, first.col)
-    b.endTree()
-    return
   # A top-level binary operator (`T | U`, or infix `ptr`/`ref`) splits FIRST —
-  # BEFORE the tuple/object/proc keyword forms — so `tuple | object` is an
-  # `(infix | (tuple) (object))`, not an inline tuple that swallows `| object`.
+  # BEFORE the prefix keyword AND the tuple/object/proc keyword forms — so
+  # `tuple | object` is `(infix | (tuple) (object))` and `ref | ptr` is
+  # `(infix | (ref) (ptr))`, not a prefix `ref` that swallows `| ptr`. A leading
+  # prefix keyword can never itself be the split point (findSplit needs i > lo).
   block:
     let sp0 = ps.findSplit(int(lo), int(hi), typeCtx = true)
     if sp0 >= 0:
@@ -103,6 +95,16 @@ proc parseTypeRangeImpl(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32) =
       parseTypeRange(ps, b, int32(sp0) + 1, hi, op.line, op.col)
       b.endTree()
       return
+  # prefix type keywords: ref/ptr/var(->mut)/out/distinct/static
+  if first.kind == tkKeyword and isPrefixTypeKw(first.s):
+    b.addTree prefixTypeTag(first.s)
+    ps.emitInfo(b, first.line, first.col, pl, pc, false)
+    # a BARE keyword with no operand (`ptr` alone, e.g. `nil (ptr)`) → `(ptr)`
+    # with no child; nifler emits an empty node, not `(ptr .)`.
+    if int(lo) + 1 < int(hi):
+      parseTypeRange(ps, b, lo + 1, hi, first.line, first.col)
+    b.endTree()
+    return
   # proc / iterator type
   if first.kind == tkKeyword and (first.s == "proc" or first.s == "iterator"):
     parseProcType(ps, b, lo, hi, pl, pc)
@@ -400,7 +402,7 @@ proc parsePragmas(ps: var Parser; b: var Builder; braceIdx: int; pl, pc: int32):
         b.addTree "cast"
         ps.emitInfo(b, t0.line, t0.col, brace.line, brace.col, false)
         b.addEmpty                                    # empty target-type slot
-        ps.parseExprRange(b, int32(aLo + 2), int32(rp), t0.line, t0.col)
+        ps.parseArg(b, int32(aLo + 2), int32(rp), t0.line, t0.col)
         b.endTree()
       else:
         ps.parseArg(b, int32(aLo), int32(aHi), brace.line, brace.col)
