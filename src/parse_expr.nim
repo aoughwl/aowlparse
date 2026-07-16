@@ -707,7 +707,27 @@ proc parseExprRangeImpl(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32) =
     # parenthesised/bracketed/braced primary (`(uint64)x`, `[a]b`), which nifler
     # renders `(cmd (par uint64) x)`. `cmdCalleeEnd` already folds the whole
     # postfix chain of the bracket form, so `ce` points at the first argument.
-    if (head.kind == tkIdent or isOpenBracket(head.kind)) and
+    # A command callee normally starts with an ident or an open bracket, but a
+    # DOTTED callee reached from a literal base (`"xabc".contains x`,
+    # `'#'.repeat i`) is also valid — the trailing `.field` makes it a symbol.
+    let litHead = head.kind == tkCharLit or head.kind == tkStrLit or
+                  head.kind == tkRStrLit or head.kind == tkTripleStrLit or
+                  head.kind == tkIntLit or head.kind == tkFloatLit
+    let dottedCallee =
+      if not litHead: false
+      else:
+        var d = 0
+        var found = false
+        var k = int(lo)
+        while k < ce:
+          let t = ps.tok(k)
+          if isOpenBracket(t.kind): inc d
+          elif isCloseBracket(t.kind):
+            if d > 0: dec d
+          elif d == 0 and t.kind == tkDot: found = true
+          inc k
+        found
+    if (head.kind == tkIdent or isOpenBracket(head.kind) or dottedCallee) and
        ce < int(hi) and ps.startsArg(ce, int(hi)):
       # EXPRESSION-context command (`commandExpr`): nkCommand.info = the FIRST
       # ARGUMENT's position (the cursor when the node is built), so the callee

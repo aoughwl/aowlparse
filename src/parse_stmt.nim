@@ -946,6 +946,30 @@ proc parsePostExprBlock(ps: var Parser; b: var Builder; headLo, colonIdx: int;
     result = ps.appendTrailingDo(b, result, int(refIndent), anchor.line, anchor.col)
     b.endTree()
   else:
+    # generalized-raw-string call with a colon block: `runnableExamples"-r:off":⏎
+    # body` → the block appends directly onto the `(callstrlit …)` node, NOT an
+    # outer `(call (callstrlit …) …)` wrapper.
+    block callstrlit:
+      let s = ps.tok(colonIdx - 1)
+      if (s.kind == tkStrLit or s.kind == tkRStrLit or s.kind == tkTripleStrLit) and
+         colonIdx - 2 >= headLo:
+        let cal = ps.tok(colonIdx - 2)
+        let adj = cal.line == s.line and cal.endCol == s.col and
+                  (cal.kind == tkIdent or cal.kind == tkKeyword)
+        let dotAccess = colonIdx - 2 == headLo or ps.tok(colonIdx - 3).kind == tkDot
+        if adj and dotAccess:
+          b.addTree "callstrlit"
+          ps.emitInfo(b, s.line, s.col, pl, pc, false)
+          ps.parseExprRange(b, int32(headLo), int32(colonIdx - 1), s.line, s.col)  # callee
+          b.addTree "suf"
+          ps.emitInfo(b, s.line, s.col, s.line, s.col, false)
+          b.addStrLit s.s
+          b.addStrLit "R"
+          b.endTree()   # suf
+          result = ps.emitBody(b, colonIdx, refIndent, s.line, s.col)  # (stmts body)
+          result = ps.appendTrailingDo(b, result, int(refIndent), s.line, s.col)
+          b.endTree()   # callstrlit
+          return
     # call form: `foo: body` / `c.into: body` / `foo(args): body`
     # → `(call <callee> [args…] (stmts body))`.
     b.addTree "call"
