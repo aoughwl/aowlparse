@@ -933,6 +933,9 @@ proc parseParams(ps: var Parser; b: var Builder; lpIdx: int; pl, pc: int32;
   ## sends parseType into infinite recursion).
   let lp = ps.tok(lpIdx)
   let rpIdx = ps.matchClose(lpIdx)
+  # nifler's nkFormalParams sets `c.section = ParamL` unconditionally and never
+  # restores it; a following var/let/const section item then inherits `param`.
+  ps.section = "param"
   b.addTree "params"
   ps.emitInfo(b, lp.line, lp.col, pl, pc, false)           # params node = '(' pos
   var i = lpIdx + 1

@@ -763,6 +763,8 @@ proc parseSection(ps: var Parser; b: var Builder; kwIdx: int; pl, pc: int32;
   let next = ps.tok(kwIdx + 1)
   if next.kind == tkEof:
     return kwIdx + 1
+  # nifler resets `c.section` to this section's kind at the section head.
+  ps.section = tag
   if next.indent >= 0:
     # indented section block: each line at indent > kw.col is one ident-def
     let refIndent = kw.col
@@ -780,13 +782,14 @@ proc parseSection(ps: var Parser; b: var Builder; kwIdx: int; pl, pc: int32;
           b.endTree()
         inc i; continue
       let dhi = ps.extendPastTypeColon(i, ps.lineEnd(i))
-      let consumed = ps.parseSectionDef(b, i, dhi, tag, pl, pc)
+      # Read the (possibly leaked) section state for THIS member's tag.
+      let consumed = ps.parseSectionDef(b, i, dhi, ps.section, pl, pc)
       i = if consumed > dhi: consumed else: dhi
     result = i
   else:
     # inline single ident-def on the keyword's line, bounded at the next `;`
     let hi = ps.extendPastTypeColon(kwIdx, ps.semiEnd(kwIdx, ps.lineEnd(kwIdx)))
-    result = ps.parseSectionDef(b, kwIdx + 1, hi, tag, pl, pc)
+    result = ps.parseSectionDef(b, kwIdx + 1, hi, ps.section, pl, pc)
 
 proc parsePragmaStmt(ps: var Parser; b: var Builder; braceIdx: int; pl, pc: int32): int =
   ## A statement that starts with `{.` is a pragma statement, NOT a `{ }` set.

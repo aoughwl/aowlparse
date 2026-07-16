@@ -20,6 +20,11 @@ type
     curly*: bool   ## experimental: accept `{ … }` as a block body alongside `:`
     depth*: int    ## live recursion nesting through the main parse entry points
     maxDepth*: int ## abort ceiling for `depth` (0 = unlimited, the default)
+    section*: string ## nifler's un-scoped `c.section` state: a var/let/const
+                     ## section resets it to its own tag, but parsing a `(params)`
+                     ## list (proc/proctype value or type) overwrites it to
+                     ## "param" and it is NOT restored — so a section item that
+                     ## FOLLOWS a proc-typed item inherits the `param` tag.
 
 proc initParser*(toks: seq[Token]; file: string; curly = false;
                  maxDepth = 0): Parser =
