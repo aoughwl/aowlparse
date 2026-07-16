@@ -1005,7 +1005,22 @@ proc parseOneStmt(ps: var Parser; b: var Builder; startIdx: int; pl, pc: int32;
     of "mixin": return ps.parseImportLike(b, startIdx, pl, pc, "mixin")
     of "bind": return ps.parseImportLike(b, startIdx, pl, pc, "bind")
     of "from": return ps.parseFromImport(b, startIdx, pl, pc)
-    of "static": return ps.parseStatic(b, startIdx, pl, pc)
+    of "static":
+      # An inline `static: body` (as the one-line body of another colon block,
+      # `if c: static: x`) parses via the command path as `(call static (stmts …))`,
+      # NOT a `(staticstmt …)`; a standalone `static:` block stays staticstmt.
+      if hiLimit >= 0:
+        let kw = ps.tok(startIdx)
+        let colon = ps.findColon(startIdx, ps.lineEnd(startIdx))
+        if colon > startIdx:
+          b.addTree "call"
+          ps.emitInfo(b, kw.line, kw.col, pl, pc, false)
+          b.addIdent "static"
+          ps.emitInfo(b, kw.line, kw.col, kw.line, kw.col, false)
+          result = ps.emitBody(b, colon, int32(kw.col), kw.line, kw.col)
+          b.endTree()
+          return result
+      return ps.parseStatic(b, startIdx, pl, pc)
     of "if": return ps.parseIfLike(b, startIdx, pl, pc, "if")
     of "when": return ps.parseIfLike(b, startIdx, pl, pc, "when")
     of "while": return ps.parseWhile(b, startIdx, pl, pc)
