@@ -656,7 +656,12 @@ proc parseExprRangeImpl(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32) =
   # spaced binary operator so it does not masquerade as a command here.)
   block cmdLead:
     let ce = ps.cmdCalleeEnd(int(lo), int(hi))
-    if head.kind == tkIdent and ce < int(hi) and ps.startsArg(ce, int(hi)):
+    # The callee of a command is any *primary* — an identifier (`echo x`) or a
+    # parenthesised/bracketed/braced primary (`(uint64)x`, `[a]b`), which nifler
+    # renders `(cmd (par uint64) x)`. `cmdCalleeEnd` already folds the whole
+    # postfix chain of the bracket form, so `ce` points at the first argument.
+    if (head.kind == tkIdent or isOpenBracket(head.kind)) and
+       ce < int(hi) and ps.startsArg(ce, int(hi)):
       # EXPRESSION-context command (`commandExpr`): nkCommand.info = the FIRST
       # ARGUMENT's position (the cursor when the node is built), so the callee
       # gets a negative delta back to it. (Statement-context commands anchor at
