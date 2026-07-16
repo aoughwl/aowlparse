@@ -390,7 +390,14 @@ proc parsePrimaryRangeImpl(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32
     let negNumFold = t.s == "-" and int(lo) + 1 < int(hi) and
                      (nn.kind == tkIntLit or nn.kind == tkFloatLit) and
                      nn.line == t.line and nn.col == t.col + 1
-    if not negNumFold:
+    # `@[...]` / `@{...}` is a constructor sigil: the `@` binds TIGHTER than a
+    # trailing `.`/`[`/`(` postfix, so `@[""].Field` = `(dot (prefix @ (bracket
+    # "")) Field)`, dot outermost. Fall through to the postfix split when a
+    # postfix follows the constructor's close bracket (bare `@[...]` still folds).
+    let sigilCtorFold = t.s == "@" and int(lo) + 1 < int(hi) and
+                        (nn.kind == tkBracketLe or nn.kind == tkCurlyLe) and
+                        ps.matchClose(int(lo) + 1) < int(hi) - 1
+    if not negNumFold and not sigilCtorFold:
       b.addTree "prefix"
       ps.emitInfo(b, t.line, t.col, pl, pc, false)
       b.addIdent t.s
