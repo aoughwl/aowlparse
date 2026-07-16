@@ -1,0 +1,2913 @@
+(.nif27)
+(.indexat 67119            )
+(stmts@,1,../nimony/lib/std/math.nim
+ (const@K,u :strlit.0.I17663241064981421312. . LongString.0.sysvq0asl
+  (oconstr LongString.0.sysvq0asl
+   (kv fullLen.0 8)
+   (kv rc.0 0)
+   (kv capImpl.0 0)
+   (kv data.0 "<math.h>")))
+ (const@4,1y :strlit.0.I12064251030117205798. . LongString.0.sysvq0asl
+  (oconstr LongString.0.sysvq0asl
+   (kv fullLen.0 8)
+   (kv rc.0 0)
+   (kv capImpl.0 0)
+   (kv data.0 "fcNormal")))
+ (const@4,1z :strlit.0.I13051302242398678779. . LongString.0.sysvq0asl
+  (oconstr LongString.0.sysvq0asl
+   (kv fullLen.0 11)
+   (kv rc.0 0)
+   (kv capImpl.0 0)
+   (kv data.0 "fcSubnormal")))
+ (const@4,21 :strlit.0.I10683379878145369823. . LongString.0.sysvq0asl
+  (oconstr LongString.0.sysvq0asl
+   (kv fullLen.0 9)
+   (kv rc.0 0)
+   (kv capImpl.0 0)
+   (kv data.0 "fcNegZero")))
+ (const@4,24 :strlit.0.I8652872438240444023. . LongString.0.sysvq0asl
+  (oconstr LongString.0.sysvq0asl
+   (kv fullLen.0 8)
+   (kv rc.0 0)
+   (kv capImpl.0 0)
+   (kv data.0 "fcNegInf")))
+ (const@A,3N,../nimony/lib/std/system.nim :strlit.0.I8031254106179394417. . LongString.0.sysvq0asl
+  (oconstr LongString.0.sysvq0asl
+   (kv fullLen.0 24)
+   (kv rc.0 0)
+   (kv capImpl.0 0)
+   (kv data.0 "ignore runnable examples")))
+ (const@E,1C,../nimony/lib/std/system/seqimpl.nim :strlit.0.I15750996627617194403. . LongString.0.sysvq0asl
+  (oconstr LongString.0.sysvq0asl
+   (kv fullLen.0 19)
+   (kv rc.0 0)
+   (kv capImpl.0 0)
+   (kv data.0 "leave uninitialized")))
+ (const@4,a :PI.0.~2 .
+  (f@F,32,../nimony/lib/std/system/arithmetics.nim 64)3.141592653589793@4)
+ (const@5,b :TAU.0.~3 .
+  (f@F,32,../nimony/lib/std/system/arithmetics.nim 64)6.283185307179586@8)
+ (const@3,c :E.0.~1 .
+  (f@F,32,../nimony/lib/std/system/arithmetics.nim 64)2.718281828459045@4)
+ (const@L,e :MaxFloat64Precision.0.~J .
+  (i~B,10 64)
+  (suf@4 16 "i64"))
+ (const@L,h :MaxFloat32Precision.0.~J .
+  (i~B,x 64)
+  (suf@4 8 "i64"))
+ (const@J,k :MaxFloatPrecision.0.~H .
+  (i~9,u 64)
+  (suf@6,~6 16 "i64"))
+ (const@G,o :MinFloatNormal.0.~E .
+  (f@F,32,../nimony/lib/std/system/arithmetics.nim 64)2.225073858507201E-308@4)
+ (const@6,u :CMathHeader.0. . string.0.sysvq0asl
+  (oconstr@E string.0.sysvq0asl
+   (kv bytes.0 7507052477933239550u)
+   (kv more.0
+    (addr strlit.0.I17663241064981421312.))))
+ (proc@2,1i :c_frexp.0.@5
+  (params@C
+   (param@1 :x.22 .
+    (f@3 32))
+   (param@D :exponent.0 .
+    (ptr@A
+     (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+      (importc "int")))))
+  (f@Y 32)
+  (pragmas@s
+   (importc "frexpf")
+   (header "<math.h>")
+   (smry~s
+    (param 0 0)
+    (param 1 1)))
+  (stmts .))
+ (proc@2,1j :c_frexp.1.@5
+  (params@C
+   (param@1 :x.23 .
+    (f@3 64))
+   (param@D :exponent.1 .
+    (ptr@A
+     (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+      (importc "int")))))
+  (f@Y 64)
+  (pragmas@s
+   (importc "frexp")
+   (header "<math.h>")
+   (smry~s
+    (param 0 0)
+    (param 1 1)))
+  (stmts .))
+ (gvar@I,1o :c_fpNormal.0.~E
+  (pragmas
+   (importc "FP_NORMAL")
+   (header "<math.h>"))
+  (i@l 64).)
+ (gvar@I,1p :c_fpSubnormal.0.~E
+  (pragmas
+   (importc "FP_SUBNORMAL")
+   (header "<math.h>"))
+  (i@o 64).)
+ (gvar@I,1q :c_fpZero.0.~E
+  (pragmas
+   (importc "FP_ZERO")
+   (header "<math.h>"))
+  (i@j 64).)
+ (gvar@I,1r :c_fpInfinite.0.~E
+  (pragmas
+   (importc "FP_INFINITE")
+   (header "<math.h>"))
+  (i@n 64).)
+ (gvar@I,1s :c_fpNan.0.~E
+  (pragmas
+   (importc "FP_NAN")
+   (header "<math.h>"))
+  (i@i 64).)
+ (type@E,1v :FloatClass.0.~C .
+  (enum@2
+   (u 8)
+   (efld~C,3 :fcNormal.0. 0)
+   (efld~C,4 :fcSubnormal.0. 1)
+   (efld~C,5 :fcZero.0. 2)
+   (efld~C,6 :fcNegZero.0. 3)
+   (efld~C,7 :fcNan.0. 4)
+   (efld~C,8 :fcInf.0. 5)
+   (efld~C,9 :fcNegInf.0. 6)))
+ (proc@2,1v :dollar`.FloatClass.0.
+  (params
+   (param :e.0 . FloatClass.0.))string.0.sysvq0asl
+  (pragmas
+   (smry callsUnknown
+    (param 0 0 reads)))
+  (stmts
+   (var@E :result.0 . string.0.sysvq0asl .)
+   (call@E =wasMoved.2.sysvq0asl
+    (addr result.0))
+   (case@E e.0
+    (of~C,3
+     (ranges 0)
+     (stmts
+      (ret
+       (oconstr string.0.sysvq0asl
+        (kv bytes.0 7020393216522544894u)
+        (kv more.0
+         (addr strlit.0.I12064251030117205798.))))))
+    (of~C,4
+     (ranges 1)
+     (stmts
+      (ret
+       (oconstr string.0.sysvq0asl
+        (kv bytes.0 8029463441697892094u)
+        (kv more.0
+         (addr strlit.0.I13051302242398678779.))))))
+    (of~C,5
+     (ranges 2)
+     (stmts
+      (ret
+       (oconstr string.0.sysvq0asl
+        (kv bytes.0 31369502048609798u)
+        (kv more.0
+         (nil))))))
+    (of~C,6
+     (ranges 3)
+     (stmts
+      (ret
+       (oconstr string.0.sysvq0asl
+        (kv bytes.0 7303263430539175678u)
+        (kv more.0
+         (addr strlit.0.I10683379878145369823.))))))
+    (of~C,7
+     (ranges 4)
+     (stmts
+      (ret
+       (oconstr string.0.sysvq0asl
+        (kv bytes.0 121364206020101u)
+        (kv more.0
+         (nil))))))
+    (of~C,8
+     (ranges 5)
+     (stmts
+      (ret
+       (oconstr string.0.sysvq0asl
+        (kv bytes.0 112623863686661u)
+        (kv more.0
+         (nil))))))
+    (of~C,9
+     (ranges 6)
+     (stmts
+      (ret
+       (oconstr string.0.sysvq0asl
+        (kv bytes.0 7946996702276445950u)
+        (kv more.0
+         (addr strlit.0.I8652872438240444023.)))))))
+   (ret result.0)))
+ (proc@,2H :copySign.0.@5
+  (params@E
+   (param@1 :x.25 .
+    (f@6 32))
+   (param@4 :y.13 .
+    (f@3 32)))
+  (f@H 32)
+  (pragmas@d
+   (importc "copysignf")
+   (header "<math.h>")
+   (smry~d
+    (param 0 0)
+    (param 1 1)))
+  (stmts .))
+ (proc@,2I :copySign.1.@5
+  (params@E
+   (param@1 :x.26 .
+    (f@6 64))
+   (param@4 :y.14 .
+    (f@3 64)))
+  (f@H 64)
+  (pragmas@d
+   (importc "copysign")
+   (header "<math.h>")
+   (smry~d
+    (param 0 0)
+    (param 1 1)))
+  (stmts@2,1
+   (var :result.2 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64).)
+   (stmts@2,3N,../nimony/lib/std/system.nim
+    (var :`x.3 . string.0.sysvq0asl
+     (oconstr@A,3N,../nimony/lib/std/system.nim string.0.sysvq0asl
+      (kv bytes.0 2334397804780677630u)
+      (kv more.0
+       (addr strlit.0.I8031254106179394417.)))))
+   (ret~2,~1 result.2)))
+ (proc@,40 :floor.0.@5
+  (params@B
+   (param@1 :x.32 .
+    (f@3 32)))
+  (f@E 32)
+  (pragmas@X
+   (importc "floorf")
+   (header "<math.h>")
+   (smry~X
+    (param 0 0)))
+  (stmts .))
+ (proc@,41 :floor.1.@5
+  (params@B
+   (param@1 :x.33 .
+    (f@3 64)))
+  (f@E 64)
+  (pragmas@X
+   (importc "floor")
+   (header "<math.h>")
+   (smry~X
+    (param 0 0)))
+  (stmts@2,1
+   (var :result.6 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64).)
+   (stmts@2,3N,../nimony/lib/std/system.nim
+    (var :`x.4 . string.0.sysvq0asl
+     (oconstr@A,3N,../nimony/lib/std/system.nim string.0.sysvq0asl
+      (kv bytes.0 2334397804780677630u)
+      (kv more.0
+       (addr strlit.0.I8031254106179394417.)))))
+   (ret~2,~1 result.6)))
+ (proc@,4D :ceil.0.@5
+  (params@A
+   (param@1 :x.34 .
+    (f@3 32)))
+  (f@E 32)
+  (pragmas@W
+   (importc "ceilf")
+   (header "<math.h>")
+   (smry~W
+    (param 0 0)))
+  (stmts .))
+ (proc@,4E :ceil.1.@5
+  (params@A
+   (param@1 :x.35 .
+    (f@3 64)))
+  (f@E 64)
+  (pragmas@W
+   (importc "ceil")
+   (header "<math.h>")
+   (smry~W
+    (param 0 0)))
+  (stmts@2,1
+   (var :result.7 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64).)
+   (stmts@2,3N,../nimony/lib/std/system.nim
+    (var :`x.5 . string.0.sysvq0asl
+     (oconstr@A,3N,../nimony/lib/std/system.nim string.0.sysvq0asl
+      (kv bytes.0 2334397804780677630u)
+      (kv more.0
+       (addr strlit.0.I8031254106179394417.)))))
+   (ret~2,~1 result.7)))
+ (proc@,4R :round.0.@5
+  (params@B
+   (param@1 :x.36 .
+    (f@3 32)))
+  (f@E 32)
+  (pragmas@X
+   (importc "roundf")
+   (header "<math.h>")
+   (smry~X
+    (param 0 0)))
+  (stmts .))
+ (proc@,4S :round.1.@5
+  (params@B
+   (param@1 :x.37 .
+    (f@3 64)))
+  (f@E 64)
+  (pragmas@X
+   (importc "round")
+   (header "<math.h>")
+   (smry~X
+    (param 0 0)))
+  (stmts@2,1
+   (var :result.8 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64).)
+   (stmts@2,3N,../nimony/lib/std/system.nim
+    (var :`x.6 . string.0.sysvq0asl
+     (oconstr@A,3N,../nimony/lib/std/system.nim string.0.sysvq0asl
+      (kv bytes.0 2334397804780677630u)
+      (kv more.0
+       (addr strlit.0.I8031254106179394417.)))))
+   (ret~2,~1 result.8)))
+ (proc@,4e :trunc.0.@5
+  (params@B
+   (param@1 :x.38 .
+    (f@3 32)))
+  (f@E 32)
+  (pragmas@X
+   (importc "truncf")
+   (header "<math.h>")
+   (smry~X
+    (param 0 0)))
+  (stmts .))
+ (proc@,4f :trunc.1.@5
+  (params@B
+   (param@1 :x.39 .
+    (f@3 64)))
+  (f@E 64)
+  (pragmas@X
+   (importc "trunc")
+   (header "<math.h>")
+   (smry~X
+    (param 0 0)))
+  (stmts@2,1
+   (var :result.9 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64).)
+   (stmts@2,3N,../nimony/lib/std/system.nim
+    (var :`x.7 . string.0.sysvq0asl
+     (oconstr@A,3N,../nimony/lib/std/system.nim string.0.sysvq0asl
+      (kv bytes.0 2334397804780677630u)
+      (kv more.0
+       (addr strlit.0.I8031254106179394417.)))))
+   (ret~2,~1 result.9)))
+ (proc@,4q :mod.1.@5
+  (params@B
+   (param@1 :x.40 .
+    (f@6 32))
+   (param@4 :y.16 .
+    (f@3 32)))
+  (f@H 32)
+  (pragmas@a
+   (importc "fmodf")
+   (header "<math.h>")
+   (smry~a
+    (param 0 0)
+    (param 1 1)))
+  (stmts .))
+ (proc@,4r :mod.2.@5
+  (params@B
+   (param@1 :x.41 .
+    (f@6 64))
+   (param@4 :y.17 .
+    (f@3 64)))
+  (f@H 64)
+  (pragmas@a
+   (importc "fmod")
+   (header "<math.h>")
+   (smry~a
+    (param 0 0)
+    (param 1 1)))
+  (stmts@2,1
+   (var :result.10 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64).)
+   (stmts@2,3N,../nimony/lib/std/system.nim
+    (var :`x.8 . string.0.sysvq0asl
+     (oconstr@A,3N,../nimony/lib/std/system.nim string.0.sysvq0asl
+      (kv bytes.0 2334397804780677630u)
+      (kv more.0
+       (addr strlit.0.I8031254106179394417.)))))
+   (ret~2,~1 result.10)))
+ (proc@,8J :sqrt.1.@5
+  (params@A
+   (param@1 :x.54 .
+    (f@3 32)))
+  (f@E 32)
+  (pragmas@W
+   (importc "sqrtf")
+   (header "<math.h>")
+   (smry~W
+    (param 0 0)))
+  (stmts .))
+ (proc@,8K :sqrt.2.@5
+  (params@A
+   (param@1 :x.55 .
+    (f@3 64)))
+  (f@E 64)
+  (pragmas@W
+   (importc "sqrt")
+   (header "<math.h>")
+   (smry~W
+    (param 0 0)))
+  (stmts@2,1
+   (var :result.19 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64).)
+   (stmts@2,3N,../nimony/lib/std/system.nim
+    (var :`x.9 . string.0.sysvq0asl
+     (oconstr@A,3N,../nimony/lib/std/system.nim string.0.sysvq0asl
+      (kv bytes.0 2334397804780677630u)
+      (kv more.0
+       (addr strlit.0.I8031254106179394417.)))))
+   (ret~2,~1 result.19)))
+ (proc@,8S :cbrt.0.@5
+  (params@A
+   (param@1 :x.56 .
+    (f@3 32)))
+  (f@E 32)
+  (pragmas@W
+   (importc "cbrtf")
+   (header "<math.h>")
+   (smry~W
+    (param 0 0)))
+  (stmts .))
+ (proc@,8T :cbrt.1.@5
+  (params@A
+   (param@1 :x.57 .
+    (f@3 64)))
+  (f@E 64)
+  (pragmas@W
+   (importc "cbrt")
+   (header "<math.h>")
+   (smry~W
+    (param 0 0)))
+  (stmts@2,1
+   (var :result.20 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64).)
+   (stmts@2,3N,../nimony/lib/std/system.nim
+    (var :`x.10 . string.0.sysvq0asl
+     (oconstr@A,3N,../nimony/lib/std/system.nim string.0.sysvq0asl
+      (kv bytes.0 2334397804780677630u)
+      (kv more.0
+       (addr strlit.0.I8031254106179394417.)))))
+   (ret~2,~1 result.20)))
+ (proc@,8c :pow.0.@5
+  (params@9
+   (param@1 :x.58 .
+    (f@6 32))
+   (param@4 :y.26 .
+    (f@3 32)))
+  (f@H 32)
+  (pragmas@Y
+   (importc "powf")
+   (header "<math.h>")
+   (smry~Y
+    (param 0 0)
+    (param 1 1)))
+  (stmts .))
+ (proc@,8d :pow.1.@5
+  (params@9
+   (param@1 :x.59 .
+    (f@6 64))
+   (param@4 :y.27 .
+    (f@3 64)))
+  (f@H 64)
+  (pragmas@Y
+   (importc "pow")
+   (header "<math.h>")
+   (smry~Y
+    (param 0 0)
+    (param 1 1)))
+  (stmts@2,1
+   (var :result.21 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64).)
+   (stmts@2,3N,../nimony/lib/std/system.nim
+    (var :`x.11 . string.0.sysvq0asl
+     (oconstr@A,3N,../nimony/lib/std/system.nim string.0.sysvq0asl
+      (kv bytes.0 2334397804780677630u)
+      (kv more.0
+       (addr strlit.0.I8031254106179394417.)))))
+   (ret~2,~1 result.21)))
+ (proc@,8q :hypot.1.@5
+  (params@B
+   (param@1 :x.60 .
+    (f@6 32))
+   (param@4 :y.28 .
+    (f@3 32)))
+  (f@H 32)
+  (pragmas@a
+   (importc "hypotf")
+   (header "<math.h>")
+   (smry~a
+    (param 0 0)
+    (param 1 1)))
+  (stmts .))
+ (proc@,8r :hypot.2.@5
+  (params@B
+   (param@1 :x.61 .
+    (f@6 64))
+   (param@4 :y.29 .
+    (f@3 64)))
+  (f@H 64)
+  (pragmas@a
+   (importc "hypot")
+   (header "<math.h>")
+   (smry~a
+    (param 0 0)
+    (param 1 1)))
+  (stmts@2,1
+   (var :result.22 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64).)
+   (stmts@2,3N,../nimony/lib/std/system.nim
+    (var :`x.12 . string.0.sysvq0asl
+     (oconstr@A,3N,../nimony/lib/std/system.nim string.0.sysvq0asl
+      (kv bytes.0 2334397804780677630u)
+      (kv more.0
+       (addr strlit.0.I8031254106179394417.)))))
+   (ret~2,~1 result.22)))
+ (proc@,8w :exp.1.@5
+  (params@9
+   (param@1 :x.62 .
+    (f@3 32)))
+  (f@E 32)
+  (pragmas@V
+   (importc "expf")
+   (header "<math.h>")
+   (smry~V
+    (param 0 0)))
+  (stmts .))
+ (proc@,8x :exp.2.@5
+  (params@9
+   (param@1 :x.63 .
+    (f@3 64)))
+  (f@E 64)
+  (pragmas@V
+   (importc "exp")
+   (header "<math.h>")
+   (smry~V
+    (param 0 0)))
+  (stmts@2,1
+   (var :result.23 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64).)
+   (stmts@2,3N,../nimony/lib/std/system.nim
+    (var :`x.13 . string.0.sysvq0asl
+     (oconstr@A,3N,../nimony/lib/std/system.nim string.0.sysvq0asl
+      (kv bytes.0 2334397804780677630u)
+      (kv more.0
+       (addr strlit.0.I8031254106179394417.)))))
+   (ret~2,~1 result.23)))
+ (proc@,96 :ln.1.@5
+  (params@8
+   (param@1 :x.64 .
+    (f@3 32)))
+  (f@E 32)
+  (pragmas@U
+   (importc "logf")
+   (header "<math.h>")
+   (smry~U
+    (param 0 0)))
+  (stmts .))
+ (proc@,97 :ln.2.@5
+  (params@8
+   (param@1 :x.65 .
+    (f@3 64)))
+  (f@E 64)
+  (pragmas@U
+   (importc "log")
+   (header "<math.h>")
+   (smry~U
+    (param 0 0)))
+  (stmts@2,1
+   (var :result.24 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64).)
+   (stmts@2,3N,../nimony/lib/std/system.nim
+    (var :`x.14 . string.0.sysvq0asl
+     (oconstr@A,3N,../nimony/lib/std/system.nim string.0.sysvq0asl
+      (kv bytes.0 2334397804780677630u)
+      (kv more.0
+       (addr strlit.0.I8031254106179394417.)))))
+   (ret~2,~1 result.24)))
+ (proc@,9L :log2.0.@5
+  (params@A
+   (param@1 :x.66 .
+    (f@3 32)))
+  (f@E 32)
+  (pragmas@W
+   (importc "log2f")
+   (header "<math.h>")
+   (smry~W
+    (param 0 0)))
+  (stmts .))
+ (proc@,9M :log2.1.@5
+  (params@A
+   (param@1 :x.67 .
+    (f@3 64)))
+  (f@E 64)
+  (pragmas@W
+   (importc "log2")
+   (header "<math.h>")
+   (smry~W
+    (param 0 0)))
+  (stmts@2,1
+   (var :result.25 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64).)
+   (stmts@2,3N,../nimony/lib/std/system.nim
+    (var :`x.15 . string.0.sysvq0asl
+     (oconstr@A,3N,../nimony/lib/std/system.nim string.0.sysvq0asl
+      (kv bytes.0 2334397804780677630u)
+      (kv more.0
+       (addr strlit.0.I8031254106179394417.)))))
+   (ret~2,~1 result.25)))
+ (proc@,9Y :log10.0.@5
+  (params@B
+   (param@1 :x.68 .
+    (f@3 32)))
+  (f@E 32)
+  (pragmas@X
+   (importc "log10f")
+   (header "<math.h>")
+   (smry~X
+    (param 0 0)))
+  (stmts .))
+ (proc@,9Z :log10.1.@5
+  (params@B
+   (param@1 :x.69 .
+    (f@3 64)))
+  (f@E 64)
+  (pragmas@X
+   (importc "log10")
+   (header "<math.h>")
+   (smry~X
+    (param 0 0)))
+  (stmts@2,1
+   (var :result.26 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64).)
+   (stmts@2,3N,../nimony/lib/std/system.nim
+    (var :`x.16 . string.0.sysvq0asl
+     (oconstr@A,3N,../nimony/lib/std/system.nim string.0.sysvq0asl
+      (kv bytes.0 2334397804780677630u)
+      (kv more.0
+       (addr strlit.0.I8031254106179394417.)))))
+   (ret~2,~1 result.26)))
+ (proc@,AY :isPowerOfTwo.0.@5
+  (params@I
+   (param@1 :x.72 .
+    (i@3 64)))
+  (bool@A)
+  (pragmas
+   (smry
+    (param 0 0 reads)))
+  (stmts@2,1
+   (var :result.28 .
+    (bool@G,~AM).)
+   (stmts@2,3N,../nimony/lib/std/system.nim
+    (var :`x.17 . string.0.sysvq0asl
+     (oconstr@A,3N,../nimony/lib/std/system.nim string.0.sysvq0asl
+      (kv bytes.0 2334397804780677630u)
+      (kv more.0
+       (addr strlit.0.I8031254106179394417.)))))
+   (stmts@,C
+    (var@F :`x.18 .
+     (bool).)
+    (if@F
+     (elif
+      (lt@4,1u,../nimony/lib/std/system/comparisons.nim 0@E,Am,../nimony/lib/std/math.nim x.72@A,Am,../nimony/lib/std/math.nim)
+      (stmts
+       (asgn@L `x.18
+        (eq
+         (bitand~D
+          (i 64)x.72~2
+          (sub@7
+           (i 64)x.72~2 1@2))0@3))))
+     (else
+      (stmts
+       (asgn `x.18
+        (false)))))
+    (asgn result.28 `x.18@F)
+    (ret result.28))
+   (ret~2,~1 result.28)))
+ (proc@,An :nextPowerOfTwo.0.@5
+  (params@K
+   (param@1 :x.73 .
+    (i@3 64)))
+  (i@A 64)
+  (pragmas
+   (smry writeGlobal readGlobal
+    (param 0 0 reads)))
+  (stmts@2,1
+   (var :result.29 .
+    (i@8,~9A 64).)
+   (stmts@2,3N,../nimony/lib/std/system.nim
+    (var :`x.19 . string.0.sysvq0asl
+     (oconstr@A,3N,../nimony/lib/std/system.nim string.0.sysvq0asl
+      (kv bytes.0 2334397804780677630u)
+      (kv more.0
+       (addr strlit.0.I8031254106179394417.)))))
+   (asgn@7,C result.29~7
+    (sub@4
+     (i 64)x.73~2 1@2))
+   (stmts@2,E
+    (asgn@7 result.29~7
+     (bitor@9
+      (i 64)result.29~7
+      (shr@B
+       (i 64)
+       (cast~7
+        (i 64)result.29)
+       (cast@4
+        (u 64)32)))))
+   (stmts@2,G
+    (asgn@7 result.29~7
+     (bitor@9
+      (i 64)result.29~7
+      (shr@B
+       (i 64)
+       (cast~7
+        (i 64)result.29)
+       (cast@4
+        (u 64)16)))))
+   (stmts@2,I
+    (asgn@7 result.29~7
+     (bitor@9
+      (i 64)result.29~7
+      (shr@B
+       (i 64)
+       (cast~7
+        (i 64)result.29)
+       (cast@4
+        (u 64)8)))))
+   (asgn@7,J result.29~7
+    (bitor@9
+     (i 64)result.29~7
+     (shr@B
+      (i 64)
+      (cast~7
+       (i 64)result.29)
+      (cast@4
+       (u 64)4))))
+   (asgn@7,K result.29~7
+    (bitor@9
+     (i 64)result.29~7
+     (shr@B
+      (i 64)
+      (cast~7
+       (i 64)result.29)
+      (cast@4
+       (u 64)2))))
+   (asgn@7,L result.29~7
+    (bitor@9
+     (i 64)result.29~7
+     (shr@B
+      (i 64)
+      (cast~7
+       (i 64)result.29)
+      (cast@4
+       (u 64)1))))
+   (call@7,M \2B=.0.Ihg6mz11.
+    (addr~7 result.29)
+    (add@5
+     (i 64)1~2
+     (conv@5,3U,../nimony/lib/std/system.nim
+      (i@U,E,../nimony/lib/std/system/defaults.nim 64)
+      (le@M,BB,../nimony/lib/std/math.nim x.73~2 0@3))))
+   (ret~2,~1 result.29)))
+ (const@6,BC :RadPerDeg.0. .
+  (f@F,32,../nimony/lib/std/system/arithmetics.nim 64)0.017453292519943295@F)
+ (proc@,BZ :sin.1.@5
+  (params@9
+   (param@1 :x.74 .
+    (f@3 32)))
+  (f@E 32)
+  (pragmas@V
+   (importc "sinf")
+   (header "<math.h>")
+   (smry~V
+    (param 0 0)))
+  (stmts .))
+ (proc@,Ba :sin.2.@5
+  (params@9
+   (param@1 :x.75 .
+    (f@3 64)))
+  (f@E 64)
+  (pragmas@V
+   (importc "sin")
+   (header "<math.h>")
+   (smry~V
+    (param 0 0)))
+  (stmts@2,1
+   (var :result.32 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64).)
+   (stmts@2,3N,../nimony/lib/std/system.nim
+    (var :`x.20 . string.0.sysvq0asl
+     (oconstr@A,3N,../nimony/lib/std/system.nim string.0.sysvq0asl
+      (kv bytes.0 2334397804780677630u)
+      (kv more.0
+       (addr strlit.0.I8031254106179394417.)))))
+   (ret~2,~1 result.32)))
+ (proc@,Bi :cos.1.@5
+  (params@9
+   (param@1 :x.76 .
+    (f@3 32)))
+  (f@E 32)
+  (pragmas@V
+   (importc "cosf")
+   (header "<math.h>")
+   (smry~V
+    (param 0 0)))
+  (stmts .))
+ (proc@,Bj :cos.2.@5
+  (params@9
+   (param@1 :x.77 .
+    (f@3 64)))
+  (f@E 64)
+  (pragmas@V
+   (importc "cos")
+   (header "<math.h>")
+   (smry~V
+    (param 0 0)))
+  (stmts@2,1
+   (var :result.33 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64).)
+   (stmts@2,3N,../nimony/lib/std/system.nim
+    (var :`x.21 . string.0.sysvq0asl
+     (oconstr@A,3N,../nimony/lib/std/system.nim string.0.sysvq0asl
+      (kv bytes.0 2334397804780677630u)
+      (kv more.0
+       (addr strlit.0.I8031254106179394417.)))))
+   (ret~2,~1 result.33)))
+ (proc@,Br :tan.0.@5
+  (params@9
+   (param@1 :x.78 .
+    (f@3 32)))
+  (f@E 32)
+  (pragmas@V
+   (importc "tanf")
+   (header "<math.h>")
+   (smry~V
+    (param 0 0)))
+  (stmts .))
+ (proc@,Bs :tan.1.@5
+  (params@9
+   (param@1 :x.79 .
+    (f@3 64)))
+  (f@E 64)
+  (pragmas@V
+   (importc "tan")
+   (header "<math.h>")
+   (smry~V
+    (param 0 0)))
+  (stmts@2,1
+   (var :result.34 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64).)
+   (stmts@2,3N,../nimony/lib/std/system.nim
+    (var :`x.22 . string.0.sysvq0asl
+     (oconstr@A,3N,../nimony/lib/std/system.nim string.0.sysvq0asl
+      (kv bytes.0 2334397804780677630u)
+      (kv more.0
+       (addr strlit.0.I8031254106179394417.)))))
+   (ret~2,~1 result.34)))
+ (proc@,C0 :arcsin.0.@5
+  (params@C
+   (param@1 :x.80 .
+    (f@3 32)))
+  (f@E 32)
+  (pragmas@Y
+   (importc "asinf")
+   (header "<math.h>")
+   (smry~Y
+    (param 0 0)))
+  (stmts .))
+ (proc@,C1 :arcsin.1.@5
+  (params@C
+   (param@1 :x.81 .
+    (f@3 64)))
+  (f@E 64)
+  (pragmas@Y
+   (importc "asin")
+   (header "<math.h>")
+   (smry~Y
+    (param 0 0)))
+  (stmts@2,1
+   (var :result.35 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64).)
+   (stmts@2,3N,../nimony/lib/std/system.nim
+    (var :`x.23 . string.0.sysvq0asl
+     (oconstr@A,3N,../nimony/lib/std/system.nim string.0.sysvq0asl
+      (kv bytes.0 2334397804780677630u)
+      (kv more.0
+       (addr strlit.0.I8031254106179394417.)))))
+   (ret~2,~1 result.35)))
+ (proc@,C9 :arccos.0.@5
+  (params@C
+   (param@1 :x.82 .
+    (f@3 32)))
+  (f@E 32)
+  (pragmas@Y
+   (importc "acosf")
+   (header "<math.h>")
+   (smry~Y
+    (param 0 0)))
+  (stmts .))
+ (proc@,CA :arccos.1.@5
+  (params@C
+   (param@1 :x.83 .
+    (f@3 64)))
+  (f@E 64)
+  (pragmas@Y
+   (importc "acos")
+   (header "<math.h>")
+   (smry~Y
+    (param 0 0)))
+  (stmts@2,1
+   (var :result.36 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64).)
+   (stmts@2,3N,../nimony/lib/std/system.nim
+    (var :`x.24 . string.0.sysvq0asl
+     (oconstr@A,3N,../nimony/lib/std/system.nim string.0.sysvq0asl
+      (kv bytes.0 2334397804780677630u)
+      (kv more.0
+       (addr strlit.0.I8031254106179394417.)))))
+   (ret~2,~1 result.36)))
+ (proc@,CI :arctan.0.@5
+  (params@C
+   (param@1 :x.84 .
+    (f@3 32)))
+  (f@E 32)
+  (pragmas@Y
+   (importc "atanf")
+   (header "<math.h>")
+   (smry~Y
+    (param 0 0)))
+  (stmts .))
+ (proc@,CJ :arctan.1.@5
+  (params@C
+   (param@1 :x.85 .
+    (f@3 64)))
+  (f@E 64)
+  (pragmas@Y
+   (importc "atan")
+   (header "<math.h>")
+   (smry~Y
+    (param 0 0)))
+  (stmts@2,1
+   (var :result.37 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64).)
+   (stmts@2,3N,../nimony/lib/std/system.nim
+    (var :`x.25 . string.0.sysvq0asl
+     (oconstr@A,3N,../nimony/lib/std/system.nim string.0.sysvq0asl
+      (kv bytes.0 2334397804780677630u)
+      (kv more.0
+       (addr strlit.0.I8031254106179394417.)))))
+   (ret~2,~1 result.37)))
+ (proc@,CS :arctan2.1.@5
+  (params@D
+   (param@1 :y.31 .
+    (f@6 32))
+   (param@4 :x.86 .
+    (f@3 32)))
+  (f@H 32)
+  (pragmas@c
+   (importc "atan2f")
+   (header "<math.h>")
+   (smry~c
+    (param 0 0)
+    (param 1 1)))
+  (stmts .))
+ (proc@,CT :arctan2.2.@5
+  (params@D
+   (param@1 :y.32 .
+    (f@6 64))
+   (param@4 :x.87 .
+    (f@3 64)))
+  (f@H 64)
+  (pragmas@c
+   (importc "atan2")
+   (header "<math.h>")
+   (smry~c
+    (param 0 0)
+    (param 1 1)))
+  (stmts@2,1
+   (var :result.38 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64).)
+   (stmts@2,3N,../nimony/lib/std/system.nim
+    (var :`x.26 . string.0.sysvq0asl
+     (oconstr@A,3N,../nimony/lib/std/system.nim string.0.sysvq0asl
+      (kv bytes.0 2334397804780677630u)
+      (kv more.0
+       (addr strlit.0.I8031254106179394417.)))))
+   (ret~2,~1 result.38)))
+ (proc@,Ce :sinh.0.@5
+  (params@A
+   (param@1 :x.88 .
+    (f@3 32)))
+  (f@E 32)
+  (pragmas@W
+   (importc "sinhf")
+   (header "<math.h>")
+   (smry~W
+    (param 0 0)))
+  (stmts .))
+ (proc@,Cf :sinh.1.@5
+  (params@A
+   (param@1 :x.89 .
+    (f@3 64)))
+  (f@E 64)
+  (pragmas@W
+   (importc "sinh")
+   (header "<math.h>")
+   (smry~W
+    (param 0 0)))
+  (stmts@2,1
+   (var :result.39 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64).)
+   (stmts@2,3N,../nimony/lib/std/system.nim
+    (var :`x.27 . string.0.sysvq0asl
+     (oconstr@A,3N,../nimony/lib/std/system.nim string.0.sysvq0asl
+      (kv bytes.0 2334397804780677630u)
+      (kv more.0
+       (addr strlit.0.I8031254106179394417.)))))
+   (ret~2,~1 result.39)))
+ (proc@,Cn :cosh.0.@5
+  (params@A
+   (param@1 :x.90 .
+    (f@3 32)))
+  (f@E 32)
+  (pragmas@W
+   (importc "coshf")
+   (header "<math.h>")
+   (smry~W
+    (param 0 0)))
+  (stmts .))
+ (proc@,Co :cosh.1.@5
+  (params@A
+   (param@1 :x.91 .
+    (f@3 64)))
+  (f@E 64)
+  (pragmas@W
+   (importc "cosh")
+   (header "<math.h>")
+   (smry~W
+    (param 0 0)))
+  (stmts@2,1
+   (var :result.40 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64).)
+   (stmts@2,3N,../nimony/lib/std/system.nim
+    (var :`x.28 . string.0.sysvq0asl
+     (oconstr@A,3N,../nimony/lib/std/system.nim string.0.sysvq0asl
+      (kv bytes.0 2334397804780677630u)
+      (kv more.0
+       (addr strlit.0.I8031254106179394417.)))))
+   (ret~2,~1 result.40)))
+ (proc@,Cw :tanh.0.@5
+  (params@A
+   (param@1 :x.92 .
+    (f@3 32)))
+  (f@E 32)
+  (pragmas@W
+   (importc "tanhf")
+   (header "<math.h>")
+   (smry~W
+    (param 0 0)))
+  (stmts .))
+ (proc@,Cx :tanh.1.@5
+  (params@A
+   (param@1 :x.93 .
+    (f@3 64)))
+  (f@E 64)
+  (pragmas@W
+   (importc "tanh")
+   (header "<math.h>")
+   (smry~W
+    (param 0 0)))
+  (stmts@2,1
+   (var :result.41 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64).)
+   (stmts@2,3N,../nimony/lib/std/system.nim
+    (var :`x.29 . string.0.sysvq0asl
+     (oconstr@A,3N,../nimony/lib/std/system.nim string.0.sysvq0asl
+      (kv bytes.0 2334397804780677630u)
+      (kv more.0
+       (addr strlit.0.I8031254106179394417.)))))
+   (ret~2,~1 result.41)))
+ (proc@,D5 :arcsinh.0.@5
+  (params@D
+   (param@1 :x.94 .
+    (f@3 32)))
+  (f@E 32)
+  (pragmas@Z
+   (importc "asinhf")
+   (header "<math.h>")
+   (smry~Z
+    (param 0 0)))
+  (stmts .))
+ (proc@,D6 :arcsinh.1.@5
+  (params@D
+   (param@1 :x.95 .
+    (f@3 64)))
+  (f@E 64)
+  (pragmas@Z
+   (importc "asinh")
+   (header "<math.h>")
+   (smry~Z
+    (param 0 0)))
+  (stmts .))
+ (proc@,DB :arccosh.0.@5
+  (params@D
+   (param@1 :x.96 .
+    (f@3 32)))
+  (f@E 32)
+  (pragmas@Z
+   (importc "acoshf")
+   (header "<math.h>")
+   (smry~Z
+    (param 0 0)))
+  (stmts .))
+ (proc@,DC :arccosh.1.@5
+  (params@D
+   (param@1 :x.97 .
+    (f@3 64)))
+  (f@E 64)
+  (pragmas@Z
+   (importc "acosh")
+   (header "<math.h>")
+   (smry~Z
+    (param 0 0)))
+  (stmts .))
+ (proc@,DH :arctanh.0.@5
+  (params@D
+   (param@1 :x.98 .
+    (f@3 32)))
+  (f@E 32)
+  (pragmas@Z
+   (importc "atanhf")
+   (header "<math.h>")
+   (smry~Z
+    (param 0 0)))
+  (stmts .))
+ (proc@,DI :arctanh.1.@5
+  (params@D
+   (param@1 :x.99 .
+    (f@3 64)))
+  (f@E 64)
+  (pragmas@Z
+   (importc "atanh")
+   (header "<math.h>")
+   (smry~Z
+    (param 0 0)))
+  (stmts .))
+ (proc@,DO :erf.0.@5
+  (params@9
+   (param@1 :x.100 .
+    (f@3 32)))
+  (f@E 32)
+  (pragmas@V
+   (importc "erff")
+   (header "<math.h>")
+   (smry~V
+    (param 0 0)))
+  (stmts .))
+ (proc@,DP :erf.1.@5
+  (params@9
+   (param@1 :x.101 .
+    (f@3 64)))
+  (f@E 64)
+  (pragmas@V
+   (importc "erf")
+   (header "<math.h>")
+   (smry~V
+    (param 0 0)))
+  (stmts .))
+ (proc@,DR :erfc.0.@5
+  (params@A
+   (param@1 :x.102 .
+    (f@3 32)))
+  (f@E 32)
+  (pragmas@W
+   (importc "erfcf")
+   (header "<math.h>")
+   (smry~W
+    (param 0 0)))
+  (stmts .))
+ (proc@,DS :erfc.1.@5
+  (params@A
+   (param@1 :x.103 .
+    (f@3 64)))
+  (f@E 64)
+  (pragmas@W
+   (importc "erfc")
+   (header "<math.h>")
+   (smry~W
+    (param 0 0)))
+  (stmts .))
+ (proc@,DU :gamma.0.@5
+  (params@B
+   (param@1 :x.104 .
+    (f@3 32)))
+  (f@E 32)
+  (pragmas@X
+   (importc "tgammaf")
+   (header "<math.h>")
+   (smry~X
+    (param 0 0)))
+  (stmts .))
+ (proc@,DV :gamma.1.@5
+  (params@B
+   (param@1 :x.105 .
+    (f@3 64)))
+  (f@E 64)
+  (pragmas@X
+   (importc "tgamma")
+   (header "<math.h>")
+   (smry~X
+    (param 0 0)))
+  (stmts@2,1
+   (var :result.42 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64).)
+   (stmts@2,3N,../nimony/lib/std/system.nim
+    (var :`x.30 . string.0.sysvq0asl
+     (oconstr@A,3N,../nimony/lib/std/system.nim string.0.sysvq0asl
+      (kv bytes.0 2334397804780677630u)
+      (kv more.0
+       (addr strlit.0.I8031254106179394417.)))))
+   (ret~2,~1 result.42)))
+ (proc@,De :lgamma.0.@5
+  (params@C
+   (param@1 :x.106 .
+    (f@3 32)))
+  (f@E 32)
+  (pragmas@Y
+   (importc "lgammaf")
+   (header "<math.h>")
+   (smry~Y
+    (param 0 0)))
+  (stmts .))
+ (proc@,Df :lgamma.1.@5
+  (params@C
+   (param@1 :x.107 .
+    (f@3 64)))
+  (f@E 64)
+  (pragmas@Y
+   (importc "lgamma")
+   (header "<math.h>")
+   (smry~Y
+    (param 0 0)))
+  (stmts@2,1
+   (var :result.43 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64).)
+   (ret~2,~1 result.43)))
+ (proc@,Dm :cot.0.@5
+  (params@9
+   (param@1 :x.108 .
+    (f@3 32)))
+  (f@E 32)
+  (pragmas
+   (smry
+    (param 0 0 reads)))
+  (stmts@X
+   (var@8 :result.44 .
+    (f~N,~C4 32).)
+   (var@D :`x.31 .
+    (f~W,~1v 32)
+    (call tan.0.~3 x.108@1))
+   (asgn@8 result.44
+    (div
+     (f 32)
+     (suf~8 1.0 "f32")`x.31@5))
+   (ret~X result.44)))
+ (proc@,Dn :cot.1.@5
+  (params@9
+   (param@1 :x.109 .
+    (f@3 64)))
+  (f@E 64)
+  (pragmas
+   (smry
+    (param 0 0 reads)))
+  (stmts@X
+   (var@4 :result.45 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64).)
+   (var@9 :`x.32 .
+    (f~S,~1v 64)
+    (call tan.1.~3 x.109@1))
+   (asgn@4 result.45
+    (div
+     (f 64)1.0~4 `x.32@5))
+   (ret~X result.45)))
+ (proc@,Do :sec.0.@5
+  (params@9
+   (param@1 :x.110 .
+    (f@3 32)))
+  (f@E 32)
+  (pragmas
+   (smry
+    (param 0 0 reads)))
+  (stmts@X
+   (var@8 :result.46 .
+    (f~N,~C6 32).)
+   (var@D :`x.33 .
+    (f~W,~26 32)
+    (call cos.1.~3 x.110@1))
+   (asgn@8 result.46
+    (div
+     (f 32)
+     (suf~8 1.0 "f32")`x.33@5))
+   (ret~X result.46)))
+ (proc@,Dp :sec.1.@5
+  (params@9
+   (param@1 :x.111 .
+    (f@3 64)))
+  (f@E 64)
+  (pragmas
+   (smry
+    (param 0 0 reads)))
+  (stmts@X
+   (var@4 :result.47 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64).)
+   (var@9 :`x.34 .
+    (f~S,~26 64)
+    (call cos.2.~3 x.111@1))
+   (asgn@4 result.47
+    (div
+     (f 64)1.0~4 `x.34@5))
+   (ret~X result.47)))
+ (proc@,Dq :csc.0.@5
+  (params@9
+   (param@1 :x.112 .
+    (f@3 32)))
+  (f@E 32)
+  (pragmas
+   (smry
+    (param 0 0 reads)))
+  (stmts@X
+   (var@8 :result.48 .
+    (f~N,~C8 32).)
+   (var@D :`x.35 .
+    (f~W,~2H 32)
+    (call sin.1.~3 x.112@1))
+   (asgn@8 result.48
+    (div
+     (f 32)
+     (suf~8 1.0 "f32")`x.35@5))
+   (ret~X result.48)))
+ (proc@,Dr :csc.1.@5
+  (params@9
+   (param@1 :x.113 .
+    (f@3 64)))
+  (f@E 64)
+  (pragmas
+   (smry
+    (param 0 0 reads)))
+  (stmts@X
+   (var@4 :result.49 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64).)
+   (var@9 :`x.36 .
+    (f~S,~2H 64)
+    (call sin.2.~3 x.113@1))
+   (asgn@4 result.49
+    (div
+     (f 64)1.0~4 `x.36@5))
+   (ret~X result.49)))
+ (proc@,Ds :coth.0.@5
+  (params@A
+   (param@1 :x.114 .
+    (f@3 32)))
+  (f@E 32)
+  (pragmas
+   (smry
+    (param 0 0 reads)))
+  (stmts@Y
+   (var@8 :result.50 .
+    (f~O,~CA 32).)
+   (var@E :`x.37 .
+    (f~Y,~w 32)
+    (call tanh.0.~4 x.114@1))
+   (asgn@8 result.50
+    (div
+     (f 32)
+     (suf~8 1.0 "f32")`x.37@6))
+   (ret~Y result.50)))
+ (proc@,Dt :coth.1.@5
+  (params@A
+   (param@1 :x.115 .
+    (f@3 64)))
+  (f@E 64)
+  (pragmas
+   (smry
+    (param 0 0 reads)))
+  (stmts@Y
+   (var@4 :result.51 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64).)
+   (var@A :`x.38 .
+    (f~U,~w 64)
+    (call tanh.1.~4 x.115@1))
+   (asgn@4 result.51
+    (div
+     (f 64)1.0~4 `x.38@6))
+   (ret~Y result.51)))
+ (proc@,Du :sech.0.@5
+  (params@A
+   (param@1 :x.116 .
+    (f@3 32)))
+  (f@E 32)
+  (pragmas
+   (smry
+    (param 0 0 reads)))
+  (stmts@Y
+   (var@8 :result.52 .
+    (f~O,~CC 32).)
+   (var@E :`x.39 .
+    (f~Y,~17 32)
+    (call cosh.0.~4 x.116@1))
+   (asgn@8 result.52
+    (div
+     (f 32)
+     (suf~8 1.0 "f32")`x.39@6))
+   (ret~Y result.52)))
+ (proc@,Dv :sech.1.@5
+  (params@A
+   (param@1 :x.117 .
+    (f@3 64)))
+  (f@E 64)
+  (pragmas
+   (smry
+    (param 0 0 reads)))
+  (stmts@Y
+   (var@4 :result.53 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64).)
+   (var@A :`x.40 .
+    (f~U,~17 64)
+    (call cosh.1.~4 x.117@1))
+   (asgn@4 result.53
+    (div
+     (f 64)1.0~4 `x.40@6))
+   (ret~Y result.53)))
+ (proc@,Dw :csch.0.@5
+  (params@A
+   (param@1 :x.118 .
+    (f@3 32)))
+  (f@E 32)
+  (pragmas
+   (smry
+    (param 0 0 reads)))
+  (stmts@Y
+   (var@8 :result.54 .
+    (f~O,~CE 32).)
+   (var@E :`x.41 .
+    (f~Y,~1I 32)
+    (call sinh.0.~4 x.118@1))
+   (asgn@8 result.54
+    (div
+     (f 32)
+     (suf~8 1.0 "f32")`x.41@6))
+   (ret~Y result.54)))
+ (proc@,Dx :csch.1.@5
+  (params@A
+   (param@1 :x.119 .
+    (f@3 64)))
+  (f@E 64)
+  (pragmas
+   (smry
+    (param 0 0 reads)))
+  (stmts@Y
+   (var@4 :result.55 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64).)
+   (var@A :`x.42 .
+    (f~U,~1I 64)
+    (call sinh.1.~4 x.119@1))
+   (asgn@4 result.55
+    (div
+     (f 64)1.0~4 `x.42@6))
+   (ret~Y result.55)))
+ (proc@,Dy :arccot.0.@5
+  (params@C
+   (param@1 :x.120 .
+    (f@3 32)))
+  (f@E 32)
+  (pragmas
+   (smry
+    (param 0 0 reads)))
+  (stmts@a
+   (var@6 :result.56 .
+    (f~O,~CG 32).)
+   (var@6 :`x.43 .
+    (f~S,~1g 32)
+    (call arctan.0.~6
+     (div@9
+      (f 32)
+      (suf~8 1.0 "f32")x.120@2)))
+   (asgn@6 result.56 `x.43)
+   (ret~a result.56)))
+ (proc@,Dz :arccot.1.@5
+  (params@C
+   (param@1 :x.121 .
+    (f@3 64)))
+  (f@E 64)
+  (pragmas
+   (smry
+    (param 0 0 reads)))
+  (stmts@a
+   (var@6 :result.57 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64).)
+   (var@6 :`x.44 .
+    (f~S,~1g 64)
+    (call arctan.1.~6
+     (div@5
+      (f 64)1.0~4 x.121@2)))
+   (asgn@6 result.57 `x.44)
+   (ret~a result.57)))
+ (proc@,E0 :arcsec.0.@5
+  (params@C
+   (param@1 :x.122 .
+    (f@3 32)))
+  (f@E 32)
+  (pragmas
+   (smry
+    (param 0 0 reads)))
+  (stmts@a
+   (var@6 :result.58 .
+    (f~O,~CI 32).)
+   (var@6 :`x.45 .
+    (f~S,~1r 32)
+    (call arccos.0.~6
+     (div@9
+      (f 32)
+      (suf~8 1.0 "f32")x.122@2)))
+   (asgn@6 result.58 `x.45)
+   (ret~a result.58)))
+ (proc@,E1 :arcsec.1.@5
+  (params@C
+   (param@1 :x.123 .
+    (f@3 64)))
+  (f@E 64)
+  (pragmas
+   (smry
+    (param 0 0 reads)))
+  (stmts@a
+   (var@6 :result.59 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64).)
+   (var@6 :`x.46 .
+    (f~S,~1r 64)
+    (call arccos.1.~6
+     (div@5
+      (f 64)1.0~4 x.123@2)))
+   (asgn@6 result.59 `x.46)
+   (ret~a result.59)))
+ (proc@,E2 :arccsc.0.@5
+  (params@C
+   (param@1 :x.124 .
+    (f@3 32)))
+  (f@E 32)
+  (pragmas
+   (smry
+    (param 0 0 reads)))
+  (stmts@a
+   (var@6 :result.60 .
+    (f~O,~CK 32).)
+   (var@6 :`x.47 .
+    (f~S,~22 32)
+    (call arcsin.0.~6
+     (div@9
+      (f 32)
+      (suf~8 1.0 "f32")x.124@2)))
+   (asgn@6 result.60 `x.47)
+   (ret~a result.60)))
+ (proc@,E3 :arccsc.1.@5
+  (params@C
+   (param@1 :x.125 .
+    (f@3 64)))
+  (f@E 64)
+  (pragmas
+   (smry
+    (param 0 0 reads)))
+  (stmts@a
+   (var@6 :result.61 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64).)
+   (var@6 :`x.48 .
+    (f~S,~22 64)
+    (call arcsin.1.~6
+     (div@5
+      (f 64)1.0~4 x.125@2)))
+   (asgn@6 result.61 `x.48)
+   (ret~a result.61)))
+ (proc@,E4 :arccoth.0.@5
+  (params@D
+   (param@1 :x.126 .
+    (f@3 32)))
+  (f@E 32)
+  (pragmas
+   (smry
+    (param 0 0 reads)))
+  (stmts@b
+   (var@7 :result.62 .
+    (f~Q,~CM 32).)
+   (var@7 :`x.49 .
+    (f~U,~n 32)
+    (call arctanh.0.~7
+     (div@9
+      (f 32)
+      (suf~8 1.0 "f32")x.126@2)))
+   (asgn@7 result.62 `x.49)
+   (ret~b result.62)))
+ (proc@,E5 :arccoth.1.@5
+  (params@D
+   (param@1 :x.127 .
+    (f@3 64)))
+  (f@E 64)
+  (pragmas
+   (smry
+    (param 0 0 reads)))
+  (stmts@b
+   (var@7 :result.63 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64).)
+   (var@7 :`x.50 .
+    (f~U,~n 64)
+    (call arctanh.1.~7
+     (div@5
+      (f 64)1.0~4 x.127@2)))
+   (asgn@7 result.63 `x.50)
+   (ret~b result.63)))
+ (proc@,E6 :arcsech.0.@5
+  (params@D
+   (param@1 :x.128 .
+    (f@3 32)))
+  (f@E 32)
+  (pragmas
+   (smry
+    (param 0 0 reads)))
+  (stmts@b
+   (var@7 :result.64 .
+    (f~Q,~CO 32).)
+   (var@7 :`x.51 .
+    (f~U,~v 32)
+    (call arccosh.0.~7
+     (div@9
+      (f 32)
+      (suf~8 1.0 "f32")x.128@2)))
+   (asgn@7 result.64 `x.51)
+   (ret~b result.64)))
+ (proc@,E7 :arcsech.1.@5
+  (params@D
+   (param@1 :x.129 .
+    (f@3 64)))
+  (f@E 64)
+  (pragmas
+   (smry
+    (param 0 0 reads)))
+  (stmts@b
+   (var@7 :result.65 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64).)
+   (var@7 :`x.52 .
+    (f~U,~v 64)
+    (call arccosh.1.~7
+     (div@5
+      (f 64)1.0~4 x.129@2)))
+   (asgn@7 result.65 `x.52)
+   (ret~b result.65)))
+ (proc@,E8 :arccsch.0.@5
+  (params@D
+   (param@1 :x.130 .
+    (f@3 32)))
+  (f@E 32)
+  (pragmas
+   (smry
+    (param 0 0 reads)))
+  (stmts@b
+   (var@7 :result.66 .
+    (f~Q,~CQ 32).)
+   (var@7 :`x.53 .
+    (f~U,~13 32)
+    (call arcsinh.0.~7
+     (div@9
+      (f 32)
+      (suf~8 1.0 "f32")x.130@2)))
+   (asgn@7 result.66 `x.53)
+   (ret~b result.66)))
+ (proc@,E9 :arccsch.1.@5
+  (params@D
+   (param@1 :x.131 .
+    (f@3 64)))
+  (f@E 64)
+  (pragmas
+   (smry
+    (param 0 0 reads)))
+  (stmts@b
+   (var@7 :result.67 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64).)
+   (var@7 :`x.54 .
+    (f~U,~13 64)
+    (call arcsinh.1.~7
+     (div@5
+      (f 64)1.0~4 x.131@2)))
+   (asgn@7 result.67 `x.54)
+   (ret~b result.67)))
+ (proc@,EU :fac.0.@5
+  (params@9
+   (param@1 :n.0 .
+    (i@3 64)))
+  (i@A 64)
+  (pragmas
+   (smry writeGlobal readGlobal
+    (param 0 0 reads)))
+  (stmts@2,1
+   (var :result.68 .
+    (i@8,~Cr 64).)
+   (stmts@2,3N,../nimony/lib/std/system.nim
+    (var :`x.55 . string.0.sysvq0asl
+     (oconstr@A,3N,../nimony/lib/std/system.nim string.0.sysvq0asl
+      (kv bytes.0 2334397804780677630u)
+      (kv more.0
+       (addr strlit.0.I8031254106179394417.)))))
+   (asgn@7,C result.68~7 1@2)
+   (scope@4,D
+    (stmts
+     (var@R,7,../nimony/lib/std/system/iterators.nim :`lf.0 .
+      (i 64)1@B,Ej,../nimony/lib/std/math.nim)
+     (var@U,7,../nimony/lib/std/system/iterators.nim :`lf.1 .
+      (i 64)n.0@G,Ej,../nimony/lib/std/math.nim)
+     (stmts@2,8,../nimony/lib/std/system/iterators.nim
+      (var@4 :`lf.2 .
+       (i@A,1f,../nimony/lib/std/math.nim 64)`lf.0@4)
+      (scope@,1
+       (stmts
+        (while
+         (le@8 `lf.2~2 `lf.1@3)
+         (stmts@2,1
+          (scope
+           (stmts
+            (call@B,Ek,../nimony/lib/std/math.nim *=.0.Iu9okoo1.
+             (addr~7 result.68)`lf.2@3)))
+          (call@,1 inc.1.Irn1g7r1.
+           (addr@4 `lf.2))))))
+      (lab@,1 :whileStmtLabel.1))))
+   (lab@4,D :forStmtLabel.0)
+   (ret~2,~1 result.68)))
+ (proc@,El :binom.0.@5
+  (params@B
+   (param@1 :n.1 .
+    (i@D,7W,../nimony/lib/std/system.nim 64))
+   (param@4 :k.0 .
+    (i@D,7W,../nimony/lib/std/system.nim 64)))
+  (i@H 64)
+  (pragmas
+   (smry writeGlobal readGlobal
+    (param 0 0 reads)
+    (param 1 1 reads)result 0))
+  (stmts@2,1
+   (var :result.69 .
+    (i@8,~D8 64).)
+   (stmts@2,3N,../nimony/lib/std/system.nim
+    (var :`x.56 . string.0.sysvq0asl
+     (oconstr@A,3N,../nimony/lib/std/system.nim string.0.sysvq0asl
+      (kv bytes.0 2334397804780677630u)
+      (kv more.0
+       (addr strlit.0.I8031254106179394417.)))))
+   (if@,5
+    (elif@3
+     (le@2 k.0~2 0@3)
+     (stmts@8
+      (ret 1@7))))
+   (if@,6
+    (elif@3
+     (lt@4,1u,../nimony/lib/std/system/comparisons.nim n.1@D,Et,../nimony/lib/std/math.nim
+      (mul@7,Et,../nimony/lib/std/math.nim
+       (i 64)2~2 k.0@2))
+     (stmts@B
+      (stmts
+       (var@C :`x.57 .
+        (i~B,~7 64)
+        (call binom.0.~5 n.1@1
+         (sub@6
+          (i 64)n.1~2 k.0@2)))
+       (asgn result.69 `x.57@C)
+       (ret result.69)))))
+   (asgn@7,7 result.69~7 n.1@2)
+   (scope@4,8
+    (stmts
+     (var@R,7,../nimony/lib/std/system/iterators.nim :`lf.3 .
+      (i 64)2@B,Ev,../nimony/lib/std/math.nim)
+     (var@U,7,../nimony/lib/std/system/iterators.nim :`lf.4 .
+      (i 64)k.0@G,Ev,../nimony/lib/std/math.nim)
+     (stmts@2,8,../nimony/lib/std/system/iterators.nim
+      (var@4 :`lf.5 .
+       (i@A,1f,../nimony/lib/std/math.nim 64)`lf.3@4)
+      (scope@,1
+       (stmts
+        (while
+         (le@8 `lf.5~2 `lf.4@3)
+         (stmts@2,1
+          (scope
+           (stmts
+            (asgn@B,Ew,../nimony/lib/std/math.nim result.69~7
+             (div@P
+              (i 64)
+              (mul~F
+               (i 64)result.69~7
+               (sub@9
+                (i 64)
+                (add~4
+                 (i 64)n.1~2 1@2)`lf.5@2))`lf.5@4))))
+          (call@,1 inc.1.Irn1g7r1.
+           (addr@4 `lf.5))))))
+      (lab@,1 :whileStmtLabel.1))))
+   (lab@4,8 :forStmtLabel.0)
+   (ret~2,~1 result.69)))
+ (proc@T,2P :isNaN.0.Ica2702.
+  (params~4,T
+   (param@1 :x.143 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64)))
+  (bool~L,T)
+  (pragmas@9,T
+   (inline 0 10)
+   (smry~9,~T
+    (param 0 0 reads)))
+  (stmts~R,U
+   (var :result.74 .
+    (bool@G,~2g).)
+   (stmts@2,3N,../nimony/lib/std/system.nim
+    (var :`x.58 . string.0.sysvq0asl
+     (oconstr@A,3N,../nimony/lib/std/system.nim string.0.sysvq0asl
+      (kv bytes.0 2334397804780677630u)
+      (kv more.0
+       (addr strlit.0.I8031254106179394417.)))))
+   (var@7,6 :`x.59 .
+    (i@1,~1J 64)
+    (call c_isnan.0.I3164fs1.~7 x.143@1))
+   (asgn@B,6 result.74
+    (not@2,1m,../nimony/lib/std/system/comparisons.nim
+     (eq@7 `x.59@9,30,../nimony/lib/std/math.nim 0@G,30,../nimony/lib/std/math.nim)))
+   (ret~2,~1 result.74)))
+ (proc@M,8Q :almostEqual.0.Ivmzi1f.
+  (params@9,~5P
+   (param@1 :x.145 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64))
+   (param@4 :y.40 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64))
+   (param@A :unitsInLastPlace.2 .
+    (i~V,~1N 64)))
+  (bool@G,~5P)
+  (pragmas
+   (smry readGlobal
+    (param 0 0 reads)
+    (param 1 1 reads)
+    (param 2 2 reads)))
+  (stmts~K,~5N
+   (var :result.75 .
+    (bool@G,~2q).)
+   (stmts@2,3N,../nimony/lib/std/system.nim
+    (var :`x.60 . string.0.sysvq0asl
+     (oconstr@A,3N,../nimony/lib/std/system.nim string.0.sysvq0asl
+      (kv bytes.0 2334397804780677630u)
+      (kv more.0
+       (addr strlit.0.I8031254106179394417.)))))
+   (if@,J
+    (elif@3
+     (eq@2 x.145~2 y.40@3)
+     (stmts~1,3
+      (ret
+       (true@7)))))
+   (var@4,N :diff.0 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64)
+    (call@A abs.0.Iwxvrq71.~3
+     (sub@3
+      (f 64)x.145~2 y.40@2)))
+   (stmts@,O
+    (var@z :`x.61 .
+     (bool).)
+    (var@V :`x.62 .
+     (f@F,32,../nimony/lib/std/system/arithmetics.nim 64)
+     (call abs.0.Iwxvrq71.~3
+      (add@3
+       (f 64)x.145~2 y.40@2)))
+    (if@z
+     (elif
+      (le~n diff.0~5
+       (mul@R
+        (f 64)
+        (mul~D
+         (f 64)2.220446049250313E-16@G,B,../nimony/lib/std/fenv.nim `x.62@5)
+        (conv@3
+         (f@F,32,../nimony/lib/std/system/arithmetics.nim 64)unitsInLastPlace.2@1)))
+      (stmts
+       (asgn `x.61
+        (true))))
+     (else
+      (stmts
+       (asgn@8 `x.61
+        (lt diff.0~5 2.2250738585072014E-308@C,A,../nimony/lib/std/fenv.nim)))))
+    (asgn result.75 `x.61@z)
+    (ret result.75))
+   (ret result.75)))
+ (proc@9,BA :\2B=.0.Ihg6mz11.
+  (params@P,36,../nimony/lib/std/system/arithmetics.nim
+   (param@1 :x.147 .
+    (ptr@3
+     (i@A,1f,../nimony/lib/std/math.nim 64)))
+   (param@B :y.41 .
+    (i@A,1f,../nimony/lib/std/math.nim 64))).@,36,../nimony/lib/std/system/arithmetics.nim
+  (pragmas@g,36,../nimony/lib/std/system/arithmetics.nim
+   (inline 0 20 20)
+   (smry@9,BB,../nimony/lib/std/math.nim
+    (param 0 0 reads writes)
+    (param 1 1 reads)))
+  (stmts@2,37,../nimony/lib/std/system/arithmetics.nim
+   (asgn@2
+    (deref~2 x.147)
+    (add@4
+     (i 64)
+     (deref~2 x.147)y.41@2))))
+ (proc@Z,Bh :degToRad.0.Ijbttm21.
+  (params@8,~T
+   (param@1 :d.2 .
+    (f 64)))
+  (f 64)
+  (pragmas@I,~T
+   (inline 0 20)
+   (smry~I,T
+    (param 0 0 reads)))
+  (stmts~X,~S
+   (var :result.76 .
+    (f 64).)
+   (stmts@2,3N,../nimony/lib/std/system.nim
+    (var :`x.63 . string.0.sysvq0asl
+     (oconstr@A,3N,../nimony/lib/std/system.nim string.0.sysvq0asl
+      (kv bytes.0 2334397804780677630u)
+      (kv more.0
+       (addr strlit.0.I8031254106179394417.)))))
+   (asgn@7,7 result.76~7
+    (mul@4
+     (f 64)d.2~2
+     (conv@3
+      (f 64)0.017453292519943295@5,~A)))
+   (ret~2,~1 result.76)))
+ (proc@V,C7 :radToDeg.0.Intoyme1.
+  (params@C,~j
+   (param@1 :r.4 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64)))
+  (f@F,32,../nimony/lib/std/system/arithmetics.nim 64)
+  (pragmas@M,~j
+   (inline 0 20)
+   (smry~M,j
+    (param 0 0 reads)))
+  (stmts~T,~i
+   (var :result.77 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64).)
+   (stmts@2,3N,../nimony/lib/std/system.nim
+    (var :`x.64 . string.0.sysvq0asl
+     (oconstr@A,3N,../nimony/lib/std/system.nim string.0.sysvq0asl
+      (kv bytes.0 2334397804780677630u)
+      (kv more.0
+       (addr strlit.0.I8031254106179394417.)))))
+   (asgn@7,7 result.77~7
+    (div@4
+     (f 64)r.4~2
+     (conv@3
+      (f@F,32,../nimony/lib/std/system/arithmetics.nim 64)0.017453292519943295@5,~K)))
+   (ret~2,~1 result.77)))
+ (proc@B,Ej :*=.0.Iu9okoo1.
+  (params@P,3C,../nimony/lib/std/system/arithmetics.nim
+   (param@1 :x.149 .
+    (ptr@3
+     (i@A,1f,../nimony/lib/std/math.nim 64)))
+   (param@B :y.42 .
+    (i@A,1f,../nimony/lib/std/math.nim 64))).@,3C,../nimony/lib/std/system/arithmetics.nim
+  (pragmas@g,3C,../nimony/lib/std/system/arithmetics.nim
+   (inline 0 20 20)
+   (smry@B,Ek,../nimony/lib/std/math.nim
+    (param 0 0 reads writes)
+    (param 1 1 reads)))
+  (stmts@2,3D,../nimony/lib/std/system/arithmetics.nim
+   (asgn@2
+    (deref~2 x.149)
+    (mul@4
+     (i 64)
+     (deref~2 x.149)y.42@2))))
+ (proc@9,2z :c_isnan.0.I3164fs1.
+  (params@J,~1J
+   (param@1 :x.150 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64)))
+  (i@1,~1J 64)
+  (pragmas@V,~1J
+   (importc "isnan")
+   (header "<math.h>")
+   (smry~V,1J
+    (param 0 0)))
+  (stmts~7,~1J .))
+ (proc@G,3Q :abs.0.Iwxvrq71.
+  (params@a,3r,../nimony/lib/std/system.nim
+   (param@1 :x.151 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64)))
+  (f@F,32,../nimony/lib/std/system/arithmetics.nim 64)
+  (pragmas@k,3r,../nimony/lib/std/system.nim
+   (inline 0 150)
+   (smry@G,3R,../nimony/lib/std/math.nim
+    (param 0 0 reads)result 0))
+  (stmts@2,3s,../nimony/lib/std/system.nim
+   (var :result.78 .
+    (f@F,32,../nimony/lib/std/system/arithmetics.nim 64).)
+   (var@,1 :`x.0 .
+    (f@A 64).)
+   (if@,1
+    (elif@3
+     (lt@2 x.151~2
+      (conv@2
+       (f@G,1d,../nimony/lib/std/system/comparisons.nim 64)0))
+     (stmts
+      (asgn@7 `x.0
+       (neg
+        (f 64)x.151@1))))
+    (else
+     (stmts
+      (stmts
+       (stmts
+        (stmts@D
+         (asgn@6 `x.0 x.151)))))))
+   (asgn@,1 result.78 `x.0)
+   (ret~2,~1 result.78)))
+ (proc@4,B,../nimony/lib/std/system/iterators.nim :inc.1.Irn1g7r1.
+  (params@L,E,../nimony/lib/std/system/arithmetics.nim
+   (param@1 :x.152 .
+    (ptr@3
+     (i@A,1f,../nimony/lib/std/math.nim 64)))).@,E,../nimony/lib/std/system/arithmetics.nim
+  (pragmas@W,E,../nimony/lib/std/system/arithmetics.nim
+   (inline 0 20)
+   (smry@4,B,../nimony/lib/std/system/iterators.nim
+    (param 0 0 reads writes)))
+  (stmts@2,F,../nimony/lib/std/system/arithmetics.nim
+   (asgn@2,1
+    (deref~2 x.152)
+    (add@6
+     (i@A,1f,../nimony/lib/std/math.nim 64)
+     (deref@1 x.152)
+     (conv@U,~F
+      (i@A,1f,../nimony/lib/std/math.nim 64)1@1)))))
+ (type@b,G,../nimony/lib/std/system/openarrays.nim :openArray.0.Ij9i6zj. .
+  (object~A,~A .
+   (fld~N,1 :a.0 .
+    (ptr@3
+     (i@I 64)))
+   (fld~N,2 :len.0 .
+    (i@5 64))))
+ (type@L,2r,../nimony/lib/std/system/seqimpl.nim :seq.0.Iotb7mc. .
+  (object~9,~2l .
+   (fld~8,1 :len.0 .
+    (i@5 64))
+   (fld~8,2 :data.0 .
+    (ptr@6
+     (i@I 64)))))
+ (type@L,2r,../nimony/lib/std/system/seqimpl.nim :seq.0.Izimvvd1. .
+  (object~9,~2l .
+   (fld~8,1 :len.0 .
+    (i@5 64))
+   (fld~8,2 :data.0 .
+    (ptr@6
+     (f@I 64)))))
+ (type@M,N,../nimony/lib/std/system/openarrays.nim :openArray.0.I8jqt5c1. .
+  (object@5,~H .
+   (fld~N,1 :a.0 .
+    (ptr@3
+     (f@I 64)))
+   (fld~N,2 :len.0 .
+    (i@5 64))))
+ (proc@,D,../nimony/lib/std/system/seqimpl.nim :=destroy.1.Iez2nr5.
+  (params@J
+   (param@1 :s.4 . seq.0.Iotb7mc.@6)).
+  (pragmas
+   (smry writeGlobal readGlobal callsUnknown
+    (param 0 0 reads writes escapes)))
+  (stmts@2,1
+   (if
+    (elif@3
+     (not@2,1m,../nimony/lib/std/system/comparisons.nim
+      (eq@7
+       (dot@6,E,../nimony/lib/std/system/seqimpl.nim s.4~1 data.0 0)
+       (nil)))
+     (stmts~1,1
+      (var@4 :i.9 .
+       (i@A,1f,../nimony/lib/std/math.nim 64)0@4)
+      (scope@,1
+       (stmts
+        (while
+         (lt@8 i.9~2
+          (dot@3 s.4~1 len.0 0))
+         (stmts@2,1 .@A
+          (call@,1 inc.1.Irn1g7r1.
+           (addr@4 i.9))))))
+      (lab@,1 :whileStmtLabel.0)
+      (call@,4 dealloc.0.sysvq0asl
+       (conv@9
+        (ptr@H,10,../nimony/lib/std/system/mimalloc.nim
+         (void))
+        (conv
+         (ptr@H,10,../nimony/lib/std/system/mimalloc.nim
+          (void))
+         (dot s.4~1 data.0 0)))))))))
+ (proc@,L,../nimony/lib/std/system/seqimpl.nim :=wasMoved.1.Ia0kll01.
+  (params@K
+   (param@1 :s.5 .
+    (ptr@3 seq.0.Iotb7mc.@7))).
+  (pragmas@a
+   (inline 0 0)
+   (smry~a
+    (param 0 0 reads writes)))
+  (stmts@2,1
+   (asgn@6
+    (dot~5
+     (deref~1 s.5)len.0 0)0@2)
+   (asgn@7,1
+    (dot~6
+     (deref~1 s.5)data.0 0)
+    (nil))))
+ (proc@,1U,../nimony/lib/std/system/seqimpl.nim :=dup.1.Is27omc.
+  (params@F
+   (param@1 :a.6 . seq.0.Iotb7mc.@6))seq.0.Iotb7mc.@G
+  (pragmas
+   (smry writeGlobal readGlobal callsUnknown
+    (param 0 0 reads writes escapes)result 0))
+  (stmts@2,1
+   (var@7 :result.79 . seq.0.Iotb7mc.@D,~1 .)
+   (var@O :`x.65 . seq.0.Iotb7mc.~A,~R
+    (call newSeqUninit.0.I7whkjh1.~F
+     (dot@2 a.6~1 len.0 0)))
+   (asgn@7 result.79~7 `x.65@H)
+   (var@4,1 :i.10 .
+    (i@A,1f,../nimony/lib/std/math.nim 64)0@4)
+   (scope@,2
+    (stmts
+     (while
+      (lt@8 i.10~2
+       (dot@3 a.6~1 len.0 0))
+      (stmts@2,1
+       (asgn@H
+        (pat~A
+         (dot result.79~6 data.0 0)i.10@6)
+        (pat@A
+         (dot a.6~1 data.0 0)i.10@6))
+       (call@,1 inc.1.Irn1g7r1.
+        (addr@4 i.10))))))
+   (lab@,2 :whileStmtLabel.0)
+   (ret~2,~1 result.79)))
+ (proc@,20,../nimony/lib/std/system/seqimpl.nim :=copy.1.Iw71th7.
+  (params@G
+   (param@1 :dest.2 .
+    (ptr@6 seq.0.Iotb7mc.@7))
+   (param@J :src.2 . seq.0.Iotb7mc.@8)).
+  (pragmas
+   (smry writeGlobal readGlobal callsUnknown
+    (param 0 0 reads writes escapes)
+    (param 1 0 reads writes escapes)))
+  (stmts@2,1
+   (if
+    (elif@3
+     (eq@A
+      (dot~6
+       (deref~4 dest.2)data.0 0)
+      (dot@6 src.2~3 data.0 0))
+     (stmts@N
+      (ret .))))
+   (if@,1
+    (elif@3
+     (lt@8
+      (dot~5 src.2~3 len.0 0)
+      (dot@6
+       (deref~4 dest.2)len.0 0))
+     (stmts~1,1
+      (var@4 :i.11 .
+       (i@A,1f,../nimony/lib/std/math.nim 64)
+       (dot@7 src.2~3 len.0 0))
+      (scope@,1
+       (stmts
+        (while
+         (lt@8 i.11~2
+          (dot@6
+           (deref~4 dest.2)len.0 0))
+         (stmts@2,1 .@A
+          (call@,1 inc.1.Irn1g7r1.
+           (addr@4 i.11))))))
+      (lab@,1 :whileStmtLabel.0)))
+    (else
+     (stmts
+      (stmts
+       (stmts
+        (var@9,5 :`x.66 .
+         (i@2,~1x 64)
+         (call capInBytes.0.Ilkynur1.@1
+          (deref~4 dest.2)))
+        (if
+         (elif@5,5
+          (lt@G `x.66~C
+           (mul@A
+            (i 64)
+            (dot~5 src.2~3 len.0 0)
+            (sizeof@8
+             (i 64))))
+          (stmts~3,1
+           (var@H :`x.67 .
+            (i~8,~1y 64)
+            (call capInBytes.0.Ilkynur1.@1
+             (deref~4 dest.2)))
+           (var@4 :oldCap.0 .
+            (i@A,1f,../nimony/lib/std/math.nim 64)
+            (div@P
+             (i 64)`x.67~C
+             (sizeof@A
+              (i 64))))
+           (var@4,1 :newCap.0 .
+            (i@A,1f,../nimony/lib/std/math.nim 64)
+            (call@I recalcCap.0.sysvq0asl~9 oldCap.0@1
+             (sub@H
+              (i 64)
+              (dot~5 src.2~3 len.0 0)oldCap.0@2)))
+           (var@4,2 :memSize.0 .
+            (i@A,1f,../nimony/lib/std/math.nim 64)
+            (call@R memSizeInBytes.0.Iqj0wsf.~H newCap.0@1))
+           (var@l,3 :`x.68 .
+            (ptr@P,x,../nimony/lib/std/system/mimalloc.nim
+             (void))
+            (call realloc.0.sysvq0asl~7
+             (conv@5
+              (ptr@H,x,../nimony/lib/std/system/mimalloc.nim
+               (void))
+              (conv
+               (ptr@H,10,../nimony/lib/std/system/mimalloc.nim
+                (void))
+               (dot
+                (deref~4 dest.2)data.0 0)))memSize.0@C))
+           (asgn@A,3
+            (dot~6
+             (deref~4 dest.2)data.0 0)
+            (cast@2
+             (ptr@5
+              (i@I 64))`x.68@Z))
+           (if@,4
+            (elif@3
+             (eq@A
+              (dot~6
+               (deref~4 dest.2)data.0 0)
+              (nil))
+             (stmts~1,1
+              (asgn@9
+               (dot~5
+                (deref~4 dest.2)len.0 0)0@2)
+              (stmts@2,2
+               (call oomHandler.0.sysvq0asl memSize.0@B))
+              (ret@,3 .))))))))))))
+   (asgn@9,G
+    (dot~5
+     (deref~4 dest.2)len.0 0)
+    (dot@5 src.2~3 len.0 0))
+   (var@4,H :i.12 .
+    (i@A,1f,../nimony/lib/std/math.nim 64)0@4)
+   (scope@,I
+    (stmts
+     (while
+      (lt@8 i.12~2
+       (dot@6
+        (deref~4 dest.2)len.0 0))
+      (stmts@2,1
+       (stmts@2,Y,../nimony/lib/std/system.nim
+        (asgn@7
+         (pat~6
+          (dot@8,2K,../nimony/lib/std/system/seqimpl.nim
+           (deref~4 dest.2)data.0 0)i.12@E,2K,../nimony/lib/std/system/seqimpl.nim)
+         (pat@T,2K,../nimony/lib/std/system/seqimpl.nim
+          (dot src.2~3 data.0 0)i.12@6)))
+       (call@,1 inc.1.Irn1g7r1.
+        (addr@4 i.12))))))
+   (lab@,I :whileStmtLabel.1)))
+ (proc@,D,../nimony/lib/std/system/seqimpl.nim :=destroy.1.Ittbaxj1.
+  (params@J
+   (param@1 :s.7 . seq.0.Izimvvd1.@6)).
+  (pragmas
+   (smry writeGlobal readGlobal callsUnknown
+    (param 0 0 reads writes escapes)))
+  (stmts@2,1
+   (if
+    (elif@3
+     (not@2,1m,../nimony/lib/std/system/comparisons.nim
+      (eq@7
+       (dot@6,E,../nimony/lib/std/system/seqimpl.nim s.7~1 data.0 0)
+       (nil)))
+     (stmts~1,1
+      (var@4 :i.13 .
+       (i@A,1f,../nimony/lib/std/math.nim 64)0@4)
+      (scope@,1
+       (stmts
+        (while
+         (lt@8 i.13~2
+          (dot@3 s.7~1 len.0 0))
+         (stmts@2,1 .@A
+          (call@,1 inc.1.Irn1g7r1.
+           (addr@4 i.13))))))
+      (lab@,1 :whileStmtLabel.0)
+      (call@,4 dealloc.0.sysvq0asl
+       (conv@9
+        (ptr@H,10,../nimony/lib/std/system/mimalloc.nim
+         (void))
+        (conv
+         (ptr@H,10,../nimony/lib/std/system/mimalloc.nim
+          (void))
+         (dot s.7~1 data.0 0)))))))))
+ (proc@,L,../nimony/lib/std/system/seqimpl.nim :=wasMoved.1.Iu8y1ro1.
+  (params@K
+   (param@1 :s.8 .
+    (ptr@3 seq.0.Izimvvd1.@7))).
+  (pragmas@a
+   (inline 0 0)
+   (smry~a
+    (param 0 0 reads writes)))
+  (stmts@2,1
+   (asgn@6
+    (dot~5
+     (deref~1 s.8)len.0 0)0@2)
+   (asgn@7,1
+    (dot~6
+     (deref~1 s.8)data.0 0)
+    (nil))))
+ (proc@,1U,../nimony/lib/std/system/seqimpl.nim :=dup.1.Imfj8kj.
+  (params@F
+   (param@1 :a.7 . seq.0.Izimvvd1.@6))seq.0.Izimvvd1.@G
+  (pragmas
+   (smry writeGlobal readGlobal callsUnknown
+    (param 0 0 reads writes escapes)result 0))
+  (stmts@2,1
+   (var@7 :result.80 . seq.0.Izimvvd1.@D,~1 .)
+   (var@O :`x.69 . seq.0.Izimvvd1.~A,~R
+    (call newSeqUninit.0.I02czk9.~F
+     (dot@2 a.7~1 len.0 0)))
+   (asgn@7 result.80~7 `x.69@H)
+   (var@4,1 :i.14 .
+    (i@A,1f,../nimony/lib/std/math.nim 64)0@4)
+   (scope@,2
+    (stmts
+     (while
+      (lt@8 i.14~2
+       (dot@3 a.7~1 len.0 0))
+      (stmts@2,1
+       (asgn@H
+        (pat~A
+         (dot result.80~6 data.0 0)i.14@6)
+        (pat@A
+         (dot a.7~1 data.0 0)i.14@6))
+       (call@,1 inc.1.Irn1g7r1.
+        (addr@4 i.14))))))
+   (lab@,2 :whileStmtLabel.0)
+   (ret~2,~1 result.80)))
+ (proc@,20,../nimony/lib/std/system/seqimpl.nim :=copy.1.I6bjvy8.
+  (params@G
+   (param@1 :dest.3 .
+    (ptr@6 seq.0.Izimvvd1.@7))
+   (param@J :src.3 . seq.0.Izimvvd1.@8)).
+  (pragmas
+   (smry writeGlobal readGlobal callsUnknown
+    (param 0 0 reads writes escapes)
+    (param 1 0 reads writes escapes)))
+  (stmts@2,1
+   (if
+    (elif@3
+     (eq@A
+      (dot~6
+       (deref~4 dest.3)data.0 0)
+      (dot@6 src.3~3 data.0 0))
+     (stmts@N
+      (ret .))))
+   (if@,1
+    (elif@3
+     (lt@8
+      (dot~5 src.3~3 len.0 0)
+      (dot@6
+       (deref~4 dest.3)len.0 0))
+     (stmts~1,1
+      (var@4 :i.15 .
+       (i@A,1f,../nimony/lib/std/math.nim 64)
+       (dot@7 src.3~3 len.0 0))
+      (scope@,1
+       (stmts
+        (while
+         (lt@8 i.15~2
+          (dot@6
+           (deref~4 dest.3)len.0 0))
+         (stmts@2,1 .@A
+          (call@,1 inc.1.Irn1g7r1.
+           (addr@4 i.15))))))
+      (lab@,1 :whileStmtLabel.0)))
+    (else
+     (stmts
+      (stmts
+       (stmts
+        (var@9,5 :`x.70 .
+         (i@2,~1x 64)
+         (call capInBytes.0.Ip5tpl61.@1
+          (deref~4 dest.3)))
+        (if
+         (elif@5,5
+          (lt@G `x.70~C
+           (mul@A
+            (i 64)
+            (dot~5 src.3~3 len.0 0)
+            (sizeof@8
+             (f 64))))
+          (stmts~3,1
+           (var@H :`x.71 .
+            (i~8,~1y 64)
+            (call capInBytes.0.Ip5tpl61.@1
+             (deref~4 dest.3)))
+           (var@4 :oldCap.1 .
+            (i@A,1f,../nimony/lib/std/math.nim 64)
+            (div@P
+             (i 64)`x.71~C
+             (sizeof@A
+              (f 64))))
+           (var@4,1 :newCap.1 .
+            (i@A,1f,../nimony/lib/std/math.nim 64)
+            (call@I recalcCap.0.sysvq0asl~9 oldCap.1@1
+             (sub@H
+              (i 64)
+              (dot~5 src.3~3 len.0 0)oldCap.1@2)))
+           (var@4,2 :memSize.1 .
+            (i@A,1f,../nimony/lib/std/math.nim 64)
+            (call@R memSizeInBytes.0.I9xmoo4.~H newCap.1@1))
+           (var@l,3 :`x.72 .
+            (ptr@P,x,../nimony/lib/std/system/mimalloc.nim
+             (void))
+            (call realloc.0.sysvq0asl~7
+             (conv@5
+              (ptr@H,x,../nimony/lib/std/system/mimalloc.nim
+               (void))
+              (conv
+               (ptr@H,10,../nimony/lib/std/system/mimalloc.nim
+                (void))
+               (dot
+                (deref~4 dest.3)data.0 0)))memSize.1@C))
+           (asgn@A,3
+            (dot~6
+             (deref~4 dest.3)data.0 0)
+            (cast@2
+             (ptr@5
+              (f@I 64))`x.72@Z))
+           (if@,4
+            (elif@3
+             (eq@A
+              (dot~6
+               (deref~4 dest.3)data.0 0)
+              (nil))
+             (stmts~1,1
+              (asgn@9
+               (dot~5
+                (deref~4 dest.3)len.0 0)0@2)
+              (stmts@2,2
+               (call oomHandler.0.sysvq0asl memSize.1@B))
+              (ret@,3 .))))))))))))
+   (asgn@9,G
+    (dot~5
+     (deref~4 dest.3)len.0 0)
+    (dot@5 src.3~3 len.0 0))
+   (var@4,H :i.16 .
+    (i@A,1f,../nimony/lib/std/math.nim 64)0@4)
+   (scope@,I
+    (stmts
+     (while
+      (lt@8 i.16~2
+       (dot@6
+        (deref~4 dest.3)len.0 0))
+      (stmts@2,1
+       (stmts@2,Y,../nimony/lib/std/system.nim
+        (asgn@7
+         (pat~6
+          (dot@8,2K,../nimony/lib/std/system/seqimpl.nim
+           (deref~4 dest.3)data.0 0)i.16@E,2K,../nimony/lib/std/system/seqimpl.nim)
+         (pat@T,2K,../nimony/lib/std/system/seqimpl.nim
+          (dot src.3~3 data.0 0)i.16@6)))
+       (call@,1 inc.1.Irn1g7r1.
+        (addr@4 i.16))))))
+   (lab@,I :whileStmtLabel.1)))
+ (proc@Q,1V,../nimony/lib/std/system/seqimpl.nim :newSeqUninit.0.I7whkjh1.
+  (params~5,~R
+   (param@1 :size.4 .
+    (i@6 64)))seq.0.Iotb7mc.~A,~R
+  (pragmas@F,~R
+   (inline 0 200)
+   (smry~F,R writeGlobal callsUnknown
+    (param 0 0 reads writes escapes)))
+  (stmts~O,~Q
+   (var :result.81 . seq.0.Iotb7mc.@E,~1 .)
+   (if@,1
+    (elif@3
+     (eq@5 size.4~5 0@3)
+     (stmts~1,1
+      (asgn@7 result.81~7
+       (oconstr@8 seq.0.Iotb7mc.@2,1k
+        (kv@4 len.0~3 size.4@2)
+        (kv@G data.0~4
+         (nil))))))
+    (else
+     (stmts
+      (stmts
+       (stmts
+        (stmts@2,3
+         (var@4 :memSize.2 .
+          (i@A,1f,../nimony/lib/std/math.nim 64)
+          (call@R memSizeInBytes.0.Iqj0wsf.~H size.4@1))
+         (var@14,1 :`x.73 .
+          (ptr@D,r,../nimony/lib/std/system/mimalloc.nim
+           (void))
+          (call alloc.0.sysvq0asl~5 memSize.2@1))
+         (asgn@7,1 result.81~7
+          (oconstr@8 seq.0.Iotb7mc.@2,1h
+           (kv@4 len.0~3 size.4@2)
+           (kv@G data.0~4
+            (cast@2
+             (ptr@5
+              (i@I 64))`x.73@X))))
+         (if@,2
+          (elif@3
+           (not@2,1m,../nimony/lib/std/system/comparisons.nim
+            (eq@7
+             (dot@D,1B,../nimony/lib/std/system/seqimpl.nim result.81~6 data.0 0)
+             (nil)))
+           (stmts~1,1
+            (var :`x.74 . string.0.sysvq0asl
+             (oconstr@E,1C,../nimony/lib/std/system/seqimpl.nim string.0.sysvq0asl
+              (kv bytes.0 8439857260806892798u)
+              (kv more.0
+               (addr strlit.0.I15750996627617194403.))))))
+          (else
+           (stmts
+            (stmts
+             (stmts
+              (stmts@2,3
+               (asgn@B
+                (dot~5 result.81~6 len.0 0)0@2)
+               (stmts@2,2
+                (call oomHandler.0.sysvq0asl memSize.2@B))))))))))))))
+   (ret~2,~1 result.81)))
+ (proc@B,27,../nimony/lib/std/system/seqimpl.nim :capInBytes.0.Ilkynur1.
+  (params@7,~1x
+   (param@1 :s.10 . seq.0.Iotb7mc.@6))
+  (i@2,~1x 64)
+  (pragmas@O,~1x
+   (inline 0 100)
+   (smry~O,1x callsUnknown
+    (param 0 0 reads writes escapes)))
+  (stmts~9,~1w
+   (var@7 :result.82 .
+    (i@D,V,../nimony/lib/std/system/basic_types.nim 64).)
+   (var@9 :`x.1 .
+    (i@E,13,../nimony/lib/std/system/mimalloc.nim 64).)
+   (if@9
+    (elif@3
+     (not@2,1m,../nimony/lib/std/system/comparisons.nim
+      (eq@7
+       (dot@F,B,../nimony/lib/std/system/seqimpl.nim s.10~1 data.0 0)
+       (nil)))
+     (stmts
+      (var@S :`x.75 .
+       (i@E,13,../nimony/lib/std/system/mimalloc.nim 64)
+       (call allocatedSize.0.sysvq0asl~D
+        (conv@2
+         (ptr@N,13,../nimony/lib/std/system/mimalloc.nim
+          (void))
+         (conv
+          (ptr@H,10,../nimony/lib/std/system/mimalloc.nim
+           (void))
+          (dot s.10~1 data.0 0)))))
+      (asgn@F `x.1 `x.75@D)))
+    (else
+     (stmts
+      (stmts
+       (stmts
+        (stmts@e
+         (asgn@6 `x.1 0)))))))
+   (asgn@7 result.82~7 `x.1@2)
+   (ret~2,~1 result.82)))
+ (proc@Z,2A,../nimony/lib/std/system/seqimpl.nim :memSizeInBytes.0.Iqj0wsf.
+  (params~D,~1l
+   (param@1 :size.5 .
+    (i@6 64)))
+  (i~M,~1l 64)
+  (pragmas@4,~1l
+   (inline 0 20)
+   (smry~4,1l
+    (param 0 0 reads)))
+  (stmts~X,~1k
+   (var :result.83 .
+    (i@D,V,../nimony/lib/std/system/basic_types.nim 64).)
+   (stmts@2,1
+    (stmts@E
+     (var :`constRefTemp.0 .
+      (i 64).)
+     (keepovf
+      (mul
+       (i 64)size.5~5
+       (sizeof@8
+        (i 64)))`constRefTemp.0))
+    (asgn@7 result.83~7 `constRefTemp.0@7)
+    (if@,1
+     (elif@3
+      (ovf@C)
+      (stmts~1,2
+       (asgn@7 result.83~7
+        (suf@6 9223372036854775807 "i64"))))))
+   (ret~2,~1 result.83)))
+ (proc@Q,1V,../nimony/lib/std/system/seqimpl.nim :newSeqUninit.0.I02czk9.
+  (params~5,~R
+   (param@1 :size.6 .
+    (i@6 64)))seq.0.Izimvvd1.~A,~R
+  (pragmas@F,~R
+   (inline 0 200)
+   (smry~F,R writeGlobal callsUnknown
+    (param 0 0 reads writes escapes)))
+  (stmts~O,~Q
+   (var :result.84 . seq.0.Izimvvd1.@E,~1 .)
+   (if@,1
+    (elif@3
+     (eq@5 size.6~5 0@3)
+     (stmts~1,1
+      (asgn@7 result.84~7
+       (oconstr@8 seq.0.Izimvvd1.@2,1k
+        (kv@4 len.0~3 size.6@2)
+        (kv@G data.0~4
+         (nil))))))
+    (else
+     (stmts
+      (stmts
+       (stmts
+        (stmts@2,3
+         (var@4 :memSize.3 .
+          (i@A,1f,../nimony/lib/std/math.nim 64)
+          (call@R memSizeInBytes.0.I9xmoo4.~H size.6@1))
+         (var@14,1 :`x.76 .
+          (ptr@D,r,../nimony/lib/std/system/mimalloc.nim
+           (void))
+          (call alloc.0.sysvq0asl~5 memSize.3@1))
+         (asgn@7,1 result.84~7
+          (oconstr@8 seq.0.Izimvvd1.@2,1h
+           (kv@4 len.0~3 size.6@2)
+           (kv@G data.0~4
+            (cast@2
+             (ptr@5
+              (f@I 64))`x.76@X))))
+         (if@,2
+          (elif@3
+           (not@2,1m,../nimony/lib/std/system/comparisons.nim
+            (eq@7
+             (dot@D,1B,../nimony/lib/std/system/seqimpl.nim result.84~6 data.0 0)
+             (nil)))
+           (stmts~1,1
+            (var :`x.77 . string.0.sysvq0asl
+             (oconstr@E,1C,../nimony/lib/std/system/seqimpl.nim string.0.sysvq0asl
+              (kv bytes.0 8439857260806892798u)
+              (kv more.0
+               (addr strlit.0.I15750996627617194403.))))))
+          (else
+           (stmts
+            (stmts
+             (stmts
+              (stmts@2,3
+               (asgn@B
+                (dot~5 result.84~6 len.0 0)0@2)
+               (stmts@2,2
+                (call oomHandler.0.sysvq0asl memSize.3@B))))))))))))))
+   (ret~2,~1 result.84)))
+ (proc@B,27,../nimony/lib/std/system/seqimpl.nim :capInBytes.0.Ip5tpl61.
+  (params@7,~1x
+   (param@1 :s.11 . seq.0.Izimvvd1.@6))
+  (i@2,~1x 64)
+  (pragmas@O,~1x
+   (inline 0 100)
+   (smry~O,1x callsUnknown
+    (param 0 0 reads writes escapes)))
+  (stmts~9,~1w
+   (var@7 :result.85 .
+    (i@D,V,../nimony/lib/std/system/basic_types.nim 64).)
+   (var@9 :`x.2 .
+    (i@E,13,../nimony/lib/std/system/mimalloc.nim 64).)
+   (if@9
+    (elif@3
+     (not@2,1m,../nimony/lib/std/system/comparisons.nim
+      (eq@7
+       (dot@F,B,../nimony/lib/std/system/seqimpl.nim s.11~1 data.0 0)
+       (nil)))
+     (stmts
+      (var@S :`x.78 .
+       (i@E,13,../nimony/lib/std/system/mimalloc.nim 64)
+       (call allocatedSize.0.sysvq0asl~D
+        (conv@2
+         (ptr@N,13,../nimony/lib/std/system/mimalloc.nim
+          (void))
+         (conv
+          (ptr@H,10,../nimony/lib/std/system/mimalloc.nim
+           (void))
+          (dot s.11~1 data.0 0)))))
+      (asgn@F `x.2 `x.78@D)))
+    (else
+     (stmts
+      (stmts
+       (stmts
+        (stmts@e
+         (asgn@6 `x.2 0)))))))
+   (asgn@7 result.85~7 `x.2@2)
+   (ret~2,~1 result.85)))
+ (proc@Z,2A,../nimony/lib/std/system/seqimpl.nim :memSizeInBytes.0.I9xmoo4.
+  (params~D,~1l
+   (param@1 :size.7 .
+    (i@6 64)))
+  (i~M,~1l 64)
+  (pragmas@4,~1l
+   (inline 0 20)
+   (smry~4,1l
+    (param 0 0 reads)))
+  (stmts~X,~1k
+   (var :result.86 .
+    (i@D,V,../nimony/lib/std/system/basic_types.nim 64).)
+   (stmts@2,1
+    (stmts@E
+     (var :`constRefTemp.0 .
+      (i 64).)
+     (keepovf
+      (mul
+       (i 64)size.7~5
+       (sizeof@8
+        (f 64)))`constRefTemp.0))
+    (asgn@7 result.86~7 `constRefTemp.0@7)
+    (if@,1
+     (elif@3
+      (ovf@C)
+      (stmts~1,2
+       (asgn@7 result.86~7
+        (suf@6 9223372036854775807 "i64"))))))
+   (ret~2,~1 result.86)))
+ (gvar :`iniGuard.0. .
+  (bool).)
+ (proc :`ini.0.
+  (params).
+  (pragmas
+   (smry callsUnknown))
+  (stmts
+   (if
+    (elif `iniGuard.0.
+     (stmts
+      (ret .))))
+   (asgn `iniGuard.0.
+    (true))
+   (call `ini.0.sysvq0asl)
+   (call `ini.0.assy765wm)
+   (call `ini.0.fen2xhzfd))))(.index@,1,../nimony/lib/std/math.nim
+ (h strlit.0.I17663241064981421312. 74)
+ (h strlit.0.I12064251030117205798. 187)
+ (h strlit.0.I13051302242398678779. 188)
+ (h strlit.0.I10683379878145369823. 192)
+ (h strlit.0.I8652872438240444023. 189)
+ (h strlit.0.I8031254106179394417. 187)
+ (h strlit.0.I15750996627617194403. 233)
+ (h PI.0. 237)
+ (h TAU.0. 98)
+ (h E.0. 99)
+ (h MaxFloat64Precision.0. 97)
+ (h MaxFloat32Precision.0. 74)
+ (h MaxFloatPrecision.0. 72)
+ (h MinFloatNormal.0. 74)
+ (h CMathHeader.0. 115)
+ (x c_frexp.0. 178)
+ (x c_frexp.1. 313)
+ (x c_fpNormal.0. 312)
+ (x c_fpSubnormal.0. 102)
+ (x c_fpZero.0. 108)
+ (x c_fpInfinite.0. 98)
+ (x c_fpNan.0. 106)
+ (h FloatClass.0. 96)
+ (x@G,1v fcNormal.0. 50)
+ (x@G,1v fcSubnormal.0. 29)
+ (x@G,1v fcZero.0. 32)
+ (x@G,1v fcNegZero.0. 27)
+ (x@G,1v fcNan.0. 30)
+ (x@G,1v fcInf.0. 26)
+ (x@G,1v fcNegInf.0. 26)
+ (x dollar`.FloatClass.0. 31)
+ (x copySign.0. 1586)
+ (x copySign.1. 237)
+ (x floor.0. 593)
+ (x floor.1. 181)
+ (x ceil.0. 537)
+ (x ceil.1. 179)
+ (x round.0. 535)
+ (x round.1. 181)
+ (x trunc.0. 537)
+ (x trunc.1. 181)
+ (x mod.1. 537)
+ (x mod.2. 228)
+ (x sqrt.1. 586)
+ (x sqrt.2. 179)
+ (x cbrt.0. 537)
+ (x cbrt.1. 179)
+ (x pow.0. 538)
+ (x pow.1. 227)
+ (x hypot.1. 586)
+ (x hypot.2. 231)
+ (x exp.1. 590)
+ (x exp.2. 177)
+ (x ln.1. 536)
+ (x ln.2. 176)
+ (x log2.0. 535)
+ (x log2.1. 179)
+ (x log10.0. 538)
+ (x log10.1. 181)
+ (x isPowerOfTwo.0. 540)
+ (x nextPowerOfTwo.0. 916)
+ (h RadPerDeg.0. 1796)
+ (x sin.1. 107)
+ (x sin.2. 177)
+ (x cos.1. 536)
+ (x cos.2. 177)
+ (x tan.0. 536)
+ (x tan.1. 177)
+ (x arcsin.0. 536)
+ (x arcsin.1. 181)
+ (x arccos.0. 540)
+ (x arccos.1. 181)
+ (x arctan.0. 540)
+ (x arctan.1. 181)
+ (x arctan2.1. 540)
+ (x arctan2.2. 233)
+ (x sinh.0. 592)
+ (x sinh.1. 179)
+ (x cosh.0. 538)
+ (x cosh.1. 179)
+ (x tanh.0. 538)
+ (x tanh.1. 179)
+ (x arcsinh.0. 538)
+ (x arcsinh.1. 183)
+ (x arccosh.0. 182)
+ (x arccosh.1. 183)
+ (x arctanh.0. 182)
+ (x arctanh.1. 183)
+ (x erf.0. 182)
+ (x erf.1. 178)
+ (x erfc.0. 177)
+ (x erfc.1. 180)
+ (x gamma.0. 179)
+ (x gamma.1. 183)
+ (x lgamma.0. 542)
+ (x lgamma.1. 184)
+ (x cot.0. 289)
+ (x cot.1. 339)
+ (x sec.0. 362)
+ (x sec.1. 339)
+ (x csc.0. 362)
+ (x csc.1. 339)
+ (x coth.0. 362)
+ (x coth.1. 340)
+ (x sech.0. 363)
+ (x sech.1. 341)
+ (x csch.0. 364)
+ (x csch.1. 341)
+ (x arccot.0. 364)
+ (x arccot.1. 348)
+ (x arcsec.0. 370)
+ (x arcsec.1. 348)
+ (x arccsc.0. 370)
+ (x arccsc.1. 348)
+ (x arccoth.0. 370)
+ (x arccoth.1. 349)
+ (x arcsech.0. 371)
+ (x arcsech.1. 349)
+ (x arccsch.0. 371)
+ (x arccsch.1. 350)
+ (x fac.0. 372)
+ (x binom.0. 1254)
+ (x isNaN.0.Ica2702. 2022)
+ (x almostEqual.0.Ivmzi1f. 784)
+ (x \2B=.0.Ihg6mz11. 1641)
+ (x degToRad.0.Ijbttm21. 586)
+ (x radToDeg.0.Intoyme1. 595)
+ (x *=.0.Iu9okoo1. 779)
+ (x c_isnan.0.I3164fs1. 584)
+ (x abs.0.Iwxvrq71. 256)
+ (x inc.1.Irn1g7r1. 843)
+ (h openArray.0.Ij9i6zj. 634)
+ (h seq.0.Iotb7mc. 175)
+ (h seq.0.Izimvvd1. 171)
+ (h openArray.0.I8jqt5c1. 172)
+ (x =destroy.1.Iez2nr5. 176)
+ (x =wasMoved.1.Ia0kll01. 954)
+ (x =dup.1.Is27omc. 335)
+ (x =copy.1.Iw71th7. 840)
+ (x =destroy.1.Ittbaxj1. 3601)
+ (x =wasMoved.1.Iu8y1ro1. 959)
+ (x =dup.1.Imfj8kj. 336)
+ (x =copy.1.I6bjvy8. 843)
+ (x newSeqUninit.0.I7whkjh1. 3603)
+ (x capInBytes.0.Ilkynur1. 1873)
+ (x memSizeInBytes.0.Iqj0wsf. 1123)
+ (x newSeqUninit.0.I02czk9. 677)
+ (x capInBytes.0.Ip5tpl61. 1876)
+ (x memSizeInBytes.0.I9xmoo4. 1124)
+ (h `iniGuard.0. 677)
+ (x `ini.0. 34))

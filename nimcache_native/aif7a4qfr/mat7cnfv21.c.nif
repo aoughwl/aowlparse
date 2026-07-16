@@ -1,0 +1,302 @@
+(.nif27)
+(.indexat 7338             )
+(stmts@,1,../nimony/lib/std/math.nim
+ (gvar@I,1o :c_fpNormal.0.~E
+  (pragmas
+   (importc "FP_NORMAL")
+   (header "<math.h>"))
+  (i@l 64).)
+ (gvar@I,1p :c_fpSubnormal.0.~E
+  (pragmas
+   (importc "FP_SUBNORMAL")
+   (header "<math.h>"))
+  (i@o 64).)
+ (gvar@I,1q :c_fpZero.0.~E
+  (pragmas
+   (importc "FP_ZERO")
+   (header "<math.h>"))
+  (i@j 64).)
+ (gvar@I,1r :c_fpInfinite.0.~E
+  (pragmas
+   (importc "FP_INFINITE")
+   (header "<math.h>"))
+  (i@n 64).)
+ (gvar@I,1s :c_fpNan.0.~E
+  (pragmas
+   (importc "FP_NAN")
+   (header "<math.h>"))
+  (i@i 64).)
+ (type@E,1v :FloatClass.0.~C .
+  (enum@2
+   (u 8)
+   (efld~C,3 :fcNormal.0. 0)
+   (efld~C,4 :fcSubnormal.0. 1)
+   (efld~C,5 :fcZero.0. 2)
+   (efld~C,6 :fcNegZero.0. 3)
+   (efld~C,7 :fcNan.0. 4)
+   (efld~C,8 :fcInf.0. 5)
+   (efld~C,9 :fcNegInf.0. 6)))
+ (proc@9,BA :\2B=.0.Ihg6mz11.
+  (params@P,36,../nimony/lib/std/system/arithmetics.nim
+   (param@1 :x.147 .
+    (ptr@3
+     (i@A,1f,../nimony/lib/std/math.nim 64)))
+   (param@B :y.41 .
+    (i@A,1f,../nimony/lib/std/math.nim 64))).@,36,../nimony/lib/std/system/arithmetics.nim
+  (pragmas@g,36,../nimony/lib/std/system/arithmetics.nim
+   (inline 0 20 20)
+   (smry@9,BB,../nimony/lib/std/math.nim
+    (param 0 0 reads writes)
+    (param 1 1 reads)))
+  (stmts@2,37,../nimony/lib/std/system/arithmetics.nim
+   (asgn@2
+    (deref~2 x.147)
+    (add@4
+     (i 64)
+     (deref~2 x.147)y.41@2))))
+ (type@b,G,../nimony/lib/std/system/openarrays.nim :openArray.0.Ij9i6zj. .
+  (object~A,~A .
+   (fld~N,1 :a.0 .
+    (ptr@3
+     (i@I 64)))
+   (fld~N,2 :len.0 .
+    (i@5 64))))
+ (type@L,2r,../nimony/lib/std/system/seqimpl.nim :seq.0.Iotb7mc. .
+  (object~9,~2l .
+   (fld~8,1 :len.0 .
+    (i@5 64))
+   (fld~8,2 :data.0 .
+    (ptr@6
+     (i@I 64)))))
+ (type@L,2r,../nimony/lib/std/system/seqimpl.nim :seq.0.Izimvvd1. .
+  (object~9,~2l .
+   (fld~8,1 :len.0 .
+    (i@5 64))
+   (fld~8,2 :data.0 .
+    (ptr@6
+     (f@I 64)))))
+ (type@M,N,../nimony/lib/std/system/openarrays.nim :openArray.0.I8jqt5c1. .
+  (object@5,~H .
+   (fld~N,1 :a.0 .
+    (ptr@3
+     (f@I 64)))
+   (fld~N,2 :len.0 .
+    (i@5 64))))
+ (proc@,D,../nimony/lib/std/system/seqimpl.nim :=destroy.1.Iez2nr5.
+  (params@J
+   (param@1 :s.4 . seq.0.Iotb7mc.@6)).
+  (pragmas
+   (smry writeGlobal readGlobal callsUnknown
+    (param 0 0 reads writes escapes)))
+  (stmts@2,1
+   (if
+    (elif@3
+     (not@2,1m,../nimony/lib/std/system/comparisons.nim
+      (eq@7
+       (dot@6,E,../nimony/lib/std/system/seqimpl.nim s.4~1 data.0 0)
+       (nil)))
+     (stmts~1,1
+      (var@4 :i.9 .
+       (i@A,1f,../nimony/lib/std/math.nim 64)0@4)
+      (scope@,1
+       (stmts
+        (while
+         (lt@8 i.9~2
+          (dot@3 s.4~1 len.0 0))
+         (stmts@2,1 .@A
+          (call@,1 inc.1.Irn1g7r1.aif7a4qfr
+           (addr@4 i.9))))))
+      (lab@,1 :whileStmtLabel.0)
+      (call@,4 dealloc.0.sysvq0asl
+       (conv@9
+        (ptr@H,10,../nimony/lib/std/system/mimalloc.nim
+         (void))
+        (conv
+         (ptr@H,10,../nimony/lib/std/system/mimalloc.nim
+          (void))
+         (dot s.4~1 data.0 0)))))))))
+ (proc@,L,../nimony/lib/std/system/seqimpl.nim :=wasMoved.1.Ia0kll01.
+  (params@K
+   (param@1 :s.5 .
+    (ptr@3 seq.0.Iotb7mc.@7))).
+  (pragmas@a
+   (inline 0 0)
+   (smry~a
+    (param 0 0 reads writes)))
+  (stmts@2,1
+   (asgn@6
+    (dot~5
+     (deref~1 s.5)len.0 0)0@2)
+   (asgn@7,1
+    (dot~6
+     (deref~1 s.5)data.0 0)
+    (nil))))
+ (proc@Q,1V,../nimony/lib/std/system/seqimpl.nim :newSeqUninit.0.I7whkjh1.
+  (params~5,~R
+   (param@1 :size.4 .
+    (i@6 64)))seq.0.Iotb7mc.~A,~R
+  (pragmas@F,~R
+   (inline 0 200)
+   (smry~F,R writeGlobal callsUnknown
+    (param 0 0 reads writes escapes)))
+  (stmts~O,~Q
+   (var :result.81 . seq.0.Iotb7mc.@E,~1 .)
+   (if@,1
+    (elif@3
+     (eq@5 size.4~5 0@3)
+     (stmts~1,1
+      (asgn@7 result.81~7
+       (oconstr@8 seq.0.Iotb7mc.@2,1k
+        (kv@4 len.0~3 size.4@2)
+        (kv@G data.0~4
+         (nil))))))
+    (else
+     (stmts
+      (stmts
+       (stmts
+        (stmts@2,3
+         (var@4 :memSize.2 .
+          (i@A,1f,../nimony/lib/std/math.nim 64)
+          (call@R memSizeInBytes.0.Iqj0wsf.~H size.4@1))
+         (var@14,1 :`x.73 .
+          (ptr@D,r,../nimony/lib/std/system/mimalloc.nim
+           (void))
+          (call alloc.0.sysvq0asl~5 memSize.2@1))
+         (asgn@7,1 result.81~7
+          (oconstr@8 seq.0.Iotb7mc.@2,1h
+           (kv@4 len.0~3 size.4@2)
+           (kv@G data.0~4
+            (cast@2
+             (ptr@5
+              (i@I 64))`x.73@X))))
+         (if@,2
+          (elif@3
+           (not@2,1m,../nimony/lib/std/system/comparisons.nim
+            (eq@7
+             (dot@D,1B,../nimony/lib/std/system/seqimpl.nim result.81~6 data.0 0)
+             (nil)))
+           (stmts~1,1
+            (var :`x.74 . string.0.sysvq0asl
+             (oconstr@8 string.0.sysvq0asl
+              (kv bytes.0 8439857260806892798u)
+              (kv more.0
+               (addr strlit.0.I15750996627617194403.aif7a4qfr))))))
+          (else
+           (stmts
+            (stmts
+             (stmts
+              (stmts@2,3
+               (asgn@B
+                (dot~5 result.81~6 len.0 0)0@2)
+               (stmts@2,2
+                (call oomHandler.0.sysvq0asl memSize.2@B))))))))))))))
+   (ret~2,~1 result.81)))
+ (proc@B,27,../nimony/lib/std/system/seqimpl.nim :capInBytes.0.Ilkynur1.
+  (params@7,~1x
+   (param@1 :s.10 . seq.0.Iotb7mc.@6))
+  (i@2,~1x 64)
+  (pragmas@O,~1x
+   (inline 0 100)
+   (smry~O,1x callsUnknown
+    (param 0 0 reads writes escapes)))
+  (stmts~9,~1w
+   (var@7 :result.82 .
+    (i@D,V,../nimony/lib/std/system/basic_types.nim 64).)
+   (var@9 :`x.1 .
+    (i@E,13,../nimony/lib/std/system/mimalloc.nim 64).)
+   (if@9
+    (elif@3
+     (not@2,1m,../nimony/lib/std/system/comparisons.nim
+      (eq@7
+       (dot@F,B,../nimony/lib/std/system/seqimpl.nim s.10~1 data.0 0)
+       (nil)))
+     (stmts
+      (var@S :`x.75 .
+       (i@E,13,../nimony/lib/std/system/mimalloc.nim 64)
+       (call allocatedSize.0.sysvq0asl~D
+        (conv@2
+         (ptr@N,13,../nimony/lib/std/system/mimalloc.nim
+          (void))
+         (conv
+          (ptr@H,10,../nimony/lib/std/system/mimalloc.nim
+           (void))
+          (dot s.10~1 data.0 0)))))
+      (asgn@F `x.1 `x.75@D)))
+    (else
+     (stmts
+      (stmts
+       (stmts
+        (stmts@e
+         (asgn@6 `x.1 0)))))))
+   (asgn@7 result.82~7 `x.1@2)
+   (ret~2,~1 result.82)))
+ (proc@Z,2A,../nimony/lib/std/system/seqimpl.nim :memSizeInBytes.0.Iqj0wsf.
+  (params~D,~1l
+   (param@1 :size.5 .
+    (i@6 64)))
+  (i~M,~1l 64)
+  (pragmas@4,~1l
+   (inline 0 20)
+   (smry~4,1l
+    (param 0 0 reads)))
+  (stmts~X,~1k
+   (var :result.83 .
+    (i@D,V,../nimony/lib/std/system/basic_types.nim 64).)
+   (stmts@2,1
+    (stmts@E
+     (var :`constRefTemp.0 .
+      (i 64).)
+     (keepovf
+      (mul
+       (i 64)size.5~5
+       (sizeof@8
+        (i 64)))`constRefTemp.0))
+    (asgn@7 result.83~7 `constRefTemp.0@7)
+    (if@,1
+     (elif@3
+      (ovf@C)
+      (stmts~1,2
+       (asgn@7 result.83~7
+        (suf@6 9223372036854775807 "i64"))))))
+   (ret~2,~1 result.83)))
+ (gvar :`iniGuard.0. .
+  (bool).)
+ (proc :`ini.0.
+  (params).
+  (pragmas
+   (smry callsUnknown))
+  (stmts
+   (if
+    (elif `iniGuard.0.
+     (stmts
+      (ret .))))
+   (asgn `iniGuard.0.
+    (true))
+   (call `ini.0.sysvq0asl)
+   (call `ini.0.assy765wm)
+   (call `ini.0.fen2xhzfd))))(.index@,1,../nimony/lib/std/math.nim
+ (x c_fpNormal.0. 74)
+ (x c_fpSubnormal.0. 102)
+ (x c_fpZero.0. 108)
+ (x c_fpInfinite.0. 98)
+ (x c_fpNan.0. 106)
+ (h FloatClass.0. 96)
+ (x@G,1v fcNormal.0. 50)
+ (x@G,1v fcSubnormal.0. 29)
+ (x@G,1v fcZero.0. 32)
+ (x@G,1v fcNegZero.0. 27)
+ (x@G,1v fcNan.0. 30)
+ (x@G,1v fcInf.0. 26)
+ (x@G,1v fcNegInf.0. 26)
+ (x \2B=.0.Ihg6mz11. 31)
+ (h openArray.0.Ij9i6zj. 586)
+ (h seq.0.Iotb7mc. 175)
+ (h seq.0.Izimvvd1. 171)
+ (h openArray.0.I8jqt5c1. 172)
+ (x =destroy.1.Iez2nr5. 176)
+ (x =wasMoved.1.Ia0kll01. 963)
+ (x newSeqUninit.0.I7whkjh1. 335)
+ (x capInBytes.0.Ilkynur1. 1842)
+ (x memSizeInBytes.0.Iqj0wsf. 1123)
+ (h `iniGuard.0. 677)
+ (x `ini.0. 34))

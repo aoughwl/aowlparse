@@ -1,0 +1,1222 @@
+(.nif27)
+(.indexat 39205            )
+(stmts@,1,../nimony/lib/std/widestrs.nim
+ (type@D,5 :Utf16Char.0.~B .
+  (i@B 16))
+ (type@H,9 :WideCString.0.~D .
+  (ptr@2
+   (i@5,~4 16)))
+ (type@K,B :WideCStringObj.0.~G .
+  (object@2 .
+   (fld~G,1 :bytes.0 .
+    (i@7 64))
+   (fld~G,2 :data.0 .
+    (ptr@D,~4
+     (i@5,~4 16)))))
+ (proc@2,F :=destroy.0.@5
+  (params@F
+   (param@1 :a.0 . WideCStringObj.0.@3)).
+  (pragmas
+   (smry callsUnknown
+    (param 0 0 reads writes escapes)))
+  (stmts@2,1
+   (if
+    (elif@3
+     (not@2,1m,../nimony/lib/std/system/comparisons.nim
+      (eq@7
+       (dot@8,H,../nimony/lib/std/widestrs.nim a.0~1 data.0 0)
+       (nil)))
+     (stmts@1,4
+      (call@7 dealloc.0.sysvq0asl~7
+       (conv@2
+        (ptr@H,10,../nimony/lib/std/system/mimalloc.nim
+         (void))
+        (dot a.0~1 data.0 0))))))))
+ (proc@2,M :=wasMoved.0.@5
+  (params@G
+   (param@1 :a.1 .
+    (ptr@3 WideCStringObj.0.@4))).
+  (pragmas
+   (smry
+    (param 0 0 reads writes)))
+  (stmts@2,1
+   (asgn@7
+    (dot~6
+     (deref~1 a.1)data.0 0)
+    (nil))))
+ (proc@2,P :=copy.0.@5
+  (params@C
+   (param@1 :a.2 .
+    (ptr@3 WideCStringObj.0.@4))
+   (param@O :b.0 . WideCStringObj.0.@3)).
+  (pragmas
+   (smry
+    (param 0 0)
+    (param 1 1)))
+  (stmts .))
+ (proc@2,R :=sink.0.@5
+  (params@C
+   (param@1 :a.3 .
+    (ptr@3 WideCStringObj.0.@4))
+   (param@O :b.1 . WideCStringObj.0.@3)).
+  (pragmas
+   (smry
+    (param 0 0 reads writes)
+    (param 1 0 reads)))
+  (stmts@2,1
+   (asgn@8
+    (dot~7
+     (deref~1 a.3)bytes.0 0)
+    (dot@3 b.1~1 bytes.0 0))
+   (asgn@7,1
+    (dot~6
+     (deref~1 a.3)data.0 0)
+    (dot@3 b.1~1 data.0 0))))
+ (proc@2,V :createWide.0.@5
+  (params@F
+   (param@1 :a.4 .
+    (ptr@3 WideCStringObj.0.@4))
+   (param@O :bytes.0 .
+    (i@7 64))).
+  (pragmas
+   (smry callsUnknown
+    (param 0 0 reads writes)
+    (param 1 0 reads writes escapes)))
+  (stmts@2,1
+   (asgn@8
+    (dot~7
+     (deref~1 a.4)bytes.0 0)bytes.0@2)
+   (var@W,5 :`x.0 .
+    (ptr@D,r,../nimony/lib/std/system/mimalloc.nim
+     (void))
+    (call alloc.0.sysvq0asl~5 bytes.0@1))
+   (asgn@7,5
+    (dot~6
+     (deref~1 a.4)data.0 0)
+    (cast@2
+     (ptr@6,~S
+      (i@5,~4 16))`x.0@N))))
+ (proc@2,i :toWideCString.0.@5
+  (params@J
+   (param@1 :x.0 . WideCStringObj.0.@3))
+  (ptr@H,~Z
+   (i@5,~4 16))
+  (pragmas@q
+   (inline 0 0)
+   (smry~q
+    (param 0 0 reads)result 0))
+  (stmts@2,1
+   (var@7 :result.1 .
+    (ptr@8,~a
+     (i@5,~4 16)).)
+   (asgn@7 result.1~7
+    (dot@3 x.0~1 data.0 0))
+   (ret~2,~1 result.1)))
+ (proc@2,l :rawData.0.@5
+  (params@D
+   (param@1 :x.1 . WideCStringObj.0.@3))
+  (ptr@H,~c
+   (i@5,~4 16))
+  (pragmas@k
+   (inline 0 0)
+   (smry~k
+    (param 0 0 reads)result 0))
+  (stmts@2,1
+   (var@7 :result.2 .
+    (ptr@8,~d
+     (i@5,~4 16)).)
+   (asgn@7 result.2~7
+    (dot@3 x.1~1 data.0 0))
+   (ret~2,~1 result.2)))
+ (proc@2,o :ord.0.@5
+  (params@8
+   (param@1 :arg.0 .
+    (i@D,~j 16)))
+  (i@I 64)
+  (pragmas
+   (smry
+    (param 0 0 reads)result 0))
+  (stmts@W
+   (var@3 :result.3 .
+    (i~O,~c 64).)
+   (asgn@3 result.3
+    (conv
+     (i~3 64)
+     (cast@1
+      (u@5 16)arg.0@D)))
+   (ret~W result.3)))
+ (proc@2,q :len.0.@5
+  (params@9
+   (param@1 :w.0 .
+    (ptr@7,~h
+     (i@5,~4 16))))
+  (i@I 64)
+  (pragmas
+   (smry writeGlobal readGlobal
+    (param 0 0 reads)))
+  (stmts@2,1
+   (var :result.4 .
+    (i@9,~f 64).)
+   (asgn@7,2 result.4~7 0@2)
+   (scope@,3
+    (stmts
+     (while
+      (not@2,1m,../nimony/lib/std/system/comparisons.nim
+       (eq@7
+        (conv@F,v,../nimony/lib/std/widestrs.nim
+         (i~5 16)
+         (pat@1 w.0 result.4@2))
+        (suf@U,v,../nimony/lib/std/widestrs.nim 0 "i16")))
+      (stmts@X
+       (call inc.1.Irn1g7r1.
+        (addr@4 result.4))))))
+   (lab@,3 :whileStmtLabel.0)
+   (ret~2,~1 result.4)))
+ (const@4,x :UNI_REPLACEMENT_CHAR.0. .
+  (i@K,~s 16)
+  (suf@X -3 "i16"))
+ (const@4,y :UNI_MAX_BMP.0. .
+  (i@9,~m 64)
+  (suf@E 65535 "i64"))
+ (const@4,z :UNI_MAX_UTF16.0. .
+  (i@9,~n 64)
+  (suf@G 1114111 "i64"))
+ (const@4,13 :halfShift.0. .
+  (i@9,~r 64)
+  (suf@C 10 "i64"))
+ (const@4,14 :halfBase.0. .
+  (i@9,~s 64)
+  (suf@B 65536 "i64"))
+ (const@4,15 :halfMask.0. .
+  (i@9,~t 64)
+  (suf@B 1023 "i64"))
+ (const@4,17 :UNI_SUR_HIGH_START.0. .
+  (i@9,~v 64)
+  (suf@L 55296 "i64"))
+ (const@4,18 :UNI_SUR_HIGH_END.0. .
+  (i@9,~w 64)
+  (suf@J 56319 "i64"))
+ (const@4,19 :UNI_SUR_LOW_START.0. .
+  (i@9,~x 64)
+  (suf@K 56320 "i64"))
+ (const@4,1A :UNI_SUR_LOW_END.0. .
+  (i@9,~y 64)
+  (suf@I 57343 "i64"))
+ (const@4,1B :UNI_REPL.0. .
+  (i@9,~z 64)
+  (suf@B 65533 "i64"))
+ (proc@2,23 :newWideCString.0.@5
+  (params@K
+   (param@1 :size.0 .
+    (i@6 64)))WideCStringObj.0.@D
+  (pragmas
+   (smry writeGlobal readGlobal callsUnknown
+    (param 0 0 reads)))
+  (stmts@2,1
+   (var@7 :result.6 . WideCStringObj.0.@A,~1p .)
+   (call@7 =wasMoved.0.
+    (addr result.6))
+   (call =destroy.0. result.6)
+   (asgn@7 result.6~7
+    (oconstr@9 WideCStringObj.0.@1,~1p
+     (kv bytes.0
+      (suf@l,E,../nimony/lib/std/system/defaults.nim 0 "i64"))
+     (kv data.0
+      (conv@s,L,../nimony/lib/std/system/defaults.nim
+       (ptr@J,A,../nimony/lib/std/widestrs.nim
+        (i@5,~4 16))
+       (nil)))))
+   (call@A,1 createWide.0.~A
+    (addr@1 result.6)
+    (add@I
+     (i 64)
+     (mul~4
+      (i 64)size.0~5 2@2)2@2))
+   (ret~2,~1 result.6)))
+ (proc@2,27 :newWideCString.1.@5
+  (params@K
+   (param@1 :source.0 .
+    (ptr@8
+     (c 8)))
+   (param@I :L.2 .
+    (i@3 64)))WideCStringObj.0.@R
+  (pragmas
+   (smry writeGlobal readGlobal callsUnknown
+    (param 0 0 reads)
+    (param 1 1 reads)))
+  (stmts@2,1
+   (var :result.7 . WideCStringObj.0.@H,~1t .)
+   (call =wasMoved.0.
+    (addr result.7))
+   (call@,1 =destroy.0. result.7)
+   (asgn@7,1 result.7~7
+    (oconstr@9 WideCStringObj.0.@1,~1u
+     (kv bytes.0
+      (suf@l,E,../nimony/lib/std/system/defaults.nim 0 "i64"))
+     (kv data.0
+      (conv@s,L,../nimony/lib/std/system/defaults.nim
+       (ptr@J,A,../nimony/lib/std/widestrs.nim
+        (i@5,~4 16))
+       (nil)))))
+   (call@A,2 createWide.0.~A
+    (addr@1 result.7)
+    (add@F
+     (i 64)
+     (mul~4
+      (i 64)L.2~2 2@2)2@2))
+   (var@4,3 :d.0 .
+    (i 64)0@4)
+   (scope@4,4
+    (stmts
+     (var@9,~H :`lf.0 .
+      (ptr@3
+       (c 8))source.0@3,H)
+     (var@L,~H :`lf.1 .
+      (i@3 64)L.2~1,H)
+     (stmts~4,~G
+      (var@2,1 :`lf.2 .
+       (i 64)0@4)
+      (var@2,2 :`lf.3 .
+       (i@8 64).)
+      (scope@,3
+       (stmts
+        (while
+         (lt@8 `lf.2~2 `lf.1@2)
+         (stmts@2,1
+          (stmts~2,~k
+           (if@,2
+            (elif@3
+             (le@A
+              (conv~7
+               (i@O,~U 64)
+               (pat@1 `lf.0@6,i `lf.2@9,i))127@3)
+             (stmts~1,1
+              (asgn@7 `lf.3@D,h
+               (conv@5
+                (i@G,~V 64)
+                (pat@1 `lf.0~2,h `lf.2@1,h)))
+              (if@,1
+               (elif@3
+                (true@P,g)
+                (stmts@7
+                 (call@3 inc.1.Irn1g7r1.~3
+                  (addr@1,g `lf.2)))))))
+            (else
+             (stmts
+              (stmts
+               (stmts
+                (if
+                 (elif@5,3
+                  (eq@G
+                   (shr~6
+                    (i 64)
+                    (cast~7
+                     (i 64)
+                     (conv
+                      (i@M,~X 64)
+                      (pat@1 `lf.0@4,f `lf.2@7,f)))
+                    (cast@4
+                     (u 64)5))6@3)
+                  (stmts~3,2
+                   (if
+                    (elif@3
+                     (le@2 `lf.2@9,d
+                      (sub@5
+                       (i 64)`lf.1@7,d 2@2))
+                     (stmts~1,1
+                      (asgn@7 `lf.3@B,c
+                       (bitor@Y
+                        (i 64)
+                        (shl~6
+                         (i 64)
+                         (bitand~F
+                          (i 64)
+                          (conv~7
+                           (i@D,~a 64)
+                           (pat@1 `lf.0~5,c `lf.2~2,c))
+                          (sub@L,~B
+                           (i 64)
+                           (shl~6
+                            (i 64)1~2 5~5,B)1@1))6@4)
+                        (bitand@G
+                         (i 64)
+                         (conv~9
+                          (i~M,~a 64)
+                          (pat@1 `lf.0~e,c
+                           (add@3
+                            (i 64)`lf.2~e,c 1@1)))
+                         (sub~G,~B
+                          (i 64)
+                          (shl~6
+                           (i 64)1~2 6@V,B)1@1))))
+                      (if@,1
+                       (elif@3
+                        (true@N,b)
+                        (stmts@7
+                         (call@3 inc.0.Iwdk9lf.~3
+                          (addr~1,b `lf.2)2@4))))))
+                    (else
+                     (stmts
+                      (stmts
+                       (stmts
+                        (stmts@2,4
+                         (asgn@7 `lf.3@B,Z
+                          (suf@,~G 65533 "i64"))
+                         (if@,1
+                          (elif@3
+                           (true@N,Y)
+                           (stmts@7
+                            (call@3 inc.1.Irn1g7r1.~3
+                             (addr~1,Y `lf.2)))))))))))))
+                 (else
+                  (stmts
+                   (stmts
+                    (stmts
+                     (if
+                      (elif@5,B
+                       (eq@G
+                        (shr~6
+                         (i 64)
+                         (cast~7
+                          (i 64)
+                          (conv
+                           (i@M,~f 64)
+                           (pat@1 `lf.0@4,X `lf.2@7,X)))
+                         (cast@4
+                          (u 64)4))14@3)
+                       (stmts~3,1
+                        (if
+                         (elif@3
+                          (le@2 `lf.2@9,W
+                           (sub@5
+                            (i 64)`lf.1@7,W 3@2))
+                          (stmts~1,3
+                           (asgn@7 `lf.3@B,T
+                            (bitor@X,1
+                             (i 64)
+                             (bitor@,~1
+                              (i 64)
+                              (shl~7
+                               (i 64)
+                               (bitand~D
+                                (i 64)
+                                (conv~7
+                                 (i@D,~j 64)
+                                 (pat@1 `lf.0~5,T `lf.2~2,T))
+                                (sub@L,~K
+                                 (i 64)
+                                 (shl~6
+                                  (i 64)1~2 4~6,K)1@1))12@4)
+                              (shl~6,1
+                               (i 64)
+                               (bitand~D
+                                (i 64)
+                                (conv~9
+                                 (i@E,~k 64)
+                                 (pat@1 `lf.0~4,S
+                                  (add@3
+                                   (i 64)`lf.2~4,S 1@1)))
+                                (sub@K,~L
+                                 (i 64)
+                                 (shl~6
+                                  (i 64)1~2 6~5,L)1@1))6@4))
+                             (bitand~J,1
+                              (i 64)
+                              (conv~9
+                               (i@E,~l 64)
+                               (pat@1 `lf.0~4,R
+                                (add@3
+                                 (i 64)`lf.2~4,R 2@1)))
+                              (sub@K,~M
+                               (i 64)
+                               (shl~6
+                                (i 64)1~2 6~5,M)1@1))))
+                           (if@,3
+                            (elif@3
+                             (true@N,Q)
+                             (stmts@7
+                              (call@3 inc.0.Iwdk9lf.~3
+                               (addr~1,Q `lf.2)3@4))))))
+                         (else
+                          (stmts
+                           (stmts
+                            (stmts
+                             (stmts@2,8
+                              (asgn@7 `lf.3@B,O
+                               (suf@,~R 65533 "i64"))
+                              (if@,1
+                               (elif@3
+                                (true@N,N)
+                                (stmts@7
+                                 (call@3 inc.1.Irn1g7r1.~3
+                                  (addr~1,N `lf.2)))))))))))))
+                      (else
+                       (stmts
+                        (stmts
+                         (stmts
+                          (if
+                           (elif@5,M
+                            (eq@G
+                             (shr~6
+                              (i 64)
+                              (cast~7
+                               (i 64)
+                               (conv
+                                (i@M,~q 64)
+                                (pat@1 `lf.0@4,M `lf.2@7,M)))
+                              (cast@4
+                               (u 64)3))30@3)
+                            (stmts~3,1
+                             (if
+                              (elif@3
+                               (le@2 `lf.2@9,L
+                                (sub@5
+                                 (i 64)`lf.1@7,L 4@2))
+                               (stmts~1,4
+                                (asgn@7 `lf.3@B,H
+                                 (bitor@X,2
+                                  (i 64)
+                                  (bitor@1,~1
+                                   (i 64)
+                                   (bitor~1,~1
+                                    (i 64)
+                                    (shl~7
+                                     (i 64)
+                                     (bitand~D
+                                      (i 64)
+                                      (conv~7
+                                       (i@D,~v 64)
+                                       (pat@1 `lf.0~5,H `lf.2~2,H))
+                                      (sub@L,~W
+                                       (i 64)
+                                       (shl~6
+                                        (i 64)1~2 3~6,W)1@1))18@4)
+                                    (shl~6,1
+                                     (i 64)
+                                     (bitand~D
+                                      (i 64)
+                                      (conv~9
+                                       (i@E,~w 64)
+                                       (pat@1 `lf.0~4,G
+                                        (add@3
+                                         (i 64)`lf.2~4,G 1@1)))
+                                      (sub@K,~X
+                                       (i 64)
+                                       (shl~6
+                                        (i 64)1~2 6~5,X)1@1))12@4))
+                                   (shl~7,1
+                                    (i 64)
+                                    (bitand~D
+                                     (i 64)
+                                     (conv~9
+                                      (i@E,~x 64)
+                                      (pat@1 `lf.0~4,F
+                                       (add@3
+                                        (i 64)`lf.2~4,F 2@1)))
+                                     (sub@K,~Y
+                                      (i 64)
+                                      (shl~6
+                                       (i 64)1~2 6~5,Y)1@1))6@4))
+                                  (bitand~J,1
+                                   (i 64)
+                                   (conv~9
+                                    (i@E,~y 64)
+                                    (pat@1 `lf.0~4,E
+                                     (add@3
+                                      (i 64)`lf.2~4,E 3@1)))
+                                   (sub@K,~Z
+                                    (i 64)
+                                    (shl~6
+                                     (i 64)1~2 6~5,Z)1@1))))
+                                (if@,4
+                                 (elif@3
+                                  (true@N,D)
+                                  (stmts@7
+                                   (call@3 inc.0.Iwdk9lf.~3
+                                    (addr~1,D `lf.2)4@4))))))
+                              (else
+                               (stmts
+                                (stmts
+                                 (stmts
+                                  (stmts@2,A
+                                   (asgn@7 `lf.3@B,B
+                                    (suf@,~e 65533 "i64"))
+                                   (if@,1
+                                    (elif@3
+                                     (true@N,A)
+                                     (stmts@7
+                                      (call@3 inc.1.Irn1g7r1.~3
+                                       (addr~1,A `lf.2)))))))))))))
+                           (else
+                            (stmts
+                             (stmts
+                              (stmts
+                               (stmts@2,a
+                                (asgn@7 `lf.3@D,8 65533@2)
+                                (if@,1
+                                 (elif@3
+                                  (true@P,7)
+                                  (stmts@7
+                                   (call@3 inc.1.Irn1g7r1.~3
+                                    (addr@1,7 `lf.2)))))))))))))))))))))))))))
+          (scope@,1
+           (stmts
+            (if@,D
+             (elif@3
+              (le@3 `lf.3~3
+               (suf@6,~1G 65535 "i64"))
+              (stmts~1,1
+               (var@S :`x.1 .
+                (bool).)
+               (if@S
+                (elif
+                 (le@4,1q,../nimony/lib/std/system/comparisons.nim
+                  (suf@P,18,../nimony/lib/std/widestrs.nim 55296 "i64")`lf.3@B,2G,../nimony/lib/std/widestrs.nim)
+                 (stmts
+                  (asgn@7 `x.1
+                   (le `lf.3~3
+                    (suf~L,~15 57343 "i64")))))
+                (else
+                 (stmts
+                  (asgn `x.1
+                   (false)))))
+               (if
+                (elif@3 `x.1@P
+                 (stmts~1,1
+                  (stmts@t,~1c
+                   (stmts@2,Y,../nimony/lib/std/system.nim
+                    (asgn@7
+                     (pat~6
+                      (dot@14,f,../nimony/lib/std/widestrs.nim result.7~u,1c data.0 0)d.0@H,2H,../nimony/lib/std/widestrs.nim)UNI_REPLACEMENT_CHAR.0.@M,2H,../nimony/lib/std/widestrs.nim)))))
+                (else
+                 (stmts
+                  (stmts
+                   (stmts
+                    (stmts@2,3
+                     (stmts@t,~1e
+                      (stmts@2,Y,../nimony/lib/std/system.nim
+                       (asgn@7
+                        (pat~6
+                         (dot@14,f,../nimony/lib/std/widestrs.nim result.7~u,1e data.0 0)d.0@H,2J,../nimony/lib/std/widestrs.nim)
+                        (cast@M,2J,../nimony/lib/std/widestrs.nim
+                         (i@2,~2D 16)
+                         (conv@M
+                          (u~6 16)`lf.3@1)))))))))))))
+             (else
+              (stmts
+               (stmts
+                (stmts
+                 (if
+                  (elif@5,5
+                   (lt@4,1u,../nimony/lib/std/system/comparisons.nim
+                    (suf@K,10,../nimony/lib/std/widestrs.nim 1114111 "i64")`lf.3@B,2K,../nimony/lib/std/widestrs.nim)
+                   (stmts~3,1
+                    (stmts@v,~1g
+                     (stmts@2,Y,../nimony/lib/std/system.nim
+                      (asgn@7
+                       (pat~6
+                        (dot@14,f,../nimony/lib/std/widestrs.nim result.7~w,1g data.0 0)d.0@F,2L,../nimony/lib/std/widestrs.nim)UNI_REPLACEMENT_CHAR.0.@K,2L,../nimony/lib/std/widestrs.nim)))))
+                  (else
+                   (stmts
+                    (stmts
+                     (stmts
+                      (stmts@2,8
+                       (var@4 :`ii.2 .
+                        (i@1,~2A 64)
+                        (sub@8
+                         (i 64)`lf.3~3
+                         (suf~5,~1I 65536 "i64")))
+                       (stmts@v,~1i
+                        (stmts@2,Y,../nimony/lib/std/system.nim
+                         (asgn@7
+                          (pat~6
+                           (dot@14,f,../nimony/lib/std/widestrs.nim result.7~w,1j data.0 0)d.0@F,2O,../nimony/lib/std/widestrs.nim)
+                          (cast@K,2O,../nimony/lib/std/widestrs.nim
+                           (i@4,~2I 16)
+                           (conv@M
+                            (u~4,~5 16)
+                            (add@K
+                             (i 64)
+                             (shr~F
+                              (i 64)
+                              (cast~3
+                               (i 64)`ii.2)
+                              (cast@4
+                               (u 64)
+                               (suf~Z,~1K 10 "i64")))
+                             (suf~b,~1G 55296 "i64")))))))
+                       (call@,2 inc.1.Irn1g7r1.
+                        (addr@4 d.0))
+                       (stmts@v,~1i
+                        (stmts@2,Y,../nimony/lib/std/system.nim
+                         (asgn@7
+                          (pat~6
+                           (dot@14,f,../nimony/lib/std/widestrs.nim result.7~w,1l data.0 0)d.0@F,2Q,../nimony/lib/std/widestrs.nim)
+                          (cast@K,2Q,../nimony/lib/std/widestrs.nim
+                           (i@4,~2K 16)
+                           (conv@M
+                            (u~4,~7 16)
+                            (add@J
+                             (i 64)
+                             (bitand~E
+                              (i 64)`ii.2~3
+                              (suf~W,~1K 1023 "i64"))
+                             (suf~b,~1G 56320 "i64"))))))))))))))))))
+            (call@,P inc.1.Irn1g7r1.
+             (addr@4 d.0))))))))
+      (lab@,3 :whileStmtLabel.1))))
+   (lab@4,4 :forStmtLabel.0)
+   (stmts@z,~1U
+    (stmts@2,Y,../nimony/lib/std/system.nim
+     (asgn@7
+      (pat~6
+       (dot@14,f,../nimony/lib/std/widestrs.nim result.7~10,1n data.0 0)d.0@B,2S,../nimony/lib/std/widestrs.nim)
+      (conv@P,2S,../nimony/lib/std/widestrs.nim
+       (i~1,~2M 16)0@1))))
+   (ret~2,~1 result.7)))
+ (proc@2,2T :newWideCString.2.@5
+  (params@K
+   (param@1 :s.2 .
+    (ptr@3
+     (c 8))))WideCStringObj.0.@E
+  (pragmas
+   (smry writeGlobal readGlobal callsUnknown
+    (param 0 0 reads writes escapes)result 0))
+  (stmts@2,1
+   (var :result.8 . WideCStringObj.0.@H,~2F .)
+   (call =wasMoved.0.
+    (addr result.8))
+   (if
+    (elif@3
+     (eq@c,3v,../nimony/lib/std/system.nim
+      (conv~2
+       (ptr@L,B,../nimony/lib/std/system/comparisons.nim
+        (void))
+       (conv@7,2V,../nimony/lib/std/widestrs.nim
+        (ptr@c,3v,../nimony/lib/std/system.nim
+         (void))s.2))
+      (nil))
+     (stmts@9
+      (stmts
+       (asgn result.8
+        (oconstr@V,~1o WideCStringObj.0.~Q,~R
+         (kv@6 bytes.0~5 0@2)
+         (kv@F data.0~4
+          (nil))))
+       (ret result.8)))))
+   (call@,2 =destroy.0. result.8)
+   (var@S,2 :`x.2 .
+    (i@E,2O,../nimony/lib/std/system/stringimpl.nim 64)
+    (call len.5.sysvq0asl@1 s.2~1))
+   (var@N,2 :`x.3 . WideCStringObj.0.@2,~P
+    (call newWideCString.1.~E s.2@1 `x.2@5))
+   (asgn@7,2 result.8~7 `x.3@G)
+   (ret~2,~1 result.8)))
+ (proc@2,2Y :newWideCString.3.@5
+  (params@K
+   (param@1 :s.3 .
+    (ptr@3 string.0.sysvq0asl@4)))WideCStringObj.0.@H
+  (pragmas
+   (smry writeGlobal readGlobal callsUnknown
+    (param 0 0 reads writes escapes)result 0))
+  (stmts@2,2
+   (var@7 :result.9 . WideCStringObj.0.@A,~2L .)
+   (call@7 =wasMoved.0.
+    (addr result.9))
+   (call =destroy.0. result.9)
+   (var@P :`x.4 .
+    (ptr@H,C9,../nimony/lib/std/system/stringimpl.nim
+     (c 8))
+    (call toCString.0.sysvq0asl@1 s.3~1))
+   (var@c :`x.5 .
+    (i@D,1A,../nimony/lib/std/system/stringimpl.nim 64)
+    (call len.4.sysvq0asl@1
+     (deref~1 s.3)))
+   (var@N :`x.6 . WideCStringObj.0.@2,~T
+    (call newWideCString.1.~E `x.4@2 `x.5@F))
+   (asgn@7 result.9~7 `x.6@G)
+   (ret~2,~2 result.9)))
+ (proc@2,2c :$.0.@5
+  (params@9
+   (param@1 :w.1 .
+    (ptr@7,~2T
+     (i@5,~4 16)))
+   (param@H :estimate.0 .
+    (i@A 64))
+   (param@W :replacement.0 .
+    (i~U,~2Q 64)))string.0.sysvq0asl@y
+  (pragmas
+   (smry writeGlobal readGlobal callsUnknown
+    (param 0 0 reads)
+    (param 1 1 reads)
+    (param 2 2 reads writes escapes)))
+  (stmts@2,1
+   (var@7 :result.10 . string.0.sysvq0asl@p,~1 .)
+   (call@7 =wasMoved.2.sysvq0asl
+    (addr result.10))
+   (call =destroy.2.sysvq0asl result.10)
+   (var@N :`x.7 . string.0.sysvq0asl@C,Ah,../nimony/lib/std/system/stringimpl.nim
+    (call newStringOfCap.0.sysvq0asl~E
+     (add@A
+      (i 64)estimate.0~9
+      (shr@B
+       (i 64)
+       (cast~9
+        (i 64)estimate.0)
+       (cast@4
+        (u 64)2)))))
+   (asgn@7 result.10~7 `x.7@G)
+   (var@4,2 :i.2 .
+    (i 64)0@4)
+   (scope@,3
+    (stmts
+     (while
+      (not@2,1m,../nimony/lib/std/system/comparisons.nim
+       (eq@7
+        (conv@E,2h,../nimony/lib/std/widestrs.nim
+         (i~4,~1m 16)
+         (pat~4 w.1 i.2@2))
+        (suf@O,2h,../nimony/lib/std/widestrs.nim 0 "i16")))
+      (stmts@2,1
+       (var@4 :ch.2 .
+        (i@3,~2V 64)
+        (call@8 ord.0.~3
+         (pat@1 w.1 i.2@2)))
+       (call@,1 inc.1.Irn1g7r1.
+        (addr@4 i.2))
+       (var@S,2 :`x.8 .
+        (bool).)
+       (if@S,2
+        (elif
+         (le@4,1q,../nimony/lib/std/system/comparisons.nim
+          (suf@P,18,../nimony/lib/std/widestrs.nim 55296 "i64")ch.2@9,2k,../nimony/lib/std/widestrs.nim)
+         (stmts
+          (asgn@7 `x.8
+           (le ch.2~3
+            (suf~I,~1b 56319 "i64")))))
+        (else
+         (stmts
+          (asgn `x.8
+           (false)))))
+       (if@,2
+        (elif@3 `x.8@P
+         (stmts~1,2
+          (var@4 :ch2.0 .
+           (i@1,~2Z 64)
+           (call@9 ord.0.~3
+            (pat@1 w.1 i.2@2)))
+          (var@S,3 :`x.9 .
+           (bool).)
+          (if@S,3
+           (elif
+            (le@4,1q,../nimony/lib/std/system/comparisons.nim
+             (suf@O,1A,../nimony/lib/std/widestrs.nim 56320 "i64")ch2.0@B,2p,../nimony/lib/std/widestrs.nim)
+            (stmts
+             (asgn@8 `x.9
+              (le ch2.0~4
+               (suf~M,~1e 57343 "i64")))))
+           (else
+            (stmts
+             (asgn `x.9
+              (false)))))
+          (if@,3
+           (elif@3 `x.9@P
+            (stmts~1,1
+             (asgn@3 ch.2~3
+              (add@x
+               (i 64)
+               (add~M
+                (i 64)
+                (shl~F
+                 (i 64)
+                 (bitand~E
+                  (i 64)ch.2~3
+                  (suf~6,~1k 1023 "i64"))
+                 (suf~J,~1m 10 "i64"))
+                (bitand@7
+                 (i 64)ch2.0~4
+                 (suf~g,~1k 1023 "i64")))
+               (suf~v,~1l 65536 "i64")))
+             (call@,1 inc.1.Irn1g7r1.
+              (addr@4 i.2))))
+           (else
+            (stmts
+             (stmts
+              (stmts
+               (stmts@2,5
+                (asgn@3 ch.2~3 replacement.0@2)))))))))
+        (else
+         (stmts
+          (stmts
+           (stmts
+            (var@T,B :`x.10 .
+             (bool).)
+            (if@T,B
+             (elif
+              (le@4,1q,../nimony/lib/std/system/comparisons.nim
+               (suf@O,1A,../nimony/lib/std/widestrs.nim 56320 "i64")ch.2@B,2v,../nimony/lib/std/widestrs.nim)
+              (stmts
+               (asgn@7 `x.10
+                (le ch.2~3
+                 (suf~K,~1k 57343 "i64")))))
+             (else
+              (stmts
+               (asgn `x.10
+                (false)))))
+            (if
+             (elif@5,B `x.10@O
+              (stmts~3,2
+               (asgn@3 ch.2~3 replacement.0@2)))))))))
+       (if@,H
+        (elif@3
+         (lt@3 ch.2~3 128@2)
+         (stmts~1,1
+          (var@E :`x.11 .
+           (c@K,3x,../nimony/lib/std/system.nim 8)
+           (call chr.0.sysvq0asl~3 ch.2@1))
+          (call@6 add.1.sysvq0asl@1
+           (addr~6 result.10)`x.11@8)))
+        (else
+         (stmts
+          (stmts
+           (stmts
+            (if
+             (elif@5,2
+              (lt@3 ch.2~3 2048@2)
+              (stmts~3,1
+               (var@E :`x.12 .
+                (c@K,3x,../nimony/lib/std/system.nim 8)
+                (call chr.0.sysvq0asl~3
+                 (bitor@C
+                  (i 64)
+                  (shr~7
+                   (i 64)
+                   (cast~3
+                    (i 64)ch.2)
+                   (cast@4
+                    (u 64)6))192@3)))
+               (call@6 add.1.sysvq0asl@1
+                (addr~6 result.10)`x.12@8)
+               (var@E,1 :`x.13 .
+                (c@K,3x,../nimony/lib/std/system.nim 8)
+                (call chr.0.sysvq0asl~3
+                 (bitor@F
+                  (i 64)
+                  (bitand~A
+                   (i 64)ch.2~3 63@4)128@3)))
+               (call@6,1 add.1.sysvq0asl@1
+                (addr~6 result.10)`x.13@8)))
+             (else
+              (stmts
+               (stmts
+                (stmts
+                 (if
+                  (elif@5,5
+                   (lt@3 ch.2~3 65536@2)
+                   (stmts~3,1
+                    (var@E :`x.14 .
+                     (c@K,3x,../nimony/lib/std/system.nim 8)
+                     (call chr.0.sysvq0asl~3
+                      (bitor@D
+                       (i 64)
+                       (shr~8
+                        (i 64)
+                        (cast~3
+                         (i 64)ch.2)
+                        (cast@4
+                         (u 64)12))224@3)))
+                    (call@6 add.1.sysvq0asl@1
+                     (addr~6 result.10)`x.14@8)
+                    (var@E,1 :`x.15 .
+                     (c@K,3x,../nimony/lib/std/system.nim 8)
+                     (call chr.0.sysvq0asl~3
+                      (bitor@N
+                       (i 64)
+                       (bitand~A
+                        (i 64)
+                        (shr~7
+                         (i 64)
+                         (cast~3
+                          (i 64)ch.2)
+                         (cast@4
+                          (u 64)6))63@4)128@3)))
+                    (call@6,1 add.1.sysvq0asl@1
+                     (addr~6 result.10)`x.15@8)
+                    (var@E,2 :`x.16 .
+                     (c@K,3x,../nimony/lib/std/system.nim 8)
+                     (call chr.0.sysvq0asl~3
+                      (bitor@F
+                       (i 64)
+                       (bitand~A
+                        (i 64)ch.2~3 63@4)128@3)))
+                    (call@6,2 add.1.sysvq0asl@1
+                     (addr~6 result.10)`x.16@8)))
+                  (else
+                   (stmts
+                    (stmts
+                     (stmts
+                      (if
+                       (elif@5,9
+                        (le@3 ch.2~3 1114111@3)
+                        (stmts~3,1
+                         (var@E :`x.17 .
+                          (c@K,3x,../nimony/lib/std/system.nim 8)
+                          (call chr.0.sysvq0asl~3
+                           (bitor@D
+                            (i 64)
+                            (shr~8
+                             (i 64)
+                             (cast~3
+                              (i 64)ch.2)
+                             (cast@4
+                              (u 64)18))240@3)))
+                         (call@6 add.1.sysvq0asl@1
+                          (addr~6 result.10)`x.17@8)
+                         (var@E,1 :`x.18 .
+                          (c@K,3x,../nimony/lib/std/system.nim 8)
+                          (call chr.0.sysvq0asl~3
+                           (bitor@O
+                            (i 64)
+                            (bitand~A
+                             (i 64)
+                             (shr~8
+                              (i 64)
+                              (cast~3
+                               (i 64)ch.2)
+                              (cast@4
+                               (u 64)12))63@4)128@3)))
+                         (call@6,1 add.1.sysvq0asl@1
+                          (addr~6 result.10)`x.18@8)
+                         (var@E,2 :`x.19 .
+                          (c@K,3x,../nimony/lib/std/system.nim 8)
+                          (call chr.0.sysvq0asl~3
+                           (bitor@N
+                            (i 64)
+                            (bitand~A
+                             (i 64)
+                             (shr~7
+                              (i 64)
+                              (cast~3
+                               (i 64)ch.2)
+                              (cast@4
+                               (u 64)6))63@4)128@3)))
+                         (call@6,2 add.1.sysvq0asl@1
+                          (addr~6 result.10)`x.19@8)
+                         (var@E,3 :`x.20 .
+                          (c@K,3x,../nimony/lib/std/system.nim 8)
+                          (call chr.0.sysvq0asl~3
+                           (bitor@F
+                            (i 64)
+                            (bitand~A
+                             (i 64)ch.2~3 63@4)128@3)))
+                         (call@6,3 add.1.sysvq0asl@1
+                          (addr~6 result.10)`x.20@8)))
+                       (else
+                        (stmts
+                         (stmts
+                          (stmts
+                           (stmts@2,G
+                            (var@E :`x.21 .
+                             (c@K,3x,../nimony/lib/std/system.nim 8)
+                             (call chr.0.sysvq0asl~3
+                              (bitor@F
+                               (i 64)
+                               (shr~7
+                                (i 64)
+                                (cast~7
+                                 (i 64)65533)
+                                (cast@4
+                                 (u 64)12))224@3)))
+                            (call@6 add.1.sysvq0asl@1
+                             (addr~6 result.10)`x.21@8)
+                            (var@E,1 :`x.22 .
+                             (c@K,3x,../nimony/lib/std/system.nim 8)
+                             (call chr.0.sysvq0asl~3
+                              (bitor@Q
+                               (i 64)
+                               (bitand~C
+                                (i 64)
+                                (shr~6
+                                 (i 64)
+                                 (cast~7
+                                  (i 64)65533)
+                                 (cast@4
+                                  (u 64)6))
+                                (sub@D,~22
+                                 (i 64)
+                                 (shl~6
+                                  (i 64)1~2 6@2,22)1@1))128@3)))
+                            (call@6,1 add.1.sysvq0asl@1
+                             (addr~6 result.10)`x.22@8)
+                            (var@E,2 :`x.23 .
+                             (c@K,3x,../nimony/lib/std/system.nim 8)
+                             (call chr.0.sysvq0asl~3
+                              (bitor@K
+                               (i 64)
+                               (bitand~C
+                                (i 64)65533~7
+                                (sub@J,~23
+                                 (i 64)
+                                 (shl~6
+                                  (i 64)1~2 6~4,23)1@1))128@3)))
+                            (call@6,2 add.1.sysvq0asl@1
+                             (addr~6 result.10)`x.23@8))))))))))))))))))))))))))
+   (lab@,3 :whileStmtLabel.0)
+   (ret~2,~1 result.10)))
+ (proc@2,3I :$.1.@5
+  (params@9
+   (param@1 :s.4 .
+    (ptr@7,~39
+     (i@5,~4 16))))string.0.sysvq0asl@I
+  (pragmas
+   (smry writeGlobal readGlobal callsUnknown
+    (param 0 0 reads)result 0))
+  (stmts@2,1
+   (var@7 :result.11 . string.0.sysvq0asl@p,~h .)
+   (call@7 =wasMoved.2.sysvq0asl
+    (addr result.11))
+   (call =destroy.2.sysvq0asl result.11)
+   (var@B :`x.24 . string.0.sysvq0asl@l,~h
+    (call $.0. s.4~2 80@2 65533@l,~h))
+   (asgn@7 result.11~7 `x.24@4)
+   (ret~2,~1 result.11)))
+ (proc@2,3L :$.2.@5
+  (params@9
+   (param@1 :s.5 . WideCStringObj.0.@3)
+   (param@K :estimate.1 .
+    (i@A 64))
+   (param@Z :replacement.1 .
+    (i~X,~39 64)))string.0.sysvq0asl@11
+  (pragmas
+   (smry writeGlobal readGlobal callsUnknown
+    (param 0 0 reads)
+    (param 1 0 reads)
+    (param 2 0 reads writes escapes)result 0))
+  (stmts@2,1
+   (var@3 :result.12 . string.0.sysvq0asl@t,~k .)
+   (call@3 =wasMoved.2.sysvq0asl
+    (addr result.12))
+   (call@3 =destroy.2.sysvq0asl result.12)
+   (var@3 :`x.25 . string.0.sysvq0asl@t,~k
+    (call $.0.@2
+     (dot@2 s.5~1 data.0 0)estimate.1@9 replacement.1@J))
+   (asgn@3 result.12 `x.25)
+   (ret~2,~1 result.12)))
+ (proc@2,3O :$.3.@5
+  (params@9
+   (param@1 :s.6 . WideCStringObj.0.@3))string.0.sysvq0asl@L
+  (pragmas
+   (smry writeGlobal readGlobal callsUnknown
+    (param 0 0 reads)result 0))
+  (stmts@2,1
+   (var :result.13 . string.0.sysvq0asl@w,~n .)
+   (call =wasMoved.2.sysvq0asl
+    (addr result.13))
+   (call =destroy.2.sysvq0asl result.13)
+   (var :`x.26 . string.0.sysvq0asl@G,~7
+    (call $.1.
+     (dot@3 s.6~1 data.0 0)))
+   (asgn result.13 `x.26)
+   (ret~2,~1 result.13)))
+ (proc@2,3R :len.1.@5
+  (params@9
+   (param@1 :w.2 . WideCStringObj.0.@3))
+  (i@L 64)
+  (pragmas@Y
+   (inline 0 10)
+   (smry~Y writeGlobal readGlobal
+    (param 0 0 reads)result 0))
+  (stmts@2,1
+   (var@3 :result.14 .
+    (i@6,~3G 64).)
+   (var@3 :`x.27 .
+    (i@D,~2c 64)
+    (call len.0.~3
+     (dot@2 w.2~1 data.0 0)))
+   (asgn@3 result.14 `x.27)
+   (ret~2,~1 result.14)))
+ (proc@b,u :inc.1.Irn1g7r1.
+  (params@L,E,../nimony/lib/std/system/arithmetics.nim
+   (param@1 :x.4 .
+    (ptr@3
+     (i@D,D,../nimony/lib/std/widestrs.nim 64)))).@,E,../nimony/lib/std/system/arithmetics.nim
+  (pragmas@W,E,../nimony/lib/std/system/arithmetics.nim
+   (inline 0 20)
+   (smry@b,v,../nimony/lib/std/widestrs.nim
+    (param 0 0 reads writes)))
+  (stmts@2,F,../nimony/lib/std/system/arithmetics.nim
+   (asgn@2,1
+    (deref~2 x.4)
+    (add@6
+     (i@D,D,../nimony/lib/std/widestrs.nim 64)
+     (deref@1 x.4)
+     (conv@U,~F
+      (i@D,D,../nimony/lib/std/widestrs.nim 64)1@1)))))
+ (proc@L,1P :inc.0.Iwdk9lf.
+  (params@O,6,../nimony/lib/std/system/arithmetics.nim
+   (param@1 :x.5 .
+    (ptr@3
+     (i 64)))
+   (param@B :y.1 .
+    (i 64))).@,6,../nimony/lib/std/system/arithmetics.nim
+  (pragmas@f,6,../nimony/lib/std/system/arithmetics.nim
+   (inline 0 20 20)
+   (smry@L,1Q,../nimony/lib/std/widestrs.nim
+    (param 0 0 reads writes)
+    (param 1 1 reads)))
+  (stmts@2,7,../nimony/lib/std/system/arithmetics.nim
+   (asgn@2,1
+    (deref~2 x.5)
+    (add@6
+     (i 64)
+     (deref@1 x.5)y.1@4))))
+ (gvar :`iniGuard.0. .
+  (bool).)
+ (proc :`ini.0.
+  (params).
+  (pragmas
+   (smry callsUnknown))
+  (stmts
+   (if
+    (elif `iniGuard.0.
+     (stmts
+      (ret .))))
+   (asgn `iniGuard.0.
+    (true))
+   (call `ini.0.sysvq0asl))))(.index@,1,../nimony/lib/std/widestrs.nim
+ (h Utf16Char.0. 78)
+ (h WideCString.0. 41)
+ (h WideCStringObj.0. 57)
+ (x =destroy.0. 142)
+ (x =wasMoved.0. 506)
+ (x =copy.0. 220)
+ (x =sink.0. 196)
+ (x createWide.0. 377)
+ (x toWideCString.0. 540)
+ (x rawData.0. 328)
+ (x ord.0. 322)
+ (x len.0. 290)
+ (h UNI_REPLACEMENT_CHAR.0. 639)
+ (h UNI_MAX_BMP.0. 73)
+ (h UNI_MAX_UTF16.0. 67)
+ (h halfShift.0. 71)
+ (h halfBase.0. 63)
+ (h halfMask.0. 65)
+ (h UNI_SUR_HIGH_START.0. 64)
+ (h UNI_SUR_HIGH_END.0. 75)
+ (h UNI_SUR_LOW_START.0. 73)
+ (h UNI_SUR_LOW_END.0. 74)
+ (h UNI_REPL.0. 72)
+ (x newWideCString.0. 65)
+ (x newWideCString.1. 757)
+ (x newWideCString.2. 17278)
+ (x newWideCString.3. 1079)
+ (x $.0. 750)
+ (x $.1. 11506)
+ (x $.2. 493)
+ (x $.3. 661)
+ (x len.1. 474)
+ (x inc.1.Irn1g7r1. 376)
+ (x inc.0.Iwdk9lf. 590)
+ (h `iniGuard.0. 514)
+ (x `ini.0. 34))

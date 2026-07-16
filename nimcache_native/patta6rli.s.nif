@@ -1,0 +1,590 @@
+(.nif27)
+(.indexat 18462            )
+(stmts@,A,../nimony/lib/std/pathnorm.nim
+ (import
+  (kv sysvq0asl "../nimony/lib/std/system.nim")
+  (kv ossk30t39 "../nimony/lib/std/private/osseps.nim"))
+ (type@C,A :PathIter.0.~A x .
+  (pragmas)
+  (object@2 .
+   (fld~A,1 :i.0 . .
+    (i@9 64).)
+   (fld~7,1 :prev.0 . .
+    (i@6 64).)
+   (fld~A,2 :notFirst.0 . .
+    (bool@A).)))
+ (func@,E :hasNext.0.@5 x . .
+  (params@D
+   (param@1 :it.0 . . PathIter.0.@4 .)
+   (param@F :x.0 . . string.0.sysvq0asl@3 .))
+  (bool@R). .
+  (stmts@2,1
+   (result :result.1 . .
+    (bool@C,~3).)
+   (asgn@5,1 result.1
+    (lt
+     (i 64)
+     (dot~3 it.0~2 i.0 0 "x")
+     (call@3 len.4.sysvq0asl@1 x.0~1)))
+   (ret~2,~1 result.1)))
+ (func@,I :next.0.@5 x . .
+  (params@A
+   (param@1 :it.1 . .
+    (mut@4 PathIter.0.@4).)
+   (param@J :x.1 . . string.0.sysvq0asl@3 .))
+  (tuple@V
+   (i@1 64)
+   (i@6 64)). .
+  (stmts@2,1
+   (result :result.2 . .
+    (tuple@T,~1
+     (i@1 64)
+     (i@6 64)).)
+   (asgn@7,1 result.2~7
+    (tupconstr@2
+     (tuple@K,~2
+      (i@1 64)
+      (i@6 64))0@1 0@4))
+   (asgn@8,2
+    (dot~6
+     (hderef~2 it.1)prev.0 0 "x")
+    (dot@4
+     (hderef~2 it.1)i.0 0 "x"))
+   (if@,3
+    (elif@3
+     (and@G
+      (not~G
+       (dot@6
+        (hderef~2 it.1)notFirst.0 0 "x"))
+      (expr@2,2k,../nimony/lib/std/system.nim
+       (inset@8
+        (set
+         (c 8))
+        (setconstr@a,W,../nimony/lib/std/pathnorm.nim
+         (set
+          (c@8,T,../nimony/lib/std/private/osseps.nim 8))DirSep.0.ossk30t39@1 AltSep.0.ossk30t39@9)
+        (call@P,W,../nimony/lib/std/pathnorm.nim \5B\5D.9.sysvq0asl x.1
+         (dot@4
+          (hderef~2 it.1)i.0 0 "x")))))
+     (stmts~1,2
+      (cmd inc.1.Irn1g7r1.
+       (haddr@6
+        (dot
+         (hderef~2 it.1)i.0 0 "x")))))
+    (else@,3
+     (stmts@2,1
+      (while
+       (and@J
+        (lt~8
+         (i 64)
+         (dot~3
+          (hderef~2 it.1)i.0 0 "x")
+         (call@3 len.4.sysvq0asl@1 x.1~1))
+        (expr@2,2n,../nimony/lib/std/system.nim
+         (not
+          (inset@C
+           (set
+            (c 8))
+           (setconstr@f,a,../nimony/lib/std/pathnorm.nim
+            (set~5,~4
+             (c@8,T,../nimony/lib/std/private/osseps.nim 8))DirSep.0.ossk30t39@1 AltSep.0.ossk30t39@9)
+           (call@R,a,../nimony/lib/std/pathnorm.nim \5B\5D.9.sysvq0asl x.1
+            (dot@4
+             (hderef~2 it.1)i.0 0 "x"))))))
+       (stmts@t
+        (cmd inc.1.Irn1g7r1.
+         (haddr@6
+          (dot
+           (hderef~2 it.1)i.0 0 "x"))))))))
+   (if@,8
+    (elif@3
+     (expr@2,1t,../nimony/lib/std/system/comparisons.nim
+      (lt@2,1
+       (i 64)
+       (dot@E,b,../nimony/lib/std/pathnorm.nim
+        (hderef~2 it.1)prev.0 0 "x")
+       (dot@7,b,../nimony/lib/std/pathnorm.nim
+        (hderef~2 it.1)i.0 0 "x")))
+     (stmts~1,1
+      (asgn@7 result.2~7
+       (tupconstr@2
+        (tuple@I,~A
+         (i@1 64)
+         (i@6 64))
+        (dot@3
+         (hderef~2 it.1)prev.0 0 "x")
+        (sub@E
+         (i 64)
+         (dot~2
+          (hderef~2 it.1)i.0 0 "x")1@1)))))
+    (elif@5,2
+     (call@7 hasNext.0.~7
+      (hderef@1 it.1)x.1@5)
+     (stmts~3,1
+      (asgn@7 result.2~7
+       (call@6 next.0.~4 it.1@1 x.1@5)))))
+   (while@,D
+    (and@J
+     (lt~8
+      (i 64)
+      (dot~3
+       (hderef~2 it.1)i.0 0 "x")
+      (call@3 len.4.sysvq0asl@1 x.1~1))
+     (expr@2,2k,../nimony/lib/std/system.nim
+      (inset@8
+       (set
+        (c 8))
+       (setconstr@a,g,../nimony/lib/std/pathnorm.nim
+        (set@,~A
+         (c@8,T,../nimony/lib/std/private/osseps.nim 8))DirSep.0.ossk30t39@1 AltSep.0.ossk30t39@9)
+       (call@P,g,../nimony/lib/std/pathnorm.nim \5B\5D.9.sysvq0asl x.1
+        (dot@4
+         (hderef~2 it.1)i.0 0 "x")))))
+    (stmts@q
+     (cmd inc.1.Irn1g7r1.
+      (haddr@6
+       (dot
+        (hderef~2 it.1)i.0 0 "x")))))
+   (asgn@C,E
+    (dot~A
+     (hderef~2 it.1)notFirst.0 0 "x")
+    (true@2))
+   (ret~2,~1 result.2)))
+ (iterator@,Z :dirs.0.@9 . . .
+  (params@D
+   (param@1 :x.2 . . string.0.sysvq0asl@3 .))
+  (tuple@D
+   (i@1 64)
+   (i@6 64)). .
+  (stmts@2,1
+   (var@4 :it.2 . . PathIter.0.@C,~M
+    (oconstr@D PathIter.0.~1,~M
+     (kv i.0
+      (expr@l,E,../nimony/lib/std/system/defaults.nim
+       (suf 0 "i64")))
+     (kv prev.0
+      (expr@l,E,../nimony/lib/std/system/defaults.nim
+       (suf 0 "i64")))
+     (kv notFirst.0
+      (expr@j,4,../nimony/lib/std/system/defaults.nim
+       (false)))))
+   (while@,1
+    (call@D hasNext.0.~7 it.2@1 x.2@5)
+    (stmts@M
+     (yld
+      (call@A next.0.~4
+       (haddr@1 it.2)x.2@5))))))
+ (func@,d :isDot.0.@5 . . .
+  (params@A
+   (param@1 :x.3 . . string.0.sysvq0asl@3 .)
+   (param@C :bounds.0 . .
+    (tuple@8
+     (i@1 64)
+     (i@6 64)).))
+  (bool@X). .
+  (stmts@2,1
+   (result@N :result.3 . .
+    (bool~B,~S).)
+   (asgn@N result.3
+    (and
+     (eq~D
+      (i 64)
+      (tupat~A bounds.0 1@7)
+      (tupat@3 bounds.0 0@7))
+     (eq@H
+      (c 8)
+      (call~D \5B\5D.9.sysvq0asl x.3
+       (tupat@2 bounds.0 0@7))'.'@3)))
+   (ret~2,~1 result.3)))
+ (func@,g :isDotDot.0.@5 . . .
+  (params@D
+   (param@1 :x.4 . . string.0.sysvq0asl@3 .)
+   (param@C :bounds.1 . .
+    (tuple@8
+     (i@1 64)
+     (i@6 64)).))
+  (bool@X). .
+  (stmts@2,1
+   (result@p :result.4 . .
+    (bool~d,~V).)
+   (asgn@p result.4
+    (and
+     (and~O
+      (eq~H
+       (i 64)
+       (tupat~A bounds.1 1@7)
+       (add@D
+        (i 64)
+        (tupat~A bounds.1 0@7)1@2))
+      (eq@H
+       (c 8)
+       (call~D \5B\5D.9.sysvq0asl x.4
+        (tupat@2 bounds.1 0@7))'.'@3))
+     (eq@J
+      (c 8)
+      (call~F \5B\5D.9.sysvq0asl x.4
+       (add@B
+        (i 64)
+        (tupat~9 bounds.1 0@7)1@1))'.'@3)))
+   (ret~2,~1 result.4)))
+ (func@,j :isSlash.0.@5 . . .
+  (params@C
+   (param@1 :x.5 . . string.0.sysvq0asl@3 .)
+   (param@C :bounds.2 . .
+    (tuple@8
+     (i@1 64)
+     (i@6 64)).))
+  (bool@X). .
+  (stmts@2,1
+   (result@N :result.5 . .
+    (bool~B,~Y).)
+   (asgn@N result.5
+    (and
+     (eq~D
+      (i 64)
+      (tupat~A bounds.2 1@7)
+      (tupat@3 bounds.2 0@7))
+     (expr@2,2k,../nimony/lib/std/system.nim
+      (inset@8
+       (set
+        (c 8))
+       (setconstr@j,u,../nimony/lib/std/pathnorm.nim
+        (set~9,~O
+         (c@8,T,../nimony/lib/std/private/osseps.nim 8))DirSep.0.ossk30t39@1 AltSep.0.ossk30t39@9)
+       (call@T,u,../nimony/lib/std/pathnorm.nim \5B\5D.9.sysvq0asl x.5
+        (tupat@2 bounds.2 0@7))))))
+   (ret~2,~1 result.5)))
+ (func@,p :addNormalizePath.0.@5 x . .
+  (params@M
+   (param@1 :x.6 . . string.0.sysvq0asl@3 .)
+   (param@C :result.0 . .
+    (mut@8 string.0.sysvq0asl@4).)
+   (param@W :state.0 . .
+    (mut@7
+     (i@4 64)).)
+   (param~I,1 :dirSep.0 . .
+    (c@L,6V,../nimony/lib/std/system/stringimpl.nim 8)DirSep.0.ossk30t39@9)). . .
+  (stmts@2,2
+   (var@4,E :it.3 . . PathIter.0.@C,~r
+    (oconstr@M PathIter.0.~A,~r
+     (kv i.0
+      (expr@l,E,../nimony/lib/std/system/defaults.nim
+       (suf 0 "i64")))
+     (kv prev.0
+      (expr@l,E,../nimony/lib/std/system/defaults.nim
+       (suf 0 "i64")))
+     (kv notFirst.0
+      (expr@j,4,../nimony/lib/std/system/defaults.nim
+       (false)))))
+   (asgn@C,F
+    (dot~A it.3~2 notFirst.0 0 "x")
+    (expr@2,1t,../nimony/lib/std/system/comparisons.nim
+     (lt@2,1
+      (i 64)0@W,1G,../nimony/lib/std/pathnorm.nim
+      (ashr@N,1G,../nimony/lib/std/pathnorm.nim
+       (i 64)
+       (hderef~6 state.0)1@4))))
+   (if@,G
+    (elif@3
+     (dot@2 it.3~2 notFirst.0 0 "x")
+     (stmts~1,1
+      (while
+       (and@J
+        (lt~8
+         (i 64)
+         (dot~3 it.3~2 i.0 0 "x")
+         (call@3 len.4.sysvq0asl@1 x.6~1))
+        (expr@2,2k,../nimony/lib/std/system.nim
+         (inset@8
+          (set
+           (c 8))
+          (setconstr@c,1I,../nimony/lib/std/pathnorm.nim
+           (set~2,~m
+            (c@8,T,../nimony/lib/std/private/osseps.nim 8))DirSep.0.ossk30t39@1 AltSep.0.ossk30t39@9)
+          (call@R,1I,../nimony/lib/std/pathnorm.nim \5B\5D.9.sysvq0asl x.6
+           (dot@4 it.3~2 i.0 0 "x")))))
+       (stmts@q
+        (cmd inc.1.Irn1g7r1.
+         (haddr@6
+          (dot it.3~2 i.0 0 "x"))))))))
+   (while@,I
+    (call@D hasNext.0.~7 it.3@1 x.6@5)
+    (stmts@2,1
+     (let@4 :b.0 . .
+      (tuple@N,~s
+       (i@1 64)
+       (i@6 64))
+      (call@8 next.0.~4
+       (haddr@1 it.3)x.6@5))
+     (if@,1
+      (elif@3
+       (and@J
+        (eq~6
+         (i 64)
+         (ashr~6
+          (i 64)
+          (hderef~6 state.0)1@4)0@3)
+        (call@B isSlash.0.~7 x.6@1 b.0@4))
+       (stmts~1,1
+        (if
+         (elif@3
+          (or@G
+           (eq~5
+            (i 64)
+            (call~5 len.4.sysvq0asl@1
+             (hderef~6 result.0))0@3)
+           (expr@2,2n,../nimony/lib/std/system.nim
+            (not
+             (inset@C
+              (set
+               (c 8))
+              (setconstr@v,1M,../nimony/lib/std/pathnorm.nim
+               (set~L,~q
+                (c@8,T,../nimony/lib/std/private/osseps.nim 8))DirSep.0.ossk30t39@1 AltSep.0.ossk30t39@9)
+              (call@S,1M,../nimony/lib/std/pathnorm.nim \5B\5D.9.sysvq0asl
+               (hderef result.0)
+               (sub@I
+                (i 64)
+                (call~5 len.4.sysvq0asl@1
+                 (hderef~6 result.0))1@2))))))
+          (stmts~1,1
+           (cmd@6 add.1.sysvq0asl@1 result.0~6 dirSep.0@5))))
+        (asgn@6,2
+         (hderef~6 state.0)
+         (bitor@8
+          (i 64)
+          (hderef~6 state.0)1@3))))
+      (elif@5,4
+       (call@8 isDotDot.0.~8 x.6@1 b.0@4)
+       (stmts~3,1
+        (if
+         (elif@3
+          (expr@2,1p,../nimony/lib/std/system/comparisons.nim
+           (le@2,1
+            (i 64)1@Q,1Q,../nimony/lib/std/pathnorm.nim
+            (ashr@G,1Q,../nimony/lib/std/pathnorm.nim
+             (i 64)
+             (hderef~6 state.0)1@4)))
+          (stmts~1,1
+           (var@4 :d.0 . .
+            (i@1,~16 64)
+            (call@A len.4.sysvq0asl@1
+             (hderef~6 result.0)))
+           (while@,7
+            (and@S
+             (expr@2,1t,../nimony/lib/std/system/comparisons.nim
+              (lt@2,1
+               (i 64)
+               (bitand@T,1Y,../nimony/lib/std/pathnorm.nim
+                (i 64)
+                (hderef~6 state.0)1@4)
+               (sub@G,1Y,../nimony/lib/std/pathnorm.nim
+                (i 64)d.0~1 1@1)))
+             (expr@2,2n,../nimony/lib/std/system.nim
+              (not
+               (inset@C
+                (set
+                 (c 8))
+                (setconstr@w,1Y,../nimony/lib/std/pathnorm.nim
+                 (set~M,~12
+                  (c@8,T,../nimony/lib/std/private/osseps.nim 8))DirSep.0.ossk30t39@1 AltSep.0.ossk30t39@9)
+                (call@e,1Y,../nimony/lib/std/pathnorm.nim \5B\5D.9.sysvq0asl
+                 (hderef result.0)
+                 (sub@8
+                  (i 64)d.0~1 1@1))))))
+            (stmts@2,1
+             (cmd dec.1.I2mwrey1.
+              (haddr@4 d.0))))
+           (if@,9
+            (elif@3
+             (expr@2,1t,../nimony/lib/std/system/comparisons.nim
+              (lt@2,1
+               (i 64)0@F,1a,../nimony/lib/std/pathnorm.nim d.0@B,1a,../nimony/lib/std/pathnorm.nim))
+             (stmts~1,1
+              (call@6 setLen.1.sysvq0asl~6 result.0@1
+               (sub@A
+                (i 64)d.0~1 1@1))
+              (cmd@,1 dec.0.Iw9ew8i1. state.0@4 2@B))))))
+         (else@,D
+          (stmts@2,1
+           (if
+            (elif@3
+             (and@F
+              (expr@2,1t,../nimony/lib/std/system/comparisons.nim
+               (lt@2,1
+                (i 64)0@O,1e,../nimony/lib/std/pathnorm.nim
+                (call@H,1e,../nimony/lib/std/pathnorm.nim len.4.sysvq0asl@1
+                 (hderef~6 result.0))))
+              (expr@2,2n,../nimony/lib/std/system.nim
+               (not
+                (inset@C
+                 (set
+                  (c 8))
+                 (setconstr@x,1e,../nimony/lib/std/pathnorm.nim
+                  (set~N,~18
+                   (c@8,T,../nimony/lib/std/private/osseps.nim 8))DirSep.0.ossk30t39@1 AltSep.0.ossk30t39@9)
+                 (call@U,1e,../nimony/lib/std/pathnorm.nim \5B\5D.9.sysvq0asl
+                  (hderef result.0)
+                  (sub@I
+                   (i 64)
+                   (call~5 len.4.sysvq0asl@1
+                    (hderef~6 result.0))1@2))))))
+             (stmts~1,1
+              (cmd@6 add.1.sysvq0asl@1 result.0~6 dirSep.0@5))))
+           (cmd@6,2 add.2.sysvq0asl@1 result.0~6
+            (call@B substr.0.sysvq0asl~6 x.6@1
+             (tupat@4 b.0 0@2)
+             (tupat@A b.0 1@2))))))))
+      (elif@5,M
+       (call@5 isDot.0.~5 x.6@1 b.0@4)
+       (stmts~3,1
+        (discard "discard the dot"@8)))
+      (elif@5,O
+       (expr@2,1p,../nimony/lib/std/system/comparisons.nim
+        (le@2,1
+         (i 64)
+         (tupat@H,1j,../nimony/lib/std/pathnorm.nim b.0 0@2)
+         (tupat@9,1j,../nimony/lib/std/pathnorm.nim b.0 1@2)))
+       (stmts~3,1
+        (if
+         (elif@3
+          (and@F
+           (expr@2,1t,../nimony/lib/std/system/comparisons.nim
+            (lt@2,1
+             (i 64)0@M,1k,../nimony/lib/std/pathnorm.nim
+             (call@F,1k,../nimony/lib/std/pathnorm.nim len.4.sysvq0asl@1
+              (hderef~6 result.0))))
+           (expr@2,2n,../nimony/lib/std/system.nim
+            (not
+             (inset@C
+              (set
+               (c 8))
+              (setconstr@v,1k,../nimony/lib/std/pathnorm.nim
+               (set~L,~1E
+                (c@8,T,../nimony/lib/std/private/osseps.nim 8))DirSep.0.ossk30t39@1 AltSep.0.ossk30t39@9)
+              (call@S,1k,../nimony/lib/std/pathnorm.nim \5B\5D.9.sysvq0asl
+               (hderef result.0)
+               (sub@I
+                (i 64)
+                (call~5 len.4.sysvq0asl@1
+                 (hderef~6 result.0))1@2))))))
+          (stmts~1,1
+           (cmd@6 add.1.sysvq0asl@1 result.0~6 dirSep.0@5))))
+        (cmd@6,2 add.2.sysvq0asl@1 result.0~6
+         (call@B substr.0.sysvq0asl~6 x.6@1
+          (tupat@4 b.0 0@2)
+          (tupat@A b.0 1@2)))
+        (cmd@,3 inc.0.Iwdk9lf. state.0@4 2@B))))))
+   (if@,n
+    (elif@3
+     (and@D
+      (infix~6 ==.20.sysvq0asl
+       (hderef~7 result.0)""@3)
+      (expr@2,1l,../nimony/lib/std/system/comparisons.nim
+       (not@,1
+        (infix@7 ==.20.sysvq0asl x.6@M,1o,../nimony/lib/std/pathnorm.nim ""@R,1o,../nimony/lib/std/pathnorm.nim))))
+     (stmts@Q
+      (asgn@7
+       (hderef~7 result.0)"."@2))))))
+ (func@,1g :normalizePath.0.@5 x . .
+  (params@J
+   (param@1 :path.0 . . string.0.sysvq0asl@6 .)
+   (param@F :dirSep.1 . .
+    (c@L,6V,../nimony/lib/std/system/stringimpl.nim 8)DirSep.0.ossk30t39@9))string.0.sysvq0asl@X . .
+  (stmts@2,1
+   (result :result.6 . . string.0.sysvq0asl@T,~1T .)
+   (stmts@2,3N,../nimony/lib/std/system.nim
+    (discard "ignore runnable examples"@8))
+   (asgn@7,7 result.6~7
+    (call@G newStringOfCap.0.sysvq0asl~E
+     (call@5 len.4.sysvq0asl@1 path.0~4)))
+   (var@4,8 :state.1 . .
+    (i 64)0@8)
+   (call@G,9 addNormalizePath.0.~G path.0@1
+    (haddr@7 result.6)
+    (haddr@F state.1)dirSep.1@M)
+   (ret~2,~1 result.6)))
+ (comment@D,B int.0.sysvq0asl int.0.sysvq0asl bool.0.sysvq0asl@1,1 bool.0.sysvq0asl@E,3 int.0.sysvq0asl@J,7 int.0.sysvq0asl@O,7 int.0.sysvq0asl@1,O int.0.sysvq0asl@6,O int.0.sysvq0asl@I,S int.0.sysvq0asl@N,S bool.0.sysvq0asl@K,S int.0.sysvq0asl@L,V int.0.sysvq0asl@Q,V bool.0.sysvq0asl@K,V int.0.sysvq0asl@K,Y int.0.sysvq0asl@P,Y bool.0.sysvq0asl@K,Y int.0.sysvq0asl@q,e in.0.sysvq0asl@K,B notin.0.sysvq0asl@M,F >.0.sysvq0asl~3,G in.0.sysvq0asl@K,L true.0.sysvq0asl@3,M default.9.sysvq0asl@6,P default.9.sysvq0asl@6,P default.1.sysvq0asl@6,P in.0.sysvq0asl@T,Z default.9.sysvq0asl@F,u default.9.sysvq0asl@F,u default.1.sysvq0asl@F,u >.0.sysvq0asl@H,v in.0.sysvq0asl@M,x notin.0.sysvq0asl@c,11 >=.0.sysvq0asl@A,15 >.0.sysvq0asl@7,1D notin.0.sysvq0asl@d,1D >.0.sysvq0asl@,1F >.0.sysvq0asl@9,1J notin.0.sysvq0asl@e,1J >=.0.sysvq0asl@1,1O >.0.sysvq0asl@7,1P notin.0.sysvq0asl@c,1P !=.0.sysvq0asl@B,1T runnableExamples.0.sysvq0asl~B,1W)
+ (func@4,O :inc.1.Irn1g7r1. . .@,E,../nimony/lib/std/system/arithmetics.nim
+  (at inc.1.sysvq0asl
+   (i@9,~D 64))
+  (params@L,E,../nimony/lib/std/system/arithmetics.nim
+   (param@1 :x.11 . .
+    (mut@3
+     (i@D,L,../nimony/lib/std/pathnorm.nim 64)).)).@,E,../nimony/lib/std/system/arithmetics.nim
+  (pragmas@W,E,../nimony/lib/std/system/arithmetics.nim
+   (inline@2)).@,E,../nimony/lib/std/system/arithmetics.nim
+  (stmts@2,F,../nimony/lib/std/system/arithmetics.nim
+   (asgn@2,1
+    (hderef~2 x.11)
+    (add@6
+     (i@D,L,../nimony/lib/std/pathnorm.nim 64)
+     (hderef@1 x.11)
+     (conv@U,~F
+      (i@D,L,../nimony/lib/std/pathnorm.nim 64)1@1)))))
+ (func@A,1P :dec.1.I2mwrey1. . .@,I,../nimony/lib/std/system/arithmetics.nim
+  (at dec.1.sysvq0asl
+   (i@3,~1E 64))
+  (params@L,I,../nimony/lib/std/system/arithmetics.nim
+   (param@1 :x.12 . .
+    (mut@3
+     (i@D,L,../nimony/lib/std/pathnorm.nim 64)).)).@,I,../nimony/lib/std/system/arithmetics.nim
+  (pragmas@W,I,../nimony/lib/std/system/arithmetics.nim
+   (inline@2)).@,I,../nimony/lib/std/system/arithmetics.nim
+  (stmts@2,J,../nimony/lib/std/system/arithmetics.nim
+   (asgn@2,1
+    (hderef~2 x.12)
+    (sub@6
+     (i@D,L,../nimony/lib/std/pathnorm.nim 64)
+     (hderef@1 x.12)
+     (conv@U,~H
+      (i@D,L,../nimony/lib/std/pathnorm.nim 64)1@1)))))
+ (func@A,1S :dec.0.Iw9ew8i1. . .@,A,../nimony/lib/std/system/arithmetics.nim
+  (at dec.0.sysvq0asl
+   (i@t,~d 64)
+   (i 64))
+  (params@O,A,../nimony/lib/std/system/arithmetics.nim
+   (param@1 :x.13 . .
+    (mut@3
+     (i@13,z,../nimony/lib/std/pathnorm.nim 64)).)
+   (param@B :y.2 . .
+    (i 64).)).@,A,../nimony/lib/std/system/arithmetics.nim
+  (pragmas@f,A,../nimony/lib/std/system/arithmetics.nim
+   (inline@2)).@,A,../nimony/lib/std/system/arithmetics.nim
+  (stmts@2,B,../nimony/lib/std/system/arithmetics.nim
+   (asgn@2,1
+    (hderef~2 x.13)
+    (sub@6
+     (i@13,z,../nimony/lib/std/pathnorm.nim 64)
+     (hderef@1 x.13)y.2@4))))
+ (func@6,1d :inc.0.Iwdk9lf. . .@,6,../nimony/lib/std/system/arithmetics.nim
+  (at inc.0.sysvq0asl
+   (i@x,~o 64)
+   (i 64))
+  (params@O,6,../nimony/lib/std/system/arithmetics.nim
+   (param@1 :x.14 . .
+    (mut@3
+     (i@13,z,../nimony/lib/std/pathnorm.nim 64)).)
+   (param@B :y.3 . .
+    (i 64).)).@,6,../nimony/lib/std/system/arithmetics.nim
+  (pragmas@f,6,../nimony/lib/std/system/arithmetics.nim
+   (inline@2)).@,6,../nimony/lib/std/system/arithmetics.nim
+  (stmts@2,7,../nimony/lib/std/system/arithmetics.nim
+   (asgn@2,1
+    (hderef~2 x.14)
+    (add@6
+     (i@13,z,../nimony/lib/std/pathnorm.nim 64)
+     (hderef@1 x.14)y.3@4)))))(.index@,A,../nimony/lib/std/pathnorm.nim
+ (x PathIter.0. 192)
+ (x hasNext.0. 176)
+ (x next.0. 334)
+ (h dirs.0. 3206)
+ (h isDot.0. 618)
+ (h isDotDot.0. 464)
+ (h isSlash.0. 653)
+ (x addNormalizePath.0. 731)
+ (x normalizePath.0. 7927)
+ (h inc.1.Irn1g7r1. 1583)
+ (h dec.1.I2mwrey1. 652)
+ (h dec.0.Iw9ew8i1. 654)
+ (h inc.0.Iwdk9lf. 636))

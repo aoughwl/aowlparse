@@ -1,21 +1,21 @@
-## webmain.nim — browser/Node entry for nifparser, compiled through the
-## nimony-web JS backend (`nim_js`). It replaces nifparser.nim's file/stdout
+## webmain.nim — browser/Node entry for aifparser, compiled through the
+## nimony-web JS backend (`nim_js`). It replaces aifparser.nim's file/stdout
 ## bridges with in-memory equivalents so the parser runs with NO file I/O:
 ##
 ##   * INPUT   — the Nim source text arrives as a JS string in
 ##               `globalThis.__np_src` (set by the JS glue before `main` runs).
-##               The file-field path written into NIF line-info suffixes arrives
+##               The file-field path written into AIF line-info suffixes arrives
 ##               as `globalThis.__np_file` (defaults to "in.nim" if empty), so
 ##               the produced bytes can be made byte-identical to native nifler /
-##               `bin/nifparser` invoked on that same relative path.
-##   * PARSE   — identical to nifparser.parseToFile: tokenize -> initParser ->
+##               `bin/aifparser` invoked on that same relative path.
+##   * PARSE   — identical to aifparser.parseToFile: tokenize -> initParser ->
 ##               parseModule, but the builder is an in-MEMORY nifbuilder
 ##               (`open(sizeHint)`) whose bytes we `extract` instead of flushing
 ##               to a file.
-##   * OUTPUT  — the produced `.p.nif` bytes are handed back to JS on
+##   * OUTPUT  — the produced `.p.aif` bytes are handed back to JS on
 ##               `globalThis.__np_out` (string). No filesystem, no stdout.
 ##
-## This is the proof that nifparser (the parser half of client-side Tier 2) runs
+## This is the proof that aifparser (the parser half of client-side Tier 2) runs
 ## in the browser. Modeled on nifi/src/nifi/webmain.nim.
 
 when defined(nimony):
@@ -45,7 +45,7 @@ proc jsonEscape(s: string): string =
       else:
         result.add c
 
-# --- structural bracket validator (mirrors nifparser.nim's checkBrackets) -----
+# --- structural bracket validator (mirrors aifparser.nim's checkBrackets) -----
 proc closerFor(k: TokKind): char =
   case k
   of tkParLe: ')'
@@ -63,7 +63,7 @@ proc matchesClose(open, close: TokKind): bool =
 
 proc checkBrackets(toks: seq[Token]): seq[Diagnostic] =
   ## Unbalanced/mismatched ()/[]/{} — a validator the range-splitter never
-  ## reports. Best-effort: it never blocks the emitted NIF.
+  ## reports. Best-effort: it never blocks the emitted AIF.
   result = @[]
   var stack: seq[Token] = @[]
   for t in toks:
@@ -119,7 +119,7 @@ proc diagsToJson(ds: seq[Diagnostic]): string =
   result.add "]"
 
 proc parseToStr(src, fileField: string; curly: bool; diagJson: var string): string =
-  ## Parse Nim source text from memory to the `.p.nif` byte string, and set
+  ## Parse Nim source text from memory to the `.p.aif` byte string, and set
   ## `diagJson` to the JSON array of RECOVERABLE structured diagnostics (lexer
   ## checks + bracket validation). Parsing is never aborted by them — an editor
   ## gets every problem at once. `curly` enables the experimental `{ … }` mode.
@@ -151,7 +151,7 @@ proc npRun() =
   # 3. parse fully in memory (also collects syntactic diagnostics)
   var diagJson = ""
   let outp = parseToStr(src, fileField, curly, diagJson)
-  # 4. return the produced .p.nif bytes + diagnostics JSON to JS
+  # 4. return the produced .p.aif bytes + diagnostics JSON to JS
   let g = global("globalThis")
   g.set("__np_out", toJs(outp))
   g.set("__np_diag", toJs(diagJson))

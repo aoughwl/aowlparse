@@ -1,0 +1,64 @@
+(.nif27)
+(.indexat 1356             )
+(stmts@,1,../nimony/lib/std/oserrors.nim
+ (type@F,5 :OSErrorCode.0.~D .
+  (i@B 32))
+ (gvar@C,A :errno.0.~6
+  (pragmas
+   (importc "errno")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (proc@,I :raiseOSError.0.@5
+  (params@I
+   (param@1 :errorCode.0 .
+    (i@7,~D 32))
+   (param@P :additionalInfo.0 . string.0.sysvq0asl))ErrorCode.0.sysvq0asl
+  (pragmas
+   (smry callsUnknown
+    (param 0 0 reads writes escapes)
+    (param 1 1)result 0))
+  (stmts@2,1
+   (stmts@2,5
+    (stmts@2,3
+     (var@M :`x.0 . ErrorCode.0.sysvq0asl@E,1N,../nimony/lib/std/errorcodes/errorcodes_posix.nim
+      (call posixToErrorCode.0.err0o7h081~G
+       (conv@A
+        (i@1 32)errorCode.0~9)))
+     (ret `x.0@M)))
+   (ret 0@4,5,../nimony/lib/std/errorcodes/errorcodes.nim)))
+ (proc@,U :osLastError.0.@5
+  (params@H)
+  (i@Q,~P 32)
+  (pragmas
+   (smry))
+  (stmts@2,1
+   (var :result.0 .
+    (i@O,~Q 32).)
+   (stmts@2,I
+    (asgn@7 result.0~7
+     (conv@D
+      (i@2,~i 32)errno.0.@1)))
+   (ret~2,~1 result.0)))
+ (gvar :`iniGuard.0. .
+  (bool).)
+ (proc :`ini.0.
+  (params).
+  (pragmas
+   (smry callsUnknown))
+  (stmts
+   (if
+    (elif `iniGuard.0.
+     (stmts
+      (ret .))))
+   (asgn `iniGuard.0.
+    (true))
+   (call `ini.0.sysvq0asl)
+   (call `ini.0.syn1lfpjv)
+   (call `ini.0.err0o7h081))))(.index@,1,../nimony/lib/std/oserrors.nim
+ (h OSErrorCode.0. 78)
+ (x errno.0. 43)
+ (x raiseOSError.0. 150)
+ (x osLastError.0. 567)
+ (h `iniGuard.0. 234)
+ (x `ini.0. 34))

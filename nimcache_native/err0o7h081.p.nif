@@ -1,0 +1,647 @@
+(.nif27)
+(.vendor "Nifler")
+(.dialect "nim-parsed")
+(stmts@,3,../nimony/lib/std/errorcodes/errorcodes_posix.nim
+ (when
+  (elif@5
+   (prefix not
+    (call@B defined~7 nimony@1))
+   (stmts~3,1
+    (import errorcodes@7))))
+ (var@E,3 EOVERFLOW~A .
+  (pragmas
+   (kv@9 importc~7 "EOVERFLOW"@2)
+   (kv@U header~6 "<errno.h>"@2))int32@l .)
+ (var@B,4 ERANGE~7 .
+  (pragmas
+   (kv@9 importc~7 "ERANGE"@2)
+   (kv@R header~6 "<errno.h>"@2))int32@i .)
+ (var@9,5 EDOM~5 .
+  (pragmas
+   (kv@9 importc~7 "EDOM"@2)
+   (kv@P header~6 "<errno.h>"@2))int32@g .)
+ (var@B,6 ENOMEM~7 .
+  (pragmas
+   (kv@9 importc~7 "ENOMEM"@2)
+   (kv@R header~6 "<errno.h>"@2))int32@i .)
+ (var@B,7 ENOSPC~7 .
+  (pragmas
+   (kv@9 importc~7 "ENOSPC"@2)
+   (kv@R header~6 "<errno.h>"@2))int32@i .)
+ (var@8,8 EIO~4 .
+  (pragmas
+   (kv@9 importc~7 "EIO"@2)
+   (kv@O header~6 "<errno.h>"@2))int32@f .)
+ (var@B,9 EINVAL~7 .
+  (pragmas
+   (kv@9 importc~7 "EINVAL"@2)
+   (kv@R header~6 "<errno.h>"@2))int32@i .)
+ (var@C,A EBADMSG~8 .
+  (pragmas
+   (kv@9 importc~7 "EBADMSG"@2)
+   (kv@S header~6 "<errno.h>"@2))int32@j .)
+ (var@B,B EILSEQ~7 .
+  (pragmas
+   (kv@9 importc~7 "EILSEQ"@2)
+   (kv@R header~6 "<errno.h>"@2))int32@i .)
+ (var@B,C ENOMSG~7 .
+  (pragmas
+   (kv@9 importc~7 "ENOMSG"@2)
+   (kv@R header~6 "<errno.h>"@2))int32@i .)
+ (var@H,D EDESTADDRREQ~D .
+  (pragmas
+   (kv@9 importc~7 "EDESTADDRREQ"@2)
+   (kv@X header~6 "<errno.h>"@2))int32@o .)
+ (var@A,E E2BIG~6 .
+  (pragmas
+   (kv@9 importc~7 "E2BIG"@2)
+   (kv@Q header~6 "<errno.h>"@2))int32@h .)
+ (var@C,F ENOBUFS~8 .
+  (pragmas
+   (kv@9 importc~7 "ENOBUFS"@2)
+   (kv@S header~6 "<errno.h>"@2))int32@j .)
+ (var@C,G ENODATA~8 .
+  (pragmas
+   (kv@9 importc~7 "ENODATA"@2)
+   (kv@S header~6 "<errno.h>"@2))int32@j .)
+ (var@A,H EBUSY~6 .
+  (pragmas
+   (kv@9 importc~7 "EBUSY"@2)
+   (kv@Q header~6 "<errno.h>"@2))int32@h .)
+ (var@C,I ETXTBSY~8 .
+  (pragmas
+   (kv@9 importc~7 "ETXTBSY"@2)
+   (kv@S header~6 "<errno.h>"@2))int32@j .)
+ (var@B,J ECHILD~7 .
+  (pragmas
+   (kv@9 importc~7 "ECHILD"@2)
+   (kv@R header~6 "<errno.h>"@2))int32@i .)
+ (var@F,K EOWNERDEAD~B .
+  (pragmas
+   (kv@9 importc~7 "EOWNERDEAD"@2)
+   (kv@V header~6 "<errno.h>"@2))int32@m .)
+ (var@B,L ENOLCK~7 .
+  (pragmas
+   (kv@9 importc~7 "ENOLCK"@2)
+   (kv@R header~6 "<errno.h>"@2))int32@i .)
+ (var@B,M ENFILE~7 .
+  (pragmas
+   (kv@9 importc~7 "ENFILE"@2)
+   (kv@R header~6 "<errno.h>"@2))int32@i .)
+ (var@B,N EACCES~7 .
+  (pragmas
+   (kv@9 importc~7 "EACCES"@2)
+   (kv@R header~6 "<errno.h>"@2))int32@i .)
+ (var@A,O EPERM~6 .
+  (pragmas
+   (kv@9 importc~7 "EPERM"@2)
+   (kv@Q header~6 "<errno.h>"@2))int32@h .)
+ (var@B,P EAGAIN~7 .
+  (pragmas
+   (kv@9 importc~7 "EAGAIN"@2)
+   (kv@R header~6 "<errno.h>"@2))int32@i .)
+ (var@G,Q EWOULDBLOCK~C .
+  (pragmas
+   (kv@9 importc~7 "EWOULDBLOCK"@2)
+   (kv@W header~6 "<errno.h>"@2))int32@n .)
+ (var@E,R ETIMEDOUT~A .
+  (pragmas
+   (kv@9 importc~7 "ETIMEDOUT"@2)
+   (kv@U header~6 "<errno.h>"@2))int32@l .)
+ (var@A,S ETIME~6 .
+  (pragmas
+   (kv@9 importc~7 "ETIME"@2)
+   (kv@Q header~6 "<errno.h>"@2))int32@h .)
+ (var@A,T EINTR~6 .
+  (pragmas
+   (kv@9 importc~7 "EINTR"@2)
+   (kv@Q header~6 "<errno.h>"@2))int32@h .)
+ (var@C,U EDEADLK~8 .
+  (pragmas
+   (kv@9 importc~7 "EDEADLK"@2)
+   (kv@S header~6 "<errno.h>"@2))int32@j .)
+ (var@F,V EADDRINUSE~B .
+  (pragmas
+   (kv@9 importc~7 "EADDRINUSE"@2)
+   (kv@V header~6 "<errno.h>"@2))int32@m .)
+ (var@C,W EISCONN~8 .
+  (pragmas
+   (kv@9 importc~7 "EISCONN"@2)
+   (kv@S header~6 "<errno.h>"@2))int32@j .)
+ (var@I,X EADDRNOTAVAIL~E .
+  (pragmas
+   (kv@9 importc~7 "EADDRNOTAVAIL"@2)
+   (kv@Y header~6 "<errno.h>"@2))int32@p .)
+ (var@H,Y EAFNOSUPPORT~D .
+  (pragmas
+   (kv@9 importc~7 "EAFNOSUPPORT"@2)
+   (kv@X header~6 "<errno.h>"@2))int32@o .)
+ (var@F,Z EOPNOTSUPP~B .
+  (pragmas
+   (kv@9 importc~7 "EOPNOTSUPP"@2)
+   (kv@V header~6 "<errno.h>"@2))int32@m .)
+ (var@C,a ENOTSUP~8 .
+  (pragmas
+   (kv@9 importc~7 "ENOTSUP"@2)
+   (kv@S header~6 "<errno.h>"@2))int32@j .)
+ (var@B,b ENOSYS~7 .
+  (pragmas
+   (kv@9 importc~7 "ENOSYS"@2)
+   (kv@R header~6 "<errno.h>"@2))int32@i .)
+ (var@K,c EPROTONOSUPPORT~G .
+  (pragmas
+   (kv@9 importc~7 "EPROTONOSUPPORT"@2)
+   (kv@a header~6 "<errno.h>"@2))int32@r .)
+ (var@B,d ENOTTY~7 .
+  (pragmas
+   (kv@9 importc~7 "ENOTTY"@2)
+   (kv@R header~6 "<errno.h>"@2))int32@i .)
+ (var@B,e ESPIPE~7 .
+  (pragmas
+   (kv@9 importc~7 "ESPIPE"@2)
+   (kv@R header~6 "<errno.h>"@2))int32@i .)
+ (var@B,f EISDIR~7 .
+  (pragmas
+   (kv@9 importc~7 "EISDIR"@2)
+   (kv@R header~6 "<errno.h>"@2))int32@i .)
+ (var@E,g ENOTEMPTY~A .
+  (pragmas
+   (kv@9 importc~7 "ENOTEMPTY"@2)
+   (kv@U header~6 "<errno.h>"@2))int32@l .)
+ (var@E,h ECANCELED~A .
+  (pragmas
+   (kv@9 importc~7 "ECANCELED"@2)
+   (kv@U header~6 "<errno.h>"@2))int32@l .)
+ (var@H,i ECONNABORTED~D .
+  (pragmas
+   (kv@9 importc~7 "ECONNABORTED"@2)
+   (kv@X header~6 "<errno.h>"@2))int32@o .)
+ (var@E,j ENETRESET~A .
+  (pragmas
+   (kv@9 importc~7 "ENETRESET"@2)
+   (kv@U header~6 "<errno.h>"@2))int32@l .)
+ (var@D,k EALREADY~9 .
+  (pragmas
+   (kv@9 importc~7 "EALREADY"@2)
+   (kv@T header~6 "<errno.h>"@2))int32@k .)
+ (var@G,l EINPROGRESS~C .
+  (pragmas
+   (kv@9 importc~7 "EINPROGRESS"@2)
+   (kv@W header~6 "<errno.h>"@2))int32@n .)
+ (var@H,m ENAMETOOLONG~D .
+  (pragmas
+   (kv@9 importc~7 "ENAMETOOLONG"@2)
+   (kv@X header~6 "<errno.h>"@2))int32@o .)
+ (var@B,n EEXIST~7 .
+  (pragmas
+   (kv@9 importc~7 "EEXIST"@2)
+   (kv@R header~6 "<errno.h>"@2))int32@i .)
+ (var@B,o ENOENT~7 .
+  (pragmas
+   (kv@9 importc~7 "ENOENT"@2)
+   (kv@R header~6 "<errno.h>"@2))int32@i .)
+ (var@A,p EIDRM~6 .
+  (pragmas
+   (kv@9 importc~7 "EIDRM"@2)
+   (kv@Q header~6 "<errno.h>"@2))int32@h .)
+ (var@B,q ENODEV~7 .
+  (pragmas
+   (kv@9 importc~7 "ENODEV"@2)
+   (kv@R header~6 "<errno.h>"@2))int32@i .)
+ (var@C,r ENOTDIR~8 .
+  (pragmas
+   (kv@9 importc~7 "ENOTDIR"@2)
+   (kv@S header~6 "<errno.h>"@2))int32@j .)
+ (var@A,s EFBIG~6 .
+  (pragmas
+   (kv@9 importc~7 "EFBIG"@2)
+   (kv@Q header~6 "<errno.h>"@2))int32@h .)
+ (var@D,t EMSGSIZE~9 .
+  (pragmas
+   (kv@9 importc~7 "EMSGSIZE"@2)
+   (kv@T header~6 "<errno.h>"@2))int32@k .)
+ (var@A,u EPIPE~6 .
+  (pragmas
+   (kv@9 importc~7 "EPIPE"@2)
+   (kv@Q header~6 "<errno.h>"@2))int32@h .)
+ (var@A,v EBADF~6 .
+  (pragmas
+   (kv@9 importc~7 "EBADF"@2)
+   (kv@Q header~6 "<errno.h>"@2))int32@h .)
+ (var@B,w EMFILE~7 .
+  (pragmas
+   (kv@9 importc~7 "EMFILE"@2)
+   (kv@R header~6 "<errno.h>"@2))int32@i .)
+ (var@B,x ENOSTR~7 .
+  (pragmas
+   (kv@9 importc~7 "ENOSTR"@2)
+   (kv@R header~6 "<errno.h>"@2))int32@i .)
+ (var@D,y ENOTSOCK~9 .
+  (pragmas
+   (kv@9 importc~7 "ENOTSOCK"@2)
+   (kv@T header~6 "<errno.h>"@2))int32@k .)
+ (var@A,z ENOSR~6 .
+  (pragmas
+   (kv@9 importc~7 "ENOSR"@2)
+   (kv@Q header~6 "<errno.h>"@2))int32@h .)
+ (var@A,10 ENXIO~6 .
+  (pragmas
+   (kv@9 importc~7 "ENXIO"@2)
+   (kv@Q header~6 "<errno.h>"@2))int32@h .)
+ (var@A,11 ESRCH~6 .
+  (pragmas
+   (kv@9 importc~7 "ESRCH"@2)
+   (kv@Q header~6 "<errno.h>"@2))int32@h .)
+ (var@C,12 ENOEXEC~8 .
+  (pragmas
+   (kv@9 importc~7 "ENOEXEC"@2)
+   (kv@S header~6 "<errno.h>"@2))int32@j .)
+ (var@A,13 ELOOP~6 .
+  (pragmas
+   (kv@9 importc~7 "ELOOP"@2)
+   (kv@Q header~6 "<errno.h>"@2))int32@h .)
+ (var@B,14 EMLINK~7 .
+  (pragmas
+   (kv@9 importc~7 "EMLINK"@2)
+   (kv@R header~6 "<errno.h>"@2))int32@i .)
+ (var@A,15 EXDEV~6 .
+  (pragmas
+   (kv@9 importc~7 "EXDEV"@2)
+   (kv@Q header~6 "<errno.h>"@2))int32@h .)
+ (var@F,16 EPROTOTYPE~B .
+  (pragmas
+   (kv@9 importc~7 "EPROTOTYPE"@2)
+   (kv@V header~6 "<errno.h>"@2))int32@m .)
+ (var@G,17 ENOPROTOOPT~C .
+  (pragmas
+   (kv@9 importc~7 "ENOPROTOOPT"@2)
+   (kv@W header~6 "<errno.h>"@2))int32@n .)
+ (var@B,18 EPROTO~7 .
+  (pragmas
+   (kv@9 importc~7 "EPROTO"@2)
+   (kv@R header~6 "<errno.h>"@2))int32@i .)
+ (var@A,19 EROFS~6 .
+  (pragmas
+   (kv@9 importc~7 "EROFS"@2)
+   (kv@Q header~6 "<errno.h>"@2))int32@h .)
+ (var@B,1A EFAULT~7 .
+  (pragmas
+   (kv@9 importc~7 "EFAULT"@2)
+   (kv@R header~6 "<errno.h>"@2))int32@i .)
+ (var@D,1B ENETDOWN~9 .
+  (pragmas
+   (kv@9 importc~7 "ENETDOWN"@2)
+   (kv@T header~6 "<errno.h>"@2))int32@k .)
+ (var@G,1C ENETUNREACH~C .
+  (pragmas
+   (kv@9 importc~7 "ENETUNREACH"@2)
+   (kv@W header~6 "<errno.h>"@2))int32@n .)
+ (var@F,1D ECONNRESET~B .
+  (pragmas
+   (kv@9 importc~7 "ECONNRESET"@2)
+   (kv@V header~6 "<errno.h>"@2))int32@m .)
+ (var@D,1E ENOTCONN~9 .
+  (pragmas
+   (kv@9 importc~7 "ENOTCONN"@2)
+   (kv@T header~6 "<errno.h>"@2))int32@k .)
+ (var@H,1F ECONNREFUSED~D .
+  (pragmas
+   (kv@9 importc~7 "ECONNREFUSED"@2)
+   (kv@X header~6 "<errno.h>"@2))int32@o .)
+ (var@H,1G EHOSTUNREACH~D .
+  (pragmas
+   (kv@9 importc~7 "EHOSTUNREACH"@2)
+   (kv@X header~6 "<errno.h>"@2))int32@o .)
+ (var@K,1H ENOTRECOVERABLE~G .
+  (pragmas
+   (kv@9 importc~7 "ENOTRECOVERABLE"@2)
+   (kv@a header~6 "<errno.h>"@2))int32@r .)
+ (proc@,1K posixToErrorCode@5 x . .
+  (params@M
+   (param@1 err . . int32@5 .))ErrorCode@E . .
+  (stmts@2,1
+   (if
+    (elif@3
+     (infix@4 == err~4
+      (suf@3 0 "i32"))
+     (stmts~1,1 Success))
+    (elif@5,2
+     (infix@4 == err~4 EOVERFLOW@3)
+     (stmts~3,1 OverflowError))
+    (elif@5,4
+     (infix@E or
+      (infix~A == err~4 ERANGE@3)
+      (infix@7 == err~4 EDOM@3))
+     (stmts~3,1 RangeError))
+    (elif@5,6
+     (infix@4 == err~4 ENOMEM@3)
+     (stmts~3,1 OutOfMemError))
+    (elif@5,8
+     (infix@4 == err~4 ENOSPC@3)
+     (stmts~3,1 DiskFullError))
+    (elif@5,A
+     (infix@4 == err~4 EIO@3)
+     (stmts~3,1 IOError))
+    (elif@5,C
+     (infix@14 or
+      (infix~H or
+       (infix~H or
+        (infix~I or
+         (infix~A == err~4 EINVAL@3)
+         (infix@7 == err~4 EBADMSG@3))
+        (infix@7 == err~4 EILSEQ@3))
+       (infix@7 == err~4 ENOMSG@3))
+      (infix@7 == err~4 EDESTADDRREQ@3))
+     (stmts~3,1 ValueError))
+    (elif@5,E
+     (infix@D or
+      (infix~9 == err~4 E2BIG@3)
+      (infix@7 == err~4 ENOBUFS@3))
+     (stmts~3,1 FullError))
+    (elif@5,G
+     (infix@4 == err~4 ENODATA@3)
+     (stmts~3,1 EmptyError))
+    (elif@5,I
+     (infix@D or
+      (infix~9 == err~4 EBUSY@3)
+      (infix@7 == err~4 ETXTBSY@3))
+     (stmts~3,1 BusyError))
+    (elif@5,K
+     (infix@E or
+      (infix~A == err~4 ECHILD@3)
+      (infix@7 == err~4 EOWNERDEAD@3))
+     (stmts~3,1 DeadResource))
+    (elif@5,M
+     (infix@4 == err~4 ENOLCK@3)
+     (stmts~3,1 ResourceExhaustedError))
+    (elif@5,O
+     (infix@4 == err~4 ENFILE@3)
+     (stmts~3,1 DescriptorExhaustedError))
+    (elif@5,Q
+     (infix@E or
+      (infix~A == err~4 EACCES@3)
+      (infix@7 == err~4 EPERM@3))
+     (stmts~3,1 PermissionDenied))
+    (elif@5,S
+     (infix@E or
+      (infix~A == err~4 EAGAIN@3)
+      (infix@7 == err~4 EWOULDBLOCK@3))
+     (stmts~3,1 RetryError))
+    (elif@5,U
+     (infix@H or
+      (infix~D == err~4 ETIMEDOUT@3)
+      (infix@7 == err~4 ETIME@3))
+     (stmts~3,1 TimeoutError))
+    (elif@5,W
+     (infix@4 == err~4 EINTR@3)
+     (stmts~3,1 InterruptedError))
+    (elif@5,Y
+     (infix@4 == err~4 EDEADLK@3)
+     (stmts~3,1 DeadlockError))
+    (elif@5,a
+     (infix@I or
+      (infix~E == err~4 EADDRINUSE@3)
+      (infix@7 == err~4 EISCONN@3))
+     (stmts~3,1 AlreadyConnected))
+    (elif@5,c
+     (infix@4 == err~4 EADDRNOTAVAIL@3)
+     (stmts~3,1 AddressNotAvailable))
+    (elif@5,e
+     (infix@4 == err~4 EAFNOSUPPORT@3)
+     (stmts~3,1 AddressFamilyUnsupported))
+    (elif@5,g
+     (infix@26 or
+      (infix~H or
+       (infix~H or
+        (infix~H or
+         (infix~Q or
+          (infix~H or
+           (infix~I or
+            (infix~E == err~4 EOPNOTSUPP@3)
+            (infix@7 == err~4 ENOTSUP@3))
+           (infix@7 == err~4 ENOSYS@3))
+          (infix@7 == err~4 EPROTONOSUPPORT@3))
+         (infix@7 == err~4 ENOTTY@3))
+        (infix@7 == err~4 ESPIPE@3))
+       (infix@7 == err~4 EISDIR@3))
+      (infix@7 == err~4 ENOTEMPTY@3))
+     (stmts~3,1 BadOperation))
+    (elif@5,i
+     (infix@e or
+      (infix~N or
+       (infix~D == err~4 ECANCELED@3)
+       (infix@7 == err~4 ECONNABORTED@3))
+      (infix@7 == err~4 ENETRESET@3))
+     (stmts~3,1 AbortedOperation))
+    (elif@5,k
+     (infix@G or
+      (infix~C == err~4 EALREADY@3)
+      (infix@7 == err~4 EINPROGRESS@3))
+     (stmts~3,1 AlreadyInProgress))
+    (elif@5,m
+     (infix@4 == err~4 ENAMETOOLONG@3)
+     (stmts~3,1 NameTooLong))
+    (elif@5,o
+     (infix@4 == err~4 EEXIST@3)
+     (stmts~3,1 NameExists))
+    (elif@5,q
+     (infix@l or
+      (infix~H or
+       (infix~G or
+        (infix~A == err~4 ENOENT@3)
+        (infix@7 == err~4 EIDRM@3))
+       (infix@7 == err~4 ENODEV@3))
+      (infix@7 == err~4 ENOTDIR@3))
+     (stmts~3,1 NameNotFound))
+    (elif@5,s
+     (infix@D or
+      (infix~9 == err~4 EFBIG@3)
+      (infix@7 == err~4 EMSGSIZE@3))
+     (stmts~3,1 ContentTooLong))
+    (elif@5,u
+     (infix@1q or
+      (infix~G or
+       (infix~G or
+        (infix~J or
+         (infix~H or
+          (infix~H or
+           (infix~G or
+            (infix~9 == err~4 EPIPE@3)
+            (infix@7 == err~4 EBADF@3))
+           (infix@7 == err~4 EMFILE@3))
+          (infix@7 == err~4 ENOSTR@3))
+         (infix@7 == err~4 ENOTSOCK@3))
+        (infix@7 == err~4 ENOSR@3))
+       (infix@7 == err~4 ENXIO@3))
+      (infix@7 == err~4 ESRCH@3))
+     (stmts~3,1 BadDescriptor))
+    (elif@5,w
+     (infix@4 == err~4 ENOEXEC@3)
+     (stmts~3,1 BadExecutable))
+    (elif@5,y
+     (infix@U or
+      (infix~H or
+       (infix~9 == err~4 ELOOP@3)
+       (infix@7 == err~4 EMLINK@3))
+      (infix@7 == err~4 EXDEV@3))
+     (stmts~3,1 BadLink))
+    (elif@5,10
+     (infix@I or
+      (infix~E == err~4 EPROTOTYPE@3)
+      (infix@7 == err~4 ENOPROTOOPT@3))
+     (stmts~3,1 BadProtocol))
+    (elif@5,12
+     (infix@4 == err~4 EPROTO@3)
+     (stmts~3,1 ProtocolError))
+    (elif@5,14
+     (infix@4 == err~4 EROFS@3)
+     (stmts~3,1 ReadonlyProtection))
+    (elif@5,16
+     (infix@4 == err~4 EFAULT@3)
+     (stmts~3,1 SegFault))
+    (elif@5,18
+     (infix@x or
+      (infix~L or
+       (infix~M or
+        (infix~C == err~4 ENETDOWN@3)
+        (infix@7 == err~4 ENETUNREACH@3))
+       (infix@7 == err~4 ECONNRESET@3))
+      (infix@7 == err~4 ENOTCONN@3))
+     (stmts~3,1 Disconnected))
+    (elif@5,1A
+     (infix@4 == err~4 ECONNREFUSED@3)
+     (stmts~3,1 RefusedConnection))
+    (elif@5,1C
+     (infix@4 == err~4 EHOSTUNREACH@3)
+     (stmts~3,1 UnreachableHost))
+    (elif@5,1E
+     (infix@4 == err~4 ENOTRECOVERABLE@3)
+     (stmts~3,1 UnrecoverableState))
+    (else@,1G
+     (stmts@2,1 Failure)))))
+ (proc@,2e errorCodeToPosix@5 x . .
+  (params@M
+   (param@1 err . . ErrorCode@5 .))int32@I . .
+  (stmts@2,1
+   (case err@5
+    (of@,1
+     (ranges Success@3)
+     (stmts@C
+      (suf 0 "i32")))
+    (of@,2
+     (ranges OverflowError@3)
+     (stmts@I EOVERFLOW))
+    (of@,3
+     (ranges RangeError@3)
+     (stmts@F ERANGE))
+    (of@,4
+     (ranges OutOfMemError@3)
+     (stmts@I ENOMEM))
+    (of@,5
+     (ranges DiskFullError@3)
+     (stmts@I ENOSPC))
+    (of@,6
+     (ranges IOError@3)
+     (stmts@C EIO))
+    (of@,7
+     (ranges ValueError@3)
+     (stmts@F EINVAL))
+    (of@,8
+     (ranges FullError@3)
+     (stmts@E E2BIG))
+    (of@,9
+     (ranges EmptyError@3)
+     (stmts@F ENODATA))
+    (of@,A
+     (ranges BusyError@3)
+     (stmts@E EBUSY))
+    (of@,B
+     (ranges DeadResource@3)
+     (stmts@H ECHILD))
+    (of@,C
+     (ranges ResourceExhaustedError@3)
+     (stmts@R ENOLCK))
+    (of@,D
+     (ranges DescriptorExhaustedError@3)
+     (stmts@T ENFILE))
+    (of@,E
+     (ranges PermissionDenied@3)
+     (stmts@L EACCES))
+    (of@,F
+     (ranges RetryError@3)
+     (stmts@F EAGAIN))
+    (of@,G
+     (ranges TimeoutError@3)
+     (stmts@H ETIMEDOUT))
+    (of@,H
+     (ranges InterruptedError@3)
+     (stmts@L EINTR))
+    (of@,I
+     (ranges DeadlockError@3)
+     (stmts@I EDEADLK))
+    (of@,J
+     (ranges AlreadyConnected@3)
+     (stmts@L EADDRINUSE))
+    (of@,K
+     (ranges AddressNotAvailable@3)
+     (stmts@O EADDRNOTAVAIL))
+    (of@,L
+     (ranges AddressFamilyUnsupported@3)
+     (stmts@T EAFNOSUPPORT))
+    (of@,M
+     (ranges BadOperation@3)
+     (stmts@H EOPNOTSUPP))
+    (of@,N
+     (ranges AbortedOperation@3)
+     (stmts@L ECANCELED))
+    (of@,O
+     (ranges AlreadyInProgress@3)
+     (stmts@M EALREADY))
+    (of@,P
+     (ranges NameTooLong@3)
+     (stmts@G ENAMETOOLONG))
+    (of@,Q
+     (ranges NameExists@3)
+     (stmts@F EEXIST))
+    (of@,R
+     (ranges NameNotFound@3)
+     (stmts@H ENOENT))
+    (of@,S
+     (ranges ContentTooLong@3)
+     (stmts@J EFBIG))
+    (of@,T
+     (ranges BadDescriptor@3)
+     (stmts@I EPIPE))
+    (of@,U
+     (ranges BadExecutable@3)
+     (stmts@I ENOEXEC))
+    (of@,V
+     (ranges BadLink@3)
+     (stmts@C ELOOP))
+    (of@,W
+     (ranges BadProtocol@3)
+     (stmts@G EPROTOTYPE))
+    (of@,X
+     (ranges ProtocolError@3)
+     (stmts@I EPROTO))
+    (of@,Y
+     (ranges ReadonlyProtection@3)
+     (stmts@N EROFS))
+    (of@,Z
+     (ranges SegFault@3)
+     (stmts@D EFAULT))
+    (of@,a
+     (ranges Disconnected@3)
+     (stmts@H ENETDOWN))
+    (of@,b
+     (ranges RefusedConnection@3)
+     (stmts@M ECONNREFUSED))
+    (of@,c
+     (ranges UnreachableHost@3)
+     (stmts@K EHOSTUNREACH))
+    (of@,d
+     (ranges UnrecoverableState@3)
+     (stmts@N ENOTRECOVERABLE))
+    (else@,e
+     (stmts@6
+      (suf 1 "i32")))))))

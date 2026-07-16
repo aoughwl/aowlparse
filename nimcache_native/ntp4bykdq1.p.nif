@@ -1,0 +1,133 @@
+(.nif27)
+(.vendor "Nifler")
+(.dialect "nim-parsed")
+(stmts@,3,../nimony/lib/std/private/ntpath.nim
+ (import
+  (prefix@7 \2E\2E/ strutils@3))
+ (func@,B splitDrive@5 x . .
+  (params@G
+   (param@1 p . . string@3 .))
+  (tuple@D
+   (kv@J drive string@D)
+   (kv@Q path string@6)). .
+  (stmts@2,1
+   (comment)
+   (call@,9 runnableExamples
+    (stmts@2,1
+     (cmd doAssert
+      (infix@Q ==
+       (call~7 splitDrive~A "C\3A"@1)
+       (tup@3 "C\3A"@1 ""@7)))
+     (cmd@,1 doAssert
+      (infix@S ==
+       (call~9 splitDrive~A
+        (suf@1 "C\3A\5C" "R"))
+       (tup@3
+        (suf@1 "C\3A" "R")
+        (suf@8 "\5C" "R"))))
+     (cmd@,2 doAssert
+      (infix@l ==
+       (call~S splitDrive~A
+        (suf@1 "\5C\5Cserver\5Cdrive\5Cfoo\5Cbar" "R"))
+       (tup@3
+        (suf@1 "\5C\5Cserver\5Cdrive" "R")
+        (suf@K "\5Cfoo\5Cbar" "R"))))
+     (cmd@,3 doAssert
+      (infix@n ==
+       (call~U splitDrive~A
+        (suf@1 "\5C\5C?\5CUNC\5Cserver\5Cshare\5Cdir" "R"))
+       (tup@3
+        (suf@1 "\5C\5C?\5CUNC\5Cserver\5Cshare" "R")
+        (suf@Q "\5Cdir" "R"))))))
+   (asgn@7,F result~7
+    (tup@2 ""@1 p@5))
+   (if@,G
+    (elif@3
+     (infix@6 <
+      (dot~5 p~1 len@1)2@2)
+     (stmts~1,1
+      (ret .))))
+   (const@6,I sep . . . '\5C'@6)
+   (let@4,J normp . . .
+    (call@H
+     (dot~8 p~1 replace@1)'/'@1 sep@6))
+   (if@,K
+    (elif@3
+     (infix@o and
+      (infix~K and
+       (infix~K and
+        (infix~4 >
+         (dot~5 p~1 len@1)2@2)
+        (infix@D ==
+         (at~4 normp~5 0@1)sep@3))
+       (infix@D ==
+        (at~4 normp~5 1@1)sep@3))
+      (infix@D !=
+       (at~4 normp~5 2@1)sep@3))
+     (stmts~1,6
+      (let@4 start . . .
+       (block@8 .
+        (stmts~A,1
+         (const@6 unc . . . "\5C\5C?\5CUNC"@6)
+         (let@4,1 idx . . .
+          (call@9 min~3 8@1
+           (dot@9 normp~5 len@1)))
+         (if@,2
+          (elif@3
+           (infix@4 == unc~4
+            (dot@11
+             (call~W
+              (dot~6
+               (call~A
+                (dot~7 normp~5 substr@1)0@1
+                (infix@7 \2D idx~3 1@1))strip@1)
+              (vv@7 chars~6
+               (curly@2 sep@1))
+              (vv@O leading~8 false@2))toUpperAscii@1))
+           (stmts~1,1 8))
+          (else@,2
+           (stmts@2,1 2))))))
+      (let@4,7 index . . .
+       (call@I
+        (dot~5 normp~5 find@1)sep@1 start@6))
+      (if@,8
+       (elif@3
+        (infix@6 == index~6 -1@3)
+        (stmts~1,1
+         (ret .))))
+      (var@4,A index2 . . .
+       (call@J
+        (dot~5 normp~5 find@1)sep@1
+        (infix@C \2B index~6 1@2)))
+      (if@,D
+       (elif@3
+        (infix@7 == index2~7
+         (infix@9 \2B index~6 1@2))
+        (stmts~1,1
+         (ret .))))
+      (if@,F
+       (elif@3
+        (infix@7 == index2~7 -1@3)
+        (stmts~1,1
+         (asgn@7 index2~7
+          (dot@3 p~1 len@1)))))
+      (ret@,H
+       (tup@7
+        (call@9
+         (dot~7 p~1 substr@1)0@1
+         (infix@A \2D index2~6 1@1))
+        (call@W
+         (dot~7 p~1 substr@1)index2@1
+         (dot@A p~1 high@1)))))))
+   (if@,i
+    (elif@3
+     (infix@5 ==
+      (at~4 p~1 1@1)'\3A'@3)
+     (stmts~1,1
+      (ret
+       (tup@7
+        (call@9
+         (dot~7 p~1 substr@1)0@1 1@4)
+        (call@P
+         (dot~7 p~1 substr@1)2@1
+         (dot@5 p~1 high@1))))))))))

@@ -1,0 +1,113 @@
+(.nif27)
+(.indexat 1798             )
+(stmts@,A,../nimony/lib/std/times.nim
+ (type@9,I :Month.0.~7 .
+  (enum@2
+   (u 8)
+   (efld@,1 :mJan.0.~7 1)
+   (efld@3,1 :mFeb.0. 2)
+   (efld@9,1 :mMar.0. 3)
+   (efld@F,1 :mApr.0. 4)
+   (efld@L,1 :mMay.0. 5)
+   (efld@R,1 :mJun.0. 6)
+   (efld~7,2 :mJul.0. 7)
+   (efld~1,2 :mAug.0. 8)
+   (efld@5,2 :mSep.0. 9)
+   (efld@B,2 :mOct.0. 10)
+   (efld@H,2 :mNov.0. 11)
+   (efld@N,2 :mDec.0. 12)))
+ (type@B,M :WeekDay.0.~9 .
+  (enum@2
+   (u 8)
+   (efld~9,1 :dMon.0. 0)
+   (efld~3,1 :dTue.0. 1)
+   (efld@3,1 :dWed.0. 2)
+   (efld@9,1 :dThu.0. 3)
+   (efld@F,1 :dFri.0. 4)
+   (efld@L,1 :dSat.0. 5)
+   (efld@R,1 :dSun.0. 6)))
+ (type@8,P :Time.0.~6 .
+  (object@2 .
+   (fld~6,2 :seconds.0 .
+    (i@9 64))
+   (fld~6,3 :nanosecond.0 .
+    (i@C 32))))
+ (type@C,U :Duration.0.~A .
+  (object@2 .
+   (fld~A,1 :seconds.0 .
+    (i@9 64))
+   (fld~A,2 :nanosecond.0 .
+    (i@C 32))))
+ (type@C,Y :DateTime.0.~A .
+  (object@2 .
+   (fld~6,1 :year.0~4 .
+    (i@3 64))
+   (fld~5,2 :month.0~5 . Month.0.@3)
+   (fld~2,3 :monthday.0~8 .
+    (i@3 32))
+   (fld~6,4 :hour.0~4 .
+    (i@3 32))
+   (fld~4,5 :minute.0~6 .
+    (i@3 32))
+   (fld~4,6 :second.0~6 .
+    (i@3 32))
+   (fld@,7 :nanosecond.0~A .
+    (i@3 32))
+   (fld~3,8 :weekday.0~7 . WeekDay.0.@3)
+   (fld~3,9 :yearday.0~7 .
+    (i@3 32))))
+ (type@C,2z :`t.0.IAtupleAiS64ZAiS64ZAiS64. .
+  (object .
+   (fld@L :fld.0 .
+    (i 64))
+   (fld@T :fld.1 .
+    (i 64))
+   (fld@b :fld.2 .
+    (i 64))))
+ (type@P,3N :`t.0.IAarrayAiS32ZS12. .
+  (array
+   (i@5 32)12))
+ (gvar :`iniGuard.0. .
+  (bool).)
+ (proc :`ini.0.
+  (params).
+  (pragmas
+   (smry callsUnknown))
+  (stmts
+   (if
+    (elif `iniGuard.0.
+     (stmts
+      (ret .))))
+   (asgn `iniGuard.0.
+    (true))
+   (call `ini.0.sysvq0asl)
+   (call `ini.0.str7j0ifg)
+   (call `ini.0.pososrh1q1))))(.index@,A,../nimony/lib/std/times.nim
+ (h Month.0. 75)
+ (x@B,I mJan.0. 44)
+ (x@B,I mFeb.0. 26)
+ (x@B,I mMar.0. 25)
+ (x@B,I mApr.0. 25)
+ (x@B,I mMay.0. 25)
+ (x@B,I mJun.0. 25)
+ (x@B,I mJul.0. 25)
+ (x@B,I mAug.0. 25)
+ (x@B,I mSep.0. 25)
+ (x@B,I mOct.0. 25)
+ (x@B,I mNov.0. 26)
+ (x@B,I mDec.0. 26)
+ (h WeekDay.0. 28)
+ (x@D,M dMon.0. 46)
+ (x@D,M dTue.0. 25)
+ (x@D,M dWed.0. 25)
+ (x@D,M dThu.0. 25)
+ (x@D,M dFri.0. 25)
+ (x@D,M dSat.0. 25)
+ (x@D,M dSun.0. 25)
+ (h Time.0. 27)
+ (h Duration.0. 121)
+ (h DateTime.0. 125)
+ (h `t.0.IAtupleAiS64ZAiS64ZAiS64. 404)
+ (h `t.0.IAarrayAiS32ZS12. 153)
+ (h `iniGuard.0. 63)
+ (x `ini.0. 34))

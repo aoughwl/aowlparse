@@ -1,0 +1,69 @@
+(.nif27)
+(.vendor "Nifler")
+(.dialect "nim-parsed")
+(stmts@,1,../nimony/lib/std/oserrors.nim
+ (import syncio@7)
+ (comment@,2)
+ (type@F,5 OSErrorCode~D x . .
+  (distinct@2 int32@9))
+ (when@,7
+  (elif@5
+   (call@7 defined~7 windows@1)
+   (stmts~3,1
+    (import
+     (infix@E / windows~7 winlean@1))))
+  (else@,2
+   (stmts@2,1
+    (var@A errno~6 .
+     (pragmas
+      (kv@9 importc~7 "errno"@2)
+      (kv@Q header~6 "<errno.h>"@2))cint@h .))))
+ (when@,D
+  (elif@5
+   (call@7 defined~7 windows@1)
+   (stmts~3,1
+    (import
+     (infix@I / errorcodes~B errorcodes_windows@2))))
+  (else@,2
+   (stmts@2,1
+    (import
+     (infix@I / errorcodes~B errorcodes_posix@2)))))
+ (func@,I raiseOSError@5 x . .
+  (params@I
+   (param@1 errorCode . . OSErrorCode@B .)
+   (param@P additionalInfo . . . ""@H)).
+  (pragmas@12 noinline@2 raises@C noreturn@K).
+  (stmts@2,1
+   (comment)
+   (pragmax@,4
+    (pragmas
+     (cast@2 . noSideEffect@5))
+    (stmts@2,1
+     (when
+      (elif@5
+       (call@7 defined~7 windows@1)
+       (stmts~3,1
+        (raise
+         (call@O windowsToErrorCode~I
+          (dot@A errorCode~9 int32@1)))))
+      (else@,2
+       (stmts@2,1
+        (raise
+         (call@M posixToErrorCode~G
+          (dot@A errorCode~9 int32@1))))))))))
+ (proc@,U osLastError@5 x . .
+  (params@H)OSErrorCode@4
+  (pragmas@X sideEffect@2).
+  (stmts@2,1
+   (comment)
+   (when@,F
+    (elif@5
+     (call@7 defined~7 windows@1)
+     (stmts~3,1
+      (asgn@7 result~7
+       (cast@2 OSErrorCode@5
+        (call@U getLastError~C)))))
+    (else@,2
+     (stmts@2,1
+      (asgn@7 result~7
+       (call@D OSErrorCode~B errno@1))))))))

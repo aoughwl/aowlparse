@@ -1,0 +1,1327 @@
+(.nif27)
+(.indexat 46359            )
+(stmts@,1,../nimony/lib/std/dirs.nim
+ (const@A,3N,../nimony/lib/std/system.nim :strlit.0.I8031254106179394417. . LongString.0.sysvq0asl
+  (oconstr LongString.0.sysvq0asl
+   (kv fullLen.0 24)
+   (kv rc.0 0)
+   (kv capImpl.0 0)
+   (kv data.0 "ignore runnable examples")))
+ (gvar@E,R :errno.0.~6
+  (pragmas
+   (importc "errno")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (proc@,W :tryCreateFinalDir.0.@5
+  (params@N
+   (param@1 :dir.0 . Path.0.pat4k2dls@5))ErrorCode.0.sysvq0asl@D
+  (pragmas
+   (smry callsUnknown
+    (param 0 0 reads writes escapes)))
+  (stmts@2,1
+   (var :result.0 . ErrorCode.0.sysvq0asl@B,~1 .)
+   (var@4,4 :dirStr.0 . string.0.sysvq0asl@m,1u
+    (call@9 $.0.pat4k2dls dir.0@1))
+   (stmts@2,B
+    (var@F :`x.2 .
+     (ptr@H,C9,../nimony/lib/std/system/stringimpl.nim
+      (c 8))
+     (call toCString.0.sysvq0asl@1
+      (addr~6 dirStr.0)))
+    (var@8 :`x.3 .
+     (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+      (importc "int"))
+     (call mkdir.0.pososrh1q1~5 `x.2@7
+      (conv@J
+       (u@A,1O,../nimony/lib/std/posix/posix.nim 32
+        (importc "mode_t")
+        (header "<sys/types.h>"@V,~5))511)))
+    (if
+     (elif@3
+      (eq@V `x.3~Q
+       (suf@3 0 "i32"))
+      (stmts~1,1
+       (asgn@7 result.0~7 0@4,5,../nimony/lib/std/errorcodes/errorcodes.nim)))
+     (else
+      (stmts
+       (stmts
+        (stmts
+         (stmts@2,3
+          (var@P :`x.4 . ErrorCode.0.sysvq0asl@E,1N,../nimony/lib/std/errorcodes/errorcodes_posix.nim
+           (call posixToErrorCode.0.err0o7h081~G errno.0.@1))
+          (asgn@7 result.0~7 `x.4@I))))))))
+   (call =destroy.2.sysvq0asl dirStr.0)
+   (ret~2,~1 result.0)
+   (call =destroy.2.sysvq0asl dirStr.0)
+   (ret result.0)))
+ (proc@,n :createDir.0.@5
+  (params@F
+   (param@1 :dir.1 . Path.0.pat4k2dls@5))ErrorCode.0.sysvq0asl
+  (pragmas
+   (smry callsUnknown
+    (param 0 0 reads writes escapes)result 0))
+  (stmts@2,1
+   (scope@4,4
+    (stmts
+     (var@L,2c,../nimony/lib/std/paths.nim :`lf.0 . Path.0.pat4k2dls@6 dir.1@M,t,../nimony/lib/std/dirs.nim)
+     (var@X,2c,../nimony/lib/std/paths.nim :`lf.1 .
+      (bool~J,~1v)
+      (true@a,t,../nimony/lib/std/dirs.nim))
+     (var@n,2c,../nimony/lib/std/paths.nim :`lf.2 .
+      (bool~Z,~1v)
+      (true@q,t,../nimony/lib/std/dirs.nim))
+     (stmts@2,2d,../nimony/lib/std/paths.nim
+      (scope@4,D
+       (stmts
+        (var@L,7l,../nimony/lib/std/private/ospaths2.nim :`lf.4 . string.0.sysvq0asl@6
+         (dot@Q,2q,../nimony/lib/std/paths.nim `lf.0~4 data.0 0))
+        (var@Z,7l,../nimony/lib/std/private/ospaths2.nim :`lf.5 .
+         (bool@E,1H,../nimony/lib/std/system/basic_types.nim)`lf.1@X,2q,../nimony/lib/std/paths.nim)
+        (var@p,7l,../nimony/lib/std/private/ospaths2.nim :`lf.6 .
+         (bool@E,1H,../nimony/lib/std/system/basic_types.nim)`lf.2@h,2q,../nimony/lib/std/paths.nim)
+        (stmts@2,7m,../nimony/lib/std/private/ospaths2.nim
+         (stmts@2,3N,../nimony/lib/std/system.nim
+          (var :`x.5 . string.0.sysvq0asl
+           (oconstr@A,3N,../nimony/lib/std/system.nim string.0.sysvq0asl
+            (kv bytes.0 2334397804780677630u)
+            (kv more.0
+             (addr strlit.0.I8031254106179394417.)))))
+         (if@,X
+          (elif@3
+           (not `lf.5@4)
+           (stmts~1,1
+            (var@4 :`lf.7 . string.0.sysvq0asl@J,~Z
+             (call@A =dup.2.sysvq0asl `lf.4))
+            (if@,1
+             (elif@3 `lf.6
+              (stmts@B
+               (scope
+                (stmts
+                 (scope@4,2r,../nimony/lib/std/paths.nim
+                  (stmts
+                   (var@6,t,../nimony/lib/std/dirs.nim :`ii.6 . Path.0.pat4k2dls@N,~M
+                    (call@E,2r,../nimony/lib/std/paths.nim path.0.pat4k2dls~4 `lf.4@1))
+                   (var@8,u,../nimony/lib/std/dirs.nim :`ii.7 . ErrorCode.0.sysvq0asl@5,~N
+                    (call@N tryCreateFinalDir.0.~H `ii.6@1))
+                   (var@M,v,../nimony/lib/std/dirs.nim :`x.6 .
+                    (bool).)
+                   (if@M,v,../nimony/lib/std/dirs.nim
+                    (elif
+                     (eq~B `ii.7~4 0@4,5,../nimony/lib/std/errorcodes/errorcodes.nim)
+                     (stmts
+                      (asgn `x.6
+                       (true))))
+                    (else
+                     (stmts
+                      (asgn@7 `x.6
+                       (eq `ii.7~4 37@4,g,../nimony/lib/std/errorcodes/errorcodes.nim)))))
+                   (if@4,v,../nimony/lib/std/dirs.nim
+                    (elif@3 `x.6@F
+                     (stmts~1,1
+                      (var :`x.7 . string.0.sysvq0asl
+                       (oconstr@E,w,../nimony/lib/std/dirs.nim string.0.sysvq0asl
+                        (kv bytes.0 435644098052u)
+                        (kv more.0
+                         (nil))))))
+                    (else
+                     (stmts
+                      (stmts
+                       (stmts
+                        (stmts@2,3
+                         (call~2,~3 =destroy_SX50ath0pat4k2dls.0.pat4k2dls `ii.6)
+                         (call~2,~3 =destroy.2.sysvq0asl `lf.7)
+                         (ret `ii.7@6)))))))
+                   (call =destroy_SX50ath0pat4k2dls.0.pat4k2dls `ii.6))))))))
+            (scope@,2
+             (stmts
+              (while
+               (true@6)
+               (stmts@2,1
+                (var@A :`x.8 .
+                 (bool@,~s)
+                 (call isRootDir.0.ospaexnw61@1 `lf.7~7))
+                (if
+                 (elif@3 `x.8@7
+                  (stmts@J
+                   (jmp whileStmtLabel.2))))
+                (var@H,1 :`lhs.0 . string.0.sysvq0asl@4,~d
+                 (call parentDir.0.ospaexnw61@1 `lf.7~7))
+                (call@,1 =destroy.2.sysvq0asl `lf.7)
+                (asgn@8,1 `lf.7~8 `lhs.0@9)
+                (scope@,2
+                 (stmts
+                  (scope@4,2r,../nimony/lib/std/paths.nim
+                   (stmts
+                    (var@6,t,../nimony/lib/std/dirs.nim :`ii.8 . Path.0.pat4k2dls@N,~M
+                     (call@E,2r,../nimony/lib/std/paths.nim path.0.pat4k2dls~4 `lf.7@1))
+                    (var@8,u,../nimony/lib/std/dirs.nim :`ii.9 . ErrorCode.0.sysvq0asl@5,~N
+                     (call@N tryCreateFinalDir.0.~H `ii.8@1))
+                    (var@M,v,../nimony/lib/std/dirs.nim :`x.9 .
+                     (bool).)
+                    (if@M,v,../nimony/lib/std/dirs.nim
+                     (elif
+                      (eq~B `ii.9~4 0@4,5,../nimony/lib/std/errorcodes/errorcodes.nim)
+                      (stmts
+                       (asgn `x.9
+                        (true))))
+                     (else
+                      (stmts
+                       (asgn@7 `x.9
+                        (eq `ii.9~4 37@4,g,../nimony/lib/std/errorcodes/errorcodes.nim)))))
+                    (if@4,v,../nimony/lib/std/dirs.nim
+                     (elif@3 `x.9@F
+                      (stmts~1,1
+                       (var :`x.10 . string.0.sysvq0asl
+                        (oconstr@E,w,../nimony/lib/std/dirs.nim string.0.sysvq0asl
+                         (kv bytes.0 435644098052u)
+                         (kv more.0
+                          (nil))))))
+                     (else
+                      (stmts
+                       (stmts
+                        (stmts
+                         (stmts@2,3
+                          (call~2,~3 =destroy_SX50ath0pat4k2dls.0.pat4k2dls `ii.8)
+                          (call~2,~3 =destroy.2.sysvq0asl `lf.7)
+                          (ret `ii.9@6)))))))
+                    (call =destroy_SX50ath0pat4k2dls.0.pat4k2dls `ii.8)))))))))
+            (lab@,2 :whileStmtLabel.2)
+            (call =destroy.2.sysvq0asl `lf.7)))
+          (else
+           (stmts
+            (stmts
+             (stmts
+              (stmts@2,8
+               (stmts@2,3
+                (const@6 :start.0 .
+                 (i 64)
+                 (suf@8 0 "i64")))
+               (scope@4,4
+                (stmts
+                 (var@R,7,../nimony/lib/std/system/iterators.nim :`lf.9 .
+                  (i 64)
+                  (suf@K,8U,../nimony/lib/std/private/ospaths2.nim 0 "i64"))
+                 (var@J :`x.11 .
+                  (i@D,1A,../nimony/lib/std/system/stringimpl.nim 64)
+                  (call len.4.sysvq0asl@1 `lf.4~4))
+                 (var@U,7,../nimony/lib/std/system/iterators.nim :`lf.10 .
+                  (i 64)
+                  (sub@W,8V,../nimony/lib/std/private/ospaths2.nim
+                   (i 64)`x.11~5 2@2))
+                 (stmts@2,8,../nimony/lib/std/system/iterators.nim
+                  (var@4 :`lf.11 .
+                   (i@G,6C,../nimony/lib/std/private/ospaths2.nim 64)`lf.9@4)
+                  (scope@,1
+                   (stmts
+                    (while
+                     (le@8 `lf.11~2 `lf.10@3)
+                     (stmts@2,1
+                      (scope
+                       (stmts
+                        (var@b,8X,../nimony/lib/std/private/ospaths2.nim :`x.0 .
+                         (bool).)
+                        (var@K,8X,../nimony/lib/std/private/ospaths2.nim :`desugar.0 . `t.0.IAarrayAuS8ZS32.@A,2k,../nimony/lib/std/system.nim
+                         (aconstr `t.0.IAarrayAuS8ZS32.@F,~7H 0u 0u 0u 0u 0u 128u 0u 0u 0u 0u 0u 0u 0u 0u 0u 0u 0u 0u 0u 0u 0u 0u 0u 0u 0u 0u 0u 0u 0u 0u 0u 0u))
+                        (var@9,8X,../nimony/lib/std/private/ospaths2.nim :`x.12 .
+                         (c@L,6V,../nimony/lib/std/system/stringimpl.nim 8)
+                         (call \5B\5D.9.sysvq0asl `lf.4 `lf.11@5))
+                        (var@9,8X,../nimony/lib/std/private/ospaths2.nim :`desugar.1 .
+                         (u 64)
+                         (cast
+                          (u -1)`x.12))
+                        (if@b,8X,../nimony/lib/std/private/ospaths2.nim
+                         (elif
+                          (neq@A,2k,../nimony/lib/std/system.nim
+                           (bitand
+                            (u 8)
+                            (at `desugar.0@K,8X,../nimony/lib/std/private/ospaths2.nim
+                             (shr
+                              (u -1)`desugar.1@9,8X,../nimony/lib/std/private/ospaths2.nim 3u))
+                            (shl
+                             (u 8)1u
+                             (bitand
+                              (u -1)`desugar.1@9,8X,../nimony/lib/std/private/ospaths2.nim 7u)))0u)
+                          (stmts
+                           (var~J,1 :`x.1 .
+                            (bool).)
+                           (if~J,1
+                            (elif
+                             (eq~5 `lf.11~2 0@3)
+                             (stmts
+                              (asgn `x.1
+                               (true))))
+                            (else
+                             (stmts
+                              (stmts
+                               (stmts
+                                (var@J :`desugar.2 . `t.0.IAarrayAuS8ZS32.@E,2n,../nimony/lib/std/system.nim
+                                 (aconstr `t.0.IAarrayAuS8ZS32.~2,~7I 0u 0u 0u 0u 0u 128u 0u 0u 0u 0u 0u 0u 0u 0u 0u 0u 0u 0u 0u 0u 0u 0u 0u 0u 0u 0u 0u 0u 0u 0u 0u 0u))
+                                (var@3 :`x.13 .
+                                 (c@L,6V,../nimony/lib/std/system/stringimpl.nim 8)
+                                 (call \5B\5D.9.sysvq0asl `lf.4
+                                  (sub@6
+                                   (i 64)`lf.11~1 1@1)))
+                                (var@3 :`desugar.3 .
+                                 (u 64)
+                                 (cast
+                                  (u -1)`x.13))
+                                (asgn@2,2n,../nimony/lib/std/system.nim `x.1
+                                 (not
+                                  (neq@C
+                                   (bitand
+                                    (u 8)
+                                    (at `desugar.2@b,8Y,../nimony/lib/std/private/ospaths2.nim
+                                     (shr
+                                      (u -1)`desugar.3@L,8Y,../nimony/lib/std/private/ospaths2.nim 3u))
+                                    (shl
+                                     (u 8)1u
+                                     (bitand
+                                      (u -1)`desugar.3@L,8Y,../nimony/lib/std/private/ospaths2.nim 7u)))0u))))))))
+                           (asgn~J,1 `x.0 `x.1)))
+                         (else
+                          (stmts
+                           (stmts
+                            (stmts
+                             (asgn `x.0
+                              (false)))))))
+                        (if@6,8X,../nimony/lib/std/private/ospaths2.nim
+                         (elif@3 `x.0@S
+                          (stmts~1,2
+                           (scope
+                            (stmts
+                             (var@6,2q,../nimony/lib/std/paths.nim :`ii.5 . string.0.sysvq0asl@4,~2S
+                              (call@P,8Z,../nimony/lib/std/private/ospaths2.nim substr.0.sysvq0asl~6 `lf.4~B 0@1 `lf.11@4))
+                             (scope@4,2r,../nimony/lib/std/paths.nim
+                              (stmts
+                               (var@6,t,../nimony/lib/std/dirs.nim :`ii.10 . Path.0.pat4k2dls@N,~M
+                                (call@E,2r,../nimony/lib/std/paths.nim path.0.pat4k2dls~4 `ii.5@1))
+                               (var@8,u,../nimony/lib/std/dirs.nim :`ii.11 . ErrorCode.0.sysvq0asl@5,~N
+                                (call@N tryCreateFinalDir.0.~H `ii.10@1))
+                               (var@M,v,../nimony/lib/std/dirs.nim :`x.14 .
+                                (bool).)
+                               (if@M,v,../nimony/lib/std/dirs.nim
+                                (elif
+                                 (eq~B `ii.11~4 0@4,5,../nimony/lib/std/errorcodes/errorcodes.nim)
+                                 (stmts
+                                  (asgn `x.14
+                                   (true))))
+                                (else
+                                 (stmts
+                                  (asgn@7 `x.14
+                                   (eq `ii.11~4 37@4,g,../nimony/lib/std/errorcodes/errorcodes.nim)))))
+                               (if@4,v,../nimony/lib/std/dirs.nim
+                                (elif@3 `x.14@F
+                                 (stmts~1,1
+                                  (var :`x.15 . string.0.sysvq0asl
+                                   (oconstr@E,w,../nimony/lib/std/dirs.nim string.0.sysvq0asl
+                                    (kv bytes.0 435644098052u)
+                                    (kv more.0
+                                     (nil))))))
+                                (else
+                                 (stmts
+                                  (stmts
+                                   (stmts
+                                    (stmts@2,3
+                                     (call~2,~3 =destroy_SX50ath0pat4k2dls.0.pat4k2dls `ii.10)
+                                     (call~2,~3 =destroy.2.sysvq0asl `ii.5)
+                                     (ret `ii.11@6)))))))
+                               (call =destroy_SX50ath0pat4k2dls.0.pat4k2dls `ii.10)))
+                             (call =destroy.2.sysvq0asl `ii.5))))))))
+                      (call@,1 inc.1.Irn1g7r1.ospaexnw61
+                       (addr@4 `lf.11))))))
+                  (lab@,1 :whileStmtLabel.4))))
+               (lab@4,4 :forStmtLabel.3)
+               (if@,A
+                (elif@3 `lf.6
+                 (stmts@B
+                  (scope
+                   (stmts
+                    (scope@4,2r,../nimony/lib/std/paths.nim
+                     (stmts
+                      (var@6,t,../nimony/lib/std/dirs.nim :`ii.12 . Path.0.pat4k2dls@N,~M
+                       (call@E,2r,../nimony/lib/std/paths.nim path.0.pat4k2dls~4 `lf.4@1))
+                      (var@8,u,../nimony/lib/std/dirs.nim :`ii.13 . ErrorCode.0.sysvq0asl@5,~N
+                       (call@N tryCreateFinalDir.0.~H `ii.12@1))
+                      (var@M,v,../nimony/lib/std/dirs.nim :`x.16 .
+                       (bool).)
+                      (if@M,v,../nimony/lib/std/dirs.nim
+                       (elif
+                        (eq~B `ii.13~4 0@4,5,../nimony/lib/std/errorcodes/errorcodes.nim)
+                        (stmts
+                         (asgn `x.16
+                          (true))))
+                       (else
+                        (stmts
+                         (asgn@7 `x.16
+                          (eq `ii.13~4 37@4,g,../nimony/lib/std/errorcodes/errorcodes.nim)))))
+                      (if@4,v,../nimony/lib/std/dirs.nim
+                       (elif@3 `x.16@F
+                        (stmts~1,1
+                         (var :`x.17 . string.0.sysvq0asl
+                          (oconstr@E,w,../nimony/lib/std/dirs.nim string.0.sysvq0asl
+                           (kv bytes.0 435644098052u)
+                           (kv more.0
+                            (nil))))))
+                       (else
+                        (stmts
+                         (stmts
+                          (stmts
+                           (stmts@2,3
+                            (call~2,~3 =destroy_SX50ath0pat4k2dls.0.pat4k2dls `ii.12)
+                            (ret `ii.13@6)))))))
+                      (call =destroy_SX50ath0pat4k2dls.0.pat4k2dls `ii.12)))))))))))))))))
+      (lab@4,D :forStmtLabel.1))))
+   (lab@4,4 :forStmtLabel.0)
+   (ret 0@4,5,../nimony/lib/std/errorcodes/errorcodes.nim)))
+ (proc@,z :tryRemoveFinalDir.0.@5
+  (params@N
+   (param@1 :dir.2 . Path.0.pat4k2dls@5))ErrorCode.0.sysvq0asl@D
+  (pragmas
+   (smry callsUnknown
+    (param 0 0 reads writes escapes)))
+  (stmts@2,1
+   (var :result.1 . ErrorCode.0.sysvq0asl@B,~U .)
+   (var@4,4 :dirStr.1 . string.0.sysvq0asl@m,1R
+    (call@9 $.0.pat4k2dls dir.2@1))
+   (stmts@2,B
+    (var@F :`x.18 .
+     (ptr@H,C9,../nimony/lib/std/system/stringimpl.nim
+      (c 8))
+     (call toCString.0.sysvq0asl@1
+      (addr~6 dirStr.1)))
+    (var@8 :`x.19 .
+     (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+      (importc "int"))
+     (call rmdir.0.pososrh1q1~5 `x.18@7))
+    (if
+     (elif@3
+      (eq@O `x.19~J
+       (suf@3 0 "i32"))
+      (stmts~1,1
+       (asgn@7 result.1~7 0@4,5,../nimony/lib/std/errorcodes/errorcodes.nim)))
+     (else
+      (stmts
+       (stmts
+        (stmts
+         (stmts@2,3
+          (var@P :`x.20 . ErrorCode.0.sysvq0asl@E,1N,../nimony/lib/std/errorcodes/errorcodes_posix.nim
+           (call posixToErrorCode.0.err0o7h081~G errno.0.@1))
+          (asgn@7 result.1~7 `x.20@I))))))))
+   (call =destroy.2.sysvq0asl dirStr.1)
+   (ret~2,~1 result.1)
+   (call =destroy.2.sysvq0asl dirStr.1)
+   (ret result.1)))
+ (proc@,1G :removeDir.0.@5
+  (params@F
+   (param@1 :dir.3 . Path.0.pat4k2dls@5))ErrorCode.0.sysvq0asl
+  (pragmas
+   (smry callsUnknown
+    (param 0 0 reads writes escapes)result 0))
+  (stmts@2,1
+   (var@4,1 :res.1 . ErrorCode.0.sysvq0asl@7,~m
+    (call@N tryRemoveFinalDir.0.~H dir.3@1))
+   (var@I,2 :`x.21 .
+    (bool).)
+   (if@I,2
+    (elif
+     (eq~B res.1~4 0@4,5,../nimony/lib/std/errorcodes/errorcodes.nim)
+     (stmts
+      (asgn `x.21
+       (true))))
+    (else
+     (stmts
+      (asgn@7 `x.21
+       (eq res.1~4 38@4,h,../nimony/lib/std/errorcodes/errorcodes.nim)))))
+   (if@,2
+    (elif@3 `x.21@F
+     (stmts~1,1
+      (var :`x.22 . string.0.sysvq0asl
+       (oconstr@C,1L,../nimony/lib/std/dirs.nim string.0.sysvq0asl
+        (kv bytes.0 435644098052u)
+        (kv more.0
+         (nil))))))
+    (else
+     (stmts
+      (stmts
+       (stmts
+        (stmts@2,3
+         (ret res.1@6)))))))
+   (ret 0@4,5,../nimony/lib/std/errorcodes/errorcodes.nim)))
+ (proc@,1O :tryRemoveFile.0.@5
+  (params@J
+   (param@1 :file.0 . Path.0.pat4k2dls@6))ErrorCode.0.sysvq0asl@E
+  (pragmas
+   (smry callsUnknown
+    (param 0 0 reads writes escapes)))
+  (stmts@2,1
+   (var@4 :result.2 . ErrorCode.0.sysvq0asl@7,~t .)
+   (var@4 :fileStr.0 . string.0.sysvq0asl@m,16
+    (call@A $.0.pat4k2dls file.0@1))
+   (stmts@2,7
+    (var@H :`x.23 .
+     (ptr@H,C9,../nimony/lib/std/system/stringimpl.nim
+      (c 8))
+     (call toCString.0.sysvq0asl@1
+      (addr~7 fileStr.0)))
+    (var@9 :`x.24 .
+     (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+      (importc "int"))
+     (call unlink.0.pososrh1q1~6 `x.23@8))
+    (if
+     (elif@3
+      (eq@Q `x.24~K
+       (suf@3 0 "i32"))
+      (stmts~1,1
+       (asgn@7 result.2~7 0@4,5,../nimony/lib/std/errorcodes/errorcodes.nim)))
+     (else
+      (stmts
+       (stmts
+        (stmts
+         (stmts@2,3
+          (var@P :`x.25 . ErrorCode.0.sysvq0asl@E,1N,../nimony/lib/std/errorcodes/errorcodes_posix.nim
+           (call posixToErrorCode.0.err0o7h081~G errno.0.@1))
+          (asgn@7 result.2~7 `x.25@I))))))))
+   (call =destroy.2.sysvq0asl fileStr.0)
+   (ret~2,~1 result.2)
+   (call =destroy.2.sysvq0asl fileStr.0)
+   (ret result.2)))
+ (proc@,1b :removeFile.0.@5
+  (params@G
+   (param@1 :file.1 . Path.0.pat4k2dls@6))ErrorCode.0.sysvq0asl
+  (pragmas
+   (smry callsUnknown
+    (param 0 0 reads writes escapes)result 0))
+  (stmts@2,1
+   (var@4,2 :res.2 . ErrorCode.0.sysvq0asl@7,~18
+    (call@J tryRemoveFile.0.~D file.1@1))
+   (var@I,3 :`x.26 .
+    (bool).)
+   (if@I,3
+    (elif
+     (eq~B res.2~4 0@4,5,../nimony/lib/std/errorcodes/errorcodes.nim)
+     (stmts
+      (asgn `x.26
+       (true))))
+    (else
+     (stmts
+      (asgn@7 `x.26
+       (eq res.2~4 38@4,h,../nimony/lib/std/errorcodes/errorcodes.nim)))))
+   (if@,3
+    (elif@3 `x.26@F
+     (stmts~1,1
+      (var :`x.27 . string.0.sysvq0asl
+       (oconstr@C,1h,../nimony/lib/std/dirs.nim string.0.sysvq0asl
+        (kv bytes.0 435644098052u)
+        (kv more.0
+         (nil))))))
+    (else
+     (stmts
+      (stmts
+       (stmts
+        (stmts@2,3
+         (ret res.2@6)))))))
+   (ret 0@4,5,../nimony/lib/std/errorcodes/errorcodes.nim)))
+ (type@C,1l :DirEntry.0.~A .
+  (object@2 .
+   (fld~6,1 :kind.0~4 . PathComponent.0.osc4bsu0d1@3)
+   (fld~6,2 :path.0~4 . Path.0.pat4k2dls@3)))
+ (type@D,1p :DirWalker.0.~B .
+  (object@2 .
+   (fld~9,5 :pimpl.0 .
+    (ptr@7 DIR.0.pososrh1q1@4))
+   (fld~B,6 :dir.0 . Path.0.pat4k2dls@5)
+   (fld~B,7 :status.0 . ErrorCode.0.sysvq0asl@8)))
+ (proc@,1y :tryOpenDir.0.@5
+  (params@G
+   (param@1 :dir.4 . Path.0.pat4k2dls@A))DirWalker.0.@I
+  (pragmas
+   (smry writeGlobal readGlobal callsUnknown
+    (param 0 0 reads writes escapes)))
+  (stmts@2,1
+   (var :result.3 . DirWalker.0.@G,~1 .)
+   (call =wasmoved_SX44irX57alker0dir38pj6l.0.
+    (addr result.3))
+   (call@,1 =destroy_SX44irX57alker0dir38pj6l.0.
+    (addr result.3))
+   (stmts@O,1
+    (var :`tmp.1 . Path.0.pat4k2dls@1,~2 dir.4)
+    (call =wasmoved_SX50ath0pat4k2dls.0.pat4k2dls
+     (addr dir.4)))
+   (asgn@7,1 result.3~7
+    (oconstr@B DirWalker.0.~2,~2
+     (kv pimpl.0
+      (conv@s,L,../nimony/lib/std/system/defaults.nim
+       (ptr@D,1v,../nimony/lib/std/dirs.nim DIR.0.pososrh1q1@4)
+       (nil)))
+     (kv@4 dir.0~3 `tmp.1@2)
+     (kv@H status.0~6 17@4,M,../nimony/lib/std/errorcodes/errorcodes.nim)))
+   (stmts@2,A
+    (var@4 :dirStr.2 . string.0.sysvq0asl@k,M
+     (call@9 $.0.pat4k2dls
+      (dot@7 result.3~6 dir.0 0)))
+    (var@T,1 :`x.28 .
+     (ptr@H,C9,../nimony/lib/std/system/stringimpl.nim
+      (c 8))
+     (call toCString.0.sysvq0asl@1
+      (addr~6 dirStr.2)))
+    (var@M,1 :`x.29 .
+     (ptr@P,6R,../nimony/lib/std/posix/posix.nim DIR.0.pososrh1q1@4)
+     (call opendir.0.pososrh1q1~7 `x.28@7))
+    (asgn@D,1
+     (dot~7 result.3~6 pimpl.0 0)`x.29@9)
+    (if@,2
+     (elif@3
+      (eq@D
+       (dot~7 result.3~6 pimpl.0 0)
+       (nil))
+      (stmts~1,1
+       (var@W :`x.30 . ErrorCode.0.sysvq0asl@E,1N,../nimony/lib/std/errorcodes/errorcodes_posix.nim
+        (call posixToErrorCode.0.err0o7h081~G errno.0.@1))
+       (asgn@E
+        (dot~8 result.3~6 status.0 0)`x.30@I)))
+     (else
+      (stmts
+       (stmts
+        (stmts
+         (stmts@2,3
+          (asgn@E
+           (dot~8 result.3~6 status.0 0)0@4,5,../nimony/lib/std/errorcodes/errorcodes.nim))))))))
+   (call =destroy.2.sysvq0asl dirStr.2)
+   (call =destroy_SX50ath0pat4k2dls.0.pat4k2dls dir.4)
+   (ret~2,~1 result.3)
+   (call =destroy.2.sysvq0asl dirStr.2)
+   (call =destroy_SX50ath0pat4k2dls.0.pat4k2dls dir.4)
+   (ret result.3)))
+ (proc@,2G :fillDirEntry.0.@5
+  (params@H
+   (param@1 :w.0 .
+    (ptr@3 DirWalker.0.@4))
+   (param@J :e.0 .
+    (ptr@3 DirEntry.0.@4))).
+  (pragmas
+   (smry
+    (param 0 0)
+    (param 1 1)))
+  (stmts@2,1))
+ (proc@2,2V :pathComponentFromEntry.0.@5
+  (params@R
+   (param@1 :w.1 .
+    (ptr@3 DirWalker.0.@4))
+   (param@J :name.0 . string.0.sysvq0asl@6)
+   (param@X :dType.0 .
+    (u@7 8)))PathComponent.0.osc4bsu0d1@m
+  (pragmas
+   (smry callsUnknown
+    (param 0 0 reads writes escapes)
+    (param 1 1 reads writes escapes)
+    (param 2 2 reads)))
+  (stmts@2,1
+   (var :result.4 . PathComponent.0.osc4bsu0d1@7,~k .)
+   (var@N :`x.31 .
+    (bool).)
+   (if@N
+    (elif
+     (eq~E dType.0~6
+      (suf@I,6j,../nimony/lib/std/posix/posix.nim 0u "u8"))
+     (stmts
+      (asgn `x.31
+       (true))))
+    (else
+     (stmts
+      (asgn@9 `x.31
+       (eq dType.0~6
+        (suf@E,6p,../nimony/lib/std/posix/posix.nim 10u "u8"))))))
+   (if
+    (elif@3 `x.31@K
+     (stmts~1,1
+      (var@F :`desugar.4 . string.0.sysvq0asl
+       (call $.0.pat4k2dls
+        (dot@2
+         (deref~1 w.1)dir.0 0)))
+      (var@S :`x.32 .
+       (i@D,1A,../nimony/lib/std/system/stringimpl.nim 64)
+       (call len.4.sysvq0asl `desugar.4~D))
+      (var@S :`x.33 .
+       (i@D,1A,../nimony/lib/std/system/stringimpl.nim 64)
+       (call len.4.sysvq0asl
+        (oconstr~4 string.0.sysvq0asl
+         (kv bytes.0 12033u)
+         (kv more.0
+          (nil)))))
+      (var@S :`x.34 .
+       (i@D,1A,../nimony/lib/std/system/stringimpl.nim 64)
+       (call len.4.sysvq0asl name.0@2))
+      (var@S :`desugar.5 . string.0.sysvq0asl
+       (call newStringOfCap.0.sysvq0asl
+        (add
+         (i -1)
+         (add
+          (i -1)`x.32 `x.33)`x.34)))
+      (call@S add.2.sysvq0asl
+       (addr `desugar.5)`desugar.4~D)
+      (call@S add.2.sysvq0asl
+       (addr `desugar.5)
+       (oconstr~4 string.0.sysvq0asl
+        (kv bytes.0 12033u)
+        (kv more.0
+         (nil))))
+      (call@S add.2.sysvq0asl
+       (addr `desugar.5)name.0@2)
+      (var@4 :fullPath.0 . string.0.sysvq0asl@i,~2 `desugar.5@O)
+      (call@S =wasMoved.2.sysvq0asl
+       (addr `desugar.5))
+      (var@4,1 :s.0 . Stat.0.pososrh1q1@C
+       (oconstr@C Stat.0.pososrh1q1
+        (kv st_dev.0
+         (suf@n,F,../nimony/lib/std/system/defaults.nim 0u "u64"))
+        (kv st_ino.0
+         (suf@n,F,../nimony/lib/std/system/defaults.nim 0u "u64"))
+        (kv st_size.0
+         (suf@l,E,../nimony/lib/std/system/defaults.nim 0 "i64"))
+        (kv st_mode.0
+         (suf@n,D,../nimony/lib/std/system/defaults.nim 0u "u32"))
+        (kv st_mtime.0
+         (suf@l,E,../nimony/lib/std/system/defaults.nim 0 "i64"))
+        (kv st_mtim.0
+         (oconstr Timespec.0.pososrh1q1@i,1p,../nimony/lib/std/posix/posix.nim
+          (kv tv_sec.0
+           (suf@l,E,../nimony/lib/std/system/defaults.nim 0 "i64"))
+          (kv tv_nsec.0
+           (suf@l,E,../nimony/lib/std/system/defaults.nim 0 "i64"))))))
+      (var@H,2 :`x.35 .
+       (ptr@H,C9,../nimony/lib/std/system/stringimpl.nim
+        (c 8))
+       (call toCString.0.sysvq0asl@1
+        (addr~8 fullPath.0)))
+      (var@8,2 :`x.36 .
+       (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+        (importc "int"))
+       (call lstat.0.pososrh1q1~5 `x.35@9
+        (addr@L s.0)))
+      (if@,2
+       (elif@3
+        (eq@T `x.36~O
+         (conv@3
+          (i@H,16,../nimony/lib/std/system/comparisons.nim 32)0))
+        (stmts~1,1
+         (var@A :`x.37 .
+          (bool@F,3V,../nimony/lib/std/posix/posix.nim)
+          (call S_ISLNK.0.pososrh1q1~7
+           (dot@2 s.0~1 st_mode.0 0)))
+         (if
+          (elif@3 `x.37@7
+           (stmts~1,2
+            (var@4 :targetStat.0 . Stat.0.pososrh1q1@8,~4
+             (oconstr@L Stat.0.pososrh1q1~D,~4
+              (kv st_dev.0
+               (suf@n,F,../nimony/lib/std/system/defaults.nim 0u "u64"))
+              (kv st_ino.0
+               (suf@n,F,../nimony/lib/std/system/defaults.nim 0u "u64"))
+              (kv st_size.0
+               (suf@l,E,../nimony/lib/std/system/defaults.nim 0 "i64"))
+              (kv st_mode.0
+               (suf@n,D,../nimony/lib/std/system/defaults.nim 0u "u32"))
+              (kv st_mtime.0
+               (suf@l,E,../nimony/lib/std/system/defaults.nim 0 "i64"))
+              (kv st_mtim.0
+               (oconstr Timespec.0.pososrh1q1@i,1p,../nimony/lib/std/posix/posix.nim
+                (kv tv_sec.0
+                 (suf@l,E,../nimony/lib/std/system/defaults.nim 0 "i64"))
+                (kv tv_nsec.0
+                 (suf@l,E,../nimony/lib/std/system/defaults.nim 0 "i64"))))))
+            (var@j,1 :`x.38 .
+             (bool).)
+            (var@G,1 :`x.39 .
+             (ptr@H,C9,../nimony/lib/std/system/stringimpl.nim
+              (c 8))
+             (call toCString.0.sysvq0asl@1
+              (addr~8 fullPath.0)))
+            (var@7,1 :`x.40 .
+             (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+              (importc "int"))
+             (call stat.0.pososrh1q1~4 `x.39@9
+              (addr@L targetStat.0)))
+            (if@j,1
+             (elif
+              (eq~5 `x.40~X
+               (conv@3
+                (i@H,16,../nimony/lib/std/system/comparisons.nim 32)0))
+              (stmts
+               (var@B :`x.41 .
+                (bool@F,3P,../nimony/lib/std/posix/posix.nim)
+                (call S_ISDIR.0.pososrh1q1~7
+                 (dot@B targetStat.0~A st_mode.0 0)))
+               (asgn@B `x.38 `x.41)))
+             (else
+              (stmts
+               (asgn `x.38
+                (false)))))
+            (if@,1
+             (elif@3 `x.38@g
+              (stmts~1,1
+               (asgn@7 result.4~7 3@4,H,../nimony/lib/std/private/oscommons.nim)))
+             (else
+              (stmts
+               (stmts
+                (stmts
+                 (stmts@2,3
+                  (asgn@7 result.4~7 1@4,F,../nimony/lib/std/private/oscommons.nim)))))))))
+          (else
+           (stmts
+            (stmts
+             (stmts
+              (var@C,7 :`x.42 .
+               (bool@F,3P,../nimony/lib/std/posix/posix.nim)
+               (call S_ISDIR.0.pososrh1q1~7
+                (dot@2 s.0~1 st_mode.0 0)))
+              (if
+               (elif@5,7 `x.42@7
+                (stmts~3,1
+                 (asgn@7 result.4~7 2@4,G,../nimony/lib/std/private/oscommons.nim)))
+               (else
+                (stmts
+                 (stmts
+                  (stmts
+                   (stmts@2,A
+                    (asgn@7 result.4~7 0@4,E,../nimony/lib/std/private/oscommons.nim))))))))))))))
+       (else
+        (stmts
+         (stmts
+          (stmts
+           (stmts@2,E
+            (asgn@7 result.4~7 0@4,E,../nimony/lib/std/private/oscommons.nim)))))))
+      (call =destroy.2.sysvq0asl fullPath.0)
+      (call =destroy.2.sysvq0asl `desugar.5)
+      (call =destroy.2.sysvq0asl `desugar.4)))
+    (else
+     (stmts
+      (stmts
+       (stmts
+        (if
+         (elif@5,I
+          (eq@6 dType.0~6
+           (suf@E,6m,../nimony/lib/std/posix/posix.nim 4u "u8"))
+          (stmts~3,1
+           (asgn@7 result.4~7 2@4,G,../nimony/lib/std/private/oscommons.nim)))
+         (else
+          (stmts
+           (stmts
+            (stmts
+             (stmts@2,L
+              (asgn@7 result.4~7 0@4,E,../nimony/lib/std/private/oscommons.nim))))))))))))
+   (ret~2,~1 result.4)))
+ (proc@,2t :tryNextDir.0.@5
+  (params@G
+   (param@1 :w.2 .
+    (ptr@3 DirWalker.0.@4))
+   (param@J :e.1 .
+    (ptr@3 DirEntry.0.@4)))
+  (bool@b)
+  (pragmas
+   (smry callsUnknown
+    (param 0 0 reads writes escapes)
+    (param 1 0 reads writes escapes)))
+  (stmts@2,1
+   (var :result.5 .
+    (bool@B,19,../nimony/lib/std/system/basic_types.nim).)
+   (stmts@2,G
+    (asgn@7 result.5~7
+     (false@2))
+    (scope@,1
+     (stmts
+      (while
+       (eq@F
+        (dot~8
+         (deref~1 w.2)status.0 0)0@4,5,../nimony/lib/std/errorcodes/errorcodes.nim)
+       (stmts@2,1
+        (var@4 :entry.0 .
+         (ptr@T,6T,../nimony/lib/std/posix/posix.nim Dirent.0.pososrh1q1@4)
+         (call@F readdir.0.pososrh1q1~7
+          (dot@2
+           (deref~1 w.2)pimpl.0 0)))
+        (if@,1
+         (elif@3
+          (eq@6 entry.0~6
+           (nil))
+          (stmts~1,1
+           (if
+            (elif@3
+             (eq@9
+              (dot~8
+               (deref~1 w.2)status.0 0)0@4,5,../nimony/lib/std/errorcodes/errorcodes.nim)
+             (stmts~1,1
+              (var@R :`x.43 . ErrorCode.0.sysvq0asl@E,1N,../nimony/lib/std/errorcodes/errorcodes_posix.nim
+               (call posixToErrorCode.0.err0o7h081~G errno.0.@1))
+              (asgn@9
+               (dot~8
+                (deref~1 w.2)status.0 0)`x.43@I))))
+           (asgn@7,2 result.5~7
+            (false@2))
+           (jmp@,3 whileStmtLabel.0)))
+         (else
+          (stmts
+           (stmts
+            (stmts
+             (stmts@2,6
+              (asgn@7 result.5~7
+               (true@2))
+              (var@Z,1 :`x.44 .
+               (i@D,1T,../nimony/lib/std/system/panics.nim 64)
+               (call nimIcheckB.0.sysvq0asl 0@8 255@i,6P,../nimony/lib/std/posix/posix.nim))
+              (var@4,1 :cstr.0 .
+               (ptr@C
+                (c 8))
+               (cast@7
+                (ptr@5
+                 (c 8))
+                (addr@J
+                 (at@5
+                  (dot
+                   (deref entry.0~5)d_name.0 0)`x.44))))
+              (var@4,2 :name.1 . string.0.sysvq0asl@g,~q
+               (call@J fromCString.0.sysvq0asl~C cstr.0))
+              (var@F,4 :`x.45 .
+               (bool).)
+              (var@8,4 :`x.46 .
+               (bool@G,9T,../nimony/lib/std/system/stringimpl.nim)
+               (call ==.20.sysvq0asl name.1~5
+                (oconstr@3 string.0.sysvq0asl
+                 (kv bytes.0 11777u)
+                 (kv more.0
+                  (nil)))))
+              (if@F,4
+               (elif `x.46~7
+                (stmts
+                 (asgn `x.45
+                  (true))))
+               (else
+                (stmts
+                 (var@8 :`x.47 .
+                  (bool@G,9T,../nimony/lib/std/system/stringimpl.nim)
+                  (call ==.20.sysvq0asl name.1~5
+                   (oconstr@3 string.0.sysvq0asl
+                    (kv bytes.0 3026434u)
+                    (kv more.0
+                     (nil)))))
+                 (asgn@8 `x.45 `x.47))))
+              (if@,4
+               (elif@3 `x.45@C
+                (stmts~1,1
+                 (var :`x.48 . string.0.sysvq0asl
+                  (oconstr@I,3P,../nimony/lib/std/dirs.nim string.0.sysvq0asl
+                   (kv bytes.0 482804986628u)
+                   (kv more.0
+                    (nil))))))
+               (else
+                (stmts
+                 (stmts
+                  (stmts
+                   (stmts@2,3
+                    (var@V :`x.49 . PathComponent.0.osc4bsu0d1@9,~v
+                     (call pathComponentFromEntry.0.~M w.2@1 name.1@4
+                      (dot@F
+                       (deref entry.0~5)d_type.0 0)))
+                    (asgn@7
+                     (dot~6
+                      (deref~1 e.1)kind.0 0)`x.49@O)
+                    (var@1,1 :`lhs.2 .
+                     (ptr Path.0.pat4k2dls@,~1e)
+                     (addr
+                      (dot
+                       (deref~1 e.1)path.0 0)))
+                    (call@1,1 =destroy_SX50ath0pat4k2dls.0.pat4k2dls
+                     (deref `lhs.2))
+                    (var@D,1 :`x.50 . Path.0.pat4k2dls@D,Q,../nimony/lib/std/paths.nim
+                     (call path.0.pat4k2dls~4 name.1@1))
+                    (asgn@7,1
+                     (deref~6 `lhs.2)`x.50@6)
+                    (call~2,~3 =destroy.2.sysvq0asl name.1)
+                    (jmp@,2 whileStmtLabel.0)))))))))
+            (call =destroy.2.sysvq0asl name.1)))))))))
+    (lab@,1 :whileStmtLabel.0))
+   (ret~2,~1 result.5)))
+ (proc@,3U :tryCloseDir.0.@5
+  (params@H
+   (param@1 :w.3 .
+    (ptr@3 DirWalker.0.@4)))ErrorCode.0.sysvq0asl@K
+  (pragmas
+   (smry callsUnknown
+    (param 0 0 reads writes escapes)))
+  (stmts@2,1
+   (var :result.6 . ErrorCode.0.sysvq0asl@B,~2z .)
+   (stmts@2,6
+    (var@B :`x.51 .
+     (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+      (importc "int"))
+     (call closedir.0.pososrh1q1~8
+      (dot@2
+       (deref~1 w.3)pimpl.0 0)))
+    (if
+     (elif@3
+      (eq@I `x.51~A
+       (suf@3 0 "i32"))
+      (stmts~1,1
+       (asgn@7 result.6~7 0@4,5,../nimony/lib/std/errorcodes/errorcodes.nim)))
+     (else
+      (stmts
+       (stmts
+        (stmts
+         (stmts@2,3
+          (var@P :`x.52 . ErrorCode.0.sysvq0asl@E,1N,../nimony/lib/std/errorcodes/errorcodes_posix.nim
+           (call posixToErrorCode.0.err0o7h081~G errno.0.@1))
+          (asgn@7 result.6~7 `x.52@I))))))))
+   (ret~2,~1 result.6)))
+ (proc@,4C :getCurrentDir.0.@5
+  (params@J)`t.0.IAtupleSX45rrorX43ode0sysvq0aslSX50ath0pat4k2dls.
+  (pragmas
+   (smry writeGlobal readGlobal callsUnknown))
+  (stmts@2,1
+   (var :result.7 . `t.0.IAtupleSX45rrorX43ode0sysvq0aslSX50ath0pat4k2dls.@R,~3h .)
+   (asgn
+    (dot result.7 fld.0 0)0@4,5,../nimony/lib/std/errorcodes/errorcodes.nim)
+   (call =wasmoved_SX50ath0pat4k2dls.0.pat4k2dls
+    (addr
+     (dot result.7 fld.1 0)))
+   (stmts@2,E
+    (const@6 :bufSize.0 .
+     (i 64)
+     (suf@A 1024 "i64"))
+    (var@4,1 :buffer.0 . string.0.sysvq0asl@k,~1x
+     (call@I newString.0.sysvq0asl~9
+      (suf~6,~1 1024 "i64")))
+    (var@Q,2 :`x.53 .
+     (ptr@H,C9,../nimony/lib/std/system/stringimpl.nim
+      (c 8))
+     (call toCString.0.sysvq0asl~9
+      (addr~G buffer.0)))
+    (var@9,2 :`x.54 .
+     (ptr@S,4R,../nimony/lib/std/posix/posix.nim
+      (c 8))
+     (call getcwd.0.pososrh1q1~6 `x.53@H
+      (suf@7,~2 1024 "i64")))
+    (if@,2
+     (elif@3
+      (eq@a
+       (conv~U
+        (ptr@L,B,../nimony/lib/std/system/comparisons.nim
+         (void))`x.54)
+       (nil))
+      (stmts~1,1
+       (stmts@C
+        (var@C :`x.55 .
+         (i@Q,6,../nimony/lib/std/oserrors.nim 32)
+         (call osLastError.0.osezuyu63~B))
+        (var :`canRaise.0 . ErrorCode.0.sysvq0asl@,J,../nimony/lib/std/oserrors.nim
+         (call raiseOSError.0.osezuyu63~C `x.55@C
+          (oconstr@y,J,../nimony/lib/std/oserrors.nim string.0.sysvq0asl
+           (kv bytes.0 0u)
+           (kv more.0
+            (nil)))))
+        (if
+         (elif `canRaise.0
+          (stmts
+           (call =destroy.2.sysvq0asl buffer.0)
+           (ret
+            (oconstr `t.0.IAtupleSX45rrorX43ode0sysvq0aslSX50ath0pat4k2dls.
+             (kv fld.0 `canRaise.0)
+             (kv fld.1
+              (dot result.7 fld.1 0)))))))))))
+    (var@4,4 :i.0 .
+     (i 64)0@4)
+    (scope@,5
+     (stmts
+      (while
+       (true)
+       (stmts
+        (var@L :`x.56 .
+         (bool).)
+        (var@G :`x.57 .
+         (i@D,1A,../nimony/lib/std/system/stringimpl.nim 64)
+         (call len.4.sysvq0asl@1 buffer.0~6))
+        (if@L
+         (elif
+          (lt~D i.0~2 `x.57@8)
+          (stmts
+           (var@4 :`x.58 .
+            (c@L,6V,../nimony/lib/std/system/stringimpl.nim 8)
+            (call \5B\5D.9.sysvq0asl buffer.0 i.0@7))
+           (asgn@2,1m,../nimony/lib/std/system/comparisons.nim `x.56
+            (not
+             (eq@7 `x.58@T,4X,../nimony/lib/std/dirs.nim '\00'@g,4X,../nimony/lib/std/dirs.nim)))))
+         (else
+          (stmts
+           (asgn `x.56
+            (false)))))
+        (if
+         (elif `x.56@L
+          (stmts@i
+           (call inc.1.Irn1g7r1.
+            (addr@4 i.0))))
+         (else
+          (stmts
+           (break))))))))
+    (lab@,5 :whileStmtLabel.0)
+    (call@6,6 shrink.1.sysvq0asl~6
+     (addr@1 buffer.0)i.0@9)
+    (call@,7 =destroy_SX50ath0pat4k2dls.0.pat4k2dls
+     (dot result.7 fld.1 0))
+    (var@J,7 :`x.59 . Path.0.pat4k2dls@D,Q,../nimony/lib/std/paths.nim
+     (call path.0.pat4k2dls~5 buffer.0@1))
+    (asgn@7,7 result.7~7
+     (oconstr@C `t.0.IAtupleSX45rrorX43ode0sysvq0aslSX50ath0pat4k2dls.
+      (kv fld.0 0@4,5,../nimony/lib/std/errorcodes/errorcodes.nim)
+      (kv fld.1 `x.59))))
+   (call =destroy.2.sysvq0asl buffer.0)
+   (ret~2,~1
+    (oconstr `t.0.IAtupleSX45rrorX43ode0sysvq0aslSX50ath0pat4k2dls.
+     (kv fld.0 0@4,5,../nimony/lib/std/errorcodes/errorcodes.nim)
+     (kv fld.1
+      (dot result.7 fld.1 0))))
+   (call =destroy.2.sysvq0asl buffer.0)
+   (ret result.7)))
+ (proc@,4a :setCurrentDir.0.@5
+  (params@J
+   (param@1 :dir.6 . Path.0.pat4k2dls@5))ErrorCode.0.sysvq0asl
+  (pragmas
+   (smry callsUnknown
+    (param 0 0 reads writes escapes)))
+  (stmts@2,1
+   (var@4,6 :dirStr.3 . string.0.sysvq0asl@m,~2C
+    (call@9 $.0.pat4k2dls dir.6@1))
+   (stmts@2,B
+    (var@F :`x.60 .
+     (ptr@H,C9,../nimony/lib/std/system/stringimpl.nim
+      (c 8))
+     (call toCString.0.sysvq0asl@1
+      (addr~6 dirStr.3)))
+    (var@8 :`x.61 .
+     (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+      (importc "int"))
+     (call chdir.0.pososrh1q1~5 `x.60@7))
+    (if
+     (elif@3
+      (not@2,1m,../nimony/lib/std/system/comparisons.nim
+       (eq@7 `x.61@C,4n,../nimony/lib/std/dirs.nim
+        (suf@Y,4n,../nimony/lib/std/dirs.nim 0 "i32")))
+      (stmts~1,1
+       (stmts@C
+        (var@C :`x.62 .
+         (i@Q,6,../nimony/lib/std/oserrors.nim 32)
+         (call osLastError.0.osezuyu63~B))
+        (var :`canRaise.0 . ErrorCode.0.sysvq0asl@,J,../nimony/lib/std/oserrors.nim
+         (call raiseOSError.0.osezuyu63~C `x.62@C
+          (oconstr@y,J,../nimony/lib/std/oserrors.nim string.0.sysvq0asl
+           (kv bytes.0 0u)
+           (kv more.0
+            (nil)))))
+        (if
+         (elif `canRaise.0
+          (stmts
+           (call =destroy.2.sysvq0asl dirStr.3)
+           (ret `canRaise.0)))))))))
+   (call =destroy.2.sysvq0asl dirStr.3)
+   (ret 0@4,5,../nimony/lib/std/errorcodes/errorcodes.nim)))
+ (proc@m,4W :inc.1.Irn1g7r1.
+  (params@L,E,../nimony/lib/std/system/arithmetics.nim
+   (param@1 :x.1 .
+    (ptr@3
+     (i 64)))).@,E,../nimony/lib/std/system/arithmetics.nim
+  (pragmas@W,E,../nimony/lib/std/system/arithmetics.nim
+   (inline 0 20)
+   (smry@m,4X,../nimony/lib/std/dirs.nim
+    (param 0 0 reads writes)))
+  (stmts@2,F,../nimony/lib/std/system/arithmetics.nim
+   (asgn@2,1
+    (deref~2 x.1)
+    (add@6
+     (i 64)
+     (deref@1 x.1)
+     (conv@U,~F
+      (i 64)1@1)))))
+ (proc@D,1p :=destroy_SX44irX45ntry0dir38pj6l.0.
+  (params
+   (param :dest.0 . DirEntry.0.~1,~4)).
+  (pragmas
+   (smry callsUnknown
+    (param 0 0 reads writes escapes)))
+  (stmts
+   (call =destroy_SX50ath0pat4k2dls.0.pat4k2dls
+    (dot dest.0 path.0 0))))
+ (proc@D,1p :=wasmoved_SX44irX45ntry0dir38pj6l.0.
+  (params
+   (param :dest.0 .
+    (ptr DirEntry.0.~1,~4))).
+  (pragmas
+   (smry callsUnknown
+    (param 0 0 reads writes escapes)))
+  (stmts
+   (call =wasmoved_SX50ath0pat4k2dls.0.pat4k2dls
+    (addr
+     (dot
+      (deref dest.0)path.0 0)))))
+ (proc@D,1p :=dup_SX44irX45ntry0dir38pj6l.0.
+  (params
+   (param :src.0 . DirEntry.0.~1,~4))DirEntry.0.~1,~4
+  (pragmas
+   (smry writeGlobal callsUnknown
+    (param 0 0 reads writes escapes)))
+  (stmts
+   (var :dest.0 . DirEntry.0.~1,~4 .)
+   (asgn
+    (dot dest.0 kind.0 0)
+    (dot src.0 kind.0 0))
+   (var :`x.63 . Path.0.pat4k2dls@8,N,../nimony/lib/std/paths.nim
+    (call =dup_SX50ath0pat4k2dls.0.pat4k2dls
+     (dot src.0 path.0 0)))
+   (asgn
+    (dot dest.0 path.0 0)`x.63)
+   (ret dest.0)))
+ (proc@D,1p :=copy_SX44irX45ntry0dir38pj6l.0.
+  (params
+   (param :dest.0 .
+    (ptr DirEntry.0.~1,~4))
+   (param :src.0 . DirEntry.0.~1,~4)).
+  (pragmas
+   (smry callsUnknown
+    (param 0 0 reads writes escapes)
+    (param 1 0 reads writes escapes)))
+  (stmts
+   (asgn
+    (dot
+     (deref dest.0)kind.0 0)
+    (dot src.0 kind.0 0))
+   (call =copy_SX50ath0pat4k2dls.0.pat4k2dls
+    (dot
+     (deref dest.0)path.0 0)
+    (dot src.0 path.0 0))))
+ (proc@D,1p :=destroy_SX44irX57alker0dir38pj6l.0.
+  (params
+   (param :dest.0 .
+    (ptr DirWalker.0.))).
+  (pragmas
+   (smry callsUnknown
+    (param 0 0 reads writes escapes)))
+  (stmts
+   (call =destroy_SX50ath0pat4k2dls.0.pat4k2dls
+    (dot
+     (deref dest.0)dir.0 0))))
+ (proc@D,1p :=wasmoved_SX44irX57alker0dir38pj6l.0.
+  (params
+   (param :dest.0 .
+    (ptr DirWalker.0.))).
+  (pragmas
+   (smry callsUnknown
+    (param 0 0 reads writes escapes)))
+  (stmts
+   (call =wasmoved_SX50ath0pat4k2dls.0.pat4k2dls
+    (addr
+     (dot
+      (deref dest.0)dir.0 0)))))
+ (proc@D,1p :=dup_SX44irX57alker0dir38pj6l.0.
+  (params
+   (param :src.0 .
+    (ptr DirWalker.0.)))DirWalker.0.
+  (pragmas
+   (smry writeGlobal callsUnknown
+    (param 0 0 reads writes escapes)))
+  (stmts
+   (var :dest.0 . DirWalker.0. .)
+   (asgn
+    (dot dest.0 pimpl.0 0)
+    (dot
+     (deref src.0)pimpl.0 0))
+   (var :`x.64 . Path.0.pat4k2dls@8,N,../nimony/lib/std/paths.nim
+    (call =dup_SX50ath0pat4k2dls.0.pat4k2dls
+     (dot
+      (deref src.0)dir.0 0)))
+   (asgn
+    (dot dest.0 dir.0 0)`x.64)
+   (asgn
+    (dot dest.0 status.0 0)
+    (dot
+     (deref src.0)status.0 0))
+   (ret dest.0)))
+ (proc@D,1p :=copy_SX44irX57alker0dir38pj6l.0.
+  (params
+   (param :dest.0 .
+    (ptr DirWalker.0.))
+   (param :src.0 .
+    (ptr DirWalker.0.))).
+  (pragmas
+   (smry callsUnknown
+    (param 0 0 reads writes escapes)
+    (param 1 0 reads writes escapes)))
+  (stmts
+   (asgn
+    (dot
+     (deref dest.0)pimpl.0 0)
+    (dot
+     (deref src.0)pimpl.0 0))
+   (call =copy_SX50ath0pat4k2dls.0.pat4k2dls
+    (dot
+     (deref dest.0)dir.0 0)
+    (dot
+     (deref src.0)dir.0 0))
+   (asgn
+    (dot
+     (deref dest.0)status.0 0)
+    (dot
+     (deref src.0)status.0 0))))
+ (type@A,2k,../nimony/lib/std/system.nim :`t.0.IAarrayAuS8ZS32. .
+  (array
+   (u 8)32))
+ (type :`t.0.IAtupleSX45rrorX43ode0sysvq0aslSX50ath0pat4k2dls. .
+  (object .
+   (fld :fld.0 . ErrorCode.0.sysvq0asl)
+   (fld@4,4D,../nimony/lib/std/dirs.nim :fld.1 . Path.0.pat4k2dls)))
+ (gvar :`iniGuard.0. .
+  (bool).)
+ (proc :`ini.0.
+  (params).
+  (pragmas
+   (smry callsUnknown))
+  (stmts
+   (if
+    (elif `iniGuard.0.
+     (stmts
+      (ret .))))
+   (asgn `iniGuard.0.
+    (true))
+   (call `ini.0.sysvq0asl)
+   (call `ini.0.osezuyu63)
+   (call `ini.0.pat4k2dls)
+   (call `ini.0.ossk30t39)
+   (call `ini.0.osc4bsu0d1)
+   (call `ini.0.pososrh1q1)
+   (call `ini.0.err0o7h081))))(.index@,1,../nimony/lib/std/dirs.nim
+ (h strlit.0.I8031254106179394417. 74)
+ (x errno.0. 233)
+ (x tryCreateFinalDir.0. 150)
+ (x createDir.0. 1326)
+ (x tryRemoveFinalDir.0. 15837)
+ (x removeDir.0. 1196)
+ (x tryRemoveFile.0. 961)
+ (x removeFile.0. 1200)
+ (h DirEntry.0. 961)
+ (h DirWalker.0. 143)
+ (x tryOpenDir.0. 191)
+ (x fillDirEntry.0. 2038)
+ (x pathComponentFromEntry.0. 206)
+ (x tryNextDir.0. 7109)
+ (x tryCloseDir.0. 4512)
+ (x getCurrentDir.0. 906)
+ (x setCurrentDir.0. 3513)
+ (x inc.1.Irn1g7r1. 1431)
+ (x =destroy_SX44irX45ntry0dir38pj6l.0. 483)
+ (x =wasmoved_SX44irX45ntry0dir38pj6l.0. 257)
+ (x =dup_SX44irX45ntry0dir38pj6l.0. 294)
+ (x =copy_SX44irX45ntry0dir38pj6l.0. 499)
+ (x =destroy_SX44irX57alker0dir38pj6l.0. 445)
+ (x =wasmoved_SX44irX57alker0dir38pj6l.0. 275)
+ (x =dup_SX44irX57alker0dir38pj6l.0. 290)
+ (x =copy_SX44irX57alker0dir38pj6l.0. 600)
+ (h `t.0.IAarrayAuS8ZS32. 561)
+ (h `t.0.IAtupleSX45rrorX43ode0sysvq0aslSX50ath0pat4k2dls. 88)
+ (h `iniGuard.0. 186)
+ (x `ini.0. 34))

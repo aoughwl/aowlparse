@@ -1,0 +1,114 @@
+(.nif27)
+(.indexat 3127             )
+(stmts@,3,../nimony/lib/std/private/oscommons.nim
+ (type@H,6 :PathComponent.0.~F .
+  (enum@2
+   (u 8)
+   (efld~F,5 :pcFile.0. 0)
+   (efld~F,6 :pcLinkToFile.0. 1)
+   (efld~F,7 :pcDir.0. 2)
+   (efld~F,8 :pcLinkToDir.0. 3)))
+ (proc@2,1d :fileExists.0.@5
+  (params@G
+   (param@1 :filename.0 . string.0.sysvq0asl@A))
+  (bool@K)
+  (pragmas
+   (smry callsUnknown
+    (param 0 0 reads writes escapes)))
+  (stmts@2,1
+   (var :result.3 .
+    (bool@E,1H,../nimony/lib/std/system/basic_types.nim).)
+   (stmts@2,O
+    (var@4 :res.0 . Stat.0.pososrh1q1@3,~15
+     (oconstr@J Stat.0.pososrh1q1~G,~15
+      (kv st_dev.0
+       (suf@n,F,../nimony/lib/std/system/defaults.nim 0u "u64"))
+      (kv st_ino.0
+       (suf@n,F,../nimony/lib/std/system/defaults.nim 0u "u64"))
+      (kv st_size.0
+       (suf@l,E,../nimony/lib/std/system/defaults.nim 0 "i64"))
+      (kv st_mode.0
+       (suf@n,D,../nimony/lib/std/system/defaults.nim 0u "u32"))
+      (kv st_mtime.0
+       (suf@l,E,../nimony/lib/std/system/defaults.nim 0 "i64"))
+      (kv st_mtim.0
+       (oconstr Timespec.0.pososrh1q1@i,1p,../nimony/lib/std/posix/posix.nim
+        (kv tv_sec.0
+         (suf@l,E,../nimony/lib/std/system/defaults.nim 0 "i64"))
+        (kv tv_nsec.0
+         (suf@l,E,../nimony/lib/std/system/defaults.nim 0 "i64"))))))
+    (var@4,1 :filename.1 . string.0.sysvq0asl@J,~Q
+     (call@B =dup.2.sysvq0asl filename.0))
+    (stmts@,2
+     (var@k :`x.12 .
+      (bool).)
+     (var@K :`x.13 .
+      (ptr@H,C9,../nimony/lib/std/system/stringimpl.nim
+       (c 8))
+      (call toCString.0.sysvq0asl@1
+       (addr~8 filename.1)))
+     (var@B :`x.14 .
+      (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+       (importc "int"))
+      (call stat.0.pososrh1q1~4 `x.13@9
+       (addr@L res.0)))
+     (if@k
+      (elif
+       (le@4,1q,../nimony/lib/std/system/comparisons.nim
+        (suf@k,27,../nimony/lib/std/private/oscommons.nim 0 "i32")`x.14@H,27,../nimony/lib/std/private/oscommons.nim)
+       (stmts
+        (var@B :`x.15 .
+         (bool@F,3T,../nimony/lib/std/posix/posix.nim)
+         (call S_ISREG.0.pososrh1q1~7
+          (dot@4 res.0~3 st_mode.0 0)))
+        (asgn@B `x.12 `x.15)))
+      (else
+       (stmts
+        (asgn `x.12
+         (false)))))
+     (asgn result.3 `x.12@k)
+     (call~2,~Q =destroy.2.sysvq0asl filename.1)
+     (ret result.3)))
+   (call =destroy.2.sysvq0asl filename.1)
+   (ret~2,~1 result.3)
+   (call =destroy.2.sysvq0asl filename.1)
+   (ret result.3)))
+ (type@,v :`t.0.IAtupleSX50athX43omponent0osc4bsu0d1Abool. .
+  (object .
+   (fld@4,1 :fld.0 . PathComponent.0.)
+   (fld@G,1 :fld.1 .
+    (bool))))
+ (type :`t.0.IAtupleSX45rrorX43ode0sysvq0aslAbool. .
+  (object .
+   (fld :fld.0 . ErrorCode.0.sysvq0asl)
+   (fld@d,18 :fld.1 .
+    (bool))))
+ (gvar :`iniGuard.0. .
+  (bool).)
+ (proc :`ini.0.
+  (params).
+  (pragmas
+   (smry callsUnknown))
+  (stmts
+   (if
+    (elif `iniGuard.0.
+     (stmts
+      (ret .))))
+   (asgn `iniGuard.0.
+    (true))
+   (call `ini.0.sysvq0asl)
+   (call `ini.0.osezuyu63)
+   (call `ini.0.syn1lfpjv)
+   (call `ini.0.assy765wm)
+   (call `ini.0.wid623gv)
+   (call `ini.0.pososrh1q1))))(.index@,3,../nimony/lib/std/private/oscommons.nim
+ (h PathComponent.0. 87)
+ (x@J,6 pcFile.0. 52)
+ (x@J,6 pcLinkToFile.0. 27)
+ (x@J,6 pcDir.0. 33)
+ (x@J,6 pcLinkToDir.0. 26)
+ (x fileExists.0. 34)
+ (h `t.0.IAtupleSX50athX43omponent0osc4bsu0d1Abool. 2216)
+ (h `t.0.IAtupleSX45rrorX43ode0sysvq0aslAbool. 147)
+ (h `iniGuard.0. 141)
+ (x `ini.0. 34))

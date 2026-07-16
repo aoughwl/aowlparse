@@ -1,0 +1,660 @@
+(.nif27)
+(.vendor "Nifler")
+(.dialect "nim-parsed")
+(stmts@,1,../nimony/lib/std/memfiles.nim
+ (comment)
+ (import@,5 assertions@7 syncio@J)
+ (when@,7
+  (elif@5
+   (call@7 defined~7 windows@1)
+   (stmts~3,1
+    (import
+     (infix@F / windows~8 winlean@2))
+    (import@,1 widestrs@7)))
+  (elif@5,3
+   (call@7 defined~7 posix@1)
+   (stmts~3,1
+    (import
+     (infix@D / posix~6 posix@2))))
+  (else@,5
+   (stmts@2,1
+    (pragmas
+     (kv@7 error~5 "the memfiles module is not supported on your operating system!"@2)))))
+ (import@,F
+  (infix@A / std~3 oserrors@1))
+ (when@,I
+  (elif@5
+   (prefix not
+    (call@B defined~7 windows@1))
+   (stmts~3,1
+    (type@9,1 Handle~7 . . . bool@2))))
+ (type@B,N MemFile~9 x . .
+  (object@2 .
+   (fld~6,1 mem~3 x .
+    (cmd@D unchecked~A pointer).)
+   (fld~5,4 size~4 x . int@3 .)
+   (when~9,6
+    (elif@5
+     (call@7 defined~7 windows@1)
+     (stmts~3,1
+      (fld@7 fHandle~7 x . Handle@3 .)
+      (fld@9,2 mapHandle~9 x . Handle@3 .)
+      (fld@9,3 wasOpened~9 x . bool@3 .)))
+    (else@,5
+     (stmts@2,1
+      (fld@6 handle~6 x . cint@3 .)
+      (fld@,1 flags . . cint@7 .))))))
+ (when@,c
+  (elif@5
+   (call@7 defined~7 windows@1)
+   (stmts~3,1
+    (type@I OsFileHandle~D . . . Handle@2)))
+  (else@,2
+   (stmts@2,1
+    (type@I OsFileHandle~D . . . cint@2))))
+ (proc@,h setFileSize@5 . . .
+  (params@G
+   (param@1 fh . . OsFileHandle@4 .)
+   (param@J newFileSize . . . -1@E)
+   (param@b oldSize . . . -1@A))OSErrorCode@q . .
+  (stmts@2,1
+   (comment)
+   (asgn@7,4 result~7
+    (call@D OSErrorCode~B 0@1))
+   (if@,5
+    (elif@3
+     (infix@G or
+      (infix~4 < newFileSize~C 0@2)
+      (infix@F == newFileSize~C oldSize@3))
+     (stmts~1,1
+      (ret result@7))))
+   (when@,7
+    (elif@5
+     (call@7 defined~7 windows@1)
+     (stmts~3,1
+      (var@4 sizeHigh . . .
+       (call@F LONG~4
+        (par@1
+         (infix@D shr newFileSize~C 32@4))))
+      (let@4,1 sizeLow . . .
+       (call@E LONG~4
+        (par@1
+         (infix@D and newFileSize~C
+          (suf@4 4294967295 "i64")))))
+      (let@4,2 status . . .
+       (call@N setFilePointer~E fh@1 sizeLow@5
+        (call@I addr~4 sizeHigh@1)FILE_BEGIN@U))
+      (let@4,3 lastErr . . .
+       (call@L osLastError~B))
+      (if@,4
+       (elif@3
+        (infix@15 or
+         (par~15
+          (infix@a and
+           (infix~S == status~7 INVALID_SET_FILE_POINTER@3)
+           (infix@I !=
+            (dot~7 lastErr~7 int32@1)NO_ERROR@3)))
+         (dot~o,1
+          (call~4 setEndOfFile~C fh@1)isFail@1))
+        (stmts~1,2
+         (asgn@7 result~7 lastErr@2))))))
+    (else@,8
+     (stmts@2,1
+      (if
+       (elif@3
+        (infix@C > newFileSize~C oldSize@2)
+        (stmts~1,1
+         (var@4 e . . cint@3
+          (call@E cint~4 0@1))
+         (when@,1
+          (elif@5
+           (call@8 declared~8 posix_fallocate@1)
+           (stmts~3,1
+            (while
+             (expr
+              (stmts@6
+               (asgn@3 e~2
+                (call@H posix_fallocate~F fh@1 0@5 newFileSize@8)))
+              (infix@i == e~2 EINTR@3))
+             (stmts@2,1
+              (discard .))))))
+         (if@,4
+          (elif@3
+           (infix@C or
+            (infix~A == e~2 EINVAL@3)
+            (infix@5 == e~2 EOPNOTSUPP@3))
+           (stmts~1,2
+            (let@4 r . . .
+             (call@9 pcall~5
+              (call@A ftruncate~9 fh@1 newFileSize@5)))
+            (if@,1
+             (elif@3
+              (infix@2 < r~2 0@2)
+              (stmts@7
+               (asgn@7 result~7
+                (call@D OSErrorCode~B
+                 (call@6 int32~5
+                  (infix@3 \2D 0~2 r@2)))))))))
+          (elif@5,4
+           (infix@2 != e~2 0@3)
+           (stmts~3,1
+            (asgn@7 result~7
+             (call@D OSErrorCode~B e@1)))))))
+       (else@,B
+        (stmts@2,1
+         (let@4 r . . .
+          (call@9 pcall~5
+           (call@A ftruncate~9
+            (dot@3 fh~2 cint@1)newFileSize@A)))
+         (if@,1
+          (elif@3
+           (infix@2 < r~2 0@2)
+           (stmts@7
+            (asgn@7 result~7
+             (call@D OSErrorCode~B
+              (call@6 int32~5
+               (infix@3 \2D 0~2 r@2)))))))))))))))
+ (proc@,1D open@5 x . .
+  (params@A
+   (param@1 filename . . string@A .)
+   (param@J mode . . FileMode@6 fmRead@H)
+   (param@1,1 mappedSize . . . -1@D)
+   (param@I,1 offset . . . 0@9)
+   (param@U,1 newFileSize . . . -1@E)
+   (param@1,2 allowRemap . . . false@D)
+   (param@L,2 mapFlags . . .
+    (call@F cint~4 -1@1)))MemFile@h,2
+  (pragmas@z,2 raises@2).
+  (stmts@2,3
+   (comment)
+   (asgn@7,X result~7
+    (call@9 default~7 MemFile@1))
+   (if@,Z
+    (elif@3
+     (infix@5 == mode~5 fmAppend@3)
+     (stmts~1,2
+      (raise BadOperation@6))))
+   (cmd@,d assert
+    (infix@P or
+     (infix~6 == newFileSize~C -1@3)
+     (infix@8 != mode~5 fmRead@3)))
+   (var@4,e readonly . . .
+    (infix@G == mode~5 fmRead@3))
+   (template@,g rollback@9 . . .
+    (params@I). . .
+    (stmts@2,1
+     (asgn@B
+      (dot~5 result~6 mem@1)
+      (nil@2))
+     (asgn@C,1
+      (dot~6 result~6 size@1)0@2)))
+   (when@,k
+    (elif@5
+     (call@7 defined~7 windows@1)
+     (stmts~3,1
+      (let@4 desiredAccess . . . GENERIC_READ@G)
+      (let@4,1 shareMode . . . FILE_SHARE_READ@C)
+      (let@4,2 flags . . . FILE_FLAG_RANDOM_ACCESS@8)
+      (template@,4 fail@9 . . .
+       (params@D
+        (param@1 errCode . . OSErrorCode@9 .)
+        (param@N msg . . string@5 .)). . .
+       (stmts@2,1
+        (call@8 rollback~8)
+        (if@,1
+         (elif@3
+          (prefix not
+           (dot@I
+            (dot~8 result~6 fHandle@1)isNil@1))
+          (stmts@Q
+           (discard
+            (call@J closeHandle~B
+             (dot@7 result~6 fHandle@1))))))
+        (if@,2
+         (elif@3
+          (prefix not
+           (dot@K
+            (dot~A result~6 mapHandle@1)isNil@1))
+          (stmts@S
+           (discard
+            (call@J closeHandle~B
+             (dot@7 result~6 mapHandle@1))))))
+        (call@C,3 raiseOSError~C errCode@1 msg@A)))
+      (var@4,C filename . . . filename@B)
+      (asgn@F,D
+       (dot~9 result~6 fHandle@1)
+       (call@D createFileW~B
+        (dot@P
+         (call~A newWideCString~E filename@1)toWideCString@1)
+        (if@,2
+         (elif@3 readonly
+          (stmts@A desiredAccess))
+         (else@R
+          (stmts@6
+           (infix@E or desiredAccess~E GENERIC_WRITE@3))))
+        (if@,3
+         (elif@3 readonly
+          (stmts@A shareMode))
+         (else@N
+          (stmts@6
+           (infix@A or shareMode~A FILE_SHARE_WRITE@3))))
+        (nil@,4)
+        (if@,5
+         (elif@3
+          (infix@C != newFileSize~C -1@3)
+          (stmts@J CREATE_ALWAYS))
+         (else@a
+          (stmts@6 OPEN_EXISTING)))
+        (if@,6
+         (elif@3 readonly
+          (stmts@A
+           (infix@O or FILE_ATTRIBUTE_READONLY~O flags@3)))
+         (else@,1
+          (stmts@6
+           (infix@M or FILE_ATTRIBUTE_NORMAL~M flags@3))))
+        (cmd@7,8 Handle~7 0)))
+      (if@,N
+       (elif@3
+        (infix@F ==
+         (dot~9 result~6 fHandle@1)INVALID_HANDLE_VALUE@3)
+        (stmts~1,1
+         (call@4 fail~4
+          (call@C osLastError~B)"error opening file"@G))))
+      (if@,Q
+       (elif@3
+        (expr
+         (stmts
+          (let@5 e . . .
+           (call@F setFileSize~B
+            (dot@7 result~6 fHandle@1)newFileSize@H)))
+         (infix@3,1 != e~2
+          (dot@4 0~1 OSErrorCode@1)))
+        (stmts@M,1
+         (call@4 fail~4 e@1 "error setting file size"@4))))
+      (asgn@H,V
+       (dot~B result~6 mapHandle@1)
+       (call@K createFileMappingW~I
+        (dot~T,1 result~6 fHandle@1)
+        (nil~J,1)
+        (if~Z,2
+         (elif@3 readonly
+          (stmts@A PAGE_READONLY))
+         (else@R
+          (stmts@6 PAGE_READWRITE)))0~Z,3 0~W,3
+        (nil~T,3)))
+      (if@,a
+       (elif@3
+        (dot@G
+         (dot~A result~6 mapHandle@1)isNil@1)
+        (stmts~1,1
+         (call@4 fail~4
+          (call@C osLastError~B)"error creating mapping"@G))))
+      (asgn@B,d
+       (dot~5 result~6 mem@1)
+       (call@H mapViewOfFileEx~F
+        (dot~K,1 result~6 mapHandle@1)
+        (if~Q,2
+         (elif@3 readonly
+          (stmts@A FILE_MAP_READ))
+         (else@R
+          (stmts@6
+           (infix@E or FILE_MAP_READ~E FILE_MAP_WRITE@3))))
+        (call~L,3 DWORD~5
+         (infix@8 shr offset~7 32@4))
+        (call~L,4 DWORD~5
+         (infix@8 and offset~7
+          (suf@4 4294967295 "i64")))
+        (call~I,5 WinSizeT~8
+         (if@1
+          (elif@3
+           (infix@B == mappedSize~B -1@3)
+           (stmts@I 0))
+          (else@N
+           (stmts@6 mappedSize))))
+        (nil~Q,6)))
+      (if@,l
+       (elif@3
+        (infix@B ==
+         (dot~5 result~6 mem@1)
+         (nil@3))
+        (stmts~1,1
+         (call@4 fail~4
+          (call@C osLastError~B)"error mapping view"@G))))
+      (var@4,o hi . . DWORD@4
+       (call@H DWORD~5 0@1))
+      (let@4,p low . . .
+       (call@H getFileSize~B
+        (dot@7 result~6 fHandle@1)
+        (call@L addr~4 hi@1)))
+      (if@,q
+       (elif@3
+        (infix@4 == low~4 INVALID_FILE_SIZE@3)
+        (stmts~1,1
+         (call@4 fail~4
+          (call@C osLastError~B)"error getting file size"@G)))
+       (else@,2
+        (stmts@2,1
+         (var@4 fileSize . . .
+          (infix@U or
+           (par~J
+            (infix@B shl
+             (call~5 int64~5 hi@1)32@4))
+           (call@8 int64~5
+            (call@7 uint32~6 low@1))))
+         (if@,1
+          (elif@3
+           (infix@B != mappedSize~B -1@3)
+           (stmts@I
+            (asgn@C
+             (dot~6 result~6 size@1)
+             (dot@R
+              (call~M min~3 fileSize@1 mappedSize@B)int@1))))
+          (else@,1
+           (stmts@6
+            (asgn@C
+             (dot~6 result~6 size@1)
+             (dot@A fileSize~8 int@1))))))))
+      (asgn@H,x
+       (dot~B result~6 wasOpened@1)true@2)
+      (if@,y
+       (elif@3
+        (infix@F and
+         (prefix~F not allowRemap@4)
+         (infix@J !=
+          (dot~9 result~6 fHandle@1)INVALID_HANDLE_VALUE@3))
+        (stmts~1,1
+         (if
+          (elif@3
+           (dot@R
+            (call~G closeHandle~B
+             (dot@7 result~6 fHandle@1))isSuccess@1)
+           (stmts~1,1
+            (asgn@F
+             (dot~9 result~6 fHandle@1)INVALID_HANDLE_VALUE@2)))))))))
+    (else@,13
+     (stmts@2,1
+      (template fail@9 . . .
+       (params@D
+        (param@1 errCode . . OSErrorCode@9 .)
+        (param@N msg . . string@5 .)). . .
+       (stmts@2,1
+        (call@8 rollback~8)
+        (if@,1
+         (elif@3
+          (infix@E >=
+           (dot~8 result~6 handle@1)0@3)
+          (stmts@K
+           (discard
+            (call@D close~5
+             (dot@7 result~6 handle@1))))))
+        (call@C,2 raiseOSError~C errCode@1 msg@A)))
+      (var@4,5 flags . . .
+       (infix@j or
+        (expr
+         (stmts~b)
+         (if@1
+          (elif@3 readonly O_RDONLY@A)
+          (else@M O_RDWR@6)))O_CLOEXEC@3))
+      (if@,7
+       (elif@3
+        (infix@C != newFileSize~C -1@3)
+        (stmts~1,1
+         (asgn@6 flags~6
+          (infix@J or
+           (infix~B or flags~6 O_CREAT@3)O_TRUNC@3))
+         (var@4,1 permissionsMode . . .
+          (call@M Mode~4
+           (infix@9 or S_IRUSR~8 S_IWUSR@3)))
+         (var@4,2 filename . . . filename@B)
+         (let@4,3 fc . . .
+          (call@N
+           (dot~A filename~8 toCString@1)))
+         (if@,4
+          (elif@3
+           (dot@2 fc~2 isNil@1)
+           (stmts~1,1
+            (raise OutOfMemError@6))))
+         (asgn@E,6
+          (dot~8 result~6 handle@1)
+          (call@6 cint~4
+           (call@6 pcall~5
+            (call@5 open~4 fc@1 flags@5 permissionsMode@C))))
+         (if@,7
+          (elif@3
+           (infix@E >=
+            (dot~8 result~6 handle@1)0@3)
+           (stmts~1,1
+            (if
+             (elif@3
+              (expr
+               (stmts
+                (let@5 e . . .
+                 (call@F setFileSize~B
+                  (dot@7 result~6 handle@1)newFileSize@G)))
+               (infix@3,1 != e~2
+                (dot@4 0~1 OSErrorCode@1)))
+              (stmts@M,1
+               (call@4 fail~4 e@1 "error setting file size"@4)))))))))
+       (else@,B
+        (stmts@2,1
+         (var@4 filename . . . filename@B)
+         (let@4,1 fc . . .
+          (call@N
+           (dot~A filename~8 toCString@1)))
+         (if@,2
+          (elif@3
+           (dot@2 fc~2 isNil@1)
+           (stmts~1,1
+            (raise OutOfMemError@6))))
+         (asgn@E,4
+          (dot~8 result~6 handle@1)
+          (call@6 cint~4
+           (call@6 pcall~5
+            (call@5 open~4 fc@1 flags@5)))))))
+      (if@,P
+       (elif@3
+        (infix@E <
+         (dot~8 result~6 handle@1)0@2)
+        (stmts~1,1
+         (call@4 fail~4
+          (call@C OSErrorCode~B
+           (call@6 int32~5
+            (infix@3 \2D 0~2
+             (dot@8 result~6 handle@1))))"error opening file"@e))))
+      (if@,S
+       (elif@3
+        (infix@B != mappedSize~B -1@3)
+        (stmts~1,1
+         (asgn@C
+          (dot~6 result~6 size@1)mappedSize@2)))
+       (else@,2
+        (stmts@2,1
+         (var@4 stat . . Stat@6
+          (call@K default~7 Stat@1))
+         (let@4,1 sr . . .
+          (call@A pcall~5
+           (call@6 fstat~5
+            (dot@7 result~6 handle@1)stat@G)))
+         (if@,2
+          (elif@3
+           (infix@3 >= sr~3 0@3)
+           (stmts~1,1
+            (asgn@C
+             (dot~6 result~6 size@1)
+             (dot@E
+              (dot~8 stat~4 st_size@1)int@1))))
+          (else@,2
+           (stmts@2,1
+            (call@4 fail~4
+             (call@C OSErrorCode~B
+              (call@6 int32~5
+               (infix@3 \2D 0~2 sr@2)))"error getting file size"@T)))))))
+      (asgn@D,c
+       (dot~7 result~6 flags@1)
+       (if@2
+        (elif@3
+         (infix@9 == mapFlags~9
+          (call@7 cint~4 -1@1))
+         (stmts@M MAP_SHARED))
+        (else@a
+         (stmts@6 mapFlags))))
+      (if@,e
+       (elif@3
+        (infix@Y ==
+         (call~V int~3
+          (infix@E and
+           (dot~7 result~6 flags@1)MAP_PRIVATE@4))0@3)
+        (stmts~1,1
+         (asgn@D
+          (dot~7 result~6 flags@1)
+          (infix@F or
+           (dot~7 result~6 flags@1)MAP_SHARED@3)))))
+      (let@4,h pr . . .
+       (if@5
+        (elif@3 readonly
+         (stmts@A PROT_READ))
+        (else@N
+         (stmts@6
+          (infix@A or PROT_READ~A PROT_WRITE@3)))))
+      (asgn@B,i
+       (dot~5 result~6 mem@1)
+       (call@6 mmap~4
+        (nil@1)
+        (dot@C result~6 size@1)pr@J
+        (dot@T result~6 flags@1)
+        (dot@h result~6 handle@1)offset@q))
+      (if@,j
+       (elif@3
+        (call@A mmapFailed~A
+         (dot@7 result~6 mem@1))
+        (stmts~1,1
+         (call@4 fail~4
+          (call@C OSErrorCode~B
+           (call@A mmapErrno~9
+            (dot@7 result~6 mem@1)))"file mapping failed"@b))))
+      (if@,m
+       (elif@3
+        (infix@F and
+         (prefix~F not allowRemap@4)
+         (infix@I >=
+          (dot~8 result~6 handle@1)0@3))
+        (stmts~1,1
+         (if
+          (elif@3
+           (infix@S >=
+            (call~N pcall~5
+             (call@6 close~5
+              (dot@7 result~6 handle@1)))0@3)
+           (stmts~1,1
+            (asgn@E
+             (dot~8 result~6 handle@1)-1@2))))))))))))
+ (proc@,3u close@5 x . .
+  (params@B
+   (param@1 f . .
+    (mut@3 MemFile@4).)).
+  (pragmas@S raises@2).
+  (stmts@2,1
+   (comment)
+   (var@4,3 error . . . false@8)
+   (var@C,4 lastErr~8 .
+    (pragmas noinit@2)OSErrorCode@C .)
+   (when@,6
+    (elif@5
+     (call@7 defined~7 windows@1)
+     (stmts~3,1
+      (if
+       (elif@3
+        (dot@1 f~1 wasOpened@1)
+        (stmts~1,1
+         (asgn@6 error~6
+          (dot@O
+           (call~7 unmapViewOfFile~F
+            (dot@2 f~1 mem@1))isFail@1))
+         (if@,1
+          (elif@3
+           (prefix not error@4)
+           (stmts~1,1
+            (asgn@6 error~6
+             (dot@Q
+              (call~D closeHandle~B
+               (dot@2 f~1 mapHandle@1))isFail@1))
+            (if@,1
+             (elif@3
+              (infix@A and
+               (prefix~A not error@4)
+               (infix@E !=
+                (dot~9 f~1 fHandle@1)INVALID_HANDLE_VALUE@3))
+              (stmts~1,1
+               (discard
+                (call@J closeHandle~B
+                 (dot@2 f~1 fHandle@1)))
+               (asgn@A,1
+                (dot~9 f~1 fHandle@1)INVALID_HANDLE_VALUE@2)))))))
+         (if@,6
+          (elif@3 error
+           (stmts~1,1
+            (asgn@8 lastErr~8
+             (call@D osLastError~B))))))))))
+    (else@,A
+     (stmts@2,1
+      (let@4 mr . . .
+       (call@A pcall~5
+        (call@7 munmap~6
+         (dot@2 f~1 mem@1)
+         (dot@9 f~1 size@1))))
+      (asgn@6,1 error~6
+       (infix@5 < mr~3 0@2))
+      (asgn@8,2 lastErr~8
+       (if@2
+        (elif@3
+         (infix@3 < mr~3 0@2)
+         (stmts@8
+          (call@B OSErrorCode~B
+           (call@6 int32~5
+            (infix@3 \2D 0~2 mr@2)))))
+        (else@c
+         (stmts@6
+          (call@B OSErrorCode~B 0@1)))))
+      (if@,3
+       (elif@3
+        (infix@9 >=
+         (dot~8 f~1 handle@1)0@3)
+        (stmts~1,1
+         (let@4 cr . . .
+          (call@A pcall~5
+           (call@6 close~5
+            (dot@2 f~1 handle@1))))
+         (if@,1
+          (elif@3
+           (infix@3 < cr~3 0@2)
+           (stmts~1,1
+            (asgn@6 error~6 true@2)
+            (asgn@8,1 lastErr~8
+             (call@D OSErrorCode~B
+              (call@6 int32~5
+               (infix@3 \2D 0~2 cr@2)))))))))))))
+   (asgn@7,Q
+    (dot~6 f~1 size@1)0@2)
+   (asgn@6,R
+    (dot~5 f~1 mem@1)
+    (nil@2))
+   (when@,T
+    (elif@5
+     (call@7 defined~7 windows@1)
+     (stmts~3,1
+      (asgn@A
+       (dot~9 f~1 fHandle@1)
+       (cmd@9 Handle~7 0))
+      (asgn@C,1
+       (dot~B f~1 mapHandle@1)
+       (cmd@9 Handle~7 0))
+      (asgn@C,2
+       (dot~B f~1 wasOpened@1)false@2)))
+    (else@,4
+     (stmts@2,1
+      (asgn@9
+       (dot~8 f~1 handle@1)-1@2))))
+   (if@,a
+    (elif@3 error
+     (stmts@7
+      (call@C raiseOSError~C lastErr@1)))))))

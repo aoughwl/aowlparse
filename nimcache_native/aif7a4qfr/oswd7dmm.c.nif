@@ -1,0 +1,67 @@
+(.nif27)
+(.indexat 1680             )
+(stmts@,1,../nimony/lib/std/os.nim
+ (type@f,20 :openArray.0.Ig73pnk.osalirkw71 .
+  (object@R,6,../nimony/lib/std/system/openarrays.nim .
+   (fld~N,1 :a.0 .
+    (ptr@3 string.0.sysvq0asl@g,21,../nimony/lib/std/os.nim))
+   (fld~N,2 :len.0 .
+    (i@5 64))))
+ (type@V,l,../nimony/lib/std/system/openarrays.nim :openArray.0.Ijk0jkw1.has9tn57v .
+  (object~4,~f .
+   (fld~N,1 :a.0 .
+    (ptr@3
+     (c@Q,J 8)))
+   (fld~N,2 :len.0 .
+    (i@5 64))))
+ (type :`t.0.IAtupleSX45rrorX43ode0sysvq0aslSstring0R20.aif7a4qfr .
+  (object .
+   (fld :fld.0 . ErrorCode.0.sysvq0asl)
+   (fld@M,H :fld.1 . string.0.sysvq0asl)))
+ (type@G,9f,../nimony/lib/std/private/ospaths2.nim :`t.0.IAtupleSstring0sysvq0aslSR6SR6.ospaexnw61 .
+  (object .
+   (fld@c :fld.0 . string.0.sysvq0asl)
+   (fld@c :fld.1 . string.0.sysvq0asl)
+   (fld@c :fld.2 . string.0.sysvq0asl)))
+ (type@T,1D :`t.0.IAarrayAuS8ZS32.cmdqs323n1 .
+  (array
+   (u 8)32))
+ (type :`t.0.IAtupleSX45rrorX43ode0sysvq0aslAiS64. .
+  (object .
+   (fld :fld.0 . ErrorCode.0.sysvq0asl)
+   (fld@I,2F :fld.1 .
+    (i 64))))
+ (type@l,G,../nimony/lib/std/system/openarrays.nim :`t.0.IAarraySstring0sysvq0aslS3. .
+  (array string.0.sysvq0asl 3))
+ (gvar :`iniGuard.0. .
+  (bool).)
+ (proc :`ini.0.
+  (params).
+  (pragmas
+   (smry callsUnknown))
+  (stmts
+   (if
+    (elif `iniGuard.0.
+     (stmts
+      (ret .))))
+   (asgn `iniGuard.0.
+    (true))
+   (call `ini.0.sysvq0asl)
+   (call `ini.0.str7j0ifg)
+   (call `ini.0.pososrh1q1)
+   (call `ini.0.cmdqs323n1)
+   (call `ini.0.envto7w6l1)
+   (call `ini.0.osezuyu63)
+   (call `ini.0.ospaexnw61)
+   (call `ini.0.ossk30t39)
+   (call `ini.0.osalirkw71)
+   (call `ini.0.osc4bsu0d1))))(.index@,1,../nimony/lib/std/os.nim
+ (h openArray.0.Ig73pnk.osalirkw71 72)
+ (h openArray.0.Ijk0jkw1.has9tn57v 220)
+ (h `t.0.IAtupleSX45rrorX43ode0sysvq0aslSstring0R20.aif7a4qfr 186)
+ (h `t.0.IAtupleSstring0sysvq0aslSR6SR6.ospaexnw61 163)
+ (h `t.0.IAarrayAuS8ZS32.cmdqs323n1 232)
+ (h `t.0.IAtupleSX45rrorX43ode0sysvq0aslAiS64. 69)
+ (h `t.0.IAarraySstring0sysvq0aslS3. 141)
+ (h `iniGuard.0. 119)
+ (x `ini.0. 34))

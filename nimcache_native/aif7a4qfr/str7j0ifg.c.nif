@@ -1,0 +1,230 @@
+(.nif27)
+(.indexat 6219             )
+(stmts@,1,../nimony/lib/std/strutils.nim
+ (const@1N,C,../nimony/lib/std/system/openarrays.nim :strlit.0.I14872370265633446329. . LongString.0.sysvq0asl
+  (oconstr LongString.0.sysvq0asl
+   (kv fullLen.0 88)
+   (kv rc.0 0)
+   (kv capImpl.0 0)
+   (kv data.0 "../nimony/lib/std/system/openarrays.nim\2812, 59\29\3A 0 <= i and i < x.len \5BAssertionDefect\5D\0A")))
+ (proc@2,2g :strlen.0.@5
+  (params@C
+   (param@1 :x.0 .
+    (ptr@3
+     (c 8))))
+  (i@E 64)
+  (pragmas@U
+   (importc "strlen")
+   (header "<string.h>")
+   (smry~U
+    (param 0 0)))
+  (stmts .))
+ (proc@,2j :$.0.@5
+  (params@9
+   (param@1 :x.1 .
+    (ptr@3
+     (c 8))))string.0.sysvq0asl@E
+  (pragmas
+   (smry writeGlobal readGlobal callsUnknown
+    (param 0 0 reads writes escapes)result 0))
+  (stmts@2,1
+   (var :result.12 . string.0.sysvq0asl@8,~1n .)
+   (call =wasMoved.2.sysvq0asl
+    (addr result.12))
+   (if@,1
+    (elif@3
+     (eq@2
+      (conv~2
+       (ptr@L,B,../nimony/lib/std/system/comparisons.nim
+        (void))x.1)
+      (nil))
+     (stmts~1,1
+      (call =destroy.2.sysvq0asl result.12)
+      (asgn@7 result.12~7
+       (oconstr@2 string.0.sysvq0asl
+        (kv bytes.0 0u)
+        (kv more.0
+         (nil))))))
+    (else
+     (stmts
+      (stmts
+       (stmts
+        (stmts@2,3
+         (var@I :`x.49 .
+          (i~6,~8 64)
+          (call strlen.0.~6 x.1@1))
+         (var@4 :L.0 .
+          (i@4 64)
+          (conv@8
+           (i~4 64)`x.49@6))
+         (call@,1 =destroy.2.sysvq0asl result.12)
+         (var@I,1 :`x.50 . string.0.sysvq0asl@C,AP,../nimony/lib/std/system/stringimpl.nim
+          (call newString.0.sysvq0asl~9 L.0@1))
+         (asgn@7,1 result.12~7 `x.50@B)
+         (scope@4,2
+          (stmts
+           (var@S,1,../nimony/lib/std/system/iterators.nim :`lf.11 .
+            (i 64)0@D,2r,../nimony/lib/std/strutils.nim)
+           (var@V,1,../nimony/lib/std/system/iterators.nim :`lf.12 .
+            (i 64)
+            (call@N,2r,../nimony/lib/std/strutils.nim len.4.sysvq0asl@1 result.12~6))
+           (stmts@2,2,../nimony/lib/std/system/iterators.nim
+            (var@4 :`lf.13 .
+             (i@G,y,../nimony/lib/std/strutils.nim 64)`lf.11@4)
+            (scope@,1
+             (stmts
+              (while
+               (lt@8 `lf.13~2 `lf.12@2)
+               (stmts@2,1
+                (scope
+                 (stmts
+                  (call@6,2s,../nimony/lib/std/strutils.nim \5B\5D=.9.sysvq0asl
+                   (addr result.12)`lf.13@7
+                   (pat@C x.1 `lf.13@2))))
+                (call@,1 inc.1.Irn1g7r1.aif7a4qfr
+                 (addr@4 `lf.13))))))
+            (lab@,1 :whileStmtLabel.1))))
+         (lab@4,2 :forStmtLabel.0)))))))
+   (ret~2,~1 result.12)))
+ (type@D,A7 :SkipTable.0.~B . `t.0.IAarrayAiS64ZS256.@7)
+ (type@J,FB :FloatFormatMode.0.~H .
+  (enum@2
+   (u 8)
+   (efld~H,2 :ffDefault.0. 0)
+   (efld~H,3 :ffDecimal.0. 1)
+   (efld~H,4 :ffScientific.0. 2)))
+ (type@K,JC :BinaryPrefixMode.0.~I .
+  (enum@2
+   (u 8)
+   (efld~I,1 :bpIEC.0. 0)
+   (efld~I,2 :bpColloquial.0. 1)))
+ (type@14,5O :seq.0.Ixdx2fh1.aif7a4qfr .
+  (object@C,6,../nimony/lib/std/system/seqimpl.nim .
+   (fld~8,1 :len.0 .
+    (i@5 64))
+   (fld~8,2 :data.0 .
+    (ptr@6 string.0.sysvq0asl@15,5P,../nimony/lib/std/strutils.nim))))
+ (type@e,5i :Slice.0.Iwrrkdg. . HSlice.0.I6e0t4q1.aif7a4qfr@K,7i,../nimony/lib/std/system.nim)
+ (type@K,7i,../nimony/lib/std/system.nim :HSlice.0.I6e0t4q1.aif7a4qfr .
+  (object~2,~3 .
+   (fld~D,1 :a.0~1 .
+    (i@f,5j,../nimony/lib/std/strutils.nim 64))
+   (fld~D,2 :b.0~1 .
+    (i@f,5j,../nimony/lib/std/strutils.nim 64))))
+ (type@r,CY :openArray.0.Ihfaw761. .
+  (object@R,6,../nimony/lib/std/system/openarrays.nim .
+   (fld~N,1 :a.0 .
+    (ptr@3 `t.0.IAtupleSstring0sysvq0aslSR6.ospaexnw61@s,CZ,../nimony/lib/std/strutils.nim))
+   (fld~N,2 :len.0 .
+    (i@5 64))))
+ (type@V,DL :openArray.0.Ijk0jkw1.has9tn57v .
+  (object@R,6,../nimony/lib/std/system/openarrays.nim .
+   (fld~N,1 :a.0 .
+    (ptr@3
+     (c@W,DM,../nimony/lib/std/strutils.nim 8)))
+   (fld~N,2 :len.0 .
+    (i@5 64))))
+ (type@10,DL :openArray.0.I8ohqne. .
+  (object@R,6,../nimony/lib/std/system/openarrays.nim .
+   (fld~N,1 :a.0 .
+    (ptr@3 `t.0.IAtupleAsetAcS8ZZAcS8.@11,DM,../nimony/lib/std/strutils.nim))
+   (fld~N,2 :len.0 .
+    (i@5 64))))
+ (type@n,GH :openArray.0.Ig73pnk.osalirkw71 .
+  (object@R,6,../nimony/lib/std/system/openarrays.nim .
+   (fld~N,1 :a.0 .
+    (ptr@3 string.0.sysvq0asl@o,GI,../nimony/lib/std/strutils.nim))
+   (fld~N,2 :len.0 .
+    (i@5 64))))
+ (type@b,G,../nimony/lib/std/system/openarrays.nim :openArray.0.Ij9i6zj.mat7cnfv21 .
+  (object~A,~A .
+   (fld~N,1 :a.0 .
+    (ptr@3
+     (i@R,A8,../nimony/lib/std/strutils.nim 64)))
+   (fld~N,2 :len.0 .
+    (i@5 64))))
+ (type@G,C :`t.0.IAarrayAuS8ZS32.cmdqs323n1 .
+  (array
+   (u 8)32))
+ (type@K,A7 :`t.0.IAarrayAiS64ZS256. .
+  (array
+   (i@7 64)256))
+ (type@s,CY :`t.0.IAtupleSstring0sysvq0aslSR6.ospaexnw61 .
+  (object .
+   (fld@1 :fld.0 . string.0.sysvq0asl)
+   (fld@9 :fld.1 . string.0.sysvq0asl)))
+ (type@11,DL :`t.0.IAtupleAsetAcS8ZZAcS8. .
+  (object .
+   (fld@4 :fld.0 . `t.0.IAarrayAuS8ZS32.cmdqs323n1)
+   (fld@C :fld.1 .
+    (c 8))))
+ (type :`t.0.IAtupleSX45rrorX43ode0sysvq0aslSstring0R20.aif7a4qfr .
+  (object .
+   (fld :fld.0 . ErrorCode.0.sysvq0asl)
+   (fld@h,ES :fld.1 . string.0.sysvq0asl)))
+ (type@W,FZ :`t.0.IAarrayAcS8ZS3. .
+  (array
+   (c@I 8)3))
+ (type@T,Fb :`t.0.IAarrayAcS8ZS6. .
+  (array
+   (c@7 8)6))
+ (type@P,Fc :`t.0.IAarrayAcS8ZS2501. .
+  (array
+   (c@A 8)2501))
+ (type@M,Jc :`t.0.IAarraySstring0sysvq0aslS7. .
+  (array string.0.sysvq0asl 7))
+ (type :`t.0.IAtupleSX45rrorX43ode0sysvq0aslAiS64.oswd7dmm .
+  (object .
+   (fld :fld.0 . ErrorCode.0.sysvq0asl)
+   (fld@G,5,../nimony/lib/std/system/ctypes.nim :fld.1 .
+    (i 64))))
+ (type@l,G,../nimony/lib/std/system/openarrays.nim :`t.0.IAarrayAtupleAsetAcS8ZZAcS8ZZS4. .
+  (array `t.0.IAtupleAsetAcS8ZZAcS8.@7,Dc,../nimony/lib/std/strutils.nim 4))
+ (gvar :`iniGuard.0. .
+  (bool).)
+ (proc :`ini.0.
+  (params).
+  (pragmas
+   (smry callsUnknown))
+  (stmts
+   (if
+    (elif `iniGuard.0.
+     (stmts
+      (ret .))))
+   (asgn `iniGuard.0.
+    (true))
+   (call `ini.0.sysvq0asl)
+   (call `ini.0.assy765wm)
+   (call `ini.0.party5a2l1))))(.index@,1,../nimony/lib/std/strutils.nim
+ (h strlit.0.I14872370265633446329. 78)
+ (x strlen.0. 321)
+ (x $.0. 194)
+ (h SkipTable.0. 2136)
+ (h FloatFormatMode.0. 57)
+ (x@L,FB ffDefault.0. 55)
+ (x@L,FB ffDecimal.0. 30)
+ (x@L,FB ffScientific.0. 30)
+ (h BinaryPrefixMode.0. 35)
+ (x@M,JC bpIEC.0. 56)
+ (x@M,JC bpColloquial.0. 26)
+ (h seq.0.Ixdx2fh1.aif7a4qfr 35)
+ (h Slice.0.Iwrrkdg. 222)
+ (h HSlice.0.I6e0t4q1.aif7a4qfr 95)
+ (h openArray.0.Ihfaw761. 229)
+ (h openArray.0.Ijk0jkw1.has9tn57v 242)
+ (h openArray.0.I8ohqne. 218)
+ (h openArray.0.Ig73pnk.osalirkw71 227)
+ (h openArray.0.Ij9i6zj.mat7cnfv21 226)
+ (h `t.0.IAarrayAuS8ZS32.cmdqs323n1 219)
+ (h `t.0.IAarrayAiS64ZS256. 68)
+ (h `t.0.IAtupleSstring0sysvq0aslSR6.ospaexnw61 65)
+ (h `t.0.IAtupleAsetAcS8ZZAcS8. 151)
+ (h `t.0.IAtupleSX45rrorX43ode0sysvq0aslSstring0R20.aif7a4qfr 140)
+ (h `t.0.IAarrayAcS8ZS3. 164)
+ (h `t.0.IAarrayAcS8ZS6. 59)
+ (h `t.0.IAarrayAcS8ZS2501. 59)
+ (h `t.0.IAarraySstring0sysvq0aslS7. 65)
+ (h `t.0.IAtupleSX45rrorX43ode0sysvq0aslAiS64.oswd7dmm 80)
+ (h `t.0.IAarrayAtupleAsetAcS8ZZAcS8ZZS4. 184)
+ (h `iniGuard.0. 169)
+ (x `ini.0. 34))

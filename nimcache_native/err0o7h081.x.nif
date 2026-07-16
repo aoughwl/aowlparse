@@ -1,0 +1,1454 @@
+(.nif27)
+(.indexat 107773           )
+(stmts@,3,../nimony/lib/std/errorcodes/errorcodes_posix.nim
+ (gvar@E,3 :EOVERFLOW.0.~A
+  (pragmas
+   (importc "EOVERFLOW")
+   (header "<errno.h>"))
+  (i@l 32).)
+ (gvar@B,4 :ERANGE.0.~7
+  (pragmas
+   (importc "ERANGE")
+   (header "<errno.h>"))
+  (i@i 32).)
+ (gvar@9,5 :EDOM.0.~5
+  (pragmas
+   (importc "EDOM")
+   (header "<errno.h>"))
+  (i@g 32).)
+ (gvar@B,6 :ENOMEM.0.~7
+  (pragmas
+   (importc "ENOMEM")
+   (header "<errno.h>"))
+  (i@i 32).)
+ (gvar@B,7 :ENOSPC.0.~7
+  (pragmas
+   (importc "ENOSPC")
+   (header "<errno.h>"))
+  (i@i 32).)
+ (gvar@8,8 :EIO.0.~4
+  (pragmas
+   (importc "EIO")
+   (header "<errno.h>"))
+  (i@f 32).)
+ (gvar@B,9 :EINVAL.0.~7
+  (pragmas
+   (importc "EINVAL")
+   (header "<errno.h>"))
+  (i@i 32).)
+ (gvar@C,A :EBADMSG.0.~8
+  (pragmas
+   (importc "EBADMSG")
+   (header "<errno.h>"))
+  (i@j 32).)
+ (gvar@B,B :EILSEQ.0.~7
+  (pragmas
+   (importc "EILSEQ")
+   (header "<errno.h>"))
+  (i@i 32).)
+ (gvar@B,C :ENOMSG.0.~7
+  (pragmas
+   (importc "ENOMSG")
+   (header "<errno.h>"))
+  (i@i 32).)
+ (gvar@H,D :EDESTADDRREQ.0.~D
+  (pragmas
+   (importc "EDESTADDRREQ")
+   (header "<errno.h>"))
+  (i@o 32).)
+ (gvar@A,E :E2BIG.0.~6
+  (pragmas
+   (importc "E2BIG")
+   (header "<errno.h>"))
+  (i@h 32).)
+ (gvar@C,F :ENOBUFS.0.~8
+  (pragmas
+   (importc "ENOBUFS")
+   (header "<errno.h>"))
+  (i@j 32).)
+ (gvar@C,G :ENODATA.0.~8
+  (pragmas
+   (importc "ENODATA")
+   (header "<errno.h>"))
+  (i@j 32).)
+ (gvar@A,H :EBUSY.0.~6
+  (pragmas
+   (importc "EBUSY")
+   (header "<errno.h>"))
+  (i@h 32).)
+ (gvar@C,I :ETXTBSY.0.~8
+  (pragmas
+   (importc "ETXTBSY")
+   (header "<errno.h>"))
+  (i@j 32).)
+ (gvar@B,J :ECHILD.0.~7
+  (pragmas
+   (importc "ECHILD")
+   (header "<errno.h>"))
+  (i@i 32).)
+ (gvar@F,K :EOWNERDEAD.0.~B
+  (pragmas
+   (importc "EOWNERDEAD")
+   (header "<errno.h>"))
+  (i@m 32).)
+ (gvar@B,L :ENOLCK.0.~7
+  (pragmas
+   (importc "ENOLCK")
+   (header "<errno.h>"))
+  (i@i 32).)
+ (gvar@B,M :ENFILE.0.~7
+  (pragmas
+   (importc "ENFILE")
+   (header "<errno.h>"))
+  (i@i 32).)
+ (gvar@B,N :EACCES.0.~7
+  (pragmas
+   (importc "EACCES")
+   (header "<errno.h>"))
+  (i@i 32).)
+ (gvar@A,O :EPERM.0.~6
+  (pragmas
+   (importc "EPERM")
+   (header "<errno.h>"))
+  (i@h 32).)
+ (gvar@B,P :EAGAIN.0.~7
+  (pragmas
+   (importc "EAGAIN")
+   (header "<errno.h>"))
+  (i@i 32).)
+ (gvar@G,Q :EWOULDBLOCK.0.~C
+  (pragmas
+   (importc "EWOULDBLOCK")
+   (header "<errno.h>"))
+  (i@n 32).)
+ (gvar@E,R :ETIMEDOUT.0.~A
+  (pragmas
+   (importc "ETIMEDOUT")
+   (header "<errno.h>"))
+  (i@l 32).)
+ (gvar@A,S :ETIME.0.~6
+  (pragmas
+   (importc "ETIME")
+   (header "<errno.h>"))
+  (i@h 32).)
+ (gvar@A,T :EINTR.0.~6
+  (pragmas
+   (importc "EINTR")
+   (header "<errno.h>"))
+  (i@h 32).)
+ (gvar@C,U :EDEADLK.0.~8
+  (pragmas
+   (importc "EDEADLK")
+   (header "<errno.h>"))
+  (i@j 32).)
+ (gvar@F,V :EADDRINUSE.0.~B
+  (pragmas
+   (importc "EADDRINUSE")
+   (header "<errno.h>"))
+  (i@m 32).)
+ (gvar@C,W :EISCONN.0.~8
+  (pragmas
+   (importc "EISCONN")
+   (header "<errno.h>"))
+  (i@j 32).)
+ (gvar@I,X :EADDRNOTAVAIL.0.~E
+  (pragmas
+   (importc "EADDRNOTAVAIL")
+   (header "<errno.h>"))
+  (i@p 32).)
+ (gvar@H,Y :EAFNOSUPPORT.0.~D
+  (pragmas
+   (importc "EAFNOSUPPORT")
+   (header "<errno.h>"))
+  (i@o 32).)
+ (gvar@F,Z :EOPNOTSUPP.0.~B
+  (pragmas
+   (importc "EOPNOTSUPP")
+   (header "<errno.h>"))
+  (i@m 32).)
+ (gvar@C,a :ENOTSUP.0.~8
+  (pragmas
+   (importc "ENOTSUP")
+   (header "<errno.h>"))
+  (i@j 32).)
+ (gvar@B,b :ENOSYS.0.~7
+  (pragmas
+   (importc "ENOSYS")
+   (header "<errno.h>"))
+  (i@i 32).)
+ (gvar@K,c :EPROTONOSUPPORT.0.~G
+  (pragmas
+   (importc "EPROTONOSUPPORT")
+   (header "<errno.h>"))
+  (i@r 32).)
+ (gvar@B,d :ENOTTY.0.~7
+  (pragmas
+   (importc "ENOTTY")
+   (header "<errno.h>"))
+  (i@i 32).)
+ (gvar@B,e :ESPIPE.0.~7
+  (pragmas
+   (importc "ESPIPE")
+   (header "<errno.h>"))
+  (i@i 32).)
+ (gvar@B,f :EISDIR.0.~7
+  (pragmas
+   (importc "EISDIR")
+   (header "<errno.h>"))
+  (i@i 32).)
+ (gvar@E,g :ENOTEMPTY.0.~A
+  (pragmas
+   (importc "ENOTEMPTY")
+   (header "<errno.h>"))
+  (i@l 32).)
+ (gvar@E,h :ECANCELED.0.~A
+  (pragmas
+   (importc "ECANCELED")
+   (header "<errno.h>"))
+  (i@l 32).)
+ (gvar@H,i :ECONNABORTED.0.~D
+  (pragmas
+   (importc "ECONNABORTED")
+   (header "<errno.h>"))
+  (i@o 32).)
+ (gvar@E,j :ENETRESET.0.~A
+  (pragmas
+   (importc "ENETRESET")
+   (header "<errno.h>"))
+  (i@l 32).)
+ (gvar@D,k :EALREADY.0.~9
+  (pragmas
+   (importc "EALREADY")
+   (header "<errno.h>"))
+  (i@k 32).)
+ (gvar@G,l :EINPROGRESS.0.~C
+  (pragmas
+   (importc "EINPROGRESS")
+   (header "<errno.h>"))
+  (i@n 32).)
+ (gvar@H,m :ENAMETOOLONG.0.~D
+  (pragmas
+   (importc "ENAMETOOLONG")
+   (header "<errno.h>"))
+  (i@o 32).)
+ (gvar@B,n :EEXIST.0.~7
+  (pragmas
+   (importc "EEXIST")
+   (header "<errno.h>"))
+  (i@i 32).)
+ (gvar@B,o :ENOENT.0.~7
+  (pragmas
+   (importc "ENOENT")
+   (header "<errno.h>"))
+  (i@i 32).)
+ (gvar@A,p :EIDRM.0.~6
+  (pragmas
+   (importc "EIDRM")
+   (header "<errno.h>"))
+  (i@h 32).)
+ (gvar@B,q :ENODEV.0.~7
+  (pragmas
+   (importc "ENODEV")
+   (header "<errno.h>"))
+  (i@i 32).)
+ (gvar@C,r :ENOTDIR.0.~8
+  (pragmas
+   (importc "ENOTDIR")
+   (header "<errno.h>"))
+  (i@j 32).)
+ (gvar@A,s :EFBIG.0.~6
+  (pragmas
+   (importc "EFBIG")
+   (header "<errno.h>"))
+  (i@h 32).)
+ (gvar@D,t :EMSGSIZE.0.~9
+  (pragmas
+   (importc "EMSGSIZE")
+   (header "<errno.h>"))
+  (i@k 32).)
+ (gvar@A,u :EPIPE.0.~6
+  (pragmas
+   (importc "EPIPE")
+   (header "<errno.h>"))
+  (i@h 32).)
+ (gvar@A,v :EBADF.0.~6
+  (pragmas
+   (importc "EBADF")
+   (header "<errno.h>"))
+  (i@h 32).)
+ (gvar@B,w :EMFILE.0.~7
+  (pragmas
+   (importc "EMFILE")
+   (header "<errno.h>"))
+  (i@i 32).)
+ (gvar@B,x :ENOSTR.0.~7
+  (pragmas
+   (importc "ENOSTR")
+   (header "<errno.h>"))
+  (i@i 32).)
+ (gvar@D,y :ENOTSOCK.0.~9
+  (pragmas
+   (importc "ENOTSOCK")
+   (header "<errno.h>"))
+  (i@k 32).)
+ (gvar@A,z :ENOSR.0.~6
+  (pragmas
+   (importc "ENOSR")
+   (header "<errno.h>"))
+  (i@h 32).)
+ (gvar@A,10 :ENXIO.0.~6
+  (pragmas
+   (importc "ENXIO")
+   (header "<errno.h>"))
+  (i@h 32).)
+ (gvar@A,11 :ESRCH.0.~6
+  (pragmas
+   (importc "ESRCH")
+   (header "<errno.h>"))
+  (i@h 32).)
+ (gvar@C,12 :ENOEXEC.0.~8
+  (pragmas
+   (importc "ENOEXEC")
+   (header "<errno.h>"))
+  (i@j 32).)
+ (gvar@A,13 :ELOOP.0.~6
+  (pragmas
+   (importc "ELOOP")
+   (header "<errno.h>"))
+  (i@h 32).)
+ (gvar@B,14 :EMLINK.0.~7
+  (pragmas
+   (importc "EMLINK")
+   (header "<errno.h>"))
+  (i@i 32).)
+ (gvar@A,15 :EXDEV.0.~6
+  (pragmas
+   (importc "EXDEV")
+   (header "<errno.h>"))
+  (i@h 32).)
+ (gvar@F,16 :EPROTOTYPE.0.~B
+  (pragmas
+   (importc "EPROTOTYPE")
+   (header "<errno.h>"))
+  (i@m 32).)
+ (gvar@G,17 :ENOPROTOOPT.0.~C
+  (pragmas
+   (importc "ENOPROTOOPT")
+   (header "<errno.h>"))
+  (i@n 32).)
+ (gvar@B,18 :EPROTO.0.~7
+  (pragmas
+   (importc "EPROTO")
+   (header "<errno.h>"))
+  (i@i 32).)
+ (gvar@A,19 :EROFS.0.~6
+  (pragmas
+   (importc "EROFS")
+   (header "<errno.h>"))
+  (i@h 32).)
+ (gvar@B,1A :EFAULT.0.~7
+  (pragmas
+   (importc "EFAULT")
+   (header "<errno.h>"))
+  (i@i 32).)
+ (gvar@D,1B :ENETDOWN.0.~9
+  (pragmas
+   (importc "ENETDOWN")
+   (header "<errno.h>"))
+  (i@k 32).)
+ (gvar@G,1C :ENETUNREACH.0.~C
+  (pragmas
+   (importc "ENETUNREACH")
+   (header "<errno.h>"))
+  (i@n 32).)
+ (gvar@F,1D :ECONNRESET.0.~B
+  (pragmas
+   (importc "ECONNRESET")
+   (header "<errno.h>"))
+  (i@m 32).)
+ (gvar@D,1E :ENOTCONN.0.~9
+  (pragmas
+   (importc "ENOTCONN")
+   (header "<errno.h>"))
+  (i@k 32).)
+ (gvar@H,1F :ECONNREFUSED.0.~D
+  (pragmas
+   (importc "ECONNREFUSED")
+   (header "<errno.h>"))
+  (i@o 32).)
+ (gvar@H,1G :EHOSTUNREACH.0.~D
+  (pragmas
+   (importc "EHOSTUNREACH")
+   (header "<errno.h>"))
+  (i@o 32).)
+ (gvar@K,1H :ENOTRECOVERABLE.0.~G
+  (pragmas
+   (importc "ENOTRECOVERABLE")
+   (header "<errno.h>"))
+  (i@r 32).)
+ (proc@,1K :posixToErrorCode.0.@5
+  (params@M
+   (param@1 :err.0 .
+    (i@5 32)))ErrorCode.0.sysvq0asl@E
+  (pragmas
+   (smry
+    (param 0 0 reads)))
+  (stmts@2,1
+   (var :result.0 . ErrorCode.0.sysvq0asl@C,~1 .)
+   (var :`x.0 . ErrorCode.0.sysvq0asl@4,5,../nimony/lib/std/errorcodes/errorcodes.nim .)
+   (if
+    (elif@3
+     (eq@4 err.0~4
+      (suf@3 0 "i32"))
+     (stmts
+      (asgn~1,1 `x.0 0@4,5,../nimony/lib/std/errorcodes/errorcodes.nim)))
+    (else
+     (stmts
+      (stmts
+       (stmts
+        (if
+         (elif@5,2
+          (eq@4 err.0~4 EOVERFLOW.0.@3)
+          (stmts
+           (asgn~3,1 `x.0 1@4,6,../nimony/lib/std/errorcodes/errorcodes.nim)))
+         (else
+          (stmts
+           (stmts
+            (stmts
+             (var@J,4 :`x.2 .
+              (bool).)
+             (if@J,4
+              (elif
+               (eq~A err.0~4 ERANGE.0.@3)
+               (stmts
+                (asgn `x.2
+                 (true))))
+              (else
+               (stmts
+                (asgn@7 `x.2
+                 (eq err.0~4 EDOM.0.@3)))))
+             (if
+              (elif@5,4 `x.2@E
+               (stmts
+                (asgn~3,1 `x.0 5@4,A,../nimony/lib/std/errorcodes/errorcodes.nim)))
+              (else
+               (stmts
+                (stmts
+                 (stmts
+                  (if
+                   (elif@5,6
+                    (eq@4 err.0~4 ENOMEM.0.@3)
+                    (stmts
+                     (asgn~3,1 `x.0 8@4,D,../nimony/lib/std/errorcodes/errorcodes.nim)))
+                   (else
+                    (stmts
+                     (stmts
+                      (stmts
+                       (if
+                        (elif@5,8
+                         (eq@4 err.0~4 ENOSPC.0.@3)
+                         (stmts
+                          (asgn~3,1 `x.0 9@4,E,../nimony/lib/std/errorcodes/errorcodes.nim)))
+                        (else
+                         (stmts
+                          (stmts
+                           (stmts
+                            (if
+                             (elif@5,A
+                              (eq@4 err.0~4 EIO.0.@3)
+                              (stmts
+                               (asgn~3,1 `x.0 11@4,G,../nimony/lib/std/errorcodes/errorcodes.nim)))
+                             (else
+                              (stmts
+                               (stmts
+                                (stmts
+                                 (var@19,C :`x.3 .
+                                  (bool).)
+                                 (var@s,C :`x.4 .
+                                  (bool).)
+                                 (var@b,C :`x.5 .
+                                  (bool).)
+                                 (var@J,C :`x.6 .
+                                  (bool).)
+                                 (if@J,C
+                                  (elif
+                                   (eq~A err.0~4 EINVAL.0.@3)
+                                   (stmts
+                                    (asgn `x.6
+                                     (true))))
+                                  (else
+                                   (stmts
+                                    (asgn@7 `x.6
+                                     (eq err.0~4 EBADMSG.0.@3)))))
+                                 (if@b,C
+                                  (elif `x.6~I
+                                   (stmts
+                                    (asgn `x.5
+                                     (true))))
+                                  (else
+                                   (stmts
+                                    (asgn@7 `x.5
+                                     (eq err.0~4 EILSEQ.0.@3)))))
+                                 (if@s,C
+                                  (elif `x.5~H
+                                   (stmts
+                                    (asgn `x.4
+                                     (true))))
+                                  (else
+                                   (stmts
+                                    (asgn@7 `x.4
+                                     (eq err.0~4 ENOMSG.0.@3)))))
+                                 (if@19,C
+                                  (elif `x.4~H
+                                   (stmts
+                                    (asgn `x.3
+                                     (true))))
+                                  (else
+                                   (stmts
+                                    (asgn@7 `x.3
+                                     (eq err.0~4 EDESTADDRREQ.0.@3)))))
+                                 (if
+                                  (elif@5,C `x.3@14
+                                   (stmts
+                                    (asgn~3,1 `x.0 12@4,H,../nimony/lib/std/errorcodes/errorcodes.nim)))
+                                  (else
+                                   (stmts
+                                    (stmts
+                                     (stmts
+                                      (var@I,E :`x.7 .
+                                       (bool).)
+                                      (if@I,E
+                                       (elif
+                                        (eq~9 err.0~4 E2BIG.0.@3)
+                                        (stmts
+                                         (asgn `x.7
+                                          (true))))
+                                       (else
+                                        (stmts
+                                         (asgn@7 `x.7
+                                          (eq err.0~4 ENOBUFS.0.@3)))))
+                                      (if
+                                       (elif@5,E `x.7@D
+                                        (stmts
+                                         (asgn~3,1 `x.0 16@4,L,../nimony/lib/std/errorcodes/errorcodes.nim)))
+                                       (else
+                                        (stmts
+                                         (stmts
+                                          (stmts
+                                           (if
+                                            (elif@5,G
+                                             (eq@4 err.0~4 ENODATA.0.@3)
+                                             (stmts
+                                              (asgn~3,1 `x.0 17@4,M,../nimony/lib/std/errorcodes/errorcodes.nim)))
+                                            (else
+                                             (stmts
+                                              (stmts
+                                               (stmts
+                                                (var@I,I :`x.8 .
+                                                 (bool).)
+                                                (if@I,I
+                                                 (elif
+                                                  (eq~9 err.0~4 EBUSY.0.@3)
+                                                  (stmts
+                                                   (asgn `x.8
+                                                    (true))))
+                                                 (else
+                                                  (stmts
+                                                   (asgn@7 `x.8
+                                                    (eq err.0~4 ETXTBSY.0.@3)))))
+                                                (if
+                                                 (elif@5,I `x.8@D
+                                                  (stmts
+                                                   (asgn~3,1 `x.0 18@4,N,../nimony/lib/std/errorcodes/errorcodes.nim)))
+                                                 (else
+                                                  (stmts
+                                                   (stmts
+                                                    (stmts
+                                                     (var@J,K :`x.9 .
+                                                      (bool).)
+                                                     (if@J,K
+                                                      (elif
+                                                       (eq~A err.0~4 ECHILD.0.@3)
+                                                       (stmts
+                                                        (asgn `x.9
+                                                         (true))))
+                                                      (else
+                                                       (stmts
+                                                        (asgn@7 `x.9
+                                                         (eq err.0~4 EOWNERDEAD.0.@3)))))
+                                                     (if
+                                                      (elif@5,K `x.9@E
+                                                       (stmts
+                                                        (asgn~3,1 `x.0 19@4,O,../nimony/lib/std/errorcodes/errorcodes.nim)))
+                                                      (else
+                                                       (stmts
+                                                        (stmts
+                                                         (stmts
+                                                          (if
+                                                           (elif@5,M
+                                                            (eq@4 err.0~4 ENOLCK.0.@3)
+                                                            (stmts
+                                                             (asgn~3,1 `x.0 20@4,P,../nimony/lib/std/errorcodes/errorcodes.nim)))
+                                                           (else
+                                                            (stmts
+                                                             (stmts
+                                                              (stmts
+                                                               (if
+                                                                (elif@5,O
+                                                                 (eq@4 err.0~4 ENFILE.0.@3)
+                                                                 (stmts
+                                                                  (asgn~3,1 `x.0 21@4,Q,../nimony/lib/std/errorcodes/errorcodes.nim)))
+                                                                (else
+                                                                 (stmts
+                                                                  (stmts
+                                                                   (stmts
+                                                                    (var@J,Q :`x.10 .
+                                                                     (bool).)
+                                                                    (if@J,Q
+                                                                     (elif
+                                                                      (eq~A err.0~4 EACCES.0.@3)
+                                                                      (stmts
+                                                                       (asgn `x.10
+                                                                        (true))))
+                                                                     (else
+                                                                      (stmts
+                                                                       (asgn@7 `x.10
+                                                                        (eq err.0~4 EPERM.0.@3)))))
+                                                                    (if
+                                                                     (elif@5,Q `x.10@E
+                                                                      (stmts
+                                                                       (asgn~3,1 `x.0 22@4,R,../nimony/lib/std/errorcodes/errorcodes.nim)))
+                                                                     (else
+                                                                      (stmts
+                                                                       (stmts
+                                                                        (stmts
+                                                                         (var@J,S :`x.11 .
+                                                                          (bool).)
+                                                                         (if@J,S
+                                                                          (elif
+                                                                           (eq~A err.0~4 EAGAIN.0.@3)
+                                                                           (stmts
+                                                                            (asgn `x.11
+                                                                             (true))))
+                                                                          (else
+                                                                           (stmts
+                                                                            (asgn@7 `x.11
+                                                                             (eq err.0~4 EWOULDBLOCK.0.@3)))))
+                                                                         (if
+                                                                          (elif@5,S `x.11@E
+                                                                           (stmts
+                                                                            (asgn~3,1 `x.0 23@4,S,../nimony/lib/std/errorcodes/errorcodes.nim)))
+                                                                          (else
+                                                                           (stmts
+                                                                            (stmts
+                                                                             (stmts
+                                                                              (var@M,U :`x.12 .
+                                                                               (bool).)
+                                                                              (if@M,U
+                                                                               (elif
+                                                                                (eq~D err.0~4 ETIMEDOUT.0.@3)
+                                                                                (stmts
+                                                                                 (asgn `x.12
+                                                                                  (true))))
+                                                                               (else
+                                                                                (stmts
+                                                                                 (asgn@7 `x.12
+                                                                                  (eq err.0~4 ETIME.0.@3)))))
+                                                                              (if
+                                                                               (elif@5,U `x.12@H
+                                                                                (stmts
+                                                                                 (asgn~3,1 `x.0 24@4,T,../nimony/lib/std/errorcodes/errorcodes.nim)))
+                                                                               (else
+                                                                                (stmts
+                                                                                 (stmts
+                                                                                  (stmts
+                                                                                   (if
+                                                                                    (elif@5,W
+                                                                                     (eq@4 err.0~4 EINTR.0.@3)
+                                                                                     (stmts
+                                                                                      (asgn~3,1 `x.0 25@4,U,../nimony/lib/std/errorcodes/errorcodes.nim)))
+                                                                                    (else
+                                                                                     (stmts
+                                                                                      (stmts
+                                                                                       (stmts
+                                                                                        (if
+                                                                                         (elif@5,Y
+                                                                                          (eq@4 err.0~4 EDEADLK.0.@3)
+                                                                                          (stmts
+                                                                                           (asgn~3,1 `x.0 26@4,V,../nimony/lib/std/errorcodes/errorcodes.nim)))
+                                                                                         (else
+                                                                                          (stmts
+                                                                                           (stmts
+                                                                                            (stmts
+                                                                                             (var@N,a :`x.13 .
+                                                                                              (bool).)
+                                                                                             (if@N,a
+                                                                                              (elif
+                                                                                               (eq~E err.0~4 EADDRINUSE.0.@3)
+                                                                                               (stmts
+                                                                                                (asgn `x.13
+                                                                                                 (true))))
+                                                                                              (else
+                                                                                               (stmts
+                                                                                                (asgn@7 `x.13
+                                                                                                 (eq err.0~4 EISCONN.0.@3)))))
+                                                                                             (if
+                                                                                              (elif@5,a `x.13@I
+                                                                                               (stmts
+                                                                                                (asgn~3,1 `x.0 29@4,Y,../nimony/lib/std/errorcodes/errorcodes.nim)))
+                                                                                              (else
+                                                                                               (stmts
+                                                                                                (stmts
+                                                                                                 (stmts
+                                                                                                  (if
+                                                                                                   (elif@5,c
+                                                                                                    (eq@4 err.0~4 EADDRNOTAVAIL.0.@3)
+                                                                                                    (stmts
+                                                                                                     (asgn~3,1 `x.0 30@4,Z,../nimony/lib/std/errorcodes/errorcodes.nim)))
+                                                                                                   (else
+                                                                                                    (stmts
+                                                                                                     (stmts
+                                                                                                      (stmts
+                                                                                                       (if
+                                                                                                        (elif@5,e
+                                                                                                         (eq@4 err.0~4 EAFNOSUPPORT.0.@3)
+                                                                                                         (stmts
+                                                                                                          (asgn~3,1 `x.0 31@4,a,../nimony/lib/std/errorcodes/errorcodes.nim)))
+                                                                                                        (else
+                                                                                                         (stmts
+                                                                                                          (stmts
+                                                                                                           (stmts
+                                                                                                            (var@2B,g :`x.14 .
+                                                                                                             (bool).)
+                                                                                                            (var@1u,g :`x.15 .
+                                                                                                             (bool).)
+                                                                                                            (var@1d,g :`x.16 .
+                                                                                                             (bool).)
+                                                                                                            (var@1M,g :`x.17 .
+                                                                                                             (bool).)
+                                                                                                            (var@w,g :`x.18 .
+                                                                                                             (bool).)
+                                                                                                            (var@f,g :`x.19 .
+                                                                                                             (bool).)
+                                                                                                            (var@N,g :`x.20 .
+                                                                                                             (bool).)
+                                                                                                            (if@N,g
+                                                                                                             (elif
+                                                                                                              (eq~E err.0~4 EOPNOTSUPP.0.@3)
+                                                                                                              (stmts
+                                                                                                               (asgn `x.20
+                                                                                                                (true))))
+                                                                                                             (else
+                                                                                                              (stmts
+                                                                                                               (asgn@7 `x.20
+                                                                                                                (eq err.0~4 ENOTSUP.0.@3)))))
+                                                                                                            (if@f,g
+                                                                                                             (elif `x.20~I
+                                                                                                              (stmts
+                                                                                                               (asgn `x.19
+                                                                                                                (true))))
+                                                                                                             (else
+                                                                                                              (stmts
+                                                                                                               (asgn@7 `x.19
+                                                                                                                (eq err.0~4 ENOSYS.0.@3)))))
+                                                                                                            (if@w,g
+                                                                                                             (elif `x.19~H
+                                                                                                              (stmts
+                                                                                                               (asgn `x.18
+                                                                                                                (true))))
+                                                                                                             (else
+                                                                                                              (stmts
+                                                                                                               (asgn@7 `x.18
+                                                                                                                (eq err.0~4 EPROTONOSUPPORT.0.@3)))))
+                                                                                                            (if@1M,g
+                                                                                                             (elif `x.18~Q
+                                                                                                              (stmts
+                                                                                                               (asgn `x.17
+                                                                                                                (true))))
+                                                                                                             (else
+                                                                                                              (stmts
+                                                                                                               (asgn@7 `x.17
+                                                                                                                (eq err.0~4 ENOTTY.0.@3)))))
+                                                                                                            (if@1d,g
+                                                                                                             (elif `x.17~H
+                                                                                                              (stmts
+                                                                                                               (asgn `x.16
+                                                                                                                (true))))
+                                                                                                             (else
+                                                                                                              (stmts
+                                                                                                               (asgn@7 `x.16
+                                                                                                                (eq err.0~4 ESPIPE.0.@3)))))
+                                                                                                            (if@1u,g
+                                                                                                             (elif `x.16~H
+                                                                                                              (stmts
+                                                                                                               (asgn `x.15
+                                                                                                                (true))))
+                                                                                                             (else
+                                                                                                              (stmts
+                                                                                                               (asgn@7 `x.15
+                                                                                                                (eq err.0~4 EISDIR.0.@3)))))
+                                                                                                            (if@2B,g
+                                                                                                             (elif `x.15~H
+                                                                                                              (stmts
+                                                                                                               (asgn `x.14
+                                                                                                                (true))))
+                                                                                                             (else
+                                                                                                              (stmts
+                                                                                                               (asgn@7 `x.14
+                                                                                                                (eq err.0~4 ENOTEMPTY.0.@3)))))
+                                                                                                            (if
+                                                                                                             (elif@5,g `x.14@26
+                                                                                                              (stmts
+                                                                                                               (asgn~3,1 `x.0 32@4,b,../nimony/lib/std/errorcodes/errorcodes.nim)))
+                                                                                                             (else
+                                                                                                              (stmts
+                                                                                                               (stmts
+                                                                                                                (stmts
+                                                                                                                 (var@j,i :`x.21 .
+                                                                                                                  (bool).)
+                                                                                                                 (var@M,i :`x.22 .
+                                                                                                                  (bool).)
+                                                                                                                 (if@M,i
+                                                                                                                  (elif
+                                                                                                                   (eq~D err.0~4 ECANCELED.0.@3)
+                                                                                                                   (stmts
+                                                                                                                    (asgn `x.22
+                                                                                                                     (true))))
+                                                                                                                  (else
+                                                                                                                   (stmts
+                                                                                                                    (asgn@7 `x.22
+                                                                                                                     (eq err.0~4 ECONNABORTED.0.@3)))))
+                                                                                                                 (if@j,i
+                                                                                                                  (elif `x.22~N
+                                                                                                                   (stmts
+                                                                                                                    (asgn `x.21
+                                                                                                                     (true))))
+                                                                                                                  (else
+                                                                                                                   (stmts
+                                                                                                                    (asgn@7 `x.21
+                                                                                                                     (eq err.0~4 ENETRESET.0.@3)))))
+                                                                                                                 (if
+                                                                                                                  (elif@5,i `x.21@e
+                                                                                                                   (stmts
+                                                                                                                    (asgn~3,1 `x.0 33@4,c,../nimony/lib/std/errorcodes/errorcodes.nim)))
+                                                                                                                  (else
+                                                                                                                   (stmts
+                                                                                                                    (stmts
+                                                                                                                     (stmts
+                                                                                                                      (var@L,k :`x.23 .
+                                                                                                                       (bool).)
+                                                                                                                      (if@L,k
+                                                                                                                       (elif
+                                                                                                                        (eq~C err.0~4 EALREADY.0.@3)
+                                                                                                                        (stmts
+                                                                                                                         (asgn `x.23
+                                                                                                                          (true))))
+                                                                                                                       (else
+                                                                                                                        (stmts
+                                                                                                                         (asgn@7 `x.23
+                                                                                                                          (eq err.0~4 EINPROGRESS.0.@3)))))
+                                                                                                                      (if
+                                                                                                                       (elif@5,k `x.23@G
+                                                                                                                        (stmts
+                                                                                                                         (asgn~3,1 `x.0 35@4,e,../nimony/lib/std/errorcodes/errorcodes.nim)))
+                                                                                                                       (else
+                                                                                                                        (stmts
+                                                                                                                         (stmts
+                                                                                                                          (stmts
+                                                                                                                           (if
+                                                                                                                            (elif@5,m
+                                                                                                                             (eq@4 err.0~4 ENAMETOOLONG.0.@3)
+                                                                                                                             (stmts
+                                                                                                                              (asgn~3,1 `x.0 36@4,f,../nimony/lib/std/errorcodes/errorcodes.nim)))
+                                                                                                                            (else
+                                                                                                                             (stmts
+                                                                                                                              (stmts
+                                                                                                                               (stmts
+                                                                                                                                (if
+                                                                                                                                 (elif@5,o
+                                                                                                                                  (eq@4 err.0~4 EEXIST.0.@3)
+                                                                                                                                  (stmts
+                                                                                                                                   (asgn~3,1 `x.0 37@4,g,../nimony/lib/std/errorcodes/errorcodes.nim)))
+                                                                                                                                 (else
+                                                                                                                                  (stmts
+                                                                                                                                   (stmts
+                                                                                                                                    (stmts
+                                                                                                                                     (var@q,q :`x.24 .
+                                                                                                                                      (bool).)
+                                                                                                                                     (var@Z,q :`x.25 .
+                                                                                                                                      (bool).)
+                                                                                                                                     (var@J,q :`x.26 .
+                                                                                                                                      (bool).)
+                                                                                                                                     (if@J,q
+                                                                                                                                      (elif
+                                                                                                                                       (eq~A err.0~4 ENOENT.0.@3)
+                                                                                                                                       (stmts
+                                                                                                                                        (asgn `x.26
+                                                                                                                                         (true))))
+                                                                                                                                      (else
+                                                                                                                                       (stmts
+                                                                                                                                        (asgn@7 `x.26
+                                                                                                                                         (eq err.0~4 EIDRM.0.@3)))))
+                                                                                                                                     (if@Z,q
+                                                                                                                                      (elif `x.26~G
+                                                                                                                                       (stmts
+                                                                                                                                        (asgn `x.25
+                                                                                                                                         (true))))
+                                                                                                                                      (else
+                                                                                                                                       (stmts
+                                                                                                                                        (asgn@7 `x.25
+                                                                                                                                         (eq err.0~4 ENODEV.0.@3)))))
+                                                                                                                                     (if@q,q
+                                                                                                                                      (elif `x.25~H
+                                                                                                                                       (stmts
+                                                                                                                                        (asgn `x.24
+                                                                                                                                         (true))))
+                                                                                                                                      (else
+                                                                                                                                       (stmts
+                                                                                                                                        (asgn@7 `x.24
+                                                                                                                                         (eq err.0~4 ENOTDIR.0.@3)))))
+                                                                                                                                     (if
+                                                                                                                                      (elif@5,q `x.24@l
+                                                                                                                                       (stmts
+                                                                                                                                        (asgn~3,1 `x.0 38@4,h,../nimony/lib/std/errorcodes/errorcodes.nim)))
+                                                                                                                                      (else
+                                                                                                                                       (stmts
+                                                                                                                                        (stmts
+                                                                                                                                         (stmts
+                                                                                                                                          (var@I,s :`x.27 .
+                                                                                                                                           (bool).)
+                                                                                                                                          (if@I,s
+                                                                                                                                           (elif
+                                                                                                                                            (eq~9 err.0~4 EFBIG.0.@3)
+                                                                                                                                            (stmts
+                                                                                                                                             (asgn `x.27
+                                                                                                                                              (true))))
+                                                                                                                                           (else
+                                                                                                                                            (stmts
+                                                                                                                                             (asgn@7 `x.27
+                                                                                                                                              (eq err.0~4 EMSGSIZE.0.@3)))))
+                                                                                                                                          (if
+                                                                                                                                           (elif@5,s `x.27@D
+                                                                                                                                            (stmts
+                                                                                                                                             (asgn~3,1 `x.0 39@4,i,../nimony/lib/std/errorcodes/errorcodes.nim)))
+                                                                                                                                           (else
+                                                                                                                                            (stmts
+                                                                                                                                             (stmts
+                                                                                                                                              (stmts
+                                                                                                                                               (var@1v,u :`x.28 .
+                                                                                                                                                (bool).)
+                                                                                                                                               (var@1f,u :`x.29 .
+                                                                                                                                                (bool).)
+                                                                                                                                               (var@1P,u :`x.30 .
+                                                                                                                                                (bool).)
+                                                                                                                                               (var@16,u :`x.31 .
+                                                                                                                                                (bool).)
+                                                                                                                                               (var@p,u :`x.32 .
+                                                                                                                                                (bool).)
+                                                                                                                                               (var@Y,u :`x.33 .
+                                                                                                                                                (bool).)
+                                                                                                                                               (var@I,u :`x.34 .
+                                                                                                                                                (bool).)
+                                                                                                                                               (if@I,u
+                                                                                                                                                (elif
+                                                                                                                                                 (eq~9 err.0~4 EPIPE.0.@3)
+                                                                                                                                                 (stmts
+                                                                                                                                                  (asgn `x.34
+                                                                                                                                                   (true))))
+                                                                                                                                                (else
+                                                                                                                                                 (stmts
+                                                                                                                                                  (asgn@7 `x.34
+                                                                                                                                                   (eq err.0~4 EBADF.0.@3)))))
+                                                                                                                                               (if@Y,u
+                                                                                                                                                (elif `x.34~G
+                                                                                                                                                 (stmts
+                                                                                                                                                  (asgn `x.33
+                                                                                                                                                   (true))))
+                                                                                                                                                (else
+                                                                                                                                                 (stmts
+                                                                                                                                                  (asgn@7 `x.33
+                                                                                                                                                   (eq err.0~4 EMFILE.0.@3)))))
+                                                                                                                                               (if@p,u
+                                                                                                                                                (elif `x.33~H
+                                                                                                                                                 (stmts
+                                                                                                                                                  (asgn `x.32
+                                                                                                                                                   (true))))
+                                                                                                                                                (else
+                                                                                                                                                 (stmts
+                                                                                                                                                  (asgn@7 `x.32
+                                                                                                                                                   (eq err.0~4 ENOSTR.0.@3)))))
+                                                                                                                                               (if@16,u
+                                                                                                                                                (elif `x.32~H
+                                                                                                                                                 (stmts
+                                                                                                                                                  (asgn `x.31
+                                                                                                                                                   (true))))
+                                                                                                                                                (else
+                                                                                                                                                 (stmts
+                                                                                                                                                  (asgn@7 `x.31
+                                                                                                                                                   (eq err.0~4 ENOTSOCK.0.@3)))))
+                                                                                                                                               (if@1P,u
+                                                                                                                                                (elif `x.31~J
+                                                                                                                                                 (stmts
+                                                                                                                                                  (asgn `x.30
+                                                                                                                                                   (true))))
+                                                                                                                                                (else
+                                                                                                                                                 (stmts
+                                                                                                                                                  (asgn@7 `x.30
+                                                                                                                                                   (eq err.0~4 ENOSR.0.@3)))))
+                                                                                                                                               (if@1f,u
+                                                                                                                                                (elif `x.30~G
+                                                                                                                                                 (stmts
+                                                                                                                                                  (asgn `x.29
+                                                                                                                                                   (true))))
+                                                                                                                                                (else
+                                                                                                                                                 (stmts
+                                                                                                                                                  (asgn@7 `x.29
+                                                                                                                                                   (eq err.0~4 ENXIO.0.@3)))))
+                                                                                                                                               (if@1v,u
+                                                                                                                                                (elif `x.29~G
+                                                                                                                                                 (stmts
+                                                                                                                                                  (asgn `x.28
+                                                                                                                                                   (true))))
+                                                                                                                                                (else
+                                                                                                                                                 (stmts
+                                                                                                                                                  (asgn@7 `x.28
+                                                                                                                                                   (eq err.0~4 ESRCH.0.@3)))))
+                                                                                                                                               (if
+                                                                                                                                                (elif@5,u `x.28@1q
+                                                                                                                                                 (stmts
+                                                                                                                                                  (asgn~3,1 `x.0 40@4,j,../nimony/lib/std/errorcodes/errorcodes.nim)))
+                                                                                                                                                (else
+                                                                                                                                                 (stmts
+                                                                                                                                                  (stmts
+                                                                                                                                                   (stmts
+                                                                                                                                                    (if
+                                                                                                                                                     (elif@5,w
+                                                                                                                                                      (eq@4 err.0~4 ENOEXEC.0.@3)
+                                                                                                                                                      (stmts
+                                                                                                                                                       (asgn~3,1 `x.0 41@4,k,../nimony/lib/std/errorcodes/errorcodes.nim)))
+                                                                                                                                                     (else
+                                                                                                                                                      (stmts
+                                                                                                                                                       (stmts
+                                                                                                                                                        (stmts
+                                                                                                                                                         (var@Z,y :`x.35 .
+                                                                                                                                                          (bool).)
+                                                                                                                                                         (var@I,y :`x.36 .
+                                                                                                                                                          (bool).)
+                                                                                                                                                         (if@I,y
+                                                                                                                                                          (elif
+                                                                                                                                                           (eq~9 err.0~4 ELOOP.0.@3)
+                                                                                                                                                           (stmts
+                                                                                                                                                            (asgn `x.36
+                                                                                                                                                             (true))))
+                                                                                                                                                          (else
+                                                                                                                                                           (stmts
+                                                                                                                                                            (asgn@7 `x.36
+                                                                                                                                                             (eq err.0~4 EMLINK.0.@3)))))
+                                                                                                                                                         (if@Z,y
+                                                                                                                                                          (elif `x.36~H
+                                                                                                                                                           (stmts
+                                                                                                                                                            (asgn `x.35
+                                                                                                                                                             (true))))
+                                                                                                                                                          (else
+                                                                                                                                                           (stmts
+                                                                                                                                                            (asgn@7 `x.35
+                                                                                                                                                             (eq err.0~4 EXDEV.0.@3)))))
+                                                                                                                                                         (if
+                                                                                                                                                          (elif@5,y `x.35@U
+                                                                                                                                                           (stmts
+                                                                                                                                                            (asgn~3,1 `x.0 42@4,l,../nimony/lib/std/errorcodes/errorcodes.nim)))
+                                                                                                                                                          (else
+                                                                                                                                                           (stmts
+                                                                                                                                                            (stmts
+                                                                                                                                                             (stmts
+                                                                                                                                                              (var@N,10 :`x.37 .
+                                                                                                                                                               (bool).)
+                                                                                                                                                              (if@N,10
+                                                                                                                                                               (elif
+                                                                                                                                                                (eq~E err.0~4 EPROTOTYPE.0.@3)
+                                                                                                                                                                (stmts
+                                                                                                                                                                 (asgn `x.37
+                                                                                                                                                                  (true))))
+                                                                                                                                                               (else
+                                                                                                                                                                (stmts
+                                                                                                                                                                 (asgn@7 `x.37
+                                                                                                                                                                  (eq err.0~4 ENOPROTOOPT.0.@3)))))
+                                                                                                                                                              (if
+                                                                                                                                                               (elif@5,10 `x.37@I
+                                                                                                                                                                (stmts
+                                                                                                                                                                 (asgn~3,1 `x.0 43@4,m,../nimony/lib/std/errorcodes/errorcodes.nim)))
+                                                                                                                                                               (else
+                                                                                                                                                                (stmts
+                                                                                                                                                                 (stmts
+                                                                                                                                                                  (stmts
+                                                                                                                                                                   (if
+                                                                                                                                                                    (elif@5,12
+                                                                                                                                                                     (eq@4 err.0~4 EPROTO.0.@3)
+                                                                                                                                                                     (stmts
+                                                                                                                                                                      (asgn~3,1 `x.0 44@4,n,../nimony/lib/std/errorcodes/errorcodes.nim)))
+                                                                                                                                                                    (else
+                                                                                                                                                                     (stmts
+                                                                                                                                                                      (stmts
+                                                                                                                                                                       (stmts
+                                                                                                                                                                        (if
+                                                                                                                                                                         (elif@5,14
+                                                                                                                                                                          (eq@4 err.0~4 EROFS.0.@3)
+                                                                                                                                                                          (stmts
+                                                                                                                                                                           (asgn~3,1 `x.0 45@4,o,../nimony/lib/std/errorcodes/errorcodes.nim)))
+                                                                                                                                                                         (else
+                                                                                                                                                                          (stmts
+                                                                                                                                                                           (stmts
+                                                                                                                                                                            (stmts
+                                                                                                                                                                             (if
+                                                                                                                                                                              (elif@5,16
+                                                                                                                                                                               (eq@4 err.0~4 EFAULT.0.@3)
+                                                                                                                                                                               (stmts
+                                                                                                                                                                                (asgn~3,1 `x.0 46@4,p,../nimony/lib/std/errorcodes/errorcodes.nim)))
+                                                                                                                                                                              (else
+                                                                                                                                                                               (stmts
+                                                                                                                                                                                (stmts
+                                                                                                                                                                                 (stmts
+                                                                                                                                                                                  (var@12,18 :`x.38 .
+                                                                                                                                                                                   (bool).)
+                                                                                                                                                                                  (var@h,18 :`x.39 .
+                                                                                                                                                                                   (bool).)
+                                                                                                                                                                                  (var@L,18 :`x.40 .
+                                                                                                                                                                                   (bool).)
+                                                                                                                                                                                  (if@L,18
+                                                                                                                                                                                   (elif
+                                                                                                                                                                                    (eq~C err.0~4 ENETDOWN.0.@3)
+                                                                                                                                                                                    (stmts
+                                                                                                                                                                                     (asgn `x.40
+                                                                                                                                                                                      (true))))
+                                                                                                                                                                                   (else
+                                                                                                                                                                                    (stmts
+                                                                                                                                                                                     (asgn@7 `x.40
+                                                                                                                                                                                      (eq err.0~4 ENETUNREACH.0.@3)))))
+                                                                                                                                                                                  (if@h,18
+                                                                                                                                                                                   (elif `x.40~M
+                                                                                                                                                                                    (stmts
+                                                                                                                                                                                     (asgn `x.39
+                                                                                                                                                                                      (true))))
+                                                                                                                                                                                   (else
+                                                                                                                                                                                    (stmts
+                                                                                                                                                                                     (asgn@7 `x.39
+                                                                                                                                                                                      (eq err.0~4 ECONNRESET.0.@3)))))
+                                                                                                                                                                                  (if@12,18
+                                                                                                                                                                                   (elif `x.39~L
+                                                                                                                                                                                    (stmts
+                                                                                                                                                                                     (asgn `x.38
+                                                                                                                                                                                      (true))))
+                                                                                                                                                                                   (else
+                                                                                                                                                                                    (stmts
+                                                                                                                                                                                     (asgn@7 `x.38
+                                                                                                                                                                                      (eq err.0~4 ENOTCONN.0.@3)))))
+                                                                                                                                                                                  (if
+                                                                                                                                                                                   (elif@5,18 `x.38@x
+                                                                                                                                                                                    (stmts
+                                                                                                                                                                                     (asgn~3,1 `x.0 48@4,r,../nimony/lib/std/errorcodes/errorcodes.nim)))
+                                                                                                                                                                                   (else
+                                                                                                                                                                                    (stmts
+                                                                                                                                                                                     (stmts
+                                                                                                                                                                                      (stmts
+                                                                                                                                                                                       (if
+                                                                                                                                                                                        (elif@5,1A
+                                                                                                                                                                                         (eq@4 err.0~4 ECONNREFUSED.0.@3)
+                                                                                                                                                                                         (stmts
+                                                                                                                                                                                          (asgn~3,1 `x.0 49@4,s,../nimony/lib/std/errorcodes/errorcodes.nim)))
+                                                                                                                                                                                        (else
+                                                                                                                                                                                         (stmts
+                                                                                                                                                                                          (stmts
+                                                                                                                                                                                           (stmts
+                                                                                                                                                                                            (if
+                                                                                                                                                                                             (elif@5,1C
+                                                                                                                                                                                              (eq@4 err.0~4 EHOSTUNREACH.0.@3)
+                                                                                                                                                                                              (stmts
+                                                                                                                                                                                               (asgn~3,1 `x.0 50@4,t,../nimony/lib/std/errorcodes/errorcodes.nim)))
+                                                                                                                                                                                             (else
+                                                                                                                                                                                              (stmts
+                                                                                                                                                                                               (stmts
+                                                                                                                                                                                                (stmts
+                                                                                                                                                                                                 (if
+                                                                                                                                                                                                  (elif@5,1E
+                                                                                                                                                                                                   (eq@4 err.0~4 ENOTRECOVERABLE.0.@3)
+                                                                                                                                                                                                   (stmts
+                                                                                                                                                                                                    (asgn~3,1 `x.0 51@4,u,../nimony/lib/std/errorcodes/errorcodes.nim)))
+                                                                                                                                                                                                  (else
+                                                                                                                                                                                                   (stmts
+                                                                                                                                                                                                    (stmts
+                                                                                                                                                                                                     (stmts
+                                                                                                                                                                                                      (stmts@,1G
+                                                                                                                                                                                                       (asgn@2,1 `x.0 2@4,7,../nimony/lib/std/errorcodes/errorcodes.nim)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+   (asgn result.0 `x.0)
+   (ret~2,~1 result.0)))
+ (proc@,2e :errorCodeToPosix.0.@5
+  (params@M
+   (param@1 :err.1 . ErrorCode.0.sysvq0asl@5))
+  (i@I 32)
+  (pragmas
+   (smry
+    (param 0 0 reads)))
+  (stmts@2,1
+   (var :result.1 .
+    (i@Q,~1L 32).)
+   (var :`x.1 .
+    (i 32).)
+   (case err.1@5
+    (of@,1
+     (ranges@3 0@4,5,../nimony/lib/std/errorcodes/errorcodes.nim)
+     (stmts@,~1
+      (asgn@C,1 `x.1
+       (suf 0 "i32"))))
+    (of@,2
+     (ranges@3 1@4,6,../nimony/lib/std/errorcodes/errorcodes.nim)
+     (stmts@,~2
+      (asgn@I,2 `x.1 EOVERFLOW.0.)))
+    (of@,3
+     (ranges@3 5@4,A,../nimony/lib/std/errorcodes/errorcodes.nim)
+     (stmts@,~3
+      (asgn@F,3 `x.1 ERANGE.0.)))
+    (of@,4
+     (ranges@3 8@4,D,../nimony/lib/std/errorcodes/errorcodes.nim)
+     (stmts@,~4
+      (asgn@I,4 `x.1 ENOMEM.0.)))
+    (of@,5
+     (ranges@3 9@4,E,../nimony/lib/std/errorcodes/errorcodes.nim)
+     (stmts@,~5
+      (asgn@I,5 `x.1 ENOSPC.0.)))
+    (of@,6
+     (ranges@3 11@4,G,../nimony/lib/std/errorcodes/errorcodes.nim)
+     (stmts@,~6
+      (asgn@C,6 `x.1 EIO.0.)))
+    (of@,7
+     (ranges@3 12@4,H,../nimony/lib/std/errorcodes/errorcodes.nim)
+     (stmts@,~7
+      (asgn@F,7 `x.1 EINVAL.0.)))
+    (of@,8
+     (ranges@3 16@4,L,../nimony/lib/std/errorcodes/errorcodes.nim)
+     (stmts@,~8
+      (asgn@E,8 `x.1 E2BIG.0.)))
+    (of@,9
+     (ranges@3 17@4,M,../nimony/lib/std/errorcodes/errorcodes.nim)
+     (stmts@,~9
+      (asgn@F,9 `x.1 ENODATA.0.)))
+    (of@,A
+     (ranges@3 18@4,N,../nimony/lib/std/errorcodes/errorcodes.nim)
+     (stmts@,~A
+      (asgn@E,A `x.1 EBUSY.0.)))
+    (of@,B
+     (ranges@3 19@4,O,../nimony/lib/std/errorcodes/errorcodes.nim)
+     (stmts@,~B
+      (asgn@H,B `x.1 ECHILD.0.)))
+    (of@,C
+     (ranges@3 20@4,P,../nimony/lib/std/errorcodes/errorcodes.nim)
+     (stmts@,~C
+      (asgn@R,C `x.1 ENOLCK.0.)))
+    (of@,D
+     (ranges@3 21@4,Q,../nimony/lib/std/errorcodes/errorcodes.nim)
+     (stmts@,~D
+      (asgn@T,D `x.1 ENFILE.0.)))
+    (of@,E
+     (ranges@3 22@4,R,../nimony/lib/std/errorcodes/errorcodes.nim)
+     (stmts@,~E
+      (asgn@L,E `x.1 EACCES.0.)))
+    (of@,F
+     (ranges@3 23@4,S,../nimony/lib/std/errorcodes/errorcodes.nim)
+     (stmts@,~F
+      (asgn@F,F `x.1 EAGAIN.0.)))
+    (of@,G
+     (ranges@3 24@4,T,../nimony/lib/std/errorcodes/errorcodes.nim)
+     (stmts@,~G
+      (asgn@H,G `x.1 ETIMEDOUT.0.)))
+    (of@,H
+     (ranges@3 25@4,U,../nimony/lib/std/errorcodes/errorcodes.nim)
+     (stmts@,~H
+      (asgn@L,H `x.1 EINTR.0.)))
+    (of@,I
+     (ranges@3 26@4,V,../nimony/lib/std/errorcodes/errorcodes.nim)
+     (stmts@,~I
+      (asgn@I,I `x.1 EDEADLK.0.)))
+    (of@,J
+     (ranges@3 29@4,Y,../nimony/lib/std/errorcodes/errorcodes.nim)
+     (stmts@,~J
+      (asgn@L,J `x.1 EADDRINUSE.0.)))
+    (of@,K
+     (ranges@3 30@4,Z,../nimony/lib/std/errorcodes/errorcodes.nim)
+     (stmts@,~K
+      (asgn@O,K `x.1 EADDRNOTAVAIL.0.)))
+    (of@,L
+     (ranges@3 31@4,a,../nimony/lib/std/errorcodes/errorcodes.nim)
+     (stmts@,~L
+      (asgn@T,L `x.1 EAFNOSUPPORT.0.)))
+    (of@,M
+     (ranges@3 32@4,b,../nimony/lib/std/errorcodes/errorcodes.nim)
+     (stmts@,~M
+      (asgn@H,M `x.1 EOPNOTSUPP.0.)))
+    (of@,N
+     (ranges@3 33@4,c,../nimony/lib/std/errorcodes/errorcodes.nim)
+     (stmts@,~N
+      (asgn@L,N `x.1 ECANCELED.0.)))
+    (of@,O
+     (ranges@3 35@4,e,../nimony/lib/std/errorcodes/errorcodes.nim)
+     (stmts@,~O
+      (asgn@M,O `x.1 EALREADY.0.)))
+    (of@,P
+     (ranges@3 36@4,f,../nimony/lib/std/errorcodes/errorcodes.nim)
+     (stmts@,~P
+      (asgn@G,P `x.1 ENAMETOOLONG.0.)))
+    (of@,Q
+     (ranges@3 37@4,g,../nimony/lib/std/errorcodes/errorcodes.nim)
+     (stmts@,~Q
+      (asgn@F,Q `x.1 EEXIST.0.)))
+    (of@,R
+     (ranges@3 38@4,h,../nimony/lib/std/errorcodes/errorcodes.nim)
+     (stmts@,~R
+      (asgn@H,R `x.1 ENOENT.0.)))
+    (of@,S
+     (ranges@3 39@4,i,../nimony/lib/std/errorcodes/errorcodes.nim)
+     (stmts@,~S
+      (asgn@J,S `x.1 EFBIG.0.)))
+    (of@,T
+     (ranges@3 40@4,j,../nimony/lib/std/errorcodes/errorcodes.nim)
+     (stmts@,~T
+      (asgn@I,T `x.1 EPIPE.0.)))
+    (of@,U
+     (ranges@3 41@4,k,../nimony/lib/std/errorcodes/errorcodes.nim)
+     (stmts@,~U
+      (asgn@I,U `x.1 ENOEXEC.0.)))
+    (of@,V
+     (ranges@3 42@4,l,../nimony/lib/std/errorcodes/errorcodes.nim)
+     (stmts@,~V
+      (asgn@C,V `x.1 ELOOP.0.)))
+    (of@,W
+     (ranges@3 43@4,m,../nimony/lib/std/errorcodes/errorcodes.nim)
+     (stmts@,~W
+      (asgn@G,W `x.1 EPROTOTYPE.0.)))
+    (of@,X
+     (ranges@3 44@4,n,../nimony/lib/std/errorcodes/errorcodes.nim)
+     (stmts@,~X
+      (asgn@I,X `x.1 EPROTO.0.)))
+    (of@,Y
+     (ranges@3 45@4,o,../nimony/lib/std/errorcodes/errorcodes.nim)
+     (stmts@,~Y
+      (asgn@N,Y `x.1 EROFS.0.)))
+    (of@,Z
+     (ranges@3 46@4,p,../nimony/lib/std/errorcodes/errorcodes.nim)
+     (stmts@,~Z
+      (asgn@D,Z `x.1 EFAULT.0.)))
+    (of@,a
+     (ranges@3 48@4,r,../nimony/lib/std/errorcodes/errorcodes.nim)
+     (stmts@,~a
+      (asgn@H,a `x.1 ENETDOWN.0.)))
+    (of@,b
+     (ranges@3 49@4,s,../nimony/lib/std/errorcodes/errorcodes.nim)
+     (stmts@,~b
+      (asgn@M,b `x.1 ECONNREFUSED.0.)))
+    (of@,c
+     (ranges@3 50@4,t,../nimony/lib/std/errorcodes/errorcodes.nim)
+     (stmts@,~c
+      (asgn@K,c `x.1 EHOSTUNREACH.0.)))
+    (of@,d
+     (ranges@3 51@4,u,../nimony/lib/std/errorcodes/errorcodes.nim)
+     (stmts@,~d
+      (asgn@N,d `x.1 ENOTRECOVERABLE.0.)))
+    (else@,e
+     (stmts@,~e
+      (asgn@6,e `x.1
+       (suf 1 "i32")))))
+   (asgn result.1 `x.1)
+   (ret~2,~1 result.1)))
+ (gvar :`iniGuard.0. .
+  (bool).)
+ (proc :`ini.0.
+  (params).
+  (pragmas
+   (smry callsUnknown))
+  (stmts
+   (if
+    (elif `iniGuard.0.
+     (stmts
+      (ret .))))
+   (asgn `iniGuard.0.
+    (true))
+   (call `ini.0.sysvq0asl))))(.index@,3,../nimony/lib/std/errorcodes/errorcodes_posix.nim
+ (x EOVERFLOW.0. 97)
+ (x ERANGE.0. 101)
+ (x EDOM.0. 95)
+ (x ENOMEM.0. 91)
+ (x ENOSPC.0. 95)
+ (x EIO.0. 95)
+ (x EINVAL.0. 89)
+ (x EBADMSG.0. 95)
+ (x EILSEQ.0. 97)
+ (x ENOMSG.0. 95)
+ (x EDESTADDRREQ.0. 95)
+ (x E2BIG.0. 107)
+ (x ENOBUFS.0. 93)
+ (x ENODATA.0. 97)
+ (x EBUSY.0. 97)
+ (x ETXTBSY.0. 93)
+ (x ECHILD.0. 97)
+ (x EOWNERDEAD.0. 95)
+ (x ENOLCK.0. 103)
+ (x ENFILE.0. 95)
+ (x EACCES.0. 95)
+ (x EPERM.0. 95)
+ (x EAGAIN.0. 93)
+ (x EWOULDBLOCK.0. 95)
+ (x ETIMEDOUT.0. 105)
+ (x ETIME.0. 101)
+ (x EINTR.0. 93)
+ (x EDEADLK.0. 93)
+ (x EADDRINUSE.0. 97)
+ (x EISCONN.0. 103)
+ (x EADDRNOTAVAIL.0. 97)
+ (x EAFNOSUPPORT.0. 109)
+ (x EOPNOTSUPP.0. 107)
+ (x ENOTSUP.0. 103)
+ (x ENOSYS.0. 97)
+ (x EPROTONOSUPPORT.0. 95)
+ (x ENOTTY.0. 113)
+ (x ESPIPE.0. 95)
+ (x EISDIR.0. 95)
+ (x ENOTEMPTY.0. 95)
+ (x ECANCELED.0. 101)
+ (x ECONNABORTED.0. 101)
+ (x ENETRESET.0. 107)
+ (x EALREADY.0. 101)
+ (x EINPROGRESS.0. 99)
+ (x ENAMETOOLONG.0. 105)
+ (x EEXIST.0. 107)
+ (x ENOENT.0. 95)
+ (x EIDRM.0. 95)
+ (x ENODEV.0. 93)
+ (x ENOTDIR.0. 95)
+ (x EFBIG.0. 97)
+ (x EMSGSIZE.0. 93)
+ (x EPIPE.0. 99)
+ (x EBADF.0. 93)
+ (x EMFILE.0. 93)
+ (x ENOSTR.0. 95)
+ (x ENOTSOCK.0. 95)
+ (x ENOSR.0. 99)
+ (x ENXIO.0. 93)
+ (x ESRCH.0. 94)
+ (x ENOEXEC.0. 94)
+ (x ELOOP.0. 98)
+ (x EMLINK.0. 94)
+ (x EXDEV.0. 96)
+ (x EPROTOTYPE.0. 94)
+ (x ENOPROTOOPT.0. 104)
+ (x EPROTO.0. 106)
+ (x EROFS.0. 96)
+ (x EFAULT.0. 94)
+ (x ENETDOWN.0. 96)
+ (x ENETUNREACH.0. 100)
+ (x ECONNRESET.0. 106)
+ (x ENOTCONN.0. 104)
+ (x ECONNREFUSED.0. 100)
+ (x EHOSTUNREACH.0. 108)
+ (x ENOTRECOVERABLE.0. 108)
+ (x posixToErrorCode.0. 114)
+ (x errorCodeToPosix.0. 94458)
+ (h `iniGuard.0. 5426)
+ (x `ini.0. 34))

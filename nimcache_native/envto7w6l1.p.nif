@@ -1,0 +1,648 @@
+(.nif27)
+(.vendor "Nifler")
+(.dialect "nim-parsed")
+(stmts@,1,../nimony/lib/std/envvars.nim
+ (when
+  (elif@5
+   (call@7 defined~7 nodejs@1)
+   (stmts~3,1
+    (proc getEnv@5 x . .
+     (params@C
+      (param@1 key . . string@5 .)
+      (param@E default . . . ""@A))string@T
+     (pragmas@m
+      (kv@6 tags~4
+       (bracket@2 ReadEnvEffect@1))).
+     (stmts@2,1
+      (var@4 ret . . .
+       (dot@D default~7 cstring@1))
+      (let@4,1 key2 . . .
+       (dot@A key~3 cstring@1))
+      (pragmas@,2
+       (kv@6 emit~4 "const value = process.env\5B`key2`\5D;"@2))
+      (pragmas@,3
+       (kv@6 emit~4 "if \28value !== undefined\29 \7B `ret` = value \7D;"@2))
+      (asgn@7,4 result~7
+       (prefix@2 $ ret@1))))
+    (proc@,7 existsEnv@5 x . .
+     (params@F
+      (param@1 key . . string@5 .))bool@F
+     (pragmas@Z
+      (kv@6 tags~4
+       (bracket@2 ReadEnvEffect@1))).
+     (stmts@2,1
+      (var@4 key2 . . .
+       (dot@A key~3 cstring@1))
+      (var@4,1 ret . . bool@5 .)
+      (pragmas@,2
+       (kv@6 emit~4 "`ret` = `key2` in process.env;"@2))
+      (asgn@7,3 result~7 ret@2)))
+    (proc@,D putEnv@5 x . .
+     (params@C
+      (param@1 key . . string@A .)
+      (param@6 val . . string@5 .)).
+     (pragmas@V
+      (kv@6 tags~4
+       (bracket@2 WriteEnvEffect@1))).
+     (stmts@2,1
+      (var@4 key2 . . .
+       (dot@A key~3 cstring@1))
+      (var@4,1 val2 . . .
+       (dot@A val~3 cstring@1))
+      (pragmas@,2
+       (kv@6 emit~4 "process.env\5B`key2`\5D = `val2`;"@2))))
+    (proc@,I delEnv@5 x . .
+     (params@C
+      (param@1 key . . string@5 .)).
+     (pragmas@Q
+      (kv@6 tags~4
+       (bracket@2 WriteEnvEffect@1))).
+     (stmts@2,1
+      (var@4 key2 . . .
+       (dot@A key~3 cstring@1))
+      (pragmas@,1
+       (kv@6 emit~4 "delete process.env\5B`key2`\5D;"@2))))
+    (iterator@,M envPairs@9 x . .
+     (params@I)
+     (tuple@4
+      (kv@A key string@C)
+      (kv@F value string@7))
+     (pragmas@m
+      (kv@6 tags~4
+       (bracket@2 ReadEnvEffect@1))sideEffect@P).
+     (stmts@2,1
+      (var@4 num . . int@5 .)
+      (var@4,1 keys . . RootObj@6 .)
+      (pragmas@,2
+       (kv@6 emit~4 "`keys` = Object.keys\28process.env\29; `num` = `keys`.length;"@2))
+      (for@4,3
+       (infix@6 \2E\2E< 0~1 num@3)
+       (unpackflat
+        (let i . . ..))
+       (stmts~2,1
+        (var@4 key . . cstring@C .)
+        (var@9 value . . cstring@7 .)
+        (pragmas@,1
+         (kv@6 emit~4 "`key` = `keys`\5B`i`\5D; `value` = process.env\5B`key`\5D;"@2))
+        (yld@,2
+         (tup@6
+          (prefix@1 $ key@1)
+          (prefix@7 $ value@1)))))))))
+  (else@,a
+   (stmts@2,1
+    (when
+     (elif@5
+      (call@7 defined~7 windows@1)
+      (stmts~3,1
+       (fromimport parseutils@5 skipIgnoreCase@N))))
+    (import@,3 strutils@7 oserrors@H)
+    (type@F,8 cstringArray~D . . .
+     (ptr@2
+      (at@I UncheckedArray~E cstring@1)))
+    (proc@,A delete@5 . .
+     (typevars@B
+      (typevar@1 T . . . .))
+     (params@E
+      (param@1 x . .
+       (mut@3
+        (at@7 seq~3 T@1)).)
+      (param@G i . . Natural@3 .)).
+     (pragmas@g noSideEffect@2).
+     (stmts@2,1
+      (let@4 xl . . .
+       (dot@6 x~1 len@1))
+      (for@4,1
+       (infix@A \2E\2E
+        (dot~4 i~1 int@1)
+        (infix@4 \2D xl~2 2@1))
+       (unpackflat
+        (let j . . ..))
+       (stmts~2,1
+        (asgn@5
+         (at~4 x~1 j@1)
+         (cmd@7 move~5
+          (at@1 x~1
+           (infix@2 \2B j~1 1@1))))))
+      (call@6,3 shrink~6 x@1
+       (infix@6 \2D xl~2 1@1))))
+    (when@,G
+     (elif@5
+      (infix@H and
+       (call~A defined~7 windows@1)
+       (prefix@4 not
+        (call@B defined~7 nimscript@1)))
+      (stmts~3,1
+       (import widestrs@7)
+       (type@A,4 WINBOOL~8 . . . int32@2)
+       (comment@2,5)
+       (proc@,7 getEnvironmentStringsW@5 . . .
+        (params@R)WideCString@4
+        (pragmas@h
+         (kv~Y,1 importc~7 "GetEnvironmentStringsW"@2)
+         (kv@,1 header~6 "<windows.h>"@2)). .)
+       (proc@,9 freeEnvironmentStringsW@5 . . .
+        (params@S
+         (param@1 env . . WideCString@5 .))WINBOOL@K
+        (pragmas@u
+         (kv~l,1 importc~7 "FreeEnvironmentStringsW"@2)
+         (kv~C,1 header~6 "<windows.h>"@2)). .)
+       (proc@,B setEnvironmentVariableW@5 . . .
+        (params@S
+         (param@1 name . . WideCString@D .)
+         (param@7 value . . WideCString@7 .))WINBOOL@S
+        (pragmas@12
+         (kv~t,1 importc~7 "SetEnvironmentVariableW"@2)
+         (kv~K,1 header~6 "<windows.h>"@2)). .))))
+    (proc@,V c_getenv@5 . . .
+     (params@D
+      (param@1 env . . cstring@5 .))cstring@G
+     (pragmas@b
+      (kv~S,1 importc~7 "getenv"@2)
+      (kv~A,1 header~6 "<stdlib.h>"@2)). .)
+    (when@,X
+     (elif@5
+      (call@7 defined~7 vcc@1)
+      (stmts~3,1
+       (proc c_putenv_s@5 . . .
+        (params@F
+         (param@1 envname . . cstring@9 .)
+         (param@J envval . . cstring@8 .))cint@b
+        (pragmas@v
+         (kv@9 importc~7 "_putenv_s"@2)
+         (kv@U header~6 "<stdlib.h>"@2)). .)))
+     (else@,2
+      (stmts@2,1
+       (proc c_setenv@5 . . .
+        (params@D
+         (param@1 envname . . cstring@9 .)
+         (param@J envval . . cstring@8 .)
+         (param@a overwrite . . cint@B .))cint@s
+        (pragmas@1A
+         (kv@9 importc~7 "setenv"@2)
+         (kv@R header~6 "<stdlib.h>"@2)). .))))
+    (proc@,b c_unsetenv@5 . . .
+     (params@F
+      (param@1 env . . cstring@5 .))cint@G
+     (pragmas@a
+      (kv~R,1 importc~7 "unsetenv"@2)
+      (kv~7,1 header~6 "<stdlib.h>"@2)). .)
+    (var@E,i envComputed~C .
+     (pragmas threadvar@2)bool@F .)
+    (var@E,j environment~C .
+     (pragmas threadvar@2)
+     (at@I seq~3 string@1).)
+    (when@,l
+     (elif@5
+      (call@7 defined~7 nimV2@1)
+      (stmts~3,1
+       (proc unpairedEnvAllocs@5 x . .
+        (params@N)int@4 . .
+        (stmts@2,1
+         (asgn@7 result~7
+          (dot@D environment~B len@1))
+         (if@,1
+          (elif@3
+           (infix@7 > result~7 0@2)
+           (stmts@C
+            (cmd inc result@4)))))))))
+    (when@,q
+     (elif@5
+      (infix@H and
+       (call~A defined~7 windows@1)
+       (prefix@4 not
+        (call@B defined~7 nimscript@1)))
+      (stmts~3,3
+       (when
+        (elif@5
+         (call@7 defined~7 cpp@1)
+         (stmts~3,1
+          (proc strEnd@5 . . .
+           (params@B
+            (param@1 cstr . . WideCString@6 .)
+            (param@K c . . .
+             (suf@4 0 "i32")))WideCString@W
+           (pragmas@t
+            (kv~i,1 importcpp~9 "\28NI16*\29wcschr\28\28const wchar_t *\29\23, \23\29"@2)
+            (kv@4,1 header~6 "<string.h>"@2)). .)))
+        (else@,3
+         (stmts@2,1
+          (proc strEnd@5 . . .
+           (params@B
+            (param@1 cstr . . WideCString@6 .)
+            (param@K c . . .
+             (suf@4 0 "i32")))WideCString@W
+           (pragmas@t
+            (kv~k,1 importc~7 "wcschr"@2)
+            (kv~S,1 header~6 "<string.h>"@2)). .))))
+       (proc@,7 getEnvVarsC@5 . . .
+        (params@G). . .
+        (stmts@2,1
+         (if
+          (elif@3
+           (prefix not envComputed@4)
+           (stmts~1,1
+            (asgn@C environment~C
+             (prefix@2 \40
+              (bracket@1)))
+            (var@2,2 env . . .
+             (call@S getEnvironmentStringsW~M))
+            (var@2,3 e . . . env@4)
+            (if@,4
+             (elif@3
+              (infix@2 == e~2
+               (nil@3))
+              (stmts@A
+               (ret .))))
+            (while@,5 true@6
+             (stmts@2,1
+              (var@4 eend . . .
+               (call@D strEnd~6 e@1))
+              (call@3,1 add~3 environment@1
+               (prefix@E $ e@1))
+              (asgn@2,2 e~2
+               (cast@2 WideCString@5
+                (infix@Y \2B
+                 (cast~G uint@5 eend@B)2@1)))
+              (if@,3
+               (elif@3
+                (infix@C ==
+                 (dot~5
+                  (at~3 eend~4 1@1)int@1)0@3)
+                (stmts@I
+                 (break .))))))
+            (discard@,A
+             (call@V freeEnvironmentStringsW~N env@1))
+            (asgn@C,C envComputed~C true@2))))))))
+     (else@,Q
+      (stmts@2,1
+       (const@2,1 useNSGetEnviron . . .
+        (infix@1N or
+         (par~15
+          (infix@c and
+           (infix~L and
+            (call~9 defined~7 macosx@1)
+            (prefix@4 not
+             (call@B defined~7 ios@1)))
+           (prefix@4 not
+            (call@B defined~7 emscripten@1))))
+         (call@A defined~7 nimscript@1)))
+       (when@,3
+        (elif@5 useNSGetEnviron
+         (stmts~3,9
+          (proc NSGetEnviron@5 . . .
+           (params@H)pointer@4
+           (pragmas@T
+            (kv~K,1 importc~7 "_NSGetEnviron"@2)
+            (kv@5,1 header~6 "<crt_externs.h>"@2)). .)))
+        (elif@5,B
+         (call@7 defined~7 haiku@1)
+         (stmts~3,1
+          (var@9 gEnv~5 .
+           (pragmas
+            (kv@9 importc~7 "environ"@2)
+            (kv@S header~6 "<stdlib.h>"@2))cstringArray@k .)))
+        (elif@5,D
+         (call@7 defined~7 nimNativeIo@1)
+         (stmts~3,3
+          (var@9 gEnv~5 .
+           (pragmas
+            (kv@9 importc~7 "nimEnviron"@2))cstringArray@R .)))
+        (else@,H
+         (stmts@2,1
+          (var@9 gEnv~5 .
+           (pragmas
+            (kv@9 importc~7 "environ"@2))cstringArray@O .))))
+       (proc@,N getEnvVarsC@5 . . .
+        (params@G). . .
+        (stmts@2,2
+         (if
+          (elif@3
+           (prefix not envComputed@4)
+           (stmts~1,1
+            (asgn@C environment~C
+             (prefix@2 \40
+              (bracket@1)))
+            (when@,1
+             (elif@5 useNSGetEnviron
+              (stmts~3,1
+               (var@4 gEnv . . .
+                (at@j
+                 (cast~c
+                  (ptr@5 cstringArray@4)
+                  (call@Z NSGetEnviron~C)))))))
+            (var@4,3 i . . . 0@4)
+            (while@,4
+             (infix@E !=
+              (at~4 gEnv~4 i@1)
+              (nil@3))
+             (stmts@2,1
+              (cmd add environment@4
+               (prefix@H $
+                (at@5 gEnv~4 i@1)))
+              (call@3,1 inc~3 i@1)))
+            (asgn@C,7 envComputed~C true@2)))))))))
+    (proc@,1q findEnvVar@5 . . .
+     (params@F
+      (param@1 key . . string@5 .))int@F . .
+     (stmts@2,1
+      (call@B getEnvVarsC~B)
+      (var@4,1 temp . . .
+       (infix@B & key~4 "="@2))
+      (for@4,2
+       (infix@6 \2E\2E 0~1
+        (call@6 high~4 environment@1))
+       (unpackflat
+        (let i . . ..))
+       (stmts~2,1
+        (when
+         (elif@5
+          (call@7 defined~7 windows@1)
+          (stmts~3,1
+           (if
+            (elif@3
+             (infix@b ==
+              (call~N skipIgnoreCase~E
+               (at@C environment~B i@1)temp@H)
+              (call@6 len~3 temp@1))
+             (stmts@p
+              (ret i@7))))))
+         (else@,2
+          (stmts@2,1
+           (if
+            (elif@3
+             (call@A startsWith~A
+              (at@C environment~B i@1)temp@H)
+             (stmts@Y
+              (ret i@7)))))))))
+      (ret@,7 -1@7)))
+    (proc@,20 getEnv@5 x . .
+     (params@C
+      (param@1 key . . string@5 .)
+      (param@E default . . . ""@A))string@T
+     (pragmas@m
+      (kv@6 tags~4
+       (bracket@2 ReadEnvEffect@1))).
+     (stmts@2,1
+      (comment)
+      (call@,B runnableExamples
+       (stmts@2,1
+        (cmd assert
+         (infix@S ==
+          (call~F getEnv~6 "unknownEnv"@1)""@3))
+        (cmd@,1 assert
+         (infix@j ==
+          (call~W getEnv~6 "unknownEnv"@1 "doesn\27t exist"@F)"doesn\27t exist"@3))))
+      (var@4,G i . . .
+       (call@E findEnvVar~A key@1))
+      (if@,H
+       (elif@3
+        (infix@2 >= i~2 0@3)
+        (stmts~1,1
+         (asgn@7 result~7
+          (call@8 substr~6
+           (at@C environment~B i@1)
+           (infix@g \2B
+            (call~L find~4
+             (at@C environment~B i@1)'='@H)1@1)))))
+       (else@,2
+        (stmts@2,1
+         (when
+          (elif@5
+           (call@7 defined~7 nimNativeIo@1)
+           (stmts~3,3
+            (asgn@7 result~7 default@2)))
+          (else@,4
+           (stmts@2,1
+            (var@4 key . . . key@6)
+            (let@4,1 kc . . .
+             (call@I
+              (dot~A key~3 toCString@1)))
+            (if@,2
+             (elif@3
+              (dot@2 kc~2 isNil@1)
+              (stmts~1,1
+               (asgn@7 result~7 default@2)))
+             (else@,2
+              (stmts@2,1
+               (var@4 env . . .
+                (call@E c_getenv~8 kc@1))
+               (if@,1
+                (elif@3
+                 (infix@4 == env~4
+                  (nil@3))
+                 (stmts@C
+                  (asgn@7 result~7 default@2)))
+                (else@,1
+                 (stmts@6
+                  (asgn@7 result~7
+                   (prefix@2 $ env@1))))))))))))))))
+    (proc@,2Z existsEnv@5 x . .
+     (params@F
+      (param@1 key . . string@5 .))bool@F
+     (pragmas@Z
+      (kv@6 tags~4
+       (bracket@2 ReadEnvEffect@1))).
+     (stmts@2,1
+      (comment)
+      (call@,8 runnableExamples
+       (stmts@2,1
+        (cmd assert
+         (prefix@7 not
+          (call@D existsEnv~9 "unknownEnv"@1)))))
+      (var@4,B key . . . key@6)
+      (let@4,C kc . . .
+       (call@I
+        (dot~A key~3 toCString@1)))
+      (if@,D
+       (elif@3
+        (dot@2 kc~2 isNil@1)
+        (stmts~1,1
+         (asgn@7 result~7 false@2)))
+       (elif@5,2
+        (infix@D !=
+         (call~5 c_getenv~8 kc@1)
+         (nil@3))
+        (stmts~3,1
+         (asgn@7 result~7 true@2)))
+       (else@,4
+        (stmts@2,1
+         (asgn@7 result~7
+          (infix@I >=
+           (call~6 findEnvVar~A key@1)0@3)))))))
+    (proc@,2u putEnv@5 x . .
+     (params@C
+      (param@1 key . . string@A .)
+      (param@6 val . . string@5 .)).
+     (pragmas@V
+      (kv@6 tags~4
+       (bracket@2 WriteEnvEffect@1))raises@Q).
+     (stmts@2,1
+      (comment)
+      (var@4,E indx . . .
+       (call@H findEnvVar~A key@1))
+      (if@,F
+       (elif@3
+        (infix@5 >= indx~5 0@3)
+        (stmts~1,1
+         (asgn@I
+          (at~7 environment~B indx@1)
+          (infix@C &
+           (infix~6 & key~4 '='@2)val@2))))
+       (else@,2
+        (stmts@2,1
+         (cmd add environment@4
+          (par@H
+           (infix@B &
+            (infix~6 & key~4 '='@2)val@2)))
+         (asgn@5,1 indx~5
+          (call@6 high~4 environment@1)))))
+      (var@4,L key . . . key@6)
+      (var@4,M val . . . val@6)
+      (when@,N
+       (elif@5
+        (infix@H and
+         (call~A defined~7 windows@1)
+         (prefix@4 not
+          (call@B defined~7 nimscript@1)))
+        (stmts~3,1
+         (var@4 k . . .
+          (call@I newWideCString~E key@1))
+         (var@4,1 v . . .
+          (call@I newWideCString~E val@1))
+         (if@,2
+          (elif@3
+           (infix@10 ==
+            (call~d setEnvironmentVariableW~N
+             (call@G
+              (dot~E k~1 toWideCString@1))
+             (call@Z
+              (dot~E v~1 toWideCString@1)))
+            (suf@3 0 "i32"))
+           (stmts~1,1
+            (call@C raiseOSError~C
+             (call@C osLastError~B)))))))
+       (elif@5,6
+        (call@7 defined~7 vcc@1)
+        (stmts~3,1
+         (if
+          (elif@3
+           (infix@L !=
+            (call~B c_putenv_s~A key@1 val@6)
+            (suf@3 0 "i32"))
+           (stmts~1,1
+            (call@C raiseOSError~C
+             (call@C osLastError~B)))))))
+       (else@,9
+        (stmts@2,1
+         (let@4 kc . . .
+          (call@I
+           (dot~A key~3 toCString@1)))
+         (let@4,1 vc . . .
+          (call@I
+           (dot~A val~3 toCString@1)))
+         (if@,2
+          (elif@3
+           (dot@2 kc~2 isNil@1)
+           (stmts~1,1
+            (raise OutOfMemError@6))))
+         (if@,4
+          (elif@3
+           (dot@2 vc~2 isNil@1)
+           (stmts~1,1
+            (raise OutOfMemError@6))))
+         (if@,6
+          (elif@3
+           (infix@O !=
+            (call~G c_setenv~8 kc@1 vc@5
+             (suf@9 1 "i32"))
+            (suf@3 0 "i32"))
+           (stmts~1,1
+            (call@C raiseOSError~C
+             (call@C osLastError~B))))))))))
+    (proc@,3b delEnv@5 x . .
+     (params@C
+      (param@1 key . . string@5 .)).
+     (pragmas@Q
+      (kv@6 tags~4
+       (bracket@2 WriteEnvEffect@1))raises@Q).
+     (stmts@2,1
+      (comment)
+      (var@4,8 indx . . .
+       (call@H findEnvVar~A key@1))
+      (if@,9
+       (elif@3
+        (infix@5 >= indx~5 0@3)
+        (stmts~1,1
+         (when
+          (elif@5
+           (infix@H and
+            (call~A defined~7 windows@1)
+            (prefix@4 not
+             (call@B defined~7 nimscript@1)))
+           (stmts~3,1
+            (var@4 key . . . key@6)
+            (var@4,1 k . . .
+             (call@I newWideCString~E key@1))
+            (if@,2
+             (elif@3
+              (infix@m ==
+               (call~P setEnvironmentVariableW~N
+                (call@G
+                 (dot~E k~1 toWideCString@1))
+                (nil@K))
+               (suf@3 0 "i32"))
+              (stmts~1,1
+               (call@C raiseOSError~C
+                (call@C osLastError~B)))))))
+          (else@,5
+           (stmts@2,1
+            (var@4 key . . . key@6)
+            (let@4,1 kc . . .
+             (call@I
+              (dot~A key~3 toCString@1)))
+            (if@,2
+             (elif@3
+              (dot@2 kc~2 isNil@1)
+              (stmts~1,1
+               (raise OutOfMemError@6))))
+            (if@,4
+             (elif@3
+              (infix@F !=
+               (call~5 c_unsetenv~A kc@1)
+               (suf@3 0 "i32"))
+              (stmts~1,1
+               (call@C raiseOSError~C
+                (call@C osLastError~B))))))))
+         (call@I,C
+          (dot~7 environment~B delete@1)indx@1)))
+       (else@,E
+        (stmts@2,1
+         (discard .))))))
+    (iterator@,42 envPairs@9 x . .
+     (params@I)
+     (tuple@4
+      (kv@A key string@C)
+      (kv@F value string@7))
+     (pragmas@m
+      (kv@6 tags~4
+       (bracket@2 ReadEnvEffect@1))sideEffect@P).
+     (stmts@2,1
+      (comment)
+      (call@B,A getEnvVarsC~B)
+      (for@4,B
+       (infix@6 \2E\2E 0~1
+        (call@6 high~4 environment@1))
+       (unpackflat
+        (let i . . ..))
+       (stmts~2,1
+        (var@4 p . . .
+         (call@8 find~4
+          (at@C environment~B i@1)'='@H))
+        (yld@,1
+         (tup@6
+          (call@7 substr~6
+           (at@C environment~B i@1)0@H
+           (infix@L \2D p~1 1@1))
+          (call@7,1 substr~6
+           (at@C environment~B i@1)
+           (infix@I \2B p~1 1@1))))))))))))

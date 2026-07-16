@@ -1,0 +1,71 @@
+(.nif27)
+(.indexat 1879             )
+(stmts@,1,../nimony/lib/std/paths.nim
+ (type@8,M :Path.0.~6 .
+  (object@2 .
+   (fld~6,1 :data.0 . string.0.sysvq0asl@6)))
+ (type@A,2k,../nimony/lib/std/system.nim :`t.0.IAarrayAuS8ZS32.cmdqs323n1 .
+  (array
+   (u 8)32))
+ (type@E,1E :`t.0.IAtupleSX50ath0pat4k2dlsSR6. .
+  (object .
+   (fld@W :fld.0 . Path.0.)
+   (fld@W :fld.1 . Path.0.)))
+ (type@G,2t,../nimony/lib/std/private/ospaths2.nim :`t.0.IAtupleSstring0sysvq0aslSR6.ospaexnw61 .
+  (object .
+   (fld@Y :fld.0 . string.0.sysvq0asl)
+   (fld@Y :fld.1 . string.0.sysvq0asl)))
+ (type@E,1Q :`t.0.IAtupleSX50ath0pat4k2dlsSR6Sstring0sysvq0asl. .
+  (object .
+   (fld@V :fld.0 . Path.0.)
+   (fld@V :fld.1 . Path.0.)
+   (fld@g :fld.2 . string.0.sysvq0asl)))
+ (type@G,9f,../nimony/lib/std/private/ospaths2.nim :`t.0.IAtupleSstring0sysvq0aslSR6SR6.ospaexnw61 .
+  (object .
+   (fld@c :fld.0 . string.0.sysvq0asl)
+   (fld@c :fld.1 . string.0.sysvq0asl)
+   (fld@c :fld.2 . string.0.sysvq0asl)))
+ (type :`t.0.IAtupleSX45rrorX43ode0sysvq0aslSX50ath0pat4k2dls.dir38pj6l .
+  (object .
+   (fld :fld.0 . ErrorCode.0.sysvq0asl)
+   (fld@Y,1o :fld.1 . Path.0.)))
+ (type@a,4Z,../nimony/lib/std/private/ospaths2.nim :`t.0.IAtupleSX45rrorX43ode0sysvq0aslSstring0R20.aif7a4qfr .
+  (object .
+   (fld :fld.0 . ErrorCode.0.sysvq0asl)
+   (fld :fld.1 . string.0.sysvq0asl)))
+ (type :`t.0.IAtupleSX45rrorX43ode0sysvq0aslAbool.osc4bsu0d1 .
+  (object .
+   (fld :fld.0 . ErrorCode.0.sysvq0asl)
+   (fld@Q,25 :fld.1 .
+    (bool))))
+ (gvar :`iniGuard.0. .
+  (bool).)
+ (proc :`ini.0.
+  (params).
+  (pragmas
+   (smry callsUnknown))
+  (stmts
+   (if
+    (elif `iniGuard.0.
+     (stmts
+      (ret .))))
+   (asgn `iniGuard.0.
+    (true))
+   (call `ini.0.sysvq0asl)
+   (call `ini.0.ossk30t39)
+   (call `ini.0.osalirkw71)
+   (call `ini.0.patta6rli)
+   (call `ini.0.has9tn57v)
+   (call `ini.0.str7j0ifg)
+   (call `ini.0.ospaexnw61))))(.index@,1,../nimony/lib/std/paths.nim
+ (h Path.0. 75)
+ (h `t.0.IAarrayAuS8ZS32.cmdqs323n1 84)
+ (h `t.0.IAtupleSX50ath0pat4k2dlsSR6. 98)
+ (h `t.0.IAtupleSstring0sysvq0aslSR6.ospaexnw61 119)
+ (h `t.0.IAtupleSX50ath0pat4k2dlsSR6Sstring0sysvq0asl. 190)
+ (h `t.0.IAtupleSstring0sysvq0aslSR6SR6.ospaexnw61 175)
+ (h `t.0.IAtupleSX45rrorX43ode0sysvq0aslSX50ath0pat4k2dls.dir38pj6l 232)
+ (h `t.0.IAtupleSX45rrorX43ode0sysvq0aslSstring0R20.aif7a4qfr 159)
+ (h `t.0.IAtupleSX45rrorX43ode0sysvq0aslAbool.osc4bsu0d1 203)
+ (h `iniGuard.0. 151)
+ (x `ini.0. 34))

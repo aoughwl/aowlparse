@@ -1,0 +1,9 @@
+(stmts
+ (roots)
+ (uses ParDir.0. string.0.sysvq0asl)
+ (uses `ini.0. `iniGuard.0. `ini.0.sysvq0asl)
+ (uses ScriptExt.0. string.0.sysvq0asl)
+ (uses ExeExt.0. string.0.sysvq0asl)
+ (uses DynlibFormat.0. strlit.0.I9829949071316678068. string.0.sysvq0asl)
+ (uses strlit.0.I9829949071316678068. LongString.0.sysvq0asl)
+ (offers strlit.0.I9829949071316678068.))

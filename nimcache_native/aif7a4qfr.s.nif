@@ -1,0 +1,726 @@
+(.nif27)
+(.indexat 22536            )
+(stmts@,1,src/aifparser.nim
+ (import
+  (kv sysvq0asl "../nimony/lib/std/system.nim")
+  (kv syn1lfpjv "../nimony/lib/std/syncio.nim")
+  (kv oswd7dmm "../nimony/lib/std/os.nim")
+  (kv cmdqs323n1 "../nimony/lib/std/cmdline.nim")
+  (kv ospaexnw61 "../nimony/lib/std/private/ospaths2.nim")
+  (kv osalirkw71 "../nimony/lib/std/private/osappdirs.nim")
+  (kv osc4bsu0d1 "../nimony/lib/std/private/oscommons.nim")
+  (kv ossk30t39 "../nimony/lib/std/private/osseps.nim")
+  (kv nifjp9lau1 "../nimony/src/lib/nifbuilder.nim")
+  (kv vfsc9jn7 "../nimony/src/lib/vfs.nim")
+  (kv tok9e79hf "src/tokens.nim")
+  (kv lex3r1urc1 "src/lexer.nim")
+  (kv parq39nt2 "src/parser.nim"))
+ (proc@,H :parseToFile.0.@5 . . .
+  (params@G
+   (param@1 :inp.0 . . string.0.sysvq0asl@M .)
+   (param@6 :outp.0 . . string.0.sysvq0asl@H .)
+   (param@C :fileField.0 . . string.0.sysvq0asl@B .)
+   (param@V :curly.0 . .
+    (bool@7).)). . .
+  (stmts@2,1
+   (var@4 :src.0 . . string.0.sysvq0asl ""@6)
+   (try@,1
+    (stmts@2,1
+     (asgn@4 src.0~4
+      (call@A readFile.0.syn1lfpjv~8 inp.0@1)))
+    (except@,2 .
+     (stmts@2,1
+      (cmd write.0.syn1lfpjv stderr.0.syn1lfpjv@6
+       (infix@f &.0.sysvq0asl
+        (infix~6 &.0.sysvq0asl "cannot read file\3A "~L inp.0@2)"\0A"@2))
+      (cmd@,1 quit.0.syn1lfpjv 1@5))))
+   (let@4,6 :toks.0 . . seq.0.Iyai4gn.lex3r1urc1@I,Cp,src/lexer.nim
+    (call@F tokenize.3.lex3r1urc1~8 src.0@1))
+   (var@4,7 :ps.0 . . Parser.0.parq39nt2@G,P,src/parsecore.nim
+    (call@F initParser.0.parq39nt2~A toks.0@1 fileField.0@7 curly.0@I 0@S,P,src/parsecore.nim))
+   (var@4,8 :b.0 . . Builder.0.nifjp9lau1@1F,X,../nimony/src/lib/nifbuilder.nim
+    (call@J open.0.nifjp9lau1~5 outp.0@1
+     (false@d,X,../nimony/src/lib/nifbuilder.nim)AlwaysWrite.0.vfsc9jn7@1B,X,../nimony/src/lib/nifbuilder.nim))
+   (call@B,9 parseModule.0.parq39nt2~B
+    (haddr@1 ps.0)
+    (haddr@5 b.0))
+   (call@7,A close.0.nifjp9lau1~5
+    (haddr~7 b.0))))
+ (proc@,U :usage.0.@5 . . .
+  (params@A). . .
+  (stmts@2,1
+   (cmd write.0.syn1lfpjv stderr.0.syn1lfpjv@6 "aifparser — Nim source -> AIF \28nifler-compatible\29\0A"@E)
+   (cmd@,1 write.0.syn1lfpjv stderr.0.syn1lfpjv@6 "usage\3A aifparser \5B--curly\5D p <in.nim> \5Bout.p.aif\5D\0A"@E)
+   (cmd@,2 write.0.syn1lfpjv stderr.0.syn1lfpjv@6 "  --curly   experimental\3A also accept `\7B … \7D` block bodies\0A"@E)
+   (cmd@,3 quit.0.syn1lfpjv 1@5)))
+ (proc@,a :main.0.@5 . . .
+  (params@9). . .
+  (stmts@2,2
+   (var@4 :params.0 . . seq.0.Ixdx2fh1.@B
+    (expr@2,32,../nimony/lib/std/system/seqimpl.nim
+     (call@F,1 newSeqUninit.0.Im3cqd9.~F 0@1)))
+   (var@4,1 :curly.1 . .
+    (bool@C,h,../nimony/lib/std/system/basic_types.nim)
+    (false@8))
+   (let@4,2 :cli.0 . . seq.0.Ixdx2fh1.@B,~2
+    (call@N commandLineParams.0.cmdqs323n1~H))
+   (for@4,3
+    (infix@8 \2E.<.0.Inpqkww1. 0~2
+     (call@7 len.3.Ixq6taz.@1 cli.0~3))
+    (unpackflat
+     (let :ci.0 . .
+      (i@9,7,../nimony/lib/std/system/seqimpl.nim 64).))
+    (stmts~2,1
+     (if
+      (elif@3
+       (infix@8 ==.20.sysvq0asl
+        (hderef~8
+         (call \5B\5D.7.Ir6d0tw. cli.0 ci.0@4))"--curly"@3)
+       (stmts@M
+        (asgn@6 curly.1~6
+         (true@2))))
+      (else@,1
+       (stmts@6
+        (cmd@6 add.0.Ig6072n.@1
+         (haddr~6 params.0)
+         (hderef@5
+          (call \5B\5D.7.Ir6d0tw. cli.0 ci.0@4))))))))
+   (if@,6
+    (elif@3
+     (lt@B
+      (i 64)
+      (call~5 len.3.Ixq6taz.@1 params.0~6)2@2)
+     (stmts~1,1
+      (call@5 usage.0.~5))))
+   (let@4,8 :action.0 . . string.0.sysvq0asl@C,~8
+    (hderef@9
+     (call \5B\5D.7.Ir6d0tw. params.0 0@7)))
+   (if@,9
+    (elif@3
+     (and@E
+      (expr@2,1l,../nimony/lib/std/system/comparisons.nim
+       (not@,1
+        (infix@7 ==.20.sysvq0asl action.0@5,m,src/aifparser.nim "p"@F,m,src/aifparser.nim)))
+      (expr@2,1l,../nimony/lib/std/system/comparisons.nim
+       (not@,1
+        (infix@7 ==.20.sysvq0asl action.0@N,m,src/aifparser.nim "parse"@X,m,src/aifparser.nim))))
+     (stmts~1,1
+      (cmd write.0.syn1lfpjv stderr.0.syn1lfpjv@6
+       (infix@h &.0.sysvq0asl
+        (infix~9 &.0.sysvq0asl "unknown command\3A "~K action.0@2)"\0A"@2))
+      (call@5,1 usage.0.~5))))
+   (let@4,C :inp.1 . . string.0.sysvq0asl@C,~C
+    (hderef@6
+     (call \5B\5D.7.Ir6d0tw. params.0 1@7)))
+   (var@4,D :outp.1 . . string.0.sysvq0asl ""@7)
+   (if@,E
+    (elif@3
+     (expr@2,1p,../nimony/lib/std/system/comparisons.nim
+      (le@2,1
+       (i 64)3@J,r,src/aifparser.nim
+       (dot@B,r,src/aifparser.nim params.0~6 len.0 0 "x")))
+     (stmts~1,1
+      (asgn@5 outp.1~5
+       (hderef@2
+        (call \5B\5D.7.Ir6d0tw. params.0 2@7)))
+      (let@4,1 :n.0 . .
+       (i@9,7,../nimony/lib/std/system/seqimpl.nim 64)
+       (call@8 len.4.sysvq0asl@1 outp.1~4))
+      (if@,2
+       (elif@3
+        (or@6
+         (lt~4
+          (i 64)n.0~2 4@2)
+         (expr@2,1l,../nimony/lib/std/system/comparisons.nim
+          (not@,1
+           (infix@7 ==.20.sysvq0asl
+            (call@G,u,src/aifparser.nim \5B\5D.14.sysvq0asl outp.1
+             (infix@9 \2E..1.If4noih.
+              (sub~3
+               (i 64)n.0~1 4@1)
+              (sub@4
+               (i 64)n.0~1 1@1)))".nif"@a,u,src/aifparser.nim))))
+        (stmts~1,1
+         (asgn@5 outp.1~5
+          (infix@7 &.0.sysvq0asl outp.1~5 ".nif"@2)))))))
+    (else@,5
+     (stmts@2,1
+      (asgn@5 outp.1~5
+       (infix@6 &.0.sysvq0asl inp.1~4 ".p.aif"@2)))))
+   (call@B,O parseToFile.0.~B inp.1@1 outp.1@6 inp.1@C curly.1@H)))
+ (call@4,12 main.0.~4)
+ (comment@s,H bool.0.sysvq0asl \40.1.sysvq0asl~Q,L false.0.sysvq0asl~e,M true.0.sysvq0asl~H,P !=.0.sysvq0asl~g,U !=.0.sysvq0asl~O,U >=.0.sysvq0asl~c,Z !=.0.sysvq0asl~L,c)
+ (func@H,33,../nimony/lib/std/system/seqimpl.nim :newSeqUninit.0.Im3cqd9. . .~H,~1z
+  (at newSeqUninit.0.sysvq0asl string.0.sysvq0asl@I,d,src/aifparser.nim)
+  (params@4,~1z
+   (param@1 :size.1 . .
+    (i@6 64).))seq.0.Ixdx2fh1.~1,~1z
+  (pragmas@O,~1z
+   (nodestroy@2)
+   (inline@D)).~H,~1z
+  (stmts~F,~1y
+   (result :result.0 . . seq.0.Ixdx2fh1.@E,~1 .)
+   (if@,1
+    (elif@3
+     (eq@5
+      (i 64)size.1~5 0@3)
+     (stmts~1,1
+      (asgn@7 result.0~7
+       (oconstr@8 seq.0.Ixdx2fh1.@H,d,src/aifparser.nim
+        (kv@4 len.0~3 size.1@2)
+        (kv@G data.0~4
+         (nil@2))))))
+    (else@,2
+     (stmts@2,1
+      (let@4 :memSize.0 . .
+       (i@1,~12 64)
+       (call@R memSizeInBytes.0.I7me00i.~H size.1@1))
+      (asgn@7,1 result.0~7
+       (oconstr@8 seq.0.Ixdx2fh1.@H,d,src/aifparser.nim
+        (kv@4 len.0~3 size.1@2)
+        (kv@G data.0~4
+         (cast@2
+          (ptr@5
+           (uarray@I string.0.sysvq0asl@I,d,src/aifparser.nim)
+           (unchecked))
+          (call@X alloc.0.sysvq0asl~5 memSize.0@1)))))
+      (if@,2
+       (elif@3
+        (expr@2,1l,../nimony/lib/std/system/comparisons.nim
+         (not@,1
+          (eq@7
+           (ptr
+            (uarray string.0.sysvq0asl@I,d,src/aifparser.nim)
+            (unchecked))
+           (dot@D,1B,../nimony/lib/std/system/seqimpl.nim result.0~6 data.0 0 "x")
+           (nil@M,1B,../nimony/lib/std/system/seqimpl.nim))))
+        (stmts~1,1
+         (discard "leave uninitialized"@8)))
+       (else@,2
+        (stmts@2,1
+         (asgn@B
+          (dot~5 result.0~6 len.0 0 "x")0@2)
+         (pragmax@,1
+          (pragmas
+           (cast@2
+            (pragmas
+             (noSideEffect@5))))
+          (stmts@2,1
+           (cmd oomHandler.0.sysvq0asl memSize.0@B)))))))))
+   (ret~2,~1 result.0)))
+ (func@L,f :len.3.Ixq6taz. . .@,2Z,../nimony/lib/std/system/seqimpl.nim
+  (at len.3.sysvq0asl string.0.sysvq0asl~3,~3)
+  (params@C,2Z,../nimony/lib/std/system/seqimpl.nim
+   (param@1 :s.3 . . seq.0.Ixdx2fh1.@6 .))
+  (i@D,2Z,../nimony/lib/std/system/seqimpl.nim 64)
+  (pragmas@T,2Z,../nimony/lib/std/system/seqimpl.nim
+   (inline@2)).@,2Z,../nimony/lib/std/system/seqimpl.nim
+  (stmts@2,2a,../nimony/lib/std/system/seqimpl.nim
+   (result :result.1 . .
+    (i@D,V,../nimony/lib/std/system/basic_types.nim 64).)
+   (asgn@1,1 result.1
+    (dot s.3~1 len.0 0 "x"))
+   (ret~2,~1 result.1)))
+ (iterator@E,f :\2E.<.0.Inpqkww1. . .@,1,../nimony/lib/std/system/iterators.nim
+  (at \2E.<.0.sysvq0asl
+   (i 64))
+  (params@R,1,../nimony/lib/std/system/iterators.nim
+   (param@1 :a.2 . .
+    (i 64).)
+   (param@4 :b.3 . .
+    (i 64).))
+  (i 64)
+  (pragmas@e,1,../nimony/lib/std/system/iterators.nim
+   (inline@2)).@,1,../nimony/lib/std/system/iterators.nim
+  (stmts@2,2,../nimony/lib/std/system/iterators.nim
+   (var@4 :i.1 . .
+    (i@9,7,../nimony/lib/std/system/seqimpl.nim 64)a.2@4)
+   (while@,1
+    (lt@8
+     (i 64)i.1~2 b.3@2)
+    (stmts@2,1
+     (yld i.1@6)
+     (cmd@,1 inc.1.Irn1g7r1.
+      (haddr@4 i.1))))))
+ (func@7,g :\5B\5D.7.Ir6d0tw. . .@,2h,../nimony/lib/std/system/seqimpl.nim
+  (at \5B\5D.7.sysvq0asl string.0.sysvq0asl@B,~4)
+  (params@D,2h,../nimony/lib/std/system/seqimpl.nim
+   (param@1 :s.4 . . seq.0.Ixdx2fh1.@6 .)
+   (param@C :i.2 . .
+    (i@3 64).))
+  (mut@L,2h,../nimony/lib/std/system/seqimpl.nim string.0.sysvq0asl@I,d,src/aifparser.nim)
+  (pragmas@e,2h,../nimony/lib/std/system/seqimpl.nim
+   (requires@2
+    (and@L
+     (lt~8
+      (i 64)i.2~2
+      (dot@3 s.4~1 len.0 0 "x"))
+     (expr@2,1p,../nimony/lib/std/system/comparisons.nim
+      (le@2,1
+       (i 64)0@1A,2h,../nimony/lib/std/system/seqimpl.nim i.2@15,2h,../nimony/lib/std/system/seqimpl.nim))))
+   (inline@a)).@,2h,../nimony/lib/std/system/seqimpl.nim
+  (stmts@1P,2h,../nimony/lib/std/system/seqimpl.nim
+   (result@6 :result.2 . .
+    (mut~1A string.0.sysvq0asl@I,d,src/aifparser.nim).)
+   (asgn@6 result.2
+    (haddr~5
+     (pat
+      (dot s.4~1 data.0 0 "x")i.2@6)))
+   (ret~1P result.2)))
+ (func@G,h :add.0.Ig6072n. . .@,2N,../nimony/lib/std/system/seqimpl.nim
+  (at add.0.sysvq0asl string.0.sysvq0asl@2,~5)
+  (params@C,2N,../nimony/lib/std/system/seqimpl.nim
+   (param@1 :s.5 . .
+    (mut@3 seq.0.Ixdx2fh1.@7).)
+   (param@G :elem.1 . .
+    (sink@6 string.0.sysvq0asl@I,d,src/aifparser.nim).)).@,2N,../nimony/lib/std/system/seqimpl.nim
+  (pragmas@g,2N,../nimony/lib/std/system/seqimpl.nim
+   (inline@2)
+   (nodestroy@A)).@,2N,../nimony/lib/std/system/seqimpl.nim
+  (stmts@2,2O,../nimony/lib/std/system/seqimpl.nim
+   (let@4,1 :L.0 . .
+    (i@3,~2I 64)
+    (dot@5
+     (hderef~1 s.5)len.0 0 "x"))
+   (if@,2
+    (elif@3
+     (lt@D
+      (i 64)
+      (call~C capInBytes.0.Ih2sbn01.@1
+       (hderef~1 s.5))
+      (add@I
+       (i 64)
+       (mul~D
+        (i 64)L.0~2
+        (sizeof@8 string.0.sysvq0asl@I,d,src/aifparser.nim))
+       (sizeof@8 string.0.sysvq0asl@I,d,src/aifparser.nim)))
+     (stmts~1,1
+      (if
+       (elif@3
+        (not
+         (call@A resize.0.I4buliy.~6 s.5@1 1@4))
+        (stmts~1,3
+         (destroy@A elem.1@1)
+         (ret@,1 .)))))))
+   (cmd@,8 inc.1.Irn1g7r1.
+    (haddr@5
+     (dot
+      (hderef~1 s.5)len.0 0 "x")))
+   (asgn@C,9
+    (pat~A
+     (dot
+      (hderef~1 s.5)data.0 0 "x")L.0@6)elem.1@2)))
+ (func@P,t :\2E..1.If4noih. . .@,7k,../nimony/lib/std/system.nim
+  (at \2E..1.sysvq0asl
+   (i@9,7,../nimony/lib/std/system/seqimpl.nim 64)
+   (i@9,7,../nimony/lib/std/system/seqimpl.nim 64))
+  (params@G,7k,../nimony/lib/std/system.nim
+   (param@1 :a.3 . .
+    (sink@Y,2N,../nimony/lib/std/system/seqimpl.nim
+     (i~P,~2G 64)).)
+   (param@C :b.4 . .
+    (sink@Y,2N,../nimony/lib/std/system/seqimpl.nim
+     (i~P,~2G 64)).))HSlice.0.I6e0t4q1.@U,7k,../nimony/lib/std/system.nim
+  (pragmas@r,7k,../nimony/lib/std/system.nim
+   (inline@2)).@,7k,../nimony/lib/std/system.nim
+  (stmts@2,7l,../nimony/lib/std/system.nim
+   (result :result.3 . . HSlice.0.I6e0t4q1.@S,~1 .)
+   (asgn@7,9 result.3~7
+    (oconstr@E HSlice.0.I6e0t4q1.@7,~A
+     (kv@2 a.0~1 a.3@2)
+     (kv@8 b.0~1 b.4@2)))
+   (ret~2,~1 result.3)))
+ (func@Z,19,../nimony/lib/std/system/seqimpl.nim :memSizeInBytes.0.I7me00i. . .~Z,~k
+  (at memSizeInBytes.0.sysvq0asl string.0.sysvq0asl@I,d,src/aifparser.nim)
+  (params~D,~k
+   (param@1 :size.3 . .
+    (i@6 64).))
+  (i~M,~k 64)
+  (pragmas@4,~k
+   (inline@2)).~Z,~k
+  (stmts~X,~j
+   (result :result.4 . .
+    (i@D,V,../nimony/lib/std/system/basic_types.nim 64).)
+   (pragmax
+    (pragmas
+     (keepOverflowFlag@2))
+    (stmts@2,1
+     (asgn@7 result.4~7
+      (mul@7
+       (i 64)size.3~5
+       (sizeof@8 string.0.sysvq0asl@I,d,src/aifparser.nim)))
+     (if@,1
+      (elif@3
+       (ovf@C)
+       (stmts~1,2
+        (asgn@7 result.4~7
+         (suf@6 9223372036854775807 "i64")))))))
+   (ret~2,~1 result.4)))
+ (func@4,5,../nimony/lib/std/system/iterators.nim :inc.1.Irn1g7r1. . .@,E,../nimony/lib/std/system/arithmetics.nim
+  (at inc.1.sysvq0asl
+   (i@9,7,../nimony/lib/std/system/seqimpl.nim 64))
+  (params@L,E,../nimony/lib/std/system/arithmetics.nim
+   (param@1 :x.1 . .
+    (mut@3
+     (i@9,7,../nimony/lib/std/system/seqimpl.nim 64)).)).@,E,../nimony/lib/std/system/arithmetics.nim
+  (pragmas@W,E,../nimony/lib/std/system/arithmetics.nim
+   (inline@2)).@,E,../nimony/lib/std/system/arithmetics.nim
+  (stmts@2,F,../nimony/lib/std/system/arithmetics.nim
+   (asgn@2,1
+    (hderef~2 x.1)
+    (add@6
+     (i@9,7,../nimony/lib/std/system/seqimpl.nim 64)
+     (hderef@1 x.1)
+     (conv@U,~F
+      (i@9,7,../nimony/lib/std/system/seqimpl.nim 64)1@1)))))
+ (func@6,2Q,../nimony/lib/std/system/seqimpl.nim :capInBytes.0.Ih2sbn01. . .~6,~2G
+  (at capInBytes.0.sysvq0asl string.0.sysvq0asl@I,d,src/aifparser.nim)
+  (params@C,~2G
+   (param@1 :s.7 . . seq.0.Ixdx2fh1.@6 .))
+  (i@7,~2G 64)
+  (pragmas@T,~2G
+   (inline@2)).~6,~2G
+  (stmts~4,~2F
+   (result@7 :result.5 . .
+    (i@D,V,../nimony/lib/std/system/basic_types.nim 64).)
+   (asgn@7 result.5~7
+    (if@2
+     (elif@3
+      (expr@2,1l,../nimony/lib/std/system/comparisons.nim
+       (not@,1
+        (eq@7
+         (ptr
+          (uarray string.0.sysvq0asl@I,d,src/aifparser.nim)
+          (unchecked))
+         (dot@F,B,../nimony/lib/std/system/seqimpl.nim s.7~1 data.0 0 "x")
+         (nil@O,B,../nimony/lib/std/system/seqimpl.nim))))
+      (expr@F
+       (call@D allocatedSize.0.sysvq0asl~D
+        (hconv@2
+         (pointer@N,13,../nimony/lib/std/system/mimalloc.nim
+          (unchecked))
+         (hconv
+          (pointer@D,r,../nimony/lib/std/system/mimalloc.nim
+           (unchecked))
+          (dot s.7~1 data.0 0 "x"))))))
+     (else@e
+      (expr@6 0))))
+   (ret~2,~1 result.5)))
+ (func@H,2R,../nimony/lib/std/system/seqimpl.nim :resize.0.I4buliy. . .~H,~e
+  (at resize.0.sysvq0asl string.0.sysvq0asl@I,d,src/aifparser.nim)
+  (params~3,~e
+   (param@1 :dest.1 . .
+    (mut@6 seq.0.Ixdx2fh1.@7).)
+   (param@J :addedElements.1 . .
+    (i@F 64).))
+  (bool@N,~e)
+  (pragmas@g,~e
+   (nodestroy@2)).~H,~e
+  (stmts~F,~d
+   (result@4 :result.6 . .
+    (bool@2,g,../nimony/lib/std/system/basic_types.nim).)
+   (let@4 :oldCap.0 . .
+    (i@3,~1h 64)
+    (div@P
+     (i 64)
+     (call~C capInBytes.0.Ih2sbn01.@1
+      (hderef~4 dest.1))
+     (sizeof@A string.0.sysvq0asl@I,d,src/aifparser.nim)))
+   (let@4,1 :newCap.0 . .
+    (i@3,~1i 64)
+    (call@I recalcCap.0.sysvq0asl~9 oldCap.0@1 addedElements.1@9))
+   (let@4,2 :memSize.1 . .
+    (i@3,~1j 64)
+    (call@R memSizeInBytes.0.I7me00i.~H newCap.0@1))
+   (asgn@A,3
+    (dot~6
+     (hderef~4 dest.1)data.0 0 "x")
+    (cast@2
+     (ptr@5
+      (uarray@I string.0.sysvq0asl@I,d,src/aifparser.nim)
+      (unchecked))
+     (call@Z realloc.0.sysvq0asl~7
+      (hconv@5
+       (pointer@H,x,../nimony/lib/std/system/mimalloc.nim
+        (unchecked))
+       (hconv
+        (pointer@D,r,../nimony/lib/std/system/mimalloc.nim
+         (unchecked))
+        (dot
+         (hderef~4 dest.1)data.0 0 "x")))memSize.1@C)))
+   (if@,4
+    (elif@3
+     (eq@A
+      (ptr
+       (uarray string.0.sysvq0asl@I,d,src/aifparser.nim)
+       (unchecked))
+      (dot~6
+       (hderef~4 dest.1)data.0 0 "x")
+      (nil@3))
+     (stmts~1,1
+      (asgn@9
+       (dot~5
+        (hderef~4 dest.1)len.0 0 "x")0@2)
+      (pragmax@,1
+       (pragmas
+        (cast@2
+         (pragmas
+          (noSideEffect@5))))
+       (stmts@2,1
+        (cmd oomHandler.0.sysvq0asl memSize.1@B)))
+      (asgn@7,3 result.6~7
+       (false@2))))
+    (else@,5
+     (stmts@2,1
+      (asgn@7 result.6~7
+       (true@2)))))
+   (ret~2,~1 result.6)))
+ (type@H,c :seq.0.Ixdx2fh1. .
+  (at seq.0.sysvq0asl string.0.sysvq0asl@1)
+  (pragmas@A,6,../nimony/lib/std/system/seqimpl.nim
+   (destroy =destroy.1.Ivioh0a.)
+   (wasmoved =wasMoved.1.I5vdnla.)
+   (dup =dup.1.Imq0s4c.)
+   (copy =copy.1.Iiwrt4i1.))
+  (object@C,6,../nimony/lib/std/system/seqimpl.nim .
+   (fld~8,1 :len.0 . .
+    (i@5 64).)
+   (fld~8,2 :data.0 . .
+    (ptr@6
+     (uarray@I string.0.sysvq0asl@I,d,src/aifparser.nim)
+     (unchecked)).)))
+ (type@U,7k,../nimony/lib/std/system.nim :HSlice.0.I6e0t4q1. .
+  (at HSlice.0.sysvq0asl
+   (i@9,7,../nimony/lib/std/system/seqimpl.nim 64)
+   (i@9,7,../nimony/lib/std/system/seqimpl.nim 64))
+  (pragmas)
+  (object~C,~5 .
+   (fld~D,1 :a.0~1 x .
+    (i@9,7,../nimony/lib/std/system/seqimpl.nim 64).)
+   (fld~D,2 :b.0~1 x .
+    (i@9,7,../nimony/lib/std/system/seqimpl.nim 64).)))
+ (func@,D,../nimony/lib/std/system/seqimpl.nim :=destroy.1.Ivioh0a. . .
+  (at =destroy.1.sysvq0asl string.0.sysvq0asl@I,d,src/aifparser.nim)
+  (params@J
+   (param@1 :s.10 . . seq.0.Ixdx2fh1.@6 .)). . .
+  (stmts@2,1
+   (if
+    (elif@3
+     (expr@2,1l,../nimony/lib/std/system/comparisons.nim
+      (not@,1
+       (eq@7
+        (ptr
+         (uarray string.0.sysvq0asl@I,d,src/aifparser.nim)
+         (unchecked))
+        (dot@6,E,../nimony/lib/std/system/seqimpl.nim s.10~1 data.0 0 "x")
+        (nil@F,E,../nimony/lib/std/system/seqimpl.nim))))
+     (stmts~1,1
+      (var@4 :i.3 . .
+       (i@1,~8 64)0@4)
+      (while@,1
+       (lt@8
+        (i 64)i.3~2
+        (dot@3 s.10~1 len.0 0 "x"))
+       (stmts@2,1
+        (destroy@A
+         (pat@2
+          (dot s.10~1 data.0 0 "x")i.3@6))
+        (cmd@,1 inc.1.Irn1g7r1.
+         (haddr@4 i.3))))
+      (cmd@,4 dealloc.0.sysvq0asl
+       (hconv@9
+        (pointer@H,10,../nimony/lib/std/system/mimalloc.nim
+         (unchecked))
+        (hconv
+         (pointer@D,r,../nimony/lib/std/system/mimalloc.nim
+          (unchecked))
+         (dot s.10~1 data.0 0 "x")))))))))
+ (func@,L,../nimony/lib/std/system/seqimpl.nim :=wasMoved.1.I5vdnla. . .
+  (at =wasMoved.1.sysvq0asl string.0.sysvq0asl@I,d,src/aifparser.nim)
+  (params@K
+   (param@1 :s.11 . .
+    (mut@3 seq.0.Ixdx2fh1.@7).)).
+  (pragmas@a
+   (inline@2)).
+  (stmts@2,1
+   (asgn@6
+    (dot~5
+     (hderef~1 s.11)len.0 0 "x")0@2)
+   (asgn@7,1
+    (dot~6
+     (hderef~1 s.11)data.0 0 "x")
+    (nil@2))))
+ (func@,1U,../nimony/lib/std/system/seqimpl.nim :=dup.1.Imq0s4c. . .
+  (at =dup.1.sysvq0asl string.0.sysvq0asl@I,d,src/aifparser.nim)
+  (params@F
+   (param@1 :a.5 . . seq.0.Ixdx2fh1.@6 .))seq.0.Ixdx2fh1.@G
+  (pragmas@Z
+   (nodestroy@2)).
+  (stmts@2,1
+   (result@7 :result.7 . . seq.0.Ixdx2fh1.@D,~1 .)
+   (asgn@7 result.7~7
+    (call@H newSeqUninit.0.Im3cqd9.~F
+     (dot@2 a.5~1 len.0 0 "x")))
+   (var@4,1 :i.4 . .
+    (i@3,~1P 64)0@4)
+   (while@,2
+    (lt@8
+     (i 64)i.4~2
+     (dot@3 a.5~1 len.0 0 "x"))
+    (stmts@2,1
+     (asgn@H
+      (pat~A
+       (dot result.7~6 data.0 0 "x")i.4@6)
+      (dup@8
+       (pat@2
+        (dot a.5~1 data.0 0 "x")i.4@6)))
+     (cmd@,1 inc.1.Irn1g7r1.
+      (haddr@4 i.4))))
+   (ret~2,~1 result.7)))
+ (func@,20,../nimony/lib/std/system/seqimpl.nim :=copy.1.Iiwrt4i1. . .
+  (at =copy.1.sysvq0asl string.0.sysvq0asl@I,d,src/aifparser.nim)
+  (params@G
+   (param@1 :dest.3 . .
+    (mut@6 seq.0.Ixdx2fh1.@7).)
+   (param@J :src.2 . . seq.0.Ixdx2fh1.@8 .)).
+  (pragmas@m
+   (nodestroy@2)).
+  (stmts@2,1
+   (if
+    (elif@3
+     (eq@A
+      (ptr
+       (uarray string.0.sysvq0asl@I,d,src/aifparser.nim)
+       (unchecked))
+      (dot~6
+       (hderef~4 dest.3)data.0 0 "x")
+      (dot@6 src.2~3 data.0 0 "x"))
+     (stmts@N
+      (ret .))))
+   (if@,1
+    (elif@3
+     (lt@8
+      (i 64)
+      (dot~5 src.2~3 len.0 0 "x")
+      (dot@6
+       (hderef~4 dest.3)len.0 0 "x"))
+     (stmts~1,1
+      (var@4 :i.5 . .
+       (i@1,~1w 64)
+       (dot@7 src.2~3 len.0 0 "x"))
+      (while@,1
+       (lt@8
+        (i 64)i.5~2
+        (dot@6
+         (hderef~4 dest.3)len.0 0 "x"))
+       (stmts@2,1
+        (destroy@A
+         (pat@5
+          (dot
+           (hderef~4 dest.3)data.0 0 "x")i.5@6))
+        (cmd@,1 inc.1.Irn1g7r1.
+         (haddr@4 i.5))))))
+    (elif@5,5
+     (lt@G
+      (i 64)
+      (call~C capInBytes.0.Ih2sbn01.@1
+       (hderef~4 dest.3))
+      (mul@A
+       (i 64)
+       (dot~5 src.2~3 len.0 0 "x")
+       (sizeof@8 string.0.sysvq0asl@I,d,src/aifparser.nim)))
+     (stmts~3,1
+      (let@4 :oldCap.1 . .
+       (i@1,~21 64)
+       (div@P
+        (i 64)
+        (call~C capInBytes.0.Ih2sbn01.@1
+         (hderef~4 dest.3))
+        (sizeof@A string.0.sysvq0asl@I,d,src/aifparser.nim)))
+      (let@4,1 :newCap.1 . .
+       (i@1,~22 64)
+       (call@I recalcCap.0.sysvq0asl~9 oldCap.1@1
+        (sub@H
+         (i 64)
+         (dot~5 src.2~3 len.0 0 "x")oldCap.1@2)))
+      (let@4,2 :memSize.2 . .
+       (i@1,~23 64)
+       (call@R memSizeInBytes.0.I7me00i.~H newCap.1@1))
+      (asgn@A,3
+       (dot~6
+        (hderef~4 dest.3)data.0 0 "x")
+       (cast@2
+        (ptr@5
+         (uarray@I string.0.sysvq0asl@I,d,src/aifparser.nim)
+         (unchecked))
+        (call@Z realloc.0.sysvq0asl~7
+         (hconv@5
+          (pointer@H,x,../nimony/lib/std/system/mimalloc.nim
+           (unchecked))
+          (hconv
+           (pointer@D,r,../nimony/lib/std/system/mimalloc.nim
+            (unchecked))
+           (dot
+            (hderef~4 dest.3)data.0 0 "x")))memSize.2@C)))
+      (if@,4
+       (elif@3
+        (eq@A
+         (ptr
+          (uarray string.0.sysvq0asl@I,d,src/aifparser.nim)
+          (unchecked))
+         (dot~6
+          (hderef~4 dest.3)data.0 0 "x")
+         (nil@3))
+        (stmts~1,1
+         (asgn@9
+          (dot~5
+           (hderef~4 dest.3)len.0 0 "x")0@2)
+         (pragmax@,1
+          (pragmas
+           (cast@2
+            (pragmas
+             (noSideEffect@5))))
+          (stmts@2,1
+           (cmd oomHandler.0.sysvq0asl memSize.2@B)))
+         (ret@,3 .)))))))
+   (asgn@9,G
+    (dot~5
+     (hderef~4 dest.3)len.0 0 "x")
+    (dot@5 src.2~3 len.0 0 "x"))
+   (var@4,H :i.6 . .
+    (i@3,~2B 64)0@4)
+   (while@,I
+    (lt@8
+     (i 64)i.6~2
+     (dot@6
+      (hderef~4 dest.3)len.0 0 "x"))
+    (stmts@2,1
+     (stmts@2,Y,../nimony/lib/std/system.nim
+      (asgn@7
+       (pat~6
+        (dot@8,2K,../nimony/lib/std/system/seqimpl.nim
+         (hderef~4 dest.3)data.0 0 "x")i.6@E,2K,../nimony/lib/std/system/seqimpl.nim)
+       (dup@P,2K,../nimony/lib/std/system/seqimpl.nim
+        (pat@4
+         (dot src.2~3 data.0 0 "x")i.6@6))))
+     (cmd@,1 inc.1.Irn1g7r1.
+      (haddr@4 i.6)))))))(.index@,1,src/aifparser.nim
+ (h parseToFile.0. 698)
+ (h usage.0. 1258)
+ (h main.0. 448)
+ (h newSeqUninit.0.Im3cqd9. 3251)
+ (h len.3.Ixq6taz. 1781)
+ (h \2E.<.0.Inpqkww1. 585)
+ (h \5B\5D.7.Ir6d0tw. 620)
+ (h add.0.Ig6072n. 965)
+ (h \2E..1.If4noih. 1246)
+ (h memSizeInBytes.0.I7me00i. 803)
+ (h inc.1.Irn1g7r1. 710)
+ (h capInBytes.0.Ih2sbn01. 742)
+ (h resize.0.I4buliy. 1087)
+ (h seq.0.Ixdx2fh1. 1850)
+ (h HSlice.0.I6e0t4q1. 453)
+ (h =destroy.1.Ivioh0a. 376)
+ (h =wasMoved.1.I5vdnla. 1118)
+ (h =dup.1.Imq0s4c. 385)
+ (h =copy.1.Iiwrt4i1. 738))

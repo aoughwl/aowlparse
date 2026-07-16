@@ -1,0 +1,5 @@
+(.nif27)
+(index
+(export "/home/savant/nimony/lib/std/cmdline.nim")(export "/home/savant/nimony/lib/std/private/ospaths2.nim")(export "/home/savant/nimony/lib/std/private/osappdirs.nim")(export "/home/savant/nimony/lib/std/private/oscommons.nim")
+(checksum "9B10F785000EB40973714DFBD24D1368729A3117")
+)

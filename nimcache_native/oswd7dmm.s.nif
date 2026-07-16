@@ -1,0 +1,867 @@
+(.nif27)
+(.indexat 27308            )
+(stmts@,1,../nimony/lib/std/os.nim
+ (import
+  (kv sysvq0asl "../nimony/lib/std/system.nim")
+  (kv str7j0ifg "../nimony/lib/std/strutils.nim")
+  (kv pososrh1q1 "../nimony/lib/std/posix/posix.nim")
+  (kv cmdqs323n1 "../nimony/lib/std/cmdline.nim")
+  (kv envto7w6l1 "../nimony/lib/std/envvars.nim")
+  (kv osezuyu63 "../nimony/lib/std/oserrors.nim")
+  (kv ospaexnw61 "../nimony/lib/std/private/ospaths2.nim")
+  (kv ossk30t39 "../nimony/lib/std/private/osseps.nim")
+  (kv osalirkw71 "../nimony/lib/std/private/osappdirs.nim")
+  (kv osc4bsu0d1 "../nimony/lib/std/private/oscommons.nim"))
+ (stmts@2,D
+  (proc :c_system.0.@5 . . .
+   (params@D
+    (param@1 :cmd.0 . .
+     (cstring@5
+      (notnil)).))
+   (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+    (importc "int"))
+   (pragmas@Y
+    (importc~U,1 "system"@9)
+    (header~B,1 "<stdlib.h>"@8)). .))
+ (stmts@2,H
+  (proc :expandFilename.0.@5 x . .
+   (params@K
+    (param@1 :filename.0 . . string.0.sysvq0asl@A .))string.0.sysvq0asl@K
+   (pragmas@l
+    (raises@2 ErrorCode.0.sysvq0asl~2)).
+   (stmts@2,1
+    (result :result.0 . . string.0.sysvq0asl@T,~1 .)
+    (stmts@2,C
+     (const@6 :PATH_MAX.0 . .
+      (i 64)
+      (suf@B 4096 "i64"))
+     (asgn@7,1 result.0~7
+      (call@B newString.0.sysvq0asl~9 PATH_MAX.0@1))
+     (var@4,2 :filename.1 . . string.0.sysvq0asl@N,~F filename.0@B)
+     (let@4,3 :r.0 . .
+      (cstring@B,~K
+       (notnil))
+      (call@C realpath.0.pososrh1q1~8
+       (call@9 toCString.0.sysvq0asl@1
+        (haddr~8 filename.1))
+       (call@R toCString.0.sysvq0asl@1
+        (haddr~6 result.0))))
+     (if@,4
+      (elif@3
+       (expr@a,3v,../nimony/lib/std/system.nim
+        (eq@2
+         (pointer
+          (nil))
+         (hconv~2
+          (pointer@L,B,../nimony/lib/std/system/comparisons.nim
+           (nil))
+          (hconv@9,Z,../nimony/lib/std/os.nim
+           (pointer@c,3v,../nimony/lib/std/system.nim
+            (nil))r.0))
+         (nil@3)))
+       (stmts~1,1
+        (call@C raiseOSError.0.osezuyu63~C
+         (call@C osLastError.0.osezuyu63~B)filename.1@G)))
+      (else@,2
+       (stmts@2,1
+        (var@4 :L.0 . .
+         (i 64)0@4)
+        (while@,1
+         (and@J
+          (lt~B
+           (i 64)L.0~2 PATH_MAX.0@2)
+          (expr@2,1l,../nimony/lib/std/system/comparisons.nim
+           (not@,1
+            (eq@7
+             (c 8)
+             (call@V,d,../nimony/lib/std/os.nim \5B\5D.9.sysvq0asl result.0 L.0@7)'\00'@i,d,../nimony/lib/std/os.nim))))
+         (stmts@2,1
+          (cmd inc.1.Irn1g7r1.
+           (haddr@4 L.0))))
+        (call@6,3 setLen.1.sysvq0asl~6
+         (haddr@1 result.0)L.0@9)))))
+    (ret~2,~1 result.0))))
+ (stmts@2,k
+  (const@6 :maxSymlinkLen.0. . .
+   (i@9,8,../nimony/lib/std/system/openarrays.nim 64)
+   (suf@G 1024 "i64"))
+  (proc@,2 :getApplAux.0.@5 . . .
+   (params@F
+    (param@1 :procPath.0 . . string.0.sysvq0asl@A .))string.0.sysvq0asl@K . .
+   (stmts@2,1
+    (result@7 :result.1 . . string.0.sysvq0asl@M,~W .)
+    (asgn@7 result.1~7
+     (call@B newString.0.sysvq0asl~9 maxSymlinkLen.0.@1))
+    (var@4,1 :procPath.1 . . string.0.sysvq0asl@K,~2 procPath.0@B)
+    (var@4,2 :len.0 . .
+     (i@9,8,../nimony/lib/std/system/openarrays.nim 64)
+     (call@E readlink.0.pososrh1q1~8
+      (call@9 toCString.0.sysvq0asl@1
+       (haddr~8 procPath.1))
+      (call@R toCString.0.sysvq0asl@1
+       (haddr~6 result.1))maxSymlinkLen.0.@d))
+    (if@,3
+     (elif@3
+      (expr@2,1t,../nimony/lib/std/system/comparisons.nim
+       (lt@2,1
+        (i 64)maxSymlinkLen.0.@D,r,../nimony/lib/std/os.nim len.0@7,r,../nimony/lib/std/os.nim))
+      (stmts~1,1
+       (asgn@7 result.1~7
+        (call@B newString.0.sysvq0asl~9
+         (add@4
+          (i 64)len.0~3 1@1)))
+       (asgn@4,1 len.0~4
+        (call@A readlink.0.pososrh1q1~8
+         (call@9 toCString.0.sysvq0asl@1
+          (haddr~8 procPath.1))
+         (call@R toCString.0.sysvq0asl@1
+          (haddr~6 result.1))len.0@d)))))
+    (if@,6
+     (elif@3
+      (lt@4
+       (i 64)len.0~4 0@2)
+      (stmts~1,1
+       (asgn@4 len.0~4 0@2))))
+    (call@6,8 setLen.1.sysvq0asl~6
+     (haddr@1 result.1)len.0@9)
+    (ret~2,~1 result.1))))
+ (stmts@2,y
+  (proc :getAppFilename.0.@5 x . .
+   (params@K)string.0.sysvq0asl@4
+   (pragmas@V
+    (tags@2
+     (bracket@6 ReadIOEffect@1))).
+   (stmts@2,1
+    (result :result.2 . . string.0.sysvq0asl@T,~i .)
+    (stmts@2,1
+     (asgn@7 result.2~7
+      (call@C getApplAux.0.~A "/proc/self/exe"@1)))
+    (ret~2,~1 result.2)))
+  (proc@,6 :getAppDir.0.@5 x . .
+   (params@F)string.0.sysvq0asl@4
+   (pragmas@Q
+    (tags@2
+     (bracket@6 ReadIOEffect@1))).
+   (stmts@2,1
+    (result@7 :result.3 . . string.0.sysvq0asl@M,~o .)
+    (asgn@7 result.3~7
+     (tupat@T
+      (call~I splitFile.0.ospaexnw61~9
+       (call@F getAppFilename.0.~E))0))
+    (ret~2,~1 result.3))))
+ (func@,17 :quoteShellWindows.0.@5 x . .
+  (params@N
+   (param@1 :s.0 . . string.0.sysvq0asl@3 .))string.0.sysvq0asl@D
+  (pragmas@h
+   (noSideEffect@2)).
+  (stmts@2,1
+   (result :result.4 . . string.0.sysvq0asl@V,~r .)
+   (let@4,5 :needQuote.0 . .
+    (bool@B,19,../nimony/lib/std/system/basic_types.nim)
+    (or@a
+     (call~E contains.1.str7j0ifg~8 s.0~A
+      (setconstr@1
+       (set
+        (c 8))' '@1 '\09'@6))
+     (eq@9
+      (i 64)
+      (call~5 len.4.sysvq0asl@1 s.0~1)0@3)))
+   (asgn@7,6 result.4~7 ""@2)
+   (var@4,7 :backslashBuff.0 . . string.0.sysvq0asl ""@G)
+   (if@,8
+    (elif@3 needQuote.0
+     (stmts~1,1
+      (call@A add.2.sysvq0asl~3
+       (haddr~A result.4)"\22"@1))))
+   (for@4,B
+    (hderef@5
+     (call items.1.I4py2pf1.~5
+      (hcall toOpenArray.2.sysvq0asl s.0)))
+    (unpackflat
+     (let :c.0 . .
+      (mut@J,l,../nimony/lib/std/system/openarrays.nim
+       (c@E,~L 8)).))
+    (stmts~2,1
+     (if
+      (elif@3
+       (eq@2
+        (c 8)
+        (hderef~2 c.0)'\5C'@3)
+       (stmts~1,1
+        (call@H add.1.sysvq0asl~3
+         (haddr~H backslashBuff.0)
+         (hderef@1 c.0))))
+      (elif@5,2
+       (eq@2
+        (c 8)
+        (hderef~2 c.0)'\22'@3)
+       (stmts~3,1
+        (for@4
+         (infix@6 \2E.<.0.Inpqkww1. 0~1
+          (mul@K
+           (i 64)
+           (call~4 len.4.sysvq0asl@1 backslashBuff.0~D)2@1))
+         (unpackflat
+          (let :i.0 . .
+           (i@9,8,../nimony/lib/std/system/openarrays.nim 64).))
+         (stmts~2,1
+          (call@A add.1.sysvq0asl~3
+           (haddr~A result.4)'\5C'@1)))
+        (call@K,2 setLen.1.sysvq0asl~6
+         (haddr~K backslashBuff.0)0@1)
+        (call@A,3 add.2.sysvq0asl~3
+         (haddr~A result.4)"\5C\22"@1)))
+      (else@,7
+       (stmts@2,1
+        (if
+         (elif@3
+          (expr@2,1l,../nimony/lib/std/system/comparisons.nim
+           (not@,1
+            (eq@7
+             (i 64)
+             (call@M,1T,../nimony/lib/std/os.nim len.4.sysvq0asl@1 backslashBuff.0~D)0@U,1T,../nimony/lib/std/os.nim)))
+          (stmts~1,1
+           (call@A add.2.sysvq0asl~3
+            (haddr~A result.4)backslashBuff.0@1)
+           (call@K,1 setLen.1.sysvq0asl~6
+            (haddr~K backslashBuff.0)0@1))))
+        (call@A,3 add.1.sysvq0asl~3
+         (haddr~A result.4)
+         (hderef@1 c.0)))))))
+   (if@,P
+    (elif@3
+     (expr@2,1t,../nimony/lib/std/system/comparisons.nim
+      (lt@2,1
+       (i 64)0@P,1Y,../nimony/lib/std/os.nim
+       (call@I,1Y,../nimony/lib/std/os.nim len.4.sysvq0asl@1 backslashBuff.0~D)))
+     (stmts~1,1
+      (call@A add.2.sysvq0asl~3
+       (haddr~A result.4)backslashBuff.0@1))))
+   (if@,R
+    (elif@3 needQuote.0
+     (stmts~1,1
+      (call@A add.2.sysvq0asl~3
+       (haddr~A result.4)backslashBuff.0@1)
+      (call@A,1 add.2.sysvq0asl~3
+       (haddr~A result.4)"\22"@1))))
+   (ret~2,~1 result.4)))
+ (func@,1e :quoteShellPosix.0.@5 x . .
+  (params@L
+   (param@1 :s.1 . . string.0.sysvq0asl@3 .))string.0.sysvq0asl@D
+  (pragmas@f
+   (noSideEffect@2)).
+  (stmts@2,1
+   (result :result.5 . . string.0.sysvq0asl@V,~1O .)
+   (const@6,1 :safeUnixChars.0 . .
+    (set@L,~T
+     (c 8))
+    (setconstr@G
+     (set@5,~T
+      (c 8))'%'@1 '+'@6 '-'@B '.'@G '/'@L '_'@Q '\3A'@V '='@a '\40'@f
+     (range@1,1 '0' '9'@5)
+     (range@B,1 'A' 'Z'@5)
+     (range@L,1 'a' 'z'@5)))
+   (if@,3
+    (elif@3
+     (eq@6
+      (i 64)
+      (call~5 len.4.sysvq0asl@1 s.1~1)0@3)
+     (stmts~1,1
+      (asgn@7 result.5~7 "\27\27"@2)))
+    (elif@5,2
+     (call@F allCharsInSet.0.str7j0ifg~D s.1~F safeUnixChars.0@1)
+     (stmts~3,1
+      (asgn@7 result.5~7 s.1@2)))
+    (else@,4
+     (stmts@2,1
+      (asgn@7 result.5~7
+       (infix@Y &.0.sysvq0asl
+        (infix~S &.0.sysvq0asl "\27"~4
+         (call@B replace.1.str7j0ifg~7 s.1~9 "\27"@1 "\27\22\27\22\27"@6))"\27"@2)))))
+   (ret~2,~1 result.5)))
+ (stmts@2,1q
+  (func :quoteShell.0.@5 x . .
+   (params@G
+    (param@1 :s.2 . . string.0.sysvq0asl@3 .))string.0.sysvq0asl@D
+   (pragmas@a
+    (noSideEffect@2)).
+   (stmts@2,1
+    (result :result.6 . . string.0.sysvq0asl@T,~1a .)
+    (stmts@2,7
+     (asgn@7 result.6~7
+      (call@H quoteShellPosix.0.~F s.2@1)))
+    (ret~2,~1 result.6)))
+  (func@,A :quoteShellCommand.0.@5 x . .
+   (params@N
+    (param@1 :args.0 . . openArray.0.Ig73pnk.@F .))string.0.sysvq0asl@R . .
+   (stmts@2,1
+    (result :result.7 . . string.0.sysvq0asl@T,~1k .)
+    (stmts@2,3N,../nimony/lib/std/system.nim
+     (discard "ignore runnable examples"@8))
+    (asgn@7,8 result.7~7 ""@2)
+    (for@4,9
+     (infix@6 \2E.<.0.Inpqkww1. 0~1
+      (call@7 len.6.Igv2wyu1.@1 args.0~4))
+     (unpackflat
+      (let :i.1 . .
+       (i@9,8,../nimony/lib/std/system/openarrays.nim 64).))
+     (stmts~2,1
+      (if
+       (elif@3
+        (expr@2,1t,../nimony/lib/std/system/comparisons.nim
+         (lt@2,1
+          (i 64)0@D,2C,../nimony/lib/std/os.nim i.1@9,2C,../nimony/lib/std/os.nim))
+        (stmts@7
+         (cmd@6 add.2.sysvq0asl@1
+          (haddr~6 result.7)" "@5))))
+      (cmd@6,1 add.2.sysvq0asl@1
+       (haddr~6 result.7)
+       (call@F quoteShell.0.~A
+        (hderef@1
+         (call \5B\5D.10.Ik9hgkq1. args.0 i.1@5))))))
+    (ret~2,~1 result.7))))
+ (stmts@2,2F
+  (proc :getLastModificationTime.0.@5 x . .
+   (params@T
+    (param@1 :file.0 . . string.0.sysvq0asl@6 .))
+   (i@G 64)
+   (pragmas@p
+    (raises@2 ErrorCode.0.sysvq0asl~2)).
+   (stmts@2,1
+    (result :result.8 . .
+     (i@9,8,../nimony/lib/std/system/openarrays.nim 64).)
+    (var@4,3 :s.3 . . Stat.0.pososrh1q1@C
+     (oconstr@B Stat.0.pososrh1q1@1
+      (kv st_dev.0
+       (expr@n,F,../nimony/lib/std/system/defaults.nim
+        (suf 0u "u64")))
+      (kv st_ino.0
+       (expr@n,F,../nimony/lib/std/system/defaults.nim
+        (suf 0u "u64")))
+      (kv st_size.0
+       (expr@l,E,../nimony/lib/std/system/defaults.nim
+        (suf 0 "i64")))
+      (kv st_mode.0
+       (expr@n,D,../nimony/lib/std/system/defaults.nim
+        (suf 0u "u32")))
+      (kv st_mtime.0
+       (expr@l,E,../nimony/lib/std/system/defaults.nim
+        (suf 0 "i64")))
+      (kv st_mtim.0
+       (oconstr Timespec.0.pososrh1q1@i,1p,../nimony/lib/std/posix/posix.nim
+        (kv tv_sec.0
+         (dconv Time.0.pososrh1q1@S,k,../nimony/lib/std/posix/posix_other.nim
+          (expr@l,E,../nimony/lib/std/system/defaults.nim
+           (suf 0 "i64"))))
+        (kv tv_nsec.0
+         (expr@l,E,../nimony/lib/std/system/defaults.nim
+          (suf 0 "i64")))))))
+    (var@4,4 :filename.2 . . string.0.sysvq0asl@U,~5 file.0@B)
+    (if@,5
+     (elif@3
+      (lt@S
+       (i 32)
+       (call~O stat.0.pososrh1q1~4
+        (call@9 toCString.0.sysvq0asl@1
+         (haddr~8 filename.2))
+        (haddr@L s.3))
+       (hconv@2
+        (i@G,1G,../nimony/lib/std/system/comparisons.nim 32)0))
+      (stmts~1,1
+       (call@C raiseOSError.0.osezuyu63~C
+        (call@C osLastError.0.osezuyu63~B)file.0@G))))
+    (asgn@7,7 result.8~7
+     (add@k
+      (i 64)
+      (mul~K
+       (i 64)
+       (conv~J
+        (i@9,8,../nimony/lib/std/system/openarrays.nim 64)
+        (dot@A
+         (dot~8 s.3~1 st_mtim.0 0)tv_sec.0 0))
+       (suf@2 1000000000 "i64"))
+      (conv@7
+       (i@9,8,../nimony/lib/std/system/openarrays.nim 64)
+       (dot@A
+        (dot~8 s.3~1 st_mtim.0 0)tv_nsec.0 0))))
+    (ret~2,~1 result.8))))
+ (proc@,2p :exitStatusLikeShell.0.@5 x . .
+  (params@P
+   (param@1 :status.0 . .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int")).))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")). .
+  (stmts@2,1
+   (result :result.9 . .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int")).)
+   (asgn@,1 result.9
+    (expr@2,1
+     (if
+      (elif@3
+       (call@B WIFSIGNALED.0.pososrh1q1~B status.0@1)
+       (expr~1,2
+        (add@4
+         (i 32)
+         (hconv~4
+          (i@G,k,../nimony/lib/std/system/arithmetics.nim 32)128)
+         (call@A WTERMSIG.0.pososrh1q1~8 status.0@1))))
+      (else@,3
+       (expr@2,1
+        (call@B WEXITSTATUS.0.pososrh1q1~B status.0@1))))))
+   (ret~2,~1 result.9)))
+ (proc@,30 :findExe.0.@5 x . .
+  (params@D
+   (param@1 :exe.0 . . string.0.sysvq0asl@5 .))string.0.sysvq0asl@F
+  (pragmas@Z
+   (tags@2
+    (bracket@6 ReadDirEffect@1 ReadEnvEffect@G))).
+  (stmts@2,1
+   (result :result.10 . . string.0.sysvq0asl@V,~2k .)
+   (asgn@7,3 result.10~7 ""@2)
+   (if@,4
+    (elif@3
+     (eq@8
+      (i 64)
+      (call~5 len.4.sysvq0asl@1 exe.0~3)0@3)
+     (stmts@E
+      (ret result.10))))
+   (let@4,5 :withExt.0 . . string.0.sysvq0asl@R,~2p
+    (call@K addFileExt.0.ospaexnw61~A exe.0@1 ExeExt.0.ossk30t39@6))
+   (stmts@2,7
+    (if
+     (elif@3
+      (expr@2,2k,../nimony/lib/std/system.nim
+       (call@8 contains.1.Iyjk1vr.~8
+        (hcall@E,39,../nimony/lib/std/os.nim toOpenArray.2.sysvq0asl exe.0)'/'@7,39,../nimony/lib/std/os.nim))
+      (stmts~1,1
+       (if
+        (elif@3
+         (call@A fileExists.0.osc4bsu0d1~A withExt.0@1)
+         (stmts@L
+          (ret withExt.0@7))))))))
+   (let@4,B :path.0 . . string.0.sysvq0asl@R,~2v
+    (call@D getEnv.0.envto7w6l1~6 "PATH"@1 ""@c,2c,../nimony/lib/std/envvars.nim))
+   (for@4,C
+    (call@I split.1.str7j0ifg~5 path.0@1 PathSep.0.ossk30t39@7 -1@s,4R,../nimony/lib/std/strutils.nim)
+    (unpackflat
+     (let :candidate.0 . . string.0.sysvq0asl@R,~2w .))
+    (stmts~2,1
+     (if
+      (elif@3
+       (eq@E
+        (i 64)
+        (call~5 len.4.sysvq0asl@1 candidate.0~9)0@3)
+       (stmts@K
+        (continue .))))
+     (stmts@2,8
+      (let@4 :dir.0 . . string.0.sysvq0asl@N,~35 candidate.0@6))
+     (let@4,9 :x.3 . . string.0.sysvq0asl@P,~36
+      (call@E addFileExt.0.ospaexnw61~A
+       (infix@5 /.0.ospaexnw61 dir.0~4 exe.0@2)ExeExt.0.ossk30t39@C))
+     (if@,A
+      (elif@3
+       (call@A fileExists.0.osc4bsu0d1~A x.3@1)
+       (stmts@F
+        (ret x.3@7))))))
+   (asgn@7,O result.10~7 ""@2)
+   (ret~2,~1 result.10)))
+ (proc@,3R :execShellCmd.0.@5 x . .
+  (params@I
+   (param@1 :command.0 . . string.0.sysvq0asl@9 .))
+  (i@J 64)
+  (pragmas@f
+   (tags@2
+    (bracket@6 ExecIOEffect@1))).
+  (stmts@2,1
+   (result :result.11 . .
+    (i@9,8,../nimony/lib/std/system/openarrays.nim 64).)
+   (stmts@2,i
+    (var@4 :command.1 . . string.0.sysvq0asl@K,~j command.0@A)
+    (let@4,1 :cc.0 . .
+     (cstring@D,~3y
+      (notnil))
+     (call@M toCString.0.sysvq0asl~9
+      (haddr~H command.1)))
+    (if@,2
+     (elif@3
+      (expr@a,3v,../nimony/lib/std/system.nim
+       (eq@2
+        (pointer
+         (nil))
+        (hconv~2
+         (pointer@L,B,../nimony/lib/std/system/comparisons.nim
+          (nil))
+         (hconv@7,4D,../nimony/lib/std/os.nim
+          (pointer@c,3v,../nimony/lib/std/system.nim
+           (nil))cc.0))
+        (nil@3)))
+      (stmts~1,1
+       (asgn@7 result.11~7 -202@2)))
+     (else@,2
+      (stmts@2,1
+       (asgn@7 result.11~7
+        (hconv@L
+         (i@9,8,../nimony/lib/std/system/openarrays.nim 64)
+         (call exitStatusLikeShell.0.~J
+          (call@9 c_system.0.~8 cc.0@1))))))))
+   (ret~2,~1 result.11)))
+ (proc@,4H :getFileSize.0.@5 x . .
+  (params@H
+   (param@1 :file.1 . . string.0.sysvq0asl@6 .))
+  (i@G 64)
+  (pragmas@d
+   (tags@2
+    (bracket@6 ReadIOEffect@1))
+   (raises@O ErrorCode.0.sysvq0asl~O)).
+  (stmts@2,1
+   (result :result.12 . .
+    (i@9,8,../nimony/lib/std/system/openarrays.nim 64).)
+   (stmts@2,A
+    (var@4 :rawInfo.0 . . Stat.0.pososrh1q1@C,~29
+     (oconstr@H Stat.0.pososrh1q1~5,~29
+      (kv st_dev.0
+       (expr@n,F,../nimony/lib/std/system/defaults.nim
+        (suf 0u "u64")))
+      (kv st_ino.0
+       (expr@n,F,../nimony/lib/std/system/defaults.nim
+        (suf 0u "u64")))
+      (kv st_size.0
+       (expr@l,E,../nimony/lib/std/system/defaults.nim
+        (suf 0 "i64")))
+      (kv st_mode.0
+       (expr@n,D,../nimony/lib/std/system/defaults.nim
+        (suf 0u "u32")))
+      (kv st_mtime.0
+       (expr@l,E,../nimony/lib/std/system/defaults.nim
+        (suf 0 "i64")))
+      (kv st_mtim.0
+       (oconstr Timespec.0.pososrh1q1@i,1p,../nimony/lib/std/posix/posix.nim
+        (kv tv_sec.0
+         (dconv Time.0.pososrh1q1@S,k,../nimony/lib/std/posix/posix_other.nim
+          (expr@l,E,../nimony/lib/std/system/defaults.nim
+           (suf 0 "i64"))))
+        (kv tv_nsec.0
+         (expr@l,E,../nimony/lib/std/system/defaults.nim
+          (suf 0 "i64")))))))
+    (var@4,1 :filename.3 . . string.0.sysvq0asl@G,~C file.1@B)
+    (if@,2
+     (elif@3
+      (lt@Y
+       (i 32)
+       (call~U stat.0.pososrh1q1~4
+        (call@9 toCString.0.sysvq0asl@1
+         (haddr~8 filename.3))
+        (haddr@L rawInfo.0))
+       (suf@2 0 "i32"))
+      (stmts~1,1
+       (call@C raiseOSError.0.osezuyu63~C
+        (call@C osLastError.0.osezuyu63~B)file.1@G))))
+    (asgn@7,4 result.12~7
+     (conv@7
+      (i@9,8,../nimony/lib/std/system/openarrays.nim 64)
+      (dot@8 rawInfo.0~7 st_size.0 0))))
+   (ret~2,~1 result.12)))
+ (comment@L,D cstring.0.sysvq0asl int64.0.sysvq0asl~3,22 int.0.sysvq0asl~2,3E int64.0.sysvq0asl~5,44 isNil.0.sysvq0asl~B,L !=.0.sysvq0asl@K,P >.0.sysvq0asl~A,d !=.0.sysvq0asl@6,1F >.0.sysvq0asl@2,1K runnableExamples.0.sysvq0asl~H,1p >.0.sysvq0asl~A,1y default.10.sysvq0asl~2,26 default.10.sysvq0asl~2,26 default.9.sysvq0asl~2,26 default.8.sysvq0asl~2,26 default.9.sysvq0asl~2,26 default.9.sysvq0asl~2,26 default.9.sysvq0asl~2,26 int64.0.sysvq0asl~8,2A int64.0.sysvq0asl@c,2A in.0.sysvq0asl~A,2v isNil.0.sysvq0asl~C,3z default.10.sysvq0asl@4,4F default.10.sysvq0asl@4,4F default.9.sysvq0asl@4,4F default.8.sysvq0asl@4,4F default.9.sysvq0asl@4,4F default.9.sysvq0asl@4,4F default.9.sysvq0asl@4,4F int64.0.sysvq0asl~8,4J)
+ (func@A,d :inc.1.Irn1g7r1. . .@,E,../nimony/lib/std/system/arithmetics.nim
+  (at inc.1.sysvq0asl
+   (i 64))
+  (params@L,E,../nimony/lib/std/system/arithmetics.nim
+   (param@1 :x.4 . .
+    (mut@3
+     (i 64)).)).@,E,../nimony/lib/std/system/arithmetics.nim
+  (pragmas@W,E,../nimony/lib/std/system/arithmetics.nim
+   (inline@2)).@,E,../nimony/lib/std/system/arithmetics.nim
+  (stmts@2,F,../nimony/lib/std/system/arithmetics.nim
+   (asgn@2,1
+    (hderef~2 x.4)
+    (add@6
+     (i 64)
+     (hderef@1 x.4)
+     (conv@U,~F
+      (i 64)1@1)))))
+ (iterator@B,1J :items.1.I4py2pf1. . .@,l,../nimony/lib/std/system/openarrays.nim
+  (at items.1.sysvq0asl
+   (c@X,Q,../nimony/lib/std/system/openarrays.nim 8))
+  (params@I,l,../nimony/lib/std/system/openarrays.nim
+   (param@1 :a.4 . . openArray.0.Ijk0jkw1.@C .))
+  (mut@J,l,../nimony/lib/std/system/openarrays.nim
+   (c@E,~L 8)). .@,l,../nimony/lib/std/system/openarrays.nim
+  (stmts@2,m,../nimony/lib/std/system/openarrays.nim
+   (var@4 :i.2 . .
+    (i@3,~e 64)0@4)
+   (while@,1
+    (lt@8
+     (i 64)i.2~2
+     (call@5 len.6.Iroq7kd1.~3 a.4@1))
+    (stmts@2,1
+     (yld
+      (call@6 \5B\5D.10.I5nt6we. a.4 i.2@2))
+     (cmd@,1 inc.1.Irn1g7r1.
+      (haddr@4 i.2))))))
+ (iterator@G,1N :\2E.<.0.Inpqkww1. . .@,1,../nimony/lib/std/system/iterators.nim
+  (at \2E.<.0.sysvq0asl
+   (i 64))
+  (params@R,1,../nimony/lib/std/system/iterators.nim
+   (param@1 :a.6 . .
+    (i 64).)
+   (param@4 :b.1 . .
+    (i 64).))
+  (i 64)
+  (pragmas@e,1,../nimony/lib/std/system/iterators.nim
+   (inline@2)).@,1,../nimony/lib/std/system/iterators.nim
+  (stmts@2,2,../nimony/lib/std/system/iterators.nim
+   (var@4 :i.3 . .
+    (i@9,8,../nimony/lib/std/system/openarrays.nim 64)a.6@4)
+   (while@,1
+    (lt@8
+     (i 64)i.3~2 b.1@2)
+    (stmts@2,1
+     (yld i.3@6)
+     (cmd@,1 inc.1.Irn1g7r1.
+      (haddr@4 i.3))))))
+ (converter@X,24 :toOpenArray.0.Ib2y0vy1. . .@,G,../nimony/lib/std/system/openarrays.nim
+  (at toOpenArray.0.sysvq0asl
+   (rangetype
+    (i 64)0 2)string.0.sysvq0asl)
+  (params@S,G,../nimony/lib/std/system/openarrays.nim
+   (param@3 :x.6~2 .
+    (pragmas
+     (byref@2))
+    (array@G string.0.sysvq0asl
+     (rangetype@X,25,../nimony/lib/std/os.nim
+      (i 64)0 2)).))openArray.0.Ig73pnk.@b,G,../nimony/lib/std/system/openarrays.nim
+  (pragmas@17,G,../nimony/lib/std/system/openarrays.nim
+   (inline@2)).@,G,../nimony/lib/std/system/openarrays.nim
+  (stmts@2,H,../nimony/lib/std/system/openarrays.nim
+   (result :result.13 . . openArray.0.Ig73pnk.@Z,~1 .)
+   (asgn result.13
+    (if
+     (elif@3
+      (eq@7
+       (i 64)
+       (expr@2,2Z,../nimony/lib/std/system.nim
+        (expr@,~4
+         (add@j,2
+          (i 64)
+          (sub~N
+           (i 64)
+           (conv~5
+            (i@U,E,../nimony/lib/std/system/defaults.nim 64)
+            (conv~D
+             (i 64)2@X,25,../nimony/lib/std/os.nim))
+           (conv@I
+            (i@U,E,../nimony/lib/std/system/defaults.nim 64)
+            (conv~D
+             (i 64)0@X,25,../nimony/lib/std/os.nim)))1@2)))0@3)
+      (expr~1,1
+       (oconstr@C openArray.0.Ig73pnk.@f,21,../nimony/lib/std/os.nim
+        (kv@2 a.0~1
+         (nil@2))
+        (kv@C len.0~3 0@2))))
+     (else@,2
+      (expr@2,1
+       (oconstr@C openArray.0.Ig73pnk.@f,21,../nimony/lib/std/os.nim
+        (kv@2 a.0~1
+         (cast@2
+          (ptr@5
+           (uarray@I string.0.sysvq0asl)
+           (unchecked))
+          (addr@W x.6@1)))
+        (kv@j len.0~3
+         (expr@2,2Z,../nimony/lib/std/system.nim
+          (expr@,~4
+           (add@j,2
+            (i 64)
+            (sub~N
+             (i 64)
+             (conv~5
+              (i@U,E,../nimony/lib/std/system/defaults.nim 64)
+              (conv~D
+               (i 64)2@X,25,../nimony/lib/std/os.nim))
+             (conv@I
+              (i@U,E,../nimony/lib/std/system/defaults.nim 64)
+              (conv~D
+               (i 64)0@X,25,../nimony/lib/std/os.nim)))1@2)))))))))
+   (ret~2,~1 result.13)))
+ (func@L,2A :len.6.Igv2wyu1. . .@,V,../nimony/lib/std/system/openarrays.nim
+  (at len.6.sysvq0asl string.0.sysvq0asl@L,~A)
+  (params@C,V,../nimony/lib/std/system/openarrays.nim
+   (param@1 :a.7 . . openArray.0.Ig73pnk.@C .))
+  (i@J,V,../nimony/lib/std/system/openarrays.nim 64)
+  (pragmas@Z,V,../nimony/lib/std/system/openarrays.nim
+   (inline@2)).@,V,../nimony/lib/std/system/openarrays.nim
+  (stmts@m,V,../nimony/lib/std/system/openarrays.nim
+   (result@1 :result.14 . .
+    (i@D,V,../nimony/lib/std/system/basic_types.nim 64).)
+   (asgn@1 result.14
+    (dot a.7~1 len.0 0 "x"))
+   (ret~m result.14)))
+ (func@S,2C :\5B\5D.10.Ik9hgkq1. . .@,A,../nimony/lib/std/system/openarrays.nim
+  (at \5B\5D.10.sysvq0asl string.0.sysvq0asl@E,~C)
+  (params@D,A,../nimony/lib/std/system/openarrays.nim
+   (param@1 :x.7 . . openArray.0.Ig73pnk.@C .)
+   (param@I :idx.2 . .
+    (i@5 64).))
+  (mut@T,A,../nimony/lib/std/system/openarrays.nim string.0.sysvq0asl@g,21,../nimony/lib/std/os.nim)
+  (pragmas@m,A,../nimony/lib/std/system/openarrays.nim
+   (inline@2)
+   (requires@A
+    (and@J
+     (expr@2,1p,../nimony/lib/std/system/comparisons.nim
+      (le@2,1
+       (i 64)0@1D,A,../nimony/lib/std/system/openarrays.nim idx.2@16,A,../nimony/lib/std/system/openarrays.nim))
+     (lt@8
+      (i 64)idx.2~4
+      (dot@3 x.7~1 len.0 0 "x"))))).@,A,../nimony/lib/std/system/openarrays.nim
+  (stmts@1Z,A,../nimony/lib/std/system/openarrays.nim
+   (result@3 :result.15 . .
+    (mut~19 string.0.sysvq0asl@g,21,../nimony/lib/std/os.nim).)
+   (asgn@3 result.15
+    (haddr~2
+     (pat
+      (dot x.7~1 a.0 0 "x")idx.2@3)))
+   (ret~1Z result.15)))
+ (func@A,2k,../nimony/lib/std/system.nim :contains.1.Iyjk1vr. . .@,i,../nimony/lib/std/system/openarrays.nim
+  (at contains.1.sysvq0asl
+   (c@X,Q,../nimony/lib/std/system/openarrays.nim 8))
+  (params@S,i,../nimony/lib/std/system/openarrays.nim
+   (param@1 :a.8 . . openArray.0.Ijk0jkw1.@C .)
+   (param@I :elem.1 . .
+    (c~D,~I 8).))
+  (bool@S,i,../nimony/lib/std/system/openarrays.nim)
+  (pragmas@z,i,../nimony/lib/std/system/openarrays.nim
+   (inline@2)).@,i,../nimony/lib/std/system/openarrays.nim
+  (stmts@2,j,../nimony/lib/std/system/openarrays.nim
+   (result@E :result.16 . .
+    (bool@2,g,../nimony/lib/std/system/basic_types.nim).)
+   (asgn@E result.16
+    (expr@2,1p,../nimony/lib/std/system/comparisons.nim
+     (le@2,1
+      (i 64)0@J,j,../nimony/lib/std/system/openarrays.nim
+      (call@6,j,../nimony/lib/std/system/openarrays.nim find.0.Izz6vsi.~4 a.8@1 elem.1@4))))
+   (ret~2,~1 result.16)))
+ (func@F,n,../nimony/lib/std/system/openarrays.nim :len.6.Iroq7kd1. . .~F,~I
+  (at len.6.sysvq0asl
+   (c@I,~N 8))
+  (params~3,~I
+   (param@1 :a.10 . . openArray.0.Ijk0jkw1.@C .))
+  (i@4,~I 64)
+  (pragmas@K,~I
+   (inline@2)).~F,~I
+  (stmts@X,~I
+   (result@1 :result.17 . .
+    (i@D,V,../nimony/lib/std/system/basic_types.nim 64).)
+   (asgn@1 result.17
+    (dot a.10~1 len.0 0 "x"))
+   (ret~m result.17)))
+ (func@A,o,../nimony/lib/std/system/openarrays.nim :\5B\5D.10.I5nt6we. . .~A,~e
+  (at \5B\5D.10.sysvq0asl
+   (c@N,~O 8))
+  (params@3,~e
+   (param@1 :x.8 . . openArray.0.Ijk0jkw1.@C .)
+   (param@I :idx.3 . .
+    (i@5 64).))
+  (mut@J,~e
+   (c@4,G 8))
+  (pragmas@c,~e
+   (inline@2)
+   (requires@A
+    (and@J
+     (expr@2,1p,../nimony/lib/std/system/comparisons.nim
+      (le@2,1
+       (i 64)0@1D,A,../nimony/lib/std/system/openarrays.nim idx.3@16,A,../nimony/lib/std/system/openarrays.nim))
+     (lt@8
+      (i 64)idx.3~4
+      (dot@3 x.8~1 len.0 0 "x"))))).~A,~e
+  (stmts@1P,~e
+   (result@3 :result.18 . .
+    (mut~19
+     (c@4,G 8)).)
+   (asgn@3 result.18
+    (haddr~2
+     (pat
+      (dot x.8~1 a.0 0 "x")idx.3@3)))
+   (ret~1Z result.18)))
+ (func@6,j,../nimony/lib/std/system/openarrays.nim :find.0.Izz6vsi. . .~6,~8
+  (at find.0.sysvq0asl
+   (c@R,~J 8))
+  (params@I,~8
+   (param@1 :a.11 . . openArray.0.Ijk0jkw1.@C .)
+   (param@I :elem.3 . .
+    (c~9,~B 8).))
+  (i@M,~8 64). .~6,~8
+  (stmts~4,~7
+   (result@4 :result.19 . .
+    (i@D,V,../nimony/lib/std/system/basic_types.nim 64).)
+   (var@4 :i.4 . .
+    (i@3,~U 64)0@4)
+   (while@,1
+    (lt@8
+     (i 64)i.4~2
+     (call@5 len.6.Iroq7kd1.~3 a.11@1))
+    (stmts@2,1
+     (if
+      (elif@3
+       (eq@5
+        (c 8)
+        (hderef~5
+         (call \5B\5D.10.I5nt6we. a.11 i.4@2))elem.3@3)
+       (stmts@E
+        (ret i.4@7))))
+     (cmd@,1 inc.1.Irn1g7r1.
+      (haddr@4 i.4))))
+   (ret@,4 -1@7)
+   (ret~2,~1 result.19)))
+ (type@f,20 :openArray.0.Ig73pnk. .
+  (at openArray.0.sysvq0asl string.0.sysvq0asl@1)
+  (pragmas@G,6,../nimony/lib/std/system/openarrays.nim
+   (view@2))
+  (object@R,6,../nimony/lib/std/system/openarrays.nim .
+   (fld~N,1 :a.0 . .
+    (ptr@3
+     (uarray@I string.0.sysvq0asl@g,21,../nimony/lib/std/os.nim)
+     (unchecked)).)
+   (fld~N,2 :len.0 . .
+    (i@5 64).)))
+ (type@V,l,../nimony/lib/std/system/openarrays.nim :openArray.0.Ijk0jkw1. .
+  (at openArray.0.sysvq0asl
+   (c@2,~L 8))
+  (pragmas~F,~f
+   (view@2))
+  (object~4,~f .
+   (fld~N,1 :a.0 . .
+    (ptr@3
+     (uarray@I
+      (c@8,J 8))
+     (unchecked)).)
+   (fld~N,2 :len.0 . .
+    (i@5 64).))))(.index@,1,../nimony/lib/std/os.nim
+ (h@2,D c_system.0. 631)
+ (x@2,H expandFilename.0. 264)
+ (h@2,k maxSymlinkLen.0. 1794)
+ (h@2,k getApplAux.0. 110)
+ (x@2,y getAppFilename.0. 1372)
+ (x@2,y getAppDir.0. 314)
+ (x quoteShellWindows.0. 340)
+ (x quoteShellPosix.0. 2847)
+ (x@2,1q quoteShell.0. 986)
+ (x@2,1q quoteShellCommand.0. 325)
+ (x@2,2F getLastModificationTime.0. 1002)
+ (x exitStatusLikeShell.0. 2082)
+ (x findExe.0. 756)
+ (x execShellCmd.0. 1806)
+ (x getFileSize.0. 1122)
+ (h inc.1.Irn1g7r1. 2559)
+ (h items.1.I4py2pf1. 539)
+ (h \2E.<.0.Inpqkww1. 670)
+ (h toOpenArray.0.Ib2y0vy1. 624)
+ (h len.6.Igv2wyu1. 2103)
+ (h \5B\5D.10.Ik9hgkq1. 604)
+ (h contains.1.Iyjk1vr. 1014)
+ (h len.6.Iroq7kd1. 907)
+ (h \5B\5D.10.I5nt6we. 404)
+ (h find.0.Izz6vsi. 741)
+ (h openArray.0.Ig73pnk. 735)
+ (h openArray.0.Ijk0jkw1. 367))

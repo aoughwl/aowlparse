@@ -1,0 +1,434 @@
+(.nif27)
+(.vendor "Nifler")
+(.dialect "nim-parsed")
+(stmts@,A,../nimony/lib/std/cmdline.nim
+ (comment)
+ (comment@,3)
+ (import@,8
+  (infix@A / std~3
+   (bracket@1 widestrs@1 syncio@B)))
+ (const@6,9 weirdTarget . . .
+  (infix@X or
+   (call~C defined~7 nimscript@1)
+   (call@A defined~7 js@1)))
+ (when@,C
+  (elif@5 weirdTarget
+   (stmts~3,1
+    (discard .)))
+  (elif@5,2
+   (call@7 defined~7 windows@1)
+   (stmts~3,1
+    (import
+     (infix@E / windows~7 winlean@1))))
+  (elif@5,4
+   (call@7 defined~7 posix@1)
+   (stmts~3,1
+    (import
+     (infix@C / posix~5 posix@1)))))
+ (when@,M
+  (elif@5
+   (infix@H and
+    (call~A defined~7 windows@1)
+    (prefix@4 not weirdTarget@4))
+   (stmts~3,1
+    (template getCommandLine@9 x . .
+     (params@O)untyped@4 . .
+     (stmts@c
+      (call@F getCommandLineW~F))))))
+ (proc@,Q parseCmdLine@5 x . .
+  (params@I
+   (param@1 c . . string@3 .))
+  (at@G seq~3 string@1)
+  (pragmas@h noSideEffect@2).
+  (stmts@2,1
+   (comment)
+   (asgn@7,c result~7
+    (prefix@2 \40
+     (bracket@1)))
+   (var@4,d i . . . 0@4)
+   (var@4,e a . . . ""@4)
+   (while@,f true@6
+    (stmts@2,1
+     (call@6 setLen~6 a@1 0@4)
+     (while@,2
+      (infix@G and
+       (infix~8 < i~2
+        (dot@3 c~1 len@1))
+       (infix@9 in
+        (at~4 c~1 i@1)
+        (curly@3 ' '@1 '\09'@6 '\0A'@C '\0D'@I)))
+      (stmts@r
+       (call@3 inc~3 i@1)))
+     (if@,3
+      (elif@3
+       (infix@2 >= i~2
+        (dot@4 c~1 len@1))
+       (stmts@C
+        (break .))))
+     (when@,4
+      (elif@5
+       (call@7 defined~7 windows@1)
+       (stmts~3,2
+        (var@4 inQuote . . . false@A)
+        (while@,1
+         (infix@8 < i~2
+          (dot@3 c~1 len@1))
+         (stmts@2,1
+          (case
+           (at@6 c~1 i@1)
+           (of@,1
+            (ranges '\5C'@3)
+            (stmts@2,1
+             (var@4 j . . . i@4)
+             (while@,1
+              (infix@G and
+               (infix~8 < j~2
+                (dot@3 c~1 len@1))
+               (infix@9 ==
+                (at~4 c~1 j@1)'\5C'@3))
+              (stmts@Y
+               (call@3 inc~3 j@1)))
+             (if@,2
+              (elif@3
+               (infix@A and
+                (infix~8 < j~2
+                 (dot@3 c~1 len@1))
+                (infix@9 ==
+                 (at~4 c~1 j@1)'\22'@3))
+               (stmts~1,1
+                (for@4
+                 (infix@6 \2E\2E 1~1
+                  (infix@8 div
+                   (par~6
+                    (infix@2 \2D j~1 i@1))2@4))
+                 (unpackflat
+                  (let k . . ..))
+                 (stmts@L
+                  (call@5
+                   (dot~4 a~1 add@1)'\5C'@1)))
+                (if@,1
+                 (elif@3
+                  (infix@C ==
+                   (infix~6 mod
+                    (par~6
+                     (infix@2 \2D j~1 i@1))2@4)0@3)
+                  (stmts~1,1
+                   (asgn@2 i~2 j@2)))
+                 (else@,2
+                  (stmts@2,1
+                   (call@5
+                    (dot~4 a~1 add@1)'\22'@1)
+                   (asgn@2,1 i~2
+                    (infix@3 \2B j~1 1@1)))))))
+              (else@,7
+               (stmts@2,1
+                (call@5
+                 (dot~4 a~1 add@1)
+                 (at@2 c~1 i@1))
+                (call@3,1 inc~3 i@1))))))
+           (of@,E
+            (ranges '\22'@3)
+            (stmts@2,1
+             (call@3 inc~3 i@1)
+             (if@,1
+              (elif@3
+               (prefix not inQuote@4)
+               (stmts@D
+                (asgn@8 inQuote~8 true@2)))
+              (elif@5,1
+               (infix@A and
+                (infix~8 < i~2
+                 (dot@3 c~1 len@1))
+                (infix@9 ==
+                 (at~4 c~1 i@1)'\22'@3))
+               (stmts~3,1
+                (call@5
+                 (dot~4 a~1 add@1)
+                 (at@2 c~1 i@1))
+                (call@3,1 inc~3 i@1)))
+              (else@,4
+               (stmts@2,1
+                (asgn@8 inQuote~8 false@2)
+                (break@,1 .))))))
+           (of@,N
+            (ranges ' '@3 '\09'@8)
+            (stmts@2,1
+             (if
+              (elif@3
+               (prefix not inQuote@4)
+               (stmts@D
+                (break .))))
+             (call@5,1
+              (dot~4 a~1 add@1)
+              (at@2 c~1 i@1))
+             (call@3,2 inc~3 i@1)))
+           (else@,R
+            (stmts@2,1
+             (call@5
+              (dot~4 a~1 add@1)
+              (at@2 c~1 i@1))
+             (call@3,1 inc~3 i@1))))))))
+      (else@,Y
+       (stmts@2,1
+        (case
+         (at@6 c~1 i@1)
+         (of@,1
+          (ranges '\27'@3 '\22'@9)
+          (stmts@2,1
+           (var@4 delim . . .
+            (at@9 c~1 i@1))
+           (call@3,1 inc~3 i@1)
+           (while@,2
+            (infix@G and
+             (infix~8 < i~2
+              (dot@3 c~1 len@1))
+             (infix@9 !=
+              (at~4 c~1 i@1)delim@3))
+            (stmts@2,1
+             (cmd add a@4
+              (at@8 c~1 i@1))
+             (call@3,1 inc~3 i@1)))
+           (if@,5
+            (elif@3
+             (infix@2 < i~2
+              (dot@3 c~1 len@1))
+             (stmts@B
+              (call@3 inc~3 i@1))))))
+         (else@,8
+          (stmts@2,1
+           (while
+            (infix@G and
+             (infix~8 < i~2
+              (dot@3 c~1 len@1))
+             (infix@9 >
+              (at~4 c~1 i@1)' '@2))
+            (stmts@2,1
+             (call@3 add~3 a@1
+              (at@5 c~1 i@1))
+             (call@3,1 inc~3 i@1)))))))))
+     (call@3,p add~3 result@1
+      (cmd@E move~5 a))))))
+ (when@,1y
+  (elif@5
+   (call@7 defined~7 nimdoc@1)
+   (stmts~3,2
+    (proc paramCount@5 x . .
+     (params@G)int@4
+     (pragmas@O
+      (kv@6 tags~4
+       (bracket@2 ReadIOEffect@1))).
+     (stmts@2,1
+      (comment)))
+    (proc@,S paramStr@5 x . .
+     (params@E
+      (param@1 i . . int@3 .))string@A
+     (pragmas@V
+      (kv@6 tags~4
+       (bracket@2 ReadIOEffect@1))).
+     (stmts@2,1
+      (comment)))))
+  (elif@5,r
+   (call@7 defined~7 nimscript@1)
+   (stmts@K
+    (discard .)))
+  (elif@5,s
+   (call@7 defined~7 nodejs@1)
+   (stmts~3,1
+    (type@A Argv~5 . . .
+     (object@2 JsRoot@A))
+    (let@9,1 argv~5 .
+     (pragmas
+      (kv@A importjs~8 "process.argv"@2))Argv@V .)
+    (proc@,2 len@5 . . .
+     (params@8
+      (param@1 argv . . Argv@6 .))int@E
+     (pragmas@Q
+      (kv@A importjs~8 "\23.length"@2)). .)
+    (proc@,3
+     (quoted@5 \5B\5D@1). . .
+     (params@9
+      (param@1 argv . . Argv@6 .)
+      (param@D i . . int@3 .))cstring@M
+     (pragmas@d
+      (kv@A importjs~8 "\23\5B\23\5D"@2)). .)
+    (proc@,5 paramCount@5 x . .
+     (params@G)int@4
+     (pragmas@O
+      (kv@6 tags~4
+       (bracket@2 ReadDirEffect@1))).
+     (stmts@2,1
+      (asgn@7 result~7
+       (infix@B \2D
+        (dot~5 argv~4 len@1)2@2))))
+    (proc@,8 paramStr@5 x . .
+     (params@E
+      (param@1 i . . int@3 .))string@A
+     (pragmas@V
+      (kv@6 tags~4
+       (bracket@2 ReadIOEffect@1))).
+     (stmts@2,1
+      (let@4 i . . .
+       (infix@6 \2B i~2 1@2))
+      (if@,1
+       (elif@3
+        (infix@D and
+         (infix~B < i~2
+          (dot@6 argv~4 len@1))
+         (infix@6 >= i~2 0@3))
+        (stmts~1,1
+         (asgn@7 result~7
+          (prefix@2 $
+           (at@5 argv~4 i@1)))))
+       (else@,2
+        (stmts@2,1
+         (asgn@7 result~7 ""@2))))))))
+  (elif@5,17
+   (call@7 defined~7 windows@1)
+   (stmts~3,6
+    (var@A,1 ownArgv~8 .
+     (pragmas threadvar@2)
+     (at@I seq~3 string@1).)
+    (var@G,2 ownParsedArgv~E .
+     (pragmas threadvar@2)bool@F .)
+    (proc@,4 paramCount@5 x . .
+     (params@G)int@4
+     (pragmas@O
+      (kv@6 tags~4
+       (bracket@2 ReadIOEffect@1))).
+     (stmts@2,2
+      (if
+       (elif@3
+        (prefix not ownParsedArgv@4)
+        (stmts~1,1
+         (asgn@8 ownArgv~8
+          (call@E parseCmdLine~C
+           (prefix@1 $
+            (call@F getCommandLine~E))))
+         (asgn@E,1 ownParsedArgv~E true@2))))
+      (asgn@7,3 result~7
+       (infix@D \2D
+        (dot~4 ownArgv~7 len@1)1@1))))
+    (proc@,B paramStr@5 x . .
+     (params@E
+      (param@1 i . . int@3 .))string@A
+     (pragmas@V
+      (kv@6 tags~4
+       (bracket@2 ReadIOEffect@1))).
+     (stmts@2,2
+      (if
+       (elif@3
+        (prefix not ownParsedArgv@4)
+        (stmts~1,1
+         (asgn@8 ownArgv~8
+          (call@E parseCmdLine~C
+           (prefix@1 $
+            (call@F getCommandLine~E))))
+         (asgn@E,1 ownParsedArgv~E true@2))))
+      (if@,3
+       (elif@3
+        (infix@G and
+         (infix~E < i~2
+          (dot@9 ownArgv~7 len@1))
+         (infix@6 >= i~2 0@3))
+        (stmts~1,1
+         (asgn@7 result~7
+          (at@9 ownArgv~7 i@1))))
+       (else@,2
+        (stmts@2,1
+         (asgn@7 result~7 ""@2))))))))
+  (elif@5,1Y
+   (call@7 defined~7 genode@1)
+   (stmts~3,1
+    (proc paramStr@5 x . .
+     (params@E
+      (param@1 i . . int@3 .))string@A
+     (pragmas@V
+      (kv@6 tags~4
+       (bracket@2 ReadIOEffect@1))).
+     (stmts@2,1
+      (asgn@7 result~7 ""@2)))
+    (proc@,3 paramCount@5 x . .
+     (params@G)int@4
+     (pragmas@O
+      (kv@6 tags~4
+       (bracket@2 ReadIOEffect@1))).
+     (stmts@2,1
+      (asgn@7 result~7 0@2)))))
+  (elif@5,1e weirdTarget
+   (stmts~3,1
+    (proc paramStr@5 x . .
+     (params@E
+      (param@1 i . . int@3 .))string@A
+     (pragmas@V
+      (kv@6 tags~4
+       (bracket@2 ReadIOEffect@1))).
+     (stmts@2,1
+      (asgn@7 result~7 ""@2)))
+    (proc@,3 paramCount@5 x . .
+     (params@G)int@4
+     (pragmas@O
+      (kv@6 tags~4
+       (bracket@2 ReadIOEffect@1))).
+     (stmts@2,1
+      (asgn@7 result~7 0@2)))))
+  (elif@5,1k
+   (prefix not
+    (call@B defined~7 createNimRtl@1))
+   (stmts~3,2
+    (import strutils@7)
+    (type@I,2 cstringArray~D . . .
+     (ptr@2
+      (at@I UncheckedArray~E cstring@1)))
+    (var@B,5 cmdCount~9 .
+     (pragmas
+      (kv@9 importc~7 "cmdCount"@2))cint@P .)
+    (var@A,6 cmdLine~8 .
+     (pragmas
+      (kv@9 importc~7 "cmdLine"@2))cstringArray@O .)
+    (proc@,8 paramStr@5 x . .
+     (params@E
+      (param@1 i . . int@3 .))string@A
+     (pragmas@V
+      (kv@6 tags~4
+       (bracket@2 ReadIOEffect@1))).
+     (stmts@2,2
+      (if
+       (elif@3
+        (infix@D and
+         (infix~B < i~2 cmdCount@2)
+         (infix@6 >= i~2 0@3))
+        (stmts~1,1
+         (asgn@7 result~7
+          (prefix@2 $
+           (at@8 cmdLine~7 i@1)))))
+       (else@,2
+        (stmts@2,1
+         (asgn@7 result~7 ""@2))))))
+    (proc@,F paramCount@5 x . .
+     (params@G)int@4
+     (pragmas@O
+      (kv@6 tags~4
+       (bracket@2 ReadIOEffect@1))).
+     (stmts@2,2
+      (asgn@7 result~7
+       (infix@A \2D cmdCount~8 1@1)))))))
+ (proc@,43 commandLineParams@5 x . .
+  (params@N)
+  (at@7 seq~3 string@1)
+  (pragmas@d
+   (kv@6 tags~4
+    (bracket@2 ReadIOEffect@1))).
+  (stmts@2,1
+   (comment)
+   (asgn@7,P result~7
+    (prefix@2 \40
+     (bracket@1)))
+   (for@4,Q
+    (infix@6 \2E\2E 1~1
+     (call@C paramCount~A))
+    (unpackflat
+     (let i . . ..))
+    (stmts~2,1
+     (call@A
+      (dot~4 result~6 add@1)
+      (call@9 paramStr~8 i@1)))))))

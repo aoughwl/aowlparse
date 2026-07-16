@@ -1,0 +1,508 @@
+(.nif27)
+(.indexat 16391            )
+(stmts@,1,../nimony/lib/std/private/osappdirs.nim
+ (const@K,j :strlit.0.I17899431971652232885. . LongString.0.sysvq0asl
+  (oconstr LongString.0.sysvq0asl
+   (kv fullLen.0 13)
+   (kv rc.0 0)
+   (kv capImpl.0 0)
+   (kv data.0 "XDG_DATA_HOME")))
+ (const@K,17 :strlit.0.I2427788052952346732. . LongString.0.sysvq0asl
+  (oconstr LongString.0.sysvq0asl
+   (kv fullLen.0 15)
+   (kv rc.0 0)
+   (kv capImpl.0 0)
+   (kv data.0 "XDG_CONFIG_HOME")))
+ (const@K,1W :strlit.0.I15713846427667781584. . LongString.0.sysvq0asl
+  (oconstr LongString.0.sysvq0asl
+   (kv fullLen.0 14)
+   (kv rc.0 0)
+   (kv capImpl.0 0)
+   (kv data.0 "XDG_CACHE_HOME")))
+ (const@1F,A,../nimony/lib/std/system/openarrays.nim :strlit.0.I14694606176902936784. . LongString.0.sysvq0asl
+  (oconstr LongString.0.sysvq0asl
+   (kv fullLen.0 92)
+   (kv rc.0 0)
+   (kv capImpl.0 0)
+   (kv data.0 "../nimony/lib/std/system/openarrays.nim\2810, 49\29\3A 0 <= idx and idx < x.len \5BAssertionDefect\5D\0A")))
+ (proc@,5 :getHomeDir.0.@5
+  (params@G)string.0.sysvq0asl@4
+  (pragmas
+   (smry callsUnknown))
+  (stmts@2,1
+   (var :result.2 . string.0.sysvq0asl@2,~1 .)
+   (call =wasMoved.2.sysvq0asl
+    (addr result.2))
+   (stmts@6,H
+    (stmts
+     (stmts@D
+      (var :`tmp.0 . string.0.sysvq0asl@V,2c,../nimony/lib/std/envvars.nim
+       (call getEnv.0.envto7w6l1~6
+        (oconstr@1 string.0.sysvq0asl
+         (kv bytes.0 297649784836u)
+         (kv more.0
+          (nil)))
+        (oconstr@c,2c,../nimony/lib/std/envvars.nim string.0.sysvq0asl
+         (kv bytes.0 0u)
+         (kv more.0
+          (nil))))))
+     (var@M :`x.1 . string.0.sysvq0asl@G,Ay,../nimony/lib/std/system/stringimpl.nim
+      (call &.0.sysvq0asl `tmp.0~9
+       (oconstr@2 string.0.sysvq0asl
+        (kv bytes.0 12033u)
+        (kv more.0
+         (nil)))))
+     (asgn result.2 `x.1@M)
+     (call~6,~H =destroy.2.sysvq0asl `tmp.0)
+     (ret result.2)))
+   (call =destroy.2.sysvq0asl `tmp.0)
+   (ret~2,~1 result.2)
+   (call =destroy.2.sysvq0asl `tmp.0)
+   (ret result.2)))
+ (proc@,P :getDataDir.0.@5
+  (params@G)string.0.sysvq0asl@4
+  (pragmas
+   (smry callsUnknown))
+  (stmts@2,1
+   (var :result.3 . string.0.sysvq0asl@2,~L .)
+   (call =wasMoved.2.sysvq0asl
+    (addr result.3))
+   (stmts@2,J
+    (call =destroy.2.sysvq0asl result.3)
+    (stmts@x
+     (stmts~B
+      (stmts~9
+       (var :`tmp.3 . string.0.sysvq0asl@V,2c,../nimony/lib/std/envvars.nim
+        (call getEnv.0.envto7w6l1~6
+         (oconstr@1 string.0.sysvq0asl
+          (kv bytes.0 297649784836u)
+          (kv more.0
+           (nil)))
+         (oconstr@c,2c,../nimony/lib/std/envvars.nim string.0.sysvq0asl
+          (kv bytes.0 0u)
+          (kv more.0
+           (nil))))))
+      (var :`tmp.2 . string.0.sysvq0asl@M,2W,../nimony/lib/std/private/ospaths2.nim
+       (call /.0.ospaexnw61 `tmp.3~9
+        (oconstr@2 string.0.sysvq0asl
+         (kv bytes.0 30506377183768070u)
+         (kv more.0
+          (nil))))))
+     (var :`tmp.1 . string.0.sysvq0asl@M,2W,../nimony/lib/std/private/ospaths2.nim
+      (call /.0.ospaexnw61 `tmp.2~B
+       (oconstr@2 string.0.sysvq0asl
+        (kv bytes.0 111541934912261u)
+        (kv more.0
+         (nil))))))
+    (var@F :`x.2 . string.0.sysvq0asl@V,2c,../nimony/lib/std/envvars.nim
+     (call getEnv.0.envto7w6l1~6
+      (oconstr@1 string.0.sysvq0asl
+       (kv bytes.0 6071208948680382718u)
+       (kv more.0
+        (addr strlit.0.I17899431971652232885.)))`tmp.1@i))
+    (asgn@7 result.3~7 `x.2@8))
+   (call@N,K normalizePathEnd.0.ospaexnw61~G
+    (addr~N result.3)
+    (true@F))
+   (call =destroy.2.sysvq0asl `tmp.1)
+   (call =destroy.2.sysvq0asl `tmp.2)
+   (call =destroy.2.sysvq0asl `tmp.3)
+   (ret~2,~1 result.3)
+   (call =destroy.2.sysvq0asl `tmp.1)
+   (call =destroy.2.sysvq0asl `tmp.2)
+   (call =destroy.2.sysvq0asl `tmp.3)
+   (ret result.3)))
+ (proc@,m :getConfigDir.0.@5
+  (params@I)string.0.sysvq0asl@4
+  (pragmas
+   (smry callsUnknown))
+  (stmts@2,1
+   (var :result.4 . string.0.sysvq0asl@2,~i .)
+   (call =wasMoved.2.sysvq0asl
+    (addr result.4))
+   (stmts@2,K
+    (call =destroy.2.sysvq0asl result.4)
+    (stmts@o
+     (stmts~9
+      (var :`tmp.5 . string.0.sysvq0asl@V,2c,../nimony/lib/std/envvars.nim
+       (call getEnv.0.envto7w6l1~6
+        (oconstr@1 string.0.sysvq0asl
+         (kv bytes.0 297649784836u)
+         (kv more.0
+          (nil)))
+        (oconstr@c,2c,../nimony/lib/std/envvars.nim string.0.sysvq0asl
+         (kv bytes.0 0u)
+         (kv more.0
+          (nil))))))
+     (var :`tmp.4 . string.0.sysvq0asl@M,2W,../nimony/lib/std/private/ospaths2.nim
+      (call /.0.ospaexnw61 `tmp.5~9
+       (oconstr@2 string.0.sysvq0asl
+        (kv bytes.0 7451599682962402823u)
+        (kv more.0
+         (nil))))))
+    (var@F :`x.3 . string.0.sysvq0asl@V,2c,../nimony/lib/std/envvars.nim
+     (call getEnv.0.envto7w6l1~6
+      (oconstr@1 string.0.sysvq0asl
+       (kv bytes.0 5642802934615136510u)
+       (kv more.0
+        (addr strlit.0.I2427788052952346732.)))`tmp.4@Z))
+    (asgn@7 result.4~7 `x.3@8))
+   (call@N,L normalizePathEnd.0.ospaexnw61~G
+    (addr~N result.4)
+    (true@F))
+   (call =destroy.2.sysvq0asl `tmp.4)
+   (call =destroy.2.sysvq0asl `tmp.5)
+   (ret~2,~1 result.4)
+   (call =destroy.2.sysvq0asl `tmp.4)
+   (call =destroy.2.sysvq0asl `tmp.5)
+   (ret result.4)))
+ (proc@,1A :getCacheDir.0.@5
+  (params@H)string.0.sysvq0asl@4
+  (pragmas
+   (smry callsUnknown))
+  (stmts@2,1
+   (var :result.5 . string.0.sysvq0asl@2,~16 .)
+   (call =wasMoved.2.sysvq0asl
+    (addr result.5))
+   (stmts@2,L
+    (call =destroy.2.sysvq0asl result.5)
+    (stmts@n
+     (stmts~9
+      (var :`tmp.7 . string.0.sysvq0asl@V,2c,../nimony/lib/std/envvars.nim
+       (call getEnv.0.envto7w6l1~6
+        (oconstr@1 string.0.sysvq0asl
+         (kv bytes.0 297649784836u)
+         (kv more.0
+          (nil)))
+        (oconstr@c,2c,../nimony/lib/std/envvars.nim string.0.sysvq0asl
+         (kv bytes.0 0u)
+         (kv more.0
+          (nil))))))
+     (var :`tmp.6 . string.0.sysvq0asl@M,2W,../nimony/lib/std/private/ospaths2.nim
+      (call /.0.ospaexnw61 `tmp.7~9
+       (oconstr@2 string.0.sysvq0asl
+        (kv bytes.0 28543748692717062u)
+        (kv more.0
+         (nil))))))
+    (var@F :`x.4 . string.0.sysvq0asl@V,2c,../nimony/lib/std/envvars.nim
+     (call getEnv.0.envto7w6l1~6
+      (oconstr@1 string.0.sysvq0asl
+       (kv bytes.0 4846228750523980030u)
+       (kv more.0
+        (addr strlit.0.I15713846427667781584.)))`tmp.6@Y))
+    (asgn@7 result.5~7 `x.4@8))
+   (call@N,M normalizePathEnd.0.ospaexnw61~G
+    (addr~N result.5)
+    (false@1))
+   (call =destroy.2.sysvq0asl `tmp.6)
+   (call =destroy.2.sysvq0asl `tmp.7)
+   (ret~2,~1 result.5)
+   (call =destroy.2.sysvq0asl `tmp.6)
+   (call =destroy.2.sysvq0asl `tmp.7)
+   (ret result.5)))
+ (proc@,1Z :getCacheDir.1.@5
+  (params@H
+   (param@1 :app.0 . string.0.sysvq0asl@5))string.0.sysvq0asl@F
+  (pragmas
+   (smry callsUnknown
+    (param 0 0 reads writes escapes)result 0))
+  (stmts@2,1
+   (var :result.6 . string.0.sysvq0asl@2,~1V .)
+   (call =wasMoved.2.sysvq0asl
+    (addr result.6))
+   (call@,4 =destroy.2.sysvq0asl result.6)
+   (stmts@D,7
+    (var :`tmp.8 . string.0.sysvq0asl~B,~X
+     (call getCacheDir.0.~B)))
+   (var@G,7 :`x.5 . string.0.sysvq0asl@M,2W,../nimony/lib/std/private/ospaths2.nim
+    (call /.0.ospaexnw61 `tmp.8~3 app.0@2))
+   (asgn@,4 result.6 `x.5@G,3)
+   (call =destroy.2.sysvq0asl `tmp.8)
+   (ret~2,~1 result.6)
+   (call =destroy.2.sysvq0asl `tmp.8)
+   (ret result.6)))
+ (proc@,26 :getTempDir.0.@5
+  (params@G)string.0.sysvq0asl@4
+  (pragmas
+   (smry writeGlobal readGlobal callsUnknown))
+  (stmts@2,1
+   (var :result.7 . string.0.sysvq0asl@2,~22 .)
+   (call =wasMoved.2.sysvq0asl
+    (addr result.7))
+   (const@6,I :tempDirDefault.0 . string.0.sysvq0asl
+    (oconstr@H string.0.sysvq0asl
+     (kv bytes.0 482872667908u)
+     (kv more.0
+      (nil))))
+   (stmts@2,N
+    (call =destroy.2.sysvq0asl result.7)
+    (asgn@7 result.7~7
+     (oconstr@2 string.0.sysvq0asl
+      (kv bytes.0 0u)
+      (kv more.0
+       (nil))))
+    (stmts@2,B
+     (stmts~4,~e
+      (stmts@2,3
+       (stmts~2,~9
+        (scope@4
+         (stmts
+          (stmts@H,9
+           (var :`constRefTemp.0 . `t.0.IAarraySstring0sysvq0aslS4.
+            (aconstr `t.0.IAarraySstring0sysvq0aslS4.
+             (oconstr@1 string.0.sysvq0asl
+              (kv bytes.0 23161505844122630u)
+              (kv more.0
+               (nil)))
+             (oconstr@B string.0.sysvq0asl
+              (kv bytes.0 344893772804u)
+              (kv more.0
+               (nil)))
+             (oconstr@J string.0.sysvq0asl
+              (kv bytes.0 1347245059u)
+              (kv more.0
+               (nil)))
+             (oconstr@Q string.0.sysvq0asl
+              (kv bytes.0 5929345496094430215u)
+              (kv more.0
+               (nil))))))
+          (var@J,l,../nimony/lib/std/system/openarrays.nim :`lf.0 . openArray.0.Ig73pnk.@C
+           (call@N,25,../nimony/lib/std/private/osappdirs.nim toOpenArray.0.I22rwzu1.
+            (addr `constRefTemp.0)))
+          (stmts@2,m,../nimony/lib/std/system/openarrays.nim
+           (var@4 :`lf.1 .
+            (i@3,~e 64)0@4)
+           (scope@,1
+            (stmts
+             (while
+              (true)
+              (stmts
+               (var@D :`x.6 .
+                (i@4,~I 64)
+                (call len.6.Igv2wyu1.~3 `lf.0@1))
+               (if
+                (elif
+                 (lt@8 `lf.1~2 `x.6@5)
+                 (stmts@2,1
+                  (scope
+                   (stmts
+                    (var@6,1w,../nimony/lib/std/private/osappdirs.nim :`ii.2 .
+                     (ptr@M,~1 string.0.sysvq0asl@4)
+                     (call@A,o,../nimony/lib/std/system/openarrays.nim \5B\5D.10.Ik9hgkq1. `lf.0 `lf.1@2))
+                    (var@G,1x,../nimony/lib/std/private/osappdirs.nim :`x.7 .
+                     (bool@H,3B,../nimony/lib/std/envvars.nim)
+                     (call existsEnv.0.envto7w6l1~9
+                      (deref@1 `ii.2)))
+                    (if@4,1x,../nimony/lib/std/private/osappdirs.nim
+                     (elif@3 `x.7@9
+                      (stmts~1,1
+                       (call@F,i =destroy.2.sysvq0asl result.7)
+                       (var@F :`x.8 . string.0.sysvq0asl@V,2c,../nimony/lib/std/envvars.nim
+                        (call getEnv.0.envto7w6l1~6
+                         (deref@1 `ii.2)
+                         (oconstr@c,2c,../nimony/lib/std/envvars.nim string.0.sysvq0asl
+                          (kv bytes.0 0u)
+                          (kv more.0
+                           (nil)))))
+                       (asgn@7 result.7@8,i `x.8@8)
+                       (jmp@,1 forStmtLabel.0))))))
+                  (call@,1 inc.1.Irn1g7r1.
+                   (addr@4 `lf.1))))
+                (else
+                 (stmts
+                  (break))))))))
+           (lab@,1 :whileStmtLabel.1))))
+        (lab@4 :forStmtLabel.0)))))
+    (var@9,D :`x.9 .
+     (i@D,1A,../nimony/lib/std/system/stringimpl.nim 64)
+     (call len.4.sysvq0asl@1 result.7~6))
+    (if@,D
+     (elif@3
+      (eq@B `x.9~5 0@3)
+      (stmts~1,1
+       (call =destroy.2.sysvq0asl result.7)
+       (var@9 :`x.10 . string.0.sysvq0asl@D,28,../nimony/lib/std/system/stringimpl.nim
+        (call =dup.2.sysvq0asl
+         (oconstr@A,~J string.0.sysvq0asl
+          (kv bytes.0 482872667908u)
+          (kv more.0
+           (nil)))))
+       (asgn@7 result.7~7 `x.10@2)))))
+   (call@G,c normalizePathEnd.0.ospaexnw61~G
+    (addr@1 result.7)
+    (true@L))
+   (ret~2,~1 result.7)))
+ (proc@N,24 :toOpenArray.0.I22rwzu1.
+  (params@S,G,../nimony/lib/std/system/openarrays.nim
+   (param@3 :x.1~2 .
+    (ptr@G `t.0.IAarraySstring0sysvq0aslS4.)))openArray.0.Ig73pnk.@b,G,../nimony/lib/std/system/openarrays.nim
+  (pragmas@17,G,../nimony/lib/std/system/openarrays.nim
+   (inline 0 50)
+   (smry@N,25,../nimony/lib/std/private/osappdirs.nim
+    (param 0 0 reads escapes)))
+  (stmts@2,H,../nimony/lib/std/system/openarrays.nim
+   (var :result.8 . openArray.0.Ig73pnk.@Z,~1 .)
+   (var :`x.0 . openArray.0.Ig73pnk.@10,1v,../nimony/lib/std/private/osappdirs.nim .)
+   (if
+    (elif@3
+     (eq@7
+      (add@l,2X,../nimony/lib/std/system.nim
+       (i 64)
+       (sub~N
+        (i 64)
+        (conv~5
+         (i@U,E,../nimony/lib/std/system/defaults.nim 64)
+         (conv~D
+          (i 64)3@N,25,../nimony/lib/std/private/osappdirs.nim))
+        (conv@I
+         (i@U,E,../nimony/lib/std/system/defaults.nim 64)
+         (conv~D
+          (i 64)0@N,25,../nimony/lib/std/private/osappdirs.nim)))1@2)0@3)
+     (stmts
+      (asgn~1,1 `x.0
+       (oconstr@C openArray.0.Ig73pnk.@10,1v,../nimony/lib/std/private/osappdirs.nim
+        (kv@2 a.0~1
+         (nil))
+        (kv@C len.0~3 0@2)))))
+    (else
+     (stmts
+      (stmts
+       (stmts
+        (stmts@,2
+         (asgn@2,1 `x.0
+          (oconstr@C openArray.0.Ig73pnk.@10,1v,../nimony/lib/std/private/osappdirs.nim
+           (kv@2 a.0~1
+            (cast@2
+             (ptr@5 string.0.sysvq0asl@I)
+             (addr@W
+              (deref@1 x.1))))
+           (kv@j len.0~3
+            (add@l,2X,../nimony/lib/std/system.nim
+             (i 64)
+             (sub~N
+              (i 64)
+              (conv~5
+               (i@U,E,../nimony/lib/std/system/defaults.nim 64)
+               (conv~D
+                (i 64)3@N,25,../nimony/lib/std/private/osappdirs.nim))
+              (conv@I
+               (i@U,E,../nimony/lib/std/system/defaults.nim 64)
+               (conv~D
+                (i 64)0@N,25,../nimony/lib/std/private/osappdirs.nim)))1@2))))))))))
+   (asgn result.8 `x.0)
+   (ret~2,~1 result.8)))
+ (proc@F,n,../nimony/lib/std/system/openarrays.nim :len.6.Igv2wyu1.
+  (params~3,~I
+   (param@1 :a.3 . openArray.0.Ig73pnk.@C))
+  (i@4,~I 64)
+  (pragmas@K,~I
+   (inline 0 0)
+   (smry~K,I
+    (param 0 0 reads)result 0))
+  (stmts@X,~I
+   (var@1 :result.9 .
+    (i@D,V,../nimony/lib/std/system/basic_types.nim 64).)
+   (asgn@1 result.9
+    (dot a.3~1 len.0 0))
+   (ret~m result.9)))
+ (proc@A,o,../nimony/lib/std/system/openarrays.nim :\5B\5D.10.Ik9hgkq1.
+  (params@3,~e
+   (param@1 :x.4 . openArray.0.Ig73pnk.@C)
+   (param@I :idx.1 .
+    (i@5 64)))
+  (ptr@J,~e string.0.sysvq0asl@11,1v,../nimony/lib/std/private/osappdirs.nim)
+  (pragmas@c,~e
+   (inline 0 90 140)
+   (smry~c,e callsUnknown
+    (param 0 0 reads escapes)
+    (param 1 1 reads)result 0))
+  (stmts@1P,~e
+   (var~K :`x.11 .
+    (bool).)
+   (if~K
+    (elif
+     (le@4,1q,../nimony/lib/std/system/comparisons.nim 0@1D,A,../nimony/lib/std/system/openarrays.nim idx.1@16,A,../nimony/lib/std/system/openarrays.nim)
+     (stmts
+      (asgn@8 `x.11
+       (lt idx.1~4
+        (dot@3 x.4~1 len.0 0)))))
+    (else
+     (stmts
+      (asgn `x.11
+       (false)))))
+   (if~K
+    (elif
+     (not `x.11)
+     (stmts
+      (call panic.0.sysvq0asl
+       (oconstr string.0.sysvq0asl
+        (kv bytes.0 8029189632630337278u)
+        (kv more.0
+         (addr strlit.0.I14694606176902936784.)))))))
+   (var@3 :result.10 .
+    (ptr~19 string.0.sysvq0asl@11,1v,../nimony/lib/std/private/osappdirs.nim).)
+   (asgn@3 result.10
+    (addr~2
+     (pat
+      (dot x.4~1 a.0 0)idx.1@3)))
+   (ret~1Z result.10)))
+ (proc@4,p,../nimony/lib/std/system/openarrays.nim :inc.1.Irn1g7r1.
+  (params@L,E,../nimony/lib/std/system/arithmetics.nim
+   (param@1 :x.5 .
+    (ptr@3
+     (i@9,8,../nimony/lib/std/system/openarrays.nim 64)))).@,E,../nimony/lib/std/system/arithmetics.nim
+  (pragmas@W,E,../nimony/lib/std/system/arithmetics.nim
+   (inline 0 20)
+   (smry@4,p,../nimony/lib/std/system/openarrays.nim
+    (param 0 0 reads writes)))
+  (stmts@2,F,../nimony/lib/std/system/arithmetics.nim
+   (asgn@2,1
+    (deref~2 x.5)
+    (add@6
+     (i@9,8,../nimony/lib/std/system/openarrays.nim 64)
+     (deref@1 x.5)
+     (conv@U,~F
+      (i@9,8,../nimony/lib/std/system/openarrays.nim 64)1@1)))))
+ (type@10,1u :openArray.0.Ig73pnk. .
+  (object@R,6,../nimony/lib/std/system/openarrays.nim .
+   (fld~N,1 :a.0 .
+    (ptr@3 string.0.sysvq0asl@11,1v,../nimony/lib/std/private/osappdirs.nim))
+   (fld~N,2 :len.0 .
+    (i@5 64))))
+ (type@N,24 :`t.0.IAarraySstring0sysvq0aslS4. .
+  (array string.0.sysvq0asl 4))
+ (gvar :`iniGuard.0. .
+  (bool).)
+ (proc :`ini.0.
+  (params).
+  (pragmas
+   (smry callsUnknown))
+  (stmts
+   (if
+    (elif `iniGuard.0.
+     (stmts
+      (ret .))))
+   (asgn `iniGuard.0.
+    (true))
+   (call `ini.0.sysvq0asl)
+   (call `ini.0.envto7w6l1)
+   (call `ini.0.ospaexnw61)
+   (call `ini.0.ossk30t39))))(.index@,1,../nimony/lib/std/private/osappdirs.nim
+ (h strlit.0.I17899431971652232885. 87)
+ (h strlit.0.I2427788052952346732. 193)
+ (h strlit.0.I15713846427667781584. 195)
+ (h strlit.0.I14694606176902936784. 195)
+ (x getHomeDir.0. 325)
+ (x getDataDir.0. 1041)
+ (x getConfigDir.0. 1791)
+ (x getCacheDir.0. 1454)
+ (x getCacheDir.1. 1455)
+ (x getTempDir.0. 706)
+ (x toOpenArray.0.I22rwzu1. 4050)
+ (x len.6.Igv2wyu1. 2070)
+ (x \5B\5D.10.Ik9hgkq1. 379)
+ (x inc.1.Irn1g7r1. 1165)
+ (h openArray.0.Ig73pnk. 666)
+ (h `t.0.IAarraySstring0sysvq0aslS4. 227)
+ (h `iniGuard.0. 80)
+ (x `ini.0. 34))

@@ -1,0 +1,786 @@
+(.nif27)
+(.indexat 20100            )
+(stmts@,7,../nimony/src/lib/vfs.nim
+ (const@4,17 :strlit.0.I9783897901262956596. . LongString.0.sysvq0asl
+  (oconstr LongString.0.sysvq0asl
+   (kv fullLen.0 11)
+   (kv rc.0 0)
+   (kv capImpl.0 0)
+   (kv data.0 "AlwaysWrite")))
+ (const@4,18 :strlit.0.I7917576470905474282. . LongString.0.sysvq0asl
+  (oconstr LongString.0.sysvq0asl
+   (kv fullLen.0 13)
+   (kv rc.0 0)
+   (kv capImpl.0 0)
+   (kv data.0 "OnlyIfChanged")))
+ (const@c,1Q :strlit.0.I12909424938976562878. . LongString.0.sysvq0asl
+  (oconstr LongString.0.sysvq0asl
+   (kv fullLen.0 19)
+   (kv rc.0 0)
+   (kv capImpl.0 0)
+   (kv data.0 "vfs\3A write failed\3A ")))
+ (const@d,1U :strlit.0.I3169694335637950427. . LongString.0.sysvq0asl
+  (oconstr LongString.0.sysvq0asl
+   (kv fullLen.0 18)
+   (kv rc.0 0)
+   (kv capImpl.0 0)
+   (kv data.0 "vfs\3A open failed\3A ")))
+ (const@6,13 :nanosPerSec.0. .
+  (i@D 64)
+  (suf@L 1000000000 "i64"))
+ (type@H,16 :FileWriteMode.0.~F .
+  (enum@2
+   (u 8)
+   (efld~F,1 :AlwaysWrite.0. 0)
+   (efld~F,2 :OnlyIfChanged.0. 1)))
+ (proc@2,16 :dollar`.FileWriteMode.0.
+  (params
+   (param :e.0 . FileWriteMode.0.))string.0.sysvq0asl
+  (pragmas
+   (smry callsUnknown
+    (param 0 0 reads)))
+  (stmts
+   (var@H :result.0 . string.0.sysvq0asl@F,~5 .)
+   (call@H =wasMoved.2.sysvq0asl
+    (addr result.0))
+   (case@H e.0
+    (of~F,1
+     (ranges 0)
+     (stmts
+      (ret
+       (oconstr string.0.sysvq0asl
+        (kv bytes.0 6301513763143827966u)
+        (kv more.0
+         (addr strlit.0.I9783897901262956596.))))))
+    (of~F,2
+     (ranges 1)
+     (stmts
+      (ret
+       (oconstr string.0.sysvq0asl
+        (kv bytes.0 4856650034024697854u)
+        (kv more.0
+         (addr strlit.0.I7917576470905474282.)))))))
+   (ret result.0)))
+ (proc@2,1E :unixModTime.0.@5
+  (params@G
+   (param@1 :p.0 . string.0.sysvq0asl@3))
+  (i@D 64)
+  (pragmas
+   (smry callsUnknown
+    (param 0 0 reads writes escapes)))
+  (stmts@2,1
+   (var :result.1 .
+    (i@F,~C 64).)
+   (var :`x.0 .
+    (i@I,2G,../nimony/lib/std/os.nim 64).)
+   (stmts
+    (stmts@S
+     (var :`canRaise.0 . `t.0.IAtupleSX45rrorX43ode0sysvq0aslAiS64.@I,2G,../nimony/lib/std/os.nim
+      (call getLastModificationTime.0.oswd7dmm~N p.0@1))
+     (if
+      (elif
+       (dot `canRaise.0 fld.0 0)
+       (stmts
+        (jmp `exlab.0)))))
+    (asgn@5 `x.0
+     (dot@N `canRaise.0 fld.1 0)))
+   (if@W
+    (elif
+     (false)
+     (stmts
+      (lab :`exlab.0)
+      (stmts~W
+       (asgn@e `x.0
+        (suf 0 "i64"))))))
+   (asgn result.1 `x.0)
+   (ret~2,~1 result.1)))
+ (proc@2,1G :unixNow.0.@5
+  (params@C)
+  (i@4 64)
+  (pragmas
+   (smry callsUnknown))
+  (stmts@2,1
+   (var :result.2 .
+    (i@F,~E 64).)
+   (var :`x.1 .
+    (i@Q,2 64).)
+   (stmts
+    (var@6,1 :t.0 . Time.0.timsagyye1@6,2W,../nimony/lib/std/times.nim
+     (call@B getTime.0.timsagyye1~7))
+    (var@8,2 :`x.5 .
+     (i@B,19,../nimony/lib/std/times.nim 64)
+     (call toUnix.0.timsagyye1~6 t.0@1))
+    (var@Z,2 :`x.6 .
+     (i@B,1E,../nimony/lib/std/times.nim 32)
+     (call nanosecond.0.timsagyye1@1 t.0~1))
+    (asgn@2,1 `x.1
+     (add@O,1
+      (i 64)
+      (mul~E
+       (i 64)`x.5~4
+       (suf@B,~G 1000000000 "i64"))
+      (conv@7
+       (i~5 64)`x.6@2))))
+   (if@,3
+    (elif
+     (false)
+     (stmts
+      (lab :`exlab.1)
+      (stmts@,~3
+       (asgn@8,3 `x.1
+        (suf 0 "i64"))))))
+   (asgn result.2 `x.1)
+   (ret~2,~1 result.2)))
+ (proc@2,1L :rmPath.0.@5
+  (params@B
+   (param@1 :p.1 . string.0.sysvq0asl@3)).
+  (pragmas
+   (smry callsUnknown
+    (param 0 0 reads writes escapes)))
+  (stmts@2,1
+   (stmts@5
+    (stmts@A
+     (stmts@5
+      (var :`tmp.0 . Path.0.pat4k2dls@D,Q,../nimony/lib/std/paths.nim
+       (call path.0.pat4k2dls~4 p.1@1)))
+     (var :`canRaise.0 . ErrorCode.0.sysvq0asl@,1c,../nimony/lib/std/dirs.nim
+      (call removeFile.0.dir38pj6l~A `tmp.0@5))
+     (if
+      (elif `canRaise.0
+       (stmts
+        (call =destroy_SX50ath0pat4k2dls.0.pat4k2dls `tmp.0)
+        (jmp `exlab.2)))))
+    (call =destroy_SX50ath0pat4k2dls.0.pat4k2dls `tmp.0))
+   (if@P
+    (elif
+     (false)
+     (stmts
+      (lab :`exlab.2)
+      (stmts@8 .))))))
+ (proc@2,1N :readBytes.0.@5
+  (params@E
+   (param@1 :p.2 . string.0.sysvq0asl@3))string.0.sysvq0asl@D
+  (pragmas
+   (smry callsUnknown
+    (param 0 0 reads writes escapes)))
+  (stmts@2,1
+   (var :result.3 . string.0.sysvq0asl@U,~N .)
+   (call =wasMoved.2.sysvq0asl
+    (addr result.3))
+   (var :`x.2 . string.0.sysvq0asl@K,9A,../nimony/lib/std/syncio.nim .)
+   (call =wasMoved.2.sysvq0asl
+    (addr `x.2))
+   (stmts
+    (stmts@D
+     (var :`canRaise.0 . `t.0.IAtupleSX45rrorX43ode0sysvq0aslSstring0R20.@K,9A,../nimony/lib/std/syncio.nim
+      (call readFile.0.syn1lfpjv~8 p.2@1))
+     (if
+      (elif
+       (dot `canRaise.0 fld.0 0)
+       (stmts
+        (jmp `exlab.3)))))
+    (call@5 =destroy.2.sysvq0asl `x.2)
+    (var@D :`x.7 . string.0.sysvq0asl@D,28,../nimony/lib/std/system/stringimpl.nim
+     (call =dup.2.sysvq0asl
+      (dot `canRaise.0 fld.1 0)))
+    (asgn@5 `x.2 `x.7@8))
+   (if@H
+    (elif
+     (false)
+     (stmts
+      (lab :`exlab.3)
+      (stmts~H
+       (call@P =destroy.2.sysvq0asl `x.2)
+       (asgn@P `x.2
+        (oconstr string.0.sysvq0asl
+         (kv bytes.0 0u)
+         (kv more.0
+          (nil))))))))
+   (call =destroy.2.sysvq0asl result.3)
+   (asgn result.3 `x.2)
+   (call =wasMoved.2.sysvq0asl
+    (addr `x.2))
+   (call =destroy.2.sysvq0asl `x.2)
+   (ret~2,~1 result.3)
+   (call =destroy.2.sysvq0asl `x.2)
+   (ret result.3)))
+ (proc@2,1P :writeBytes.0.@5
+  (params@F
+   (param@1 :p.3 . string.0.sysvq0asl@6)
+   (param@4 :c.0 . string.0.sysvq0asl@3)).
+  (pragmas
+   (smry callsUnknown
+    (param 0 0 reads writes escapes)
+    (param 1 1 reads writes escapes)))
+  (stmts@2,1
+   (stmts@5
+    (stmts@9
+     (var :`canRaise.0 . ErrorCode.0.sysvq0asl@,9N,../nimony/lib/std/syncio.nim
+      (call writeFile.0.syn1lfpjv~9 p.3@1 c.0@4))
+     (if
+      (elif `canRaise.0
+       (stmts
+        (jmp `exlab.4))))))
+   (if@L
+    (elif
+     (false)
+     (stmts
+      (lab :`exlab.4)
+      (stmts@8
+       (stmts@R
+        (var :`tmp.1 . string.0.sysvq0asl@G,Ay,../nimony/lib/std/system/stringimpl.nim
+         (call &.0.sysvq0asl
+          (oconstr~M string.0.sysvq0asl
+           (kv bytes.0 8248096677968639742u)
+           (kv more.0
+            (addr strlit.0.I12909424938976562878.)))p.3@2)))
+       (call quit.1.syn1lfpjv `tmp.1@R)
+       (call =destroy.2.sysvq0asl `tmp.1)))))))
+ (proc@2,1R :fileMaybeExists.0.@5
+  (params@K
+   (param@1 :p.4 . string.0.sysvq0asl@3))
+  (bool@D)
+  (pragmas
+   (smry callsUnknown
+    (param 0 0 reads writes escapes)))
+  (stmts@2,1
+   (var :result.4 .
+    (bool@B,~1).)
+   (var :`x.3 .
+    (bool@M,1g,../nimony/lib/std/private/oscommons.nim).)
+   (stmts
+    (var@F :`x.8 .
+     (bool@M,1g,../nimony/lib/std/private/oscommons.nim)
+     (call fileExists.0.osc4bsu0d1~A p.4@1))
+    (asgn@5 `x.3 `x.8@A))
+   (if@J
+    (elif
+     (false)
+     (stmts
+      (lab :`exlab.5)
+      (stmts~J
+       (asgn@R `x.3
+        (false))))))
+   (asgn result.4 `x.3)
+   (ret~2,~1 result.4)))
+ (proc@2,1T :openMmapImpl.0.@5
+  (params@H
+   (param@1 :p.5 . string.0.sysvq0asl@3))MemFile.0.memlzdyby@D
+  (pragmas
+   (smry callsUnknown
+    (param 0 0 reads writes escapes)result 0))
+  (stmts@2,1
+   (var :result.5 . MemFile.0.memlzdyby@B,~1 .)
+   (var :`x.4 . MemFile.0.memlzdyby@h,1G,../nimony/lib/std/memfiles.nim .)
+   (stmts
+    (stmts@I
+     (var :`canRaise.0 . `t.0.IAtupleSX45rrorX43ode0sysvq0aslSX4demX46ile0memlzdyby.@h,1G,../nimony/lib/std/memfiles.nim
+      (call open.0.memlzdyby~5 p.5@1 0@4,7,../nimony/lib/std/syncio.nim -1@O,1F,../nimony/lib/std/memfiles.nim 0@b,1F,../nimony/lib/std/memfiles.nim -1@s,1F,../nimony/lib/std/memfiles.nim
+       (false@O,1G,../nimony/lib/std/memfiles.nim)
+       (conv@k,1G,../nimony/lib/std/memfiles.nim
+        (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+         (importc "int"))-1@1)))
+     (if
+      (elif
+       (dot `canRaise.0 fld.0 0)
+       (stmts
+        (jmp `exlab.6)))))
+    (asgn@5 `x.4
+     (dot@D `canRaise.0 fld.1 0)))
+   (if@M
+    (elif
+     (false)
+     (stmts
+      (lab :`exlab.6)
+      (stmts~M
+       (stmts@U
+        (stmts@Q
+         (var :`tmp.2 . string.0.sysvq0asl@G,Ay,../nimony/lib/std/system/stringimpl.nim
+          (call &.0.sysvq0asl
+           (oconstr~L string.0.sysvq0asl
+            (kv bytes.0 8101729690079098622u)
+            (kv more.0
+             (addr strlit.0.I3169694335637950427.)))p.5@2)))
+        (call quit.1.syn1lfpjv `tmp.2@Q))
+       (call =destroy.2.sysvq0asl `tmp.2)))))
+   (asgn result.5 `x.4)
+   (ret~2,~1 result.5)))
+ (type@B,1t :VfsBlob.0.~9 .
+  (object@2 .
+   (fld~5,8 :data.0~4 .
+    (ptr@3
+     (void)))
+   (fld~5,9 :size.0~4 .
+    (i@3 64))
+   (fld~9,A :mf.0 . MemFile.0.memlzdyby@4)
+   (fld~3,B :cookie.0~6 .
+    (ptr@3
+     (void)))
+   (fld~9,C :cleanup.0 . `t.0.IAmutSX56fsX42lob0vfsc9jn7ZSEAnimcallZAfalseZAR37.@E)))
+ (proc@,27 :initBlob.0.@5
+  (params@E
+   (param@1 :data.0 .
+    (ptr@6
+     (void)))
+   (param@G :size.0 .
+    (i@6 64))
+   (param@1,1 :cookie.0 .
+    (ptr~4,~7
+     (void)))
+   (param@1,2 :cleanup.0 . `t.0.IAmutSX56fsX42lob0vfsc9jn7ZSEAnimcallZAfalseZAR37.@3,~4))VfsBlob.0.@q,2
+  (pragmas
+   (smry
+    (param 0 0 reads)
+    (param 1 1 reads)
+    (param 2 2 reads)
+    (param 3 3 reads)))
+  (stmts@2,3
+   (var :result.6 . VfsBlob.0.@o,~1 .)
+   (asgn@7,1 result.6
+    (oconstr VfsBlob.0.@h,~2
+     (kv@5 data.0~4 data.0@2)
+     (kv@H size.0~4 size.0@2)
+     (kv mf.0
+      (oconstr MemFile.0.memlzdyby@6,~i
+       (kv mem.0
+        (nil))
+       (kv size.0
+        (suf@l,E,../nimony/lib/std/system/defaults.nim 0 "i64"))
+       (kv handle.0
+        (suf@l,C,../nimony/lib/std/system/defaults.nim 0 "i32"))
+       (kv flags.0
+        (suf@l,C,../nimony/lib/std/system/defaults.nim 0 "i32"))))
+     (kv@V cookie.0~6 cookie.0@2)
+     (kv@m cleanup.0~7 cleanup.0@2)))
+   (ret~2,~3 result.6)))
+ (proc@,2D :closeBlob.0.@5
+  (params@F
+   (param@1 :b.2 .
+    (ptr@3 VfsBlob.0.@4))).
+  (pragmas
+   (smry callsUnknown
+    (param 0 0 reads writes escapes)))
+  (stmts@2,1
+   (if@,2
+    (elif@3
+     (not@2,1m,../nimony/lib/std/system/comparisons.nim
+      (eq@7
+       (conv@6,2N,../nimony/src/lib/vfs.nim
+        (ptr@L,B,../nimony/lib/std/system/comparisons.nim
+         (void))
+        (dot
+         (deref~1 b.2)cleanup.0 0))
+       (nil)))
+     (stmts~1,1
+      (call@9
+       (dot~8
+        (deref~1 b.2)cleanup.0 0)b.2@1))))
+   (asgn@7,4
+    (dot~6
+     (deref~1 b.2)data.0 0)
+    (nil))
+   (asgn@7,5
+    (dot~6
+     (deref~1 b.2)size.0 0)0@2)
+   (asgn@5,6
+    (dot~4
+     (deref~1 b.2)mf.0 0)
+    (oconstr@9 MemFile.0.memlzdyby~1,~r
+     (kv mem.0
+      (nil))
+     (kv size.0
+      (suf@l,E,../nimony/lib/std/system/defaults.nim 0 "i64"))
+     (kv handle.0
+      (suf@l,C,../nimony/lib/std/system/defaults.nim 0 "i32"))
+     (kv flags.0
+      (suf@l,C,../nimony/lib/std/system/defaults.nim 0 "i32"))))
+   (asgn@9,7
+    (dot~8
+     (deref~1 b.2)cookie.0 0)
+    (nil))
+   (asgn@A,8
+    (dot~9
+     (deref~1 b.2)cleanup.0 0)
+    (nil))))
+ (proc@,2S :closeMemFileBlob.0.@5
+  (params@L
+   (param@1 :b.3 .
+    (ptr@3 VfsBlob.0.@4))).
+  (pragmas@c
+   (nimcall)
+   (smry~c callsUnknown
+    (param 0 0 reads writes escapes)))
+  (stmts@2,1
+   (stmts@5
+    (stmts@E
+     (var :`canRaise.0 . ErrorCode.0.sysvq0asl@,3v,../nimony/lib/std/memfiles.nim
+      (call close.0.memlzdyby~6
+       (addr@2
+        (dot
+         (deref~1 b.3)mf.0 0))))
+     (if
+      (elif `canRaise.0
+       (stmts
+        (jmp `exlab.7))))))
+   (if@Q
+    (elif
+     (false)
+     (stmts
+      (lab :`exlab.7)
+      (stmts@8 .))))))
+ (proc@,2V :fromMemFile.0.@5
+  (params@H
+   (param@1 :mf.0 . MemFile.0.memlzdyby@9))VfsBlob.0.@K
+  (pragmas
+   (smry
+    (param 0 0 reads)))
+  (stmts@2,1
+   (var :result.7 . VfsBlob.0.@o,~N .)
+   (asgn@7,1 result.7~7
+    (oconstr@9 VfsBlob.0.@Y,~O
+     (kv@5 data.0~4
+      (dot@4 mf.0~2 mem.0 0))
+     (kv@J size.0~4
+      (dot@4 mf.0~2 size.0 0))
+     (kv@W mf.0~2 mf.0@2)
+     (kv@7,1 cookie.0~6
+      (nil))
+     (kv@L,1 cleanup.0~7 closeMemFileBlob.0.@2)))
+   (ret~2,~1 result.7)))
+ (proc@H,2a :`anonproc.0.~A,1
+  (params
+   (param@1 :path.7 . string.0.sysvq0asl@6))VfsBlob.0.@G
+  (pragmas
+   (smry callsUnknown
+    (param 0 0 reads writes escapes)result 0))
+  (stmts@Q
+   (var@B :result.8 . VfsBlob.0.~2,~R .)
+   (var@O :`x.9 . MemFile.0.memlzdyby~q,~17
+    (call openMmapImpl.0.~C path.7@1))
+   (var@B :`x.10 . VfsBlob.0.~Y,~5
+    (call fromMemFile.0.~B `x.9@D))
+   (asgn@B result.8 `x.10)
+   (ret~Q result.8)))
+ (gvar@H,2a :openMmapRelay.0.~D . `t.0.ISstring0sysvq0aslSX56fsX42lob0vfsc9jn7AnimcallZAfalseZAR47.@8 `anonproc.0.~A,1)
+ (proc@I,2d :`anonproc.1.~B,1
+  (params
+   (param@1 :path.9 . string.0.sysvq0asl@6))string.0.sysvq0asl@G
+  (pragmas
+   (smry callsUnknown
+    (param 0 0 reads writes escapes)result 0))
+  (stmts@P
+   (var@9 :result.9 . string.0.sysvq0asl~I,~1c .)
+   (call@9 =wasMoved.2.sysvq0asl
+    (addr result.9))
+   (call@9 =destroy.2.sysvq0asl result.9)
+   (var@9 :`x.11 . string.0.sysvq0asl~b,~1G
+    (call readBytes.0.~9 path.9@1))
+   (asgn@9 result.9 `x.11)
+   (ret~P result.9)))
+ (gvar@I,2d :readBytesRelay.0.~E . `t.0.ISstring0sysvq0aslSR0AnimcallZAfalseZAR29.@8 `anonproc.1.~B,1)
+ (proc@J,2g :`anonproc.2.~C,1
+  (params
+   (param@1 :path.11 . string.0.sysvq0asl@F)
+   (param@7 :content.2 . string.0.sysvq0asl@9)).
+  (pragmas
+   (smry callsUnknown
+    (param 0 0 reads writes escapes)
+    (param 1 1 reads writes escapes)))
+  (stmts@Q
+   (call@A writeBytes.0.~A path.11@1 content.2@7)))
+ (gvar@J,2g :writeBytesRelay.0.~F . `t.0.ISstring0sysvq0aslSR0SEAnimcallZAfalseZAR31.@8 `anonproc.2.~C,1)
+ (proc@F,2j :`anonproc.3.~8,1
+  (params
+   (param@1 :path.13 . string.0.sysvq0asl@6))
+  (bool@G)
+  (pragmas
+   (smry callsUnknown
+    (param 0 0 reads writes escapes)result 0))
+  (stmts@N
+   (var@F :result.10 .
+    (bool~c,~1I).)
+   (var@F :`x.12 .
+    (bool~c,~1I)
+    (call fileMaybeExists.0.~F path.13@1))
+   (asgn@F result.10 `x.12)
+   (ret~N result.10)))
+ (gvar@F,2j :existsRelay.0.~B . `t.0.ISstring0sysvq0aslAboolZAnimcallZAfalseZAR32.@8 `anonproc.3.~8,1)
+ (proc@E,2m :`anonproc.4.~7,1
+  (params
+   (param@1 :path.15 . string.0.sysvq0asl@6))
+  (i@G 64)
+  (pragmas
+   (smry callsUnknown
+    (param 0 0 reads writes escapes)result 0))
+  (stmts@O
+   (var@B :result.11 .
+    (i~U,~1j 64).)
+   (var@B :`x.13 .
+    (i~Y,~1Y 64)
+    (call unixModTime.0.~B path.15@1))
+   (asgn@B result.11 `x.13)
+   (ret~O result.11)))
+ (gvar@E,2m :mtimeRelay.0.~A . `t.0.ISstring0sysvq0aslAiS64ZAnimcallZAfalseZAR32.@8 `anonproc.4.~7,1)
+ (proc@C,2p :`anonproc.5.~5,1
+  (params)
+  (i@4 64)
+  (pragmas
+   (smry callsUnknown))
+  (stmts@C
+   (var@7 :result.12 .
+    (i~C,~1m 64).)
+   (var@7 :`x.14 .
+    (i~P,~1Z 64)
+    (call unixNow.0.~7))
+   (asgn@7 result.12 `x.14)
+   (ret~C result.12)))
+ (gvar@C,2p :nowRelay.0.~8 . `t.0.IAiS64ZAnimcallZAfalseZAR15.@8 `anonproc.5.~5,1)
+ (proc@F,2s :`anonproc.6.~8,1
+  (params
+   (param@1 :path.17 . string.0.sysvq0asl@6)).
+  (pragmas
+   (smry callsUnknown
+    (param 0 0 reads writes escapes)))
+  (stmts@H
+   (call@6 rmPath.0.~6 path.17@1)))
+ (gvar@F,2s :removeRelay.0.~B . `t.0.ISstring0sysvq0aslSEAnimcallZAfalseZAR28.@8 `anonproc.6.~8,1)
+ (proc@2,3d :vfsOpenMmap.0.@5
+  (params@H
+   (param@1 :path.0 . string.0.sysvq0asl@6))VfsBlob.0.@G
+  (pragmas@f
+   (inline 0 10)
+   (smry~f callsUnknown
+    (param 0 0 reads writes escapes)result 0))
+  (stmts@s
+   (var@D :result.13 . VfsBlob.0.~H,~1U .)
+   (var@D :`x.15 . VfsBlob.0.~S,~13
+    (call openMmapRelay.0.~D path.0@1))
+   (asgn@D result.13 `x.15)
+   (ret~s result.13)))
+ (proc@2,3e :vfsRead.0.@5
+  (params@D
+   (param@1 :path.1 . string.0.sysvq0asl@6))string.0.sysvq0asl@G
+  (pragmas@a
+   (inline 0 10)
+   (smry~a callsUnknown
+    (param 0 0 reads writes escapes)result 0))
+  (stmts@n
+   (var@E :result.14 . string.0.sysvq0asl~V,~2d .)
+   (call@E =wasMoved.2.sysvq0asl
+    (addr result.14))
+   (call@E =destroy.2.sysvq0asl result.14)
+   (var@E :`x.16 . string.0.sysvq0asl~N,~11
+    (call readBytesRelay.0.~E path.1@1))
+   (asgn@E result.14 `x.16)
+   (ret~n result.14)))
+ (proc@2,3f :vfsWrite.0.@5
+  (params@E
+   (param@1 :path.2 . string.0.sysvq0asl@F)
+   (param@7 :content.0 . string.0.sysvq0asl@9)).
+  (pragmas@c
+   (inline 0 10 10)
+   (smry~c callsUnknown
+    (param 0 0 reads writes escapes)
+    (param 1 1 reads writes escapes)))
+  (stmts@p
+   (call@F writeBytesRelay.0.~F path.2@1 content.0@7)))
+ (proc@2,3g :vfsExists.0.@5
+  (params@F
+   (param@1 :path.3 . string.0.sysvq0asl@6))
+  (bool@G)
+  (pragmas@a
+   (inline 0 10)
+   (smry~a callsUnknown
+    (param 0 0 reads writes escapes)result 0))
+  (stmts@n
+   (var@B :result.15 .
+    (bool~l,~2F).)
+   (var@B :`x.17 .
+    (bool~N,~x)
+    (call existsRelay.0.~B path.3@1))
+   (asgn@B result.15 `x.17)
+   (ret~n result.15)))
+ (proc@2,3h :vfsMtime.0.@5
+  (params@E
+   (param@1 :path.4 . string.0.sysvq0asl@6))
+  (i@G 64)
+  (pragmas@a
+   (inline 0 10)
+   (smry~a callsUnknown
+    (param 0 0 reads writes escapes)result 0))
+  (stmts@n
+   (var@A :result.16 .
+    (i~g,~2e 64).)
+   (var@A :`x.18 .
+    (i~N,~v 64)
+    (call mtimeRelay.0.~A path.4@1))
+   (asgn@A result.16 `x.18)
+   (ret~n result.16)))
+ (proc@2,3i :vfsNow.0.@5
+  (params@C)
+  (i@4 64)
+  (pragmas@M
+   (inline 0)
+   (smry~M callsUnknown))
+  (stmts@Z
+   (var@8 :result.17 .
+    (i~Q,~2f 64).)
+   (var@8 :`x.19 .
+    (i~L,~t 64)
+    (call nowRelay.0.~8))
+   (asgn@8 result.17 `x.19)
+   (ret~Z result.17)))
+ (proc@2,3j :vfsRemove.0.@5
+  (params@F
+   (param@1 :path.5 . string.0.sysvq0asl@6)).
+  (pragmas@U
+   (inline 0 10)
+   (smry~U callsUnknown
+    (param 0 0 reads writes escapes)))
+  (stmts@h
+   (call@B removeRelay.0.~B path.5@1)))
+ (type@I,2G,../nimony/lib/std/os.nim :`t.0.IAtupleSX45rrorX43ode0sysvq0aslAiS64. .
+  (object .
+   (fld :fld.0 . ErrorCode.0.sysvq0asl)
+   (fld :fld.1 .
+    (i 64))))
+ (type@K,9A,../nimony/lib/std/syncio.nim :`t.0.IAtupleSX45rrorX43ode0sysvq0aslSstring0R20. .
+  (object .
+   (fld :fld.0 . ErrorCode.0.sysvq0asl)
+   (fld :fld.1 . string.0.sysvq0asl)))
+ (type@h,1G,../nimony/lib/std/memfiles.nim :`t.0.IAtupleSX45rrorX43ode0sysvq0aslSX4demX46ile0memlzdyby. .
+  (object .
+   (fld :fld.0 . ErrorCode.0.sysvq0asl)
+   (fld :fld.1 . MemFile.0.memlzdyby)))
+ (type@I,25 :`t.0.IAmutSX56fsX42lob0vfsc9jn7ZSEAnimcallZAfalseZAR37. .
+  (proctype .
+   (params
+    (param@1 :b.0 .
+     (ptr@3 VfsBlob.0.@4))).
+   (pragmas@H
+    (nimcall))))
+ (type@P,2a :`t.0.ISstring0sysvq0aslSX56fsX42lob0vfsc9jn7AnimcallZAfalseZAR47. .
+  (proctype .
+   (params
+    (param@1 :path.6 . string.0.sysvq0asl@6))VfsBlob.0.@G
+   (pragmas@O
+    (nimcall))))
+ (type@Q,2d :`t.0.ISstring0sysvq0aslSR0AnimcallZAfalseZAR29. .
+  (proctype .
+   (params
+    (param@1 :path.8 . string.0.sysvq0asl@6))string.0.sysvq0asl@G
+   (pragmas@N
+    (nimcall))))
+ (type@R,2g :`t.0.ISstring0sysvq0aslSR0SEAnimcallZAfalseZAR31. .
+  (proctype .
+   (params
+    (param@1 :path.10 . string.0.sysvq0asl@F)
+    (param@7 :content.1 . string.0.sysvq0asl@9)).
+   (pragmas@O
+    (nimcall))))
+ (type@N,2j :`t.0.ISstring0sysvq0aslAboolZAnimcallZAfalseZAR32. .
+  (proctype .
+   (params
+    (param@1 :path.12 . string.0.sysvq0asl@6))
+   (bool@G)
+   (pragmas@L
+    (nimcall))))
+ (type@M,2m :`t.0.ISstring0sysvq0aslAiS64ZAnimcallZAfalseZAR32. .
+  (proctype .
+   (params
+    (param@1 :path.14 . string.0.sysvq0asl@6))
+   (i@G 64)
+   (pragmas@M
+    (nimcall))))
+ (type@K,2p :`t.0.IAiS64ZAnimcallZAfalseZAR15. .
+  (proctype .
+   (params)
+   (i@4 64)
+   (pragmas@A
+    (nimcall))))
+ (type@N,2s :`t.0.ISstring0sysvq0aslSEAnimcallZAfalseZAR28. .
+  (proctype .
+   (params
+    (param@1 :path.16 . string.0.sysvq0asl@6)).
+   (pragmas@F
+    (nimcall))))
+ (gvar :`iniGuard.0. .
+  (bool).)
+ (proc :`ini.0.
+  (params).
+  (pragmas
+   (smry callsUnknown))
+  (stmts
+   (if
+    (elif `iniGuard.0.
+     (stmts
+      (ret .))))
+   (asgn `iniGuard.0.
+    (true))
+   (call `ini.0.sysvq0asl)
+   (call `ini.0.memlzdyby)
+   (call `ini.0.syn1lfpjv)
+   (call `ini.0.timsagyye1)
+   (call `ini.0.oswd7dmm)
+   (call `ini.0.cmdqs323n1)
+   (call `ini.0.ospaexnw61)
+   (call `ini.0.osalirkw71)
+   (call `ini.0.osc4bsu0d1)
+   (call `ini.0.ossk30t39)
+   (call `ini.0.dir38pj6l)
+   (call `ini.0.pat4k2dls))))(.index@,7,../nimony/src/lib/vfs.nim
+ (h strlit.0.I9783897901262956596. 73)
+ (h strlit.0.I7917576470905474282. 191)
+ (h strlit.0.I12909424938976562878. 193)
+ (h strlit.0.I3169694335637950427. 204)
+ (h nanosPerSec.0. 202)
+ (h FileWriteMode.0. 70)
+ (x@J,16 AlwaysWrite.0. 53)
+ (x@J,16 OnlyIfChanged.0. 32)
+ (x dollar`.FileWriteMode.0. 36)
+ (x unixModTime.0. 705)
+ (x unixNow.0. 779)
+ (x rmPath.0. 843)
+ (x readBytes.0. 723)
+ (x writeBytes.0. 1359)
+ (x fileMaybeExists.0. 946)
+ (x openMmapImpl.0. 624)
+ (h VfsBlob.0. 1528)
+ (x initBlob.0. 309)
+ (x closeBlob.0. 989)
+ (x closeMemFileBlob.0. 1143)
+ (x fromMemFile.0. 559)
+ (x `anonproc.0. 487)
+ (h openMmapRelay.0. 432)
+ (x `anonproc.1. 120)
+ (h readBytesRelay.0. 471)
+ (x `anonproc.2. 103)
+ (h writeBytesRelay.0. 306)
+ (x `anonproc.3. 106)
+ (h existsRelay.0. 360)
+ (x `anonproc.4. 103)
+ (h mtimeRelay.0. 356)
+ (x `anonproc.5. 102)
+ (h nowRelay.0. 252)
+ (x `anonproc.6. 83)
+ (h removeRelay.0. 206)
+ (x vfsOpenMmap.0. 99)
+ (x vfsRead.0. 381)
+ (x vfsWrite.0. 500)
+ (x vfsExists.0. 332)
+ (x vfsMtime.0. 374)
+ (x vfsNow.0. 372)
+ (x vfsRemove.0. 267)
+ (h `t.0.IAtupleSX45rrorX43ode0sysvq0aslAiS64. 230)
+ (h `t.0.IAtupleSX45rrorX43ode0sysvq0aslSstring0R20. 166)
+ (h `t.0.IAtupleSX45rrorX43ode0sysvq0aslSX4demX46ile0memlzdyby. 184)
+ (h `t.0.IAmutSX56fsX42lob0vfsc9jn7ZSEAnimcallZAfalseZAR37. 198)
+ (h `t.0.ISstring0sysvq0aslSX56fsX42lob0vfsc9jn7AnimcallZAfalseZAR47. 176)
+ (h `t.0.ISstring0sysvq0aslSR0AnimcallZAfalseZAR29. 195)
+ (h `t.0.ISstring0sysvq0aslSR0SEAnimcallZAfalseZAR31. 185)
+ (h `t.0.ISstring0sysvq0aslAboolZAnimcallZAfalseZAR32. 217)
+ (h `t.0.ISstring0sysvq0aslAiS64ZAnimcallZAfalseZAR32. 181)
+ (h `t.0.IAiS64ZAnimcallZAfalseZAR15. 181)
+ (h `t.0.ISstring0sysvq0aslSEAnimcallZAfalseZAR28. 118)
+ (h `iniGuard.0. 166)
+ (x `ini.0. 34))

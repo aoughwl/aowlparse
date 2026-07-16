@@ -1,0 +1,658 @@
+(.nif27)
+(.vendor "Nifler")
+(.dialect "nim-parsed")
+(stmts@,1,../nimony/lib/std/os.nim
+ (import strutils@7)
+ (import@,1
+  (infix@C / posix~5 posix@1))
+ (import@,2 cmdline@7)
+ (import@,3 envvars@7)
+ (import@,4 oserrors@7)
+ (import@,5
+  (infix@E / private~7
+   (bracket@1 ospaths2@1 osappdirs@B oscommons@M)))
+ (export@,7 cmdline@7)
+ (export@,8 ospaths2@7)
+ (export@,9 osappdirs@7)
+ (export@,A oscommons@7)
+ (when@,C
+  (elif@5
+   (prefix not
+    (call@B defined~7 nimNativeIo@1))
+   (stmts~3,1
+    (proc c_system@5 . . .
+     (params@D
+      (param@1 cmd . . cstring@5 .))cint@G
+     (pragmas@Y
+      (kv~N,1 importc~7 "system"@2)
+      (kv~5,1 header~6 "<stdlib.h>"@2)). .))))
+ (when@,G
+  (elif@5
+   (call@7 defined~7 posix@1)
+   (stmts~3,1
+    (proc expandFilename@5 x . .
+     (params@K
+      (param@1 filename . . string@A .))string@K
+     (pragmas@l raises@2).
+     (stmts@2,1
+      (comment)
+      (when@,2
+       (elif@5
+        (call@7 defined~7 nimNativeIo@1)
+        (stmts~3,6
+         (if
+          (elif@3
+           (prefix not
+            (par@4
+             (infix@M or
+              (call~B fileExists~A filename@1)
+              (call@C dirExists~9 filename@1))))
+           (stmts~1,1
+            (call@C raiseOSError~C
+             (call@C osLastError~B)filename@G))))
+         (asgn@7,2 result~7
+          (call@G normalizedPath~E
+           (call@D absolutePath~C filename@1)))))
+       (else@,9
+        (stmts@2,1
+         (const@6 PATH_MAX . . . 4096@B)
+         (asgn@7,1 result~7
+          (call@B newString~9 PATH_MAX@1))
+         (var@4,2 filename . . . filename@B)
+         (let@4,3 r . . .
+          (call@C realpath~8
+           (dot@9 filename~8 toCString@1)
+           (dot@R result~6 toCString@1)))
+         (if@,4
+          (elif@3
+           (dot@1 r~1 isNil@1)
+           (stmts~1,1
+            (call@C raiseOSError~C
+             (call@C osLastError~B)filename@G)))
+          (else@,2
+           (stmts@2,1
+            (var@4 L . . . 0@4)
+            (while@,1
+             (infix@J and
+              (infix~B < L~2 PATH_MAX@2)
+              (infix@E !=
+               (at~4 result~6 L@1)'\00'@3))
+             (stmts@2,1
+              (cmd inc L@4)))
+            (call@6,3 setLen~6 result@1 L@9)))))))))))
+  (else@,P
+   (stmts@2,1
+    (proc expandFilename@5 x . .
+     (params@K
+      (param@1 filename . . string@A .))string@K
+     (pragmas@l raises@2).
+     (stmts@2,1
+      (asgn@7 result~7
+       (call@E absolutePath~C filename@1)))))))
+ (when@,j
+  (elif@5
+   (infix@F or
+    (call~8 defined~7 linux@1)
+    (call@A defined~7 aix@1))
+   (stmts~3,1
+    (const@6 maxSymlinkLen . . . 1024@G)
+    (proc@,2 getApplAux@5 . . .
+     (params@F
+      (param@1 procPath . . string@A .))string@K . .
+     (stmts@2,1
+      (asgn@7 result~7
+       (call@B newString~9 maxSymlinkLen@1))
+      (var@4,1 procPath . . . procPath@B)
+      (var@4,2 len . . .
+       (call@E readlink~8
+        (dot@9 procPath~8 toCString@1)
+        (dot@R result~6 toCString@1)maxSymlinkLen@d))
+      (if@,3
+       (elif@3
+        (infix@4 > len~4 maxSymlinkLen@2)
+        (stmts~1,1
+         (asgn@7 result~7
+          (call@B newString~9
+           (infix@4 \2B len~3 1@1)))
+         (asgn@4,1 len~4
+          (call@A readlink~8
+           (dot@9 procPath~8 toCString@1)
+           (dot@R result~6 toCString@1)len@d)))))
+      (if@,6
+       (elif@3
+        (infix@4 < len~4 0@2)
+        (stmts~1,1
+         (asgn@4 len~4 0@2))))
+      (call@6,8 setLen~6 result@1 len@9))))))
+ (when@,x
+  (elif@5 supportedSystem
+   (stmts~3,1
+    (proc getAppFilename@5 x . .
+     (params@K)string@4
+     (pragmas@V
+      (kv@6 tags~4
+       (bracket@2 ReadIOEffect@1))
+      (kv@U raises~6
+       (bracket@2))).
+     (stmts@2,1
+      (when
+       (elif@5
+        (infix@F or
+         (call~8 defined~7 linux@1)
+         (call@A defined~7 aix@1))
+        (stmts~3,1
+         (asgn@7 result~7
+          (call@C getApplAux~A "/proc/self/exe"@1))))
+       (else@,2
+        (stmts@2,1
+         (asgn@7 result~7
+          (call@A paramStr~8 0@1)))))))
+    (proc@,6 getAppDir@5 x . .
+     (params@F)string@4
+     (pragmas@Q
+      (kv@6 tags~4
+       (bracket@2 ReadIOEffect@1))).
+     (stmts@2,1
+      (asgn@7 result~7
+       (dot@T
+        (call~I splitFile~9
+         (call@F getAppFilename~E))dir@1)))))))
+ (func@,17 quoteShellWindows@5 x . .
+  (params@N
+   (param@1 s . . string@3 .))string@D
+  (pragmas@h noSideEffect@2).
+  (stmts@2,1
+   (comment)
+   (let@4,5 needQuote . . .
+    (infix@a or
+     (call~E
+      (dot~9 s~1 contains@1)
+      (curly@1 ' '@1 '\09'@6))
+     (infix@9 ==
+      (dot~5 s~1 len@1)0@3)))
+   (asgn@7,6 result~7 ""@2)
+   (var@4,7 backslashBuff . . . ""@G)
+   (if@,8
+    (elif@3 needQuote
+     (stmts~1,1
+      (call@A
+       (dot~4 result~6 add@1)"\22"@1))))
+   (for@4,B s@5
+    (unpackflat
+     (let c . . ..))
+    (stmts~2,1
+     (if
+      (elif@3
+       (infix@2 == c~2 '\5C'@3)
+       (stmts~1,1
+        (call@H
+         (dot~4 backslashBuff~D add@1)c@1)))
+      (elif@5,2
+       (infix@2 == c~2 '\22'@3)
+       (stmts~3,1
+        (for@4
+         (infix@6 \2E\2E< 0~1
+          (infix@K *
+           (dot~4 backslashBuff~D len@1)2@1))
+         (unpackflat
+          (let i . . ..))
+         (stmts~2,1
+          (call@A
+           (dot~4 result~6 add@1)'\5C'@1)))
+        (call@K,2
+         (dot~7 backslashBuff~D setLen@1)0@1)
+        (call@A,3
+         (dot~4 result~6 add@1)"\5C\22"@1)))
+      (else@,7
+       (stmts@2,1
+        (if
+         (elif@3
+          (infix@I !=
+           (dot~5 backslashBuff~D len@1)0@3)
+          (stmts~1,1
+           (call@A
+            (dot~4 result~6 add@1)backslashBuff@1)
+           (call@K,1
+            (dot~7 backslashBuff~D setLen@1)0@1))))
+        (call@A,3
+         (dot~4 result~6 add@1)c@1))))))
+   (if@,P
+    (elif@3
+     (infix@I >
+      (dot~5 backslashBuff~D len@1)0@2)
+     (stmts~1,1
+      (call@A
+       (dot~4 result~6 add@1)backslashBuff@1))))
+   (if@,R
+    (elif@3 needQuote
+     (stmts~1,1
+      (call@A
+       (dot~4 result~6 add@1)backslashBuff@1)
+      (call@A,1
+       (dot~4 result~6 add@1)"\22"@1))))))
+ (func@,1e quoteShellPosix@5 x . .
+  (params@L
+   (param@1 s . . string@3 .))string@D
+  (pragmas@f noSideEffect@2).
+  (stmts@2,1
+   (comment)
+   (const@6,1 safeUnixChars . . .
+    (curly@G '%'@1 '+'@6 '-'@B '.'@G '/'@L '_'@Q '\3A'@V '='@a '\40'@f
+     (infix@4,1 \2E\2E '0'~3 '9'@2)
+     (infix@E,1 \2E\2E 'A'~3 'Z'@2)
+     (infix@O,1 \2E\2E 'a'~3 'z'@2)))
+   (if@,3
+    (elif@3
+     (infix@6 ==
+      (dot~5 s~1 len@1)0@3)
+     (stmts~1,1
+      (asgn@7 result~7 "\27\27"@2)))
+    (elif@5,2
+     (call@F
+      (dot~E s~1 allCharsInSet@1)safeUnixChars@1)
+     (stmts~3,1
+      (asgn@7 result~7 s@2)))
+    (else@,4
+     (stmts@2,1
+      (asgn@7 result~7
+       (infix@Y &
+        (infix~S & "\27"~4
+         (call@B
+          (dot~8 s~1 replace@1)"\27"@1 "\27\22\27\22\27"@6))"\27"@2)))))))
+ (when@,1p
+  (elif@5
+   (infix@Z or
+    (infix~I or
+     (call~A defined~7 windows@1)
+     (call@A defined~7 posix@1))
+    (call@A defined~7 nintendoswitch@1))
+   (stmts~3,1
+    (func quoteShell@5 x . .
+     (params@G
+      (param@1 s . . string@3 .))string@D
+     (pragmas@a noSideEffect@2).
+     (stmts@2,1
+      (comment)
+      (when@,4
+       (elif@5
+        (call@7 defined~7 windows@1)
+        (stmts~3,1
+         (asgn@7 result~7
+          (call@J quoteShellWindows~H s@1))))
+       (else@,2
+        (stmts@2,1
+         (asgn@7 result~7
+          (call@H quoteShellPosix~F s@1)))))))
+    (func@,A quoteShellCommand@5 x . .
+     (params@N
+      (param@1 args . .
+       (at@F openArray~9 string@1).))string@R . .
+     (stmts@2,1
+      (comment)
+      (call@,1 runnableExamples
+       (stmts@2,1
+        (when
+         (elif@5
+          (call@7 defined~7 posix@1)
+          (stmts~3,1
+           (cmd assert
+            (infix@j ==
+             (call~L quoteShellCommand~H
+              (bracket@1 "aaa"@1 ""@8 "c d"@C))"aaa \27\27 \27c d\27"@3)))))
+        (when@,2
+         (elif@5
+          (call@7 defined~7 windows@1)
+          (stmts~3,1
+           (cmd assert
+            (infix@j ==
+             (call~L quoteShellCommand~H
+              (bracket@1 "aaa"@1 ""@8 "c d"@C))"aaa \22\22 \22c d\22"@3)))))))
+      (asgn@7,8 result~7 ""@2)
+      (for@4,9
+       (infix@6 \2E\2E< 0~1
+        (dot@7 args~4 len@1))
+       (unpackflat
+        (let i . . ..))
+       (stmts~2,1
+        (if
+         (elif@3
+          (infix@2 > i~2 0@2)
+          (stmts@7
+           (cmd@6
+            (dot result~6 add@1)" "@5))))
+        (cmd@6,1
+         (dot result~6 add@1)
+         (call@F quoteShell~A
+          (at@5 args~4 i@1))))))))))
+ (when@,2E
+  (elif@5
+   (call@7 defined~7 posix@1)
+   (stmts~3,1
+    (proc getLastModificationTime@5 x . .
+     (params@T
+      (param@1 file . . string@6 .))int64@G
+     (pragmas@p raises@2).
+     (stmts@2,1
+      (comment)
+      (var@4,3 s . . .
+       (call@B default~7 Stat@1))
+      (var@4,4 filename . . . file@B)
+      (if@,5
+       (elif@3
+        (infix@S <
+         (call~O stat~4
+          (dot@9 filename~8 toCString@1)s@L)0@2)
+        (stmts~1,1
+         (call@C raiseOSError~C
+          (call@C osLastError~B)file@G))))
+      (asgn@7,7 result~7
+       (infix@k \2B
+        (infix~K *
+         (call~J int64~5
+          (dot@A
+           (dot~8 s~1 st_mtim@1)tv_sec@1))
+         (suf@2 1000000000 "i64"))
+        (call@7 int64~5
+         (dot@A
+          (dot~8 s~1 st_mtim@1)tv_nsec@1))))))))
+  (elif@5,A
+   (call@7 defined~7 windows@1)
+   (stmts~3,1
+    (import
+     (infix@E / windows~7 winlean@1))
+    (const@2,4 winEpochDiff . . int64@E
+     (suf@M 116444736000000000 "i64"))
+    (proc@,6 rdFileTime@5 . . .
+     (params@F
+      (param@1 f . . FILETIME@3 .))int64@F
+     (pragmas@a inline@2).
+     (stmts@2,1
+      (asgn@7 result~7
+       (infix@d or
+        (call~W int64~5
+         (cast@1 uint32@5
+          (dot@E f~1 dwLowDateTime@1)))
+        (par~b,1
+         (infix@d shl
+          (call~X int64~5
+           (cast@1 uint32@5
+            (dot@E f~1 dwHighDateTime@1)))32@4))))))
+    (proc@,A rdFileSize@5 . . .
+     (params@F
+      (param@1 f . . WIN32_FIND_DATA@3 .))int64@M
+     (pragmas@h inline@2).
+     (stmts@2,1
+      (asgn@7 result~7
+       (infix@c or
+        (call~V int64~5
+         (cast@1 uint32@5
+          (dot@E f~1 nFileSizeLow@1)))
+        (par~a,1
+         (infix@c shl
+          (call~W int64~5
+           (cast@1 uint32@5
+            (dot@E f~1 nFileSizeHigh@1)))32@4))))))
+    (proc@,E getLastModificationTime@5 x . .
+     (params@T
+      (param@1 file . . string@6 .))int64@G
+     (pragmas@p raises@2).
+     (stmts@2,1
+      (comment)
+      (var@6,3 f~2 .
+       (pragmas noinit@2)WIN32_FIND_DATA@C .)
+      (let@4,4 h . . .
+       (call@H findFirstFile~D file@1 f@7))
+      (if@,5
+       (elif@3
+        (infix@2 == h~2 INVALID_HANDLE_VALUE@3)
+        (stmts~1,1
+         (call@C raiseOSError~C
+          (call@C osLastError~B)file@G))))
+      (asgn@7,8 result~7
+       (infix@n *
+        (par~l
+         (infix@V \2D
+          (call~K rdFileTime~A
+           (dot@2 f~1 ftLastWriteTime@1))winEpochDiff@2))
+        (suf@2 100 "i64")))
+      (discard@,9
+       (call@H findClose~9 h@1)))))))
+ (proc@,2p exitStatusLikeShell@5 x . .
+  (params@P
+   (param@1 status . . cint@8 .))cint@G . .
+  (stmts@2,1
+   (comment)
+   (when@,1
+    (elif@5
+     (call@7 defined~7 posix@1)
+     (stmts~3,1
+      (if
+       (elif@3
+        (call@B WIFSIGNALED~B status@1)
+        (stmts~1,2
+         (infix@4 \2B 128~4
+          (call@A WTERMSIG~8 status@1))))
+       (else@,3
+        (stmts@2,1
+         (call@B WEXITSTATUS~B status@1))))))
+    (else@,6
+     (stmts@2,1 status)))))
+ (proc@,30 findExe@5 x . .
+  (params@D
+   (param@1 exe . . string@5 .))string@F
+  (pragmas@Z
+   (kv@6 tags~4
+    (bracket@2 ReadDirEffect@1 ReadEnvEffect@G))).
+  (stmts@2,1
+   (comment)
+   (asgn@7,3 result~7 ""@2)
+   (if@,4
+    (elif@3
+     (infix@8 ==
+      (dot~5 exe~3 len@1)0@3)
+     (stmts@E
+      (ret .))))
+   (let@4,5 withExt . . .
+    (call@K addFileExt~A exe@1 ExeExt@6))
+   (when@,6
+    (elif@5
+     (call@7 defined~7 posix@1)
+     (stmts~3,1
+      (if
+       (elif@3
+        (infix@4 in '/'~4 exe@3)
+        (stmts~1,1
+         (if
+          (elif@3
+           (call@A fileExists~A withExt@1)
+           (stmts@L
+            (ret withExt@7)))))))))
+    (else@,3
+     (stmts@2,1
+      (if
+       (elif@3
+        (call@A fileExists~A withExt@1)
+        (stmts@L
+         (ret withExt@7)))))))
+   (let@4,B path . . .
+    (call@D getEnv~6 "PATH"@1))
+   (for@4,C
+    (call@I split~5 path@1 PathSep@7)
+    (unpackflat
+     (let candidate . . ..))
+    (stmts~2,1
+     (if
+      (elif@3
+       (infix@E ==
+        (dot~5 candidate~9 len@1)0@3)
+       (stmts@K
+        (continue .))))
+     (when@,1
+      (elif@5
+       (call@7 defined~7 windows@1)
+       (stmts~3,1
+        (let@4 dir . . .
+         (if~2,1
+          (elif@3
+           (infix@K and
+            (infix~7 ==
+             (at~4 candidate~9 0@1)'\22'@3)
+            (infix@I ==
+             (at~5 candidate~9
+              (prefix@1 ^ 1@1))'\22'@3))
+           (stmts~1,1
+            (call@6 substr~6 candidate@1 1@C
+             (infix@S \2D
+              (dot~4 candidate~9 len@1)2@1))))
+          (else@,2
+           (stmts@2,1 candidate))))))
+      (else@,6
+       (stmts@2,1
+        (let@4 dir . . . candidate@6))))
+     (let@4,9 x . . .
+      (call@E addFileExt~A
+       (infix@5 / dir~4 exe@2)ExeExt@C))
+     (if@,A
+      (elif@3
+       (call@A fileExists~A x@1)
+       (stmts@F
+        (ret x@7))))))
+   (asgn@7,O result~7 ""@2)))
+ (proc@,3R execShellCmd@5 x . .
+  (params@I
+   (param@1 command . . string@9 .))int@J
+  (pragmas@f
+   (kv@6 tags~4
+    (bracket@2 ExecIOEffect@1))).
+  (stmts@2,1
+   (comment)
+   (when@,E
+    (elif@5
+     (infix@L and
+      (call~E defined~7 nimNativeIo@1)
+      (call@B defined~7 posix@1))
+     (stmts~3,6
+      (var@4 sh . . . "/bin/sh"@5)
+      (var@4,1 dashc . . . "-c"@8)
+      (var@4,2 cmd . . . command@6)
+      (let@4,3 argv . . .
+       (cast@7
+        (ptr@5
+         (at@I UncheckedArray~E cstring@1))
+        (call@e alloc0~6
+         (infix@3 * 4~2
+          (call@8 sizeof~6 cstring@1)))))
+      (asgn@8,4
+       (at~4 argv~4 0@1)
+       (dot@4 sh~2 toCString@1))
+      (asgn@8,5
+       (at~4 argv~4 1@1)
+       (dot@7 dashc~5 toCString@1))
+      (asgn@8,6
+       (at~4 argv~4 2@1)
+       (dot@5 cmd~3 toCString@1))
+      (asgn@8,7
+       (at~4 argv~4 3@1)
+       (dot@5
+        (nil~3)cstring@1))
+      (let@4,8 pid . . .
+       (call@A fork~4))
+      (if@,9
+       (elif@3
+        (infix@4 == pid~4
+         (call@6 Pid~3 0@1))
+        (stmts~1,2
+         (discard
+          (call@E execve~6
+           (dot@3 sh~2 toCString@1)
+           (cast@F CCharArray@5 argv@H)
+           (cast@1,1 CCharArray@5 posix_environ@H)))
+         (call@7,2 exitnow~7
+          (suf@1 127 "i32")))))
+      (call@7,E dealloc~7
+       (cast@1 pointer@5 argv@E))
+      (if@,F
+       (elif@3
+        (infix@8 <
+         (dot~5 pid~3 int@1)0@2)
+        (stmts~1,1
+         (asgn@7 result~7 -1@2)))
+       (else@,2
+        (stmts@2,1
+         (var@4 status . . cint@8
+          (suf@F 0 "i32"))
+         (if@,1
+          (elif@3
+           (infix@W <
+            (dot~5
+             (call~K waitpid~7 pid@1 status@6
+              (suf@E 0 "i32"))int@1)0@2)
+           (stmts~1,1
+            (asgn@7 result~7 -1@2)))
+          (else@,2
+           (stmts@2,1
+            (asgn@7 result~7
+             (call@L exitStatusLikeShell~J status@1))))))))))
+    (else@,T
+     (stmts@2,1
+      (var@4 command . . . command@A)
+      (let@4,1 cc . . .
+       (call@M
+        (dot~A command~7 toCString@1)))
+      (if@,2
+       (elif@3
+        (dot@2 cc~2 isNil@1)
+        (stmts~1,1
+         (asgn@7 result~7 -202@2)))
+       (else@,2
+        (stmts@2,1
+         (asgn@7 result~7
+          (call@L exitStatusLikeShell~J
+           (call@9 c_system~8 cc@1)))))))))))
+ (proc@,4H getFileSize@5 x . .
+  (params@H
+   (param@1 file . . string@6 .))int64@G
+  (pragmas@d
+   (kv@6 tags~4
+    (bracket@2 ReadIOEffect@1))raises@O).
+  (stmts@2,1
+   (comment)
+   (when@,1
+    (elif@5
+     (call@7 defined~7 windows@1)
+     (stmts~3,1
+      (var@6 a~2 .
+       (pragmas noinit@2)WIN32_FIND_DATA@C .)
+      (let@4,1 resA . . .
+       (call@K findFirstFile~D file@1 a@7))
+      (if@,2
+       (elif@3
+        (infix@5 == resA~5 INVALID_HANDLE_VALUE@3)
+        (stmts@U
+         (call@C raiseOSError~C
+          (call@C osLastError~B)file@G))))
+      (try@,3
+       (stmts@2,1
+        (asgn@7 result~7
+         (call@C rdFileSize~A a@1)))
+       (fin@,2
+        (stmts@2,1
+         (discard
+          (call@H findClose~9 resA@1)))))))
+    (else@,8
+     (stmts@2,1
+      (var@4 rawInfo . . .
+       (call@H default~7 Stat@1))
+      (var@4,1 filename . . . file@B)
+      (if@,2
+       (elif@3
+        (infix@Y <
+         (call~U stat~4
+          (dot@9 filename~8 toCString@1)rawInfo@L)
+         (suf@2 0 "i32"))
+        (stmts~1,1
+         (call@C raiseOSError~C
+          (call@C osLastError~B)file@G))))
+      (asgn@7,4 result~7
+       (call@7 int64~5
+        (dot@8 rawInfo~7 st_size@1)))))))))

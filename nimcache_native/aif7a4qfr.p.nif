@@ -1,0 +1,120 @@
+(.nif27)
+(.vendor "Nifler")
+(.dialect "nim-parsed")
+(stmts@,1,src/aifparser.nim
+ (comment)
+ (import@,D
+  (infix@A / std~3
+   (bracket@1 syncio@1 os@9)))
+ (import@,E nifbuilder@7)
+ (import@,F tokens@7 lexer@F parser@M)
+ (proc@,H parseToFile@5 . . .
+  (params@G
+   (param@1 inp . . string@M .)
+   (param@6 outp . . string@H .)
+   (param@C fileField . . string@B .)
+   (param@V curly . . bool@7 .)). . .
+  (stmts@2,1
+   (var@4 src . . . ""@6)
+   (try@,1
+    (stmts@2,1
+     (asgn@4 src~4
+      (call@A readFile~8 inp@1)))
+    (except@,2 .
+     (stmts@2,1
+      (cmd write stderr@6
+       (infix@f &
+        (infix~6 & "cannot read file\3A "~L inp@2)"\0A"@2))
+      (cmd@,1 quit 1@5))))
+   (let@4,6 toks . . .
+    (call@F tokenize~8 src@1))
+   (var@4,7 ps . . .
+    (call@F initParser~A toks@1 fileField@7 curly@I))
+   (var@4,8 b . . .
+    (call@J
+     (dot~5 nifbuilder~A open@1)outp@1))
+   (call@B,9 parseModule~B ps@1 b@5)
+   (call@7,A
+    (dot~6 b~1 close@1))))
+ (proc@,U usage@5 . . .
+  (params@A). . .
+  (stmts@2,1
+   (cmd write stderr@6 "aifparser — Nim source -> AIF \28nifler-compatible\29\0A"@E)
+   (cmd@,1 write stderr@6 "usage\3A aifparser \5B--curly\5D p <in.nim> \5Bout.p.aif\5D\0A"@E)
+   (cmd@,2 write stderr@6 "  --curly   experimental\3A also accept `\7B … \7D` block bodies\0A"@E)
+   (cmd@,3 quit 1@5)))
+ (proc@,a main@5 . . .
+  (params@9). . .
+  (stmts@2,2
+   (var@4 params . .
+    (at@B seq~3 string@1)
+    (prefix@M \40
+     (bracket@1)))
+   (var@4,1 curly . . . false@8)
+   (let@4,2 cli . . .
+    (call@N commandLineParams~H))
+   (for@4,3
+    (infix@8 \2E\2E< 0~2
+     (dot@7 cli~3 len@1))
+    (unpackflat
+     (let ci . . ..))
+    (stmts~2,1
+     (if
+      (elif@3
+       (infix@8 ==
+        (at~5 cli~3 ci@1)"--curly"@3)
+       (stmts@M
+        (asgn@6 curly~6 true@2)))
+      (else@,1
+       (stmts@6
+        (cmd@6
+         (dot params~6 add@1)
+         (at@8 cli~3 ci@1)))))))
+   (if@,6
+    (elif@3
+     (infix@B <
+      (dot~5 params~6 len@1)2@2)
+     (stmts~1,1
+      (call@5 usage~5))))
+   (let@4,8 action . . .
+    (at@F params~6 0@1))
+   (if@,9
+    (elif@3
+     (infix@E and
+      (infix~7 != action~7 "p"@3)
+      (infix@B != action~7 "parse"@3))
+     (stmts~1,1
+      (cmd write stderr@6
+       (infix@h &
+        (infix~9 & "unknown command\3A "~K action@2)"\0A"@2))
+      (call@5,1 usage~5))))
+   (let@4,C inp . . .
+    (at@C params~6 1@1))
+   (var@4,D outp . . . ""@7)
+   (if@,E
+    (elif@3
+     (infix@B >=
+      (dot~5 params~6 len@1)3@3)
+     (stmts~1,1
+      (asgn@5 outp~5
+       (at@8 params~6 2@1))
+      (let@4,1 n . . .
+       (dot@8 outp~4 len@1))
+      (if@,2
+       (elif@3
+        (infix@6 or
+         (infix~4 < n~2 4@2)
+         (infix@K !=
+          (at~D outp~4
+           (infix@5 \2E\2E
+            (infix~3 \2D n~1 4@1)
+            (infix@4 \2D n~1 1@1)))".nif"@3))
+        (stmts~1,1
+         (asgn@5 outp~5
+          (infix@7 & outp~5 ".nif"@2)))))))
+    (else@,5
+     (stmts@2,1
+      (asgn@5 outp~5
+       (infix@6 & inp~4 ".p.aif"@2)))))
+   (call@B,O parseToFile~B inp@1 outp@6 inp@C curly@H)))
+ (call@4,12 main~4))

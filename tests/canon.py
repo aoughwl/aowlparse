@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""canon.py — canonicalise a NIF token stream for STRUCTURAL comparison.
+"""canon.py — canonicalise a AIF token stream for STRUCTURAL comparison.
 
-Reads NIF text on stdin (or a file arg) and prints one token per line:
+Reads AIF text on stdin (or a file arg) and prints one token per line:
   (            tree open
   <tag>        the tree's tag (line-info / comment suffix stripped)
   <atom>       an atom (ident, symbol, number, `.` empty, ...) suffix-stripped
@@ -10,7 +10,7 @@ Reads NIF text on stdin (or a file arg) and prints one token per line:
 
 Line-info (`@...` / bare `~...`) and comment (`#...#`) suffixes are removed from
 tags and atoms so two parsers that agree on STRUCTURE but differ only in
-line/col diffs compare equal. String-literal contents are never touched (NIF
+line/col diffs compare equal. String-literal contents are never touched (AIF
 escapes all control/marker bytes inside strings, so they cannot be confused
 with a suffix).
 
@@ -108,7 +108,7 @@ def tokenize(text: str):
 def neutralize_vendor(toks):
     """Blank the value of the `(.vendor "…")` header directive.
 
-    nifparser stamps its own vendor identity ("nifparser") where classic nifler
+    aifparser stamps its own vendor identity ("aifparser") where classic nifler
     writes "Nifler". That single header string is the ONE intentional divergence;
     everything else must still match byte-for-byte structurally. We replace only
     the vendor string token with a fixed placeholder so the directive's STRUCTURE

@@ -1,0 +1,529 @@
+(.nif27)
+(.vendor "Nifler")
+(.dialect "nim-parsed")
+(stmts@,7,../nimony/src/lib/vfs.nim
+ (comment)
+ (when@,C
+  (elif@5
+   (call@7 defined~7 nimony@1)
+   (stmts~3,1
+    (pragmas
+     (kv@9 feature~7 "lenientnils"@2)))))
+ (comment@,F)
+ (import@,O
+  (infix@B / std~4
+   (bracket@2 memfiles@1 syncio@B times@J)))
+ (when@,X
+  (elif@5
+   (call@7 defined~7 vfsProfile@1)
+   (stmts~3,1
+    (type@E,1 VfsCounter~C x . .
+     (object@2 .
+      (fld~7,1 count~5 x . int@3 .)
+      (fld~A,2 ns~2 x . int64@3 .)
+      (fld~7,3 bytes~5 x . int64@3 .)))
+    (var@E,7 statOpenMmap~C x . VfsCounter@3 .)
+    (var@A,8 statRead~8 x . VfsCounter@7 .)
+    (var@B,9 statWrite~9 x . VfsCounter@6 .)
+    (var@C,A statExists~A x . VfsCounter@5 .)
+    (var@B,B statMtime~9 x . VfsCounter@6 .)
+    (var@C,C statRemove~A x . VfsCounter@5 .)
+    (import@,E
+     (infix@A / std~3 strutils@1))
+    (proc@,G dumpVfsProfile@5 x . .
+     (params@K
+      (param@1 label . . string@7 .)). . .
+     (stmts@2,1
+      (template emit@9 . . .
+       (params@D
+        (param@1 name . . string@6 .)
+        (param@F c . . VfsCounter@3 .)). . .
+       (stmts@2,1
+        (cmd@6
+         (dot stderr~6 writeLine@1)
+         (infix@6,3 &
+          (infix@q,~1 &
+           (infix~t &
+            (infix@E,~1 &
+             (infix~B &
+              (infix@Z,~1 &
+               (infix~7 &
+                (infix~6 &
+                 (infix~8 & "\5Bvfs\5D "~9 label@2)" "@2)name@2)" count="~j,1)
+              (prefix@2 $
+               (dot@2 c~1 count@1)))" ms="~L,1)
+            (call@D formatFloat~B
+             (infix@D /
+              (call~7 float~5
+               (dot@2 c~1 ns@1))1000000.0@2)ffDecimal@S 3@d))" bytes="~10,1)
+          (prefix@2 $
+           (dot@2 c~1 bytes@1))))))
+      (cmd@,5 emit "openMmap"@5 statOpenMmap@H)
+      (cmd@,6 emit "read"@5 statRead@H)
+      (cmd@,7 emit "write"@5 statWrite@H)
+      (cmd@,8 emit "exists"@5 statExists@H)
+      (cmd@,9 emit "mtime"@5 statMtime@H)
+      (cmd@,A emit "remove"@5 statRemove@H)))))
+  (else@,T
+   (stmts@2,1
+    (template dumpVfsProfile@9 x . .
+     (params@O
+      (param@1 label . . string@7 .)). . .
+     (stmts@g
+      (discard .))))))
+ (const@6,13 nanosPerSec . . int64@D
+  (suf@L 1000000000 "i64"))
+ (type@H,16 FileWriteMode~F x . .
+  (enum@2 .
+   (efld~F,1 AlwaysWrite . . . .)
+   (efld~F,2 OnlyIfChanged . . . .)))
+ (when@,1A
+  (elif@5
+   (call@7 defined~7 nimony@1)
+   (stmts~3,1
+    (import
+     (infix@B / std~4
+      (bracket@2 os@1 dirs@5 paths@B)))
+    (proc@,3 unixModTime@5 . . .
+     (params@G
+      (param@1 p . . string@3 .))int64@D . .
+     (stmts@2,1
+      (try
+       (stmts@5
+        (call@N getLastModificationTime~N p@1))
+       (except@W .
+        (stmts@8
+         (suf 0 "i64"))))))
+    (proc@,5 unixNow@5 . . .
+     (params@C)int64@4 . .
+     (stmts@2,1
+      (try
+       (stmts@2,1
+        (let@4 t . . .
+         (call@B getTime~7))
+        (infix@O,1 \2B
+         (infix~E *
+          (call~4 toUnix~6 t@1)nanosPerSec@2)
+         (call@7 int64~5
+          (dot@2 t~1 nanosecond@1))))
+       (except@,3 .
+        (stmts@8
+         (suf 0 "i64"))))))
+    (proc@,A rmPath@5 . . .
+     (params@B
+      (param@1 p . . string@3 .)). . .
+     (stmts@2,1
+      (try
+       (stmts@5
+        (call@A removeFile~A
+         (call@5 path~4 p@1)))
+       (except@P .
+        (stmts@8
+         (discard .))))))
+    (proc@,C readBytes@5 . . .
+     (params@E
+      (param@1 p . . string@3 .))string@D . .
+     (stmts@2,1
+      (try
+       (stmts@5
+        (call@8 readFile~8 p@1))
+       (except@H .
+        (stmts@8 "")))))
+    (proc@,E writeBytes@5 . . .
+     (params@F
+      (param@1 p . . string@6 .)
+      (param@4 c . . string@3 .)). . .
+     (stmts@2,1
+      (try
+       (stmts@5
+        (call@9 writeFile~9 p@1 c@4))
+       (except@L .
+        (stmts@8
+         (cmd quit
+          (infix@R & "vfs\3A write failed\3A "~M p@2)))))))
+    (proc@,G fileMaybeExists@5 . . .
+     (params@K
+      (param@1 p . . string@3 .))bool@D . .
+     (stmts@2,1
+      (try
+       (stmts@5
+        (call@A fileExists~A p@1))
+       (except@J .
+        (stmts@8 false)))))
+    (proc@,I openMmapImpl@5 . . .
+     (params@H
+      (param@1 p . . string@3 .))MemFile@D . .
+     (stmts@2,1
+      (try
+       (stmts@5
+        (call@D
+         (dot~5 memfiles~8 open@1)p@1))
+       (except@M .
+        (stmts@8
+         (cmd quit
+          (infix@Q & "vfs\3A open failed\3A "~L p@2)))))))))
+  (else@,L
+   (stmts@2,1
+    (import
+     (infix@B / std~4
+      (bracket@2 os@1)))
+    (proc@,1 unixModTime@5 . . .
+     (params@G
+      (param@1 path . . string@6 .))int64@G . .
+     (stmts@2,1
+      (let@4 t . . .
+       (call@R getLastModificationTime~N path@1))
+      (infix@O,1 \2B
+       (infix~E *
+        (call~4 toUnix~6 t@1)nanosPerSec@2)
+       (call@7 int64~5
+        (dot@2 t~1 nanosecond@1)))))
+    (proc@,4 unixNow@5 . . .
+     (params@C)int64@4 . .
+     (stmts@2,1
+      (let@4 t . . .
+       (call@B getTime~7))
+      (infix@O,1 \2B
+       (infix~E *
+        (call~4 toUnix~6 t@1)nanosPerSec@2)
+       (call@7 int64~5
+        (dot@2 t~1 nanosecond@1)))))
+    (proc@,7 rmPath@5 . . .
+     (params@B
+      (param@1 path . . string@6 .)). . .
+     (stmts@S
+      (call@A removeFile~A path@1)))
+    (proc@,8 readBytes@5 . . .
+     (params@E
+      (param@1 p . . string@3 .))string@D . .
+     (stmts@a
+      (call@8 readFile~8 p@1)))
+    (proc@,9 writeBytes@5 . . .
+     (params@F
+      (param@1 p . . string@6 .)
+      (param@4 c . . string@3 .)). . .
+     (stmts@W
+      (call@9 writeFile~9 p@1 c@4)))
+    (proc@,A fileMaybeExists@5 . . .
+     (params@K
+      (param@1 p . . string@3 .))bool@D . .
+     (stmts@e
+      (call@A fileExists~A p@1)))
+    (proc@,B openMmapImpl@5 . . .
+     (params@H
+      (param@1 p . . string@3 .))MemFile@D . .
+     (stmts@e
+      (call@D
+       (dot~5 memfiles~8 open@1)p@1))))))
+ (type@B,1t VfsBlob~9 x . .
+  (object@2 .
+   (fld~5,8 data~4 x . pointer@3 .)
+   (fld~5,9 size~4 x . int@3 .)
+   (fld~9,A mf . . MemFile@4 .)
+   (fld~3,B cookie~6 x . pointer@3 .)
+   (fld~9,C cleanup . .
+    (proctype@E ....
+     (params
+      (param@1 b . .
+       (mut@3 VfsBlob@4).)).
+     (pragmas@H nimcall@2)..).)))
+ (proc@,27 initBlob@5 x . .
+  (params@E
+   (param@1 data . . pointer@6 .)
+   (param@G size . . int@6 .)
+   (param@1,1 cookie . . pointer@8
+    (nil@I))
+   (param@1,2 cleanup . .
+    (proctype@E ....
+     (params
+      (param@1 b . .
+       (mut@3 VfsBlob@4).)).
+     (pragmas@H nimcall@2)..)
+    (nil@j)))VfsBlob@q,2 . .
+  (stmts@2,3
+   (comment)
+   (oconstr@7,1 VfsBlob~7
+    (kv@5 data~4 data@2)
+    (kv@H size~4 size@2)
+    (kv@V cookie~6 cookie@2)
+    (kv@m cleanup~7 cleanup@2))))
+ (proc@,2D closeBlob@5 x . .
+  (params@F
+   (param@1 b . .
+    (mut@3 VfsBlob@4).)). . .
+  (stmts@2,1
+   (comment)
+   (if@,2
+    (elif@3
+     (infix@A !=
+      (dot~9 b~1 cleanup@1)
+      (nil@3))
+     (stmts~1,1
+      (call@9
+       (dot~8 b~1 cleanup@1)b@1))))
+   (asgn@7,4
+    (dot~6 b~1 data@1)
+    (nil@2))
+   (asgn@7,5
+    (dot~6 b~1 size@1)0@2)
+   (asgn@5,6
+    (dot~4 b~1 mf@1)
+    (call@9 default~7 MemFile@1))
+   (asgn@9,7
+    (dot~8 b~1 cookie@1)
+    (nil@2))
+   (asgn@A,8
+    (dot~9 b~1 cleanup@1)
+    (nil@2))))
+ (proc@,2S closeMemFileBlob@5 . . .
+  (params@L
+   (param@1 b . .
+    (mut@3 VfsBlob@4).)).
+  (pragmas@c nimcall@2).
+  (stmts@2,1
+   (try
+    (stmts@5
+     (call@E
+      (dot~6 memfiles~8 close@1)
+      (dot@2 b~1 mf@1)))
+    (except@Q .
+     (stmts@8
+      (discard .))))))
+ (proc@,2V fromMemFile@5 x . .
+  (params@H
+   (param@1 mf . .
+    (cmd@9 sink~5 MemFile).))VfsBlob@K . .
+  (stmts@2,1
+   (comment)
+   (asgn@7,1 result~7
+    (oconstr@9 VfsBlob~7
+     (kv@5 data~4
+      (dot@4 mf~2 mem@1))
+     (kv@J size~4
+      (dot@4 mf~2 size@1))
+     (kv@W mf~2 mf@2)
+     (kv@7,1 cookie~6
+      (nil@2))
+     (kv@L,1 cleanup~7 closeMemFileBlob@2)))))
+ (var@H,2a openMmapRelay~D x .
+  (proctype@8 ....
+   (params
+    (param@1 path . . string@6 .))VfsBlob@G
+   (pragmas@O nimcall@2)..)
+  (proc .~A,1 . . .
+   (params
+    (param@1 path . . string@6 .))VfsBlob@G . .
+   (stmts@Q
+    (call@B fromMemFile~B
+     (call@D openMmapImpl~C path@1)))))
+ (var@I,2d readBytesRelay~E x .
+  (proctype@8 ....
+   (params
+    (param@1 path . . string@6 .))string@G
+   (pragmas@N nimcall@2)..)
+  (proc .~B,1 . . .
+   (params
+    (param@1 path . . string@6 .))string@G . .
+   (stmts@P
+    (call@9 readBytes~9 path@1))))
+ (var@J,2g writeBytesRelay~F x .
+  (proctype@8 ....
+   (params
+    (param@1 path . . string@F .)
+    (param@7 content . . string@9 .)).
+   (pragmas@O nimcall@2)..)
+  (proc .~C,1 . . .
+   (params
+    (param@1 path . . string@F .)
+    (param@7 content . . string@9 .)). . .
+   (stmts@Q
+    (call@A writeBytes~A path@1 content@7))))
+ (var@F,2j existsRelay~B x .
+  (proctype@8 ....
+   (params
+    (param@1 path . . string@6 .))bool@G
+   (pragmas@L nimcall@2)..)
+  (proc .~8,1 . . .
+   (params
+    (param@1 path . . string@6 .))bool@G . .
+   (stmts@N
+    (call@F fileMaybeExists~F path@1))))
+ (var@E,2m mtimeRelay~A x .
+  (proctype@8 ....
+   (params
+    (param@1 path . . string@6 .))int64@G
+   (pragmas@M nimcall@2)..)
+  (proc .~7,1 . . .
+   (params
+    (param@1 path . . string@6 .))int64@G . .
+   (stmts@O
+    (call@B unixModTime~B path@1))))
+ (var@C,2p nowRelay~8 x .
+  (proctype@8 ....
+   (params)int64@4
+   (pragmas@A nimcall@2)..)
+  (proc .~5,1 . . .
+   (params)int64@4 . .
+   (stmts@C
+    (call@7 unixNow~7))))
+ (var@F,2s removeRelay~B x .
+  (proctype@8 ....
+   (params
+    (param@1 path . . string@6 .)).
+   (pragmas@F nimcall@2)..)
+  (proc .~8,1 . . .
+   (params
+    (param@1 path . . string@6 .)). . .
+   (stmts@H
+    (call@6 rmPath~6 path@1))))
+ (when@,2x
+  (elif@5
+   (call@7 defined~7 vfsProfile@1)
+   (stmts~3,1
+    (proc vfsOpenMmap@5 x . .
+     (params@H
+      (param@1 path . . string@6 .))VfsBlob@G . .
+     (stmts@2,1
+      (let@4 t0 . . .
+       (call@G getMonoTime~B))
+      (asgn@7,1 result~7
+       (call@F openMmapRelay~D path@1))
+      (cmd@,2 inc
+       (dot@G statOpenMmap~C count@1))
+      (infix@J,3 \2B=
+       (dot~7 statOpenMmap~C bytes@1)
+       (dot@9 result~6 size@1))
+      (infix@G,4 \2B=
+       (dot~4 statOpenMmap~C ns@1)
+       (call@G inNanoseconds~D
+        (infix@F \2D
+         (call~3 getMonoTime~B)t0@2)))))
+    (proc@,7 vfsRead@5 x . .
+     (params@D
+      (param@1 path . . string@6 .))string@G . .
+     (stmts@2,1
+      (let@4 t0 . . .
+       (call@G getMonoTime~B))
+      (asgn@7,1 result~7
+       (call@G readBytesRelay~E path@1))
+      (cmd@,2 inc
+       (dot@C statRead~8 count@1))
+      (infix@F,3 \2B=
+       (dot~7 statRead~8 bytes@1)
+       (dot@9 result~6 len@1))
+      (infix@C,4 \2B=
+       (dot~4 statRead~8 ns@1)
+       (call@G inNanoseconds~D
+        (infix@F \2D
+         (call~3 getMonoTime~B)t0@2)))))
+    (proc@,E vfsWrite@5 x . .
+     (params@E
+      (param@1 path . . string@F .)
+      (param@7 content . . string@9 .)). . .
+     (stmts@2,1
+      (let@4 t0 . . .
+       (call@G getMonoTime~B))
+      (call@F,1 writeBytesRelay~F path@1 content@7)
+      (cmd@,2 inc
+       (dot@D statWrite~9 count@1))
+      (infix@G,3 \2B=
+       (dot~7 statWrite~9 bytes@1)
+       (dot@A content~7 len@1))
+      (infix@D,4 \2B=
+       (dot~4 statWrite~9 ns@1)
+       (call@G inNanoseconds~D
+        (infix@F \2D
+         (call~3 getMonoTime~B)t0@2)))))
+    (proc@,L vfsExists@5 x . .
+     (params@F
+      (param@1 path . . string@6 .))bool@G . .
+     (stmts@2,1
+      (let@4 t0 . . .
+       (call@G getMonoTime~B))
+      (asgn@7,1 result~7
+       (call@D existsRelay~B path@1))
+      (cmd@,2 inc
+       (dot@E statExists~A count@1))
+      (infix@E,3 \2B=
+       (dot~4 statExists~A ns@1)
+       (call@G inNanoseconds~D
+        (infix@F \2D
+         (call~3 getMonoTime~B)t0@2)))))
+    (proc@,R vfsMtime@5 x . .
+     (params@E
+      (param@1 path . . string@6 .))int64@G . .
+     (stmts@2,1
+      (let@4 t0 . . .
+       (call@G getMonoTime~B))
+      (asgn@7,1 result~7
+       (call@C mtimeRelay~A path@1))
+      (cmd@,2 inc
+       (dot@D statMtime~9 count@1))
+      (infix@D,3 \2B=
+       (dot~4 statMtime~9 ns@1)
+       (call@G inNanoseconds~D
+        (infix@F \2D
+         (call~3 getMonoTime~B)t0@2)))))
+    (proc@,X vfsNow@5 x . .
+     (params@C)int64@4
+     (pragmas@M inline@2).
+     (stmts@Z
+      (call@8 nowRelay~8)))
+    (proc@,Z vfsRemove@5 x . .
+     (params@F
+      (param@1 path . . string@6 .)). . .
+     (stmts@2,1
+      (let@4 t0 . . .
+       (call@G getMonoTime~B))
+      (call@B,1 removeRelay~B path@1)
+      (cmd@,2 inc
+       (dot@E statRemove~A count@1))
+      (infix@E,3 \2B=
+       (dot~4 statRemove~A ns@1)
+       (call@G inNanoseconds~D
+        (infix@F \2D
+         (call~3 getMonoTime~B)t0@2)))))))
+  (else@,f
+   (stmts@2,1
+    (proc vfsOpenMmap@5 x . .
+     (params@H
+      (param@1 path . . string@6 .))VfsBlob@G
+     (pragmas@f inline@2).
+     (stmts@s
+      (call@D openMmapRelay~D path@1)))
+    (proc@,1 vfsRead@5 x . .
+     (params@D
+      (param@1 path . . string@6 .))string@G
+     (pragmas@a inline@2).
+     (stmts@n
+      (call@E readBytesRelay~E path@1)))
+    (proc@,2 vfsWrite@5 x . .
+     (params@E
+      (param@1 path . . string@F .)
+      (param@7 content . . string@9 .)).
+     (pragmas@c inline@2).
+     (stmts@p
+      (call@F writeBytesRelay~F path@1 content@7)))
+    (proc@,3 vfsExists@5 x . .
+     (params@F
+      (param@1 path . . string@6 .))bool@G
+     (pragmas@a inline@2).
+     (stmts@n
+      (call@B existsRelay~B path@1)))
+    (proc@,4 vfsMtime@5 x . .
+     (params@E
+      (param@1 path . . string@6 .))int64@G
+     (pragmas@a inline@2).
+     (stmts@n
+      (call@A mtimeRelay~A path@1)))
+    (proc@,5 vfsNow@5 x . .
+     (params@C)int64@4
+     (pragmas@M inline@2).
+     (stmts@Z
+      (call@8 nowRelay~8)))
+    (proc@,6 vfsRemove@5 x . .
+     (params@F
+      (param@1 path . . string@6 .)).
+     (pragmas@U inline@2).
+     (stmts@h
+      (call@B removeRelay~B path@1)))))))

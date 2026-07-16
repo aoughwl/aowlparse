@@ -1,13 +1,13 @@
 ## webdiag.nim — the syntactic-diagnostics side-channel used by the JS/web build.
 ##
-## The classic native `nifler` (and nifparser's own file driver) only *parse* —
+## The classic native `nifler` (and aifparser's own file driver) only *parse* —
 ## they do not surface friendly syntax errors. The browser playground, however,
 ## wants Monaco squiggles, so the web entry (`webmain.nim`) collects a list of
-## `Diag`s alongside the produced NIF.
+## `Diag`s alongside the produced AIF.
 ##
 ## This module keeps that diagnostics layer OUT of the 8 core parser files
 ## (`tokens/lexer/parse_*/parsecore/parser`), which are synced byte-for-byte from
-## the canonical `nifparser/src` and intentionally carry no diagnostics API. All
+## the canonical `aifparser/src` and intentionally carry no diagnostics API. All
 ## the web-only reporting lives here instead.
 ##
 ## Two producers:
@@ -30,7 +30,7 @@ proc diag*(line, col: int32; msg: string): Diag =
 # ---------------------------------------------------------------------------
 # lexer-level diagnostics (unterminated literals / comments)
 # ---------------------------------------------------------------------------
-# The core lexer (byte-synced from canonical nifparser) parses leniently: it
+# The core lexer (byte-synced from canonical aifparser) parses leniently: it
 # never aborts and emits no error tokens, so an unterminated `"…`, `'…`, or
 # `#[ …` produces a perfectly valid token stream with no signal. Rather than
 # fork the core lexer, we run a SECOND, purpose-built pass here that mirrors its

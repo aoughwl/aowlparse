@@ -1,0 +1,1567 @@
+(.nif27)
+(.vendor "Nifler")
+(.dialect "nim-parsed")
+(stmts@,1,../nimony/lib/std/posix/posix.nim
+ (comment)
+ (when@,6
+  (elif@5
+   (call@7 defined~7 posix@1)
+   (stmts~3,4
+    (include posix_other@8)
+    (type@G,3 InAddrScalar~E x . . uint32@2)
+    (type@D,4 Sighandler~B . . .
+     (proctype@7 ....
+      (params
+       (param@1 a . . cint@3 .)).
+      (pragmas@A noconv@2)..))
+    (type@E,5 FileHandle~C x . . cint@2)
+    (type@G,6 SocketHandle~E x . . cint@2)
+    (when@,8
+     (elif@5
+      (infix@L and
+       (call~E defined~7 nimNativeIo@1)
+       (call@B defined~7 amd64@1))
+      (stmts~3,5
+       (type@8,1 Mode~6 x . . uint32@2)
+       (type@7,2 Off~5 x . . int64@2)
+       (type@7,3 Dev~5 x . . uint@2)
+       (type@7,4 Ino~5 x . . uint@2)
+       (type@H,6 Stat~F x .
+        (pragmas~9 pure@2)
+        (object@2 .
+         (fld~9,1 st_dev~6 x . Dev@3 .)
+         (fld~9,2 st_ino~6 x . Ino@3 .)
+         (fld~F,3 st_nlink . . uint@A .)
+         (fld~8,4 st_mode~7 x . Mode@3 .)
+         (fld~F,5 st_uid . . uint32@8 .)
+         (fld~F,6 st_gid . . uint32@8 .)
+         (fld~F,7 pad0 . . int32@6 .)
+         (fld~F,8 st_rdev . . Dev@9 .)
+         (fld~8,9 st_size~7 x . Off@3 .)
+         (fld~F,A st_blksize . . int64@C .)
+         (fld~F,B st_blocks . . int64@B .)
+         (fld~F,C st_atim . . Timespec@9 .)
+         (fld~8,D st_mtim~7 x . Timespec@3 .)
+         (fld~F,E st_ctim . . Timespec@9 .)
+         (fld~F,F glibcReserved . .
+          (at@K array~5 3@1 int64@4).)))))
+     (elif@5,R
+      (infix@L and
+       (call~E defined~7 nimNativeIo@1)
+       (call@B defined~7 osx@1))
+      (stmts~3,7
+       (type@8,1 Mode~6 x . . uint16@2)
+       (type@7,2 Off~5 x . . int64@2)
+       (type@7,3 Dev~5 x . . int32@2)
+       (type@7,4 Ino~5 x . . uint64@2)
+       (type@H,6 Stat~F x .
+        (pragmas~9 pure@2)
+        (object@2 .
+         (fld~9,1 st_dev~6 x . Dev@3 .)
+         (fld~8,2 st_mode~7 x . Mode@3 .)
+         (fld~F,3 st_nlink . . uint16@A .)
+         (fld~9,4 st_ino~6 x . Ino@3 .)
+         (fld~F,5 st_uid . . uint32@8 .)
+         (fld~F,6 st_gid . . uint32@8 .)
+         (fld~F,7 st_rdev . . Dev@9 .)
+         (fld~F,8 pad0 . . int32@6 .)
+         (fld~F,9 st_atim . . Timespec@9 .)
+         (fld~8,A st_mtim~7 x . Timespec@3 .)
+         (fld~F,B st_ctim . . Timespec@9 .)
+         (fld~F,C st_birthtim . . Timespec@D .)
+         (fld~8,D st_size~7 x . Off@3 .)
+         (fld~F,E st_blocks . . int64@B .)
+         (fld~F,F st_blksize . . int32@C .)
+         (fld~F,G st_flags . . uint32@A .)
+         (fld~F,H st_gen . . uint32@8 .)
+         (fld~F,I st_lspare . . int32@B .)
+         (fld~F,J st_qspare . .
+          (at@G array~5 2@1 int64@4).)))))
+     (else@,y
+      (stmts@2,1
+       (type@t,1 Mode~r x .
+        (pragmas~l
+         (kv@9 importc~7 "mode_t"@2)
+         (kv@R header~6 "<sys/types.h>"@2))
+        (par@2
+         (when~r,1
+          (elif@5
+           (infix@s or
+            (infix~J or
+             (infix~I or
+              (call~A defined~7 android@1)
+              (call@A defined~7 macos@1))
+             (call@A defined~7 macosx@1))
+            (par~t,1
+             (infix@d and
+              (infix~P and
+               (call~6 defined~7 bsd@1)
+               (prefix@4 not
+                (call@B defined~7 openbsd@1)))
+              (prefix@4 not
+               (call@B defined~7 netbsd@1)))))
+           (stmts~3,2 uint16))
+          (else@,3
+           (stmts@2,1 uint32)))))
+       (type@r,9 Off~p x .
+        (pragmas~k
+         (kv@9 importc~7 "off_t"@2)
+         (kv@Q header~6 "<sys/types.h>"@2))int64@2)
+       (type@r,B Dev~p x .
+        (pragmas~k
+         (kv@9 importc~7 "dev_t"@2)
+         (kv@Q header~6 "<sys/types.h>"@2))uint@2)
+       (type@r,C Ino~p x .
+        (pragmas~k
+         (kv@9 importc~7 "ino_t"@2)
+         (kv@Q header~6 "<sys/types.h>"@2))uint@2)
+       (type@n,F Stat~l,~1 x .
+        (pragmas~f,~1
+         (kv@9 importc~7 "struct stat"@2)
+         (kv@9,1 header~6 "<sys/stat.h>"@2)final@R,1 pure@Y,1)
+        (object@2 .
+         (fld~d,1 st_dev~8 x
+          (pragmas
+           (kv@9 importc~7 "st_dev"@2))Dev@O .)
+         (fld~d,2 st_ino~8 x
+          (pragmas
+           (kv@9 importc~7 "st_ino"@2))Ino@O .)
+         (fld~c,3 st_size~9 x
+          (pragmas
+           (kv@9 importc~7 "st_size"@2))Off@P .)
+         (fld~c,A st_mode~9 x
+          (pragmas
+           (kv@9 importc~7 "st_mode"@2))Mode@P .)
+         (when~l,B
+          (elif@5
+           (call@7 defined~7 osx@1)
+           (stmts~3,4
+            (fld@9 st_mtim~9 x
+             (pragmas
+              (kv@9 importc~7 "st_mtimespec"@2))Timespec@U .)))
+          (else@,5
+           (stmts@2,1
+            (fld@A st_mtime~A x
+             (pragmas
+              (kv@9 importc~7 "st_mtime"@2))int64@Q .)
+            (fld@9,1 st_mtim~9 x
+             (pragmas
+              (kv@9 importc~7 "st_mtim"@2))Timespec@P .)))))))))
+    (const@O,1h StatHasNanoseconds~I x . .
+     (infix@Z,1 or
+      (infix~M or
+       (infix~K or
+        (infix@k,~1 or
+         (infix~K or
+          (call~8 defined~7 linux@1)
+          (call@A defined~7 freebsd@1))
+         (call~q,1 defined~7 osx@1))
+        (call@A defined~7 openbsd@1))
+       (call@A defined~7 dragonfly@1))
+      (call@A defined~7 haiku@1)))
+    (when@,1r
+     (elif@5
+      (infix@D or
+       (call~6 defined~7 osx@1)
+       (par@3
+        (infix@M and
+         (call~E defined~7 nimNativeIo@1)
+         (call@B defined~7 amd64@1))))
+      (stmts~3,1
+       (template st_mtime@9 x . .
+        (params@I
+         (param@1 s . . Stat@3 .))int64@B . .
+        (stmts@b
+         (call@5 int64~5
+          (dot@A
+           (dot~8 s~1 st_mtim@1)tv_sec@1)))))))
+    (when@,1v
+     (elif@5
+      (call@7 defined~7 nimNativeIo@1)
+      (stmts~3,1
+       (proc fcntl@5 x . .
+        (params@B
+         (param@1 a1 . . cint@4 .)
+         (param@B a2 . . cint@4 .))cint@M
+        (pragmas@c varargs@2
+         (kv@I importc~7 "fcntl"@2)sideEffect@T). .)))
+     (else@,2
+      (stmts@2,1
+       (proc fcntl@5 x . .
+        (params@B
+         (param@1 a1 . . cint@4 .)
+         (param@B a2 . . cint@4 .))cint@M
+        (pragmas@c varargs@2 importc@B
+         (kv@Q header~6 "<fcntl.h>"@2)sideEffect@f). .))))
+    (when@,22
+     (elif@5
+      (call@7 defined~7 nimNativeIo@1)
+      (stmts~3,8
+       (proc open@5 x . .
+        (params@A
+         (param@1 a1 . . cstring@4 .)
+         (param@E a2 . . cint@4 .)
+         (param@O mode . . Mode@6 0@D))cint@f
+        (pragmas@u
+         (kv@9 importc~7 "open"@2)sideEffect@J). .)))
+     (else@,9
+      (stmts@2,1
+       (proc open@5 x . .
+        (params@A
+         (param@1 a1 . . cstring@4 .)
+         (param@E a2 . . cint@4 .)
+         (param@O mode . . Mode@6 .))cint@b
+        (pragmas@q
+         (kv@9 importc~7 "open"@2)
+         (kv@P header~6 "<fcntl.h>"@2)sideEffect@e). .)
+       (proc@,1 open@5 x . .
+        (params@A
+         (param@1 a1 . . cstring@4 .)
+         (param@E a2 . . cint@4 .))cint@P
+        (pragmas@e
+         (kv@9 importc~7 "open"@2)
+         (kv@P header~6 "<fcntl.h>"@2)sideEffect@e). .))))
+    (when@,2F
+     (elif@5
+      (call@7 defined~7 nimNativeIo@1)
+      (stmts~3,1
+       (proc ftruncate@5 x . .
+        (params@F
+         (param@1 a1 . . cint@4 .)
+         (param@B a2 . . Off@4 .))cint@L
+        (pragmas@f
+         (kv@9 importc~7 "ftruncate"@2)). .)))
+     (else@,2
+      (stmts@2,1
+       (proc ftruncate@5 x . .
+        (params@F
+         (param@1 a1 . . cint@4 .)
+         (param@B a2 . . Off@4 .))cint@L
+        (pragmas@f
+         (kv@9 importc~7 "ftruncate"@2)
+         (kv@U header~6 "<unistd.h>"@2)). .))))
+    (when@,2J
+     (elif@5
+      (call@7 defined~7 nimNativeIo@1)
+      (stmts~3,1
+       (discard .)))
+     (elif@5,3
+      (call@7 defined~7 osx@1)
+      (stmts~3,1
+       (type@13 FStore~y . .
+        (pragmas~r
+         (kv@9 importc~7 "fstore_t"@2)
+         (kv@T header~6 "<fcntl.h>"@2)bycopy@i)
+        (object@2 .
+         (fld~t,1 fst_flags~A .
+          (pragmas importc@2)uint32@D .)
+         (fld~r,2 fst_posmode~C .
+          (pragmas importc@2)cint@D .)
+         (fld~s,3 fst_offset~B .
+          (pragmas importc@2)Off@D .)
+         (fld~s,4 fst_length~B .
+          (pragmas importc@2)Off@D .)
+         (fld~o,5 fst_bytesalloc~F .
+          (pragmas importc@2)Off@D .)))
+       (var@I,6 F_PEOFPOSMODE~E .
+        (pragmas importc@2
+         (kv@H header~6 "<fcntl.h>"@2))cint@Y .)
+       (var@I,7 F_ALLOCATEALL~E .
+        (pragmas importc@2
+         (kv@H header~6 "<fcntl.h>"@2))uint32@Y .)
+       (var@I,8 F_PREALLOCATE~E .
+        (pragmas importc@2
+         (kv@H header~6 "<fcntl.h>"@2))cint@Y .)
+       (proc@,9 posix_fallocate@5 x . .
+        (params@L
+         (param@1 a1 . . cint@4 .)
+         (param@B a2 . . Off@8 .)
+         (param@F a3 . . Off@4 .))cint@P . .
+        (stmts@2,1
+         (var@4 fst . . .
+          (oconstr@C FStore~6
+           (kv@A fst_flags~9 F_ALLOCATEALL@2)
+           (kv@c fst_posmode~B F_PEOFPOSMODE@2)
+           (kv@B,1 fst_offset~A a2@2)
+           (kv@R,1 fst_length~A a3@2)))
+         (if@,5
+          (elif@3
+           (infix@Z !=
+            (call~U fcntl~5 a1@1 F_PREALLOCATE@5
+             (dot@N fst~3 addr@1))
+            (call@7 cint~4 -1@1))
+           (stmts@m
+            (call@9 ftruncate~9 a1@1
+             (infix@8 \2B a2~3 a3@2))))
+          (else@,1
+           (stmts@6
+            (call@4 cint~4 -1@1))))))))
+     (else@,L
+      (stmts@2,1
+       (proc posix_fallocate@5 x . .
+        (params@L
+         (param@1 a1 . . cint@4 .)
+         (param@B a2 . . Off@8 .)
+         (param@F a3 . . Off@4 .))cint@P
+        (pragmas@p
+         (kv~g,1 importc~7 "posix_fallocate"@2)
+         (kv~F,1 header~6 "<fcntl.h>"@2)). .))))
+    (when@,2i
+     (elif@5
+      (call@7 defined~7 nimNativeIo@1)
+      (stmts~3,1
+       (proc close@5 x . .
+        (params@B
+         (param@1 a1 . . cint@4 .))cint@C
+        (pragmas@S
+         (kv@9 importc~7 "close"@2)). .)))
+     (else@,2
+      (stmts@2,1
+       (proc close@5 x . .
+        (params@B
+         (param@1 a1 . . cint@4 .))cint@C
+        (pragmas@S
+         (kv@9 importc~7 "close"@2)
+         (kv@Q header~6 "<unistd.h>"@2)). .))))
+    (when@,2n
+     (elif@5
+      (call@7 defined~7 nimNativeIo@1)
+      (stmts~3,1
+       (proc fstat@5 x . .
+        (params@B
+         (param@1 a1 . . cint@4 .)
+         (param@B a2 . .
+          (mut@4 Stat@4).))cint@Q
+        (pragmas@g
+         (kv@9 importc~7 "fstat"@2)sideEffect@K). .)
+       (proc@,1 lstat@5 x . .
+        (params@B
+         (param@1 a1 . . cstring@4 .)
+         (param@E a2 . .
+          (mut@4 Stat@4).))cint@T
+        (pragmas@j
+         (kv@9 importc~7 "lstat"@2)sideEffect@K). .)
+       (proc@,2 stat@5 x . .
+        (params@A
+         (param@1 a1 . . cstring@4 .)
+         (param@E a2 . .
+          (mut@4 Stat@4).))cint@T
+        (pragmas@i
+         (kv@9 importc~7 "stat"@2)). .)))
+     (else@,4
+      (stmts@2,1
+       (proc fstat@5 x . .
+        (params@B
+         (param@1 a1 . . cint@4 .)
+         (param@B a2 . .
+          (mut@4 Stat@4).))cint@Q
+        (pragmas@g
+         (kv@9 importc~7 "fstat"@2)
+         (kv@Q header~6 "<sys/stat.h>"@2)sideEffect@i). .)
+       (proc@,1 lstat@5 x . .
+        (params@B
+         (param@1 a1 . . cstring@4 .)
+         (param@E a2 . .
+          (mut@4 Stat@4).))cint@T
+        (pragmas@j importc@2
+         (kv@H header~6 "<sys/stat.h>"@2)sideEffect@Z). .)
+       (proc@,2 stat@5 x . .
+        (params@A
+         (param@1 a1 . . cstring@4 .)
+         (param@E a2 . .
+          (mut@4 Stat@4).))cint@T
+        (pragmas@i importc@2
+         (kv@H header~6 "<sys/stat.h>"@2)). .))))
+    (when@,2x
+     (elif@5
+      (call@7 defined~7 nimNativeIo@1)
+      (stmts~3,4
+       (template fileType@9 . . .
+        (params@H
+         (param@1 m . . Mode@3 .))uint32@B . .
+        (stmts@b
+         (infix@A and
+          (call~4 uint32~6 m@1)
+          (suf@4 61440u "u32"))))
+       (proc@,1 S_ISBLK@5 x . .
+        (params@D
+         (param@1 m . . Mode@3 .))bool@B . .
+        (stmts@V
+         (infix@C ==
+          (call~4 fileType~8 m@1)
+          (suf@3 24576u "u32"))))
+       (proc@,2 S_ISCHR@5 x . .
+        (params@D
+         (param@1 m . . Mode@3 .))bool@B . .
+        (stmts@V
+         (infix@C ==
+          (call~4 fileType~8 m@1)
+          (suf@3 8192u "u32"))))
+       (proc@,3 S_ISDIR@5 x . .
+        (params@D
+         (param@1 m . . Mode@3 .))bool@B . .
+        (stmts@V
+         (infix@C ==
+          (call~4 fileType~8 m@1)
+          (suf@3 16384u "u32"))))
+       (proc@,4 S_ISFIFO@5 x . .
+        (params@E
+         (param@1 m . . Mode@3 .))bool@B . .
+        (stmts@W
+         (infix@C ==
+          (call~4 fileType~8 m@1)
+          (suf@3 4096u "u32"))))
+       (proc@,5 S_ISREG@5 x . .
+        (params@D
+         (param@1 m . . Mode@3 .))bool@B . .
+        (stmts@V
+         (infix@C ==
+          (call~4 fileType~8 m@1)
+          (suf@3 32768u "u32"))))
+       (proc@,6 S_ISLNK@5 x . .
+        (params@D
+         (param@1 m . . Mode@3 .))bool@B . .
+        (stmts@V
+         (infix@C ==
+          (call~4 fileType~8 m@1)
+          (suf@3 40960u "u32"))))
+       (proc@,7 S_ISSOCK@5 x . .
+        (params@E
+         (param@1 m . . Mode@3 .))bool@B . .
+        (stmts@W
+         (infix@C ==
+          (call~4 fileType~8 m@1)
+          (suf@3 49152u "u32"))))))
+     (else@,C
+      (stmts@2,1
+       (proc S_ISBLK@5 x . .
+        (params@D
+         (param@1 m . . Mode@3 .))bool@B
+        (pragmas@T importc@2
+         (kv@H header~6 "<sys/stat.h>"@2)). .)
+       (proc@,2 S_ISCHR@5 x . .
+        (params@D
+         (param@1 m . . Mode@3 .))bool@B
+        (pragmas@T importc@2
+         (kv@H header~6 "<sys/stat.h>"@2)). .)
+       (proc@,4 S_ISDIR@5 x . .
+        (params@D
+         (param@1 m . . Mode@3 .))bool@B
+        (pragmas@T importc@2
+         (kv@H header~6 "<sys/stat.h>"@2)). .)
+       (proc@,6 S_ISFIFO@5 x . .
+        (params@E
+         (param@1 m . . Mode@3 .))bool@B
+        (pragmas@U importc@2
+         (kv@H header~6 "<sys/stat.h>"@2)). .)
+       (proc@,8 S_ISREG@5 x . .
+        (params@D
+         (param@1 m . . Mode@3 .))bool@B
+        (pragmas@T importc@2
+         (kv@H header~6 "<sys/stat.h>"@2)). .)
+       (proc@,A S_ISLNK@5 x . .
+        (params@D
+         (param@1 m . . Mode@3 .))bool@B
+        (pragmas@T importc@2
+         (kv@H header~6 "<sys/stat.h>"@2)). .)
+       (proc@,C S_ISSOCK@5 x . .
+        (params@E
+         (param@1 m . . Mode@3 .))bool@B
+        (pragmas@U importc@2
+         (kv@H header~6 "<sys/stat.h>"@2)). .))))
+    (when@,3P
+     (elif@5
+      (call@7 defined~7 nimNativeIo@1)
+      (stmts~3,1
+       (proc mmap@5 x . .
+        (params@A
+         (param@1 a1 . .
+          (cmd@8
+           (nil~4)pointer).)
+         (param@I a2 . . int@4 .)
+         (param@R a3 . . cint@C .)
+         (param@V a4 . . cint@8 .)
+         (param@Z a5 . . cint@4 .)
+         (param@j a6 . . Off@4 .))pointer@t
+        (pragmas@1B
+         (kv~12,1 importc~7 "mmap"@2)). .)
+       (proc@,2 munmap@5 x . .
+        (params@C
+         (param@1 a1 . .
+          (cmd@8
+           (nil~4)pointer).)
+         (param@I a2 . . int@4 .))cint@S
+        (pragmas@j
+         (kv@9 importc~7 "munmap"@2)). .)))
+     (else@,4
+      (stmts@2,1
+       (proc mmap@5 x . .
+        (params@A
+         (param@1 a1 . .
+          (cmd@8
+           (nil~4)pointer).)
+         (param@I a2 . . int@4 .)
+         (param@R a3 . . cint@C .)
+         (param@V a4 . . cint@8 .)
+         (param@Z a5 . . cint@4 .)
+         (param@j a6 . . Off@4 .))pointer@t
+        (pragmas@1B
+         (kv~12,1 importc~7 "mmap"@2)
+         (kv~m,1 header~6 "<sys/mman.h>"@2)). .)
+       (proc@,2 munmap@5 x . .
+        (params@C
+         (param@1 a1 . .
+          (cmd@8
+           (nil~4)pointer).)
+         (param@I a2 . . int@4 .))cint@S
+        (pragmas@j
+         (kv@9 importc~7 "munmap"@2)
+         (kv@R header~6 "<sys/mman.h>"@2)). .))))
+    (when@,3Y
+     (elif@5
+      (prefix not
+       (call@B defined~7 nimNativeIo@1))
+      (stmts~3,1
+       (var@D errnoVar~9 .
+        (pragmas
+         (kv@9 importc~7 "errno"@2)
+         (kv@Q header~6 "<errno.h>"@2))cint@h .)))
+     (else@,2
+      (stmts@2,1
+       (var@9 errno~5 x . cint@3 0@A))))
+    (template@,3k pcall@9 x . .
+     (params@F
+      (param@1 x . . untyped@3 .))clong@E
+     (pragmas@Z untyped@2).
+     (stmts@2,1
+      (comment)
+      (when@,4
+       (elif@5
+        (call@7 defined~7 nimNativeIo@1)
+        (stmts~3,1
+         (call@5 clong~5 x@1)))
+       (else@,2
+        (stmts@2,1
+         (let@4 r . . .
+          (call@9 clong~5 x@1))
+         (if@,1
+          (elif@3
+           (infix@2 < r~2 0@2)
+           (stmts@7
+            (call@5 clong~5
+             (prefix@1 \2D errnoVar@1))))
+          (else@R
+           (stmts@6 r))))))))
+    (template@,3v mmapFailed@9 x . .
+     (params@K
+      (param@1 p . . pointer@3 .))bool@E . .
+     (stmts@2,1
+      (comment)
+      (infix@M,3 and
+       (infix~9 >=
+        (cast~D int@5 p@A)-4095@3)
+       (infix@H <=
+        (cast~D int@5 p@A)-1@3))))
+    (template@,41 mmapErrno@9 x . .
+     (params@J
+      (param@1 p . . pointer@3 .))cint@E . .
+     (stmts@2,1
+      (comment)
+      (when@,1
+       (elif@5
+        (call@7 defined~7 nimNativeIo@1)
+        (stmts@M
+         (call@4 cint~4
+          (prefix@1 \2D
+           (cast@1 int@5 p@A)))))
+       (else@,1
+        (stmts@6 errnoVar)))))
+    (when@,46
+     (elif@5
+      (call@7 defined~7 nimNativeIo@1)
+      (stmts~3,1
+       (proc clock_gettime@5 x . .
+        (params@J
+         (param@1 a1 . . ClockId@4 .)
+         (param@E a2 . .
+          (mut@4 Timespec@4).))cint@X
+        (pragmas@v
+         (kv@9 importc~7 "clock_gettime"@2)sideEffect@S). .)))
+     (else@,2
+      (stmts@2,1
+       (proc clock_gettime@5 x . .
+        (params@J
+         (param@1 a1 . . ClockId@4 .)
+         (param@E a2 . .
+          (mut@4 Timespec@4).))cint@X
+        (pragmas@v importc~t,1
+         (kv~e,1 header~6 "<time.h>"@2)sideEffect~Q,1). .))))
+    (when@,4C
+     (elif@5
+      (call@7 defined~7 nimNativeIo@1)
+      (stmts~3,1
+       (proc getcwd@5 x . .
+        (params@C
+         (param@1 a1 . . cstring@4 .)
+         (param@E a2 . . int@4 .))cstring@O
+        (pragmas@i
+         (kv@9 importc~7 "getcwd"@2)sideEffect@L). .)
+       (proc@,1 chdir@5 x . .
+        (params@B
+         (param@1 path . . cstring@6 .))cint@H
+        (pragmas@X
+         (kv@9 importc~7 "chdir"@2)sideEffect@K). .)))
+     (else@,3
+      (stmts@2,1
+       (proc getcwd@5 x . .
+        (params@C
+         (param@1 a1 . . cstring@4 .)
+         (param@E a2 . . int@4 .))cstring@O
+        (pragmas@i importc@2
+         (kv@H header~6 "<unistd.h>"@2)sideEffect@X). .)
+       (proc@,1 chdir@5 x . .
+        (params@B
+         (param@1 path . . cstring@6 .))cint@H
+        (pragmas@X importc@2
+         (kv@H header~6 "<unistd.h>"@2)sideEffect@X). .))))
+    (when@,4J
+     (elif@5
+      (call@7 defined~7 nimNativeIo@1)
+      (stmts~3,1
+       (proc realpath@5 x . .
+        (params@E
+         (param@1 path . . cstring@G .)
+         (param@7 resolved . . cstring@A .))cstring@R
+        (pragmas@n
+         (kv@9 importc~7 "realpath"@2)sideEffect@N). .)))
+     (else@,2
+      (stmts@2,1
+       (proc realpath@5 x . .
+        (params@E
+         (param@1 path . . cstring@G .)
+         (param@7 resolved . . cstring@A .))cstring@R
+        (pragmas@n importc@2
+         (kv@H header~6 "<stdlib.h>"@2)sideEffect@X). .))))
+    (when@,4O
+     (elif@5
+      (prefix not
+       (call@B defined~7 nintendoswitch@1))
+      (stmts~3,1
+       (when
+        (elif@5
+         (call@7 defined~7 nimNativeIo@1)
+         (stmts~3,1
+          (proc readlink@5 x . .
+           (params@E
+            (param@1 a1 . . cstring@8 .)
+            (param@5 a2 . . cstring@4 .)
+            (param@I a3 . . int@4 .))int@S
+           (pragmas@k
+            (kv@9 importc~7 "readlink"@2)). .)
+          (proc@,1 symlink@5 x . .
+           (params@D
+            (param@1 a1 . . cstring@8 .)
+            (param@5 a2 . . cstring@4 .))cint@J
+           (pragmas@b
+            (kv@9 importc~7 "symlink"@2)). .)))
+        (else@,3
+         (stmts@2,1
+          (proc readlink@5 x . .
+           (params@E
+            (param@1 a1 . . cstring@8 .)
+            (param@5 a2 . . cstring@4 .)
+            (param@I a3 . . int@4 .))int@S
+           (pragmas@k importc@2
+            (kv@H header~6 "<unistd.h>"@2)). .)
+          (proc@,1 symlink@5 x . .
+           (params@D
+            (param@1 a1 . . cstring@8 .)
+            (param@5 a2 . . cstring@4 .))cint@J
+           (pragmas@b importc@2
+            (kv@H header~6 "<unistd.h>"@2)). .))))))
+     (else@,7
+      (stmts@2,1
+       (proc symlink@5 x . .
+        (params@D
+         (param@1 a1 . . cstring@8 .)
+         (param@5 a2 . . cstring@4 .))cint@J . .
+        (stmts@d -1)))))
+    (when@,4Z
+     (elif@5
+      (infix@L and
+       (call~E defined~7 nimNativeIo@1)
+       (call@B defined~7 linux@1))
+      (stmts~3,6
+       (const@2,1 O_DIRECTORY . . .
+        (call@I cint~4 65536@1))
+       (const@2,2 dentBufSize . . . 4096@E)
+       (type@J,5 Dirent~H x .
+        (pragmas~9 pure@2)
+        (object@2 .
+         (fld~B,1 d_type~6 x . uint8@3 .)
+         (fld~B,2 d_name~6 x .
+          (at@8 array~5 256@1 char@6).)))
+       (type@G,9 DIR~E x .
+        (pragmas~9 pure@2)
+        (object@2 .
+         (fld~E,1 fd . . cint@4 .)
+         (fld~E,2 bpos . . int32@6 .)
+         (fld~E,3 nread . . int32@7 .)
+         (fld~E,4 ent . . Dirent@5 .)
+         (fld~E,5 buf . .
+          (at@A array~5 dentBufSize@1 byte@E).)))
+       (proc@,I getdents64@5 . . .
+        (params@F
+         (param@1 fd . . cint@4 .)
+         (param@B dirp . . pointer@6 .)
+         (param@Q count . . int@7 .))clong@d
+        (pragmas@y
+         (kv@9 importc~7 "getdents64"@2)sideEffect@P). .)
+       (proc@,K opendir@5 x . .
+        (params@D
+         (param@1 name . . cstring@6 .))
+        (infix@L ptr
+         (nil~4)DIR@4)
+        (pragmas@g sideEffect@2).
+        (stmts@2,1
+         (let@4 fd . . .
+          (call@9 open~4 name@1
+           (infix@V or
+            (infix~F or O_RDONLY~9 O_DIRECTORY@3)O_CLOEXEC@3)))
+         (if@,1
+          (elif@3
+           (infix@3 < fd~3 0@2)
+           (stmts~1,1
+            (asgn@6 errno~6
+             (call@6 cint~4
+              (prefix@1 \2D fd@1)))
+            (ret@,1
+             (nil@7)))))
+         (asgn@7,4 result~7
+          (cast@2
+           (ptr@5 DIR@4)
+           (call@K alloc0~6
+            (call@7 sizeof~6 DIR@1))))
+         (asgn@A,5
+          (dot~4 result~6 fd@1)fd@2)
+         (asgn@C,6
+          (dot~6 result~6 bpos@1)0@2)
+         (asgn@D,7
+          (dot~7 result~6 nread@1)0@2)))
+       (proc@,U closedir@5 x . .
+        (params@E
+         (param@1 dirp . .
+          (infix@A ptr
+           (nil~4)DIR@4).))cint@L
+        (pragmas@e sideEffect@2).
+        (stmts@2,1
+         (if
+          (elif@3
+           (infix@5 == dirp~5
+            (nil@3))
+           (stmts~1,1
+            (asgn@6 errno~6
+             (call@6 cint~4 9@1))
+            (ret@,1
+             (call@B cint~4 -1@1)))))
+         (let@4,3 fd . . .
+          (dot@9 dirp~4 fd@1))
+         (call@7,4 dealloc~7 dirp@1)
+         (asgn@7,5 result~7
+          (call@7 close~5 fd@1))))
+       (proc@,c readdir@5 x . .
+        (params@D
+         (param@1 dirp . .
+          (infix@A ptr
+           (nil~4)DIR@4).))
+        (infix@P ptr
+         (nil~4)Dirent@4)
+        (pragmas@n sideEffect@2).
+        (stmts@2,1
+         (if
+          (elif@3
+           (infix@5 == dirp~5
+            (nil@3))
+           (stmts~1,1
+            (asgn@6 errno~6
+             (call@6 cint~4 9@1))
+            (ret@,1
+             (nil@7)))))
+         (while@,3 true@6
+          (stmts@2,1
+           (if
+            (elif@3
+             (infix@A >=
+              (dot~6 dirp~4 bpos@1)
+              (dot@7 dirp~4 nread@1))
+             (stmts~1,1
+              (let@4 n . . .
+               (call@E getdents64~A
+                (dot@5 dirp~4 fd@1)
+                (cmd@F addr~5
+                 (at@8
+                  (dot~4 dirp~4 buf@1)0@1))dentBufSize@S))
+              (if@,1
+               (elif@3
+                (infix@2 < n~2 0@2)
+                (stmts~1,1
+                 (asgn@6 errno~6
+                  (call@6 cint~4
+                   (call@4 int~3
+                    (prefix@1 \2D n@1))))
+                 (ret@,1
+                  (nil@7)))))
+              (if@,4
+               (elif@3
+                (infix@2 == n~2 0@3)
+                (stmts~1,1
+                 (asgn@6 errno~6
+                  (call@6 cint~4 0@1))
+                 (ret@,1
+                  (nil@7)))))
+              (asgn@B,7
+               (dot~7 dirp~4 nread@1)
+               (call@7 int32~5 n@1))
+              (asgn@A,8
+               (dot~6 dirp~4 bpos@1)0@2))))
+           (let@4,D base . . .
+            (infix@a \2B
+             (cast~T uint@5
+              (cmd@G addr~5
+               (at@8
+                (dot~4 dirp~4 buf@1)0@1)))
+             (call@6 uint~4
+              (dot@5 dirp~4 bpos@1))))
+           (let@4,E reclen . . .
+            (at@c
+             (cast~T
+              (ptr@5 uint16@4)
+              (infix@M \2B base~5 16u@2))))
+           (asgn@G,F
+            (dot~8
+             (dot~4 dirp~4 ent@1)d_type@1)
+            (at@U
+             (cast~S
+              (ptr@5 uint8@4)
+              (infix@L \2B base~5 18u@2))))
+           (let@4,G namePtr . . .
+            (cast@A
+             (ptr@5
+              (at@I UncheckedArray~E char@1))
+             (infix@a \2B base~5 19u@2)))
+           (infix@A,H \2B=
+            (dot~6 dirp~4 bpos@1)
+            (call@8 int32~5 reclen@1))
+           (var@4,I i . . . 0@4)
+           (while@,J
+            (infix@E and
+             (infix~6 < i~2 255@2)
+             (infix@F !=
+              (at~4 namePtr~7 i@1)'\00'@3))
+            (stmts@2,1
+             (asgn@J
+              (at~4
+               (dot~7
+                (dot~4 dirp~4 ent@1)d_name@1)i@1)
+              (at@9 namePtr~7 i@1))
+             (cmd@,1 inc i@4)))
+           (asgn@J,M
+            (at~4
+             (dot~7
+              (dot~4 dirp~4 ent@1)d_name@1)i@1)'\00'@2)
+           (ret@,N
+            (cmd@C addr~5
+             (dot@4 dirp~4 ent@1)))))))))
+     (elif@5,1B
+      (infix@L and
+       (call~E defined~7 nimNativeIo@1)
+       (call@B defined~7 osx@1))
+      (stmts~3,9
+       (type@J,1 Dirent~H x .
+        (pragmas~9 pure@2)
+        (object@2 .
+         (fld~H,1 d_ino . . uint64@7 .)
+         (fld~H,2 d_seekoff . . uint64@B .)
+         (fld~H,3 d_reclen . . uint16@A .)
+         (fld~H,4 d_namlen . . uint16@A .)
+         (fld~B,5 d_type~6 x . uint8@3 .)
+         (fld~B,6 d_name~6 x .
+          (at@8 array~5 1024@1 char@7).)))
+       (type@G,9 DIR~E x .
+        (pragmas~9 pure@2)
+        (object@2 .
+         (fld~E,2 opaque . . pointer@8 .)))
+       (proc@,D opendir@5 x . .
+        (params@D
+         (param@1 name . . cstring@6 .))
+        (infix@L ptr
+         (nil~4)DIR@4)
+        (pragmas@g
+         (kv@9 importc~7 "opendir"@2)sideEffect@M). .)
+       (proc@,E closedir@5 x . .
+        (params@E
+         (param@1 dirp . .
+          (infix@A ptr
+           (nil~4)DIR@4).))cint@L
+        (pragmas@e
+         (kv@9 importc~7 "closedir"@2)sideEffect@N). .)
+       (proc@,F readdir@5 x . .
+        (params@D
+         (param@1 dirp . .
+          (infix@A ptr
+           (nil~4)DIR@4).))
+        (infix@P ptr
+         (nil~4)Dirent@4)
+        (pragmas@n
+         (kv@9 importc~7 "readdir"@2)sideEffect@M). .)))
+     (else@,1a
+      (stmts@2,1
+       (type@14,1 DIR~12 x .
+        (pragmas~x
+         (kv@9 importc~7 "DIR"@2)
+         (kv@O header~6 "<dirent.h>"@2)incompleteStruct@e)
+        (object@2 .))
+       (type@z,2 Dirent~x x .
+        (pragmas~p
+         (kv@9 importc~7 "struct dirent"@2)
+         (kv@Y header~6 "<dirent.h>"@2))
+        (object@2 .
+         (fld~p,1 d_type~8 x
+          (pragmas
+           (kv@9 importc~7 "d_type"@2))uint8@N .)
+         (fld~p,2 d_name~8 x
+          (pragmas
+           (kv@9 importc~7 "d_name"@2))
+          (at@S array~5 256@1 char@6).)))
+       (proc@,6 opendir@5 x . .
+        (params@D
+         (param@1 name . . cstring@6 .))
+        (infix@L ptr
+         (nil~4)DIR@4)
+        (pragmas@g importc@2
+         (kv@H header~6 "<dirent.h>"@2)sideEffect@X). .)
+       (proc@,7 closedir@5 x . .
+        (params@E
+         (param@1 dirp . .
+          (infix@A ptr
+           (nil~4)DIR@4).))cint@L
+        (pragmas@e importc@2
+         (kv@H header~6 "<dirent.h>"@2)sideEffect@X). .)
+       (proc@,8 readdir@5 x . .
+        (params@D
+         (param@1 dirp . .
+          (infix@A ptr
+           (nil~4)DIR@4).))
+        (infix@P ptr
+         (nil~4)Dirent@4)
+        (pragmas@n importc@2
+         (kv@H header~6 "<dirent.h>"@2)sideEffect@X). .))))
+    (when@,6K
+     (elif@5
+      (call@7 defined~7 nimNativeIo@1)
+      (stmts~3,4
+       (proc mkdir@5 x . .
+        (params@B
+         (param@1 path . . cstring@6 .)
+         (param@G mode . . Mode@6 .))cint@T
+        (pragmas@j
+         (kv@9 importc~7 "mkdir"@2)sideEffect@K). .)
+       (proc@,1 rmdir@5 x . .
+        (params@B
+         (param@1 path . . cstring@6 .))cint@H
+        (pragmas@X
+         (kv@9 importc~7 "rmdir"@2)sideEffect@K). .)
+       (proc@,2 unlink@5 x . .
+        (params@C
+         (param@1 path . . cstring@6 .))cint@H
+        (pragmas@Y
+         (kv@9 importc~7 "unlink"@2)sideEffect@L). .)))
+     (else@,7
+      (stmts@2,1
+       (proc mkdir@5 x . .
+        (params@B
+         (param@1 path . . cstring@6 .)
+         (param@G mode . . Mode@6 .))cint@T
+        (pragmas@j importc@2
+         (kv@H header~6 "<sys/stat.h>"@2)sideEffect@Z). .)
+       (proc@,1 rmdir@5 x . .
+        (params@B
+         (param@1 path . . cstring@6 .))cint@H
+        (pragmas@X importc@2
+         (kv@H header~6 "<unistd.h>"@2)sideEffect@X). .)
+       (proc@,2 unlink@5 x . .
+        (params@C
+         (param@1 path . . cstring@6 .))cint@H
+        (pragmas@Y importc@2
+         (kv@H header~6 "<unistd.h>"@2)sideEffect@X). .))))
+    (const@C,6Y DT_UNKNOWN~A x . .
+     (suf@4 0u "u8"))
+    (const@9,6Z DT_FIFO~7 x . .
+     (suf@4 1u "u8"))
+    (const@8,6a DT_CHR~6 x . .
+     (suf@4 2u "u8"))
+    (const@8,6b DT_DIR~6 x . .
+     (suf@4 4u "u8"))
+    (const@8,6c DT_BLK~6 x . .
+     (suf@4 6u "u8"))
+    (const@8,6d DT_REG~6 x . .
+     (suf@4 8u "u8"))
+    (const@8,6e DT_LNK~6 x . .
+     (suf@4 10u "u8"))
+    (const@9,6f DT_SOCK~7 x . .
+     (suf@4 12u "u8"))
+    (const@8,6g DT_WHT~6 x . .
+     (suf@4 14u "u8"))
+    (when@,6j
+     (elif@5
+      (call@7 defined~7 nimNativeIo@1)
+      (stmts~3,1
+       (proc sysconf@5 x . .
+        (params@D
+         (param@1 a1 . . cint@4 .))int@C
+        (pragmas@T
+         (kv@9 importc~7 "sysconf"@2)). .)))
+     (else@,2
+      (stmts@2,1
+       (proc sysconf@5 x . .
+        (params@D
+         (param@1 a1 . . cint@4 .))int@C
+        (pragmas@T importc@2
+         (kv@H header~6 "<unistd.h>"@2)). .))))
+    (proc@,6p WEXITSTATUS@5 x . .
+     (params@H
+      (param@1 s . . cint@3 .))cint@B . .
+     (stmts@a
+      (infix@F shr
+       (par~F
+        (infix@3 and s~2 65280@4))8@4)))
+    (proc@,6q WTERMSIG@5 x . .
+     (params@E
+      (param@1 s . . cint@2 .))cint@A . .
+     (stmts@V
+      (infix@2 and s~2 127@4)))
+    (proc@,6r WSTOPSIG@5 x . .
+     (params@E
+      (param@1 s . . cint@2 .))cint@A . .
+     (stmts@V
+      (call@B WEXITSTATUS~B s@1)))
+    (proc@,6s WIFEXITED@5 x . .
+     (params@F
+      (param@1 s . . cint@2 .))bool@B . .
+     (stmts@X
+      (infix@C ==
+       (call~4 WTERMSIG~8 s@1)0@3)))
+    (proc@,6t WIFSIGNALED@5 x . .
+     (params@H
+      (param@1 s . . cint@2 .))bool@B . .
+     (stmts@Z
+      (infix@b >
+       (par~b
+        (infix@U shr
+         (cast~T int8@5
+          (infix@O \2B
+           (par~D
+            (infix@3 and s~2 127@4))1@2))1@4))0@2)))
+    (proc@,6u WIFSTOPPED@5 x . .
+     (params@G
+      (param@1 s . . cint@2 .))bool@B . .
+     (stmts@Y
+      (infix@D ==
+       (par~D
+        (infix@3 and s~2 255@4))127@3)))
+    (proc@,6v WIFCONTINUED@5 x . .
+     (params@I
+      (param@1 s . . cint@2 .))bool@B . .
+     (stmts@a
+      (infix@2 == s~2 WCONTINUED@3)))
+    (when@,74
+     (elif@5
+      (call@7 defined~7 nimNativeIo@1)
+      (stmts~3,1
+       (type@A Pid~5 x . . cint@2)))
+     (else@,2
+      (stmts@2,1
+       (type@u Pid~p x .
+        (pragmas~k
+         (kv@9 importc~7 "pid_t"@2)
+         (kv@Q header~6 "<sys/types.h>"@2))cint@2))))
+    (type@e,7C CChar~Z x .
+     (pragmas~S
+      (kv@9 importc~7 "char"@2)nodecl@J)int8@2)
+    (type@H,7D CCharArray~C x . .
+     (infix@6 ptr
+      (nil~4)
+      (at@I UncheckedArray~E
+       (infix@5 ptr
+        (nil~4)CChar@4))))
+    (when@,7F
+     (elif@5
+      (call@7 defined~7 nimNativeIo@1)
+      (stmts~3,1
+       (proc pipe@5 x . .
+        (params@A
+         (param@1 a . .
+          (ptr@3 cint@4).))cint@F
+        (pragmas@U
+         (kv@9 importc~7 "pipe"@2)sideEffect@J). .)
+       (proc@,1 dup2@5 x . .
+        (params@A
+         (param@1 oldfd . . cint@E .)
+         (param@8 newfd . . cint@7 .))cint@M
+        (pragmas@b
+         (kv@9 importc~7 "dup2"@2)sideEffect@J). .)
+       (proc@,2 fork@5 x . .
+        (params@A)Pid@4
+        (pragmas@I
+         (kv@9 importc~7 "fork"@2)sideEffect@J). .)
+       (proc@,3 execve@5 x . .
+        (params@C
+         (param@1 path . . cstring@6 .)
+         (param@G argv . . CCharArray@B .)
+         (param@M env . . CCharArray@5 .))cint@e
+        (pragmas@v
+         (kv@9 importc~7 "execve"@2)sideEffect@L). .)
+       (proc@,A wait4@5 . . .
+        (params@A
+         (param@1 pid . . Pid@5 .)
+         (param@B status . .
+          (mut@8 cint@4).)
+         (param@T options . . cint@9 .)
+         (param@1,1 rusage . .
+          (cmd@C
+           (nil~4)pointer).))Pid@N,1
+        (pragmas@b,1
+         (kv@9 importc~7 "wait4"@2)sideEffect@K). .)
+       (proc@,C waitpid@5 x . .
+        (params@D
+         (param@1 pid . . Pid@5 .)
+         (param@B status . .
+          (mut@8 cint@4).)
+         (param@T options . . cint@9 .))Pid@j
+        (pragmas@10 inline@2).
+        (stmts@2,1
+         (call@5 wait4~5 pid@1 status@6 options@E
+          (nil@N))))
+       (proc@,E kill@5 x . .
+        (params@A
+         (param@1 pid . . Pid@5 .)
+         (param@B sig . . cint@5 .))cint@N
+        (pragmas@c
+         (kv@9 importc~7 "kill"@2)sideEffect@J). .)
+       (proc@,F setpgid@5 x . .
+        (params@D
+         (param@1 pid . . Pid@B .)
+         (param@6 pgid . . Pid@6 .))cint@I
+        (pragmas@a
+         (kv@9 importc~7 "setpgid"@2)sideEffect@M). .)
+       (proc@,G exitnow@5 x . .
+        (params@D
+         (param@1 status . . cint@8 .)).
+        (pragmas@S
+         (kv@9 importc~7 "_exit"@2)noreturn@K). .)
+       (proc@,H read@5 x . .
+        (params@A
+         (param@1 fildes . . cint@8 .)
+         (param@F buf . . pointer@5 .)
+         (param@T nbyte . . int@7 .))int@g
+        (pragmas@u
+         (kv@9 importc~7 "read"@2)sideEffect@J). .)
+       (proc@,I write@5 x . .
+        (params@B
+         (param@1 fildes . . cint@8 .)
+         (param@F buf . . pointer@5 .)
+         (param@T nbyte . . int@7 .))int@g
+        (pragmas@v
+         (kv@9 importc~7 "write"@2)sideEffect@K). .)
+       (var@J,M posix_environ~F x
+        (pragmas
+         (kv@9 importc~7 "nimEnviron"@2))
+        (ptr@R
+         (at@I UncheckedArray~E cstring@1)).)
+       (proc@,O execvp@5 x . .
+        (params@C
+         (param@1 file . . cstring@6 .)
+         (param@G argv . . CCharArray@6 .))cint@Z
+        (pragmas@q sideEffect@2).
+        (stmts@2,1
+         (comment)
+         (let@4,6 envp . . .
+          (cast@7 CCharArray@5 posix_environ@H))
+         (var@4,7 hasSlash . . . false@B)
+         (var@4,8 n . . . 0@4)
+         (while@,9
+          (infix@E !=
+           (at~4 file~4 n@1)'\00'@3)
+          (stmts@2,1
+           (if
+            (elif@3
+             (infix@8 ==
+              (at~4 file~4 n@1)'/'@3)
+             (stmts@G
+              (asgn@9 hasSlash~9 true@2))))
+           (cmd@,1 inc n@4)))
+         (if@,C
+          (elif@3 hasSlash
+           (stmts~1,1
+            (ret
+             (call@D execve~6 file@1 argv@7 envp@D)))))
+         (var@4,F path . . . "/bin\3A/usr/bin"@7)
+         (if@,G
+          (elif@3
+           (infix@E != posix_environ~E
+            (nil@3))
+           (stmts~1,1
+            (var@4 i . . . 0@4)
+            (while@,1
+             (infix@N !=
+              (at~4 posix_environ~D i@1)
+              (nil@3))
+             (stmts@2,1
+              (let@4 e . . .
+               (at@H posix_environ~D i@1))
+              (if@,1
+               (elif@3
+                (infix@y and
+                 (infix~G and
+                  (infix~G and
+                   (infix~G and
+                    (infix~7 ==
+                     (at~4 e~1 0@1)'P'@3)
+                    (infix@9 ==
+                     (at~4 e~1 1@1)'A'@3))
+                   (infix@9 ==
+                    (at~4 e~1 2@1)'T'@3))
+                  (infix@9 ==
+                   (at~4 e~1 3@1)'H'@3))
+                 (infix~t,1 ==
+                  (at~4 e~1 4@1)'='@3))
+                (stmts~1,2
+                 (asgn@5 path~5 ""@2)
+                 (var@4,1 k . . . 5@4)
+                 (while@,2
+                  (infix@B !=
+                   (at~4 e~1 k@1)'\00'@3)
+                  (stmts@2,1
+                   (cmd@4
+                    (dot path~4 add@1)
+                    (at@6 e~1 k@1))
+                   (cmd@,1 inc k@4)))
+                 (break@,5 .))))
+              (cmd@,9 inc i@4))))))
+         (var@4,T fileStr . . . ""@A)
+         (var@4,U m . . . 0@4)
+         (while@,V
+          (infix@E !=
+           (at~4 file~4 m@1)'\00'@3)
+          (stmts@2,1
+           (cmd@7
+            (dot fileStr~7 add@1)
+            (at@9 file~4 m@1))
+           (cmd@,1 inc m@4)))
+         (var@4,Y start . . . 0@8)
+         (var@4,Z i . . . 0@4)
+         (while@,a
+          (infix@8 <= i~2
+           (dot@7 path~4 len@1))
+          (stmts@2,1
+           (if
+            (elif@3
+             (infix@E or
+              (infix~C == i~2
+               (dot@7 path~4 len@1))
+              (infix@B ==
+               (at~4 path~4 i@1)'\3A'@3))
+             (stmts~1,1
+              (let@4 dir . . .
+               (if@6
+                (elif@3
+                 (infix@2 > i~2 start@2)
+                 (stmts@B
+                  (at@4 path~4
+                   (infix@7 \2E\2E< start~6 i@4))))
+                (else@W
+                 (stmts@6 "."))))
+              (var@4,1 candidate . . .
+               (infix@M &
+                (infix~6 & dir~4 "/"@2)fileStr@2))
+              (discard@,2
+               (call@E execve~6
+                (dot@A candidate~9 toCString@1)argv@M envp@S))
+              (asgn@6,3 start~6
+               (infix@4 \2B i~2 1@2)))))
+           (cmd@,5 inc i@4)))
+         (asgn@7,h result~7
+          (suf@2 -1 "i32"))))))
+     (else@,18
+      (stmts@2,1
+       (proc pipe@5 x . .
+        (params@A
+         (param@1 a . .
+          (ptr@3 cint@4).))cint@F
+        (pragmas@U importc~S,1
+         (kv~D,1 header~6 "<unistd.h>"@2)sideEffect@3,1). .)
+       (proc@,2 dup2@5 x . .
+        (params@A
+         (param@1 oldfd . . cint@E .)
+         (param@8 newfd . . cint@7 .))cint@M
+        (pragmas@b importc~Z,1
+         (kv~K,1 header~6 "<unistd.h>"@2)sideEffect~4,1). .)
+       (proc@,4 fork@5 x . .
+        (params@A)Pid@4
+        (pragmas@I importc@2
+         (kv@H header~6 "<unistd.h>"@2)sideEffect@X). .)
+       (proc@,5 execvp@5 x . .
+        (params@C
+         (param@1 file . . cstring@6 .)
+         (param@G argv . . CCharArray@6 .))cint@Z
+        (pragmas@q importc~o,1
+         (kv~Z,1 header~6 "<unistd.h>"@2)sideEffect~J,1). .)
+       (proc@,7 execve@5 x . .
+        (params@C
+         (param@1 path . . cstring@6 .)
+         (param@G argv . . CCharArray@B .)
+         (param@M env . . CCharArray@5 .))cint@e
+        (pragmas@v importc~t,1
+         (kv~e,1 header~6 "<unistd.h>"@2)sideEffect~O,1). .)
+       (proc@,9 waitpid@5 x . .
+        (params@D
+         (param@1 pid . . Pid@5 .)
+         (param@B status . .
+          (mut@8 cint@4).)
+         (param@T options . . cint@9 .))Pid@j
+        (pragmas@10 importc~y,1
+         (kv~j,1 header~6 "<sys/wait.h>"@2)sideEffect~R,1). .)
+       (proc@,B kill@5 x . .
+        (params@A
+         (param@1 pid . . Pid@5 .)
+         (param@B sig . . cint@5 .))cint@N
+        (pragmas@c importc~a,1
+         (kv~L,1 header~6 "<signal.h>"@2)sideEffect~5,1). .)
+       (proc@,D setpgid@5 x . .
+        (params@D
+         (param@1 pid . . Pid@B .)
+         (param@6 pgid . . Pid@6 .))cint@I
+        (pragmas@a importc~Y,1
+         (kv~J,1 header~6 "<unistd.h>"@2)sideEffect~3,1). .)
+       (proc@,F exitnow@5 x . .
+        (params@D
+         (param@1 status . . cint@8 .)).
+        (pragmas@S
+         (kv~J,1 importc~7 "_exit"@2)
+         (kv~2,1 header~6 "<unistd.h>"@2)noreturn@E,1). .)
+       (proc@,H read@5 x . .
+        (params@A
+         (param@1 fildes . . cint@8 .)
+         (param@F buf . . pointer@5 .)
+         (param@T nbyte . . int@7 .))int@g
+        (pragmas@u importc~s,1
+         (kv~d,1 header~6 "<unistd.h>"@2)sideEffect~N,1). .)
+       (proc@,J write@5 x . .
+        (params@B
+         (param@1 fildes . . cint@8 .)
+         (param@F buf . . pointer@5 .)
+         (param@T nbyte . . int@7 .))int@g
+        (pragmas@v importc~t,1
+         (kv~e,1 header~6 "<unistd.h>"@2)sideEffect~O,1). .)
+       (when@,N
+        (elif@5
+         (call@7 defined~7 osx@1)
+         (stmts~3,7
+          (type@u,1 Sigset~s x .
+           (pragmas~k
+            (kv@9 importc~7 "sigset_t"@2)
+            (kv@T header~6 "<signal.h>"@2))uint32@2)
+          (type@S,3 Tposix_spawnattr~Q,~1 x .
+           (pragmas~8,~1
+            (kv@9 importc~7 "posix_spawnattr_t"@2)
+            (kv~8,1 header~6 "<spawn.h>"@2))
+           (cmd@6
+            (nil~4)pointer))
+          (type@S,5 Tposix_spawn_file_actions~Q,~1 x .
+           (pragmas@1,~1
+            (kv@9 importc~7 "posix_spawn_file_actions_t"@2)
+            (kv~H,1 header~6 "<spawn.h>"@2))
+           (cmd@6
+            (nil~4)pointer))))
+        (else@,D
+         (stmts@2,1
+          (type@17,1 Sigset~15 x .
+           (pragmas~x
+            (kv@9 importc~7 "sigset_t"@2)
+            (kv@T header~6 "<signal.h>"@2)final@j pure@q)
+           (object@2 .))
+          (type@f,3 Tposix_spawnattr~d,~1 x .
+           (pragmas~L,~1
+            (kv@9 importc~7 "posix_spawnattr_t"@2)
+            (kv~8,1 header~6 "<spawn.h>"@2)final@7,1 pure@E,1)
+           (object@2 .))
+          (type@f,5 Tposix_spawn_file_actions~d,~1 x .
+           (pragmas~C,~1
+            (kv@9 importc~7 "posix_spawn_file_actions_t"@2)
+            (kv~H,1 header~6 "<spawn.h>"@2)final~2,1 pure@5,1)
+           (object@2 .)))))
+       (proc@,j posix_spawn@5 x . .
+        (params@H
+         (param@1 pid . .
+          (mut@5 Pid@4).)
+         (param@F path . . cstring@6 .)
+         (param@1,1 file_actions . .
+          (mut@E Tposix_spawn_file_actions@4).)
+         (param@1,2 attrp . .
+          (mut@7 Tposix_spawnattr@4).)
+         (param@1,3 argv . . CCharArray@C .)
+         (param@7,3 envp . . CCharArray@6 .))cint@Q,3
+        (pragmas@m,3 importc~k,1
+         (kv~V,1 header~6 "<spawn.h>"@2)sideEffect~G,1). .)
+       (proc@,o posix_spawnp@5 x . .
+        (params@I
+         (param@1 pid . .
+          (mut@5 Pid@4).)
+         (param@F file . . cstring@6 .)
+         (param@1,1 file_actions . .
+          (mut@E Tposix_spawn_file_actions@4).)
+         (param@1,2 attrp . .
+          (mut@7 Tposix_spawnattr@4).)
+         (param@1,3 argv . . CCharArray@C .)
+         (param@7,3 envp . . CCharArray@6 .))cint@Q,3
+        (pragmas@n,3 importc~l,1
+         (kv~W,1 header~6 "<spawn.h>"@2)sideEffect~H,1). .)
+       (proc@,t posix_spawn_file_actions_init@5 x . .
+        (params@Z
+         (param~V,1 fops . .
+          (mut@6 Tposix_spawn_file_actions@4).))cint@7,1
+        (pragmas@l,1 importc~j,1
+         (kv~U,1 header~6 "<spawn.h>"@2)). .)
+       (proc@,w posix_spawn_file_actions_destroy@5 x . .
+        (params@c
+         (param~Y,1 fops . .
+          (mut@6 Tposix_spawn_file_actions@4).))cint@4,1
+        (pragmas@l,1 importc~j,1
+         (kv~U,1 header~6 "<spawn.h>"@2)). .)
+       (proc@,z posix_spawn_file_actions_addclose@5 x . .
+        (params@d
+         (param~Z,1 fops . .
+          (mut@6 Tposix_spawn_file_actions@4).)
+         (param@2,1 fildes . . cint@8 .))cint@H,1
+        (pragmas@z,1 importc~x,1
+         (kv~i,1 header~6 "<spawn.h>"@2)). .)
+       (proc@,12 posix_spawn_file_actions_adddup2@5 x . .
+        (params@c
+         (param~Y,1 fops . .
+          (mut@6 Tposix_spawn_file_actions@4).)
+         (param@3,1 fildes . . cint@J .)
+         (param@B,1 newfildes . . cint@B .))cint@T,1
+        (pragmas@1A,1 importc~18,1
+         (kv~t,1 header~6 "<spawn.h>"@2)). .)
+       (proc@,15 posix_spawn_file_actions_addchdir_np@5 x . .
+        (params@g
+         (param~c,1 fops . .
+          (mut@6 Tposix_spawn_file_actions@4).)
+         (param~1,1 path . . cstring@6 .))cint@F,1
+        (pragmas@10,1 importc~y,1
+         (kv~j,1 header~6 "<spawn.h>"@2)). .)
+       (proc@,18 posix_spawnattr_init@5 x . .
+        (params@Q
+         (param@1 attr . .
+          (mut@6 Tposix_spawnattr@4).))cint@U
+        (pragmas@z importc~x,1
+         (kv~i,1 header~6 "<spawn.h>"@2)). .)
+       (proc@,1A posix_spawnattr_destroy@5 x . .
+        (params@T
+         (param@1 attr . .
+          (mut@6 Tposix_spawnattr@4).))cint@U
+        (pragmas@12 importc~10,1
+         (kv~l,1 header~6 "<spawn.h>"@2)). .)
+       (proc@,1C posix_spawnattr_setflags@5 x . .
+        (params@U
+         (param@1 attr . .
+          (mut@6 Tposix_spawnattr@4).)
+         (param@1,1 flags . . cshort@7 .))cint@H,1
+        (pragmas@q,1 importc~o,1
+         (kv~Z,1 header~6 "<spawn.h>"@2)). .)
+       (proc@,1F posix_spawnattr_setpgroup@5 x . .
+        (params@V
+         (param@1 attr . .
+          (mut@6 Tposix_spawnattr@4).)
+         (param@1,1 pgroup . . Pid@8 .))cint@F,1
+        (pragmas@p,1 importc~n,1
+         (kv~Y,1 header~6 "<spawn.h>"@2)). .)
+       (proc@,1I posix_spawnattr_setsigmask@5 x . .
+        (params@W
+         (param@1 attr . .
+          (mut@6 Tposix_spawnattr@4).)
+         (param@1,1 mask . .
+          (mut@6 Sigset@4).))cint@K,1
+        (pragmas@v,1 importc~t,1
+         (kv~e,1 header~6 "<spawn.h>"@2)). .)
+       (proc@,1L posix_spawnattr_setsigdefault@5 x . .
+        (params@Z
+         (param@1 attr . .
+          (mut@6 Tposix_spawnattr@4).)
+         (param@1,1 mask . .
+          (mut@6 Sigset@4).))cint@K,1
+        (pragmas@y,1 importc~w,1
+         (kv~h,1 header~6 "<spawn.h>"@2)). .)
+       (proc@,1O sigemptyset@5 x . .
+        (params@H
+         (param@1 mask . .
+          (mut@6 Sigset@4).))cint@K
+        (pragmas@g importc~e,1
+         (kv~P,1 header~6 "<signal.h>"@2)). .)
+       (proc@,1Q sigfillset@5 x . .
+        (params@G
+         (param@1 mask . .
+          (mut@6 Sigset@4).))cint@K
+        (pragmas@f importc~d,1
+         (kv~O,1 header~6 "<signal.h>"@2)). .)
+       (proc@,1S sigaddset@5 x . .
+        (params@F
+         (param@1 mask . .
+          (mut@6 Sigset@4).)
+         (param@J sig . . cint@5 .))cint@V
+        (pragmas@p importc~n,1
+         (kv~Y,1 header~6 "<signal.h>"@2)). .)
+       (var@J,1W posix_environ~F x
+        (pragmas
+         (kv@9 importc~7 "environ"@2)
+         (kv@S header~6 "<unistd.h>"@2))
+        (ptr~H,1
+         (at@I UncheckedArray~E cstring@1)).))))
+    (when@,9y
+     (elif@5
+      (call@7 defined~7 nimNativeIo@1)
+      (stmts~3,1
+       (proc strerror@5 x . .
+        (params@E
+         (param@1 errnum . . cint@8 .))cstring@G
+        (pragmas@c
+         (kv@9 importc~7 "strerror"@2)sideEffect@N). .)))
+     (else@,2
+      (stmts@2,1
+       (proc strerror@5 x . .
+        (params@E
+         (param@1 errnum . . cint@8 .))cstring@G
+        (pragmas@c importc~a,1
+         (kv~L,1 header~6 "<string.h>"@2)sideEffect~5,1). .))))
+    (when@,A4
+     (elif@5
+      (call@7 defined~7 nimNativeIo@1)
+      (stmts~3,1
+       (proc nanosleep@5 x . .
+        (params@F
+         (param@1 req . .
+          (mut@5 Timespec@4).)
+         (param@K rem . .
+          (mut@5 Timespec@4).))cint@e
+        (pragmas@y
+         (kv@9 importc~7 "nanosleep"@2)sideEffect@O). .)))
+     (else@,2
+      (stmts@2,1
+       (proc nanosleep@5 x . .
+        (params@F
+         (param@1 req . .
+          (mut@5 Timespec@4).)
+         (param@K rem . .
+          (mut@5 Timespec@4).))cint@e
+        (pragmas@y importc~w,1
+         (kv~h,1 header~6 "<time.h>"@2)sideEffect~T,1). .))))))))

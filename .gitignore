@@ -1,7 +1,7 @@
 /bin/
 /nimcache/
 /tests/_work/
-*.p.nif
+*.p.aif
 *.deps.nif
 __pycache__/
 /webtest/nc/

@@ -1,0 +1,2146 @@
+(.nif27)
+(.vendor "Nifler")
+(.dialect "nim-parsed")
+(stmts@,1,../nimony/lib/std/private/ospaths2.nim
+ (import
+  (prefix@7 \2E\2E/ strutils@3))
+ (import@,1
+  (prefix@7 \2E\2E/ oserrors@3))
+ (import@,3 oscommons@7)
+ (import@,4
+  (prefix@7 \2E\2E/
+   (bracket@3 syncio@1 assertions@9 widestrs@L)))
+ (import@,6
+  (prefix@7 \2E\2E/ pathnorm@3))
+ (comment@,B)
+ (const@6,D weirdTarget . . .
+  (infix@X or
+   (call~C defined~7 nimscript@1)
+   (call@A defined~7 js@1)))
+ (when@,F
+  (elif@5 weirdTarget
+   (stmts~3,1
+    (discard .)))
+  (elif@5,2
+   (call@7 defined~7 windows@1)
+   (stmts~3,1
+    (import
+     (infix@H /
+      (prefix~A \2E\2E/ windows@3)winlean@1))))
+  (elif@5,4
+   (call@7 defined~7 posix@1)
+   (stmts~3,1
+    (import
+     (infix@F /
+      (prefix~8 \2E\2E/ posix@3)posix@1)))))
+ (when@,M
+  (elif@5 weirdTarget
+   (stmts~3,1
+    (pragmas
+     (kv@8 pragma~6 noWeirdTarget@2)
+     (kv@U error~5 "this proc is not available on the NimScript/js target"@2))))
+  (else@,2
+   (stmts@2,1
+    (pragmas
+     (kv@8 pragma~6 noWeirdTarget@2)))))
+ (when@,R
+  (elif@5
+   (call@7 defined~7 nimscript@1)
+   (stmts~3,2
+    (template noNimJs@9 . . .
+     (params@G
+      (param@1 body . . . .))untyped@8 . .
+     (stmts@Y
+      (discard .)))))
+  (elif@5,3
+   (call@7 defined~7 js@1)
+   (stmts~3,1
+    (pragmas
+     (kv@8 pragma~6 noNimJs@2)
+     (kv@O error~5 "this proc is not available on the js target"@2))))
+  (else@,5
+   (stmts@2,1
+    (pragmas
+     (kv@8 pragma~6 noNimJs@2)))))
+ (import@,a osseps@7)
+ (export@,b osseps@7)
+ (func@,e normalizePathEnd@5 x . .
+  (params@M
+   (param@1 path . .
+    (mut@6 string@4).)
+   (param@J trailingSep . . . false@E)). . .
+  (stmts@2,1
+   (comment)
+   (if@,4
+    (elif@3
+     (infix@9 ==
+      (dot~5 path~4 len@1)0@3)
+     (stmts@F
+      (ret .))))
+   (var@4,5 i . . .
+    (dot@8 path~4 len@1))
+   (while@,6
+    (infix@8 >= i~2 1@3)
+    (stmts@2,1
+     (if
+      (elif@3
+       (infix@A in
+        (at~6 path~4
+         (infix@2 \2D i~1 1@1))
+        (curly@3 DirSep@1 AltSep@9))
+       (stmts@V
+        (call@3 dec~3 i@1)))
+      (elif@5,1
+       (infix@S and
+        (infix~B and
+         (infix~7 ==
+          (at~6 path~4
+           (infix@2 \2D i~1 1@1))'.'@3)
+         (infix@6 >= i~2 2@3))
+        (infix@E in
+         (at~6 path~4
+          (infix@2 \2D i~1 2@1))
+         (curly@3 DirSep@1 AltSep@9)))
+       (stmts@11
+        (call@3 dec~3 i@1)))
+      (else@,2
+       (stmts@6
+        (break .))))))
+   (if@,A
+    (elif@3 trailingSep
+     (stmts~1,2
+      (call@B
+       (dot~7 path~4 setLen@1)i@1)
+      (cmd@4,2
+       (dot path~4 add@1)DirSep@5)))
+    (elif@5,5
+     (infix@2 > i~2 0@2)
+     (stmts~3,2
+      (call@B
+       (dot~7 path~4 setLen@1)i@1)))
+    (else@,8
+     (stmts@2,2
+      (asgn@5 path~5
+       (prefix@2 $ DirSep@1)))))))
+ (template@,1F endsWith@9 . . .
+  (params@H
+   (param@1 a . . string@3 .)
+   (param@C b . .
+    (at@6 set~3 char@1).))bool@R . .
+  (stmts@2,1
+   (infix@A and
+    (infix~4 >
+     (dot~5 a~1 len@1)0@2)
+    (infix@E in
+     (at~9 a~1
+      (dot@2 a~1 high@1))b@3))))
+ (func@,1I joinPathImpl@5 . . .
+  (params@H
+   (param@1 result . .
+    (mut@8 string@4).)
+   (param@L state . .
+    (mut@7 int@4).)
+   (param@b tail . . string@6 .)). . .
+  (stmts@2,1
+   (let@4 trailingSep . . .
+    (infix@k or
+     (call~J
+      (dot~9 tail~4 endsWith@1)
+      (curly@1 DirSep@1 AltSep@9))
+     (infix@H and
+      (infix~5 ==
+       (dot~5 tail~4 len@1)0@3)
+      (call@J
+       (dot~9 result~6 endsWith@1)
+       (curly@1 DirSep@1 AltSep@9)))))
+   (call@G,1 normalizePathEnd~G result@1
+    (vv@K trailingSep~B false@1))
+   (call@G,2 addNormalizePath~G tail@1 result@7 state@F DirSep@M)
+   (call@G,3 normalizePathEnd~G result@1
+    (vv@K trailingSep~B trailingSep@1))))
+ (proc@,1O joinPath@5 x . .
+  (params@E
+   (param@1 head . . string@C .)
+   (param@7 tail . . string@6 .))string@M
+  (pragmas@h noSideEffect~f,1).
+  (stmts@2,2
+   (comment)
+   (call@,C runnableExamples
+    (stmts@2,1
+     (when
+      (elif@5
+       (call@7 defined~7 posix@1)
+       (stmts~3,1
+        (cmd assert
+         (infix@U ==
+          (call~F joinPath~8 "usr"@1 "lib"@8)"usr/lib"@3))
+        (cmd@,1 assert
+         (infix@V ==
+          (call~G joinPath~8 "usr"@1 "lib/"@8)"usr/lib/"@3))
+        (cmd@,2 assert
+         (infix@R ==
+          (call~C joinPath~8 "usr"@1 ""@8)"usr"@3))
+        (cmd@,3 assert
+         (infix@S ==
+          (call~D joinPath~8 "usr/"@1 ""@9)"usr/"@3))
+        (cmd@,4 assert
+         (infix@O ==
+          (call~9 joinPath~8 ""@1 ""@5)""@3))
+        (cmd@,5 assert
+         (infix@R ==
+          (call~C joinPath~8 ""@1 "lib"@5)"lib"@3))
+        (cmd@,6 assert
+         (infix@S ==
+          (call~D joinPath~8 ""@1 "/lib"@5)"/lib"@3))
+        (cmd@,7 assert
+         (infix@W ==
+          (call~H joinPath~8 "usr/"@1 "/lib"@9)"usr/lib"@3))
+        (cmd@,8 assert
+         (infix@b ==
+          (call~M joinPath~8 "usr/lib"@1 "../bin"@C)"usr/bin"@3)))))))
+   (asgn@7,O result~7
+    (call@G newStringOfCap~E
+     (infix@A \2B
+      (dot~5 head~4 len@1)
+      (dot@6 tail~4 len@1))))
+   (var@4,P state . . . 0@8)
+   (call@C,Q joinPathImpl~C result@1 state@9 head@G)
+   (call@C,R joinPathImpl~C result@1 state@9 tail@G)
+   (when@,S
+    (elif@5 false
+     (stmts~3,1
+      (if
+       (elif@3
+        (infix@A ==
+         (call~7 len~3 head@1)0@3)
+        (stmts~1,1
+         (asgn@7 result~7 tail@2)))
+       (elif@5,2
+        (infix@I in
+         (at~E head~4
+          (infix@A \2D
+           (call~6 len~3 head@1)1@1))
+         (curly@3 DirSep@1 AltSep@9))
+        (stmts~3,1
+         (if
+          (elif@3
+           (infix@D and
+            (infix~4 >
+             (dot~5 tail~4 len@1)0@2)
+            (infix@C in
+             (at~4 tail~4 0@1)
+             (curly@3 DirSep@1 AltSep@9)))
+           (stmts~1,1
+            (asgn@7 result~7
+             (infix@7 & head~5
+              (call@8 substr~6 tail@1 1@7)))))
+          (else@,2
+           (stmts@2,1
+            (asgn@7 result~7
+             (infix@7 & head~5 tail@2)))))))
+       (else@,7
+        (stmts@2,1
+         (if
+          (elif@3
+           (infix@D and
+            (infix~4 >
+             (dot~5 tail~4 len@1)0@2)
+            (infix@C in
+             (at~4 tail~4 0@1)
+             (curly@3 DirSep@1 AltSep@9)))
+           (stmts~1,1
+            (asgn@7 result~7
+             (infix@7 & head~5 tail@2))))
+          (else@,2
+           (stmts@2,1
+            (asgn@7 result~7
+             (infix@G &
+              (infix~9 & head~5 DirSep@2)tail@2)))))))))))))
+ (proc@,2V
+  (quoted@5 /@1) x . .
+  (params@9
+   (param@1 head . . string@C .)
+   (param@7 tail . . string@6 .))string@M
+  (pragmas@c noSideEffect@2 inline@G).
+  (stmts@2,1
+   (comment)
+   (call@,9 runnableExamples
+    (stmts@2,1
+     (when
+      (elif@5
+       (call@7 defined~7 posix@1)
+       (stmts~3,1
+        (cmd assert
+         (infix@I ==
+          (infix~5 / "usr"~6 ""@2)"usr"@3))
+        (cmd@,1 assert
+         (infix@I ==
+          (infix~8 / ""~3 "lib"@2)"lib"@3))
+        (cmd@,2 assert
+         (infix@J ==
+          (infix~9 / ""~3 "/lib"@2)"/lib"@3))
+        (cmd@,3 assert
+         (infix@O ==
+          (infix~A / "usr/"~7 "/lib/"@2)"usr/lib/"@3))
+        (cmd@,4 assert
+         (infix@W ==
+          (infix~B /
+           (infix~8 / "usr"~6 "lib"@2)"../bin"@2)"usr/bin"@3)))))))
+   (asgn@7,H result~7
+    (call@A joinPath~8 head@1 tail@7))))
+ (when@,2p
+  (elif@5 doslikeFileSystem
+   (stmts~3,1
+    (import ntpath@7))))
+ (proc@,2s splitPath@5 x . .
+  (params@F
+   (param@1 path . . string@6 .))
+  (tuple@G
+   (kv@M head string@C)
+   (kv@S tail string@6))
+  (pragmas@v noSideEffect~t,1).
+  (stmts@2,2
+   (comment)
+   (call@,9 runnableExamples
+    (stmts@2,1
+     (cmd assert
+      (infix@Y ==
+       (call~I splitPath~9 "usr/local/bin"@1)
+       (tup@3 "usr/local"@1 "bin"@E)))
+     (cmd@,1 assert
+      (infix@Z ==
+       (call~J splitPath~9 "usr/local/bin/"@1)
+       (tup@3 "usr/local/bin"@1 ""@I)))
+     (cmd@,2 assert
+      (infix@Q ==
+       (call~A splitPath~9 "/bin/"@1)
+       (tup@3 "/bin"@1 ""@9)))
+     (when@,3
+      (elif@5
+       (infix@L <=
+        (tup~L NimMajor@1 NimMinor@B)
+        (tup@3 1@1 0@4))
+       (stmts~3,1
+        (cmd assert
+         (infix@P ==
+          (call~9 splitPath~9 "/bin"@1)
+          (tup@3 ""@1 "bin"@5)))))
+      (else@,2
+       (stmts@2,1
+        (cmd assert
+         (infix@P ==
+          (call~9 splitPath~9 "/bin"@1)
+          (tup@3 "/"@1 "bin"@6))))))
+     (cmd@,7 assert
+      (infix@O ==
+       (call~8 splitPath~9 "bin"@1)
+       (tup@3 ""@1 "bin"@5)))
+     (cmd@,8 assert
+      (infix@L ==
+       (call~5 splitPath~9 ""@1)
+       (tup@3 ""@1 ""@5)))))
+   (when@,K
+    (elif@5 doslikeFileSystem
+     (stmts~3,1
+      (unpackdecl@4
+       (call@V splitDrive~A path@1)
+       (unpacktup
+        (let drive@1 . . ..)
+        (let splitpath@8 . . ..)))
+      (let@4,1 stop . . .
+       (dot@C drive~5 len@1))))
+    (else@,3
+     (stmts@2,1
+      (const@6 stop . . . 0@7))))
+   (var@4,Q sepPos . . . -1@9)
+   (for@4,R
+    (call@E countdown~9
+     (infix@A \2D
+      (call~6 len~3 path@1)1@1)stop@E)
+    (unpackflat
+     (let i . . ..))
+    (stmts~2,1
+     (if
+      (elif@3
+       (infix@8 in
+        (at~4 path~4 i@1)
+        (curly@3 DirSep@1 AltSep@9))
+       (stmts~1,1
+        (asgn@7 sepPos~7 i@2)
+        (break@,1 .))))))
+   (if@,V
+    (elif@3
+     (infix@7 >= sepPos~7 0@3)
+     (stmts~1,1
+      (asgn@7 result~7
+       (tup@2
+        (call~1,1 substr~6 path@1 0@7
+         (if~4,1
+          (elif@3
+           (infix@7 >= sepPos~7 1@3)
+           (stmts@D
+            (infix@6 \2D sepPos~6 1@1)))
+          (else@P
+           (stmts@6 0))))
+        (call~1,3 substr~6 path@1
+         (infix@D \2B sepPos~6 1@1))))))
+    (else@,5
+     (stmts@2,1
+      (when
+       (elif@5 doslikeFileSystem
+        (stmts~3,1
+         (asgn@7 result~7
+          (tup@2 drive@1 splitpath@8))))
+       (else@,2
+        (stmts@2,1
+         (asgn@7 result~7
+          (tup@2 ""@1 path@5))))))))))
+ (proc@,3a isAbsolute@5 x . .
+  (params@G
+   (param@1 path . . string@6 .))bool@G
+  (pragmas@b noSideEffect@2
+   (kv@M raises~6
+    (bracket@2))).
+  (stmts@2,1
+   (comment)
+   (call@,3 runnableExamples
+    (stmts@2,1
+     (cmd assert
+      (prefix@7 not
+       (dot@6 ""~2 isAbsolute@1)))
+     (cmd@,1 assert
+      (prefix@7 not
+       (dot@7 "."~3 isAbsolute@1)))
+     (when@,2
+      (elif@5
+       (call@7 defined~7 posix@1)
+       (stmts~3,1
+        (cmd assert
+         (dot@A "/"~3 isAbsolute@1))
+        (cmd@,1 assert
+         (prefix@7 not
+          (dot@8 "a/"~4 isAbsolute@1)))
+        (cmd@,2 assert
+         (dot@C "/a/"~5 isAbsolute@1)))))))
+   (if@,B
+    (elif@3
+     (infix@A ==
+      (call~7 len~3 path@1)0@3)
+     (stmts@G
+      (ret false@7))))
+   (when@,D
+    (elif@5 doslikeFileSystem
+     (stmts~3,1
+      (var@4 len . . .
+       (call@9 len~3 path@1))
+      (asgn@7,1 result~7
+       (infix@R or
+        (par~P
+         (infix@9 in
+          (at~4 path~4 0@1)
+          (curly@3 '/'@1 '\5C'@6)))
+        (par~O,1
+         (infix@j and
+          (infix~a and
+           (infix~4 > len~4 1@2)
+           (infix@C in
+            (at~4 path~4 0@1)
+            (curly@3
+             (infix@4 \2E\2E 'a'~3 'z'@2)
+             (infix@E \2E\2E 'A'~3 'Z'@2))))
+          (infix@C ==
+           (at~4 path~4 1@1)'\3A'@3)))))))
+    (elif@5,4
+     (call@7 defined~7 macos@1)
+     (stmts~3,2
+      (asgn@7 result~7
+       (infix@A !=
+        (at~4 path~4 0@1)'\3A'@3))))
+    (elif@5,7
+     (call@7 defined~7 RISCOS@1)
+     (stmts~3,1
+      (asgn@7 result~7
+       (infix@A ==
+        (at~4 path~4 0@1)'$'@3))))
+    (elif@5,9
+     (call@7 defined~7 posix@1)
+     (stmts~3,1
+      (asgn@7 result~7
+       (infix@A ==
+        (at~4 path~4 0@1)'/'@3))))
+    (elif@5,B
+     (call@7 defined~7 nodejs@1)
+     (stmts~3,1
+      (pragmas
+       (kv@6 emit~4
+        (bracket@2 result@1 " = require\28\22path\22\29.isAbsolute\28"@8
+         (dot@l path~4 cstring@1)"\29;"@u)))))
+    (else@,D
+     (stmts@2,1
+      (cmd raiseAssert "unreachable"@C))))))
+ (when@,44
+  (elif@5 FileSystemCaseSensitive
+   (stmts~3,1
+    (template
+     (quoted@9 !=?@1). . .
+     (params@E
+      (param@1 a . . char@6 .)
+      (param@4 b . . char@3 .))bool@E . .
+     (stmts@Z
+      (infix@2 != a~2 b@3)))))
+  (else@,2
+   (stmts@2,1
+    (template
+     (quoted@9 !=?@1). . .
+     (params@E
+      (param@1 a . . char@6 .)
+      (param@4 b . . char@3 .))bool@E . .
+     (stmts@Z
+      (infix@G !=
+       (call~4 toLowerAscii~C a@1)
+       (call@F toLowerAscii~C b@1)))))))
+ (when@,49
+  (elif@5 doslikeFileSystem
+   (stmts~3,1
+    (proc isAbsFromCurrentDrive@5 . . .
+     (params@Q
+      (param@1 path . . string@6 .))bool@G
+     (pragmas@l noSideEffect@2
+      (kv@M raises~6
+       (bracket@2))).
+     (stmts@2,1
+      (comment)
+      (infix@D,1 and
+       (infix~4 >
+        (dot~5 path~4 len@1)0@2)
+       (par~D,1
+        (infix@J or
+         (infix~A ==
+          (at~4 path~4 0@1)AltSep@3)
+         (par~I,1
+          (infix@J and
+           (infix~A ==
+            (at~4 path~4 0@1)DirSep@3)
+           (par~I,1
+            (infix@F or
+             (infix~5 ==
+              (dot~5 path~4 len@1)1@3)
+             (infix@B notin
+              (at~4 path~4 1@1)
+              (curly@6 DirSep@1 AltSep@9 '\3A'@H)))))))))))
+    (proc@,7 sameRoot@5 . . .
+     (params@D
+      (param@1 path1 . . string@E .)
+      (param@8 path2 . . string@7 .))bool@O
+     (pragmas@g noSideEffect@2
+      (kv@M raises~6
+       (bracket@2))).
+     (stmts@2,1
+      (comment)
+      (pragmax@,5
+       (pragmas
+        (cast@2 . noSideEffect@5))
+       (stmts@2,1
+        (call@6 assert~6
+         (call@B isAbsolute~A path1@1))
+        (call@6,1 assert~6
+         (call@B isAbsolute~A path2@1))))
+      (if@,9
+       (elif@3
+        (infix@T and
+         (call~8 isAbsFromCurrentDrive~L path1@1)
+         (call@P isAbsFromCurrentDrive~L path2@1))
+        (stmts~1,1
+         (asgn@7 result~7 true@2)))
+       (elif@5,2
+        (infix@12 ==
+         (call~p cmpIgnoreCase~D
+          (dot@I
+           (call~7 splitDrive~A path1@1)drive@1)
+          (dot@h
+           (call~7 splitDrive~A path2@1)drive@1))0@3)
+        (stmts~3,1
+         (asgn@7 result~7 true@2)))
+       (else@,4
+        (stmts@2,1
+         (asgn@7 result~7 false@2)))))))))
+ (proc@,4Y relativePath@5 x . .
+  (params@I
+   (param@1 path . . string@C .)
+   (param@7 base . . string@6 .)
+   (param@L sep . . . DirSep@6))string@a
+  (pragmas@z raises@2).
+  (stmts@2,1
+   (comment)
+   (call@,E runnableExamples
+    (stmts@2,1
+     (cmd assert
+      (infix@16 ==
+       (call~n relativePath~C "/Users/me/bar/z.nim"@1 "/Users/other/bad"@O '/'@i)"../../me/bar/z.nim"@3))
+     (cmd@,1 assert
+      (infix@12 ==
+       (call~j relativePath~C "/Users/me/bar/z.nim"@1 "/Users/other"@O '/'@e)"../me/bar/z.nim"@3))
+     (when@,2
+      (elif@5
+       (prefix not doslikeFileSystem@4)
+       (stmts~3,1
+        (cmd assert
+         (infix@11 ==
+          (call~i relativePath~C "/Users///me/bar//z.nim"@1 "//Users/"@R '/'@d)"me/bar/z.nim"@3)))))
+     (cmd@,4 assert
+      (infix@z ==
+       (call~g relativePath~C "/Users/me/bar/z.nim"@1 "/Users/me"@O '/'@b)"bar/z.nim"@3))
+     (cmd@,5 assert
+      (infix@h ==
+       (call~O relativePath~C ""@1 "/users/moo"@5 '/'@J)""@3))
+     (cmd@,6 assert
+      (infix@b ==
+       (call~I relativePath~C "foo"@1 "."@8 '/'@D)"foo"@3))
+     (cmd@,7 assert
+      (infix@d ==
+       (call~K relativePath~C "foo"@1 "foo"@8 '/'@F)"."@3))))
+   (if@,O
+    (elif@3
+     (infix@9 ==
+      (dot~5 path~4 len@1)0@3)
+     (stmts@F
+      (ret ""@7))))
+   (var@4,P base . . .
+    (if@7
+     (elif@3
+      (infix@5 == base~5 "."@3)
+      (stmts@D ""))
+     (else@J
+      (stmts@6 base))))
+   (var@4,Q path . . . path@7)
+   (dot@4,R path~4 normalizePathAux@1)
+   (dot@4,S base~4 normalizePathAux@1)
+   (let@4,T a1 . . .
+    (call@F isAbsolute~A path@1))
+   (let@4,U a2 . . .
+    (call@F isAbsolute~A base@1))
+   (if@,V
+    (elif@3
+     (infix@3 and a1~3
+      (prefix@4 not a2@4))
+     (stmts~1,1
+      (asgn@5 base~5
+       (call@M absolutePathInternal~K base@1))))
+    (elif@5,2
+     (infix@3 and a2~3
+      (prefix@4 not a1@4))
+     (stmts~3,1
+      (asgn@5 path~5
+       (call@M absolutePathInternal~K path@1)))))
+   (when@,a
+    (elif@5 doslikeFileSystem
+     (stmts~3,1
+      (if
+       (elif@3
+        (infix@H and
+         (call~7 isAbsolute~A path@1)
+         (call@E isAbsolute~A base@1))
+        (stmts~1,1
+         (if
+          (elif@3
+           (prefix not
+            (call@C sameRoot~8 path@1 base@7))
+           (stmts~1,1
+            (ret path@7))))))))))
+   (var@4,f f . . .
+    (cmd@C default~8 PathIter))
+   (var@4,g b . . .
+    (cmd@C default~8 PathIter))
+   (var@4,h ff . . .
+    (tup@5 0@1 -1@4))
+   (var@4,i bb . . .
+    (tup@5 0@1 -1@4))
+   (asgn@7,j result~7
+    (call@G newStringOfCap~E
+     (dot@5 path~4 len@1)))
+   (while@,l
+    (infix@M and
+     (call~7
+      (dot~8 f~1 hasNext@1)path@1)
+     (call@D
+      (dot~8 b~1 hasNext@1)base@1))
+    (stmts@2,1
+     (asgn@3 ff~3
+      (call@6 next~4 f@1 path@4))
+     (asgn@3,1 bb~3
+      (call@6 next~4 b@1 base@4))
+     (let@4,2 diff . . .
+      (infix@D \2D
+       (at~4 ff~2 1@1)
+       (at@4 ff~2 0@1)))
+     (if@,3
+      (elif@3
+       (infix@5 != diff~5
+        (infix@9 \2D
+         (at~4 bb~2 1@1)
+         (at@4 bb~2 0@1)))
+       (stmts@N
+        (break .))))
+     (var@4,4 same . . . true@7)
+     (for@4,5
+      (infix@6 \2E\2E 0~1 diff@2)
+      (unpackflat
+       (let i . . ..))
+      (stmts~2,1
+       (if
+        (elif@3
+         (infix@G !=?
+          (at~C path~4
+           (infix@3 \2B i~2
+            (at@4 ff~2 0@1)))
+          (at@8 base~4
+           (infix@3 \2B i~2
+            (at@4 bb~2 0@1))))
+         (stmts~1,1
+          (asgn@5 same~5 false@2)
+          (break@,1 .))))))
+     (if@,9
+      (elif@3
+       (prefix not same@4)
+       (stmts@A
+        (break .))))
+     (asgn@3,A ff~3
+      (tup@2 0@1 -1@4))
+     (asgn@3,B bb~3
+      (tup@2 0@1 -1@4))))
+   (while@,15 true@6
+    (stmts@2,1
+     (if
+      (elif@3
+       (infix@6 >=
+        (at~4 bb~2 1@1)
+        (at@5 bb~2 0@1))
+       (stmts~1,1
+        (if
+         (elif@3
+          (infix@F and
+           (infix~4 >
+            (dot~5 result~6 len@1)0@2)
+           (infix@O !=
+            (at~E result~6
+             (dot@7 result~6 high@1))sep@3))
+          (stmts~1,1
+           (cmd@6
+            (dot result~6 add@1)sep@5))))
+        (cmd@6,2
+         (dot result~6 add@1)".."@5))))
+     (if@,4
+      (elif@3
+       (prefix not
+        (call@D
+         (dot~8 b~1 hasNext@1)base@1))
+       (stmts@L
+        (break .))))
+     (asgn@3,5 bb~3
+      (call@8
+       (dot~5 b~1 next@1)base@1))))
+   (while@,1E true@6
+    (stmts@2,1
+     (if
+      (elif@3
+       (infix@6 >=
+        (at~4 ff~2 1@1)
+        (at@5 ff~2 0@1))
+       (stmts~1,1
+        (if
+         (elif@3
+          (infix@F and
+           (infix~4 >
+            (dot~5 result~6 len@1)0@2)
+           (infix@O !=
+            (at~E result~6
+             (dot@7 result~6 high@1))sep@3))
+          (stmts~1,1
+           (cmd@6
+            (dot result~6 add@1)sep@5))))
+        (for@4,2
+         (infix@6 \2E\2E 0~1
+          (infix@8 \2D
+           (at~4 ff~2 1@1)
+           (at@4 ff~2 0@1)))
+         (unpackflat
+          (let i . . ..))
+         (stmts~2,1
+          (cmd@6
+           (dot result~6 add@1)
+           (at@9 path~4
+            (infix@3 \2B i~2
+             (at@4 ff~2 0@1)))))))))
+     (if@,5
+      (elif@3
+       (prefix not
+        (call@D
+         (dot~8 f~1 hasNext@1)path@1))
+       (stmts@L
+        (break .))))
+     (asgn@3,6 ff~3
+      (call@8
+       (dot~5 f~1 next@1)path@1))))
+   (when@,1N
+    (elif@5
+     (prefix not
+      (call@B defined~7 nimOldRelativePathBehavior@1))
+     (stmts~3,1
+      (if
+       (elif@3
+        (infix@B ==
+         (dot~5 result~6 len@1)0@3)
+        (stmts@H
+         (cmd@6
+          (dot result~6 add@1)"."@5)))))))))
+ (proc@,5z isRelativeTo@5 x . .
+  (params@I
+   (param@1 path . . string@6 .)
+   (param@F base . . string@6 .))bool@U
+  (pragmas@r raises@2).
+  (stmts@2,1
+   (comment)
+   (call@,1 runnableExamples
+    (stmts@2,1
+     (cmd assert
+      (call@J isRelativeTo~C "./foo//bar"@1 "foo"@F))
+     (cmd@,1 assert
+      (call@J isRelativeTo~C "foo/bar"@1 "."@C))
+     (cmd@,2 assert
+      (call@J isRelativeTo~C "/foo/bar.nim"@1 "/foo/bar.nim"@H))
+     (cmd@,3 assert
+      (prefix@7 not
+       (call@G isRelativeTo~C "foo/bar.nims"@1 "foo/bar.nim"@H)))))
+   (let@4,6 path . . .
+    (call@T
+     (dot~E pathnorm~8 normalizePath@1)path@1))
+   (let@4,7 base . . .
+    (call@T
+     (dot~E pathnorm~8 normalizePath@1)base@1))
+   (let@4,8 ret . . .
+    (call@I relativePath~C path@1 base@7))
+   (asgn@7,9 result~7
+    (infix@F and
+     (infix~4 >
+      (dot~5 path~4 len@1)0@2)
+     (prefix@4 not
+      (cmd@J
+       (dot~C ret~3 startsWith@1)".."))))))
+ (func@,6B parentDirPos@5 . . .
+  (params@H
+   (param@1 path . . string@6 .))int@G . .
+  (stmts@2,1
+   (var@4 q . . . 1@4)
+   (if@,1
+    (elif@3
+     (infix@F and
+      (infix~5 >=
+       (call~7 len~3 path@1)1@3)
+      (infix@M in
+       (at~E path~4
+        (infix@A \2D
+         (call~6 len~3 path@1)1@1))
+       (curly@3 DirSep@1 AltSep@9)))
+     (stmts@w
+      (asgn@2 q~2 2@2))))
+   (for@4,2
+    (call@E countdown~9
+     (infix@A \2D
+      (call~6 len~3 path@1)q@1)0@E)
+    (unpackflat
+     (let i . . ..))
+    (stmts~2,1
+     (if
+      (elif@3
+       (infix@8 in
+        (at~4 path~4 i@1)
+        (curly@3 DirSep@1 AltSep@9))
+       (stmts@T
+        (ret i@7))))))
+   (asgn@7,4 result~7 -1@2)))
+ (proc@,6I parentDir@5 x . .
+  (params@F
+   (param@1 path . . string@6 .))string@G
+  (pragmas@c noSideEffect~a,1).
+  (stmts@2,2
+   (comment)
+   (call@,B runnableExamples
+    (stmts@2,1
+     (cmd assert
+      (infix@L ==
+       (call~5 parentDir~9 ""@1)""@3))
+     (when@,1
+      (elif@5
+       (call@7 defined~7 posix@1)
+       (stmts~3,1
+        (cmd assert
+         (infix@Z ==
+          (call~J parentDir~9 "/usr/local/bin"@1)"/usr/local"@3))
+        (cmd@,1 assert
+         (infix@U ==
+          (call~E parentDir~9 "foo/bar//"@1)"foo"@3))
+        (cmd@,2 assert
+         (infix@Y ==
+          (call~I parentDir~9 "//foo//bar//."@1)"/foo"@3))
+        (cmd@,3 assert
+         (infix@Q ==
+          (call~A parentDir~9 "./foo"@1)"."@3))
+        (cmd@,4 assert
+         (infix@V ==
+          (call~F parentDir~9 "/./foo//./"@1)"/"@3))
+        (cmd@,5 assert
+         (infix@Q ==
+          (call~A parentDir~9 "a//./"@1)"."@3))
+        (cmd@,6 assert
+         (infix@T ==
+          (call~D parentDir~9 "a/b/c/.."@1)"a"@3)))))))
+   (asgn@7,L result~7
+    (call@O
+     (dot~E pathnorm~8 normalizePath@1)path@1))
+   (when@,M
+    (elif@5 doslikeFileSystem
+     (stmts~3,1
+      (unpackdecl@4
+       (call@V splitDrive~A result@1)
+       (unpacktup
+        (let drive@1 . . ..)
+        (let splitpath@8 . . ..)))
+      (asgn@7,1 result~7 splitpath@2))))
+   (var@4,P sepPos . . .
+    (call@L parentDirPos~C result@1))
+   (if@,Q
+    (elif@3
+     (infix@7 >= sepPos~7 0@3)
+     (stmts~1,1
+      (asgn@7 result~7
+       (call@8 substr~6 result@1 0@9 sepPos@C))
+      (call@G,1 normalizePathEnd~G result@1)))
+    (elif@5,3
+     (infix@p or
+      (infix~J or
+       (infix~H or
+        (infix~8 == result~7 ".."@3)
+        (infix@A == result~7 "."@3))
+       (infix@E ==
+        (dot~5 result~6 len@1)0@3))
+      (infix@N in
+       (at~E result~6
+        (dot@7 result~6 high@1))
+       (curly@3 DirSep@1 AltSep@9)))
+     (stmts~3,3
+      (asgn@7 result~7 ""@2)))
+    (else@,7
+     (stmts@2,1
+      (asgn@7 result~7 "."@2))))
+   (when@,Z
+    (elif@5 doslikeFileSystem
+     (stmts~3,1
+      (if
+       (elif@3
+        (infix@B ==
+         (dot~5 result~6 len@1)0@3)
+        (stmts~1,1
+         (discard .)))
+       (elif@5,2
+        (infix@Y and
+         (infix~K and
+          (infix~4 >
+           (dot~5 drive~5 len@1)0@2)
+          (infix@F ==
+           (dot~5 result~6 len@1)1@3))
+         (infix@E in
+          (at~4 result~6 0@1)
+          (curly@3 DirSep@1 AltSep@9)))
+        (stmts~3,1
+         (asgn@7 result~7 drive@2)))
+       (else@,4
+        (stmts@2,1
+         (asgn@7 result~7
+          (infix@8 & drive~6 result@2))))))))))
+ (proc@,71 tailDir@5 x . .
+  (params@D
+   (param@1 path . . string@6 .))string@G
+  (pragmas@a noSideEffect~Y,1).
+  (stmts@2,2
+   (comment)
+   (call@,6 runnableExamples
+    (stmts@2,1
+     (cmd assert
+      (infix@N ==
+       (call~9 tailDir~7 "/bin"@1)"bin"@3))
+     (cmd@,1 assert
+      (infix@M ==
+       (call~8 tailDir~7 "bin"@1)""@3))
+     (cmd@,2 assert
+      (infix@N ==
+       (call~9 tailDir~7 "bin/"@1)""@3))
+     (cmd@,3 assert
+      (infix@X ==
+       (call~J tailDir~7 "/usr/local/bin"@1)"usr/local/bin"@3))
+     (cmd@,4 assert
+      (infix@c ==
+       (call~O tailDir~7 "//usr//local//bin//"@1)"usr//local//bin//"@3))
+     (cmd@,5 assert
+      (infix@Y ==
+       (call~K tailDir~7 "./usr/local/bin"@1)"usr/local/bin"@3))
+     (cmd@,6 assert
+      (infix@W ==
+       (call~I tailDir~7 "usr/local/bin"@1)"local/bin"@3))))
+   (var@4,F i . . . 0@4)
+   (when@,G
+    (elif@5 doslikeFileSystem
+     (stmts~3,1
+      (unpackdecl@4
+       (dot@P path~4 splitDrive@1)
+       (unpacktup
+        (let drive@1 . . ..)
+        (let splitpath@8 . . ..)))
+      (if@,1
+       (elif@3
+        (infix@6 != drive~6 ""@3)
+        (stmts~1,1
+         (ret
+          (call@M
+           (dot~6 splitpath~9 strip@1)
+           (vv@7 chars~6
+            (curly@2 DirSep@1 AltSep@9))
+           (vv@a trailing~9 false@2)))))))))
+   (while@,K
+    (infix@8 < i~2
+     (call@5 len~3 path@1))
+    (stmts@2,1
+     (if
+      (elif@3
+       (infix@8 in
+        (at~4 path~4 i@1)
+        (curly@3 DirSep@1 AltSep@9))
+       (stmts~1,1
+        (while
+         (infix@K and
+          (infix~C < i~2
+           (call@5 len~3 path@1))
+          (infix@C in
+           (at~4 path~4 i@1)
+           (curly@3 DirSep@1 AltSep@9)))
+         (stmts@r
+          (cmd inc i@4)))
+        (ret@,1
+         (call@D substr~6 path@1 i@7)))))
+     (cmd@,3 inc i@4)))
+   (asgn@7,P result~7 ""@2)))
+ (proc@,7U isRootDir@5 x . .
+  (params@F
+   (param@1 path . . string@6 .))bool@G
+  (pragmas@a noSideEffect~Y,1).
+  (stmts@2,2
+   (comment)
+   (call@,1 runnableExamples
+    (stmts@2,1
+     (cmd assert
+      (call@G isRootDir~9 ""@1))
+     (cmd@,1 assert
+      (call@G isRootDir~9 "."@1))
+     (cmd@,2 assert
+      (call@G isRootDir~9 "/"@1))
+     (cmd@,3 assert
+      (call@G isRootDir~9 "a"@1))
+     (cmd@,4 assert
+      (prefix@7 not
+       (call@D isRootDir~9 "/a"@1)))
+     (cmd@,5 assert
+      (prefix@7 not
+       (call@D isRootDir~9 "a/b/c"@1)))))
+   (when@,9
+    (elif@5 doslikeFileSystem
+     (stmts~3,1
+      (if
+       (elif@3
+        (infix@M ==
+         (dot~6
+          (call~6 splitDrive~A path@1)path@1)""@3)
+        (stmts~1,1
+         (ret true@7)))))))
+   (asgn@7,C result~7
+    (infix@L <
+     (call~7 parentDirPos~C path@1)0@2))))
+ (iterator@,7k parentDirs@9 x . .
+  (params@K
+   (param@1 path . . string@6 .)
+   (param@F fromRoot . . . false@9)
+   (param@V inclusive . . . true@A))string@m . .
+  (stmts@2,1
+   (comment)
+   (call@,D runnableExamples
+    (stmts@2,1
+     (let@4 g . . . "a/b/c"@4)
+     (for@4,2
+      (dot@6 g~1 parentDirs@1)
+      (unpackflat
+       (let p . . ..))
+      (stmts~2,1
+       (cmd echo p@5)))
+     (for@4,8
+      (call@H
+       (dot~B g~1 parentDirs@1)
+       (vv@9 fromRoot~8 true@1))
+      (unpackflat
+       (let p . . ..))
+      (stmts~2,1
+       (cmd echo p@5)))
+     (for@4,E
+      (call@H
+       (dot~B g~1 parentDirs@1)
+       (vv@A inclusive~9 false@1))
+      (unpackflat
+       (let p . . ..))
+      (stmts~2,1
+       (cmd echo p@5)))))
+   (if@,X
+    (elif@3
+     (prefix not fromRoot@4)
+     (stmts~1,1
+      (var@4 current . . . path@A)
+      (if@,1
+       (elif@3 inclusive
+        (stmts@B
+         (yld path@6))))
+      (while@,2 true@6
+       (stmts@2,1
+        (if
+         (elif@3
+          (dot@7 current~7 isRootDir@1)
+          (stmts@J
+           (break .))))
+        (asgn@8,1 current~8
+         (dot@9 current~7 parentDir@1))
+        (yld@,2 current@6)))))
+    (else@,7
+     (stmts@2,1
+      (when
+       (elif@5 doslikeFileSystem
+        (stmts~3,1
+         (let@4 start . . .
+          (dot@T
+           (dot~6
+            (dot~B path~4 splitDrive@1)drive@1)len@1))))
+       (else@,2
+        (stmts@2,1
+         (const@6 start . . . 0@8))))
+      (for@4,4
+       (infix@B \2E\2E start~6
+        (par@3
+         (infix@A \2D
+          (dot~5 path~4 len@1)2@2)))
+       (unpackflat
+        (let i . . ..))
+       (stmts~2,2
+        (if
+         (elif@3
+          (infix@S and
+           (infix~K in
+            (at~4 path~4 i@1)
+            (curly@3 DirSep@1 AltSep@9))
+           (par~R,1
+            (infix@8 or
+             (infix~5 == i~2 0@3)
+             (infix@D notin
+              (at~6 path~4
+               (infix@2 \2D i~1 1@1))
+              (curly@6 DirSep@1 AltSep@9)))))
+          (stmts~1,2
+           (yld
+            (call@H
+             (dot~7 path~4 substr@1)0@1 i@4)))))))
+      (if@,A
+       (elif@3 inclusive
+        (stmts@B
+         (yld path@6)))))))))
+ (proc@,8c
+  (quoted@5 /\2E\2E/@1) x . .
+  (params@C
+   (param@1 head . . string@C .)
+   (param@7 tail . . string@6 .))string@M
+  (pragmas@f noSideEffect@2).
+  (stmts@2,1
+   (comment)
+   (call@,6 runnableExamples
+    (stmts@2,1
+     (when
+      (elif@5
+       (call@7 defined~7 posix@1)
+       (stmts~3,1
+        (cmd assert
+         (infix@Q ==
+          (infix~B /\2E\2E/ "a/b/c"~8 "d/e"@5)"a/b/d/e"@3))
+        (cmd@,1 assert
+         (infix@M ==
+          (infix~B /\2E\2E/ "a"~4 "d/e"@5)"a/d/e"@3)))))))
+   (when@,B
+    (elif@5 doslikeFileSystem
+     (stmts~3,1
+      (unpackdecl@4
+       (call@Q splitDrive~A head@1)
+       (unpacktup
+        (let drive@1 . . ..)
+        (let head@8 . . ..))))))
+   (let@4,D sepPos . . .
+    (call@L parentDirPos~C head@1))
+   (if@,E
+    (elif@3
+     (infix@7 >= sepPos~7 0@3)
+     (stmts~1,1
+      (asgn@7 result~7
+       (infix@S /
+        (call~K substr~6 head@1 0@7
+         (infix@G \2D sepPos~6 1@1))tail@2))))
+    (else@,2
+     (stmts@2,1
+      (asgn@7 result~7
+       (infix@7 / head~5 tail@2)))))
+   (when@,I
+    (elif@5 doslikeFileSystem
+     (stmts~3,1
+      (asgn@7 result~7
+       (infix@8 / drive~6 result@2)))))))
+ (func@,8y normExt@5 . . .
+  (params@C
+   (param@1 ext . . string@5 .))string@F . .
+  (stmts@2,1
+   (if
+    (elif@3
+     (infix@A or
+      (infix~6 == ext~4 ""@3)
+      (infix@A ==
+       (at~4 ext~3 0@1)ExtSep@3))
+     (stmts@V
+      (asgn@7 result~7 ext@2)))
+    (else@,1
+     (stmts@6
+      (asgn@7 result~7
+       (infix@9 & ExtSep~7 ext@2)))))))
+ (func@,92 searchExtPos@5 x . .
+  (params@I
+   (param@1 path . . string@6 .))int@G . .
+  (stmts@2,1
+   (comment)
+   (call@,9 runnableExamples
+    (stmts@2,1
+     (cmd assert
+      (infix@T ==
+       (call~A searchExtPos~C "a/b/c"@1)-1@3))
+     (cmd@,1 assert
+      (infix@T ==
+       (call~A searchExtPos~C "c.nim"@1)1@3))
+     (cmd@,2 assert
+      (infix@X ==
+       (call~E searchExtPos~C "a/b/c.nim"@1)5@3))
+     (cmd@,3 assert
+      (infix@X ==
+       (call~E searchExtPos~C "a.b.c.nim"@1)5@3))
+     (cmd@,4 assert
+      (infix@S ==
+       (call~9 searchExtPos~C ".nim"@1)-1@3))
+     (cmd@,5 assert
+      (infix@T ==
+       (call~A searchExtPos~C "..nim"@1)-1@3))
+     (cmd@,6 assert
+      (infix@U ==
+       (call~B searchExtPos~C "a..nim"@1)2@3))))
+   (const@6,K DirSeps . . .
+    (when@A
+     (elif@5 doslikeFileSystem
+      (stmts@J
+       (curly DirSep@1 AltSep@9 '\3A'@H)))
+     (else@k
+      (stmts@6
+       (curly DirSep@1 AltSep@9)))))
+   (asgn@7,L result~7 -1@2)
+   (var@4,M i . . .
+    (dot@8 path~4 high@1))
+   (while@,N
+    (infix@8 >= i~2 1@3)
+    (stmts@2,1
+     (if
+      (elif@3
+       (infix@8 ==
+        (at~4 path~4 i@1)ExtSep@3)
+       (stmts~1,1
+        (break .)))
+      (elif@5,2
+       (infix@8 in
+        (at~4 path~4 i@1)DirSeps@3)
+       (stmts~3,1
+        (ret -1@7))))
+     (cmd@,4 dec i@4)))
+   (for@4,U
+    (call@E countdown~9
+     (infix@3 \2D i~2 1@2)0@8)
+    (unpackflat
+     (let j . . ..))
+    (stmts~2,1
+     (if
+      (elif@3
+       (infix@8 in
+        (at~4 path~4 j@1)DirSeps@3)
+       (stmts~1,1
+        (ret -1@7)))
+      (elif@5,2
+       (infix@8 !=
+        (at~4 path~4 j@1)ExtSep@3)
+       (stmts~3,1
+        (asgn@7 result~7 i@2)
+        (break@,1 .))))))))
+ (proc@,9e splitFile@5 x . .
+  (params@F
+   (param@1 path . . string@6 .))
+  (tuple@G
+   (kv@M dir string@G)
+   (kv@R name string@B)
+   (kv@X ext string@5))
+  (pragmas@z noSideEffect~x,1).
+  (stmts@2,2
+   (comment)
+   (call@,F runnableExamples
+    (stmts@2,1
+     (unpackdecl@4
+      (call@S splitFile~9 "usr/local/nimc.html"@1)
+      (unpacktup
+       (var dir@1 . . ..)
+       (var name@6 . . ..)
+       (var ext@C . . ..)))
+     (cmd@,1 assert
+      (infix@B == dir~4 "usr/local"@3))
+     (cmd@,2 assert
+      (infix@C == name~5 "nimc"@3))
+     (cmd@,3 assert
+      (infix@B == ext~4 ".html"@3))
+     (asgn@H,4
+      (tup~H dir@1 name@6 ext@C)
+      (call@B splitFile~9 "/usr/local/os"@1))
+     (cmd@,5 assert
+      (infix@B == dir~4 "/usr/local"@3))
+     (cmd@,6 assert
+      (infix@C == name~5 "os"@3))
+     (cmd@,7 assert
+      (infix@B == ext~4 ""@3))
+     (asgn@H,8
+      (tup~H dir@1 name@6 ext@C)
+      (call@B splitFile~9 "/usr/local/"@1))
+     (cmd@,9 assert
+      (infix@B == dir~4 "/usr/local"@3))
+     (cmd@,A assert
+      (infix@C == name~5 ""@3))
+     (cmd@,B assert
+      (infix@B == ext~4 ""@3))
+     (asgn@H,C
+      (tup~H dir@1 name@6 ext@C)
+      (call@B splitFile~9 "/tmp.txt"@1))
+     (cmd@,D assert
+      (infix@B == dir~4 "/"@3))
+     (cmd@,E assert
+      (infix@C == name~5 "tmp"@3))
+     (cmd@,F assert
+      (infix@B == ext~4 ".txt"@3))))
+   (var@4,X namePos . . . 0@A)
+   (var@4,Y dotPos . . . 0@9)
+   (var@4,Z dir . . . ""@6)
+   (when@,a
+    (elif@5 doslikeFileSystem
+     (stmts~3,1
+      (unpackdecl@4
+       (call@N splitDrive~A path@1)
+       (unpacktup
+        (let drive@1 . . ..)
+        (let _@8 . . ..)))
+      (let@4,1 stop . . .
+       (call@A len~3 drive@1))
+      (asgn@4,2 dir~4 drive@2)))
+    (else@,4
+     (stmts@2,1
+      (const@6 stop . . . 0@7))))
+   (for@4,g
+    (call@E countdown~9
+     (infix@B \2D
+      (call~7 len~3 path@1)1@2)stop@G)
+    (unpackflat
+     (let i . . ..))
+    (stmts~2,1
+     (if
+      (elif@3
+       (infix@S or
+        (infix~K in
+         (at~4 path~4 i@1)
+         (curly@3 DirSep@1 AltSep@9))
+        (infix@5 == i~2 0@3))
+       (stmts~1,1
+        (if
+         (elif@3
+          (infix@8 in
+           (at~4 path~4 i@1)
+           (curly@3 DirSep@1 AltSep@9))
+          (stmts~1,1
+           (asgn@4 dir~4
+            (call@8 substr~6 path@1 0@7
+             (if@A
+              (elif@3
+               (infix@2 >= i~2 1@3)
+               (stmts@8
+                (infix@2 \2D i~2 1@2)))
+              (else@H
+               (stmts@6 0)))))
+           (asgn@8,1 namePos~8
+            (infix@4 \2B i~2 1@2)))))
+        (if@,3
+         (elif@3
+          (infix@7 > dotPos~7 i@2)
+          (stmts~1,1
+           (asgn@7 result~7
+            (tup@2 dir@1
+             (call@C substr~6 path@1 namePos@7
+              (infix@N \2D dotPos~7 1@2))
+             (call@l substr~6 path@1 dotPos@7)))))
+         (else@,2
+          (stmts@2,1
+           (asgn@7 result~7
+            (tup@2 dir@1
+             (call@C substr~6 path@1 namePos@7)""@T)))))
+        (ret@,7 result@7)))
+      (elif@5,9
+       (infix@M,2 and
+        (infix@D,~1 and
+         (infix@F,~1 and
+          (infix~M and
+           (infix~A and
+            (infix~A ==
+             (at~4 path~4 i@1)ExtSep@3)
+            (infix@6 > i~2 0@2))
+           (infix@6 < i~2
+            (infix@C \2D
+             (call~7 len~3 path@1)1@2)))
+          (infix~c,1 notin
+           (at~8 path~4
+            (infix@3 \2D i~2 1@2))
+           (curly@6 DirSep@1 AltSep@9)))
+         (infix~N,1 !=
+          (at~8 path~4
+           (infix@3 \2B i~2 1@2))ExtSep@3))
+        (infix@B == dotPos~7 0@3))
+       (stmts~3,3
+        (asgn@7 dotPos~7 i@2))))))
+   (asgn@7,u result~7
+    (tup@2 dir@1 ""@6 ""@A))))
+ (proc@,Ac extractFilename@5 x . .
+  (params@L
+   (param@1 path . . string@6 .))string@G
+  (pragmas@i noSideEffect~g,1).
+  (stmts@2,2
+   (comment)
+   (call@,A runnableExamples
+    (stmts@2,1
+     (cmd assert
+      (infix@Z ==
+       (call~D extractFilename~F "foo/bar/"@1)""@3))
+     (cmd@,1 assert
+      (infix@Y ==
+       (call~C extractFilename~F "foo/bar"@1)"bar"@3))
+     (cmd@,2 assert
+      (infix@c ==
+       (call~G extractFilename~F "foo/bar.baz"@1)"bar.baz"@3))))
+   (if@,F
+    (elif@3
+     (infix@E or
+      (infix~5 ==
+       (dot~5 path~4 len@1)0@3)
+      (infix@K in
+       (at~D path~4
+        (infix@9 \2D
+         (dot~4 path~4 len@1)1@1))
+       (curly@3 DirSep@1 AltSep@9)))
+     (stmts~1,1
+      (asgn@7 result~7 ""@2)))
+    (else@,2
+     (stmts@2,1
+      (asgn@7 result~7
+       (dot@H
+        (call~6 splitPath~9 path@1)tail@1)))))))
+ (proc@,Ay lastPathPart@5 x . .
+  (params@I
+   (param@1 path . . string@6 .))string@G
+  (pragmas@f noSideEffect~d,1).
+  (stmts@2,2
+   (comment)
+   (call@,9 runnableExamples
+    (stmts@2,1
+     (cmd assert
+      (infix@W ==
+       (call~D lastPathPart~C "foo/bar/"@1)"bar"@3))
+     (cmd@,1 assert
+      (infix@V ==
+       (call~C lastPathPart~C "foo/bar"@1)"bar"@3))))
+   (var@4,D path . . . path@7)
+   (call@L,E
+    (dot~H path~4 normalizePathEnd@1)
+    (vv@D trailingSep~C false@2))
+   (asgn@7,F result~7
+    (call@H extractFilename~F path@1))))
+ (proc@,BH changeFileExt@5 x . .
+  (params@J
+   (param@1 filename . . string@F .)
+   (param@B ext . . string@5 .))string@P
+  (pragmas@p noSideEffect~n,1).
+  (stmts@2,2
+   (comment)
+   (call@,F runnableExamples
+    (stmts@2,1
+     (cmd assert
+      (infix@d ==
+       (call~J changeFileExt~D "foo.bar"@1 "baz"@C)"foo.baz"@3))
+     (cmd@,1 assert
+      (infix@a ==
+       (call~G changeFileExt~D "foo.bar"@1 ""@C)"foo"@3))
+     (cmd@,2 assert
+      (infix@Z ==
+       (call~F changeFileExt~D "foo"@1 "baz"@8)"foo.baz"@3))))
+   (var@4,K extPos . . .
+    (call@L searchExtPos~C filename@1))
+   (if@,L
+    (elif@3
+     (infix@7 < extPos~7 0@2)
+     (stmts@C
+      (asgn@7 result~7
+       (infix@B & filename~9
+        (call@9 normExt~7 ext@1)))))
+    (else@,1
+     (stmts@6
+      (asgn@7 result~7
+       (infix@W &
+        (call~O substr~6 filename@1 0@B
+         (infix@K \2D extPos~6 1@1))
+        (call@9 normExt~7 ext@1))))))))
+ (proc@,Bh addFileExt@5 x . .
+  (params@G
+   (param@1 filename . . string@F .)
+   (param@B ext . . string@5 .))string@P
+  (pragmas@m noSideEffect~k,1).
+  (stmts@2,2
+   (comment)
+   (call@,D runnableExamples
+    (stmts@2,1
+     (cmd assert
+      (infix@a ==
+       (call~J addFileExt~A "foo.bar"@1 "baz"@C)"foo.bar"@3))
+     (cmd@,1 assert
+      (infix@X ==
+       (call~G addFileExt~A "foo.bar"@1 ""@C)"foo.bar"@3))
+     (cmd@,2 assert
+      (infix@W ==
+       (call~F addFileExt~A "foo"@1 "baz"@8)"foo.baz"@3))))
+   (var@4,I extPos . . .
+    (call@L searchExtPos~C filename@1))
+   (if@,J
+    (elif@3
+     (infix@7 < extPos~7 0@2)
+     (stmts@C
+      (asgn@7 result~7
+       (infix@B & filename~9
+        (call@9 normExt~7 ext@1)))))
+    (else@,1
+     (stmts@6
+      (asgn@7 result~7 filename@2))))))
+ (proc@,C5 cmpPaths@5 x . .
+  (params@E
+   (param@1 pathA . . string@E .)
+   (param@8 pathB . . string@7 .))int@O
+  (pragmas@g noSideEffect~e,1).
+  (stmts@2,2
+   (comment)
+   (call@,8 runnableExamples
+    (stmts@2,1
+     (when
+      (elif@5
+       (call@7 defined~7 macosx@1)
+       (stmts~3,1
+        (cmd assert
+         (infix@U ==
+          (call~F cmpPaths~8 "foo"@1 "Foo"@8)0@3))))
+      (elif@5,2
+       (call@7 defined~7 posix@1)
+       (stmts~3,1
+        (cmd assert
+         (infix@U >
+          (call~F cmpPaths~8 "foo"@1 "Foo"@8)0@2)))))))
+   (let@4,E a . . string@3
+    (call@Y
+     (dot~E pathnorm~8 normalizePath@1)pathA@1))
+   (let@4,F b . . string@3
+    (call@Y
+     (dot~E pathnorm~8 normalizePath@1)pathB@1))
+   (if@,H
+    (elif@3 FileSystemCaseSensitive
+     (stmts~1,1
+      (asgn@7 result~7
+       (call@5 cmp~3 a@1 b@4))))
+    (else@,2
+     (stmts@2,1
+      (when
+       (elif@5
+        (call@7 defined~7 nimscript@1)
+        (stmts~3,1
+         (asgn@7 result~7
+          (call@7 cmpic~5 a@1 b@4))))
+       (elif@5,2
+        (call@7 defined~7 nimdoc@1)
+        (stmts@H
+         (discard .)))
+       (else@,3
+        (stmts@2,1
+         (asgn@7 result~7
+          (call@F cmpIgnoreCase~D a@1 b@4))))))))))
+ (proc@,CX unixToNativePath@5 x . .
+  (params@M
+   (param@1 path . . string@6 .)
+   (param@F drive . . . ""@6))string@Q
+  (pragmas@t noSideEffect~r,1).
+  (stmts@2,2
+   (comment)
+   (when@,9
+    (elif@5
+     (call@7 defined~7 unix@1)
+     (stmts~3,1
+      (asgn@7 result~7 path@2)))
+    (else@,2
+     (stmts@2,1
+      (if
+       (elif@3
+        (infix@9 ==
+         (dot~5 path~4 len@1)0@3)
+        (stmts@F
+         (ret ""@7))))
+      (var@4,2 start . . int@7 .)
+      (if@,3
+       (elif@3
+        (infix@8 ==
+         (at~4 path~4 0@1)'/'@3)
+        (stmts~1,2
+         (when
+          (elif@5 doslikeFileSystem
+           (stmts~3,1
+            (if
+             (elif@3
+              (infix@6 != drive~6 ""@3)
+              (stmts~1,1
+               (asgn@7 result~7
+                (infix@E &
+                 (infix~6 & drive~6 "\3A"@2)DirSep@2))))
+             (else@,2
+              (stmts@2,1
+               (asgn@7 result~7
+                (prefix@2 $ DirSep@1)))))))
+          (elif@5,5
+           (call@7 defined~7 macos@1)
+           (stmts~3,1
+            (asgn@7 result~7 ""@2)))
+          (else@,7
+           (stmts@2,1
+            (asgn@7 result~7
+             (prefix@2 $ DirSep@1)))))
+         (asgn@6,9 start~6 1@2)))
+       (elif@5,C
+        (infix@F and
+         (infix~7 ==
+          (at~4 path~4 0@1)'.'@3)
+         (par@4
+          (infix@F or
+           (infix~5 ==
+            (dot~5 path~4 len@1)1@3)
+           (infix@B ==
+            (at~4 path~4 1@1)'/'@3))))
+        (stmts~3,2
+         (asgn@7 result~7
+          (prefix@2 $ CurDir@1))
+         (asgn@6,1 start~6
+          (when@2
+           (elif@5 doslikeFileSystem
+            (stmts@J 1))
+           (else@Q
+            (stmts@6 2))))))
+       (else@,G
+        (stmts@2,1
+         (asgn@7 result~7 ""@2)
+         (asgn@6,1 start~6 0@2))))
+      (var@4,N i . . . start@4)
+      (while@,O
+       (infix@8 < i~2
+        (call@5 len~3 path@1))
+       (stmts@2,1
+        (if
+         (elif@3
+          (infix@t and
+           (infix~L and
+            (infix~J and
+             (infix~B <
+              (infix~3 \2B i~1 2@1)
+              (dot@6 path~4 len@1))
+             (infix@C ==
+              (at~4 path~4 i@1)'.'@3))
+            (infix@E ==
+             (at~6 path~4
+              (infix@2 \2B i~1 1@1))'.'@3))
+           (infix@E ==
+            (at~6 path~4
+             (infix@2 \2B i~1 2@1))'/'@3))
+          (stmts~1,2
+           (when
+            (elif@5
+             (call@7 defined~7 macos@1)
+             (stmts~3,1
+              (if
+               (elif@3
+                (infix@L ==
+                 (at~F result~6
+                  (call@5 high~4 result@1))'\3A'@3)
+                (stmts~1,1
+                 (cmd add result@4 '\3A'@C)))
+               (else@,2
+                (stmts@2,1
+                 (cmd add result@4 ParDir@C))))))
+            (else@,5
+             (stmts@2,1
+              (cmd add result@4
+               (infix@J & ParDir~7 DirSep@2)))))
+           (call@3,7 inc~3 i@1 3@4)))
+         (elif@5,A
+          (infix@8 ==
+           (at~4 path~4 i@1)'/'@3)
+          (stmts~3,1
+           (cmd add result@4 DirSep@C)
+           (call@3,1 inc~3 i@1)))
+         (else@,D
+          (stmts@2,1
+           (cmd add result@4
+            (at@G path~4 i@1))
+           (call@3,1 inc~3 i@1)))))))))))
+ (when@,DS
+  (elif@5
+   (infix@N and
+    (prefix~N not
+     (call@B defined~7 nimscript@1))supportedSystem@4)
+   (stmts~3,1
+    (proc getCurrentDir@5 x . .
+     (params@J)string@4
+     (pragmas@U
+      (kv@6 tags~4
+       (bracket@2))raises@C).
+     (stmts@2,1
+      (comment)
+      (when@,C
+       (elif@5
+        (call@7 defined~7 nodejs@1)
+        (stmts~3,1
+         (var@4 ret . . cstring@5 .)
+         (pragmas@,1
+          (kv@6 emit~4 "`ret` = process.cwd\28\29;"@2))
+         (ret@,2
+          (prefix@7 $ ret@1))))
+       (elif@5,4
+        (call@7 defined~7 js@1)
+        (stmts~3,1
+         (cmd raiseAssert "use -d\3Anodejs to have `getCurrentDir` defined"@C)))
+       (elif@5,6
+        (call@7 defined~7 windows@1)
+        (stmts~3,2
+         (asgn@7 result~7 ""@2)
+         (var@4,1 bufsize . . .
+          (dot@I MAX_PATH~8 int32@1))
+         (var@4,2 res . . .
+          (call@h
+           (dot~E
+            (call~9 newWideCString~E bufsize@1)toWideCString@1)))
+         (while@,3 true@6
+          (stmts@2,1
+           (var@4 L . . .
+            (call@O getCurrentDirectoryW~K bufsize@1 res@A))
+           (if@,1
+            (elif@3
+             (infix@2 == L~2
+              (suf@3 0 "i32"))
+             (stmts~1,1
+              (call@C raiseOSError~C
+               (call@C osLastError~B))))
+            (elif@5,2
+             (infix@2 > L~2 bufsize@2)
+             (stmts~3,1
+              (asgn@4 res~4
+               (call@X
+                (dot~E
+                 (call~3 newWideCString~E L@1)toWideCString@1)))
+              (asgn@8,1 bufsize~8 L@2)))
+            (else@,5
+             (stmts@2,1
+              (ret
+               (infix@A $ res~3 L@1)))))))
+         (call@C,C raiseOSError~C
+          (call@C osLastError~B))))
+       (else@,L
+        (stmts@2,1
+         (var@4 bufsize . . . 1024@A)
+         (asgn@7,1 result~7
+          (call@B newString~9 bufsize@1))
+         (while@,2 true@6
+          (stmts@2,1
+           (if
+            (elif@3
+             (infix@a !=
+              (call~U getcwd~6
+               (call@H
+                (dot~A result~6 toCString@1))bufsize@L)
+              (nil@3))
+             (stmts~1,1
+              (call@6 setLen~6 result@1
+               (call@C len~3
+                (call@H
+                 (dot~A result~6 toCString@1))))
+              (break@,1 .)))
+            (else@,3
+             (stmts@2,1
+              (let@4 err . . .
+               (call@H osLastError~B))
+              (if@,1
+               (elif@3
+                (infix@A ==
+                 (dot~7 err~3 int32@1)ERANGE@3)
+                (stmts~1,1
+                 (asgn@8 bufsize~8
+                  (infix@A shl bufsize~8 1@4))
+                 (call@6,1 assert~6
+                  (infix@9 >= bufsize~8 0@3))
+                 (asgn@7,2 result~7
+                  (call@B newString~9 bufsize@1))))
+               (else@,4
+                (stmts@2,1
+                 (call@C raiseOSError~C
+                  (call@C osLastError~B))))))))))))))))))
+ (proc@,EH absolutePath@5 x . .
+  (params@I
+   (param@1 path . . string@6 .)
+   (param@F root . . .
+    (when@7
+     (elif@5 supportedSystem
+      (stmts@H
+       (call@D getCurrentDir~D)))
+     (else@c
+      (stmts@6 "")))))string@19
+  (pragmas@1Y raises@2).
+  (stmts@2,1
+   (comment)
+   (call@,7 runnableExamples
+    (stmts@2,1
+     (cmd assert
+      (infix@P ==
+       (call~6 absolutePath~C "a"@1)
+       (infix@J /
+        (call~3 getCurrentDir~D)"a"@2)))))
+   (if@,A
+    (elif@3
+     (call@A isAbsolute~A path@1)
+     (stmts@I path))
+    (else@,1
+     (stmts@2,1
+      (if
+       (elif@3
+        (prefix not
+         (dot@8 root~4 isAbsolute@1))
+        (stmts~1,1
+         (raise ValueError@6))))
+      (call@8,3 joinPath~8 root@1 path@7))))))
+ (proc@,EZ absolutePathInternal@5 . . .
+  (params@P
+   (param@1 path . . string@6 .))string@G
+  (pragmas@m raises@2).
+  (stmts@2,1
+   (asgn@7 result~7
+    (call@E absolutePath~C path@1))))
+ (proc@,Ed normalizePath@5 x . .
+  (params@J
+   (param@1 path . .
+    (mut@6 string@4).)).
+  (pragmas@c
+   (kv@6 tags~4
+    (bracket@2))).
+  (stmts@2,1
+   (comment)
+   (call@,E runnableExamples
+    (stmts@2,1
+     (when
+      (elif@5
+       (call@7 defined~7 posix@1)
+       (stmts~3,1
+        (var@4 a . . . "a///b//..//c///d"@4)
+        (call@F,1
+         (dot~E a~1 normalizePath@1))
+        (cmd@,2 assert
+         (infix@9 == a~2 "a/c/d"@3)))))))
+   (asgn@5,K path~5
+    (call@O
+     (dot~E pathnorm~8 normalizePath@1)path@1))
+   (when@,L
+    (elif@5 false
+     (stmts~3,1
+      (let@4 isAbs . . .
+       (call@I isAbsolute~A path@1))
+      (var@4,1 stack . .
+       (at@A seq~3 string@1)
+       (prefix@L \40
+        (bracket@1)))
+      (for@4,2
+       (call@A split~5 path@1
+        (curly@7 DirSep@1))
+       (unpackflat
+        (let p . . ..))
+       (stmts~2,1
+        (case p@5
+         (of@,1
+          (ranges ""@3 "."@7)
+          (stmts@2,1
+           (continue .)))
+         (of@,3
+          (ranges ".."@3)
+          (stmts@2,1
+           (if
+            (elif@3
+             (infix@A ==
+              (dot~5 stack~5 len@1)0@3)
+             (stmts~1,1
+              (if
+               (elif@3 isAbs
+                (stmts~1,1
+                 (discard .)))
+               (else@,2
+                (stmts@2,1
+                 (call@9
+                  (dot~4 stack~5 add@1)p@1))))))
+            (elif@5,5
+             (infix@I ==
+              (at~D stack~5
+               (dot@6 stack~5 high@1))".."@3)
+             (stmts~3,1
+              (call@9
+               (dot~4 stack~5 add@1)p@1)))
+            (else@,7
+             (stmts@2,1
+              (discard
+               (call@H
+                (dot~4 stack~5 pop@1))))))))
+         (else@,D
+          (stmts@2,1
+           (call@9
+            (dot~4 stack~5 add@1)p@1))))))
+      (if@,J
+       (elif@3 isAbs
+        (stmts~1,1
+         (asgn@5 path~5
+          (infix@9 & DirSep~7
+           (call@6 join~4 stack@1
+            (prefix@8 $ DirSep@1))))))
+       (elif@5,2
+        (infix@A >
+         (dot~5 stack~5 len@1)0@2)
+        (stmts~3,1
+         (asgn@5 path~5
+          (call@6 join~4 stack@1
+           (prefix@8 $ DirSep@1)))))
+       (else@,4
+        (stmts@2,1
+         (asgn@5 path~5 "."@2)))))))))
+ (proc@,FQ normalizePathAux@5 . . .
+  (params@L
+   (param@1 path . .
+    (mut@6 string@4).)).
+  (pragmas@e inline@2
+   (kv@G raises~6
+    (bracket@2))).
+  (stmts@2,1
+   (call@M
+    (dot~E ospaths2~8 normalizePath@1)path@1)))
+ (proc@,FT normalizedPath@5 x . .
+  (params@K
+   (param@1 path . . string@6 .))string@G
+  (pragmas@h
+   (kv@6 tags~4
+    (bracket@2))).
+  (stmts@2,1
+   (comment)
+   (call@,5 runnableExamples
+    (stmts@2,1
+     (when
+      (elif@5
+       (call@7 defined~7 posix@1)
+       (stmts~3,1
+        (cmd assert
+         (infix@g ==
+          (call~L normalizedPath~E "a///b//..//c///d"@1)"a/c/d"@3)))))))
+   (asgn@7,8 result~7
+    (call@O
+     (dot~E pathnorm~8 normalizePath@1)path@1))))
+ (proc@,Fe normalizeExe@5 x . .
+  (params@I
+   (param@1 file . .
+    (mut@6 string@4).)). . .
+  (stmts@2,1
+   (comment)
+   (call@,1 runnableExamples
+    (stmts@2,1
+     (import
+      (infix@A / std~3 sugar@1))
+     (when@,1
+      (elif@5
+       (call@7 defined~7 posix@1)
+       (stmts~3,1
+        (cmd assert
+         (infix@V ==
+          (call~F
+           (dot~4 "foo"~5 dup@1)normalizeExe@1)"./foo"@3))
+        (cmd@,1 assert
+         (infix@c ==
+          (call~F
+           (dot~4 "foo/../bar"~C dup@1)normalizeExe@1)"foo/../bar"@3)))))
+     (cmd@,4 assert
+      (infix@S ==
+       (call~F
+        (dot~4 ""~2 dup@1)normalizeExe@1)""@3))))
+   (when@,7
+    (elif@5
+     (call@7 defined~7 posix@1)
+     (stmts~3,1
+      (if
+       (elif@3
+        (infix@p and
+         (infix~G and
+          (infix~M and
+           (infix~4 >
+            (dot~5 file~4 len@1)0@2)
+           (infix@B notin DirSep~7 file@6))
+          (infix@9 != file~5 "."@3))
+         (infix@9 != file~5 ".."@3))
+        (stmts~1,1
+         (asgn@5 file~5
+          (infix@7 & "./"~5 file@2))))))))))
+ (when@,Fq
+  (elif@5 supportedSystem
+   (stmts~3,1
+    (proc sameFile@5 x . .
+     (params@E
+      (param@1 path1 . . string@E .)
+      (param@8 path2 . . string@7 .))bool@O
+     (pragmas@h
+      (kv~b,1 tags~4
+       (bracket@2 ReadDirEffect@1))noWeirdTarget~I,1 raises~3,1).
+     (stmts@2,2
+      (comment)
+      (asgn@7,B result~7 false@2)
+      (when@,C
+       (elif@5
+        (call@7 defined~7 windows@1)
+        (stmts~3,1
+         (var@4 success . . . true@A)
+         (var@4,1 f1 . . .
+          (call@F openHandle~A path1@1))
+         (var@4,2 f2 . . .
+          (call@F openHandle~A path2@1))
+         (var@4,4 lastErr . . OSErrorCode@9
+          (call@Y OSErrorCode~B 0@1))
+         (if@,5
+          (elif@3
+           (infix@R and
+            (infix~O != f1~3 INVALID_HANDLE_VALUE@3)
+            (infix@7 != f2~3 INVALID_HANDLE_VALUE@3))
+           (stmts~1,1
+            (var@4 fi1 . . BY_HANDLE_FILE_INFORMATION@A
+             (call@k default~7 BY_HANDLE_FILE_INFORMATION@1))
+            (var@9 fi2 . . BY_HANDLE_FILE_INFORMATION@5
+             (call@f default~7 BY_HANDLE_FILE_INFORMATION@1))
+            (if@,2
+             (elif@3
+              (infix@r and
+               (infix~5 !=
+                (dot~7
+                 (call~F getFileInformationByHandle~Q f1@1
+                  (call@9 addr~4 fi1@1))int32@1)0@3)
+               (infix~5,1 !=
+                (dot~7
+                 (call~F getFileInformationByHandle~Q f2@1
+                  (call@9 addr~4 fi2@1))int32@1)0@3))
+              (stmts~1,2
+               (asgn@7 result~7
+                (infix@h,1 and
+                 (infix@C,~1 and
+                  (infix~S ==
+                   (dot~M fi1~3 dwVolumeSerialNumber@1)
+                   (dot@6 fi2~3 dwVolumeSerialNumber@1))
+                  (infix~Y,1 ==
+                   (dot~G fi1~3 nFileIndexHigh@1)
+                   (dot@6 fi2~3 nFileIndexHigh@1)))
+                 (infix~N,1 ==
+                  (dot~F fi1~3 nFileIndexLow@1)
+                  (dot@6 fi2~3 nFileIndexLow@1))))))
+             (else@,5
+              (stmts@2,1
+               (asgn@8 lastErr~8
+                (call@D osLastError~B))
+               (asgn@8,1 success~8 false@2))))))
+          (else@,B
+           (stmts@2,1
+            (asgn@8 lastErr~8
+             (call@D osLastError~B))
+            (asgn@8,1 success~8 false@2))))
+         (discard@,K
+          (call@J closeHandle~B f1@1))
+         (discard@,L
+          (call@J closeHandle~B f2@1))
+         (if@,N
+          (elif@3
+           (prefix not success@4)
+           (stmts@D
+            (call@C raiseOSError~C lastErr@1
+             (infix@b &
+              (infix~8 &
+               (infix~7 &
+                (infix~8 & "\28"~4 path1@2)", "@2)path2@2)"\29"@2)))))))
+       (else@,P
+        (stmts@2,1
+         (var@4 a . . Stat@6
+          (call@K default~7 Stat@1))
+         (var@7 b . . Stat@3
+          (call@H default~7 Stat@1))
+         (var@4,1 path1 . . . path1@8)
+         (var@4,2 path2 . . . path2@8)
+         (if@,3
+          (elif@3
+           (infix@Z or
+            (infix~8 <
+             (call~N stat~4
+              (call@G
+               (dot~A path1~5 toCString@1))a@K)
+             (suf@2 0 "i32"))
+            (infix@U <
+             (call~N stat~4
+              (call@G
+               (dot~A path2~5 toCString@1))b@K)
+             (suf@2 0 "i32")))
+           (stmts~1,1
+            (call@C raiseOSError~C
+             (call@C osLastError~B)
+             (infix@h &
+              (infix~8 &
+               (infix~7 &
+                (infix~8 & "\28"~4 path1@2)", "@2)path2@2)"\29"@2))))
+          (else@,2
+           (stmts@2,1
+            (asgn@7 result~7
+             (infix@N and
+              (infix~C ==
+               (dot~8 a~1 st_dev@1)
+               (dot@4 b~1 st_dev@1))
+              (infix@D ==
+               (dot~8 a~1 st_ino@1)
+               (dot@4 b~1 st_ino@1))))))))))))))))

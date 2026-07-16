@@ -1,0 +1,19 @@
+(.nif27)
+(.indexat 326              )
+(stmts@,3,../nimony/lib/std/errorcodes/errorcodes_posix.nim
+ (gvar :`iniGuard.0. .
+  (bool).)
+ (proc :`ini.0.
+  (params).
+  (pragmas
+   (smry callsUnknown))
+  (stmts
+   (if
+    (elif `iniGuard.0.
+     (stmts
+      (ret .))))
+   (asgn `iniGuard.0.
+    (true))
+   (call `ini.0.sysvq0asl))))(.index@,3,../nimony/lib/std/errorcodes/errorcodes_posix.nim
+ (h `iniGuard.0. 97)
+ (x `ini.0. 34))

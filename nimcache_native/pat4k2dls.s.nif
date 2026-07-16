@@ -1,0 +1,616 @@
+(.nif27)
+(.indexat 16721            )
+(stmts@,1,../nimony/lib/std/paths.nim
+ (import
+  (kv sysvq0asl "../nimony/lib/std/system.nim")
+  (kv ossk30t39 "../nimony/lib/std/private/osseps.nim")
+  (kv osalirkw71 "../nimony/lib/std/private/osappdirs.nim")
+  (kv patta6rli "../nimony/lib/std/pathnorm.nim")
+  (kv has9tn57v "../nimony/lib/std/hashes.nim")
+  (kv str7j0ifg "../nimony/lib/std/strutils.nim")
+  (kv ospaexnw61 "../nimony/lib/std/private/ospaths2.nim"))
+ (type@8,M :Path.0.~6 x .
+  (pragmas
+   (destroy =destroy_SX50ath0pat4k2dls.0.)
+   (wasmoved =wasmoved_SX50ath0pat4k2dls.0.)
+   (dup =dup_SX50ath0pat4k2dls.0.)
+   (copy =copy_SX50ath0pat4k2dls.0.))
+  (object@2 .
+   (fld~6,1 :data.0 . . string.0.sysvq0asl@6 .)))
+ (func@,P :path.0.@5 x . .
+  (params@A
+   (param@1 :s.0 . . string.0.sysvq0asl@3 .))Path.0.@D
+  (pragmas@S
+   (inline@2)).
+  (stmts@2,1
+   (result :result.0 . . Path.0.@B,~1 .)
+   (asgn@4,1 result.0
+    (oconstr Path.0.@7,~2
+     (kv@5 data.0~4 s.0@2)))
+   (ret~2,~1 result.0)))
+ (func@,T :$.0.@5 x . .
+  (params@9
+   (param@1 :x.0 . . Path.0.@3 .))string.0.sysvq0asl@B
+  (pragmas@R
+   (inline@2)).
+  (stmts@2,1
+   (result :result.1 . . string.0.sysvq0asl@8,~7 .)
+   (asgn@1,1 result.1
+    (dot x.0~1 data.0 0 "x"))
+   (ret~2,~1 result.1)))
+ (proc@,X :hash.0.@5 x . .
+  (params@A
+   (param@1 :x.1 . . Path.0.@3 .))
+  (u@A,2,../nimony/lib/std/hashes.nim 64). .
+  (stmts@2,1
+   (result :result.2 . .
+    (u@A,2,../nimony/lib/std/hashes.nim 64).)
+   (var@4,1 :s.1 . . string.0.sysvq0asl@4,~C
+    (dot@5 x.1~1 data.0 0 "x"))
+   (call@M,2 normalizePath.0.ospaexnw61~E
+    (haddr@1 s.1))
+   (if@,3
+    (elif@3 FileSystemCaseSensitive.0.ossk30t39
+     (stmts~1,1
+      (asgn@7 result.2~7
+       (call@3 hash.1.has9tn57v@1 s.1~1))))
+    (else@,2
+     (stmts@2,1
+      (asgn@7 result.2~7
+       (call@G hash.1.has9tn57v@1
+        (call~D toLowerAscii.1.str7j0ifg@1 s.1~1))))))
+   (ret~2,~1 result.2)))
+ (func@,g :==.0.@5 x . .
+  (params@A
+   (param@1 :x.2 . . Path.0.@6 .)
+   (param@4 :y.0 . . Path.0.@3 .))
+  (bool@E)
+  (pragmas@T
+   (inline@2)).
+  (stmts@2,1
+   (result :result.3 . .
+    (bool@C,~1).)
+   (asgn@7,4 result.3~7
+    (eq@R
+     (i 64)
+     (call~H cmpPaths.0.ospaexnw61~8
+      (dot@2 x.2~1 data.0 0 "x")
+      (dot@A y.0~1 data.0 0 "x"))0@3))
+   (ret~2,~1 result.3)))
+ (template@,n :endsWith.0.@9 . . .
+  (params@H
+   (param@1 :a.0 . . string.0.sysvq0asl@3 .)
+   (param@C :b.0 . .
+    (set@6
+     (c@1 8)).))
+  (bool@R). .
+  (stmts@2,1
+   (and@A
+    (expr@2,1t,../nimony/lib/std/system/comparisons.nim
+     (lt@2,1
+      (i 64)0@A,p,../nimony/lib/std/paths.nim
+      (call@3,p,../nimony/lib/std/paths.nim len.4.sysvq0asl@1 a.0~1)))
+    (expr@2,2k,../nimony/lib/std/system.nim
+     (inset@8
+      (set
+       (c 8))b.0@T,p,../nimony/lib/std/paths.nim
+      (call@G,p,../nimony/lib/std/paths.nim \5B\5D.9.sysvq0asl a.0
+       (call@3 high.4.sysvq0asl@1 a.0~1)))))))
+ (func@,q :addStr.0.@5 . . .
+  (params@B
+   (param@1 :x.3 . .
+    (mut@3 string.0.sysvq0asl@4).)
+   (param@G :tail.0 . . string.0.sysvq0asl@6 .)). . .
+  (stmts@2,1
+   (var@4 :state.0 . .
+    (i 64)0@8)
+   (let@4,1 :trailingSep.1 . .
+    (bool@8,~C)
+    (or@k
+     (expr~o,~4
+      (and@A
+       (expr@2,1t,../nimony/lib/std/system/comparisons.nim
+        (lt@2,1
+         (i 64)0@A,p,../nimony/lib/std/paths.nim
+         (call@3,p,../nimony/lib/std/paths.nim len.4.sysvq0asl@1 tail.0@H,4)))
+       (expr@2,2k,../nimony/lib/std/system.nim
+        (inset@8
+         (set
+          (c 8))
+         (setconstr@Y,t,../nimony/lib/std/paths.nim
+          (set@1,~5
+           (c@1 8))DirSep.0.ossk30t39@1 AltSep.0.ossk30t39@9)
+         (call@G,p,../nimony/lib/std/paths.nim \5B\5D.9.sysvq0asl tail.0@4,4
+          (call@3 high.4.sysvq0asl@1 tail.0@1,4))))))
+     (and@H
+      (eq~5
+       (i 64)
+       (call~5 len.4.sysvq0asl@1 tail.0~4)0@3)
+      (expr~15,~4
+       (and@A
+        (expr@2,1t,../nimony/lib/std/system/comparisons.nim
+         (lt@2,1
+          (i 64)0@A,p,../nimony/lib/std/paths.nim
+          (call@3,p,../nimony/lib/std/paths.nim len.4.sysvq0asl@1
+           (hderef@18,4 x.3))))
+        (expr@2,2k,../nimony/lib/std/system.nim
+         (inset@8
+          (set
+           (c 8))
+          (setconstr@1M,t,../nimony/lib/std/paths.nim
+           (set~n,~5
+            (c@1 8))DirSep.0.ossk30t39@1 AltSep.0.ossk30t39@9)
+          (call@G,p,../nimony/lib/std/paths.nim \5B\5D.9.sysvq0asl
+           (hderef@v,4 x.3)
+           (call@3 high.4.sysvq0asl@1
+            (hderef@s,4 x.3))))))))))
+   (call@G,2 normalizePathEnd.0.ospaexnw61~G x.3@1
+    (false@G))
+   (call@G,3 addNormalizePath.0.patta6rli~G tail.0@1 x.3@7
+    (haddr@A state.0)DirSep.0.ossk30t39@H)
+   (call@G,4 normalizePathEnd.0.ospaexnw61~G x.3@1 trailingSep.1@G)))
+ (func@,x :add.0.@5 x . .
+  (params@9
+   (param@1 :x.4 . .
+    (mut@3 Path.0.@4).)
+   (param@E :y.1 . . Path.0.@3 .)). . .
+  (stmts@2,1
+   (call@6 addStr.0.~6
+    (haddr@2
+     (dot
+      (hderef~1 x.4)data.0 0 "x"))
+    (dot@A y.1~1 data.0 0 "x"))))
+ (func@,10 :/.0.@5 x . .
+  (params@9
+   (param@1 :head.0 . . Path.0.@C .)
+   (param@7 :tail.1 . . Path.0.@6 .))Path.0.@K
+  (pragmas@Y
+   (inline@2)).
+  (stmts@2,1
+   (result :result.4 . . Path.0.@B,~c .)
+   (let@4,A :joined.0 . . string.0.sysvq0asl@4,~o
+    (call@H joinPath.0.ospaexnw61~8
+     (dot@5 head.0~4 data.0 0 "x")
+     (dot@G tail.1~4 data.0 0 "x")))
+   (asgn@4,B result.4
+    (call path.0.~4 joined.0@1))
+   (ret~2,~1 result.4)))
+ (func@,1E :splitPath.0.@5 x . .
+  (params@F
+   (param@1 :path.0 . . Path.0.@6 .))
+  (tuple@E
+   (kv@K head Path.0.@C)
+   (kv@Q tail Path.0.@6))
+  (pragmas@r
+   (inline@2)).
+  (stmts@2,1
+   (result :result.5 . .
+    (tuple@C,~1
+     (kv@K head Path.0.@C)
+     (kv@Q tail Path.0.@6)).)
+   (let@4,8 :res.0 . .
+    (tuple@G,2t,../nimony/lib/std/private/ospaths2.nim
+     (kv@M head string.0.sysvq0asl@C)
+     (kv@S tail string.0.sysvq0asl@6))
+    (call@F splitPath.0.ospaexnw61~9
+     (dot@5 path.0~4 data.0 0 "x")))
+   (asgn@7,9 result.5~7
+    (tupconstr@2
+     (tuple@5 Path.0.@U,~A Path.0.@U,~A)
+     (call@5 path.0.~4
+      (tupat@4 res.0~3 0))
+     (call@L path.0.~4
+      (tupat@4 res.0~3 1))))
+   (ret~2,~1 result.5)))
+ (func@,1Q :splitFile.0.@5 x . .
+  (params@F
+   (param@1 :path.1 . . Path.0.@6 .))
+  (tuple@E
+   (kv@K dir Path.0.@B)
+   (kv@P name Path.0.@6)
+   (kv@b ext string.0.sysvq0asl@5))
+  (pragmas@13
+   (inline@2)).
+  (stmts@2,1
+   (result :result.6 . .
+    (tuple@C,~1
+     (kv@K dir Path.0.@B)
+     (kv@P name Path.0.@6)
+     (kv@b ext string.0.sysvq0asl@5)).)
+   (let@4,E :res.1 . .
+    (tuple@G,9f,../nimony/lib/std/private/ospaths2.nim
+     (kv@M dir string.0.sysvq0asl@G)
+     (kv@R name string.0.sysvq0asl@B)
+     (kv@X ext string.0.sysvq0asl@5))
+    (call@F splitFile.0.ospaexnw61~9
+     (dot@5 path.1~4 data.0 0 "x")))
+   (asgn@7,F result.6~7
+    (tupconstr@2
+     (tuple@5 Path.0.@T,~G Path.0.@T,~G string.0.sysvq0asl@e,~G)
+     (call@5 path.0.~4
+      (tupat@4 res.1~3 0))
+     (call@K path.0.~4
+      (tupat@4 res.1~3 1))
+     (tupat@Z res.1~3 2)))
+   (ret~2,~1 result.6)))
+ (func@,1i :isAbsolute.0.@5 x . .
+  (params@G
+   (param@1 :path.2 . . Path.0.@6 .))
+  (bool@E)
+  (pragmas@Z
+   (inline@2)).
+  (stmts@2,1
+   (result :result.7 . .
+    (bool@C,~13).)
+   (asgn@7,3 result.7~7
+    (call@C isAbsolute.0.ospaexnw61~A
+     (dot@5 path.2~4 data.0 0 "x")))
+   (ret~2,~1 result.7)))
+ (proc@,1o :relativePath.0.@5 x . .
+  (params@I
+   (param@1 :path.3 . . Path.0.@C .)
+   (param@7 :base.0 . . Path.0.@6 .)
+   (param@J :sep.0 . .
+    (c@L,6V,../nimony/lib/std/system/stringimpl.nim 8)DirSep.0.ossk30t39@6))Path.0.@Y
+  (pragmas@v
+   (inline@2)
+   (raises@A ErrorCode.0.sysvq0asl~A)).
+  (stmts@2,1
+   (result :result.8 . . Path.0.@B,~1Q .)
+   (asgn@7,E result.8~7
+    (call@6 path.0.~4
+     (call@D relativePath.0.ospaexnw61~C
+      (dot@5 path.3~4 data.0 0 "x")
+      (dot@G base.0~4 data.0 0 "x")sep.0@N)))
+   (ret~2,~1 result.8)))
+ (proc@,25 :isRelativeTo.0.@5 x . .
+  (params@I
+   (param@1 :path.4 . . Path.0.@6 .)
+   (param@D :base.1 . . Path.0.@6 .))
+  (bool@Q)
+  (pragmas@n
+   (inline@2)
+   (raises@A ErrorCode.0.sysvq0asl~A)).
+  (stmts@2,1
+   (result :result.9 . .
+    (bool@C,~1Q).)
+   (asgn@7,1 result.9~7
+    (call@E isRelativeTo.0.ospaexnw61~C
+     (dot@5 path.4~4 data.0 0 "x")
+     (dot@G base.1~4 data.0 0 "x")))
+   (ret~2,~1 result.9)))
+ (func@,2A :parentDir.0.@5 x . .
+  (params@F
+   (param@1 :path.5 . . Path.0.@6 .))Path.0.@E
+  (pragmas@Y
+   (inline@2)).
+  (stmts@2,1
+   (result :result.10 . . Path.0.@B,~1m .)
+   (asgn@7,B result.10~7
+    (call@6 path.0.~4
+     (call@A parentDir.0.ospaexnw61~9
+      (dot@5 path.5~4 data.0 0 "x"))))
+   (ret~2,~1 result.10)))
+ (func@,2O :tailDir.0.@5 x . .
+  (params@D
+   (param@1 :path.6 . . Path.0.@6 .))Path.0.@E
+  (pragmas@W
+   (inline@2)).
+  (stmts@2,1
+   (result :result.11 . . Path.0.@B,~20 .)
+   (asgn@7,6 result.11~7
+    (call@6 path.0.~4
+     (call@8 tailDir.0.ospaexnw61~7
+      (dot@5 path.6~4 data.0 0 "x"))))
+   (ret~2,~1 result.11)))
+ (func@,2X :isRootDir.0.@5 x . .
+  (params@F
+   (param@1 :path.7 . . Path.0.@6 .))
+  (bool@E)
+  (pragmas@Y
+   (inline@2)).
+  (stmts@2,1
+   (result :result.12 . .
+    (bool@C,~1s).)
+   (asgn@7,1 result.12~7
+    (call@B isRootDir.0.ospaexnw61~9
+     (dot@5 path.7~4 data.0 0 "x")))
+   (ret~2,~1 result.12)))
+ (iterator@,2b :parentDirs.0.@9 x . .
+  (params@K
+   (param@1 :path.8 . . Path.0.@6 .)
+   (param@D :fromRoot.0 . .
+    (bool~J,~1v)
+    (false@9))
+   (param@T :inclusive.0 . .
+    (bool~Z,~1v)
+    (true@A)))Path.0.@k
+  (pragmas@19
+   (sideEffect@2)).
+  (stmts@2,1
+   (for@4,D
+    (call@F parentDirs.0.ospaexnw61~A
+     (dot@5 path.8~4 data.0 0 "x")fromRoot.0@C inclusive.0@M)
+    (unpackflat
+     (let :p.0 . . string.0.sysvq0asl@4,~2S .))
+    (stmts~2,1
+     (yld
+      (call@A path.0.~4 p.0@1))))))
+ (func@,2s :/../.0.@5 x . .
+  (params@C
+   (param@1 :head.1 . . Path.0.@C .)
+   (param@7 :tail.2 . . Path.0.@6 .))Path.0.@K
+  (pragmas@b
+   (inline@2)).
+  (stmts@2,1
+   (result :result.13 . . Path.0.@B,~2U .)
+   (asgn@4,6 result.13
+    (call path.0.~4
+     (call@7 /../.0.ospaexnw61@5
+      (dot@5 head.1~4 data.0 0 "x")
+      (dot@G tail.2~4 data.0 0 "x"))))
+   (ret~2,~1 result.13)))
+ (func@,31 :extractFilename.0.@5 x . .
+  (params@L
+   (param@1 :path.9 . . Path.0.@6 .))Path.0.@E
+  (pragmas@e
+   (inline@2)).
+  (stmts@2,1
+   (result :result.14 . . Path.0.@B,~2d .)
+   (asgn@7,9 result.14~7
+    (call@6 path.0.~4
+     (call@G extractFilename.0.ospaexnw61~F
+      (dot@5 path.9~4 data.0 0 "x"))))
+   (ret~2,~1 result.14)))
+ (func@,3D :lastPathPart.0.@5 x . .
+  (params@I
+   (param@1 :path.10 . . Path.0.@6 .))Path.0.@E
+  (pragmas@b
+   (inline@2)).
+  (stmts@2,1
+   (result :result.15 . . Path.0.@B,~2p .)
+   (asgn@7,8 result.15~7
+    (call@6 path.0.~4
+     (call@D lastPathPart.0.ospaexnw61~C
+      (dot@5 path.10~4 data.0 0 "x"))))
+   (ret~2,~1 result.15)))
+ (func@,3O :changeFileExt.0.@5 x . .
+  (params@J
+   (param@1 :filename.0 . . Path.0.@A .)
+   (param@H :ext.0 . . string.0.sysvq0asl@5 .))Path.0.@V
+  (pragmas@t
+   (inline@2)).
+  (stmts@2,1
+   (result :result.16 . . Path.0.@B,~30 .)
+   (asgn@7,E result.16~7
+    (call@6 path.0.~4
+     (call@E changeFileExt.0.ospaexnw61~D
+      (dot@9 filename.0~8 data.0 0 "x")ext.0@G)))
+   (ret~2,~1 result.16)))
+ (func@,3f :addFileExt.0.@5 x . .
+  (params@G
+   (param@1 :filename.1 . . Path.0.@A .)
+   (param@H :ext.1 . . string.0.sysvq0asl@5 .))Path.0.@V
+  (pragmas@q
+   (inline@2)).
+  (stmts@2,1
+   (result :result.17 . . Path.0.@B,~3H .)
+   (asgn@7,C result.17~7
+    (call@6 path.0.~4
+     (call@B addFileExt.0.ospaexnw61~A
+      (dot@9 filename.1~8 data.0 0 "x")ext.1@G)))
+   (ret~2,~1 result.17)))
+ (func@,3u :unixToNativePath.0.@5 x . .
+  (params@M
+   (param@1 :path.11 . . Path.0.@6 .)
+   (param@D :drive.0 . . Path.0.~M,~3V
+    (call@A path.0.~4 ""@1)))Path.0.@U
+  (pragmas@v
+   (inline@2)).
+  (stmts@2,1
+   (result :result.18 . . Path.0.@B,~3W .)
+   (asgn@7,9 result.18~7
+    (call@6 path.0.~4
+     (call@H unixToNativePath.0.ospaexnw61~G
+      (dot@5 path.11~4 data.0 0 "x")
+      (dot@H drive.0~5 data.0 0 "x"))))
+   (ret~2,~1 result.18)))
+ (proc@,46 :getCurrentDir.0.@5 x . .
+  (params@J)Path.0.@4
+  (pragmas@S
+   (inline@2)
+   (tags@A
+    (bracket@6))
+   (raises@K ErrorCode.0.sysvq0asl~K)).
+  (stmts@2,1
+   (result :result.19 . . Path.0.@B,~3i .)
+   (asgn@7,C result.19~7
+    (call@6 path.0.~4
+     (call@N getCurrentDir.0.ospaexnw61~E)))
+   (ret~2,~1 result.19)))
+ (proc@,4L :normalizeExe.0.@5 x . .
+  (params@I
+   (param@1 :file.0 . .
+    (mut@6 Path.0.@4).)). . .
+  (stmts@2,1
+   (call@L,4 normalizeExe.0.ospaexnw61~D
+    (haddr@5
+     (dot
+      (hderef~4 file.0)data.0 0 "x")))))
+ (proc@,4S :normalizePath.0.@5 x . .
+  (params@J
+   (param@1 :path.12 . .
+    (mut@6 Path.0.@4).)). . .
+  (stmts@2,1
+   (call@M,4 normalizePath.0.ospaexnw61~E
+    (haddr@5
+     (dot
+      (hderef~4 path.12)data.0 0 "x")))))
+ (proc@,4Z :normalizePathEnd.0.@5 x . .
+  (params@M
+   (param@1 :path.13 . .
+    (mut@6 Path.0.@4).)
+   (param@H :trailingSep.0 . .
+    (bool~P,~3t)
+    (false@E))). . .
+  (stmts@2,1
+   (call@P,2 normalizePathEnd.0.ospaexnw61~H
+    (haddr@5
+     (dot
+      (hderef~4 path.13)data.0 0 "x"))trailingSep.0@C)))
+ (proc@,4e :absolutePath.0.@5 x . .
+  (params@I
+   (param@1 :path.14 . . Path.0.@6 .)
+   (param@D :root.0 . . Path.0.~I,~4F
+    (call@K getCurrentDir.0.~D)))Path.0.@c
+  (pragmas@z
+   (raises@2 ErrorCode.0.sysvq0asl~2)).
+  (stmts@2,1
+   (result :result.20 . . Path.0.@B,~4G .)
+   (asgn@7,6 result.20~7
+    (call@6 path.0.~4
+     (call@D absolutePath.0.ospaexnw61~C
+      (dot@5 path.14~4 data.0 0 "x")
+      (dot@G root.0~4 data.0 0 "x"))))
+   (ret~2,~1 result.20)))
+ (proc@,4n :expandTildeImpl.0.@5 . . .
+  (params@K
+   (param@1 :path.15 . . string.0.sysvq0asl@6 .))string.0.sysvq0asl@G
+  (pragmas@h
+   (tags~f,1
+    (bracket@6 ReadEnvEffect@1 ReadIOEffect@G))).
+  (stmts@2,2
+   (result :result.21 . . string.0.sysvq0asl@8,~4S .)
+   (if
+    (elif@3
+     (or@F
+      (eq~5
+       (i 64)
+       (call~7 len.4.sysvq0asl~3 path.15@1)0@3)
+      (expr@2,1l,../nimony/lib/std/system/comparisons.nim
+       (not@,1
+        (eq@7
+         (c 8)
+         (call@N,4q,../nimony/lib/std/paths.nim \5B\5D.9.sysvq0asl path.15 0@5)'\7E'@Y,4q,../nimony/lib/std/paths.nim))))
+     (stmts~1,1
+      (asgn@7 result.21~7 path.15@2)))
+    (elif@5,2
+     (eq@A
+      (i 64)
+      (call~7 len.4.sysvq0asl~3 path.15@1)1@3)
+     (stmts~3,1
+      (asgn@7 result.21~7
+       (call@C getHomeDir.0.osalirkw71~A))))
+    (elif@5,4
+     (expr@2,2k,../nimony/lib/std/system.nim
+      (inset@8
+       (set
+        (c 8))
+       (setconstr@J,4u,../nimony/lib/std/paths.nim
+        (set@G,~46
+         (c@1 8))DirSep.0.ossk30t39@1 AltSep.0.ossk30t39@9)
+       (call@8,4u,../nimony/lib/std/paths.nim \5B\5D.9.sysvq0asl path.15 1@5)))
+     (stmts~3,1
+      (asgn@7 result.21~7
+       (call@A joinPath.0.ospaexnw61~8
+        (call@B getHomeDir.0.osalirkw71~A)
+        (call@Q substr.1.sysvq0asl~6 path.15~B 2@1)))))
+    (else@,6
+     (stmts@2,2
+      (asgn@7 result.21~7 path.15@2))))
+   (ret~2,~2 result.21)))
+ (proc@,4z :expandTilde.0.@5 x . .
+  (params@H
+   (param@1 :path.16 . . Path.0.@6 .))Path.0.@E
+  (pragmas@a
+   (inline@2)
+   (tags~Y,1
+    (bracket@6 ReadEnvEffect@1 ReadIOEffect@G))).
+  (stmts@2,2
+   (result :result.22 . . Path.0.@B,~4c .)
+   (asgn@7,5 result.22~7
+    (call@6 path.0.~4
+     (call@G expandTildeImpl.0.~F
+      (dot@5 path.16~4 data.0 0 "x"))))
+   (ret~2,~2 result.22)))
+ (comment@E,g bool.0.sysvq0asl set.0.sysvq0asl@I,7 char.0.sysvq0asl@M,7 bool.0.sysvq0asl@D,7 bool.0.sysvq0asl@,12 bool.0.sysvq0asl@C,1P bool.0.sysvq0asl@,1r false.0.sysvq0asl@S,1v true.0.sysvq0asl@j,1v false.0.sysvq0asl@d,3t >.0.sysvq0asl~6,8 in.0.sysvq0asl@C,8 endsWith.0.@J,C endsWith.0.@17,C false.0.sysvq0asl@K,D !=.0.sysvq0asl@H,49 in.0.sysvq0asl@2,4D)
+ (proc@8,M :=destroy_SX50ath0pat4k2dls.0. . . .
+  (params
+   (param :dest.0 . . Path.0. .)).
+  (pragmas
+   (nodestroy)).
+  (stmts
+   (call =destroy.2.sysvq0asl
+    (dot dest.0 data.0 0))))
+ (proc@8,M :=wasmoved_SX50ath0pat4k2dls.0. . . .
+  (params
+   (param :dest.0 . .
+    (mut Path.0.).)).
+  (pragmas
+   (nodestroy)).
+  (stmts
+   (call =wasMoved.2.sysvq0asl
+    (haddr
+     (dot
+      (hderef dest.0)data.0 0)))))
+ (proc@8,M :=dup_SX50ath0pat4k2dls.0. . . .
+  (params
+   (param :src.0 . . Path.0. .))Path.0.
+  (pragmas
+   (nodestroy)).
+  (stmts
+   (result :dest.0 .
+    (pragmas
+     (noinit))Path.0. .)
+   (asgn
+    (dot dest.0 data.0 0)
+    (call =dup.2.sysvq0asl
+     (dot src.0 data.0 0)))
+   (ret dest.0)))
+ (proc@8,M :=copy_SX50ath0pat4k2dls.0. . . .
+  (params
+   (param :dest.0 . .
+    (mut Path.0.).)
+   (param :src.0 . . Path.0. .)).
+  (pragmas
+   (nodestroy)).
+  (stmts
+   (call =copy.2.sysvq0asl
+    (dot
+     (hderef dest.0)data.0 0)
+    (dot src.0 data.0 0)))))(.index@,1,../nimony/lib/std/paths.nim
+ (x Path.0. 456)
+ (x path.0. 262)
+ (x $.0. 279)
+ (x hash.0. 262)
+ (x ==.0. 652)
+ (h endsWith.0. 382)
+ (h addStr.0. 596)
+ (x add.0. 1839)
+ (x /.0. 251)
+ (x splitPath.0. 442)
+ (x splitFile.0. 723)
+ (x isAbsolute.0. 879)
+ (x relativePath.0. 305)
+ (x isRelativeTo.0. 547)
+ (x parentDir.0. 419)
+ (x tailDir.0. 327)
+ (x isRootDir.0. 323)
+ (x parentDirs.0. 306)
+ (x /../.0. 501)
+ (x extractFilename.0. 386)
+ (x lastPathPart.0. 339)
+ (x changeFileExt.0. 335)
+ (x addFileExt.0. 397)
+ (x unixToNativePath.0. 391)
+ (x getCurrentDir.0. 448)
+ (x normalizeExe.0. 328)
+ (x normalizePath.0. 220)
+ (x normalizePathEnd.0. 224)
+ (x absolutePath.0. 308)
+ (h expandTildeImpl.0. 466)
+ (x expandTilde.0. 1405)
+ (h =destroy_SX50ath0pat4k2dls.0. 746)
+ (h =wasmoved_SX50ath0pat4k2dls.0. 189)
+ (h =dup_SX50ath0pat4k2dls.0. 227)
+ (h =copy_SX50ath0pat4k2dls.0. 298))

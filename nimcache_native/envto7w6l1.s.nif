@@ -1,0 +1,1167 @@
+(.nif27)
+(.indexat 35864            )
+(stmts@,1,../nimony/lib/std/envvars.nim
+ (import
+  (kv sysvq0asl "../nimony/lib/std/system.nim")
+  (kv str7j0ifg "../nimony/lib/std/strutils.nim")
+  (kv osezuyu63 "../nimony/lib/std/oserrors.nim"))
+ (stmts@2,b
+  (type@F,8 :cstringArray.0.~D . . .
+   (ptr@2
+    (uarray@I
+     (cstring@1
+      (notnil)))
+    (notnil)))
+  (proc@,A :delete.0.@5 . .
+   (typevars@B
+    (typevar@1 :T.0. . . . .))
+   (params@E
+    (param@1 :x.0 . .
+     (mut@3
+      (at@7 seq.0.sysvq0asl~3 T.0.@1)).)
+    (param@G :i.0 . .
+     (i@D,7W,../nimony/lib/std/system.nim 64).)).
+   (pragmas@g
+    (noSideEffect@2)).
+   (stmts@2,1
+    (let@4 :xl.0 . .
+     (i@D,7W,../nimony/lib/std/system.nim 64)
+     (call@6 len.3.sysvq0asl@1 x.0~1))
+    (for@4,1
+     (infix@A \2E..0.sysvq0asl
+      (conv~4
+       (i@1 64)i.0~1)
+      (sub@4
+       (i 64)xl.0~2 2@1))
+     (unpackflat
+      (let :j.0 . .
+       (i@D,7W,../nimony/lib/std/system.nim 64).))
+     (stmts~2,1
+      (call \5B\5D=.7.sysvq0asl x.0 j.0@2
+       (cmd@C move.0.sysvq0asl~5
+        (call \5B\5D.7.sysvq0asl x.0
+         (add@3
+          (i 64)j.0~1 1@1))))))
+    (call@6,3 shrink.0.sysvq0asl~6 x.0@1
+     (sub@6
+      (i 64)xl.0~2 1@1))))
+  (proc@,V :c_getenv.0.@5 . . .
+   (params@D
+    (param@1 :env.0 . .
+     (cstring@5
+      (notnil)).))
+   (cstring@G
+    (notnil))
+   (pragmas@b
+    (importc~Z,1 "getenv"@9)
+    (header~G,1 "<stdlib.h>"@8)). .)
+  (stmts@2,a
+   (proc :c_setenv.0.@5 . . .
+    (params@D
+     (param@1 :envname.0 . .
+      (cstring@9
+       (notnil)).)
+     (param@J :envval.0 . .
+      (cstring@8
+       (notnil)).)
+     (param@a :overwrite.0 . .
+      (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+       (importc "int")).))
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int"))
+    (pragmas@1A
+     (importc@2 "setenv"@9)
+     (header@L "<stdlib.h>"@8)). .))
+  (proc@,b :c_unsetenv.0.@5 . . .
+   (params@F
+    (param@1 :env.1 . .
+     (cstring@5
+      (notnil)).))
+   (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+    (importc "int"))
+   (pragmas@a
+    (importc~Y,1 "unsetenv"@9)
+    (header~D,1 "<stdlib.h>"@8)). .)
+  (tvar@E,i :envComputed.0.~C .
+   (pragmas
+    (threadvar@2))
+   (bool@F).)
+  (tvar@E,j :environment.0.~C .
+   (pragmas
+    (threadvar@2))seq.0.Ixdx2fh1.@I .)
+  (stmts@2,1H
+   (const@2,1 :useNSGetEnviron.0. . .
+    (bool@B,19,../nimony/lib/std/system/basic_types.nim)
+    (false@1Y))
+   (stmts@2,L
+    (gvar@9 :gEnv.0.~5 .
+     (pragmas
+      (importc@2 "environ"@9))
+     (ptr@4,~1U
+      (uarray@I
+       (cstring@1
+        (notnil)))
+      (notnil)).))
+   (proc@,N :getEnvVarsC.0.@5 . . .
+    (params@G). . .
+    (stmts@2,2
+     (if
+      (elif@3
+       (not envComputed.0.@4)
+       (stmts~1,1
+        (asgn@C environment.0.~C
+         (expr@2,32,../nimony/lib/std/system/seqimpl.nim
+          (call@F,1 newSeqUninit.0.Im3cqd9.~F 0@1)))
+        (var@4,3 :i.1 . .
+         (i 64)0@4)
+        (while@,4
+         (expr@2,1l,../nimony/lib/std/system/comparisons.nim
+          (not@,1
+           (eq@7
+            (pointer
+             (nil))
+            (hconv@E,2N,../nimony/lib/std/envvars.nim
+             (pointer@L,B,../nimony/lib/std/system/comparisons.nim
+              (nil))
+             (pat gEnv.0. i.1@5))
+            (nil@P,2N,../nimony/lib/std/envvars.nim))))
+         (stmts@2,1
+          (cmd add.0.Ig6072n.
+           (haddr@4 environment.0.)
+           (prefix@H $.0.str7j0ifg
+            (pat@1 gEnv.0. i.1@5)))
+          (call@3,1 inc.1.Irn1g7r1.~3
+           (haddr@1 i.1))))
+        (asgn@C,7 envComputed.0.~C
+         (true@2))))))))
+  (proc@,1q :findEnvVar.0.@5 . . .
+   (params@F
+    (param@1 :key.0 . . string.0.sysvq0asl@5 .))
+   (i@F 64). .
+   (stmts@2,1
+    (result@B :result.0 . .
+     (i@D,7W,../nimony/lib/std/system.nim 64).)
+    (call@B getEnvVarsC.0.~B)
+    (var@4,1 :temp.0 . . string.0.sysvq0asl@F,~2
+     (infix@B &.0.sysvq0asl key.0~4 "="@2))
+    (for@4,2
+     (infix@6 \2E..0.Ibdympw. 0~1
+      (call@6 high.3.Ivq2uke1.~4 environment.0.@1))
+     (unpackflat
+      (let :i.2 . .
+       (i@D,7W,../nimony/lib/std/system.nim 64).))
+     (stmts~2,1
+      (stmts@2,3
+       (if
+        (elif@3
+         (call@A startsWith.0.str7j0ifg~A
+          (hderef@1
+           (call \5B\5D.7.Ir6d0tw. environment.0. i.2@C))temp.0@H)
+         (stmts@Y
+          (ret i.2@7)))))))
+    (ret@,7 -1@7)
+    (ret~2,~1 result.0)))
+  (proc@,20 :getEnv.0.@5 x . .
+   (params@C
+    (param@1 :key.1 . . string.0.sysvq0asl@5 .)
+    (param@E :default.0 . . string.0.sysvq0asl~5,~A ""@A))string.0.sysvq0asl@T
+   (pragmas@m
+    (tags@2
+     (bracket@6 ReadEnvEffect@1))).
+   (stmts@2,1
+    (result :result.1 . . string.0.sysvq0asl@J,~B .)
+    (stmts@2,3N,../nimony/lib/std/system.nim
+     (discard "ignore runnable examples"@8))
+    (var@4,G :i.4 . .
+     (i@D,7W,../nimony/lib/std/system.nim 64)
+     (call@E findEnvVar.0.~A key.1@1))
+    (if@,H
+     (elif@3
+      (expr@2,1p,../nimony/lib/std/system/comparisons.nim
+       (le@2,1
+        (i 64)0@C,2u,../nimony/lib/std/envvars.nim i.4@7,2u,../nimony/lib/std/envvars.nim))
+      (stmts~1,1
+       (asgn@7 result.1~7
+        (call@8 substr.1.sysvq0asl~6
+         (hderef@1
+          (call \5B\5D.7.Ir6d0tw. environment.0. i.4@C))
+         (add@g
+          (i 64)
+          (call~L find.0.str7j0ifg~4
+           (hderef@1
+            (call \5B\5D.7.Ir6d0tw. environment.0. i.4@C))'='@H 0@o,9a,../nimony/lib/std/strutils.nim -1@y,9a,../nimony/lib/std/strutils.nim)1@1)))))
+     (else@,2
+      (stmts@2,1
+       (stmts@2,5
+        (var@4 :key.5 . . string.0.sysvq0asl@8,~Q key.1@6)
+        (let@4,1 :kc.0 . .
+         (cstring@9,~1w
+          (notnil))
+         (call@I toCString.0.sysvq0asl~9
+          (haddr~D key.5)))
+        (if@,2
+         (elif@3
+          (expr@a,3v,../nimony/lib/std/system.nim
+           (eq@2
+            (pointer
+             (nil))
+            (hconv~2
+             (pointer@L,B,../nimony/lib/std/system/comparisons.nim
+              (nil))
+             (hconv@B,34,../nimony/lib/std/envvars.nim
+              (pointer@c,3v,../nimony/lib/std/system.nim
+               (nil))kc.0))
+            (nil@3)))
+          (stmts~1,1
+           (asgn@7 result.1~7 default.0@2)))
+         (else@,2
+          (stmts@2,1
+           (var@4 :env.2 . .
+            (cstring@7,~20
+             (notnil))
+            (call@E c_getenv.0.~8 kc.0@1))
+           (if@,1
+            (elif@3
+             (eq@4
+              (pointer
+               (nil))
+              (hconv~4
+               (pointer@L,B,../nimony/lib/std/system/comparisons.nim
+                (nil))env.2)
+              (nil@3))
+             (stmts@C
+              (asgn@7 result.1~7 default.0@2)))
+            (else@,1
+             (stmts@6
+              (asgn@7 result.1~7
+               (prefix@2 $.0.str7j0ifg env.2@1))))))))))))
+    (ret~2,~1 result.1)))
+  (proc@,2Z :existsEnv.0.@5 x . .
+   (params@F
+    (param@1 :key.2 . . string.0.sysvq0asl@5 .))
+   (bool@F)
+   (pragmas@Z
+    (tags@2
+     (bracket@6 ReadEnvEffect@1))).
+   (stmts@2,1
+    (result :result.2 . .
+     (bool@B,19,../nimony/lib/std/system/basic_types.nim).)
+    (stmts@2,3N,../nimony/lib/std/system.nim
+     (discard "ignore runnable examples"@8))
+    (var@4,B :key.6 . . string.0.sysvq0asl@F,~C key.2@6)
+    (let@4,C :kc.1 . .
+     (cstring@D,~2H
+      (notnil))
+     (call@I toCString.0.sysvq0asl~9
+      (haddr~D key.6)))
+    (if@,D
+     (elif@3
+      (expr@a,3v,../nimony/lib/std/system.nim
+       (eq@2
+        (pointer
+         (nil))
+        (hconv~2
+         (pointer@L,B,../nimony/lib/std/system/comparisons.nim
+          (nil))
+         (hconv@7,3P,../nimony/lib/std/envvars.nim
+          (pointer@c,3v,../nimony/lib/std/system.nim
+           (nil))kc.1))
+        (nil@3)))
+      (stmts~1,1
+       (asgn@7 result.2~7
+        (false@2))))
+     (elif@5,2
+      (expr@2,1l,../nimony/lib/std/system/comparisons.nim
+       (not@,1
+        (eq@7
+         (pointer
+          (nil))
+         (hconv@H,3R,../nimony/lib/std/envvars.nim
+          (pointer@L,B,../nimony/lib/std/system/comparisons.nim
+           (nil))
+          (call c_getenv.0.~8 kc.1@1))
+         (nil@P,3R,../nimony/lib/std/envvars.nim))))
+      (stmts~3,1
+       (asgn@7 result.2~7
+        (true@2))))
+     (else@,4
+      (stmts@2,1
+       (asgn@7 result.2~7
+        (expr@2,1p,../nimony/lib/std/system/comparisons.nim
+         (le@2,1
+          (i 64)0@Y,3U,../nimony/lib/std/envvars.nim
+          (call@P,3U,../nimony/lib/std/envvars.nim findEnvVar.0.~A key.6@1)))))))
+    (ret~2,~1 result.2)))
+  (proc@,2u :putEnv.0.@5 x . .
+   (params@C
+    (param@1 :key.3 . . string.0.sysvq0asl@A .)
+    (param@6 :val.0 . . string.0.sysvq0asl@5 .)).
+   (pragmas@V
+    (tags@2
+     (bracket@6 WriteEnvEffect@1))
+    (raises@Q ErrorCode.0.sysvq0asl~Q)).
+   (stmts@2,1
+    (var@4,E :indx.0 . .
+     (i@D,7W,../nimony/lib/std/system.nim 64)
+     (call@H findEnvVar.0.~A key.3@1))
+    (if@,F
+     (elif@3
+      (expr@2,1p,../nimony/lib/std/system/comparisons.nim
+       (le@2,1
+        (i 64)0@F,3m,../nimony/lib/std/envvars.nim indx.0@7,3m,../nimony/lib/std/envvars.nim))
+      (stmts~1,1
+       (call \5B\5D=.7.Ild9iim.
+        (haddr environment.0.)indx.0@C
+        (infix@U &.0.sysvq0asl
+         (infix~6 &.1.sysvq0asl key.3~4 '='@2)val.0@2))))
+     (else@,2
+      (stmts@2,1
+       (cmd add.0.Ig6072n.
+        (haddr@4 environment.0.)
+        (infix@S &.0.sysvq0asl
+         (infix~6 &.1.sysvq0asl key.3~4 '='@2)val.0@2))
+       (asgn@5,1 indx.0~5
+        (call@6 high.3.Ivq2uke1.~4 environment.0.@1)))))
+    (var@4,L :key.7 . . string.0.sysvq0asl@H,~M key.3@6)
+    (var@4,M :val.1 . . string.0.sysvq0asl@H,~N val.0@6)
+    (stmts@2,X
+     (let@4 :kc.2 . .
+      (cstring@B,~2x
+       (notnil))
+      (call@I toCString.0.sysvq0asl~9
+       (haddr~D key.7)))
+     (let@4,1 :vc.0 . .
+      (cstring@B,~2y
+       (notnil))
+      (call@I toCString.0.sysvq0asl~9
+       (haddr~D val.1)))
+     (if@,2
+      (elif@3
+       (expr@a,3v,../nimony/lib/std/system.nim
+        (eq@2
+         (pointer
+          (nil))
+         (hconv~2
+          (pointer@L,B,../nimony/lib/std/system/comparisons.nim
+           (nil))
+          (hconv@9,46,../nimony/lib/std/envvars.nim
+           (pointer@c,3v,../nimony/lib/std/system.nim
+            (nil))kc.2))
+         (nil@3)))
+       (stmts~1,1
+        (raise OutOfMemError.0.sysvq0asl@6))))
+     (if@,4
+      (elif@3
+       (expr@a,3v,../nimony/lib/std/system.nim
+        (eq@2
+         (pointer
+          (nil))
+         (hconv~2
+          (pointer@L,B,../nimony/lib/std/system/comparisons.nim
+           (nil))
+          (hconv@9,48,../nimony/lib/std/envvars.nim
+           (pointer@c,3v,../nimony/lib/std/system.nim
+            (nil))vc.0))
+         (nil@3)))
+       (stmts~1,1
+        (raise OutOfMemError.0.sysvq0asl@6))))
+     (if@,6
+      (elif@3
+       (expr@2,1l,../nimony/lib/std/system/comparisons.nim
+        (not@,1
+         (eq@7
+          (i 32)
+          (call@H,4A,../nimony/lib/std/envvars.nim c_setenv.0.~8 kc.2@1 vc.0@5
+           (suf@9 1 "i32"))
+          (suf@a,4A,../nimony/lib/std/envvars.nim 0 "i32"))))
+       (stmts~1,1
+        (call@C raiseOSError.0.osezuyu63~C
+         (call@C osLastError.0.osezuyu63~B)""@y,J,../nimony/lib/std/oserrors.nim)))))))
+  (proc@,3b :delEnv.0.@5 x . .
+   (params@C
+    (param@1 :key.4 . . string.0.sysvq0asl@5 .)).
+   (pragmas@Q
+    (tags@2
+     (bracket@6 WriteEnvEffect@1))
+    (raises@Q ErrorCode.0.sysvq0asl~Q)).
+   (stmts@2,1
+    (var@4,8 :indx.1 . .
+     (i@D,7W,../nimony/lib/std/system.nim 64)
+     (call@H findEnvVar.0.~A key.4@1))
+    (if@,9
+     (elif@3
+      (expr@2,1p,../nimony/lib/std/system/comparisons.nim
+       (le@2,1
+        (i 64)0@F,4N,../nimony/lib/std/envvars.nim indx.1@7,4N,../nimony/lib/std/envvars.nim))
+      (stmts~1,1
+       (stmts@2,6
+        (var@4 :key.8 . . string.0.sysvq0asl@8,~H key.4@6)
+        (let@4,1 :kc.3 . .
+         (cstring@9,~3O
+          (notnil))
+         (call@I toCString.0.sysvq0asl~9
+          (haddr~D key.8)))
+        (if@,2
+         (elif@3
+          (expr@a,3v,../nimony/lib/std/system.nim
+           (eq@2
+            (pointer
+             (nil))
+            (hconv~2
+             (pointer@L,B,../nimony/lib/std/system/comparisons.nim
+              (nil))
+             (hconv@B,4W,../nimony/lib/std/envvars.nim
+              (pointer@c,3v,../nimony/lib/std/system.nim
+               (nil))kc.3))
+            (nil@3)))
+          (stmts~1,1
+           (raise OutOfMemError.0.sysvq0asl@6))))
+        (if@,4
+         (elif@3
+          (expr@2,1l,../nimony/lib/std/system/comparisons.nim
+           (not@,1
+            (eq@7
+             (i 32)
+             (call@L,4Y,../nimony/lib/std/envvars.nim c_unsetenv.0.~A kc.3@1)
+             (suf@T,4Y,../nimony/lib/std/envvars.nim 0 "i32"))))
+          (stmts~1,1
+           (call@C raiseOSError.0.osezuyu63~C
+            (call@C osLastError.0.osezuyu63~B)""@y,J,../nimony/lib/std/oserrors.nim)))))
+       (call@I,C delete.0.Im547yx.~6
+        (haddr~I environment.0.)indx.1@1)))
+     (else@,E
+      (stmts@2,1
+       (discard .))))))
+  (iterator@,42 :envPairs.0.@9 x . .
+   (params@I)
+   (tuple@4
+    (kv@A key string.0.sysvq0asl@C)
+    (kv@F value string.0.sysvq0asl@7))
+   (pragmas@m
+    (tags@2
+     (bracket@6 ReadEnvEffect@1))
+    (sideEffect@P)).
+   (stmts@2,1
+    (call@B,A getEnvVarsC.0.~B)
+    (for@4,B
+     (infix@6 \2E..0.Ibdympw. 0~1
+      (call@6 high.3.Ivq2uke1.~4 environment.0.@1))
+     (unpackflat
+      (let :i.7 . .
+       (i@D,7W,../nimony/lib/std/system.nim 64).))
+     (stmts~2,1
+      (var@4 :p.0 . .
+       (i@D,7W,../nimony/lib/std/system.nim 64)
+       (call@8 find.0.str7j0ifg~4
+        (hderef@1
+         (call \5B\5D.7.Ir6d0tw. environment.0. i.7@C))'='@H 0@o,9a,../nimony/lib/std/strutils.nim -1@y,9a,../nimony/lib/std/strutils.nim))
+      (yld@,1
+       (tupconstr@6
+        (tuple@7 string.0.sysvq0asl@9,~E string.0.sysvq0asl@9,~E)
+        (call@7 substr.0.sysvq0asl~6
+         (hderef@1
+          (call \5B\5D.7.Ir6d0tw. environment.0. i.7@C))0@H
+         (sub@L
+          (i 64)p.0~1 1@1))
+        (call@7,1 substr.1.sysvq0asl~6
+         (hderef@1
+          (call \5B\5D.7.Ir6d0tw. environment.0. i.7@C))
+         (add@I
+          (i 64)p.0~1 1@1)))))))))
+ (comment@N,j UncheckedArray.0.sysvq0asl cstring.0.sysvq0asl@F cstring.0.sysvq0asl~2,N cstring.0.sysvq0asl~5,N cstring.0.sysvq0asl@4,S cstring.0.sysvq0asl@L,S cstring.0.sysvq0asl@,T int.0.sysvq0asl~6,1i bool.0.sysvq0asl~6,2R int.0.sysvq0asl~8,4 bool.0.sysvq0asl@8,a \40.1.sysvq0asl~1,1Z !=.0.sysvq0asl~1,1d true.0.sysvq0asl~1,1g runnableExamples.0.sysvq0asl~J,24 >=.0.sysvq0asl~E,2A isNil.0.sysvq0asl~A,2K runnableExamples.0.sysvq0asl~J,2a isNil.0.sysvq0asl~E,2f false.0.sysvq0asl~8,2g !=.0.sysvq0asl~1,2h true.0.sysvq0asl~8,2i >=.0.sysvq0asl@8,2k >=.0.sysvq0asl~B,32 isNil.0.sysvq0asl~C,3M isNil.0.sysvq0asl~C,3O !=.0.sysvq0asl@A,3Q >=.0.sysvq0asl~B,3d isNil.0.sysvq0asl~A,3m !=.0.sysvq0asl@3,3o)
+ (func@H,33,../nimony/lib/std/system/seqimpl.nim :newSeqUninit.0.Im3cqd9. . .~H,~1z
+  (at newSeqUninit.0.sysvq0asl string.0.sysvq0asl@Z,1L,../nimony/lib/std/envvars.nim)
+  (params@4,~1z
+   (param@1 :size.1 . .
+    (i@6 64).))seq.0.Ixdx2fh1.~1,~1z
+  (pragmas@O,~1z
+   (nodestroy@2)
+   (inline@D)).~H,~1z
+  (stmts~F,~1y
+   (result :result.3 . . seq.0.Ixdx2fh1.@E,~1 .)
+   (if@,1
+    (elif@3
+     (eq@5
+      (i 64)size.1~5 0@3)
+     (stmts~1,1
+      (asgn@7 result.3~7
+       (oconstr@8 seq.0.Ixdx2fh1.@Y,1L,../nimony/lib/std/envvars.nim
+        (kv@4 len.0~3 size.1@2)
+        (kv@G data.0~4
+         (nil@2))))))
+    (else@,2
+     (stmts@2,1
+      (let@4 :memSize.0 . .
+       (i@D,7W,../nimony/lib/std/system.nim 64)
+       (call@R memSizeInBytes.0.I7me00i.~H size.1@1))
+      (asgn@7,1 result.3~7
+       (oconstr@8 seq.0.Ixdx2fh1.@Y,1L,../nimony/lib/std/envvars.nim
+        (kv@4 len.0~3 size.1@2)
+        (kv@G data.0~4
+         (cast@2
+          (ptr@5
+           (uarray@I string.0.sysvq0asl@Z,1L,../nimony/lib/std/envvars.nim)
+           (unchecked))
+          (call@X alloc.0.sysvq0asl~5 memSize.0@1)))))
+      (if@,2
+       (elif@3
+        (expr@2,1l,../nimony/lib/std/system/comparisons.nim
+         (not@,1
+          (eq@7
+           (ptr
+            (uarray string.0.sysvq0asl@Z,1L,../nimony/lib/std/envvars.nim)
+            (unchecked))
+           (dot@D,1B,../nimony/lib/std/system/seqimpl.nim result.3~6 data.0 0 "x")
+           (nil@M,1B,../nimony/lib/std/system/seqimpl.nim))))
+        (stmts~1,1
+         (discard "leave uninitialized"@8)))
+       (else@,2
+        (stmts@2,1
+         (asgn@B
+          (dot~5 result.3~6 len.0 0 "x")0@2)
+         (pragmax@,1
+          (pragmas
+           (cast@2
+            (pragmas
+             (noSideEffect@5))))
+          (stmts@2,1
+           (cmd oomHandler.0.sysvq0asl memSize.0@B)))))))))
+   (ret~2,~1 result.3)))
+ (func@A,2N :add.0.Ig6072n. . .@,2N,../nimony/lib/std/system/seqimpl.nim
+  (at add.0.sysvq0asl string.0.sysvq0asl@P,~13)
+  (params@C,2N,../nimony/lib/std/system/seqimpl.nim
+   (param@1 :s.4 . .
+    (mut@3 seq.0.Ixdx2fh1.@7).)
+   (param@G :elem.2 . .
+    (sink@6 string.0.sysvq0asl@Z,1L,../nimony/lib/std/envvars.nim).)).@,2N,../nimony/lib/std/system/seqimpl.nim
+  (pragmas@g,2N,../nimony/lib/std/system/seqimpl.nim
+   (inline@2)
+   (nodestroy@A)).@,2N,../nimony/lib/std/system/seqimpl.nim
+  (stmts@2,2O,../nimony/lib/std/system/seqimpl.nim
+   (let@4,1 :L.0 . .
+    (i@D,7W,../nimony/lib/std/system.nim 64)
+    (dot@5
+     (hderef~1 s.4)len.0 0 "x"))
+   (if@,2
+    (elif@3
+     (lt@D
+      (i 64)
+      (call~C capInBytes.0.Ih2sbn01.@1
+       (hderef~1 s.4))
+      (add@I
+       (i 64)
+       (mul~D
+        (i 64)L.0~2
+        (sizeof@8 string.0.sysvq0asl@Z,1L,../nimony/lib/std/envvars.nim))
+       (sizeof@8 string.0.sysvq0asl@Z,1L,../nimony/lib/std/envvars.nim)))
+     (stmts~1,1
+      (if
+       (elif@3
+        (not
+         (call@A resize.0.I4buliy.~6 s.4@1 1@4))
+        (stmts~1,3
+         (destroy@A elem.2@1)
+         (ret@,1 .)))))))
+   (cmd@,8 inc.1.Irn1g7r1.
+    (haddr@5
+     (dot
+      (hderef~1 s.4)len.0 0 "x")))
+   (asgn@C,9
+    (pat~A
+     (dot
+      (hderef~1 s.4)data.0 0 "x")L.0@6)elem.2@2)))
+ (func@D,2O :inc.1.Irn1g7r1. . .@,E,../nimony/lib/std/system/arithmetics.nim
+  (at inc.1.sysvq0asl
+   (i 64))
+  (params@L,E,../nimony/lib/std/system/arithmetics.nim
+   (param@1 :x.3 . .
+    (mut@3
+     (i 64)).)).@,E,../nimony/lib/std/system/arithmetics.nim
+  (pragmas@W,E,../nimony/lib/std/system/arithmetics.nim
+   (inline@2)).@,E,../nimony/lib/std/system/arithmetics.nim
+  (stmts@2,F,../nimony/lib/std/system/arithmetics.nim
+   (asgn@2,1
+    (hderef~2 x.3)
+    (add@6
+     (i 64)
+     (hderef@1 x.3)
+     (conv@U,~F
+      (i 64)1@1)))))
+ (func@K,2U :high.3.Ivq2uke1. . .@,41,../nimony/lib/std/system/seqimpl.nim
+  (at high.3.sysvq0asl string.0.sysvq0asl@F,~1A)
+  (params@D,41,../nimony/lib/std/system/seqimpl.nim
+   (param@1 :s.6 . . seq.0.Ixdx2fh1.@6 .))
+  (i@D,41,../nimony/lib/std/system/seqimpl.nim 64)
+  (pragmas@U,41,../nimony/lib/std/system/seqimpl.nim
+   (inline@2)).@,41,../nimony/lib/std/system/seqimpl.nim
+  (stmts@2,42,../nimony/lib/std/system/seqimpl.nim
+   (result :result.4 . .
+    (i@D,V,../nimony/lib/std/system/basic_types.nim 64).)
+   (asgn@6,1 result.4
+    (sub
+     (i 64)
+     (dot~5 s.6~1 len.0 0 "x")1@2))
+   (ret~2,~1 result.4)))
+ (iterator@E,2U :\2E..0.Ibdympw. . .@,7,../nimony/lib/std/system/iterators.nim
+  (at \2E..0.sysvq0asl
+   (i 64))
+  (params@Q,7,../nimony/lib/std/system/iterators.nim
+   (param@1 :a.1 . .
+    (i 64).)
+   (param@4 :b.1 . .
+    (i 64).))
+  (i 64)
+  (pragmas@d,7,../nimony/lib/std/system/iterators.nim
+   (inline@2)).@,7,../nimony/lib/std/system/iterators.nim
+  (stmts@2,8,../nimony/lib/std/system/iterators.nim
+   (var@4 :i.8 . .
+    (i@D,7W,../nimony/lib/std/system.nim 64)a.1@4)
+   (while@,1
+    (le@8
+     (i 64)i.8~2 b.1@3)
+    (stmts@2,1
+     (yld i.8@6)
+     (cmd@,1 inc.1.Irn1g7r1.
+      (haddr@4 i.8))))))
+ (func@M,2Y :\5B\5D.7.Ir6d0tw. . .@,2h,../nimony/lib/std/system/seqimpl.nim
+  (at \5B\5D.7.sysvq0asl string.0.sysvq0asl@D,~1E)
+  (params@D,2h,../nimony/lib/std/system/seqimpl.nim
+   (param@1 :s.7 . . seq.0.Ixdx2fh1.@6 .)
+   (param@C :i.9 . .
+    (i@3 64).))
+  (mut@L,2h,../nimony/lib/std/system/seqimpl.nim string.0.sysvq0asl@Z,1L,../nimony/lib/std/envvars.nim)
+  (pragmas@e,2h,../nimony/lib/std/system/seqimpl.nim
+   (requires@2
+    (and@L
+     (lt~8
+      (i 64)i.9~2
+      (dot@3 s.7~1 len.0 0 "x"))
+     (expr@2,1p,../nimony/lib/std/system/comparisons.nim
+      (le@2,1
+       (i 64)0@1A,2h,../nimony/lib/std/system/seqimpl.nim i.9@15,2h,../nimony/lib/std/system/seqimpl.nim))))
+   (inline@a)).@,2h,../nimony/lib/std/system/seqimpl.nim
+  (stmts@1P,2h,../nimony/lib/std/system/seqimpl.nim
+   (result@6 :result.5 . .
+    (mut~1A string.0.sysvq0asl@Z,1L,../nimony/lib/std/envvars.nim).)
+   (asgn@6 result.5
+    (haddr~5
+     (pat
+      (dot s.7~1 data.0 0 "x")i.9@6)))
+   (ret~1P result.5)))
+ (func@6,3m :\5B\5D=.7.Ild9iim. . .@,2j,../nimony/lib/std/system/seqimpl.nim
+  (at \5B\5D=.7.sysvq0asl string.0.sysvq0asl@T,~2S)
+  (params@E,2j,../nimony/lib/std/system/seqimpl.nim
+   (param@1 :s.8 . .
+    (mut@3 seq.0.Ixdx2fh1.@7).)
+   (param@G :i.10 . .
+    (i@3 64).)
+   (param@O :elem.3 . .
+    (sink~4,~M string.0.sysvq0asl@Z,1L,../nimony/lib/std/envvars.nim).)).@,2j,../nimony/lib/std/system/seqimpl.nim
+  (pragmas@q,2j,../nimony/lib/std/system/seqimpl.nim
+   (requires@2
+    (and@L
+     (lt~8
+      (i 64)i.10~2
+      (dot@3
+       (hderef~1 s.8)len.0 0 "x"))
+     (expr@2,1p,../nimony/lib/std/system/comparisons.nim
+      (le@2,1
+       (i 64)0@1M,2j,../nimony/lib/std/system/seqimpl.nim i.10@1H,2j,../nimony/lib/std/system/seqimpl.nim))))
+   (inline@a)
+   (pragma@i linear.0.sysvq0asl)).@,2j,../nimony/lib/std/system/seqimpl.nim
+  (stmts@2,2k,../nimony/lib/std/system/seqimpl.nim
+   (asgn@C
+    (pat~A
+     (dot
+      (hderef~1 s.8)data.0 0 "x")i.10@6)elem.3@2)))
+ (proc@O,4Z :delete.0.Im547yx. . .~M,~3o
+  (at delete.0. string.0.sysvq0asl@B,~3F)
+  (params~8,~3o
+   (param@1 :x.4 . .
+    (mut@3 seq.0.Ixdx2fh1.@7).)
+   (param@G :i.11 . .
+    (i@D,7W,../nimony/lib/std/system.nim 64).)).~M,~3o
+  (pragmas@K,~3o
+   (noSideEffect@2)).~M,~3o
+  (stmts~K,~3n
+   (let@4 :xl.1 . .
+    (i@D,7W,../nimony/lib/std/system.nim 64)
+    (call@6 len.3.Ixq6taz.@1
+     (hderef~1 x.4)))
+   (for@4,1
+    (infix@A \2E..0.Ibdympw.
+     (conv~4
+      (i@1 64)i.11~1)
+     (sub@4
+      (i 64)xl.1~2 2@1))
+    (unpackflat
+     (let :j.1 . .
+      (i@D,7W,../nimony/lib/std/system.nim 64).))
+    (stmts~2,1
+     (call \5B\5D=.7.Ild9iim. x.4 j.1@2
+      (cmd@C move.0.Isxfjyr.~5
+       (call \5B\5D.7.Ir6d0tw.
+        (hderef x.4)
+        (add@3
+         (i 64)j.1~1 1@1))))))
+   (call@6,3 shrink.0.Iiotmvc.~6 x.4@1
+    (sub@6
+     (i 64)xl.1~2 1@1))))
+ (func@Z,19,../nimony/lib/std/system/seqimpl.nim :memSizeInBytes.0.I7me00i. . .~Z,~k
+  (at memSizeInBytes.0.sysvq0asl string.0.sysvq0asl@Z,1L,../nimony/lib/std/envvars.nim)
+  (params~D,~k
+   (param@1 :size.3 . .
+    (i@6 64).))
+  (i~M,~k 64)
+  (pragmas@4,~k
+   (inline@2)).~Z,~k
+  (stmts~X,~j
+   (result :result.6 . .
+    (i@D,V,../nimony/lib/std/system/basic_types.nim 64).)
+   (pragmax
+    (pragmas
+     (keepOverflowFlag@2))
+    (stmts@2,1
+     (asgn@7 result.6~7
+      (mul@7
+       (i 64)size.3~5
+       (sizeof@8 string.0.sysvq0asl@Z,1L,../nimony/lib/std/envvars.nim)))
+     (if@,1
+      (elif@3
+       (ovf@C)
+       (stmts~1,2
+        (asgn@7 result.6~7
+         (suf@6 9223372036854775807 "i64")))))))
+   (ret~2,~1 result.6)))
+ (func@6,2Q,../nimony/lib/std/system/seqimpl.nim :capInBytes.0.Ih2sbn01. . .~6,~2G
+  (at capInBytes.0.sysvq0asl string.0.sysvq0asl@Z,1L,../nimony/lib/std/envvars.nim)
+  (params@C,~2G
+   (param@1 :s.11 . . seq.0.Ixdx2fh1.@6 .))
+  (i@7,~2G 64)
+  (pragmas@T,~2G
+   (inline@2)).~6,~2G
+  (stmts~4,~2F
+   (result@7 :result.7 . .
+    (i@D,V,../nimony/lib/std/system/basic_types.nim 64).)
+   (asgn@7 result.7~7
+    (if@2
+     (elif@3
+      (expr@2,1l,../nimony/lib/std/system/comparisons.nim
+       (not@,1
+        (eq@7
+         (ptr
+          (uarray string.0.sysvq0asl@Z,1L,../nimony/lib/std/envvars.nim)
+          (unchecked))
+         (dot@F,B,../nimony/lib/std/system/seqimpl.nim s.11~1 data.0 0 "x")
+         (nil@O,B,../nimony/lib/std/system/seqimpl.nim))))
+      (expr@F
+       (call@D allocatedSize.0.sysvq0asl~D
+        (hconv@2
+         (pointer@N,13,../nimony/lib/std/system/mimalloc.nim
+          (unchecked))
+         (hconv
+          (pointer@D,r,../nimony/lib/std/system/mimalloc.nim
+           (unchecked))
+          (dot s.11~1 data.0 0 "x"))))))
+     (else@e
+      (expr@6 0))))
+   (ret~2,~1 result.7)))
+ (func@H,2R,../nimony/lib/std/system/seqimpl.nim :resize.0.I4buliy. . .~H,~e
+  (at resize.0.sysvq0asl string.0.sysvq0asl@Z,1L,../nimony/lib/std/envvars.nim)
+  (params~3,~e
+   (param@1 :dest.1 . .
+    (mut@6 seq.0.Ixdx2fh1.@7).)
+   (param@J :addedElements.1 . .
+    (i@F 64).))
+  (bool@N,~e)
+  (pragmas@g,~e
+   (nodestroy@2)).~H,~e
+  (stmts~F,~d
+   (result@4 :result.8 . .
+    (bool@2,g,../nimony/lib/std/system/basic_types.nim).)
+   (let@4 :oldCap.0 . .
+    (i@D,7W,../nimony/lib/std/system.nim 64)
+    (div@P
+     (i 64)
+     (call~C capInBytes.0.Ih2sbn01.@1
+      (hderef~4 dest.1))
+     (sizeof@A string.0.sysvq0asl@Z,1L,../nimony/lib/std/envvars.nim)))
+   (let@4,1 :newCap.0 . .
+    (i@D,7W,../nimony/lib/std/system.nim 64)
+    (call@I recalcCap.0.sysvq0asl~9 oldCap.0@1 addedElements.1@9))
+   (let@4,2 :memSize.1 . .
+    (i@D,7W,../nimony/lib/std/system.nim 64)
+    (call@R memSizeInBytes.0.I7me00i.~H newCap.0@1))
+   (asgn@A,3
+    (dot~6
+     (hderef~4 dest.1)data.0 0 "x")
+    (cast@2
+     (ptr@5
+      (uarray@I string.0.sysvq0asl@Z,1L,../nimony/lib/std/envvars.nim)
+      (unchecked))
+     (call@Z realloc.0.sysvq0asl~7
+      (hconv@5
+       (pointer@H,x,../nimony/lib/std/system/mimalloc.nim
+        (unchecked))
+       (hconv
+        (pointer@D,r,../nimony/lib/std/system/mimalloc.nim
+         (unchecked))
+        (dot
+         (hderef~4 dest.1)data.0 0 "x")))memSize.1@C)))
+   (if@,4
+    (elif@3
+     (eq@A
+      (ptr
+       (uarray string.0.sysvq0asl@Z,1L,../nimony/lib/std/envvars.nim)
+       (unchecked))
+      (dot~6
+       (hderef~4 dest.1)data.0 0 "x")
+      (nil@3))
+     (stmts~1,1
+      (asgn@9
+       (dot~5
+        (hderef~4 dest.1)len.0 0 "x")0@2)
+      (pragmax@,1
+       (pragmas
+        (cast@2
+         (pragmas
+          (noSideEffect@5))))
+       (stmts@2,1
+        (cmd oomHandler.0.sysvq0asl memSize.1@B)))
+      (asgn@7,3 result.8~7
+       (false@2))))
+    (else@,5
+     (stmts@2,1
+      (asgn@7 result.8~7
+       (true@2)))))
+   (ret~2,~1 result.8)))
+ (func@E,m :len.3.Ixq6taz. . .@,2Z,../nimony/lib/std/system/seqimpl.nim
+  (at len.3.sysvq0asl string.0.sysvq0asl@L,Y)
+  (params@C,2Z,../nimony/lib/std/system/seqimpl.nim
+   (param@1 :s.12 . . seq.0.Ixdx2fh1.@6 .))
+  (i@D,2Z,../nimony/lib/std/system/seqimpl.nim 64)
+  (pragmas@T,2Z,../nimony/lib/std/system/seqimpl.nim
+   (inline@2)).@,2Z,../nimony/lib/std/system/seqimpl.nim
+  (stmts@2,2a,../nimony/lib/std/system/seqimpl.nim
+   (result :result.9 . .
+    (i@D,V,../nimony/lib/std/system/basic_types.nim 64).)
+   (asgn@1,1 result.9
+    (dot s.12~1 len.0 0 "x"))
+   (ret~2,~1 result.9)))
+ (func@I,o :move.0.Isxfjyr. . .@,2P,../nimony/lib/std/system.nim
+  (at move.0.sysvq0asl string.0.sysvq0asl@H,W)
+  (params@D,2P,../nimony/lib/std/system.nim
+   (param@1 :x.6 . .
+    (mut@3 string.0.sysvq0asl@Z,1L,../nimony/lib/std/envvars.nim).))string.0.sysvq0asl@H,W
+  (pragmas@R,2P,../nimony/lib/std/system.nim
+   (nodestroy@2)
+   (inline@D)
+   (noSideEffect@L)).@,2P,../nimony/lib/std/system.nim
+  (stmts@2,2Q,../nimony/lib/std/system.nim
+   (result :result.10 . . string.0.sysvq0asl@Z,1L,../nimony/lib/std/envvars.nim .)
+   (asgn@7,1 result.10~7
+    (hderef@2 x.6))
+   (wasmoved@B,2 x.6@1)
+   (ret~2,~1 result.10)))
+ (func@A,p :shrink.0.Iiotmvc. . .@,3J,../nimony/lib/std/system/seqimpl.nim
+  (at shrink.0.sysvq0asl string.0.sysvq0asl@P,V)
+  (params@F,3J,../nimony/lib/std/system/seqimpl.nim
+   (param@1 :s.13 . .
+    (mut@3 seq.0.Ixdx2fh1.@7).)
+   (param@G :newLen.1 . .
+    (i@8 64).)).@,3J,../nimony/lib/std/system/seqimpl.nim . .@,3J,../nimony/lib/std/system/seqimpl.nim
+  (stmts@2,3K,../nimony/lib/std/system/seqimpl.nim
+   (var@4,1 :i.12 . .
+    (i@D,7W,../nimony/lib/std/system.nim 64)
+    (sub@9
+     (i 64)
+     (dot~4
+      (hderef~1 s.13)len.0 0 "x")1@1))
+   (while@,2
+    (expr@2,1p,../nimony/lib/std/system/comparisons.nim
+     (le@2,1
+      (i 64)newLen.1@D,3M,../nimony/lib/std/system/seqimpl.nim i.12@8,3M,../nimony/lib/std/system/seqimpl.nim))
+    (stmts@2,1
+     (destroy@A
+      (pat@2
+       (dot
+        (hderef~1 s.13)data.0 0 "x")i.12@6))
+     (cmd@,1 dec.1.I2mwrey1.
+      (haddr@4 i.12))))
+   (asgn@6,5
+    (dot~5
+     (hderef~1 s.13)len.0 0 "x")newLen.1@2)))
+ (func@4,3O,../nimony/lib/std/system/seqimpl.nim :dec.1.I2mwrey1. . .@,I,../nimony/lib/std/system/arithmetics.nim
+  (at dec.1.sysvq0asl
+   (i@D,7W,../nimony/lib/std/system.nim 64))
+  (params@L,I,../nimony/lib/std/system/arithmetics.nim
+   (param@1 :x.8 . .
+    (mut@3
+     (i@D,7W,../nimony/lib/std/system.nim 64)).)).@,I,../nimony/lib/std/system/arithmetics.nim
+  (pragmas@W,I,../nimony/lib/std/system/arithmetics.nim
+   (inline@2)).@,I,../nimony/lib/std/system/arithmetics.nim
+  (stmts@2,J,../nimony/lib/std/system/arithmetics.nim
+   (asgn@2,1
+    (hderef~2 x.8)
+    (sub@6
+     (i@D,7W,../nimony/lib/std/system.nim 64)
+     (hderef@1 x.8)
+     (conv@U,~H
+      (i@D,7W,../nimony/lib/std/system.nim 64)1@1)))))
+ (type@Y,1K :seq.0.Ixdx2fh1. .
+  (at seq.0.sysvq0asl string.0.sysvq0asl@1)
+  (pragmas@A,6,../nimony/lib/std/system/seqimpl.nim
+   (destroy =destroy.1.Ivioh0a.)
+   (wasmoved =wasMoved.1.I5vdnla.)
+   (dup =dup.1.Imq0s4c.)
+   (copy =copy.1.Iiwrt4i1.))
+  (object@C,6,../nimony/lib/std/system/seqimpl.nim .
+   (fld~8,1 :len.0 . .
+    (i@5 64).)
+   (fld~8,2 :data.0 . .
+    (ptr@6
+     (uarray@I string.0.sysvq0asl@Z,1L,../nimony/lib/std/envvars.nim)
+     (unchecked)).)))
+ (func@,D,../nimony/lib/std/system/seqimpl.nim :=destroy.1.Ivioh0a. . .
+  (at =destroy.1.sysvq0asl string.0.sysvq0asl@Z,1L,../nimony/lib/std/envvars.nim)
+  (params@J
+   (param@1 :s.16 . . seq.0.Ixdx2fh1.@6 .)). . .
+  (stmts@2,1
+   (if
+    (elif@3
+     (expr@2,1l,../nimony/lib/std/system/comparisons.nim
+      (not@,1
+       (eq@7
+        (ptr
+         (uarray string.0.sysvq0asl@Z,1L,../nimony/lib/std/envvars.nim)
+         (unchecked))
+        (dot@6,E,../nimony/lib/std/system/seqimpl.nim s.16~1 data.0 0 "x")
+        (nil@F,E,../nimony/lib/std/system/seqimpl.nim))))
+     (stmts~1,1
+      (var@4 :i.13 . .
+       (i@D,7W,../nimony/lib/std/system.nim 64)0@4)
+      (while@,1
+       (lt@8
+        (i 64)i.13~2
+        (dot@3 s.16~1 len.0 0 "x"))
+       (stmts@2,1
+        (destroy@A
+         (pat@2
+          (dot s.16~1 data.0 0 "x")i.13@6))
+        (cmd@,1 inc.1.Irn1g7r1.
+         (haddr@4 i.13))))
+      (cmd@,4 dealloc.0.sysvq0asl
+       (hconv@9
+        (pointer@H,10,../nimony/lib/std/system/mimalloc.nim
+         (unchecked))
+        (hconv
+         (pointer@D,r,../nimony/lib/std/system/mimalloc.nim
+          (unchecked))
+         (dot s.16~1 data.0 0 "x")))))))))
+ (func@,L,../nimony/lib/std/system/seqimpl.nim :=wasMoved.1.I5vdnla. . .
+  (at =wasMoved.1.sysvq0asl string.0.sysvq0asl@Z,1L,../nimony/lib/std/envvars.nim)
+  (params@K
+   (param@1 :s.17 . .
+    (mut@3 seq.0.Ixdx2fh1.@7).)).
+  (pragmas@a
+   (inline@2)).
+  (stmts@2,1
+   (asgn@6
+    (dot~5
+     (hderef~1 s.17)len.0 0 "x")0@2)
+   (asgn@7,1
+    (dot~6
+     (hderef~1 s.17)data.0 0 "x")
+    (nil@2))))
+ (func@,1U,../nimony/lib/std/system/seqimpl.nim :=dup.1.Imq0s4c. . .
+  (at =dup.1.sysvq0asl string.0.sysvq0asl@Z,1L,../nimony/lib/std/envvars.nim)
+  (params@F
+   (param@1 :a.3 . . seq.0.Ixdx2fh1.@6 .))seq.0.Ixdx2fh1.@G
+  (pragmas@Z
+   (nodestroy@2)).
+  (stmts@2,1
+   (result@7 :result.11 . . seq.0.Ixdx2fh1.@D,~1 .)
+   (asgn@7 result.11~7
+    (call@H newSeqUninit.0.Im3cqd9.~F
+     (dot@2 a.3~1 len.0 0 "x")))
+   (var@4,1 :i.14 . .
+    (i@D,7W,../nimony/lib/std/system.nim 64)0@4)
+   (while@,2
+    (lt@8
+     (i 64)i.14~2
+     (dot@3 a.3~1 len.0 0 "x"))
+    (stmts@2,1
+     (asgn@H
+      (pat~A
+       (dot result.11~6 data.0 0 "x")i.14@6)
+      (dup@8
+       (pat@2
+        (dot a.3~1 data.0 0 "x")i.14@6)))
+     (cmd@,1 inc.1.Irn1g7r1.
+      (haddr@4 i.14))))
+   (ret~2,~1 result.11)))
+ (func@,20,../nimony/lib/std/system/seqimpl.nim :=copy.1.Iiwrt4i1. . .
+  (at =copy.1.sysvq0asl string.0.sysvq0asl@Z,1L,../nimony/lib/std/envvars.nim)
+  (params@G
+   (param@1 :dest.3 . .
+    (mut@6 seq.0.Ixdx2fh1.@7).)
+   (param@J :src.1 . . seq.0.Ixdx2fh1.@8 .)).
+  (pragmas@m
+   (nodestroy@2)).
+  (stmts@2,1
+   (if
+    (elif@3
+     (eq@A
+      (ptr
+       (uarray string.0.sysvq0asl@Z,1L,../nimony/lib/std/envvars.nim)
+       (unchecked))
+      (dot~6
+       (hderef~4 dest.3)data.0 0 "x")
+      (dot@6 src.1~3 data.0 0 "x"))
+     (stmts@N
+      (ret .))))
+   (if@,1
+    (elif@3
+     (lt@8
+      (i 64)
+      (dot~5 src.1~3 len.0 0 "x")
+      (dot@6
+       (hderef~4 dest.3)len.0 0 "x"))
+     (stmts~1,1
+      (var@4 :i.15 . .
+       (i@D,7W,../nimony/lib/std/system.nim 64)
+       (dot@7 src.1~3 len.0 0 "x"))
+      (while@,1
+       (lt@8
+        (i 64)i.15~2
+        (dot@6
+         (hderef~4 dest.3)len.0 0 "x"))
+       (stmts@2,1
+        (destroy@A
+         (pat@5
+          (dot
+           (hderef~4 dest.3)data.0 0 "x")i.15@6))
+        (cmd@,1 inc.1.Irn1g7r1.
+         (haddr@4 i.15))))))
+    (elif@5,5
+     (lt@G
+      (i 64)
+      (call~C capInBytes.0.Ih2sbn01.@1
+       (hderef~4 dest.3))
+      (mul@A
+       (i 64)
+       (dot~5 src.1~3 len.0 0 "x")
+       (sizeof@8 string.0.sysvq0asl@Z,1L,../nimony/lib/std/envvars.nim)))
+     (stmts~3,1
+      (let@4 :oldCap.1 . .
+       (i@D,7W,../nimony/lib/std/system.nim 64)
+       (div@P
+        (i 64)
+        (call~C capInBytes.0.Ih2sbn01.@1
+         (hderef~4 dest.3))
+        (sizeof@A string.0.sysvq0asl@Z,1L,../nimony/lib/std/envvars.nim)))
+      (let@4,1 :newCap.1 . .
+       (i@D,7W,../nimony/lib/std/system.nim 64)
+       (call@I recalcCap.0.sysvq0asl~9 oldCap.1@1
+        (sub@H
+         (i 64)
+         (dot~5 src.1~3 len.0 0 "x")oldCap.1@2)))
+      (let@4,2 :memSize.2 . .
+       (i@D,7W,../nimony/lib/std/system.nim 64)
+       (call@R memSizeInBytes.0.I7me00i.~H newCap.1@1))
+      (asgn@A,3
+       (dot~6
+        (hderef~4 dest.3)data.0 0 "x")
+       (cast@2
+        (ptr@5
+         (uarray@I string.0.sysvq0asl@Z,1L,../nimony/lib/std/envvars.nim)
+         (unchecked))
+        (call@Z realloc.0.sysvq0asl~7
+         (hconv@5
+          (pointer@H,x,../nimony/lib/std/system/mimalloc.nim
+           (unchecked))
+          (hconv
+           (pointer@D,r,../nimony/lib/std/system/mimalloc.nim
+            (unchecked))
+           (dot
+            (hderef~4 dest.3)data.0 0 "x")))memSize.2@C)))
+      (if@,4
+       (elif@3
+        (eq@A
+         (ptr
+          (uarray string.0.sysvq0asl@Z,1L,../nimony/lib/std/envvars.nim)
+          (unchecked))
+         (dot~6
+          (hderef~4 dest.3)data.0 0 "x")
+         (nil@3))
+        (stmts~1,1
+         (asgn@9
+          (dot~5
+           (hderef~4 dest.3)len.0 0 "x")0@2)
+         (pragmax@,1
+          (pragmas
+           (cast@2
+            (pragmas
+             (noSideEffect@5))))
+          (stmts@2,1
+           (cmd oomHandler.0.sysvq0asl memSize.2@B)))
+         (ret@,3 .)))))))
+   (asgn@9,G
+    (dot~5
+     (hderef~4 dest.3)len.0 0 "x")
+    (dot@5 src.1~3 len.0 0 "x"))
+   (var@4,H :i.16 . .
+    (i@D,7W,../nimony/lib/std/system.nim 64)0@4)
+   (while@,I
+    (lt@8
+     (i 64)i.16~2
+     (dot@6
+      (hderef~4 dest.3)len.0 0 "x"))
+    (stmts@2,1
+     (stmts@2,Y,../nimony/lib/std/system.nim
+      (asgn@7
+       (pat~6
+        (dot@8,2K,../nimony/lib/std/system/seqimpl.nim
+         (hderef~4 dest.3)data.0 0 "x")i.16@E,2K,../nimony/lib/std/system/seqimpl.nim)
+       (dup@P,2K,../nimony/lib/std/system/seqimpl.nim
+        (pat@4
+         (dot src.1~3 data.0 0 "x")i.16@6))))
+     (cmd@,1 inc.1.Irn1g7r1.
+      (haddr@4 i.16)))))))(.index@,1,../nimony/lib/std/envvars.nim
+ (h@2,b cstringArray.0. 247)
+ (h@2,b delete.0. 109)
+ (h@D,l T.0. 43)
+ (h@2,b c_getenv.0. 811)
+ (h@4,1B c_setenv.0. 225)
+ (h@2,b c_unsetenv.0. 436)
+ (h@2,b envComputed.0. 258)
+ (h@2,b environment.0. 77)
+ (h@4,1s useNSGetEnviron.0. 97)
+ (h@6,2D gEnv.0. 125)
+ (h@4,1s getEnvVarsC.0. 158)
+ (h@2,b findEnvVar.0. 1001)
+ (x@2,b getEnv.0. 791)
+ (x@2,b existsEnv.0. 2446)
+ (x@2,b putEnv.0. 1680)
+ (x@2,b delEnv.0. 2700)
+ (x@2,b envPairs.0. 1814)
+ (h newSeqUninit.0.Im3cqd9. 1854)
+ (h add.0.Ig6072n. 1874)
+ (h inc.1.Irn1g7r1. 1315)
+ (h high.3.Ivq2uke1. 540)
+ (h \2E..0.Ibdympw. 618)
+ (h \5B\5D.7.Ir6d0tw. 611)
+ (h \5B\5D=.7.Ild9iim. 993)
+ (h delete.0.Im547yx. 973)
+ (h memSizeInBytes.0.I7me00i. 863)
+ (h capInBytes.0.Ih2sbn01. 736)
+ (h resize.0.I4buliy. 1116)
+ (h len.3.Ixq6taz. 1986)
+ (h move.0.Isxfjyr. 586)
+ (h shrink.0.Iiotmvc. 620)
+ (h dec.1.I2mwrey1. 969)
+ (h seq.0.Ixdx2fh1. 713)
+ (h =destroy.1.Ivioh0a. 467)
+ (h =wasMoved.1.I5vdnla. 1177)
+ (h =dup.1.Imq0s4c. 398)
+ (h =copy.1.Iiwrt4i1. 788))

@@ -1,32 +1,32 @@
-# nifparser — nimony-native Nim parser → NIF
+# aifparser — nimony-native Nim parser → AIF
 
-A parser for Nim source that emits the **same NIF** as the classic
+A parser for Nim source that emits the **same AIF** as the classic
 [`nifler`](../nimony/src/nifler) tool — but written in **nimony**, so it can be
 compiled to JS (via `nim_js`) and run in the browser, where classic-Nim
 `nifler` cannot.
 
 `nifler` is a pure *syntactic* transducer: `Nim source → PNode (classic Nim
-parser) → NIF`, with **no** semantic checking and no symbol resolution. Every
-symbol comes out as a bare identifier. `nifparser` reproduces that output
+parser) → AIF`, with **no** semantic checking and no symbol resolution. Every
+symbol comes out as a bare identifier. `aifparser` reproduces that output
 without depending on the classic-Nim compiler.
 
 > Status: **mature for its scope.** The full parser + emit pipeline and the
 > differential harness are in place: the entire nimony standard library
 > round-trips structurally, and 46/47 corpus programs match native nifler to the
-> byte — apart from the `(.vendor "nifparser")` header nifparser stamps as its
+> byte — apart from the `(.vendor "aifparser")` header aifparser stamps as its
 > own identity (the harness neutralizes that one line). Remaining edge cases are
-> catalogued in [Known gaps](https://aoughwl.github.io/docs/nifparser/known-gaps).
+> catalogued in [Known gaps](https://aoughwl.github.io/docs/aifparser/known-gaps).
 >
 > The checklists further down are historical bootstrap notes; the current,
 > authoritative reference is the docs site:
-> **[aoughwl.github.io/docs/nifparser](https://aoughwl.github.io/docs/nifparser)**.
+> **[aoughwl.github.io/docs/aifparser](https://aoughwl.github.io/docs/aifparser)**.
 
 ---
 
 ## Architecture
 
-**Fused parse + emit.** `nifparser` does *not* build a Nim `PNode` AST. Instead
-it is a recursive-descent parser that writes NIF **directly** through
+**Fused parse + emit.** `aifparser` does *not* build a Nim `PNode` AST. Instead
+it is a recursive-descent parser that writes AIF **directly** through
 `nifbuilder` as it recognises each construct, using nifler's `bridge.nim` as the
 executable output spec. (Rebuilding an object-variant `ref` AST would crash
 nimony's field magics — a known constraint — and is unnecessary: the emit is a
@@ -39,7 +39,7 @@ Layout (`src/`):
 | `tokens.nim`   | **The Token contract.** Defines `TokKind` (extensible enum) and the `Token` object shared by the lexer and parser. You extend `TokKind` here; nothing else needs to change. |
 | `lexer.nim`    | **STUB hand-lexer.** Tokenizes the bootstrap corpus (idents/keywords, decimal int & float, `"..."` strings, `'c'` chars, operators, punctuation, line comments) with source line/col + off-side `indent`. Meant to be **replaced** by a full lexer. |
 | `parser.nim`   | **Recursive-descent + emit.** Statements dispatch by keyword; expressions use a token-range splitter (`parseExprRange`) that finds the lowest-precedence depth-0 operator and emits `(infix op L R)`, recursing on sub-ranges — reproducing nifler's operator nesting and pretty-print indentation. |
-| `nifparser.nim`| **CLI driver.** `nifparser p in.nim out.p.nif`, mirroring nifler's CLI. Thin top-level-init entry with only file/stdout I/O (JS-build friendly: no mmap, no PNode). |
+| `aifparser.nim`| **CLI driver.** `aifparser p in.nim out.p.aif`, mirroring nifler's CLI. Thin top-level-init entry with only file/stdout I/O (JS-build friendly: no mmap, no PNode). |
 
 ### The Token contract (`src/tokens.nim`)
 
@@ -68,7 +68,7 @@ type
 Significant indentation is carried, Nim-parser style, on `indent` (first-on-line
 tokens record their column; everyone else is `-1`) rather than as explicit
 Indent/Dedent tokens — though `tkNewline` is reserved for a lexer that prefers
-layout tokens. `line`/`col` match nimony's `TLineInfo` bases so the NIF
+layout tokens. `line`/`col` match nimony's `TLineInfo` bases so the AIF
 line-info diffs line up with native nifler.
 
 The lexer→parser boundary is *only* this contract, so a richer lexer is a
@@ -87,16 +87,16 @@ bash /home/savant/.claude/jobs/8d47d301/tmp/nifi-build-lock.sh \
   "$NIM/bin/nimony" c \
   -p:"$NIM/src/lib" -p:"$NIM/src/nimony" -p:"$NIM/src/models" \
   -p:"$NIM/src/gear2" -p:src \
-  --nimcache:./nimcache -o:./bin/nifparser src/nifparser.nim
+  --nimcache:./nimcache -o:./bin/aifparser src/aifparser.nim
 ```
 
-Produces `bin/nifparser`. (The build lock serialises nimony compiles across
+Produces `bin/aifparser`. (The build lock serialises nimony compiles across
 parallel agents — they share one static object file.)
 
 Run it:
 
 ```bash
-bin/nifparser p tests/corpus/proc_return.nim /tmp/out.p.nif
+bin/aifparser p tests/corpus/proc_return.nim /tmp/out.p.aif
 ```
 
 ### JS build (not wired up yet)
@@ -110,7 +110,7 @@ paths. Nothing here blocks it; the JS glue is future work.
 ## Differential harness (`tests/diff.sh`)
 
 The most important deliverable: for every `tests/corpus/*.nim`, run the **native
-nifler oracle** and **nifparser**, then compare their NIF.
+nifler oracle** and **aifparser**, then compare their AIF.
 
 ```bash
 bash tests/diff.sh              # PASS/FAIL per file
@@ -122,9 +122,9 @@ Two comparisons per file:
 * **STRUCTURAL** (the PASS criterion): `tests/canon.py` strips line-info
   (`@…`/`~…`) and comment (`#…#`) suffixes and normalises whitespace, then the
   two token trees must be identical. String-literal contents are preserved
-  (NIF escapes all marker bytes inside strings, so they can't be confused with a
+  (AIF escapes all marker bytes inside strings, so they can't be confused with a
   suffix).
-* **EXACT** (bonus): byte-identical `.p.nif`. nifparser aims for this and
+* **EXACT** (bonus): byte-identical `.p.aif`. aifparser aims for this and
   currently achieves it on every supported construct.
 
 Exit status is non-zero iff any file fails the structural check.
@@ -161,7 +161,7 @@ precedence & left-associativity, paren calls `f(a,b)`, command calls `f a, b`,
 `(infix …)` / `(prefix …)`, assignment `(asgn …)`, `import`/`include`/`export`,
 `return`/`discard`/`raise`/`yield`, and `proc`/`func`/… routine defs with
 `(params …)` (multi-name flatten, return-type-after-params) and an indented body
-block — including the relative NIF line-info diffs.
+block — including the relative AIF line-info diffs.
 
 ---
 
@@ -212,10 +212,10 @@ for every construct is in
 src/
   tokens.nim      # Token contract (extend TokKind here)
   lexer.nim       # stub hand-lexer (replace)
-  parser.nim      # recursive-descent + fused NIF emit
-  nifparser.nim   # CLI driver
+  parser.nim      # recursive-descent + fused AIF emit
+  aifparser.nim   # CLI driver
 tests/
   corpus/*.nim    # differential test inputs
-  canon.py        # NIF structural canonicaliser (strips line-info)
+  canon.py        # AIF structural canonicaliser (strips line-info)
   diff.sh         # differential harness vs native nifler
 ```

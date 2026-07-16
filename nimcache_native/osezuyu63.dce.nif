@@ -1,0 +1,6 @@
+(stmts
+ (roots)
+ (uses raiseOSError.0. string.0.sysvq0asl ErrorCode.0.sysvq0asl posixToErrorCode.0.err0o7h081)
+ (uses `ini.0. `iniGuard.0. `ini.0.sysvq0asl `ini.0.err0o7h081 `ini.0.syn1lfpjv)
+ (uses osLastError.0. errno.0.)
+ (offers))

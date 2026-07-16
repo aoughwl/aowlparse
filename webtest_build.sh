@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# Build nifparser-js/webmain.nim through the nimony-web JS backend -> nifparser.js
+# Build aifparser-js/webmain.nim through the nimony-web JS backend -> aifparser.js
 set -u
 NIM=/home/savant/nimony
 WEB=/home/savant/nimony-web
-NP=/home/savant/nifparser-js
+NP=/home/savant/aifparser-js
 JSFFI="$WEB/tests/jsbackend"
 HERE="$NP/webtest"
 NC="$HERE/nc"
@@ -30,7 +30,7 @@ done
 echo "   TOTAL unsupported nodes across all modules: $total_todo"
 
 echo "== 3. bundle =="
-BUNDLE="$HERE/nifparser.js"
+BUNDLE="$HERE/aifparser.js"
 AF="$HERE/.alloc.tmp"; FF="$HERE/.fill.tmp"; KF="$HERE/.code.tmp"
 jsfiles=(); for c in "${cnifs[@]}"; do jsfiles+=("${c%.c.nif}.js"); done
 awk -v AF="$AF" -v FF="$FF" -v KF="$KF" '

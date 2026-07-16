@@ -1,0 +1,54 @@
+(.nif27)
+(.indexat 1321             )
+(stmts@,1,../nimony/lib/std/oserrors.nim
+ (import
+  (kv sysvq0asl "../nimony/lib/std/system.nim")
+  (kv syn1lfpjv "../nimony/lib/std/syncio.nim")
+  (kv err0o7h081 "../nimony/lib/std/errorcodes/errorcodes_posix.nim"))
+ (type@F,5 :OSErrorCode.0.~D x .
+  (pragmas)
+  (distinct@2
+   (i@9 32)))
+ (stmts@2,A
+  (gvar@A :errno.0.~6 .
+   (pragmas
+    (importc@2 "errno"@9)
+    (header@K "<errno.h>"@8))
+   (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+    (importc "int")).))
+ (stmts@2,G)
+ (func@,I :raiseOSError.0.@5 x . .
+  (params@I
+   (param@1 :errorCode.0 . . OSErrorCode.0.@B .)
+   (param@P :additionalInfo.0 . . string.0.sysvq0asl ""@H)).
+  (pragmas@12
+   (noinline@2)
+   (raises@C ErrorCode.0.sysvq0asl@8)
+   (noreturn@K)).
+  (stmts@2,1
+   (pragmax@,4
+    (pragmas
+     (cast@2
+      (pragmas
+       (noSideEffect@5))))
+    (stmts@2,1
+     (stmts@2,3
+      (raise
+       (call@M posixToErrorCode.0.err0o7h081~G
+        (conv@A
+         (i@1 32)errorCode.0~9))))))))
+ (proc@,U :osLastError.0.@5 x . .
+  (params@H)OSErrorCode.0.@4
+  (pragmas@X
+   (sideEffect@2)).
+  (stmts@2,1
+   (result :result.0 . . OSErrorCode.0.@S,~D .)
+   (stmts@2,I
+    (asgn@7 result.0~7
+     (conv@D OSErrorCode.0.~B errno.0.@1)))
+   (ret~2,~1 result.0)))
+ (comment@Q,5 int32.0.sysvq0asl int32.0.sysvq0asl@D,M))(.index@,1,../nimony/lib/std/oserrors.nim
+ (x OSErrorCode.0. 254)
+ (h@2,A errno.0. 85)
+ (x raiseOSError.0. 178)
+ (x osLastError.0. 485))

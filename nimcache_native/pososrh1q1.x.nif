@@ -1,0 +1,6172 @@
+(.nif27)
+(.indexat 174358           )
+(stmts@,1,../nimony/lib/std/posix/posix.nim
+ (gvar@H,4,../nimony/lib/std/posix/posix_other_consts.nim :AIO_ALLDONE.0.~D
+  (pragmas
+   (importc "AIO_ALLDONE")
+   (header "<aio.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@I,5,../nimony/lib/std/posix/posix_other_consts.nim :AIO_CANCELED.0.~E
+  (pragmas
+   (importc "AIO_CANCELED")
+   (header "<aio.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@L,6,../nimony/lib/std/posix/posix_other_consts.nim :AIO_NOTCANCELED.0.~H
+  (pragmas
+   (importc "AIO_NOTCANCELED")
+   (header "<aio.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,7,../nimony/lib/std/posix/posix_other_consts.nim :LIO_NOP.0.~9
+  (pragmas
+   (importc "LIO_NOP")
+   (header "<aio.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,8,../nimony/lib/std/posix/posix_other_consts.nim :LIO_NOWAIT.0.~C
+  (pragmas
+   (importc "LIO_NOWAIT")
+   (header "<aio.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,9,../nimony/lib/std/posix/posix_other_consts.nim :LIO_READ.0.~A
+  (pragmas
+   (importc "LIO_READ")
+   (header "<aio.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,A,../nimony/lib/std/posix/posix_other_consts.nim :LIO_WAIT.0.~A
+  (pragmas
+   (importc "LIO_WAIT")
+   (header "<aio.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@F,B,../nimony/lib/std/posix/posix_other_consts.nim :LIO_WRITE.0.~B
+  (pragmas
+   (importc "LIO_WRITE")
+   (header "<aio.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@F,E,../nimony/lib/std/posix/posix_other_consts.nim :RTLD_LAZY.0.~B
+  (pragmas
+   (importc "RTLD_LAZY")
+   (header "<dlfcn.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,F,../nimony/lib/std/posix/posix_other_consts.nim :RTLD_NOW.0.~A
+  (pragmas
+   (importc "RTLD_NOW")
+   (header "<dlfcn.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,G,../nimony/lib/std/posix/posix_other_consts.nim :RTLD_GLOBAL.0.~D
+  (pragmas
+   (importc "RTLD_GLOBAL")
+   (header "<dlfcn.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,H,../nimony/lib/std/posix/posix_other_consts.nim :RTLD_LOCAL.0.~C
+  (pragmas
+   (importc "RTLD_LOCAL")
+   (header "<dlfcn.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@B,K,../nimony/lib/std/posix/posix_other_consts.nim :E2BIG.0.~7
+  (pragmas
+   (importc "E2BIG")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,L,../nimony/lib/std/posix/posix_other_consts.nim :EACCES.0.~8
+  (pragmas
+   (importc "EACCES")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,M,../nimony/lib/std/posix/posix_other_consts.nim :EADDRINUSE.0.~C
+  (pragmas
+   (importc "EADDRINUSE")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@J,N,../nimony/lib/std/posix/posix_other_consts.nim :EADDRNOTAVAIL.0.~F
+  (pragmas
+   (importc "EADDRNOTAVAIL")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@I,O,../nimony/lib/std/posix/posix_other_consts.nim :EAFNOSUPPORT.0.~E
+  (pragmas
+   (importc "EAFNOSUPPORT")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,P,../nimony/lib/std/posix/posix_other_consts.nim :EAGAIN.0.~8
+  (pragmas
+   (importc "EAGAIN")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,Q,../nimony/lib/std/posix/posix_other_consts.nim :EALREADY.0.~A
+  (pragmas
+   (importc "EALREADY")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@B,R,../nimony/lib/std/posix/posix_other_consts.nim :EBADF.0.~7
+  (pragmas
+   (importc "EBADF")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,S,../nimony/lib/std/posix/posix_other_consts.nim :EBADMSG.0.~9
+  (pragmas
+   (importc "EBADMSG")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@B,T,../nimony/lib/std/posix/posix_other_consts.nim :EBUSY.0.~7
+  (pragmas
+   (importc "EBUSY")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@F,U,../nimony/lib/std/posix/posix_other_consts.nim :ECANCELED.0.~B
+  (pragmas
+   (importc "ECANCELED")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,V,../nimony/lib/std/posix/posix_other_consts.nim :ECHILD.0.~8
+  (pragmas
+   (importc "ECHILD")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@I,W,../nimony/lib/std/posix/posix_other_consts.nim :ECONNABORTED.0.~E
+  (pragmas
+   (importc "ECONNABORTED")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@I,X,../nimony/lib/std/posix/posix_other_consts.nim :ECONNREFUSED.0.~E
+  (pragmas
+   (importc "ECONNREFUSED")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,Y,../nimony/lib/std/posix/posix_other_consts.nim :ECONNRESET.0.~C
+  (pragmas
+   (importc "ECONNRESET")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,Z,../nimony/lib/std/posix/posix_other_consts.nim :EDEADLK.0.~9
+  (pragmas
+   (importc "EDEADLK")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@I,a,../nimony/lib/std/posix/posix_other_consts.nim :EDESTADDRREQ.0.~E
+  (pragmas
+   (importc "EDESTADDRREQ")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@A,b,../nimony/lib/std/posix/posix_other_consts.nim :EDOM.0.~6
+  (pragmas
+   (importc "EDOM")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,c,../nimony/lib/std/posix/posix_other_consts.nim :EDQUOT.0.~8
+  (pragmas
+   (importc "EDQUOT")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,d,../nimony/lib/std/posix/posix_other_consts.nim :EEXIST.0.~8
+  (pragmas
+   (importc "EEXIST")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,e,../nimony/lib/std/posix/posix_other_consts.nim :EFAULT.0.~8
+  (pragmas
+   (importc "EFAULT")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@B,f,../nimony/lib/std/posix/posix_other_consts.nim :EFBIG.0.~7
+  (pragmas
+   (importc "EFBIG")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@I,g,../nimony/lib/std/posix/posix_other_consts.nim :EHOSTUNREACH.0.~E
+  (pragmas
+   (importc "EHOSTUNREACH")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@B,h,../nimony/lib/std/posix/posix_other_consts.nim :EIDRM.0.~7
+  (pragmas
+   (importc "EIDRM")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,i,../nimony/lib/std/posix/posix_other_consts.nim :EILSEQ.0.~8
+  (pragmas
+   (importc "EILSEQ")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,j,../nimony/lib/std/posix/posix_other_consts.nim :EINPROGRESS.0.~D
+  (pragmas
+   (importc "EINPROGRESS")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (const@D,l,../nimony/lib/std/posix/posix_other_consts.nim :EINTR.0.~5 .
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (suf@8 4 "i32"))
+ (const@E,m,../nimony/lib/std/posix/posix_other_consts.nim :EINVAL.0.~6 .
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (suf@8 22 "i32"))
+ (gvar@9,q,../nimony/lib/std/posix/posix_other_consts.nim :EIO.0.~5
+  (pragmas
+   (importc "EIO")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,r,../nimony/lib/std/posix/posix_other_consts.nim :EISCONN.0.~9
+  (pragmas
+   (importc "EISCONN")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,s,../nimony/lib/std/posix/posix_other_consts.nim :EISDIR.0.~8
+  (pragmas
+   (importc "EISDIR")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@B,t,../nimony/lib/std/posix/posix_other_consts.nim :ELOOP.0.~7
+  (pragmas
+   (importc "ELOOP")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,u,../nimony/lib/std/posix/posix_other_consts.nim :EMFILE.0.~8
+  (pragmas
+   (importc "EMFILE")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,v,../nimony/lib/std/posix/posix_other_consts.nim :EMLINK.0.~8
+  (pragmas
+   (importc "EMLINK")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,w,../nimony/lib/std/posix/posix_other_consts.nim :EMSGSIZE.0.~A
+  (pragmas
+   (importc "EMSGSIZE")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@F,x,../nimony/lib/std/posix/posix_other_consts.nim :EMULTIHOP.0.~B
+  (pragmas
+   (importc "EMULTIHOP")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@I,y,../nimony/lib/std/posix/posix_other_consts.nim :ENAMETOOLONG.0.~E
+  (pragmas
+   (importc "ENAMETOOLONG")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,z,../nimony/lib/std/posix/posix_other_consts.nim :ENETDOWN.0.~A
+  (pragmas
+   (importc "ENETDOWN")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@F,10,../nimony/lib/std/posix/posix_other_consts.nim :ENETRESET.0.~B
+  (pragmas
+   (importc "ENETRESET")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,11,../nimony/lib/std/posix/posix_other_consts.nim :ENETUNREACH.0.~D
+  (pragmas
+   (importc "ENETUNREACH")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,12,../nimony/lib/std/posix/posix_other_consts.nim :ENFILE.0.~8
+  (pragmas
+   (importc "ENFILE")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,13,../nimony/lib/std/posix/posix_other_consts.nim :ENOBUFS.0.~9
+  (pragmas
+   (importc "ENOBUFS")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,14,../nimony/lib/std/posix/posix_other_consts.nim :ENODATA.0.~9
+  (pragmas
+   (importc "ENODATA")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,15,../nimony/lib/std/posix/posix_other_consts.nim :ENODEV.0.~8
+  (pragmas
+   (importc "ENODEV")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,16,../nimony/lib/std/posix/posix_other_consts.nim :ENOENT.0.~8
+  (pragmas
+   (importc "ENOENT")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,17,../nimony/lib/std/posix/posix_other_consts.nim :ENOEXEC.0.~9
+  (pragmas
+   (importc "ENOEXEC")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,18,../nimony/lib/std/posix/posix_other_consts.nim :ENOLCK.0.~8
+  (pragmas
+   (importc "ENOLCK")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,19,../nimony/lib/std/posix/posix_other_consts.nim :ENOLINK.0.~9
+  (pragmas
+   (importc "ENOLINK")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,1A,../nimony/lib/std/posix/posix_other_consts.nim :ENOMEM.0.~8
+  (pragmas
+   (importc "ENOMEM")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,1B,../nimony/lib/std/posix/posix_other_consts.nim :ENOMSG.0.~8
+  (pragmas
+   (importc "ENOMSG")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,1C,../nimony/lib/std/posix/posix_other_consts.nim :ENOPROTOOPT.0.~D
+  (pragmas
+   (importc "ENOPROTOOPT")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,1D,../nimony/lib/std/posix/posix_other_consts.nim :ENOSPC.0.~8
+  (pragmas
+   (importc "ENOSPC")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@B,1E,../nimony/lib/std/posix/posix_other_consts.nim :ENOSR.0.~7
+  (pragmas
+   (importc "ENOSR")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,1F,../nimony/lib/std/posix/posix_other_consts.nim :ENOSTR.0.~8
+  (pragmas
+   (importc "ENOSTR")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,1G,../nimony/lib/std/posix/posix_other_consts.nim :ENOSYS.0.~8
+  (pragmas
+   (importc "ENOSYS")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,1H,../nimony/lib/std/posix/posix_other_consts.nim :ENOTCONN.0.~A
+  (pragmas
+   (importc "ENOTCONN")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,1I,../nimony/lib/std/posix/posix_other_consts.nim :ENOTDIR.0.~9
+  (pragmas
+   (importc "ENOTDIR")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@F,1J,../nimony/lib/std/posix/posix_other_consts.nim :ENOTEMPTY.0.~B
+  (pragmas
+   (importc "ENOTEMPTY")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,1K,../nimony/lib/std/posix/posix_other_consts.nim :ENOTSOCK.0.~A
+  (pragmas
+   (importc "ENOTSOCK")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,1L,../nimony/lib/std/posix/posix_other_consts.nim :ENOTSUP.0.~9
+  (pragmas
+   (importc "ENOTSUP")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,1M,../nimony/lib/std/posix/posix_other_consts.nim :ENOTTY.0.~8
+  (pragmas
+   (importc "ENOTTY")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@B,1N,../nimony/lib/std/posix/posix_other_consts.nim :ENXIO.0.~7
+  (pragmas
+   (importc "ENXIO")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (const@I,1P,../nimony/lib/std/posix/posix_other_consts.nim :EOPNOTSUPP.0.~A .
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (suf@8 95 "i32"))
+ (gvar@F,1U,../nimony/lib/std/posix/posix_other_consts.nim :EOVERFLOW.0.~B
+  (pragmas
+   (importc "EOVERFLOW")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@B,1V,../nimony/lib/std/posix/posix_other_consts.nim :EPERM.0.~7
+  (pragmas
+   (importc "EPERM")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@B,1W,../nimony/lib/std/posix/posix_other_consts.nim :EPIPE.0.~7
+  (pragmas
+   (importc "EPIPE")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,1X,../nimony/lib/std/posix/posix_other_consts.nim :EPROTO.0.~8
+  (pragmas
+   (importc "EPROTO")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@L,1Y,../nimony/lib/std/posix/posix_other_consts.nim :EPROTONOSUPPORT.0.~H
+  (pragmas
+   (importc "EPROTONOSUPPORT")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,1Z,../nimony/lib/std/posix/posix_other_consts.nim :EPROTOTYPE.0.~C
+  (pragmas
+   (importc "EPROTOTYPE")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,1a,../nimony/lib/std/posix/posix_other_consts.nim :ERANGE.0.~8
+  (pragmas
+   (importc "ERANGE")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@B,1b,../nimony/lib/std/posix/posix_other_consts.nim :EROFS.0.~7
+  (pragmas
+   (importc "EROFS")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,1c,../nimony/lib/std/posix/posix_other_consts.nim :ESPIPE.0.~8
+  (pragmas
+   (importc "ESPIPE")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@B,1d,../nimony/lib/std/posix/posix_other_consts.nim :ESRCH.0.~7
+  (pragmas
+   (importc "ESRCH")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,1e,../nimony/lib/std/posix/posix_other_consts.nim :ESTALE.0.~8
+  (pragmas
+   (importc "ESTALE")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@B,1f,../nimony/lib/std/posix/posix_other_consts.nim :ETIME.0.~7
+  (pragmas
+   (importc "ETIME")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@F,1g,../nimony/lib/std/posix/posix_other_consts.nim :ETIMEDOUT.0.~B
+  (pragmas
+   (importc "ETIMEDOUT")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,1h,../nimony/lib/std/posix/posix_other_consts.nim :ETXTBSY.0.~9
+  (pragmas
+   (importc "ETXTBSY")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,1i,../nimony/lib/std/posix/posix_other_consts.nim :EWOULDBLOCK.0.~D
+  (pragmas
+   (importc "EWOULDBLOCK")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@B,1j,../nimony/lib/std/posix/posix_other_consts.nim :EXDEV.0.~7
+  (pragmas
+   (importc "EXDEV")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,1m,../nimony/lib/std/posix/posix_other_consts.nim :F_DUPFD.0.~9
+  (pragmas
+   (importc "F_DUPFD")
+   (header "<fcntl.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@N,1q,../nimony/lib/std/posix/posix_other_consts.nim :F_DUPFD_CLOEXEC.0.~H
+  (pragmas
+   (importc "F_DUPFD")
+   (header "<fcntl.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,1r,../nimony/lib/std/posix/posix_other_consts.nim :F_GETFD.0.~9
+  (pragmas
+   (importc "F_GETFD")
+   (header "<fcntl.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,1s,../nimony/lib/std/posix/posix_other_consts.nim :F_SETFD.0.~9
+  (pragmas
+   (importc "F_SETFD")
+   (header "<fcntl.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,1t,../nimony/lib/std/posix/posix_other_consts.nim :F_GETFL.0.~9
+  (pragmas
+   (importc "F_GETFL")
+   (header "<fcntl.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,1u,../nimony/lib/std/posix/posix_other_consts.nim :F_SETFL.0.~9
+  (pragmas
+   (importc "F_SETFL")
+   (header "<fcntl.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,1v,../nimony/lib/std/posix/posix_other_consts.nim :F_GETLK.0.~9
+  (pragmas
+   (importc "F_GETLK")
+   (header "<fcntl.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,1w,../nimony/lib/std/posix/posix_other_consts.nim :F_SETLK.0.~9
+  (pragmas
+   (importc "F_SETLK")
+   (header "<fcntl.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,1x,../nimony/lib/std/posix/posix_other_consts.nim :F_SETLKW.0.~A
+  (pragmas
+   (importc "F_SETLKW")
+   (header "<fcntl.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,1y,../nimony/lib/std/posix/posix_other_consts.nim :F_GETOWN.0.~A
+  (pragmas
+   (importc "F_GETOWN")
+   (header "<fcntl.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,1z,../nimony/lib/std/posix/posix_other_consts.nim :F_SETOWN.0.~A
+  (pragmas
+   (importc "F_SETOWN")
+   (header "<fcntl.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,20,../nimony/lib/std/posix/posix_other_consts.nim :FD_CLOEXEC.0.~C
+  (pragmas
+   (importc "FD_CLOEXEC")
+   (header "<fcntl.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,21,../nimony/lib/std/posix/posix_other_consts.nim :F_RDLCK.0.~9
+  (pragmas
+   (importc "F_RDLCK")
+   (header "<fcntl.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,22,../nimony/lib/std/posix/posix_other_consts.nim :F_UNLCK.0.~9
+  (pragmas
+   (importc "F_UNLCK")
+   (header "<fcntl.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,23,../nimony/lib/std/posix/posix_other_consts.nim :F_WRLCK.0.~9
+  (pragmas
+   (importc "F_WRLCK")
+   (header "<fcntl.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (const@F,25,../nimony/lib/std/posix/posix_other_consts.nim :O_CREAT.0.~7 .
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (suf@8 64 "i32"))
+ (gvar@C,2A,../nimony/lib/std/posix/posix_other_consts.nim :O_EXCL.0.~8
+  (pragmas
+   (importc "O_EXCL")
+   (header "<fcntl.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,2B,../nimony/lib/std/posix/posix_other_consts.nim :O_NOCTTY.0.~A
+  (pragmas
+   (importc "O_NOCTTY")
+   (header "<fcntl.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (const@F,2D,../nimony/lib/std/posix/posix_other_consts.nim :O_TRUNC.0.~7 .
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (suf@8 512 "i32"))
+ (gvar@E,2I,../nimony/lib/std/posix/posix_other_consts.nim :O_APPEND.0.~A
+  (pragmas
+   (importc "O_APPEND")
+   (header "<fcntl.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,2J,../nimony/lib/std/posix/posix_other_consts.nim :O_DSYNC.0.~9
+  (pragmas
+   (importc "O_DSYNC")
+   (header "<fcntl.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,2K,../nimony/lib/std/posix/posix_other_consts.nim :O_NONBLOCK.0.~C
+  (pragmas
+   (importc "O_NONBLOCK")
+   (header "<fcntl.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,2L,../nimony/lib/std/posix/posix_other_consts.nim :O_RSYNC.0.~9
+  (pragmas
+   (importc "O_RSYNC")
+   (header "<fcntl.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,2M,../nimony/lib/std/posix/posix_other_consts.nim :O_SYNC.0.~8
+  (pragmas
+   (importc "O_SYNC")
+   (header "<fcntl.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@F,2N,../nimony/lib/std/posix/posix_other_consts.nim :O_ACCMODE.0.~B
+  (pragmas
+   (importc "O_ACCMODE")
+   (header "<fcntl.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (const@G,2P,../nimony/lib/std/posix/posix_other_consts.nim :O_RDONLY.0.~8 .
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (suf@8 0 "i32"))
+ (const@E,2Q,../nimony/lib/std/posix/posix_other_consts.nim :O_RDWR.0.~6 .
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (suf@8 2 "i32"))
+ (const@G,2R,../nimony/lib/std/posix/posix_other_consts.nim :O_WRONLY.0.~8 .
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (suf@8 1 "i32"))
+ (const@H,2S,../nimony/lib/std/posix/posix_other_consts.nim :O_CLOEXEC.0.~9 .
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (suf@8 524288 "i32"))
+ (gvar@N,2i,../nimony/lib/std/posix/posix_other_consts.nim :POSIX_FADV_NORMAL.0.~J
+  (pragmas
+   (importc "POSIX_FADV_NORMAL")
+   (header "<fcntl.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@R,2j,../nimony/lib/std/posix/posix_other_consts.nim :POSIX_FADV_SEQUENTIAL.0.~N
+  (pragmas
+   (importc "POSIX_FADV_SEQUENTIAL")
+   (header "<fcntl.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@N,2k,../nimony/lib/std/posix/posix_other_consts.nim :POSIX_FADV_RANDOM.0.~J
+  (pragmas
+   (importc "POSIX_FADV_RANDOM")
+   (header "<fcntl.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@P,2l,../nimony/lib/std/posix/posix_other_consts.nim :POSIX_FADV_WILLNEED.0.~L
+  (pragmas
+   (importc "POSIX_FADV_WILLNEED")
+   (header "<fcntl.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@P,2m,../nimony/lib/std/posix/posix_other_consts.nim :POSIX_FADV_DONTNEED.0.~L
+  (pragmas
+   (importc "POSIX_FADV_DONTNEED")
+   (header "<fcntl.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@O,2n,../nimony/lib/std/posix/posix_other_consts.nim :POSIX_FADV_NOREUSE.0.~K
+  (pragmas
+   (importc "POSIX_FADV_NOREUSE")
+   (header "<fcntl.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@I,2q,../nimony/lib/std/posix/posix_other_consts.nim :FE_DIVBYZERO.0.~E
+  (pragmas
+   (importc "FE_DIVBYZERO")
+   (header "<fenv.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,2r,../nimony/lib/std/posix/posix_other_consts.nim :FE_INEXACT.0.~C
+  (pragmas
+   (importc "FE_INEXACT")
+   (header "<fenv.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,2s,../nimony/lib/std/posix/posix_other_consts.nim :FE_INVALID.0.~C
+  (pragmas
+   (importc "FE_INVALID")
+   (header "<fenv.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,2t,../nimony/lib/std/posix/posix_other_consts.nim :FE_OVERFLOW.0.~D
+  (pragmas
+   (importc "FE_OVERFLOW")
+   (header "<fenv.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@I,2u,../nimony/lib/std/posix/posix_other_consts.nim :FE_UNDERFLOW.0.~E
+  (pragmas
+   (importc "FE_UNDERFLOW")
+   (header "<fenv.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@J,2v,../nimony/lib/std/posix/posix_other_consts.nim :FE_ALL_EXCEPT.0.~F
+  (pragmas
+   (importc "FE_ALL_EXCEPT")
+   (header "<fenv.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,2w,../nimony/lib/std/posix/posix_other_consts.nim :FE_DOWNWARD.0.~D
+  (pragmas
+   (importc "FE_DOWNWARD")
+   (header "<fenv.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@I,2x,../nimony/lib/std/posix/posix_other_consts.nim :FE_TONEAREST.0.~E
+  (pragmas
+   (importc "FE_TONEAREST")
+   (header "<fenv.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@J,2y,../nimony/lib/std/posix/posix_other_consts.nim :FE_TOWARDZERO.0.~F
+  (pragmas
+   (importc "FE_TOWARDZERO")
+   (header "<fenv.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@F,2z,../nimony/lib/std/posix/posix_other_consts.nim :FE_UPWARD.0.~B
+  (pragmas
+   (importc "FE_UPWARD")
+   (header "<fenv.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,30,../nimony/lib/std/posix/posix_other_consts.nim :FE_DFL_ENV.0.~C
+  (pragmas
+   (importc "FE_DFL_ENV")
+   (header "<fenv.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,33,../nimony/lib/std/posix/posix_other_consts.nim :MM_HARD.0.~9
+  (pragmas
+   (importc "MM_HARD")
+   (header "<fmtmsg.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,34,../nimony/lib/std/posix/posix_other_consts.nim :MM_SOFT.0.~9
+  (pragmas
+   (importc "MM_SOFT")
+   (header "<fmtmsg.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,35,../nimony/lib/std/posix/posix_other_consts.nim :MM_FIRM.0.~9
+  (pragmas
+   (importc "MM_FIRM")
+   (header "<fmtmsg.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,36,../nimony/lib/std/posix/posix_other_consts.nim :MM_APPL.0.~9
+  (pragmas
+   (importc "MM_APPL")
+   (header "<fmtmsg.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,37,../nimony/lib/std/posix/posix_other_consts.nim :MM_UTIL.0.~9
+  (pragmas
+   (importc "MM_UTIL")
+   (header "<fmtmsg.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,38,../nimony/lib/std/posix/posix_other_consts.nim :MM_OPSYS.0.~A
+  (pragmas
+   (importc "MM_OPSYS")
+   (header "<fmtmsg.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,39,../nimony/lib/std/posix/posix_other_consts.nim :MM_RECOVER.0.~C
+  (pragmas
+   (importc "MM_RECOVER")
+   (header "<fmtmsg.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@F,3A,../nimony/lib/std/posix/posix_other_consts.nim :MM_NRECOV.0.~B
+  (pragmas
+   (importc "MM_NRECOV")
+   (header "<fmtmsg.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,3B,../nimony/lib/std/posix/posix_other_consts.nim :MM_HALT.0.~9
+  (pragmas
+   (importc "MM_HALT")
+   (header "<fmtmsg.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,3C,../nimony/lib/std/posix/posix_other_consts.nim :MM_ERROR.0.~A
+  (pragmas
+   (importc "MM_ERROR")
+   (header "<fmtmsg.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,3D,../nimony/lib/std/posix/posix_other_consts.nim :MM_WARNING.0.~C
+  (pragmas
+   (importc "MM_WARNING")
+   (header "<fmtmsg.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,3E,../nimony/lib/std/posix/posix_other_consts.nim :MM_INFO.0.~9
+  (pragmas
+   (importc "MM_INFO")
+   (header "<fmtmsg.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,3F,../nimony/lib/std/posix/posix_other_consts.nim :MM_NOSEV.0.~A
+  (pragmas
+   (importc "MM_NOSEV")
+   (header "<fmtmsg.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,3G,../nimony/lib/std/posix/posix_other_consts.nim :MM_PRINT.0.~A
+  (pragmas
+   (importc "MM_PRINT")
+   (header "<fmtmsg.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,3H,../nimony/lib/std/posix/posix_other_consts.nim :MM_CONSOLE.0.~C
+  (pragmas
+   (importc "MM_CONSOLE")
+   (header "<fmtmsg.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@B,3I,../nimony/lib/std/posix/posix_other_consts.nim :MM_OK.0.~7
+  (pragmas
+   (importc "MM_OK")
+   (header "<fmtmsg.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,3J,../nimony/lib/std/posix/posix_other_consts.nim :MM_NOTOK.0.~A
+  (pragmas
+   (importc "MM_NOTOK")
+   (header "<fmtmsg.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,3K,../nimony/lib/std/posix/posix_other_consts.nim :MM_NOMSG.0.~A
+  (pragmas
+   (importc "MM_NOMSG")
+   (header "<fmtmsg.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,3L,../nimony/lib/std/posix/posix_other_consts.nim :MM_NOCON.0.~A
+  (pragmas
+   (importc "MM_NOCON")
+   (header "<fmtmsg.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,3O,../nimony/lib/std/posix/posix_other_consts.nim :FNM_NOMATCH.0.~D
+  (pragmas
+   (importc "FNM_NOMATCH")
+   (header "<fnmatch.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@I,3P,../nimony/lib/std/posix/posix_other_consts.nim :FNM_PATHNAME.0.~E
+  (pragmas
+   (importc "FNM_PATHNAME")
+   (header "<fnmatch.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,3Q,../nimony/lib/std/posix/posix_other_consts.nim :FNM_PERIOD.0.~C
+  (pragmas
+   (importc "FNM_PERIOD")
+   (header "<fnmatch.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@I,3R,../nimony/lib/std/posix/posix_other_consts.nim :FNM_NOESCAPE.0.~E
+  (pragmas
+   (importc "FNM_NOESCAPE")
+   (header "<fnmatch.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@F,3S,../nimony/lib/std/posix/posix_other_consts.nim :FNM_NOSYS.0.~B
+  (pragmas
+   (importc "FNM_NOSYS")
+   (header "<fnmatch.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@B,3V,../nimony/lib/std/posix/posix_other_consts.nim :FTW_F.0.~7
+  (pragmas
+   (importc "FTW_F")
+   (header "<ftw.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@B,3W,../nimony/lib/std/posix/posix_other_consts.nim :FTW_D.0.~7
+  (pragmas
+   (importc "FTW_D")
+   (header "<ftw.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,3X,../nimony/lib/std/posix/posix_other_consts.nim :FTW_DNR.0.~9
+  (pragmas
+   (importc "FTW_DNR")
+   (header "<ftw.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,3Y,../nimony/lib/std/posix/posix_other_consts.nim :FTW_DP.0.~8
+  (pragmas
+   (importc "FTW_DP")
+   (header "<ftw.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,3Z,../nimony/lib/std/posix/posix_other_consts.nim :FTW_NS.0.~8
+  (pragmas
+   (importc "FTW_NS")
+   (header "<ftw.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,3a,../nimony/lib/std/posix/posix_other_consts.nim :FTW_SL.0.~8
+  (pragmas
+   (importc "FTW_SL")
+   (header "<ftw.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,3b,../nimony/lib/std/posix/posix_other_consts.nim :FTW_SLN.0.~9
+  (pragmas
+   (importc "FTW_SLN")
+   (header "<ftw.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,3c,../nimony/lib/std/posix/posix_other_consts.nim :FTW_PHYS.0.~A
+  (pragmas
+   (importc "FTW_PHYS")
+   (header "<ftw.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@F,3d,../nimony/lib/std/posix/posix_other_consts.nim :FTW_MOUNT.0.~B
+  (pragmas
+   (importc "FTW_MOUNT")
+   (header "<ftw.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@F,3e,../nimony/lib/std/posix/posix_other_consts.nim :FTW_DEPTH.0.~B
+  (pragmas
+   (importc "FTW_DEPTH")
+   (header "<ftw.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@F,3f,../nimony/lib/std/posix/posix_other_consts.nim :FTW_CHDIR.0.~B
+  (pragmas
+   (importc "FTW_CHDIR")
+   (header "<ftw.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,3i,../nimony/lib/std/posix/posix_other_consts.nim :GLOB_APPEND.0.~D
+  (pragmas
+   (importc "GLOB_APPEND")
+   (header "<glob.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,3j,../nimony/lib/std/posix/posix_other_consts.nim :GLOB_DOOFFS.0.~D
+  (pragmas
+   (importc "GLOB_DOOFFS")
+   (header "<glob.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,3k,../nimony/lib/std/posix/posix_other_consts.nim :GLOB_ERR.0.~A
+  (pragmas
+   (importc "GLOB_ERR")
+   (header "<glob.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@F,3l,../nimony/lib/std/posix/posix_other_consts.nim :GLOB_MARK.0.~B
+  (pragmas
+   (importc "GLOB_MARK")
+   (header "<glob.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@I,3m,../nimony/lib/std/posix/posix_other_consts.nim :GLOB_NOCHECK.0.~E
+  (pragmas
+   (importc "GLOB_NOCHECK")
+   (header "<glob.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@J,3n,../nimony/lib/std/posix/posix_other_consts.nim :GLOB_NOESCAPE.0.~F
+  (pragmas
+   (importc "GLOB_NOESCAPE")
+   (header "<glob.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,3o,../nimony/lib/std/posix/posix_other_consts.nim :GLOB_NOSORT.0.~D
+  (pragmas
+   (importc "GLOB_NOSORT")
+   (header "<glob.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@I,3p,../nimony/lib/std/posix/posix_other_consts.nim :GLOB_ABORTED.0.~E
+  (pragmas
+   (importc "GLOB_ABORTED")
+   (header "<glob.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@I,3q,../nimony/lib/std/posix/posix_other_consts.nim :GLOB_NOMATCH.0.~E
+  (pragmas
+   (importc "GLOB_NOMATCH")
+   (header "<glob.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@I,3r,../nimony/lib/std/posix/posix_other_consts.nim :GLOB_NOSPACE.0.~E
+  (pragmas
+   (importc "GLOB_NOSPACE")
+   (header "<glob.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,3s,../nimony/lib/std/posix/posix_other_consts.nim :GLOB_NOSYS.0.~C
+  (pragmas
+   (importc "GLOB_NOSYS")
+   (header "<glob.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,3v,../nimony/lib/std/posix/posix_other_consts.nim :CODESET.0.~9
+  (pragmas
+   (importc "CODESET")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,3w,../nimony/lib/std/posix/posix_other_consts.nim :D_T_FMT.0.~9
+  (pragmas
+   (importc "D_T_FMT")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@B,3x,../nimony/lib/std/posix/posix_other_consts.nim :D_FMT.0.~7
+  (pragmas
+   (importc "D_FMT")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@B,3y,../nimony/lib/std/posix/posix_other_consts.nim :T_FMT.0.~7
+  (pragmas
+   (importc "T_FMT")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,3z,../nimony/lib/std/posix/posix_other_consts.nim :T_FMT_AMPM.0.~C
+  (pragmas
+   (importc "T_FMT_AMPM")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,40,../nimony/lib/std/posix/posix_other_consts.nim :AM_STR.0.~8
+  (pragmas
+   (importc "AM_STR")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,41,../nimony/lib/std/posix/posix_other_consts.nim :PM_STR.0.~8
+  (pragmas
+   (importc "PM_STR")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@B,42,../nimony/lib/std/posix/posix_other_consts.nim :DAY_1.0.~7
+  (pragmas
+   (importc "DAY_1")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@B,43,../nimony/lib/std/posix/posix_other_consts.nim :DAY_2.0.~7
+  (pragmas
+   (importc "DAY_2")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@B,44,../nimony/lib/std/posix/posix_other_consts.nim :DAY_3.0.~7
+  (pragmas
+   (importc "DAY_3")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@B,45,../nimony/lib/std/posix/posix_other_consts.nim :DAY_4.0.~7
+  (pragmas
+   (importc "DAY_4")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@B,46,../nimony/lib/std/posix/posix_other_consts.nim :DAY_5.0.~7
+  (pragmas
+   (importc "DAY_5")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@B,47,../nimony/lib/std/posix/posix_other_consts.nim :DAY_6.0.~7
+  (pragmas
+   (importc "DAY_6")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@B,48,../nimony/lib/std/posix/posix_other_consts.nim :DAY_7.0.~7
+  (pragmas
+   (importc "DAY_7")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,49,../nimony/lib/std/posix/posix_other_consts.nim :ABDAY_1.0.~9
+  (pragmas
+   (importc "ABDAY_1")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,4A,../nimony/lib/std/posix/posix_other_consts.nim :ABDAY_2.0.~9
+  (pragmas
+   (importc "ABDAY_2")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,4B,../nimony/lib/std/posix/posix_other_consts.nim :ABDAY_3.0.~9
+  (pragmas
+   (importc "ABDAY_3")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,4C,../nimony/lib/std/posix/posix_other_consts.nim :ABDAY_4.0.~9
+  (pragmas
+   (importc "ABDAY_4")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,4D,../nimony/lib/std/posix/posix_other_consts.nim :ABDAY_5.0.~9
+  (pragmas
+   (importc "ABDAY_5")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,4E,../nimony/lib/std/posix/posix_other_consts.nim :ABDAY_6.0.~9
+  (pragmas
+   (importc "ABDAY_6")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,4F,../nimony/lib/std/posix/posix_other_consts.nim :ABDAY_7.0.~9
+  (pragmas
+   (importc "ABDAY_7")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@B,4G,../nimony/lib/std/posix/posix_other_consts.nim :MON_1.0.~7
+  (pragmas
+   (importc "MON_1")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@B,4H,../nimony/lib/std/posix/posix_other_consts.nim :MON_2.0.~7
+  (pragmas
+   (importc "MON_2")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@B,4I,../nimony/lib/std/posix/posix_other_consts.nim :MON_3.0.~7
+  (pragmas
+   (importc "MON_3")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@B,4J,../nimony/lib/std/posix/posix_other_consts.nim :MON_4.0.~7
+  (pragmas
+   (importc "MON_4")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@B,4K,../nimony/lib/std/posix/posix_other_consts.nim :MON_5.0.~7
+  (pragmas
+   (importc "MON_5")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@B,4L,../nimony/lib/std/posix/posix_other_consts.nim :MON_6.0.~7
+  (pragmas
+   (importc "MON_6")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@B,4M,../nimony/lib/std/posix/posix_other_consts.nim :MON_7.0.~7
+  (pragmas
+   (importc "MON_7")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@B,4N,../nimony/lib/std/posix/posix_other_consts.nim :MON_8.0.~7
+  (pragmas
+   (importc "MON_8")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@B,4O,../nimony/lib/std/posix/posix_other_consts.nim :MON_9.0.~7
+  (pragmas
+   (importc "MON_9")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,4P,../nimony/lib/std/posix/posix_other_consts.nim :MON_10.0.~8
+  (pragmas
+   (importc "MON_10")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,4Q,../nimony/lib/std/posix/posix_other_consts.nim :MON_11.0.~8
+  (pragmas
+   (importc "MON_11")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,4R,../nimony/lib/std/posix/posix_other_consts.nim :MON_12.0.~8
+  (pragmas
+   (importc "MON_12")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,4S,../nimony/lib/std/posix/posix_other_consts.nim :ABMON_1.0.~9
+  (pragmas
+   (importc "ABMON_1")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,4T,../nimony/lib/std/posix/posix_other_consts.nim :ABMON_2.0.~9
+  (pragmas
+   (importc "ABMON_2")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,4U,../nimony/lib/std/posix/posix_other_consts.nim :ABMON_3.0.~9
+  (pragmas
+   (importc "ABMON_3")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,4V,../nimony/lib/std/posix/posix_other_consts.nim :ABMON_4.0.~9
+  (pragmas
+   (importc "ABMON_4")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,4W,../nimony/lib/std/posix/posix_other_consts.nim :ABMON_5.0.~9
+  (pragmas
+   (importc "ABMON_5")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,4X,../nimony/lib/std/posix/posix_other_consts.nim :ABMON_6.0.~9
+  (pragmas
+   (importc "ABMON_6")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,4Y,../nimony/lib/std/posix/posix_other_consts.nim :ABMON_7.0.~9
+  (pragmas
+   (importc "ABMON_7")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,4Z,../nimony/lib/std/posix/posix_other_consts.nim :ABMON_8.0.~9
+  (pragmas
+   (importc "ABMON_8")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,4a,../nimony/lib/std/posix/posix_other_consts.nim :ABMON_9.0.~9
+  (pragmas
+   (importc "ABMON_9")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,4b,../nimony/lib/std/posix/posix_other_consts.nim :ABMON_10.0.~A
+  (pragmas
+   (importc "ABMON_10")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,4c,../nimony/lib/std/posix/posix_other_consts.nim :ABMON_11.0.~A
+  (pragmas
+   (importc "ABMON_11")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,4d,../nimony/lib/std/posix/posix_other_consts.nim :ABMON_12.0.~A
+  (pragmas
+   (importc "ABMON_12")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@9,4e,../nimony/lib/std/posix/posix_other_consts.nim :ERA.0.~5
+  (pragmas
+   (importc "ERA")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@F,4f,../nimony/lib/std/posix/posix_other_consts.nim :ERA_D_FMT.0.~B
+  (pragmas
+   (importc "ERA_D_FMT")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,4g,../nimony/lib/std/posix/posix_other_consts.nim :ERA_D_T_FMT.0.~D
+  (pragmas
+   (importc "ERA_D_T_FMT")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@F,4h,../nimony/lib/std/posix/posix_other_consts.nim :ERA_T_FMT.0.~B
+  (pragmas
+   (importc "ERA_T_FMT")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,4i,../nimony/lib/std/posix/posix_other_consts.nim :ALT_DIGITS.0.~C
+  (pragmas
+   (importc "ALT_DIGITS")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@F,4j,../nimony/lib/std/posix/posix_other_consts.nim :RADIXCHAR.0.~B
+  (pragmas
+   (importc "RADIXCHAR")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,4k,../nimony/lib/std/posix/posix_other_consts.nim :THOUSEP.0.~9
+  (pragmas
+   (importc "THOUSEP")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,4l,../nimony/lib/std/posix/posix_other_consts.nim :YESEXPR.0.~9
+  (pragmas
+   (importc "YESEXPR")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,4m,../nimony/lib/std/posix/posix_other_consts.nim :NOEXPR.0.~8
+  (pragmas
+   (importc "NOEXPR")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,4n,../nimony/lib/std/posix/posix_other_consts.nim :CRNCYSTR.0.~A
+  (pragmas
+   (importc "CRNCYSTR")
+   (header "<langinfo.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,4q,../nimony/lib/std/posix/posix_other_consts.nim :LC_ALL.0.~8
+  (pragmas
+   (importc "LC_ALL")
+   (header "<locale.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,4r,../nimony/lib/std/posix/posix_other_consts.nim :LC_COLLATE.0.~C
+  (pragmas
+   (importc "LC_COLLATE")
+   (header "<locale.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,4s,../nimony/lib/std/posix/posix_other_consts.nim :LC_CTYPE.0.~A
+  (pragmas
+   (importc "LC_CTYPE")
+   (header "<locale.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,4t,../nimony/lib/std/posix/posix_other_consts.nim :LC_MESSAGES.0.~D
+  (pragmas
+   (importc "LC_MESSAGES")
+   (header "<locale.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,4u,../nimony/lib/std/posix/posix_other_consts.nim :LC_MONETARY.0.~D
+  (pragmas
+   (importc "LC_MONETARY")
+   (header "<locale.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,4v,../nimony/lib/std/posix/posix_other_consts.nim :LC_NUMERIC.0.~C
+  (pragmas
+   (importc "LC_NUMERIC")
+   (header "<locale.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,4w,../nimony/lib/std/posix/posix_other_consts.nim :LC_TIME.0.~9
+  (pragmas
+   (importc "LC_TIME")
+   (header "<locale.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@L,4z,../nimony/lib/std/posix/posix_other_consts.nim :IPPORT_RESERVED.0.~H
+  (pragmas
+   (importc "IPPORT_RESERVED")
+   (header "<netdb.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@K,50,../nimony/lib/std/posix/posix_other_consts.nim :HOST_NOT_FOUND.0.~G
+  (pragmas
+   (importc "HOST_NOT_FOUND")
+   (header "<netdb.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,51,../nimony/lib/std/posix/posix_other_consts.nim :NO_DATA.0.~9
+  (pragmas
+   (importc "NO_DATA")
+   (header "<netdb.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,52,../nimony/lib/std/posix/posix_other_consts.nim :NO_RECOVERY.0.~D
+  (pragmas
+   (importc "NO_RECOVERY")
+   (header "<netdb.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@F,53,../nimony/lib/std/posix/posix_other_consts.nim :TRY_AGAIN.0.~B
+  (pragmas
+   (importc "TRY_AGAIN")
+   (header "<netdb.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,54,../nimony/lib/std/posix/posix_other_consts.nim :AI_PASSIVE.0.~C
+  (pragmas
+   (importc "AI_PASSIVE")
+   (header "<netdb.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@I,55,../nimony/lib/std/posix/posix_other_consts.nim :AI_CANONNAME.0.~E
+  (pragmas
+   (importc "AI_CANONNAME")
+   (header "<netdb.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@K,56,../nimony/lib/std/posix/posix_other_consts.nim :AI_NUMERICHOST.0.~G
+  (pragmas
+   (importc "AI_NUMERICHOST")
+   (header "<netdb.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@K,57,../nimony/lib/std/posix/posix_other_consts.nim :AI_NUMERICSERV.0.~G
+  (pragmas
+   (importc "AI_NUMERICSERV")
+   (header "<netdb.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,58,../nimony/lib/std/posix/posix_other_consts.nim :AI_V4MAPPED.0.~D
+  (pragmas
+   (importc "AI_V4MAPPED")
+   (header "<netdb.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,59,../nimony/lib/std/posix/posix_other_consts.nim :AI_ALL.0.~8
+  (pragmas
+   (importc "AI_ALL")
+   (header "<netdb.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@J,5A,../nimony/lib/std/posix/posix_other_consts.nim :AI_ADDRCONFIG.0.~F
+  (pragmas
+   (importc "AI_ADDRCONFIG")
+   (header "<netdb.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@F,5B,../nimony/lib/std/posix/posix_other_consts.nim :NI_NOFQDN.0.~B
+  (pragmas
+   (importc "NI_NOFQDN")
+   (header "<netdb.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@K,5C,../nimony/lib/std/posix/posix_other_consts.nim :NI_NUMERICHOST.0.~G
+  (pragmas
+   (importc "NI_NUMERICHOST")
+   (header "<netdb.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,5D,../nimony/lib/std/posix/posix_other_consts.nim :NI_NAMEREQD.0.~D
+  (pragmas
+   (importc "NI_NAMEREQD")
+   (header "<netdb.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@K,5E,../nimony/lib/std/posix/posix_other_consts.nim :NI_NUMERICSERV.0.~G
+  (pragmas
+   (importc "NI_NUMERICSERV")
+   (header "<netdb.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@L,5F,../nimony/lib/std/posix/posix_other_consts.nim :NI_NUMERICSCOPE.0.~H
+  (pragmas
+   (importc "NI_NUMERICSCOPE")
+   (header "<netdb.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,5G,../nimony/lib/std/posix/posix_other_consts.nim :NI_DGRAM.0.~A
+  (pragmas
+   (importc "NI_DGRAM")
+   (header "<netdb.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@F,5H,../nimony/lib/std/posix/posix_other_consts.nim :EAI_AGAIN.0.~B
+  (pragmas
+   (importc "EAI_AGAIN")
+   (header "<netdb.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@I,5I,../nimony/lib/std/posix/posix_other_consts.nim :EAI_BADFLAGS.0.~E
+  (pragmas
+   (importc "EAI_BADFLAGS")
+   (header "<netdb.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,5J,../nimony/lib/std/posix/posix_other_consts.nim :EAI_FAIL.0.~A
+  (pragmas
+   (importc "EAI_FAIL")
+   (header "<netdb.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,5K,../nimony/lib/std/posix/posix_other_consts.nim :EAI_FAMILY.0.~C
+  (pragmas
+   (importc "EAI_FAMILY")
+   (header "<netdb.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,5L,../nimony/lib/std/posix/posix_other_consts.nim :EAI_MEMORY.0.~C
+  (pragmas
+   (importc "EAI_MEMORY")
+   (header "<netdb.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,5M,../nimony/lib/std/posix/posix_other_consts.nim :EAI_NONAME.0.~C
+  (pragmas
+   (importc "EAI_NONAME")
+   (header "<netdb.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,5N,../nimony/lib/std/posix/posix_other_consts.nim :EAI_SERVICE.0.~D
+  (pragmas
+   (importc "EAI_SERVICE")
+   (header "<netdb.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@I,5O,../nimony/lib/std/posix/posix_other_consts.nim :EAI_SOCKTYPE.0.~E
+  (pragmas
+   (importc "EAI_SOCKTYPE")
+   (header "<netdb.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,5P,../nimony/lib/std/posix/posix_other_consts.nim :EAI_SYSTEM.0.~C
+  (pragmas
+   (importc "EAI_SYSTEM")
+   (header "<netdb.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@I,5Q,../nimony/lib/std/posix/posix_other_consts.nim :EAI_OVERFLOW.0.~E
+  (pragmas
+   (importc "EAI_OVERFLOW")
+   (header "<netdb.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,5T,../nimony/lib/std/posix/posix_other_consts.nim :IF_NAMESIZE.0.~D
+  (pragmas
+   (importc "IF_NAMESIZE")
+   (header "<net/if.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,5W,../nimony/lib/std/posix/posix_other_consts.nim :IPPROTO_IP.0.~C
+  (pragmas
+   (importc "IPPROTO_IP")
+   (header "<netinet/in.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@I,5X,../nimony/lib/std/posix/posix_other_consts.nim :IPPROTO_IPV6.0.~E
+  (pragmas
+   (importc "IPPROTO_IPV6")
+   (header "<netinet/in.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@I,5Y,../nimony/lib/std/posix/posix_other_consts.nim :IPPROTO_ICMP.0.~E
+  (pragmas
+   (importc "IPPROTO_ICMP")
+   (header "<netinet/in.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@K,5Z,../nimony/lib/std/posix/posix_other_consts.nim :IPPROTO_ICMPV6.0.~G
+  (pragmas
+   (importc "IPPROTO_ICMPV6")
+   (header "<netinet/in.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,5a,../nimony/lib/std/posix/posix_other_consts.nim :IPPROTO_RAW.0.~D
+  (pragmas
+   (importc "IPPROTO_RAW")
+   (header "<netinet/in.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,5b,../nimony/lib/std/posix/posix_other_consts.nim :IPPROTO_TCP.0.~D
+  (pragmas
+   (importc "IPPROTO_TCP")
+   (header "<netinet/in.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,5c,../nimony/lib/std/posix/posix_other_consts.nim :IPPROTO_UDP.0.~D
+  (pragmas
+   (importc "IPPROTO_UDP")
+   (header "<netinet/in.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,5d,../nimony/lib/std/posix/posix_other_consts.nim :INADDR_ANY.0.~C
+  (pragmas
+   (importc "INADDR_ANY")
+   (header "<netinet/in.h>"))
+  (u@K,E,../nimony/lib/std/posix/posix.nim 32).)
+ (gvar@L,5e,../nimony/lib/std/posix/posix_other_consts.nim :INADDR_LOOPBACK.0.~H
+  (pragmas
+   (importc "INADDR_LOOPBACK")
+   (header "<netinet/in.h>"))
+  (u@K,E,../nimony/lib/std/posix/posix.nim 32).)
+ (gvar@M,5f,../nimony/lib/std/posix/posix_other_consts.nim :INADDR_BROADCAST.0.~I
+  (pragmas
+   (importc "INADDR_BROADCAST")
+   (header "<netinet/in.h>"))
+  (u@K,E,../nimony/lib/std/posix/posix.nim 32).)
+ (gvar@L,5g,../nimony/lib/std/posix/posix_other_consts.nim :INET_ADDRSTRLEN.0.~H
+  (pragmas
+   (importc "INET_ADDRSTRLEN")
+   (header "<netinet/in.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@M,5h,../nimony/lib/std/posix/posix_other_consts.nim :INET6_ADDRSTRLEN.0.~I
+  (pragmas
+   (importc "INET6_ADDRSTRLEN")
+   (header "<netinet/in.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@L,5i,../nimony/lib/std/posix/posix_other_consts.nim :IPV6_JOIN_GROUP.0.~H
+  (pragmas
+   (importc "IPV6_JOIN_GROUP")
+   (header "<netinet/in.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@M,5j,../nimony/lib/std/posix/posix_other_consts.nim :IPV6_LEAVE_GROUP.0.~I
+  (pragmas
+   (importc "IPV6_LEAVE_GROUP")
+   (header "<netinet/in.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@P,5k,../nimony/lib/std/posix/posix_other_consts.nim :IPV6_MULTICAST_HOPS.0.~L
+  (pragmas
+   (importc "IPV6_MULTICAST_HOPS")
+   (header "<netinet/in.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@N,5l,../nimony/lib/std/posix/posix_other_consts.nim :IPV6_MULTICAST_IF.0.~J
+  (pragmas
+   (importc "IPV6_MULTICAST_IF")
+   (header "<netinet/in.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@P,5m,../nimony/lib/std/posix/posix_other_consts.nim :IPV6_MULTICAST_LOOP.0.~L
+  (pragmas
+   (importc "IPV6_MULTICAST_LOOP")
+   (header "<netinet/in.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@N,5n,../nimony/lib/std/posix/posix_other_consts.nim :IPV6_UNICAST_HOPS.0.~J
+  (pragmas
+   (importc "IPV6_UNICAST_HOPS")
+   (header "<netinet/in.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,5o,../nimony/lib/std/posix/posix_other_consts.nim :IPV6_V6ONLY.0.~D
+  (pragmas
+   (importc "IPV6_V6ONLY")
+   (header "<netinet/in.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,5r,../nimony/lib/std/posix/posix_other_consts.nim :TCP_NODELAY.0.~D
+  (pragmas
+   (importc "TCP_NODELAY")
+   (header "<netinet/tcp.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,5u,../nimony/lib/std/posix/posix_other_consts.nim :NL_SETD.0.~9
+  (pragmas
+   (importc "NL_SETD")
+   (header "<nl_types.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@J,5v,../nimony/lib/std/posix/posix_other_consts.nim :NL_CAT_LOCALE.0.~F
+  (pragmas
+   (importc "NL_CAT_LOCALE")
+   (header "<nl_types.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,5y,../nimony/lib/std/posix/posix_other_consts.nim :POLLIN.0.~8
+  (pragmas
+   (importc "POLLIN")
+   (header "<poll.h>"))
+  (i@f,c,../nimony/lib/std/system/ctypes.nim 16
+   (importc "short")).)
+ (gvar@G,5z,../nimony/lib/std/posix/posix_other_consts.nim :POLLRDNORM.0.~C
+  (pragmas
+   (importc "POLLRDNORM")
+   (header "<poll.h>"))
+  (i@f,c,../nimony/lib/std/system/ctypes.nim 16
+   (importc "short")).)
+ (gvar@G,60,../nimony/lib/std/posix/posix_other_consts.nim :POLLRDBAND.0.~C
+  (pragmas
+   (importc "POLLRDBAND")
+   (header "<poll.h>"))
+  (i@f,c,../nimony/lib/std/system/ctypes.nim 16
+   (importc "short")).)
+ (gvar@D,61,../nimony/lib/std/posix/posix_other_consts.nim :POLLPRI.0.~9
+  (pragmas
+   (importc "POLLPRI")
+   (header "<poll.h>"))
+  (i@f,c,../nimony/lib/std/system/ctypes.nim 16
+   (importc "short")).)
+ (gvar@D,62,../nimony/lib/std/posix/posix_other_consts.nim :POLLOUT.0.~9
+  (pragmas
+   (importc "POLLOUT")
+   (header "<poll.h>"))
+  (i@f,c,../nimony/lib/std/system/ctypes.nim 16
+   (importc "short")).)
+ (gvar@G,63,../nimony/lib/std/posix/posix_other_consts.nim :POLLWRNORM.0.~C
+  (pragmas
+   (importc "POLLWRNORM")
+   (header "<poll.h>"))
+  (i@f,c,../nimony/lib/std/system/ctypes.nim 16
+   (importc "short")).)
+ (gvar@G,64,../nimony/lib/std/posix/posix_other_consts.nim :POLLWRBAND.0.~C
+  (pragmas
+   (importc "POLLWRBAND")
+   (header "<poll.h>"))
+  (i@f,c,../nimony/lib/std/system/ctypes.nim 16
+   (importc "short")).)
+ (gvar@D,65,../nimony/lib/std/posix/posix_other_consts.nim :POLLERR.0.~9
+  (pragmas
+   (importc "POLLERR")
+   (header "<poll.h>"))
+  (i@f,c,../nimony/lib/std/system/ctypes.nim 16
+   (importc "short")).)
+ (gvar@D,66,../nimony/lib/std/posix/posix_other_consts.nim :POLLHUP.0.~9
+  (pragmas
+   (importc "POLLHUP")
+   (header "<poll.h>"))
+  (i@f,c,../nimony/lib/std/system/ctypes.nim 16
+   (importc "short")).)
+ (gvar@E,67,../nimony/lib/std/posix/posix_other_consts.nim :POLLNVAL.0.~A
+  (pragmas
+   (importc "POLLNVAL")
+   (header "<poll.h>"))
+  (i@f,c,../nimony/lib/std/system/ctypes.nim 16
+   (importc "short")).)
+ (gvar@Z,6A,../nimony/lib/std/posix/posix_other_consts.nim :PTHREAD_BARRIER_SERIAL_THREAD.0.~V
+  (pragmas
+   (importc "PTHREAD_BARRIER_SERIAL_THREAD")
+   (header "<pthread.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@X,6B,../nimony/lib/std/posix/posix_other_consts.nim :PTHREAD_CANCEL_ASYNCHRONOUS.0.~T
+  (pragmas
+   (importc "PTHREAD_CANCEL_ASYNCHRONOUS")
+   (header "<pthread.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@R,6C,../nimony/lib/std/posix/posix_other_consts.nim :PTHREAD_CANCEL_ENABLE.0.~N
+  (pragmas
+   (importc "PTHREAD_CANCEL_ENABLE")
+   (header "<pthread.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@T,6D,../nimony/lib/std/posix/posix_other_consts.nim :PTHREAD_CANCEL_DEFERRED.0.~P
+  (pragmas
+   (importc "PTHREAD_CANCEL_DEFERRED")
+   (header "<pthread.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@S,6E,../nimony/lib/std/posix/posix_other_consts.nim :PTHREAD_CANCEL_DISABLE.0.~O
+  (pragmas
+   (importc "PTHREAD_CANCEL_DISABLE")
+   (header "<pthread.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@T,6F,../nimony/lib/std/posix/posix_other_consts.nim :PTHREAD_CREATE_DETACHED.0.~P
+  (pragmas
+   (importc "PTHREAD_CREATE_DETACHED")
+   (header "<pthread.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@T,6G,../nimony/lib/std/posix/posix_other_consts.nim :PTHREAD_CREATE_JOINABLE.0.~P
+  (pragmas
+   (importc "PTHREAD_CREATE_JOINABLE")
+   (header "<pthread.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@S,6H,../nimony/lib/std/posix/posix_other_consts.nim :PTHREAD_EXPLICIT_SCHED.0.~O
+  (pragmas
+   (importc "PTHREAD_EXPLICIT_SCHED")
+   (header "<pthread.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@R,6I,../nimony/lib/std/posix/posix_other_consts.nim :PTHREAD_INHERIT_SCHED.0.~N
+  (pragmas
+   (importc "PTHREAD_INHERIT_SCHED")
+   (header "<pthread.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@R,6J,../nimony/lib/std/posix/posix_other_consts.nim :PTHREAD_MUTEX_DEFAULT.0.~N
+  (pragmas
+   (importc "PTHREAD_MUTEX_DEFAULT")
+   (header "<pthread.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@U,6K,../nimony/lib/std/posix/posix_other_consts.nim :PTHREAD_MUTEX_ERRORCHECK.0.~Q
+  (pragmas
+   (importc "PTHREAD_MUTEX_ERRORCHECK")
+   (header "<pthread.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@Q,6L,../nimony/lib/std/posix/posix_other_consts.nim :PTHREAD_MUTEX_NORMAL.0.~M
+  (pragmas
+   (importc "PTHREAD_MUTEX_NORMAL")
+   (header "<pthread.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@T,6M,../nimony/lib/std/posix/posix_other_consts.nim :PTHREAD_MUTEX_RECURSIVE.0.~P
+  (pragmas
+   (importc "PTHREAD_MUTEX_RECURSIVE")
+   (header "<pthread.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@Q,6N,../nimony/lib/std/posix/posix_other_consts.nim :PTHREAD_PRIO_INHERIT.0.~M
+  (pragmas
+   (importc "PTHREAD_PRIO_INHERIT")
+   (header "<pthread.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@N,6O,../nimony/lib/std/posix/posix_other_consts.nim :PTHREAD_PRIO_NONE.0.~J
+  (pragmas
+   (importc "PTHREAD_PRIO_NONE")
+   (header "<pthread.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@Q,6P,../nimony/lib/std/posix/posix_other_consts.nim :PTHREAD_PRIO_PROTECT.0.~M
+  (pragmas
+   (importc "PTHREAD_PRIO_PROTECT")
+   (header "<pthread.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@S,6Q,../nimony/lib/std/posix/posix_other_consts.nim :PTHREAD_PROCESS_SHARED.0.~O
+  (pragmas
+   (importc "PTHREAD_PROCESS_SHARED")
+   (header "<pthread.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@T,6R,../nimony/lib/std/posix/posix_other_consts.nim :PTHREAD_PROCESS_PRIVATE.0.~P
+  (pragmas
+   (importc "PTHREAD_PROCESS_PRIVATE")
+   (header "<pthread.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@R,6S,../nimony/lib/std/posix/posix_other_consts.nim :PTHREAD_SCOPE_PROCESS.0.~N
+  (pragmas
+   (importc "PTHREAD_SCOPE_PROCESS")
+   (header "<pthread.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@Q,6T,../nimony/lib/std/posix/posix_other_consts.nim :PTHREAD_SCOPE_SYSTEM.0.~M
+  (pragmas
+   (importc "PTHREAD_SCOPE_SYSTEM")
+   (header "<pthread.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,6W,../nimony/lib/std/posix/posix_other_consts.nim :SCHED_FIFO.0.~C
+  (pragmas
+   (importc "SCHED_FIFO")
+   (header "<sched.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,6X,../nimony/lib/std/posix/posix_other_consts.nim :SCHED_RR.0.~A
+  (pragmas
+   (importc "SCHED_RR")
+   (header "<sched.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@K,6Y,../nimony/lib/std/posix/posix_other_consts.nim :SCHED_SPORADIC.0.~G
+  (pragmas
+   (importc "SCHED_SPORADIC")
+   (header "<sched.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,6Z,../nimony/lib/std/posix/posix_other_consts.nim :SCHED_OTHER.0.~D
+  (pragmas
+   (importc "SCHED_OTHER")
+   (header "<sched.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,6c,../nimony/lib/std/posix/posix_other_consts.nim :SEM_FAILED.0.~C
+  (pragmas
+   (importc "SEM_FAILED")
+   (header "<semaphore.h>"))
+  (ptr@q
+   (void)).)
+ (gvar@G,6f,../nimony/lib/std/posix/posix_other_consts.nim :SIGEV_NONE.0.~C
+  (pragmas
+   (importc "SIGEV_NONE")
+   (header "<signal.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@I,6g,../nimony/lib/std/posix/posix_other_consts.nim :SIGEV_SIGNAL.0.~E
+  (pragmas
+   (importc "SIGEV_SIGNAL")
+   (header "<signal.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@I,6h,../nimony/lib/std/posix/posix_other_consts.nim :SIGEV_THREAD.0.~E
+  (pragmas
+   (importc "SIGEV_THREAD")
+   (header "<signal.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,6i,../nimony/lib/std/posix/posix_other_consts.nim :SIGABRT.0.~9
+  (pragmas
+   (importc "SIGABRT")
+   (header "<signal.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,6j,../nimony/lib/std/posix/posix_other_consts.nim :SIGALRM.0.~9
+  (pragmas
+   (importc "SIGALRM")
+   (header "<signal.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,6k,../nimony/lib/std/posix/posix_other_consts.nim :SIGBUS.0.~8
+  (pragmas
+   (importc "SIGBUS")
+   (header "<signal.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,6l,../nimony/lib/std/posix/posix_other_consts.nim :SIGCHLD.0.~9
+  (pragmas
+   (importc "SIGCHLD")
+   (header "<signal.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (const@F,6n,../nimony/lib/std/posix/posix_other_consts.nim :SIGCONT.0.~7 .
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (suf@8 18 "i32"))
+ (gvar@C,6s,../nimony/lib/std/posix/posix_other_consts.nim :SIGFPE.0.~8
+  (pragmas
+   (importc "SIGFPE")
+   (header "<signal.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,6t,../nimony/lib/std/posix/posix_other_consts.nim :SIGHUP.0.~8
+  (pragmas
+   (importc "SIGHUP")
+   (header "<signal.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,6u,../nimony/lib/std/posix/posix_other_consts.nim :SIGILL.0.~8
+  (pragmas
+   (importc "SIGILL")
+   (header "<signal.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,6v,../nimony/lib/std/posix/posix_other_consts.nim :SIGINT.0.~8
+  (pragmas
+   (importc "SIGINT")
+   (header "<signal.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (const@F,6x,../nimony/lib/std/posix/posix_other_consts.nim :SIGKILL.0.~7 .
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (suf@8 9 "i32"))
+ (gvar@D,70,../nimony/lib/std/posix/posix_other_consts.nim :SIGPIPE.0.~9
+  (pragmas
+   (importc "SIGPIPE")
+   (header "<signal.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,71,../nimony/lib/std/posix/posix_other_consts.nim :SIGQUIT.0.~9
+  (pragmas
+   (importc "SIGQUIT")
+   (header "<signal.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,72,../nimony/lib/std/posix/posix_other_consts.nim :SIGSEGV.0.~9
+  (pragmas
+   (importc "SIGSEGV")
+   (header "<signal.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (const@F,74,../nimony/lib/std/posix/posix_other_consts.nim :SIGSTOP.0.~7 .
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (suf@8 19 "i32"))
+ (const@F,7A,../nimony/lib/std/posix/posix_other_consts.nim :SIGTERM.0.~7 .
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (suf@8 15 "i32"))
+ (gvar@D,7D,../nimony/lib/std/posix/posix_other_consts.nim :SIGTSTP.0.~9
+  (pragmas
+   (importc "SIGTSTP")
+   (header "<signal.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,7E,../nimony/lib/std/posix/posix_other_consts.nim :SIGTTIN.0.~9
+  (pragmas
+   (importc "SIGTTIN")
+   (header "<signal.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,7F,../nimony/lib/std/posix/posix_other_consts.nim :SIGTTOU.0.~9
+  (pragmas
+   (importc "SIGTTOU")
+   (header "<signal.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,7G,../nimony/lib/std/posix/posix_other_consts.nim :SIGUSR1.0.~9
+  (pragmas
+   (importc "SIGUSR1")
+   (header "<signal.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,7H,../nimony/lib/std/posix/posix_other_consts.nim :SIGUSR2.0.~9
+  (pragmas
+   (importc "SIGUSR2")
+   (header "<signal.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,7I,../nimony/lib/std/posix/posix_other_consts.nim :SIGPOLL.0.~9
+  (pragmas
+   (importc "SIGPOLL")
+   (header "<signal.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,7J,../nimony/lib/std/posix/posix_other_consts.nim :SIGPROF.0.~9
+  (pragmas
+   (importc "SIGPROF")
+   (header "<signal.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,7K,../nimony/lib/std/posix/posix_other_consts.nim :SIGSYS.0.~8
+  (pragmas
+   (importc "SIGSYS")
+   (header "<signal.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,7L,../nimony/lib/std/posix/posix_other_consts.nim :SIGTRAP.0.~9
+  (pragmas
+   (importc "SIGTRAP")
+   (header "<signal.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,7M,../nimony/lib/std/posix/posix_other_consts.nim :SIGURG.0.~8
+  (pragmas
+   (importc "SIGURG")
+   (header "<signal.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@F,7N,../nimony/lib/std/posix/posix_other_consts.nim :SIGVTALRM.0.~B
+  (pragmas
+   (importc "SIGVTALRM")
+   (header "<signal.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,7O,../nimony/lib/std/posix/posix_other_consts.nim :SIGXCPU.0.~9
+  (pragmas
+   (importc "SIGXCPU")
+   (header "<signal.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,7P,../nimony/lib/std/posix/posix_other_consts.nim :SIGXFSZ.0.~9
+  (pragmas
+   (importc "SIGXFSZ")
+   (header "<signal.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@I,7Q,../nimony/lib/std/posix/posix_other_consts.nim :SA_NOCLDSTOP.0.~E
+  (pragmas
+   (importc "SA_NOCLDSTOP")
+   (header "<signal.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@F,7R,../nimony/lib/std/posix/posix_other_consts.nim :SIG_BLOCK.0.~B
+  (pragmas
+   (importc "SIG_BLOCK")
+   (header "<signal.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,7S,../nimony/lib/std/posix/posix_other_consts.nim :SIG_UNBLOCK.0.~D
+  (pragmas
+   (importc "SIG_UNBLOCK")
+   (header "<signal.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,7T,../nimony/lib/std/posix/posix_other_consts.nim :SIG_SETMASK.0.~D
+  (pragmas
+   (importc "SIG_SETMASK")
+   (header "<signal.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,7U,../nimony/lib/std/posix/posix_other_consts.nim :SA_ONSTACK.0.~C
+  (pragmas
+   (importc "SA_ONSTACK")
+   (header "<signal.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@I,7V,../nimony/lib/std/posix/posix_other_consts.nim :SA_RESETHAND.0.~E
+  (pragmas
+   (importc "SA_RESETHAND")
+   (header "<signal.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,7W,../nimony/lib/std/posix/posix_other_consts.nim :SA_RESTART.0.~C
+  (pragmas
+   (importc "SA_RESTART")
+   (header "<signal.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,7X,../nimony/lib/std/posix/posix_other_consts.nim :SA_SIGINFO.0.~C
+  (pragmas
+   (importc "SA_SIGINFO")
+   (header "<signal.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@I,7Y,../nimony/lib/std/posix/posix_other_consts.nim :SA_NOCLDWAIT.0.~E
+  (pragmas
+   (importc "SA_NOCLDWAIT")
+   (header "<signal.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,7Z,../nimony/lib/std/posix/posix_other_consts.nim :SA_NODEFER.0.~C
+  (pragmas
+   (importc "SA_NODEFER")
+   (header "<signal.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,7a,../nimony/lib/std/posix/posix_other_consts.nim :SS_ONSTACK.0.~C
+  (pragmas
+   (importc "SS_ONSTACK")
+   (header "<signal.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,7b,../nimony/lib/std/posix/posix_other_consts.nim :SS_DISABLE.0.~C
+  (pragmas
+   (importc "SS_DISABLE")
+   (header "<signal.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,7c,../nimony/lib/std/posix/posix_other_consts.nim :MINSIGSTKSZ.0.~D
+  (pragmas
+   (importc "MINSIGSTKSZ")
+   (header "<signal.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,7d,../nimony/lib/std/posix/posix_other_consts.nim :SIGSTKSZ.0.~A
+  (pragmas
+   (importc "SIGSTKSZ")
+   (header "<signal.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,7e,../nimony/lib/std/posix/posix_other_consts.nim :SIG_HOLD.0.~A
+  (pragmas
+   (importc "SIG_HOLD")
+   (header "<signal.h>"))`t.0.IAiS32AimportcSUintUZZSEAnoconvZAfalseZAR31.@M,F,../nimony/lib/std/posix/posix.nim .)
+ (gvar@D,7f,../nimony/lib/std/posix/posix_other_consts.nim :SIG_DFL.0.~9
+  (pragmas
+   (importc "SIG_DFL")
+   (header "<signal.h>"))`t.0.IAiS32AimportcSUintUZZSEAnoconvZAfalseZAR31.@M,F,../nimony/lib/std/posix/posix.nim .)
+ (gvar@D,7g,../nimony/lib/std/posix/posix_other_consts.nim :SIG_ERR.0.~9
+  (pragmas
+   (importc "SIG_ERR")
+   (header "<signal.h>"))`t.0.IAiS32AimportcSUintUZZSEAnoconvZAfalseZAR31.@M,F,../nimony/lib/std/posix/posix.nim .)
+ (gvar@D,7h,../nimony/lib/std/posix/posix_other_consts.nim :SIG_IGN.0.~9
+  (pragmas
+   (importc "SIG_IGN")
+   (header "<signal.h>"))`t.0.IAiS32AimportcSUintUZZSEAnoconvZAfalseZAR31.@M,F,../nimony/lib/std/posix/posix.nim .)
+ (gvar@F,7k,../nimony/lib/std/posix/posix_other_consts.nim :IPC_CREAT.0.~B
+  (pragmas
+   (importc "IPC_CREAT")
+   (header "<sys/ipc.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,7l,../nimony/lib/std/posix/posix_other_consts.nim :IPC_EXCL.0.~A
+  (pragmas
+   (importc "IPC_EXCL")
+   (header "<sys/ipc.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,7m,../nimony/lib/std/posix/posix_other_consts.nim :IPC_NOWAIT.0.~C
+  (pragmas
+   (importc "IPC_NOWAIT")
+   (header "<sys/ipc.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,7n,../nimony/lib/std/posix/posix_other_consts.nim :IPC_PRIVATE.0.~D
+  (pragmas
+   (importc "IPC_PRIVATE")
+   (header "<sys/ipc.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,7o,../nimony/lib/std/posix/posix_other_consts.nim :IPC_RMID.0.~A
+  (pragmas
+   (importc "IPC_RMID")
+   (header "<sys/ipc.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,7p,../nimony/lib/std/posix/posix_other_consts.nim :IPC_SET.0.~9
+  (pragmas
+   (importc "IPC_SET")
+   (header "<sys/ipc.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,7q,../nimony/lib/std/posix/posix_other_consts.nim :IPC_STAT.0.~A
+  (pragmas
+   (importc "IPC_STAT")
+   (header "<sys/ipc.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (const@H,7u,../nimony/lib/std/posix/posix_other_consts.nim :PROT_READ.0.~9 .
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (suf@8 1 "i32"))
+ (const@I,7v,../nimony/lib/std/posix/posix_other_consts.nim :PROT_WRITE.0.~A .
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (suf@8 2 "i32"))
+ (gvar@F,7z,../nimony/lib/std/posix/posix_other_consts.nim :PROT_EXEC.0.~B
+  (pragmas
+   (importc "PROT_EXEC")
+   (header "<sys/mman.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@F,80,../nimony/lib/std/posix/posix_other_consts.nim :PROT_NONE.0.~B
+  (pragmas
+   (importc "PROT_NONE")
+   (header "<sys/mman.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@J,81,../nimony/lib/std/posix/posix_other_consts.nim :MAP_ANONYMOUS.0.~F
+  (pragmas
+   (importc "MAP_ANONYMOUS")
+   (header "<sys/mman.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@P,82,../nimony/lib/std/posix/posix_other_consts.nim :MAP_FIXED_NOREPLACE.0.~L
+  (pragmas
+   (importc "MAP_FIXED_NOREPLACE")
+   (header "<sys/mman.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@J,83,../nimony/lib/std/posix/posix_other_consts.nim :MAP_NORESERVE.0.~F
+  (pragmas
+   (importc "MAP_NORESERVE")
+   (header "<sys/mman.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (const@I,85,../nimony/lib/std/posix/posix_other_consts.nim :MAP_SHARED.0.~A .
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (suf@8 1 "i32"))
+ (const@J,86,../nimony/lib/std/posix/posix_other_consts.nim :MAP_PRIVATE.0.~B .
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (suf@8 2 "i32"))
+ (gvar@F,8A,../nimony/lib/std/posix/posix_other_consts.nim :MAP_FIXED.0.~B
+  (pragmas
+   (importc "MAP_FIXED")
+   (header "<sys/mman.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,8B,../nimony/lib/std/posix/posix_other_consts.nim :MS_ASYNC.0.~A
+  (pragmas
+   (importc "MS_ASYNC")
+   (header "<sys/mman.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,8C,../nimony/lib/std/posix/posix_other_consts.nim :MS_SYNC.0.~9
+  (pragmas
+   (importc "MS_SYNC")
+   (header "<sys/mman.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@J,8D,../nimony/lib/std/posix/posix_other_consts.nim :MS_INVALIDATE.0.~F
+  (pragmas
+   (importc "MS_INVALIDATE")
+   (header "<sys/mman.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,8E,../nimony/lib/std/posix/posix_other_consts.nim :MCL_CURRENT.0.~D
+  (pragmas
+   (importc "MCL_CURRENT")
+   (header "<sys/mman.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,8F,../nimony/lib/std/posix/posix_other_consts.nim :MCL_FUTURE.0.~C
+  (pragmas
+   (importc "MCL_FUTURE")
+   (header "<sys/mman.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,8H,../nimony/lib/std/posix/posix_other_consts.nim :MAP_FAILED.0.~A .
+  (ptr@H,p,../nimony/lib/std/posix/posix_other.nim
+   (void))
+  (cast@4
+   (ptr@5
+    (void))-1@E))
+ (gvar@N,8K,../nimony/lib/std/posix/posix_other_consts.nim :POSIX_MADV_NORMAL.0.~J
+  (pragmas
+   (importc "POSIX_MADV_NORMAL")
+   (header "<sys/mman.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@R,8L,../nimony/lib/std/posix/posix_other_consts.nim :POSIX_MADV_SEQUENTIAL.0.~N
+  (pragmas
+   (importc "POSIX_MADV_SEQUENTIAL")
+   (header "<sys/mman.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@N,8M,../nimony/lib/std/posix/posix_other_consts.nim :POSIX_MADV_RANDOM.0.~J
+  (pragmas
+   (importc "POSIX_MADV_RANDOM")
+   (header "<sys/mman.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@P,8N,../nimony/lib/std/posix/posix_other_consts.nim :POSIX_MADV_WILLNEED.0.~L
+  (pragmas
+   (importc "POSIX_MADV_WILLNEED")
+   (header "<sys/mman.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@P,8O,../nimony/lib/std/posix/posix_other_consts.nim :POSIX_MADV_DONTNEED.0.~L
+  (pragmas
+   (importc "POSIX_MADV_DONTNEED")
+   (header "<sys/mman.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@U,8P,../nimony/lib/std/posix/posix_other_consts.nim :POSIX_TYPED_MEM_ALLOCATE.0.~Q
+  (pragmas
+   (importc "POSIX_TYPED_MEM_ALLOCATE")
+   (header "<sys/mman.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@b,8Q,../nimony/lib/std/posix/posix_other_consts.nim :POSIX_TYPED_MEM_ALLOCATE_CONTIG.0.~X
+  (pragmas
+   (importc "POSIX_TYPED_MEM_ALLOCATE_CONTIG")
+   (header "<sys/mman.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@b,8R,../nimony/lib/std/posix/posix_other_consts.nim :POSIX_TYPED_MEM_MAP_ALLOCATABLE.0.~X
+  (pragmas
+   (importc "POSIX_TYPED_MEM_MAP_ALLOCATABLE")
+   (header "<sys/mman.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@J,8U,../nimony/lib/std/posix/posix_other_consts.nim :RLIMIT_NOFILE.0.~F
+  (pragmas
+   (importc "RLIMIT_NOFILE")
+   (header "<sys/resource.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@I,8V,../nimony/lib/std/posix/posix_other_consts.nim :RLIMIT_STACK.0.~E
+  (pragmas
+   (importc "RLIMIT_STACK")
+   (header "<sys/resource.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,8Y,../nimony/lib/std/posix/posix_other_consts.nim :FD_SETSIZE.0.~C
+  (pragmas
+   (importc "FD_SETSIZE")
+   (header "<sys/select.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,8e,../nimony/lib/std/posix/posix_other_consts.nim :MSG_CTRUNC.0.~C
+  (pragmas
+   (importc "MSG_CTRUNC")
+   (header "<sys/socket.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@J,8f,../nimony/lib/std/posix/posix_other_consts.nim :MSG_DONTROUTE.0.~F
+  (pragmas
+   (importc "MSG_DONTROUTE")
+   (header "<sys/socket.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,8g,../nimony/lib/std/posix/posix_other_consts.nim :MSG_EOR.0.~9
+  (pragmas
+   (importc "MSG_EOR")
+   (header "<sys/socket.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,8h,../nimony/lib/std/posix/posix_other_consts.nim :MSG_OOB.0.~9
+  (pragmas
+   (importc "MSG_OOB")
+   (header "<sys/socket.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,8i,../nimony/lib/std/posix/posix_other_consts.nim :SCM_RIGHTS.0.~C
+  (pragmas
+   (importc "SCM_RIGHTS")
+   (header "<sys/socket.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@J,8j,../nimony/lib/std/posix/posix_other_consts.nim :SO_ACCEPTCONN.0.~F
+  (pragmas
+   (importc "SO_ACCEPTCONN")
+   (header "<sys/socket.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@L,8k,../nimony/lib/std/posix/posix_other_consts.nim :SO_BINDTODEVICE.0.~H
+  (pragmas
+   (importc "SO_BINDTODEVICE")
+   (header "<sys/socket.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@I,8l,../nimony/lib/std/posix/posix_other_consts.nim :SO_BROADCAST.0.~E
+  (pragmas
+   (importc "SO_BROADCAST")
+   (header "<sys/socket.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,8m,../nimony/lib/std/posix/posix_other_consts.nim :SO_DEBUG.0.~A
+  (pragmas
+   (importc "SO_DEBUG")
+   (header "<sys/socket.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@I,8n,../nimony/lib/std/posix/posix_other_consts.nim :SO_DONTROUTE.0.~E
+  (pragmas
+   (importc "SO_DONTROUTE")
+   (header "<sys/socket.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,8o,../nimony/lib/std/posix/posix_other_consts.nim :SO_ERROR.0.~A
+  (pragmas
+   (importc "SO_ERROR")
+   (header "<sys/socket.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@I,8p,../nimony/lib/std/posix/posix_other_consts.nim :SO_KEEPALIVE.0.~E
+  (pragmas
+   (importc "SO_KEEPALIVE")
+   (header "<sys/socket.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@F,8q,../nimony/lib/std/posix/posix_other_consts.nim :SO_LINGER.0.~B
+  (pragmas
+   (importc "SO_LINGER")
+   (header "<sys/socket.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@I,8r,../nimony/lib/std/posix/posix_other_consts.nim :SO_OOBINLINE.0.~E
+  (pragmas
+   (importc "SO_OOBINLINE")
+   (header "<sys/socket.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@F,8s,../nimony/lib/std/posix/posix_other_consts.nim :SO_RCVBUF.0.~B
+  (pragmas
+   (importc "SO_RCVBUF")
+   (header "<sys/socket.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,8t,../nimony/lib/std/posix/posix_other_consts.nim :SO_RCVLOWAT.0.~D
+  (pragmas
+   (importc "SO_RCVLOWAT")
+   (header "<sys/socket.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,8u,../nimony/lib/std/posix/posix_other_consts.nim :SO_RCVTIMEO.0.~D
+  (pragmas
+   (importc "SO_RCVTIMEO")
+   (header "<sys/socket.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@I,8v,../nimony/lib/std/posix/posix_other_consts.nim :SO_REUSEADDR.0.~E
+  (pragmas
+   (importc "SO_REUSEADDR")
+   (header "<sys/socket.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@F,8w,../nimony/lib/std/posix/posix_other_consts.nim :SO_SNDBUF.0.~B
+  (pragmas
+   (importc "SO_SNDBUF")
+   (header "<sys/socket.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,8x,../nimony/lib/std/posix/posix_other_consts.nim :SO_SNDLOWAT.0.~D
+  (pragmas
+   (importc "SO_SNDLOWAT")
+   (header "<sys/socket.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,8y,../nimony/lib/std/posix/posix_other_consts.nim :SO_SNDTIMEO.0.~D
+  (pragmas
+   (importc "SO_SNDTIMEO")
+   (header "<sys/socket.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,8z,../nimony/lib/std/posix/posix_other_consts.nim :SO_TYPE.0.~9
+  (pragmas
+   (importc "SO_TYPE")
+   (header "<sys/socket.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,90,../nimony/lib/std/posix/posix_other_consts.nim :SOCK_DGRAM.0.~C
+  (pragmas
+   (importc "SOCK_DGRAM")
+   (header "<sys/socket.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,91,../nimony/lib/std/posix/posix_other_consts.nim :SOCK_RAW.0.~A
+  (pragmas
+   (importc "SOCK_RAW")
+   (header "<sys/socket.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@M,96,../nimony/lib/std/posix/posix_other_consts.nim :SOCK_SEQPACKET.0.~G
+  (pragmas
+   (importc "SOCK_SEQPACKET")
+   (header "<sys/socket.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,97,../nimony/lib/std/posix/posix_other_consts.nim :SOMAXCONN.0.~B
+  (pragmas
+   (importc "SOMAXCONN")
+   (header "<sys/socket.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,99,../nimony/lib/std/posix/posix_other_consts.nim :SOCK_STREAM.0.~D
+  (pragmas
+   (importc "SOCK_STREAM")
+   (header "<sys/socket.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,9A,../nimony/lib/std/posix/posix_other_consts.nim :SOL_SOCKET.0.~C
+  (pragmas
+   (importc "SOL_SOCKET")
+   (header "<sys/socket.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,9B,../nimony/lib/std/posix/posix_other_consts.nim :MSG_PEEK.0.~A
+  (pragmas
+   (importc "MSG_PEEK")
+   (header "<sys/socket.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@F,9C,../nimony/lib/std/posix/posix_other_consts.nim :MSG_TRUNC.0.~B
+  (pragmas
+   (importc "MSG_TRUNC")
+   (header "<sys/socket.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,9D,../nimony/lib/std/posix/posix_other_consts.nim :MSG_WAITALL.0.~D
+  (pragmas
+   (importc "MSG_WAITALL")
+   (header "<sys/socket.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,9E,../nimony/lib/std/posix/posix_other_consts.nim :AF_INET.0.~9
+  (pragmas
+   (importc "AF_INET")
+   (header "<sys/socket.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,9F,../nimony/lib/std/posix/posix_other_consts.nim :AF_INET6.0.~A
+  (pragmas
+   (importc "AF_INET6")
+   (header "<sys/socket.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,9G,../nimony/lib/std/posix/posix_other_consts.nim :AF_UNIX.0.~9
+  (pragmas
+   (importc "AF_UNIX")
+   (header "<sys/socket.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@F,9H,../nimony/lib/std/posix/posix_other_consts.nim :AF_UNSPEC.0.~B
+  (pragmas
+   (importc "AF_UNSPEC")
+   (header "<sys/socket.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,9I,../nimony/lib/std/posix/posix_other_consts.nim :SHUT_RD.0.~9
+  (pragmas
+   (importc "SHUT_RD")
+   (header "<sys/socket.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@F,9J,../nimony/lib/std/posix/posix_other_consts.nim :SHUT_RDWR.0.~B
+  (pragmas
+   (importc "SHUT_RDWR")
+   (header "<sys/socket.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,9K,../nimony/lib/std/posix/posix_other_consts.nim :SHUT_WR.0.~9
+  (pragmas
+   (importc "SHUT_WR")
+   (header "<sys/socket.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,9N,../nimony/lib/std/posix/posix_other_consts.nim :S_IFBLK.0.~9
+  (pragmas
+   (importc "S_IFBLK")
+   (header "<sys/stat.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,9O,../nimony/lib/std/posix/posix_other_consts.nim :S_IFCHR.0.~9
+  (pragmas
+   (importc "S_IFCHR")
+   (header "<sys/stat.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,9P,../nimony/lib/std/posix/posix_other_consts.nim :S_IFDIR.0.~9
+  (pragmas
+   (importc "S_IFDIR")
+   (header "<sys/stat.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,9Q,../nimony/lib/std/posix/posix_other_consts.nim :S_IFIFO.0.~9
+  (pragmas
+   (importc "S_IFIFO")
+   (header "<sys/stat.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,9R,../nimony/lib/std/posix/posix_other_consts.nim :S_IFLNK.0.~9
+  (pragmas
+   (importc "S_IFLNK")
+   (header "<sys/stat.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,9S,../nimony/lib/std/posix/posix_other_consts.nim :S_IFMT.0.~8
+  (pragmas
+   (importc "S_IFMT")
+   (header "<sys/stat.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,9T,../nimony/lib/std/posix/posix_other_consts.nim :S_IFREG.0.~9
+  (pragmas
+   (importc "S_IFREG")
+   (header "<sys/stat.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,9U,../nimony/lib/std/posix/posix_other_consts.nim :S_IFSOCK.0.~A
+  (pragmas
+   (importc "S_IFSOCK")
+   (header "<sys/stat.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,9V,../nimony/lib/std/posix/posix_other_consts.nim :S_IRGRP.0.~9
+  (pragmas
+   (importc "S_IRGRP")
+   (header "<sys/stat.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,9W,../nimony/lib/std/posix/posix_other_consts.nim :S_IROTH.0.~9
+  (pragmas
+   (importc "S_IROTH")
+   (header "<sys/stat.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (const@F,9Y,../nimony/lib/std/posix/posix_other_consts.nim :S_IRUSR.0.~7 .
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (suf@8 256 "i32"))
+ (gvar@D,9b,../nimony/lib/std/posix/posix_other_consts.nim :S_IRWXG.0.~9
+  (pragmas
+   (importc "S_IRWXG")
+   (header "<sys/stat.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,9c,../nimony/lib/std/posix/posix_other_consts.nim :S_IRWXO.0.~9
+  (pragmas
+   (importc "S_IRWXO")
+   (header "<sys/stat.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,9d,../nimony/lib/std/posix/posix_other_consts.nim :S_IRWXU.0.~9
+  (pragmas
+   (importc "S_IRWXU")
+   (header "<sys/stat.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,9e,../nimony/lib/std/posix/posix_other_consts.nim :S_ISGID.0.~9
+  (pragmas
+   (importc "S_ISGID")
+   (header "<sys/stat.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,9f,../nimony/lib/std/posix/posix_other_consts.nim :S_ISUID.0.~9
+  (pragmas
+   (importc "S_ISUID")
+   (header "<sys/stat.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,9g,../nimony/lib/std/posix/posix_other_consts.nim :S_ISVTX.0.~9
+  (pragmas
+   (importc "S_ISVTX")
+   (header "<sys/stat.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,9h,../nimony/lib/std/posix/posix_other_consts.nim :S_IWGRP.0.~9
+  (pragmas
+   (importc "S_IWGRP")
+   (header "<sys/stat.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,9i,../nimony/lib/std/posix/posix_other_consts.nim :S_IWOTH.0.~9
+  (pragmas
+   (importc "S_IWOTH")
+   (header "<sys/stat.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (const@F,9k,../nimony/lib/std/posix/posix_other_consts.nim :S_IWUSR.0.~7 .
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (suf@8 128 "i32"))
+ (gvar@D,9n,../nimony/lib/std/posix/posix_other_consts.nim :S_IXGRP.0.~9
+  (pragmas
+   (importc "S_IXGRP")
+   (header "<sys/stat.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,9o,../nimony/lib/std/posix/posix_other_consts.nim :S_IXOTH.0.~9
+  (pragmas
+   (importc "S_IXOTH")
+   (header "<sys/stat.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,9p,../nimony/lib/std/posix/posix_other_consts.nim :S_IXUSR.0.~9
+  (pragmas
+   (importc "S_IXUSR")
+   (header "<sys/stat.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@F,9s,../nimony/lib/std/posix/posix_other_consts.nim :ST_RDONLY.0.~B
+  (pragmas
+   (importc "ST_RDONLY")
+   (header "<sys/statvfs.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@F,9t,../nimony/lib/std/posix/posix_other_consts.nim :ST_NOSUID.0.~B
+  (pragmas
+   (importc "ST_NOSUID")
+   (header "<sys/statvfs.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (const@F,9x,../nimony/lib/std/posix/posix_other_consts.nim :WNOHANG.0.~7 .
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (suf@8 1 "i32"))
+ (gvar@F,A0,../nimony/lib/std/posix/posix_other_consts.nim :WUNTRACED.0.~B
+  (pragmas
+   (importc "WUNTRACED")
+   (header "<sys/wait.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,A1,../nimony/lib/std/posix/posix_other_consts.nim :WEXITED.0.~9
+  (pragmas
+   (importc "WEXITED")
+   (header "<sys/wait.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,A2,../nimony/lib/std/posix/posix_other_consts.nim :WSTOPPED.0.~A
+  (pragmas
+   (importc "WSTOPPED")
+   (header "<sys/wait.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (const@I,A4,../nimony/lib/std/posix/posix_other_consts.nim :WCONTINUED.0.~A .
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (suf@8 8 "i32"))
+ (gvar@D,A7,../nimony/lib/std/posix/posix_other_consts.nim :WNOWAIT.0.~9
+  (pragmas
+   (importc "WNOWAIT")
+   (header "<sys/wait.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@B,A8,../nimony/lib/std/posix/posix_other_consts.nim :P_ALL.0.~7
+  (pragmas
+   (importc "P_ALL")
+   (header "<sys/wait.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@B,A9,../nimony/lib/std/posix/posix_other_consts.nim :P_PID.0.~7
+  (pragmas
+   (importc "P_PID")
+   (header "<sys/wait.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,AA,../nimony/lib/std/posix/posix_other_consts.nim :P_PGID.0.~8
+  (pragmas
+   (importc "P_PGID")
+   (header "<sys/wait.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@Q,AD,../nimony/lib/std/posix/posix_other_consts.nim :POSIX_SPAWN_RESETIDS.0.~M
+  (pragmas
+   (importc "POSIX_SPAWN_RESETIDS")
+   (header "<spawn.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@R,AE,../nimony/lib/std/posix/posix_other_consts.nim :POSIX_SPAWN_SETPGROUP.0.~N
+  (pragmas
+   (importc "POSIX_SPAWN_SETPGROUP")
+   (header "<spawn.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@V,AF,../nimony/lib/std/posix/posix_other_consts.nim :POSIX_SPAWN_SETSCHEDPARAM.0.~R
+  (pragmas
+   (importc "POSIX_SPAWN_SETSCHEDPARAM")
+   (header "<spawn.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@U,AG,../nimony/lib/std/posix/posix_other_consts.nim :POSIX_SPAWN_SETSCHEDULER.0.~Q
+  (pragmas
+   (importc "POSIX_SPAWN_SETSCHEDULER")
+   (header "<spawn.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@R,AH,../nimony/lib/std/posix/posix_other_consts.nim :POSIX_SPAWN_SETSIGDEF.0.~N
+  (pragmas
+   (importc "POSIX_SPAWN_SETSIGDEF")
+   (header "<spawn.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@S,AI,../nimony/lib/std/posix/posix_other_consts.nim :POSIX_SPAWN_SETSIGMASK.0.~O
+  (pragmas
+   (importc "POSIX_SPAWN_SETSIGMASK")
+   (header "<spawn.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@B,AL,../nimony/lib/std/posix/posix_other_consts.nim :IOFBF.0.~7
+  (pragmas
+   (importc "_IOFBF")
+   (header "<stdio.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@B,AM,../nimony/lib/std/posix/posix_other_consts.nim :IONBF.0.~7
+  (pragmas
+   (importc "_IONBF")
+   (header "<stdio.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@K,AP,../nimony/lib/std/posix/posix_other_consts.nim :CLOCKS_PER_SEC.0.~G
+  (pragmas
+   (importc "CLOCKS_PER_SEC")
+   (header "<time.h>"))
+  (i@f,S,../nimony/lib/std/system/ctypes.nim 64
+   (importc "long")).)
+ (gvar@U,AQ,../nimony/lib/std/posix/posix_other_consts.nim :CLOCK_PROCESS_CPUTIME_ID.0.~Q
+  (pragmas
+   (importc "CLOCK_PROCESS_CPUTIME_ID")
+   (header "<time.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@T,AR,../nimony/lib/std/posix/posix_other_consts.nim :CLOCK_THREAD_CPUTIME_ID.0.~P
+  (pragmas
+   (importc "CLOCK_THREAD_CPUTIME_ID")
+   (header "<time.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (const@M,AT,../nimony/lib/std/posix/posix_other_consts.nim :CLOCK_REALTIME.0.~E .
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (suf@8 0 "i32"))
+ (const@N,AU,../nimony/lib/std/posix/posix_other_consts.nim :CLOCK_MONOTONIC.0.~F .
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (suf@8 1 "i32"))
+ (const@L,AV,../nimony/lib/std/posix/posix_other_consts.nim :TIMER_ABSTIME.0.~D .
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (suf@8 1 "i32"))
+ (gvar@K,Ac,../nimony/lib/std/posix/posix_other_consts.nim :POSIX_ASYNC_IO.0.~G
+  (pragmas
+   (importc "_POSIX_ASYNC_IO")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@J,Ad,../nimony/lib/std/posix/posix_other_consts.nim :POSIX_PRIO_IO.0.~F
+  (pragmas
+   (importc "_POSIX_PRIO_IO")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@J,Ae,../nimony/lib/std/posix/posix_other_consts.nim :POSIX_SYNC_IO.0.~F
+  (pragmas
+   (importc "_POSIX_SYNC_IO")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@A,Af,../nimony/lib/std/posix/posix_other_consts.nim :F_OK.0.~6
+  (pragmas
+   (importc "F_OK")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@A,Ag,../nimony/lib/std/posix/posix_other_consts.nim :R_OK.0.~6
+  (pragmas
+   (importc "R_OK")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@A,Ah,../nimony/lib/std/posix/posix_other_consts.nim :W_OK.0.~6
+  (pragmas
+   (importc "W_OK")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@A,Ai,../nimony/lib/std/posix/posix_other_consts.nim :X_OK.0.~6
+  (pragmas
+   (importc "X_OK")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,Aj,../nimony/lib/std/posix/posix_other_consts.nim :CS_PATH.0.~9
+  (pragmas
+   (importc "_CS_PATH")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@a,Ak,../nimony/lib/std/posix/posix_other_consts.nim :CS_POSIX_V6_ILP32_OFF32_CFLAGS.0.~W
+  (pragmas
+   (importc "_CS_POSIX_V6_ILP32_OFF32_CFLAGS")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@b,Al,../nimony/lib/std/posix/posix_other_consts.nim :CS_POSIX_V6_ILP32_OFF32_LDFLAGS.0.~X
+  (pragmas
+   (importc "_CS_POSIX_V6_ILP32_OFF32_LDFLAGS")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@Y,Am,../nimony/lib/std/posix/posix_other_consts.nim :CS_POSIX_V6_ILP32_OFF32_LIBS.0.~U
+  (pragmas
+   (importc "_CS_POSIX_V6_ILP32_OFF32_LIBS")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@b,An,../nimony/lib/std/posix/posix_other_consts.nim :CS_POSIX_V6_ILP32_OFFBIG_CFLAGS.0.~X
+  (pragmas
+   (importc "_CS_POSIX_V6_ILP32_OFFBIG_CFLAGS")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@c,Ao,../nimony/lib/std/posix/posix_other_consts.nim :CS_POSIX_V6_ILP32_OFFBIG_LDFLAGS.0.~Y
+  (pragmas
+   (importc "_CS_POSIX_V6_ILP32_OFFBIG_LDFLAGS")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@Z,Ap,../nimony/lib/std/posix/posix_other_consts.nim :CS_POSIX_V6_ILP32_OFFBIG_LIBS.0.~V
+  (pragmas
+   (importc "_CS_POSIX_V6_ILP32_OFFBIG_LIBS")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@Z,Aq,../nimony/lib/std/posix/posix_other_consts.nim :CS_POSIX_V6_LP64_OFF64_CFLAGS.0.~V
+  (pragmas
+   (importc "_CS_POSIX_V6_LP64_OFF64_CFLAGS")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@a,Ar,../nimony/lib/std/posix/posix_other_consts.nim :CS_POSIX_V6_LP64_OFF64_LDFLAGS.0.~W
+  (pragmas
+   (importc "_CS_POSIX_V6_LP64_OFF64_LDFLAGS")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@X,As,../nimony/lib/std/posix/posix_other_consts.nim :CS_POSIX_V6_LP64_OFF64_LIBS.0.~T
+  (pragmas
+   (importc "_CS_POSIX_V6_LP64_OFF64_LIBS")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@b,At,../nimony/lib/std/posix/posix_other_consts.nim :CS_POSIX_V6_LPBIG_OFFBIG_CFLAGS.0.~X
+  (pragmas
+   (importc "_CS_POSIX_V6_LPBIG_OFFBIG_CFLAGS")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@c,Au,../nimony/lib/std/posix/posix_other_consts.nim :CS_POSIX_V6_LPBIG_OFFBIG_LDFLAGS.0.~Y
+  (pragmas
+   (importc "_CS_POSIX_V6_LPBIG_OFFBIG_LDFLAGS")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@Z,Av,../nimony/lib/std/posix/posix_other_consts.nim :CS_POSIX_V6_LPBIG_OFFBIG_LIBS.0.~V
+  (pragmas
+   (importc "_CS_POSIX_V6_LPBIG_OFFBIG_LIBS")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@d,Aw,../nimony/lib/std/posix/posix_other_consts.nim :CS_POSIX_V6_WIDTH_RESTRICTED_ENVS.0.~Z
+  (pragmas
+   (importc "_CS_POSIX_V6_WIDTH_RESTRICTED_ENVS")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,Ax,../nimony/lib/std/posix/posix_other_consts.nim :F_LOCK.0.~8
+  (pragmas
+   (importc "F_LOCK")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@C,Ay,../nimony/lib/std/posix/posix_other_consts.nim :F_TEST.0.~8
+  (pragmas
+   (importc "F_TEST")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,Az,../nimony/lib/std/posix/posix_other_consts.nim :F_TLOCK.0.~9
+  (pragmas
+   (importc "F_TLOCK")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,B0,../nimony/lib/std/posix/posix_other_consts.nim :F_ULOCK.0.~9
+  (pragmas
+   (importc "F_ULOCK")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@J,B1,../nimony/lib/std/posix/posix_other_consts.nim :PC_2_SYMLINKS.0.~F
+  (pragmas
+   (importc "_PC_2_SYMLINKS")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@N,B2,../nimony/lib/std/posix/posix_other_consts.nim :PC_ALLOC_SIZE_MIN.0.~J
+  (pragmas
+   (importc "_PC_ALLOC_SIZE_MIN")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,B3,../nimony/lib/std/posix/posix_other_consts.nim :PC_ASYNC_IO.0.~D
+  (pragmas
+   (importc "_PC_ASYNC_IO")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@P,B4,../nimony/lib/std/posix/posix_other_consts.nim :PC_CHOWN_RESTRICTED.0.~L
+  (pragmas
+   (importc "_PC_CHOWN_RESTRICTED")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@L,B5,../nimony/lib/std/posix/posix_other_consts.nim :PC_FILESIZEBITS.0.~H
+  (pragmas
+   (importc "_PC_FILESIZEBITS")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,B6,../nimony/lib/std/posix/posix_other_consts.nim :PC_LINK_MAX.0.~D
+  (pragmas
+   (importc "_PC_LINK_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@I,B7,../nimony/lib/std/posix/posix_other_consts.nim :PC_MAX_CANON.0.~E
+  (pragmas
+   (importc "_PC_MAX_CANON")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@I,B8,../nimony/lib/std/posix/posix_other_consts.nim :PC_MAX_INPUT.0.~E
+  (pragmas
+   (importc "_PC_MAX_INPUT")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,B9,../nimony/lib/std/posix/posix_other_consts.nim :PC_NAME_MAX.0.~D
+  (pragmas
+   (importc "_PC_NAME_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,BA,../nimony/lib/std/posix/posix_other_consts.nim :PC_NO_TRUNC.0.~D
+  (pragmas
+   (importc "_PC_NO_TRUNC")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,BB,../nimony/lib/std/posix/posix_other_consts.nim :PC_PATH_MAX.0.~D
+  (pragmas
+   (importc "_PC_PATH_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,BC,../nimony/lib/std/posix/posix_other_consts.nim :PC_PIPE_BUF.0.~D
+  (pragmas
+   (importc "_PC_PIPE_BUF")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,BD,../nimony/lib/std/posix/posix_other_consts.nim :PC_PRIO_IO.0.~C
+  (pragmas
+   (importc "_PC_PRIO_IO")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@R,BE,../nimony/lib/std/posix/posix_other_consts.nim :PC_REC_INCR_XFER_SIZE.0.~N
+  (pragmas
+   (importc "_PC_REC_INCR_XFER_SIZE")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@Q,BF,../nimony/lib/std/posix/posix_other_consts.nim :PC_REC_MIN_XFER_SIZE.0.~M
+  (pragmas
+   (importc "_PC_REC_MIN_XFER_SIZE")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@N,BG,../nimony/lib/std/posix/posix_other_consts.nim :PC_REC_XFER_ALIGN.0.~J
+  (pragmas
+   (importc "_PC_REC_XFER_ALIGN")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@K,BH,../nimony/lib/std/posix/posix_other_consts.nim :PC_SYMLINK_MAX.0.~G
+  (pragmas
+   (importc "_PC_SYMLINK_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,BI,../nimony/lib/std/posix/posix_other_consts.nim :PC_SYNC_IO.0.~C
+  (pragmas
+   (importc "_PC_SYNC_IO")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,BJ,../nimony/lib/std/posix/posix_other_consts.nim :PC_VDISABLE.0.~D
+  (pragmas
+   (importc "_PC_VDISABLE")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,BK,../nimony/lib/std/posix/posix_other_consts.nim :SC_2_C_BIND.0.~D
+  (pragmas
+   (importc "_SC_2_C_BIND")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,BL,../nimony/lib/std/posix/posix_other_consts.nim :SC_2_C_DEV.0.~C
+  (pragmas
+   (importc "_SC_2_C_DEV")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@K,BM,../nimony/lib/std/posix/posix_other_consts.nim :SC_2_CHAR_TERM.0.~G
+  (pragmas
+   (importc "_SC_2_CHAR_TERM")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@J,BN,../nimony/lib/std/posix/posix_other_consts.nim :SC_2_FORT_DEV.0.~F
+  (pragmas
+   (importc "_SC_2_FORT_DEV")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@J,BO,../nimony/lib/std/posix/posix_other_consts.nim :SC_2_FORT_RUN.0.~F
+  (pragmas
+   (importc "_SC_2_FORT_RUN")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@K,BP,../nimony/lib/std/posix/posix_other_consts.nim :SC_2_LOCALEDEF.0.~G
+  (pragmas
+   (importc "_SC_2_LOCALEDEF")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,BQ,../nimony/lib/std/posix/posix_other_consts.nim :SC_2_PBS.0.~A
+  (pragmas
+   (importc "_SC_2_PBS")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@P,BR,../nimony/lib/std/posix/posix_other_consts.nim :SC_2_PBS_ACCOUNTING.0.~L
+  (pragmas
+   (importc "_SC_2_PBS_ACCOUNTING")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@P,BS,../nimony/lib/std/posix/posix_other_consts.nim :SC_2_PBS_CHECKPOINT.0.~L
+  (pragmas
+   (importc "_SC_2_PBS_CHECKPOINT")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@L,BT,../nimony/lib/std/posix/posix_other_consts.nim :SC_2_PBS_LOCATE.0.~H
+  (pragmas
+   (importc "_SC_2_PBS_LOCATE")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@M,BU,../nimony/lib/std/posix/posix_other_consts.nim :SC_2_PBS_MESSAGE.0.~I
+  (pragmas
+   (importc "_SC_2_PBS_MESSAGE")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@K,BV,../nimony/lib/std/posix/posix_other_consts.nim :SC_2_PBS_TRACK.0.~G
+  (pragmas
+   (importc "_SC_2_PBS_TRACK")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,BW,../nimony/lib/std/posix/posix_other_consts.nim :SC_2_SW_DEV.0.~D
+  (pragmas
+   (importc "_SC_2_SW_DEV")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,BX,../nimony/lib/std/posix/posix_other_consts.nim :SC_2_UPE.0.~A
+  (pragmas
+   (importc "_SC_2_UPE")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@I,BY,../nimony/lib/std/posix/posix_other_consts.nim :SC_2_VERSION.0.~E
+  (pragmas
+   (importc "_SC_2_VERSION")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@M,BZ,../nimony/lib/std/posix/posix_other_consts.nim :SC_ADVISORY_INFO.0.~I
+  (pragmas
+   (importc "_SC_ADVISORY_INFO")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@N,Ba,../nimony/lib/std/posix/posix_other_consts.nim :SC_AIO_LISTIO_MAX.0.~J
+  (pragmas
+   (importc "_SC_AIO_LISTIO_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,Bb,../nimony/lib/std/posix/posix_other_consts.nim :SC_AIO_MAX.0.~C
+  (pragmas
+   (importc "_SC_AIO_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@R,Bc,../nimony/lib/std/posix/posix_other_consts.nim :SC_AIO_PRIO_DELTA_MAX.0.~N
+  (pragmas
+   (importc "_SC_AIO_PRIO_DELTA_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,Bd,../nimony/lib/std/posix/posix_other_consts.nim :SC_ARG_MAX.0.~C
+  (pragmas
+   (importc "_SC_ARG_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@O,Be,../nimony/lib/std/posix/posix_other_consts.nim :SC_ASYNCHRONOUS_IO.0.~K
+  (pragmas
+   (importc "_SC_ASYNCHRONOUS_IO")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@J,Bf,../nimony/lib/std/posix/posix_other_consts.nim :SC_ATEXIT_MAX.0.~F
+  (pragmas
+   (importc "_SC_ATEXIT_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,Bg,../nimony/lib/std/posix/posix_other_consts.nim :SC_BARRIERS.0.~D
+  (pragmas
+   (importc "_SC_BARRIERS")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@K,Bh,../nimony/lib/std/posix/posix_other_consts.nim :SC_BC_BASE_MAX.0.~G
+  (pragmas
+   (importc "_SC_BC_BASE_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@J,Bi,../nimony/lib/std/posix/posix_other_consts.nim :SC_BC_DIM_MAX.0.~F
+  (pragmas
+   (importc "_SC_BC_DIM_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@L,Bj,../nimony/lib/std/posix/posix_other_consts.nim :SC_BC_SCALE_MAX.0.~H
+  (pragmas
+   (importc "_SC_BC_SCALE_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@M,Bk,../nimony/lib/std/posix/posix_other_consts.nim :SC_BC_STRING_MAX.0.~I
+  (pragmas
+   (importc "_SC_BC_STRING_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@I,Bl,../nimony/lib/std/posix/posix_other_consts.nim :SC_CHILD_MAX.0.~E
+  (pragmas
+   (importc "_SC_CHILD_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,Bm,../nimony/lib/std/posix/posix_other_consts.nim :SC_CLK_TCK.0.~C
+  (pragmas
+   (importc "_SC_CLK_TCK")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@O,Bn,../nimony/lib/std/posix/posix_other_consts.nim :SC_CLOCK_SELECTION.0.~K
+  (pragmas
+   (importc "_SC_CLOCK_SELECTION")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@P,Bo,../nimony/lib/std/posix/posix_other_consts.nim :SC_COLL_WEIGHTS_MAX.0.~L
+  (pragmas
+   (importc "_SC_COLL_WEIGHTS_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,Bp,../nimony/lib/std/posix/posix_other_consts.nim :SC_CPUTIME.0.~C
+  (pragmas
+   (importc "_SC_CPUTIME")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@N,Bq,../nimony/lib/std/posix/posix_other_consts.nim :SC_DELAYTIMER_MAX.0.~J
+  (pragmas
+   (importc "_SC_DELAYTIMER_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@M,Br,../nimony/lib/std/posix/posix_other_consts.nim :SC_EXPR_NEST_MAX.0.~I
+  (pragmas
+   (importc "_SC_EXPR_NEST_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,Bs,../nimony/lib/std/posix/posix_other_consts.nim :SC_FSYNC.0.~A
+  (pragmas
+   (importc "_SC_FSYNC")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@P,Bt,../nimony/lib/std/posix/posix_other_consts.nim :SC_GETGR_R_SIZE_MAX.0.~L
+  (pragmas
+   (importc "_SC_GETGR_R_SIZE_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@P,Bu,../nimony/lib/std/posix/posix_other_consts.nim :SC_GETPW_R_SIZE_MAX.0.~L
+  (pragmas
+   (importc "_SC_GETPW_R_SIZE_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@M,Bv,../nimony/lib/std/posix/posix_other_consts.nim :SC_HOST_NAME_MAX.0.~I
+  (pragmas
+   (importc "_SC_HOST_NAME_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,Bw,../nimony/lib/std/posix/posix_other_consts.nim :SC_IOV_MAX.0.~C
+  (pragmas
+   (importc "_SC_IOV_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@D,Bx,../nimony/lib/std/posix/posix_other_consts.nim :SC_IPV6.0.~9
+  (pragmas
+   (importc "_SC_IPV6")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@K,By,../nimony/lib/std/posix/posix_other_consts.nim :SC_JOB_CONTROL.0.~G
+  (pragmas
+   (importc "_SC_JOB_CONTROL")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,Bz,../nimony/lib/std/posix/posix_other_consts.nim :SC_LINE_MAX.0.~D
+  (pragmas
+   (importc "_SC_LINE_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@N,C0,../nimony/lib/std/posix/posix_other_consts.nim :SC_LOGIN_NAME_MAX.0.~J
+  (pragmas
+   (importc "_SC_LOGIN_NAME_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@L,C1,../nimony/lib/std/posix/posix_other_consts.nim :SC_MAPPED_FILES.0.~H
+  (pragmas
+   (importc "_SC_MAPPED_FILES")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,C2,../nimony/lib/std/posix/posix_other_consts.nim :SC_MEMLOCK.0.~C
+  (pragmas
+   (importc "_SC_MEMLOCK")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@M,C3,../nimony/lib/std/posix/posix_other_consts.nim :SC_MEMLOCK_RANGE.0.~I
+  (pragmas
+   (importc "_SC_MEMLOCK_RANGE")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@Q,C4,../nimony/lib/std/posix/posix_other_consts.nim :SC_MEMORY_PROTECTION.0.~M
+  (pragmas
+   (importc "_SC_MEMORY_PROTECTION")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@O,C5,../nimony/lib/std/posix/posix_other_consts.nim :SC_MESSAGE_PASSING.0.~K
+  (pragmas
+   (importc "_SC_MESSAGE_PASSING")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@O,C6,../nimony/lib/std/posix/posix_other_consts.nim :SC_MONOTONIC_CLOCK.0.~K
+  (pragmas
+   (importc "_SC_MONOTONIC_CLOCK")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@K,C7,../nimony/lib/std/posix/posix_other_consts.nim :SC_MQ_OPEN_MAX.0.~G
+  (pragmas
+   (importc "_SC_MQ_OPEN_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@K,C8,../nimony/lib/std/posix/posix_other_consts.nim :SC_MQ_PRIO_MAX.0.~G
+  (pragmas
+   (importc "_SC_MQ_PRIO_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@K,C9,../nimony/lib/std/posix/posix_other_consts.nim :SC_NGROUPS_MAX.0.~G
+  (pragmas
+   (importc "_SC_NGROUPS_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,CA,../nimony/lib/std/posix/posix_other_consts.nim :SC_OPEN_MAX.0.~D
+  (pragmas
+   (importc "_SC_OPEN_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,CB,../nimony/lib/std/posix/posix_other_consts.nim :SC_PAGESIZE.0.~D
+  (pragmas
+   (importc "_SC_PAGESIZE")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@N,CC,../nimony/lib/std/posix/posix_other_consts.nim :SC_PRIORITIZED_IO.0.~J
+  (pragmas
+   (importc "_SC_PRIORITIZED_IO")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@S,CD,../nimony/lib/std/posix/posix_other_consts.nim :SC_PRIORITY_SCHEDULING.0.~O
+  (pragmas
+   (importc "_SC_PRIORITY_SCHEDULING")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@K,CE,../nimony/lib/std/posix/posix_other_consts.nim :SC_RAW_SOCKETS.0.~G
+  (pragmas
+   (importc "_SC_RAW_SOCKETS")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@J,CF,../nimony/lib/std/posix/posix_other_consts.nim :SC_RE_DUP_MAX.0.~F
+  (pragmas
+   (importc "_SC_RE_DUP_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@S,CG,../nimony/lib/std/posix/posix_other_consts.nim :SC_READER_WRITER_LOCKS.0.~O
+  (pragmas
+   (importc "_SC_READER_WRITER_LOCKS")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@P,CH,../nimony/lib/std/posix/posix_other_consts.nim :SC_REALTIME_SIGNALS.0.~L
+  (pragmas
+   (importc "_SC_REALTIME_SIGNALS")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@F,CI,../nimony/lib/std/posix/posix_other_consts.nim :SC_REGEXP.0.~B
+  (pragmas
+   (importc "_SC_REGEXP")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@I,CJ,../nimony/lib/std/posix/posix_other_consts.nim :SC_RTSIG_MAX.0.~E
+  (pragmas
+   (importc "_SC_RTSIG_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@I,CK,../nimony/lib/std/posix/posix_other_consts.nim :SC_SAVED_IDS.0.~E
+  (pragmas
+   (importc "_SC_SAVED_IDS")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@M,CL,../nimony/lib/std/posix/posix_other_consts.nim :SC_SEM_NSEMS_MAX.0.~I
+  (pragmas
+   (importc "_SC_SEM_NSEMS_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@M,CM,../nimony/lib/std/posix/posix_other_consts.nim :SC_SEM_VALUE_MAX.0.~I
+  (pragmas
+   (importc "_SC_SEM_VALUE_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@J,CN,../nimony/lib/std/posix/posix_other_consts.nim :SC_SEMAPHORES.0.~F
+  (pragmas
+   (importc "_SC_SEMAPHORES")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@U,CO,../nimony/lib/std/posix/posix_other_consts.nim :SC_SHARED_MEMORY_OBJECTS.0.~Q
+  (pragmas
+   (importc "_SC_SHARED_MEMORY_OBJECTS")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,CP,../nimony/lib/std/posix/posix_other_consts.nim :SC_SHELL.0.~A
+  (pragmas
+   (importc "_SC_SHELL")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@L,CQ,../nimony/lib/std/posix/posix_other_consts.nim :SC_SIGQUEUE_MAX.0.~H
+  (pragmas
+   (importc "_SC_SIGQUEUE_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,CR,../nimony/lib/std/posix/posix_other_consts.nim :SC_SPAWN.0.~A
+  (pragmas
+   (importc "_SC_SPAWN")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@J,CS,../nimony/lib/std/posix/posix_other_consts.nim :SC_SPIN_LOCKS.0.~F
+  (pragmas
+   (importc "_SC_SPIN_LOCKS")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@O,CT,../nimony/lib/std/posix/posix_other_consts.nim :SC_SPORADIC_SERVER.0.~K
+  (pragmas
+   (importc "_SC_SPORADIC_SERVER")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@K,CU,../nimony/lib/std/posix/posix_other_consts.nim :SC_SS_REPL_MAX.0.~G
+  (pragmas
+   (importc "_SC_SS_REPL_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@J,CV,../nimony/lib/std/posix/posix_other_consts.nim :SC_STREAM_MAX.0.~F
+  (pragmas
+   (importc "_SC_STREAM_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@K,CW,../nimony/lib/std/posix/posix_other_consts.nim :SC_SYMLOOP_MAX.0.~G
+  (pragmas
+   (importc "_SC_SYMLOOP_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@O,CX,../nimony/lib/std/posix/posix_other_consts.nim :SC_SYNCHRONIZED_IO.0.~K
+  (pragmas
+   (importc "_SC_SYNCHRONIZED_IO")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@U,CY,../nimony/lib/std/posix/posix_other_consts.nim :SC_THREAD_ATTR_STACKADDR.0.~Q
+  (pragmas
+   (importc "_SC_THREAD_ATTR_STACKADDR")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@U,CZ,../nimony/lib/std/posix/posix_other_consts.nim :SC_THREAD_ATTR_STACKSIZE.0.~Q
+  (pragmas
+   (importc "_SC_THREAD_ATTR_STACKSIZE")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@N,Ca,../nimony/lib/std/posix/posix_other_consts.nim :SC_THREAD_CPUTIME.0.~J
+  (pragmas
+   (importc "_SC_THREAD_CPUTIME")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@b,Cb,../nimony/lib/std/posix/posix_other_consts.nim :SC_THREAD_DESTRUCTOR_ITERATIONS.0.~X
+  (pragmas
+   (importc "_SC_THREAD_DESTRUCTOR_ITERATIONS")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@O,Cc,../nimony/lib/std/posix/posix_other_consts.nim :SC_THREAD_KEYS_MAX.0.~K
+  (pragmas
+   (importc "_SC_THREAD_KEYS_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@S,Cd,../nimony/lib/std/posix/posix_other_consts.nim :SC_THREAD_PRIO_INHERIT.0.~O
+  (pragmas
+   (importc "_SC_THREAD_PRIO_INHERIT")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@S,Ce,../nimony/lib/std/posix/posix_other_consts.nim :SC_THREAD_PRIO_PROTECT.0.~O
+  (pragmas
+   (importc "_SC_THREAD_PRIO_PROTECT")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@Z,Cf,../nimony/lib/std/posix/posix_other_consts.nim :SC_THREAD_PRIORITY_SCHEDULING.0.~V
+  (pragmas
+   (importc "_SC_THREAD_PRIORITY_SCHEDULING")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@U,Cg,../nimony/lib/std/posix/posix_other_consts.nim :SC_THREAD_PROCESS_SHARED.0.~Q
+  (pragmas
+   (importc "_SC_THREAD_PROCESS_SHARED")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@U,Ch,../nimony/lib/std/posix/posix_other_consts.nim :SC_THREAD_SAFE_FUNCTIONS.0.~Q
+  (pragmas
+   (importc "_SC_THREAD_SAFE_FUNCTIONS")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@V,Ci,../nimony/lib/std/posix/posix_other_consts.nim :SC_THREAD_SPORADIC_SERVER.0.~R
+  (pragmas
+   (importc "_SC_THREAD_SPORADIC_SERVER")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@P,Cj,../nimony/lib/std/posix/posix_other_consts.nim :SC_THREAD_STACK_MIN.0.~L
+  (pragmas
+   (importc "_SC_THREAD_STACK_MIN")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@R,Ck,../nimony/lib/std/posix/posix_other_consts.nim :SC_THREAD_THREADS_MAX.0.~N
+  (pragmas
+   (importc "_SC_THREAD_THREADS_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,Cl,../nimony/lib/std/posix/posix_other_consts.nim :SC_THREADS.0.~C
+  (pragmas
+   (importc "_SC_THREADS")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@H,Cm,../nimony/lib/std/posix/posix_other_consts.nim :SC_TIMEOUTS.0.~D
+  (pragmas
+   (importc "_SC_TIMEOUTS")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@I,Cn,../nimony/lib/std/posix/posix_other_consts.nim :SC_TIMER_MAX.0.~E
+  (pragmas
+   (importc "_SC_TIMER_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@F,Co,../nimony/lib/std/posix/posix_other_consts.nim :SC_TIMERS.0.~B
+  (pragmas
+   (importc "_SC_TIMERS")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,Cp,../nimony/lib/std/posix/posix_other_consts.nim :SC_TRACE.0.~A
+  (pragmas
+   (importc "_SC_TRACE")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@R,Cq,../nimony/lib/std/posix/posix_other_consts.nim :SC_TRACE_EVENT_FILTER.0.~N
+  (pragmas
+   (importc "_SC_TRACE_EVENT_FILTER")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@T,Cr,../nimony/lib/std/posix/posix_other_consts.nim :SC_TRACE_EVENT_NAME_MAX.0.~P
+  (pragmas
+   (importc "_SC_TRACE_EVENT_NAME_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@M,Cs,../nimony/lib/std/posix/posix_other_consts.nim :SC_TRACE_INHERIT.0.~I
+  (pragmas
+   (importc "_SC_TRACE_INHERIT")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@I,Ct,../nimony/lib/std/posix/posix_other_consts.nim :SC_TRACE_LOG.0.~E
+  (pragmas
+   (importc "_SC_TRACE_LOG")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@N,Cu,../nimony/lib/std/posix/posix_other_consts.nim :SC_TRACE_NAME_MAX.0.~J
+  (pragmas
+   (importc "_SC_TRACE_NAME_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@M,Cv,../nimony/lib/std/posix/posix_other_consts.nim :SC_TRACE_SYS_MAX.0.~I
+  (pragmas
+   (importc "_SC_TRACE_SYS_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@T,Cw,../nimony/lib/std/posix/posix_other_consts.nim :SC_TRACE_USER_EVENT_MAX.0.~P
+  (pragmas
+   (importc "_SC_TRACE_USER_EVENT_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@L,Cx,../nimony/lib/std/posix/posix_other_consts.nim :SC_TTY_NAME_MAX.0.~H
+  (pragmas
+   (importc "_SC_TTY_NAME_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@T,Cy,../nimony/lib/std/posix/posix_other_consts.nim :SC_TYPED_MEMORY_OBJECTS.0.~P
+  (pragmas
+   (importc "_SC_TYPED_MEMORY_OBJECTS")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@J,Cz,../nimony/lib/std/posix/posix_other_consts.nim :SC_TZNAME_MAX.0.~F
+  (pragmas
+   (importc "_SC_TZNAME_MAX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@N,D0,../nimony/lib/std/posix/posix_other_consts.nim :SC_V6_ILP32_OFF32.0.~J
+  (pragmas
+   (importc "_SC_V6_ILP32_OFF32")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@O,D1,../nimony/lib/std/posix/posix_other_consts.nim :SC_V6_ILP32_OFFBIG.0.~K
+  (pragmas
+   (importc "_SC_V6_ILP32_OFFBIG")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@M,D2,../nimony/lib/std/posix/posix_other_consts.nim :SC_V6_LP64_OFF64.0.~I
+  (pragmas
+   (importc "_SC_V6_LP64_OFF64")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@O,D3,../nimony/lib/std/posix/posix_other_consts.nim :SC_V6_LPBIG_OFFBIG.0.~K
+  (pragmas
+   (importc "_SC_V6_LPBIG_OFFBIG")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@G,D4,../nimony/lib/std/posix/posix_other_consts.nim :SC_VERSION.0.~C
+  (pragmas
+   (importc "_SC_VERSION")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@P,D5,../nimony/lib/std/posix/posix_other_consts.nim :SC_XBS5_ILP32_OFF32.0.~L
+  (pragmas
+   (importc "_SC_XBS5_ILP32_OFF32")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@Q,D6,../nimony/lib/std/posix/posix_other_consts.nim :SC_XBS5_ILP32_OFFBIG.0.~M
+  (pragmas
+   (importc "_SC_XBS5_ILP32_OFFBIG")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@O,D7,../nimony/lib/std/posix/posix_other_consts.nim :SC_XBS5_LP64_OFF64.0.~K
+  (pragmas
+   (importc "_SC_XBS5_LP64_OFF64")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@Q,D8,../nimony/lib/std/posix/posix_other_consts.nim :SC_XBS5_LPBIG_OFFBIG.0.~M
+  (pragmas
+   (importc "_SC_XBS5_LPBIG_OFFBIG")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@K,D9,../nimony/lib/std/posix/posix_other_consts.nim :SC_XOPEN_CRYPT.0.~G
+  (pragmas
+   (importc "_SC_XOPEN_CRYPT")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@N,DA,../nimony/lib/std/posix/posix_other_consts.nim :SC_XOPEN_ENH_I18N.0.~J
+  (pragmas
+   (importc "_SC_XOPEN_ENH_I18N")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@L,DB,../nimony/lib/std/posix/posix_other_consts.nim :SC_XOPEN_LEGACY.0.~H
+  (pragmas
+   (importc "_SC_XOPEN_LEGACY")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@N,DC,../nimony/lib/std/posix/posix_other_consts.nim :SC_XOPEN_REALTIME.0.~J
+  (pragmas
+   (importc "_SC_XOPEN_REALTIME")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@V,DD,../nimony/lib/std/posix/posix_other_consts.nim :SC_XOPEN_REALTIME_THREADS.0.~R
+  (pragmas
+   (importc "_SC_XOPEN_REALTIME_THREADS")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@I,DE,../nimony/lib/std/posix/posix_other_consts.nim :SC_XOPEN_SHM.0.~E
+  (pragmas
+   (importc "_SC_XOPEN_SHM")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@M,DF,../nimony/lib/std/posix/posix_other_consts.nim :SC_XOPEN_STREAMS.0.~I
+  (pragmas
+   (importc "_SC_XOPEN_STREAMS")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@J,DG,../nimony/lib/std/posix/posix_other_consts.nim :SC_XOPEN_UNIX.0.~F
+  (pragmas
+   (importc "_SC_XOPEN_UNIX")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@M,DH,../nimony/lib/std/posix/posix_other_consts.nim :SC_XOPEN_VERSION.0.~I
+  (pragmas
+   (importc "_SC_XOPEN_VERSION")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@P,DI,../nimony/lib/std/posix/posix_other_consts.nim :SC_NPROCESSORS_ONLN.0.~L
+  (pragmas
+   (importc "_SC_NPROCESSORS_ONLN")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,DJ,../nimony/lib/std/posix/posix_other_consts.nim :SEEK_SET.0.~A
+  (pragmas
+   (importc "SEEK_SET")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,DK,../nimony/lib/std/posix/posix_other_consts.nim :SEEK_CUR.0.~A
+  (pragmas
+   (importc "SEEK_CUR")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (gvar@E,DL,../nimony/lib/std/posix/posix_other_consts.nim :SEEK_END.0.~A
+  (pragmas
+   (importc "SEEK_END")
+   (header "<unistd.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (type@B,8,../nimony/lib/std/posix/posix_other.nim :ClockId.0.~9 .
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")))
+ (type@y,g,../nimony/lib/std/posix/posix_other.nim :Time.0.~u
+  (pragmas~o
+   (importc "time_t")
+   (nodecl)
+   (header "<time.h>"))
+  (i@f,S,../nimony/lib/std/system/ctypes.nim 64
+   (importc "long")))
+ (type@p,j,../nimony/lib/std/posix/posix_other.nim :Timespec.0.~l,~1
+  (pragmas~b,~1
+   (importc "struct timespec")
+   (header "<time.h>"))
+  (object@2 .
+   (fld~d,1 :tv_sec.0~8
+    (pragmas
+     (exportc "tv_sec"))Time.0.@E)
+   (fld~c,2 :tv_nsec.0~9
+    (pragmas
+     (exportc "tv_nsec"))
+    (i@f,S,../nimony/lib/std/system/ctypes.nim 64
+     (importc "long")))))
+ (type@a,o,../nimony/lib/std/posix/posix_other.nim :IOVec.0.~W,~1
+  (pragmas~P,~1
+   (importc "struct iovec")
+   (header "<sys/uio.h>"))
+  (object@2 .
+   (fld~O,1 :iov_base.0~8 .
+    (ptr@3
+     (void)))
+   (fld~P,2 :iov_len.0~7 .
+    (u@h,g,../nimony/lib/std/system/ctypes.nim 64
+     (importc "size_t")))))
+ (type@12,s,../nimony/lib/std/posix/posix_other.nim :SockLen.0.~y
+  (pragmas~p
+   (importc "socklen_t")
+   (header "<sys/socket.h>"))
+  (u@l,w,../nimony/lib/std/system/ctypes.nim 32
+   (importc "socklen_t")
+   (header "<sys/socket.h>"@j,s,../nimony/lib/std/posix/posix_other.nim)))
+ (type@17,t,../nimony/lib/std/posix/posix_other.nim :TSa_Family.0.~13
+  (pragmas~r
+   (importc "sa_family_t")
+   (header "<sys/socket.h>"))
+  (u@2 8
+   (importc "sa_family_t")
+   (header "<sys/socket.h>"~L)))
+ (type@U,w,../nimony/lib/std/posix/posix_other.nim :SockAddr.0.~Q,~1
+  (pragmas~G,~1
+   (importc "struct sockaddr")
+   (header "<sys/socket.h>"))
+  (object@2 .
+   (fld~H,1 :sa_family.0~9 .
+    (u@u,~4 8
+     (importc "sa_family_t")
+     (header "<sys/socket.h>"~L)))
+   (fld~J,2 :sa_data.0~7 . `t.0.IAarrayAcS8ZS256.@8)))
+ (type@e,11,../nimony/lib/std/posix/posix_other.nim :Tmsghdr.0.~a,~1
+  (pragmas~R,~1
+   (importc "struct msghdr")
+   (header "<sys/socket.h>"))
+  (object@2 .
+   (fld~S,1 :msg_name.0~8 .
+    (ptr@3
+     (void)))
+   (fld~P,2 :msg_namelen.0~B .
+    (u@l,w,../nimony/lib/std/system/ctypes.nim 32
+     (importc "socklen_t")
+     (header "<sys/socket.h>"@j,s,../nimony/lib/std/posix/posix_other.nim)))
+   (fld~T,3 :msg_iov.0~7 .
+    (ptr@3 IOVec.0.@4))
+   (fld~Q,4 :msg_iovlen.0~A .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int")))
+   (fld~P,5 :msg_control.0~B .
+    (ptr@3
+     (void)))
+   (fld~M,6 :msg_controllen.0~E .
+    (u@l,w,../nimony/lib/std/system/ctypes.nim 32
+     (importc "socklen_t")
+     (header "<sys/socket.h>"@j,s,../nimony/lib/std/posix/posix_other.nim)))
+   (fld~R,7 :msg_flags.0~9 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int")))))
+ (gvar@I,1D,../nimony/lib/std/posix/posix_other.nim :MAP_POPULATE.0.~E
+  (pragmas
+   (importc "MAP_POPULATE")
+   (header "<sys/mman.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (type@I,D :InAddrScalar.0.~E .
+  (u@2 32))
+ (type@F,E :Sighandler.0.~B . `t.0.IAiS32AimportcSUintUZZSEAnoconvZAfalseZAR31.@7)
+ (type@G,F :FileHandle.0.~C .
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")))
+ (type@I,G :SocketHandle.0.~E .
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")))
+ (type@x,1I :Mode.0.~r
+  (pragmas~l
+   (importc "mode_t")
+   (header "<sys/types.h>"))
+  (u~n,5 32
+   (importc "mode_t")
+   (header "<sys/types.h>"@V,~5)))
+ (type@v,1Q :Off.0.~p
+  (pragmas~k
+   (importc "off_t")
+   (header "<sys/types.h>"))
+  (i@2 64
+   (importc "off_t")
+   (header "<sys/types.h>"~K)))
+ (type@v,1S :Dev.0.~p
+  (pragmas~k
+   (importc "dev_t")
+   (header "<sys/types.h>"))
+  (u@2 64
+   (importc "dev_t")
+   (header "<sys/types.h>"~K)))
+ (type@v,1T :Ino.0.~p
+  (pragmas~k
+   (importc "ino_t")
+   (header "<sys/types.h>"))
+  (u@2 64
+   (importc "ino_t")
+   (header "<sys/types.h>"~K)))
+ (type@r,1W :Stat.0.~l,~1
+  (pragmas~f,~1
+   (importc "struct stat")
+   (header "<sys/stat.h>"))
+  (object@2 .
+   (fld~d,1 :st_dev.0~8
+    (pragmas
+     (importc "st_dev"))
+    (u@h,~5 64
+     (importc "dev_t")
+     (header "<sys/types.h>"~K)))
+   (fld~d,2 :st_ino.0~8
+    (pragmas
+     (importc "st_ino"))
+    (u@h,~5 64
+     (importc "ino_t")
+     (header "<sys/types.h>"~K)))
+   (fld~c,3 :st_size.0~9
+    (pragmas
+     (importc "st_size"))
+    (i@g,~9 64
+     (importc "off_t")
+     (header "<sys/types.h>"~K)))
+   (fld~c,A :st_mode.0~9
+    (pragmas
+     (importc "st_mode"))
+    (u~7,~J 32
+     (importc "mode_t")
+     (header "<sys/types.h>"@V,~5)))
+   (fld~Z,H :st_mtime.0~A
+    (pragmas
+     (importc "st_mtime"))
+    (i@Q 64))
+   (fld~a,I :st_mtim.0~9
+    (pragmas
+     (importc "st_mtim"))Timespec.0.@P)))
+ (const@Q,1r :StatHasNanoseconds.0.~I .
+  (bool@E,1H,../nimony/lib/std/system/basic_types.nim)
+  (true@C))
+ (proc@4,28 :fcntl.0.@5
+  (params@B
+   (param@1 :a1.0 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int")))
+   (param@B :a2.0 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int")))
+   (param@T :vanon.0 .
+    (varargs)))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas@c
+   (importc "fcntl")
+   (header "<fcntl.h>")
+   (smry~c
+    (param 0 0)
+    (param 1 1)
+    (param 2 2)))
+  (stmts .))
+ (proc@4,2M :open.0.@5
+  (params@A
+   (param@1 :a1.1 .
+    (ptr@4
+     (c 8)))
+   (param@E :a2.1 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int")))
+   (param@O :mode.0 .
+    (u~S,~z 32
+     (importc "mode_t")
+     (header "<sys/types.h>"@V,~5))))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas@q
+   (importc "open")
+   (header "<fcntl.h>")
+   (smry~q
+    (param 0 0)
+    (param 1 1)
+    (param 2 2)))
+  (stmts .))
+ (proc@4,2N :open.1.@5
+  (params@A
+   (param@1 :a1.2 .
+    (ptr@4
+     (c 8)))
+   (param@E :a2.2 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int"))))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas@e
+   (importc "open")
+   (header "<fcntl.h>")
+   (smry~e
+    (param 0 0)
+    (param 1 1)))
+  (stmts .))
+ (proc@4,2S :ftruncate.0.@5
+  (params@F
+   (param@1 :a1.3 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int")))
+   (param@B :a2.3 .
+    (i@T,~12 64
+     (importc "off_t")
+     (header "<sys/types.h>"~K))))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas@f
+   (importc "ftruncate")
+   (header "<unistd.h>")
+   (smry~f
+    (param 0 0)
+    (param 1 1)))
+  (stmts .))
+ (proc@4,2p :posix_fallocate.0.@5
+  (params@L
+   (param@1 :a1.4 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int")))
+   (param@B :a2.4 .
+    (i@N,~1P 64
+     (importc "off_t")
+     (header "<sys/types.h>"~K)))
+   (param@F :a3.0 .
+    (i@J,~1P 64
+     (importc "off_t")
+     (header "<sys/types.h>"~K))))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas@p
+   (importc "posix_fallocate")
+   (header "<fcntl.h>")
+   (smry~p
+    (param 0 0)
+    (param 1 1)
+    (param 2 2)))
+  (stmts .))
+ (proc@4,2v :close.0.@5
+  (params@B
+   (param@1 :a1.5 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int"))))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas@S
+   (importc "close")
+   (header "<unistd.h>")
+   (smry~S
+    (param 0 0)))
+  (stmts .))
+ (proc@4,32 :fstat.0.@5
+  (params@B
+   (param@1 :a1.6 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int")))
+   (param@B :a2.5 .
+    (ptr@4 Stat.0.@4)))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas@g
+   (importc "fstat")
+   (header "<sys/stat.h>")
+   (smry~g
+    (param 0 0)
+    (param 1 1)))
+  (stmts .))
+ (proc@4,33 :lstat.0.@5
+  (params@B
+   (param@1 :a1.7 .
+    (ptr@4
+     (c 8)))
+   (param@E :a2.6 .
+    (ptr@4 Stat.0.@4)))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas@j
+   (importc "lstat")
+   (header "<sys/stat.h>")
+   (smry~j
+    (param 0 0)
+    (param 1 1)))
+  (stmts .))
+ (proc@4,34 :stat.0.@5
+  (params@A
+   (param@1 :a1.8 .
+    (ptr@4
+     (c 8)))
+   (param@E :a2.7 .
+    (ptr@4 Stat.0.@4)))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas@i
+   (importc "stat")
+   (header "<sys/stat.h>")
+   (smry~i
+    (param 0 0)
+    (param 1 1)))
+  (stmts .))
+ (proc@4,3K :S_ISBLK.0.@5
+  (params@D
+   (param@1 :m.0 .
+    (u~8,~1x 32
+     (importc "mode_t")
+     (header "<sys/types.h>"@V,~5))))
+  (bool@B)
+  (pragmas@T
+   (importc "S_ISBLK")
+   (header "<sys/stat.h>")
+   (smry~T
+    (param 0 0)))
+  (stmts .))
+ (proc@4,3M :S_ISCHR.0.@5
+  (params@D
+   (param@1 :m.1 .
+    (u~8,~1z 32
+     (importc "mode_t")
+     (header "<sys/types.h>"@V,~5))))
+  (bool@B)
+  (pragmas@T
+   (importc "S_ISCHR")
+   (header "<sys/stat.h>")
+   (smry~T
+    (param 0 0)))
+  (stmts .))
+ (proc@4,3O :S_ISDIR.0.@5
+  (params@D
+   (param@1 :m.2 .
+    (u~8,~21 32
+     (importc "mode_t")
+     (header "<sys/types.h>"@V,~5))))
+  (bool@B)
+  (pragmas@T
+   (importc "S_ISDIR")
+   (header "<sys/stat.h>")
+   (smry~T
+    (param 0 0)))
+  (stmts .))
+ (proc@4,3Q :S_ISFIFO.0.@5
+  (params@E
+   (param@1 :m.3 .
+    (u~9,~23 32
+     (importc "mode_t")
+     (header "<sys/types.h>"@V,~5))))
+  (bool@B)
+  (pragmas@U
+   (importc "S_ISFIFO")
+   (header "<sys/stat.h>")
+   (smry~U
+    (param 0 0)))
+  (stmts .))
+ (proc@4,3S :S_ISREG.0.@5
+  (params@D
+   (param@1 :m.4 .
+    (u~8,~25 32
+     (importc "mode_t")
+     (header "<sys/types.h>"@V,~5))))
+  (bool@B)
+  (pragmas@T
+   (importc "S_ISREG")
+   (header "<sys/stat.h>")
+   (smry~T
+    (param 0 0)))
+  (stmts .))
+ (proc@4,3U :S_ISLNK.0.@5
+  (params@D
+   (param@1 :m.5 .
+    (u~8,~27 32
+     (importc "mode_t")
+     (header "<sys/types.h>"@V,~5))))
+  (bool@B)
+  (pragmas@T
+   (importc "S_ISLNK")
+   (header "<sys/stat.h>")
+   (smry~T
+    (param 0 0)))
+  (stmts .))
+ (proc@4,3W :S_ISSOCK.0.@5
+  (params@E
+   (param@1 :m.6 .
+    (u~9,~29 32
+     (importc "mode_t")
+     (header "<sys/types.h>"@V,~5))))
+  (bool@B)
+  (pragmas@U
+   (importc "S_ISSOCK")
+   (header "<sys/stat.h>")
+   (smry~U
+    (param 0 0)))
+  (stmts .))
+ (proc@4,3e :mmap.0.@5
+  (params@A
+   (param@1 :a1.9 .
+    (ptr@8
+     (void)))
+   (param@I :a2.8 .
+    (i@4 64))
+   (param@R :a3.1 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int")))
+   (param@V :a4.0 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int")))
+   (param@Z :a5.0 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int")))
+   (param@j :a6.0 .
+    (i@,~2E 64
+     (importc "off_t")
+     (header "<sys/types.h>"~K))))
+  (ptr@t
+   (void))
+  (pragmas@1B
+   (importc "mmap")
+   (header "<sys/mman.h>")
+   (smry~1B
+    (param 0 0)
+    (param 1 1)
+    (param 2 2)
+    (param 3 3)
+    (param 4 4)
+    (param 5 5)))
+  (stmts .))
+ (proc@4,3g :munmap.0.@5
+  (params@C
+   (param@1 :a1.10 .
+    (ptr@8
+     (void)))
+   (param@I :a2.9 .
+    (i@4 64)))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas@j
+   (importc "munmap")
+   (header "<sys/mman.h>")
+   (smry~j
+    (param 0 0)
+    (param 1 1)))
+  (stmts .))
+ (gvar@H,3j :errnoVar.0.~9
+  (pragmas
+   (importc "errno")
+   (header "<errno.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")).)
+ (proc@4,4J :clock_gettime.0.@5
+  (params@J
+   (param@1 :a1.11 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int")))
+   (param@E :a2.10 .
+    (ptr@4 Timespec.0.@4)))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas@v
+   (importc "clock_gettime")
+   (header "<time.h>")
+   (smry~v
+    (param 0 0)
+    (param 1 1)))
+  (stmts .))
+ (proc@4,4Q :getcwd.0.@5
+  (params@C
+   (param@1 :a1.12 .
+    (ptr@4
+     (c 8)))
+   (param@E :a2.11 .
+    (i@4 64)))
+  (ptr@O
+   (c 8))
+  (pragmas@i
+   (importc "getcwd")
+   (header "<unistd.h>")
+   (smry~i
+    (param 0 0)
+    (param 1 1)))
+  (stmts .))
+ (proc@4,4R :chdir.0.@5
+  (params@B
+   (param@1 :path.0 .
+    (ptr@6
+     (c 8))))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas@X
+   (importc "chdir")
+   (header "<unistd.h>")
+   (smry~X
+    (param 0 0)))
+  (stmts .))
+ (proc@4,4W :realpath.0.@5
+  (params@E
+   (param@1 :path.1 .
+    (ptr@G
+     (c 8)))
+   (param@7 :resolved.0 .
+    (ptr@A
+     (c 8))))
+  (ptr@R
+   (c 8))
+  (pragmas@n
+   (importc "realpath")
+   (header "<stdlib.h>")
+   (smry~n
+    (param 0 0)
+    (param 1 1)))
+  (stmts .))
+ (proc@6,4d :readlink.0.@5
+  (params@E
+   (param@1 :a1.13 .
+    (ptr@8
+     (c 8)))
+   (param@5 :a2.12 .
+    (ptr@4
+     (c 8)))
+   (param@I :a3.2 .
+    (i@4 64)))
+  (i@S 64)
+  (pragmas@k
+   (importc "readlink")
+   (header "<unistd.h>")
+   (smry~k
+    (param 0 0)
+    (param 1 1)
+    (param 2 2)))
+  (stmts .))
+ (proc@6,4e :symlink.0.@5
+  (params@D
+   (param@1 :a1.14 .
+    (ptr@8
+     (c 8)))
+   (param@5 :a2.13 .
+    (ptr@4
+     (c 8))))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas@b
+   (importc "symlink")
+   (header "<unistd.h>")
+   (smry~b
+    (param 0 0)
+    (param 1 1)))
+  (stmts .))
+ (type@18,6L :DIR.0.~12
+  (pragmas~x
+   (importc "DIR")
+   (header "<dirent.h>"))
+  (object@2 .))
+ (type@13,6M :Dirent.0.~x
+  (pragmas~p
+   (importc "struct dirent")
+   (header "<dirent.h>"))
+  (object@2 .
+   (fld~p,1 :d_type.0~8
+    (pragmas
+     (importc "d_type"))
+    (u@N 8))
+   (fld~p,2 :d_name.0~8
+    (pragmas
+     (importc "d_name"))`t.0.IAarrayAcS8ZS256.@S)))
+ (proc@4,6Q :opendir.0.@5
+  (params@D
+   (param@1 :name.0 .
+    (ptr@6
+     (c 8))))
+  (ptr@L DIR.0.@4)
+  (pragmas@g
+   (importc "opendir")
+   (header "<dirent.h>")
+   (smry~g
+    (param 0 0)))
+  (stmts .))
+ (proc@4,6R :closedir.0.@5
+  (params@E
+   (param@1 :dirp.0 .
+    (ptr@A DIR.0.@4)))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas@e
+   (importc "closedir")
+   (header "<dirent.h>")
+   (smry~e
+    (param 0 0)))
+  (stmts .))
+ (proc@4,6S :readdir.0.@5
+  (params@D
+   (param@1 :dirp.1 .
+    (ptr@A DIR.0.@4)))
+  (ptr@P Dirent.0.@4)
+  (pragmas@n
+   (importc "readdir")
+   (header "<dirent.h>")
+   (smry~n
+    (param 0 0)))
+  (stmts .))
+ (proc@4,6c :mkdir.0.@5
+  (params@B
+   (param@1 :path.2 .
+    (ptr@6
+     (c 8)))
+   (param@G :mode.1 .
+    (u~L,~5F 32
+     (importc "mode_t")
+     (header "<sys/types.h>"@V,~5))))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas@j
+   (importc "mkdir")
+   (header "<sys/stat.h>")
+   (smry~j
+    (param 0 0)
+    (param 1 1)))
+  (stmts .))
+ (proc@4,6d :rmdir.0.@5
+  (params@B
+   (param@1 :path.3 .
+    (ptr@6
+     (c 8))))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas@X
+   (importc "rmdir")
+   (header "<unistd.h>")
+   (smry~X
+    (param 0 0)))
+  (stmts .))
+ (proc@4,6e :unlink.0.@5
+  (params@C
+   (param@1 :path.4 .
+    (ptr@6
+     (c 8))))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas@Y
+   (importc "unlink")
+   (header "<unistd.h>")
+   (smry~Y
+    (param 0 0)))
+  (stmts .))
+ (const@E,6i :DT_UNKNOWN.0.~A .
+  (u@P,~L 8)
+  (suf@4 0u "u8"))
+ (const@B,6j :DT_FIFO.0.~7 .
+  (u@S,~M 8)
+  (suf@4 1u "u8"))
+ (const@A,6k :DT_CHR.0.~6 .
+  (u@T,~N 8)
+  (suf@4 2u "u8"))
+ (const@A,6l :DT_DIR.0.~6 .
+  (u@T,~O 8)
+  (suf@4 4u "u8"))
+ (const@A,6m :DT_BLK.0.~6 .
+  (u@T,~P 8)
+  (suf@4 6u "u8"))
+ (const@A,6n :DT_REG.0.~6 .
+  (u@T,~Q 8)
+  (suf@4 8u "u8"))
+ (const@A,6o :DT_LNK.0.~6 .
+  (u@T,~R 8)
+  (suf@4 10u "u8"))
+ (const@B,6p :DT_SOCK.0.~7 .
+  (u@S,~S 8)
+  (suf@4 12u "u8"))
+ (const@A,6q :DT_WHT.0.~6 .
+  (u@T,~T 8)
+  (suf@4 14u "u8"))
+ (proc@4,6w :sysconf.0.@5
+  (params@D
+   (param@1 :a1.15 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int"))))
+  (i@C 64)
+  (pragmas@T
+   (importc "sysconf")
+   (header "<unistd.h>")
+   (smry~T
+    (param 0 0)))
+  (stmts .))
+ (proc@2,6z :WEXITSTATUS.0.@5
+  (params@H
+   (param@1 :s.0 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int"))))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas
+   (smry
+    (param 0 0 reads)))
+  (stmts@a
+   (var@F :result.0 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int")).)
+   (asgn@F result.0
+    (shr
+     (i 32)
+     (cast~C
+      (i 32)
+      (bitand
+       (i 32)s.0~2
+       (conv@4
+        (i@I,1a,../nimony/lib/std/system/arithmetics.nim 32)65280)))
+     (cast@4
+      (u 32)8)))
+   (ret~a result.0)))
+ (proc@2,70 :WTERMSIG.0.@5
+  (params@E
+   (param@1 :s.1 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int"))))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas
+   (smry
+    (param 0 0 reads)))
+  (stmts@V
+   (var@2 :result.1 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int")).)
+   (asgn@2 result.1
+    (bitand
+     (i 32)s.1~2
+     (conv@4
+      (i@I,1a,../nimony/lib/std/system/arithmetics.nim 32)127)))
+   (ret~V result.1)))
+ (proc@2,71 :WSTOPSIG.0.@5
+  (params@E
+   (param@1 :s.2 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int"))))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas
+   (smry
+    (param 0 0 reads)result 0))
+  (stmts@V
+   (var@B :result.2 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int")).)
+   (var@B :`x.0 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int"))
+    (call WEXITSTATUS.0.~B s.2@1))
+   (asgn@B result.2 `x.0)
+   (ret~V result.2)))
+ (proc@2,72 :WIFEXITED.0.@5
+  (params@F
+   (param@1 :s.3 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int"))))
+  (bool@B)
+  (pragmas
+   (smry
+    (param 0 0 reads)))
+  (stmts@X
+   (var@C :result.3 .
+    (bool@E,1H,../nimony/lib/std/system/basic_types.nim).)
+   (var@8 :`x.1 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int"))
+    (call WTERMSIG.0.~8 s.3@1))
+   (asgn@C result.3
+    (eq `x.1~4
+     (conv@3
+      (i@H,16,../nimony/lib/std/system/comparisons.nim 32)0)))
+   (ret~X result.3)))
+ (proc@2,73 :WIFSIGNALED.0.@5
+  (params@H
+   (param@1 :s.4 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int"))))
+  (bool@B)
+  (pragmas
+   (smry
+    (param 0 0 reads)))
+  (stmts@Z
+   (var@b :result.4 .
+    (bool@E,1H,../nimony/lib/std/system/basic_types.nim).)
+   (asgn@b result.4
+    (lt@4,1u,../nimony/lib/std/system/comparisons.nim
+     (conv@1E,74,../nimony/lib/std/posix/posix.nim
+      (i@G,1E,../nimony/lib/std/system/comparisons.nim 8)0)
+     (shr@15,74,../nimony/lib/std/posix/posix.nim
+      (i 8)
+      (cast~T
+       (i 8)
+       (cast
+        (i@5 8)
+        (add@O
+         (i 32)
+         (bitand~A
+          (i 32)s.4~2
+          (conv@4
+           (i@I,1a,../nimony/lib/std/system/arithmetics.nim 32)127))
+         (conv@2
+          (i@G,k,../nimony/lib/std/system/arithmetics.nim 32)1))))
+      (cast@4
+       (u 8)1))))
+   (ret~Z result.4)))
+ (proc@2,74 :WIFSTOPPED.0.@5
+  (params@G
+   (param@1 :s.5 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int"))))
+  (bool@B)
+  (pragmas
+   (smry
+    (param 0 0 reads)))
+  (stmts@Y
+   (var@D :result.5 .
+    (bool@E,1H,../nimony/lib/std/system/basic_types.nim).)
+   (asgn@D result.5
+    (eq
+     (bitand~A
+      (i 32)s.5~2
+      (conv@4
+       (i@I,1a,../nimony/lib/std/system/arithmetics.nim 32)255))
+     (conv@3
+      (i@H,16,../nimony/lib/std/system/comparisons.nim 32)127)))
+   (ret~Y result.5)))
+ (proc@2,75 :WIFCONTINUED.0.@5
+  (params@I
+   (param@1 :s.6 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int"))))
+  (bool@B)
+  (pragmas
+   (smry
+    (param 0 0 reads)))
+  (stmts@a
+   (var@2 :result.6 .
+    (bool@E,1H,../nimony/lib/std/system/basic_types.nim).)
+   (asgn@2 result.6
+    (eq s.6~2
+     (suf@Q,A4,../nimony/lib/std/posix/posix_other_consts.nim 8 "i32")))
+   (ret~a result.6)))
+ (type@y,7H :Pid.0.~p
+  (pragmas~k
+   (importc "pid_t")
+   (header "<sys/types.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "pid_t")
+   (header "<sys/types.h>"@g,7I,../nimony/lib/std/posix/posix.nim)))
+ (type@g,7M :CChar.0.~Z
+  (pragmas~S
+   (importc "char")
+   (nodecl))
+  (i@2 8
+   (importc "char")))
+ (type@J,7N :CCharArray.0.~C .
+  (ptr@6
+   (ptr@N
+    (i~4,~1 8
+     (importc "char")))))
+ (proc@4,8Y :pipe.0.@5
+  (params@A
+   (param@1 :a.1 .
+    (ptr@3
+     (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+      (importc "int")))))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas@U
+   (importc "pipe")
+   (header "<unistd.h>")
+   (smry~U
+    (param 0 0)))
+  (stmts .))
+ (proc@4,8a :dup2.0.@5
+  (params@A
+   (param@1 :oldfd.0 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int")))
+   (param@8 :newfd.0 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int"))))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas@b
+   (importc "dup2")
+   (header "<unistd.h>")
+   (smry~b
+    (param 0 0)
+    (param 1 1)))
+  (stmts .))
+ (proc@4,8c :fork.0.@5
+  (params@A)
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "pid_t")
+   (header "<sys/types.h>"@g,7I,../nimony/lib/std/posix/posix.nim))
+  (pragmas@I
+   (importc "fork")
+   (header "<unistd.h>")
+   (smry~I))
+  (stmts .))
+ (proc@4,8d :execvp.0.@5
+  (params@C
+   (param@1 :file.0 .
+    (ptr@6
+     (c 8)))
+   (param@G :argv.0 .
+    (ptr~7,~1G
+     (ptr@N
+      (i~4,~1 8
+       (importc "char"))))))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas@q
+   (importc "execvp")
+   (header "<unistd.h>")
+   (smry~q
+    (param 0 0)
+    (param 1 1)))
+  (stmts .))
+ (proc@4,8f :execve.0.@5
+  (params@C
+   (param@1 :path.5 .
+    (ptr@6
+     (c 8)))
+   (param@G :argv.1 .
+    (ptr~7,~1I
+     (ptr@N
+      (i~4,~1 8
+       (importc "char")))))
+   (param@M :env.0 .
+    (ptr~D,~1I
+     (ptr@N
+      (i~4,~1 8
+       (importc "char"))))))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas@v
+   (importc "execve")
+   (header "<unistd.h>")
+   (smry~v
+    (param 0 0)
+    (param 1 1)
+    (param 2 2)))
+  (stmts .))
+ (proc@4,8h :waitpid.0.@5
+  (params@D
+   (param@1 :pid.0 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "pid_t")
+     (header "<sys/types.h>"@g,7I,../nimony/lib/std/posix/posix.nim)))
+   (param@B :status.0 .
+    (ptr@8
+     (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+      (importc "int"))))
+   (param@T :options.0 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int"))))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "pid_t")
+   (header "<sys/types.h>"@g,7I,../nimony/lib/std/posix/posix.nim))
+  (pragmas@10
+   (importc "waitpid")
+   (header "<sys/wait.h>")
+   (smry~10
+    (param 0 0)
+    (param 1 1)
+    (param 2 2)))
+  (stmts .))
+ (proc@4,8j :kill.0.@5
+  (params@A
+   (param@1 :pid.1 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "pid_t")
+     (header "<sys/types.h>"@g,7I,../nimony/lib/std/posix/posix.nim)))
+   (param@B :sig.0 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int"))))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas@c
+   (importc "kill")
+   (header "<signal.h>")
+   (smry~c
+    (param 0 0)
+    (param 1 1)))
+  (stmts .))
+ (proc@4,8l :setpgid.0.@5
+  (params@D
+   (param@1 :pid.2 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "pid_t")
+     (header "<sys/types.h>"@g,7I,../nimony/lib/std/posix/posix.nim)))
+   (param@6 :pgid.0 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "pid_t")
+     (header "<sys/types.h>"@g,7I,../nimony/lib/std/posix/posix.nim))))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas@a
+   (importc "setpgid")
+   (header "<unistd.h>")
+   (smry~a
+    (param 0 0)
+    (param 1 1)))
+  (stmts .))
+ (proc@4,8n :exitnow.0.@5
+  (params@D
+   (param@1 :status.1 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int")))).
+  (pragmas@S
+   (importc "_exit")
+   (header "<unistd.h>")
+   (smry~S
+    (param 0 0)))
+  (stmts .))
+ (proc@4,8p :read.0.@5
+  (params@A
+   (param@1 :fildes.0 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int")))
+   (param@F :buf.0 .
+    (ptr@5
+     (void)))
+   (param@T :nbyte.0 .
+    (i@7 64)))
+  (i@g 64)
+  (pragmas@u
+   (importc "read")
+   (header "<unistd.h>")
+   (smry~u
+    (param 0 0)
+    (param 1 1)
+    (param 2 2)))
+  (stmts .))
+ (proc@4,8r :write.0.@5
+  (params@B
+   (param@1 :fildes.1 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int")))
+   (param@F :buf.1 .
+    (ptr@5
+     (void)))
+   (param@T :nbyte.1 .
+    (i@7 64)))
+  (i@g 64)
+  (pragmas@v
+   (importc "write")
+   (header "<unistd.h>")
+   (smry~v
+    (param 0 0)
+    (param 1 1)
+    (param 2 2)))
+  (stmts .))
+ (type@1D,9A :Sigset.0.~15
+  (pragmas~x
+   (importc "sigset_t")
+   (header "<signal.h>"))
+  (object@2 .))
+ (type@l,9C :Tposix_spawnattr.0.~d,~1
+  (pragmas~L,~1
+   (importc "posix_spawnattr_t")
+   (header "<spawn.h>"))
+  (object@2 .))
+ (type@l,9E :Tposix_spawn_file_actions.0.~d,~1
+  (pragmas~C,~1
+   (importc "posix_spawn_file_actions_t")
+   (header "<spawn.h>"))
+  (object@2 .))
+ (proc@4,9H :posix_spawn.0.@5
+  (params@H
+   (param@1 :pid.3 .
+    (ptr@5
+     (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+      (importc "pid_t")
+      (header "<sys/types.h>"@g,7I,../nimony/lib/std/posix/posix.nim))))
+   (param@F :path.6 .
+    (ptr@6
+     (c 8)))
+   (param@1,1 :file_actions.0 .
+    (ptr@E Tposix_spawn_file_actions.0.@4))
+   (param@1,2 :attrp.0 .
+    (ptr@7 Tposix_spawnattr.0.@4))
+   (param@1,3 :argv.2 .
+    (ptr@3,~1x
+     (ptr@N
+      (i~4,~1 8
+       (importc "char")))))
+   (param@7,3 :envp.0 .
+    (ptr~3,~1x
+     (ptr@N
+      (i~4,~1 8
+       (importc "char"))))))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas@m,3
+   (importc "posix_spawn")
+   (header "<spawn.h>")
+   (smry~m,~3
+    (param 0 0)
+    (param 1 1)
+    (param 2 2)
+    (param 3 3)
+    (param 4 4)
+    (param 5 5)))
+  (stmts .))
+ (proc@4,9M :posix_spawnp.0.@5
+  (params@I
+   (param@1 :pid.4 .
+    (ptr@5
+     (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+      (importc "pid_t")
+      (header "<sys/types.h>"@g,7I,../nimony/lib/std/posix/posix.nim))))
+   (param@F :file.1 .
+    (ptr@6
+     (c 8)))
+   (param@1,1 :file_actions.1 .
+    (ptr@E Tposix_spawn_file_actions.0.@4))
+   (param@1,2 :attrp.1 .
+    (ptr@7 Tposix_spawnattr.0.@4))
+   (param@1,3 :argv.3 .
+    (ptr@2,~22
+     (ptr@N
+      (i~4,~1 8
+       (importc "char")))))
+   (param@7,3 :envp.1 .
+    (ptr~4,~22
+     (ptr@N
+      (i~4,~1 8
+       (importc "char"))))))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas@n,3
+   (importc "posix_spawnp")
+   (header "<spawn.h>")
+   (smry~n,~3
+    (param 0 0)
+    (param 1 1)
+    (param 2 2)
+    (param 3 3)
+    (param 4 4)
+    (param 5 5)))
+  (stmts .))
+ (proc@4,9R :posix_spawn_file_actions_init.0.@5
+  (params@Z
+   (param~V,1 :fops.0 .
+    (ptr@6 Tposix_spawn_file_actions.0.@4)))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas@l,1
+   (importc "posix_spawn_file_actions_init")
+   (header "<spawn.h>")
+   (smry~l,~1
+    (param 0 0)))
+  (stmts .))
+ (proc@4,9U :posix_spawn_file_actions_destroy.0.@5
+  (params@c
+   (param~Y,1 :fops.1 .
+    (ptr@6 Tposix_spawn_file_actions.0.@4)))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas@l,1
+   (importc "posix_spawn_file_actions_destroy")
+   (header "<spawn.h>")
+   (smry~l,~1
+    (param 0 0)))
+  (stmts .))
+ (proc@4,9X :posix_spawn_file_actions_addclose.0.@5
+  (params@d
+   (param~Z,1 :fops.2 .
+    (ptr@6 Tposix_spawn_file_actions.0.@4))
+   (param@2,1 :fildes.2 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int"))))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas@z,1
+   (importc "posix_spawn_file_actions_addclose")
+   (header "<spawn.h>")
+   (smry~z,~1
+    (param 0 0)
+    (param 1 1)))
+  (stmts .))
+ (proc@4,9a :posix_spawn_file_actions_adddup2.0.@5
+  (params@c
+   (param~Y,1 :fops.3 .
+    (ptr@6 Tposix_spawn_file_actions.0.@4))
+   (param@3,1 :fildes.3 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int")))
+   (param@B,1 :newfildes.0 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int"))))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas@1A,1
+   (importc "posix_spawn_file_actions_adddup2")
+   (header "<spawn.h>")
+   (smry~1A,~1
+    (param 0 0)
+    (param 1 1)
+    (param 2 2)))
+  (stmts .))
+ (proc@4,9d :posix_spawn_file_actions_addchdir_np.0.@5
+  (params@g
+   (param~c,1 :fops.4 .
+    (ptr@6 Tposix_spawn_file_actions.0.@4))
+   (param~1,1 :path.7 .
+    (ptr@6
+     (c 8))))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas@10,1
+   (importc "posix_spawn_file_actions_addchdir_np")
+   (header "<spawn.h>")
+   (smry~10,~1
+    (param 0 0)
+    (param 1 1)))
+  (stmts .))
+ (proc@4,9g :posix_spawnattr_init.0.@5
+  (params@Q
+   (param@1 :attr.0 .
+    (ptr@6 Tposix_spawnattr.0.@4)))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas@z
+   (importc "posix_spawnattr_init")
+   (header "<spawn.h>")
+   (smry~z
+    (param 0 0)))
+  (stmts .))
+ (proc@4,9i :posix_spawnattr_destroy.0.@5
+  (params@T
+   (param@1 :attr.1 .
+    (ptr@6 Tposix_spawnattr.0.@4)))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas@12
+   (importc "posix_spawnattr_destroy")
+   (header "<spawn.h>")
+   (smry~12
+    (param 0 0)))
+  (stmts .))
+ (proc@4,9k :posix_spawnattr_setflags.0.@5
+  (params@U
+   (param@1 :attr.2 .
+    (ptr@6 Tposix_spawnattr.0.@4))
+   (param@1,1 :flags.0 .
+    (i@f,c,../nimony/lib/std/system/ctypes.nim 16
+     (importc "short"))))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas@q,1
+   (importc "posix_spawnattr_setflags")
+   (header "<spawn.h>")
+   (smry~q,~1
+    (param 0 0)
+    (param 1 1)))
+  (stmts .))
+ (proc@4,9n :posix_spawnattr_setpgroup.0.@5
+  (params@V
+   (param@1 :attr.3 .
+    (ptr@6 Tposix_spawnattr.0.@4))
+   (param@1,1 :pgroup.0 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "pid_t")
+     (header "<sys/types.h>"@g,7I,../nimony/lib/std/posix/posix.nim))))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas@p,1
+   (importc "posix_spawnattr_setpgroup")
+   (header "<spawn.h>")
+   (smry~p,~1
+    (param 0 0)
+    (param 1 1)))
+  (stmts .))
+ (proc@4,9q :posix_spawnattr_setsigmask.0.@5
+  (params@W
+   (param@1 :attr.4 .
+    (ptr@6 Tposix_spawnattr.0.@4))
+   (param@1,1 :mask.0 .
+    (ptr@6 Sigset.0.@4)))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas@v,1
+   (importc "posix_spawnattr_setsigmask")
+   (header "<spawn.h>")
+   (smry~v,~1
+    (param 0 0)
+    (param 1 1)))
+  (stmts .))
+ (proc@4,9t :posix_spawnattr_setsigdefault.0.@5
+  (params@Z
+   (param@1 :attr.5 .
+    (ptr@6 Tposix_spawnattr.0.@4))
+   (param@1,1 :mask.1 .
+    (ptr@6 Sigset.0.@4)))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas@y,1
+   (importc "posix_spawnattr_setsigdefault")
+   (header "<spawn.h>")
+   (smry~y,~1
+    (param 0 0)
+    (param 1 1)))
+  (stmts .))
+ (proc@4,9w :sigemptyset.0.@5
+  (params@H
+   (param@1 :mask.2 .
+    (ptr@6 Sigset.0.@4)))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas@g
+   (importc "sigemptyset")
+   (header "<signal.h>")
+   (smry~g
+    (param 0 0)))
+  (stmts .))
+ (proc@4,9y :sigfillset.0.@5
+  (params@G
+   (param@1 :mask.3 .
+    (ptr@6 Sigset.0.@4)))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas@f
+   (importc "sigfillset")
+   (header "<signal.h>")
+   (smry~f
+    (param 0 0)))
+  (stmts .))
+ (proc@4,A0 :sigaddset.0.@5
+  (params@F
+   (param@1 :mask.4 .
+    (ptr@6 Sigset.0.@4))
+   (param@J :sig.1 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int"))))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas@p
+   (importc "sigaddset")
+   (header "<signal.h>")
+   (smry~p
+    (param 0 0)
+    (param 1 1)))
+  (stmts .))
+ (gvar@N,A4 :posix_environ.0.~F
+  (pragmas
+   (importc "environ")
+   (header "<unistd.h>"))
+  (ptr~H,1
+   (ptr@J
+    (c 8))).)
+ (proc@4,AB :strerror.0.@5
+  (params@E
+   (param@1 :errnum.0 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int"))))
+  (ptr@G
+   (c 8))
+  (pragmas@c
+   (importc "strerror")
+   (header "<string.h>")
+   (smry~c
+    (param 0 0)))
+  (stmts .))
+ (proc@4,AH :nanosleep.0.@5
+  (params@F
+   (param@1 :req.0 .
+    (ptr@5 Timespec.0.@4))
+   (param@K :rem.0 .
+    (ptr@5 Timespec.0.@4)))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas@y
+   (importc "nanosleep")
+   (header "<time.h>")
+   (smry~y
+    (param 0 0)
+    (param 1 1)))
+  (stmts .))
+ (type@M,E :`t.0.IAiS32AimportcSUintUZZSEAnoconvZAfalseZAR31. .
+  (proctype .
+   (params
+    (param@1 :a.0 .
+     (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+      (importc "int")))).
+   (pragmas@A
+    (noconv))))
+ (type@L,y,../nimony/lib/std/posix/posix_other.nim :`t.0.IAarrayAcS8ZS256. .
+  (array
+   (c@9 8)256))
+ (gvar :`iniGuard.0. .
+  (bool).)
+ (proc :`ini.0.
+  (params).
+  (pragmas
+   (smry callsUnknown))
+  (stmts
+   (if
+    (elif `iniGuard.0.
+     (stmts
+      (ret .))))
+   (asgn `iniGuard.0.
+    (true))
+   (call `ini.0.sysvq0asl))))(.index@,1,../nimony/lib/std/posix/posix.nim
+ (x AIO_ALLDONE.0. 81)
+ (x AIO_CANCELED.0. 207)
+ (x AIO_NOTCANCELED.0. 209)
+ (x LIO_NOP.0. 215)
+ (x LIO_NOWAIT.0. 199)
+ (x LIO_READ.0. 205)
+ (x LIO_WAIT.0. 201)
+ (x LIO_WRITE.0. 201)
+ (x RTLD_LAZY.0. 203)
+ (x RTLD_NOW.0. 205)
+ (x RTLD_GLOBAL.0. 203)
+ (x RTLD_LOCAL.0. 209)
+ (x E2BIG.0. 207)
+ (x EACCES.0. 197)
+ (x EADDRINUSE.0. 199)
+ (x EADDRNOTAVAIL.0. 207)
+ (x EAFNOSUPPORT.0. 213)
+ (x EAGAIN.0. 211)
+ (x EALREADY.0. 199)
+ (x EBADF.0. 203)
+ (x EBADMSG.0. 197)
+ (x EBUSY.0. 201)
+ (x ECANCELED.0. 197)
+ (x ECHILD.0. 205)
+ (x ECONNABORTED.0. 199)
+ (x ECONNREFUSED.0. 211)
+ (x ECONNRESET.0. 211)
+ (x EDEADLK.0. 207)
+ (x EDESTADDRREQ.0. 201)
+ (x EDOM.0. 211)
+ (x EDQUOT.0. 195)
+ (x EEXIST.0. 199)
+ (x EFAULT.0. 199)
+ (x EFBIG.0. 199)
+ (x EHOSTUNREACH.0. 197)
+ (x EIDRM.0. 211)
+ (x EILSEQ.0. 197)
+ (x EINPROGRESS.0. 199)
+ (h EINTR.0. 209)
+ (h EINVAL.0. 160)
+ (x EIO.0. 162)
+ (x EISCONN.0. 193)
+ (x EISDIR.0. 201)
+ (x ELOOP.0. 199)
+ (x EMFILE.0. 197)
+ (x EMLINK.0. 199)
+ (x EMSGSIZE.0. 199)
+ (x EMULTIHOP.0. 203)
+ (x ENAMETOOLONG.0. 205)
+ (x ENETDOWN.0. 211)
+ (x ENETRESET.0. 203)
+ (x ENETUNREACH.0. 206)
+ (x ENFILE.0. 210)
+ (x ENOBUFS.0. 200)
+ (x ENODATA.0. 202)
+ (x ENODEV.0. 202)
+ (x ENOENT.0. 200)
+ (x ENOEXEC.0. 200)
+ (x ENOLCK.0. 202)
+ (x ENOLINK.0. 200)
+ (x ENOMEM.0. 202)
+ (x ENOMSG.0. 200)
+ (x ENOPROTOOPT.0. 200)
+ (x ENOSPC.0. 210)
+ (x ENOSR.0. 200)
+ (x ENOSTR.0. 198)
+ (x ENOSYS.0. 200)
+ (x ENOTCONN.0. 200)
+ (x ENOTDIR.0. 204)
+ (x ENOTEMPTY.0. 202)
+ (x ENOTSOCK.0. 206)
+ (x ENOTSUP.0. 204)
+ (x ENOTTY.0. 202)
+ (x ENXIO.0. 200)
+ (h EOPNOTSUPP.0. 198)
+ (x EOVERFLOW.0. 167)
+ (x EPERM.0. 206)
+ (x EPIPE.0. 198)
+ (x EPROTO.0. 198)
+ (x EPROTONOSUPPORT.0. 200)
+ (x EPROTOTYPE.0. 218)
+ (x ERANGE.0. 208)
+ (x EROFS.0. 200)
+ (x ESPIPE.0. 198)
+ (x ESRCH.0. 200)
+ (x ESTALE.0. 198)
+ (x ETIME.0. 200)
+ (x ETIMEDOUT.0. 198)
+ (x ETXTBSY.0. 206)
+ (x EWOULDBLOCK.0. 202)
+ (x EXDEV.0. 210)
+ (x F_DUPFD.0. 198)
+ (x F_DUPFD_CLOEXEC.0. 202)
+ (x F_GETFD.0. 210)
+ (x F_SETFD.0. 202)
+ (x F_GETFL.0. 202)
+ (x F_SETFL.0. 202)
+ (x F_GETLK.0. 202)
+ (x F_SETLK.0. 202)
+ (x F_SETLKW.0. 202)
+ (x F_GETOWN.0. 204)
+ (x F_SETOWN.0. 204)
+ (x FD_CLOEXEC.0. 204)
+ (x F_RDLCK.0. 208)
+ (x F_UNLCK.0. 202)
+ (x F_WRLCK.0. 202)
+ (h O_CREAT.0. 202)
+ (x O_EXCL.0. 164)
+ (x O_NOCTTY.0. 200)
+ (h O_TRUNC.0. 204)
+ (x O_APPEND.0. 165)
+ (x O_DSYNC.0. 204)
+ (x O_NONBLOCK.0. 202)
+ (x O_RSYNC.0. 208)
+ (x O_SYNC.0. 202)
+ (x O_ACCMODE.0. 200)
+ (h O_RDONLY.0. 206)
+ (h O_RDWR.0. 164)
+ (h O_WRONLY.0. 162)
+ (h O_CLOEXEC.0. 164)
+ (x POSIX_FADV_NORMAL.0. 170)
+ (x POSIX_FADV_SEQUENTIAL.0. 222)
+ (x POSIX_FADV_RANDOM.0. 230)
+ (x POSIX_FADV_WILLNEED.0. 222)
+ (x POSIX_FADV_DONTNEED.0. 226)
+ (x POSIX_FADV_NOREUSE.0. 226)
+ (x FE_DIVBYZERO.0. 224)
+ (x FE_INEXACT.0. 211)
+ (x FE_INVALID.0. 207)
+ (x FE_OVERFLOW.0. 207)
+ (x FE_UNDERFLOW.0. 209)
+ (x FE_ALL_EXCEPT.0. 211)
+ (x FE_DOWNWARD.0. 213)
+ (x FE_TONEAREST.0. 209)
+ (x FE_TOWARDZERO.0. 211)
+ (x FE_UPWARD.0. 213)
+ (x FE_DFL_ENV.0. 205)
+ (x MM_HARD.0. 207)
+ (x MM_SOFT.0. 203)
+ (x MM_FIRM.0. 203)
+ (x MM_APPL.0. 203)
+ (x MM_UTIL.0. 203)
+ (x MM_OPSYS.0. 203)
+ (x MM_RECOVER.0. 205)
+ (x MM_NRECOV.0. 209)
+ (x MM_HALT.0. 207)
+ (x MM_ERROR.0. 203)
+ (x MM_WARNING.0. 205)
+ (x MM_INFO.0. 209)
+ (x MM_NOSEV.0. 203)
+ (x MM_PRINT.0. 205)
+ (x MM_CONSOLE.0. 205)
+ (x MM_OK.0. 209)
+ (x MM_NOTOK.0. 199)
+ (x MM_NOMSG.0. 205)
+ (x MM_NOCON.0. 205)
+ (x FNM_NOMATCH.0. 205)
+ (x FNM_PATHNAME.0. 212)
+ (x FNM_PERIOD.0. 214)
+ (x FNM_NOESCAPE.0. 210)
+ (x FNM_NOSYS.0. 214)
+ (x FTW_F.0. 208)
+ (x FTW_D.0. 196)
+ (x FTW_DNR.0. 196)
+ (x FTW_DP.0. 200)
+ (x FTW_NS.0. 198)
+ (x FTW_SL.0. 198)
+ (x FTW_SLN.0. 198)
+ (x FTW_PHYS.0. 200)
+ (x FTW_MOUNT.0. 202)
+ (x FTW_DEPTH.0. 204)
+ (x FTW_CHDIR.0. 204)
+ (x GLOB_APPEND.0. 204)
+ (x GLOB_DOOFFS.0. 209)
+ (x GLOB_ERR.0. 209)
+ (x GLOB_MARK.0. 203)
+ (x GLOB_NOCHECK.0. 205)
+ (x GLOB_NOESCAPE.0. 211)
+ (x GLOB_NOSORT.0. 213)
+ (x GLOB_ABORTED.0. 209)
+ (x GLOB_NOMATCH.0. 211)
+ (x GLOB_NOSPACE.0. 211)
+ (x GLOB_NOSYS.0. 211)
+ (x CODESET.0. 207)
+ (x D_T_FMT.0. 205)
+ (x D_FMT.0. 205)
+ (x T_FMT.0. 201)
+ (x T_FMT_AMPM.0. 201)
+ (x AM_STR.0. 211)
+ (x PM_STR.0. 203)
+ (x DAY_1.0. 203)
+ (x DAY_2.0. 201)
+ (x DAY_3.0. 201)
+ (x DAY_4.0. 201)
+ (x DAY_5.0. 201)
+ (x DAY_6.0. 201)
+ (x DAY_7.0. 201)
+ (x ABDAY_1.0. 201)
+ (x ABDAY_2.0. 205)
+ (x ABDAY_3.0. 205)
+ (x ABDAY_4.0. 205)
+ (x ABDAY_5.0. 205)
+ (x ABDAY_6.0. 205)
+ (x ABDAY_7.0. 205)
+ (x MON_1.0. 205)
+ (x MON_2.0. 201)
+ (x MON_3.0. 201)
+ (x MON_4.0. 201)
+ (x MON_5.0. 201)
+ (x MON_6.0. 201)
+ (x MON_7.0. 201)
+ (x MON_8.0. 201)
+ (x MON_9.0. 201)
+ (x MON_10.0. 201)
+ (x MON_11.0. 203)
+ (x MON_12.0. 203)
+ (x ABMON_1.0. 203)
+ (x ABMON_2.0. 205)
+ (x ABMON_3.0. 205)
+ (x ABMON_4.0. 205)
+ (x ABMON_5.0. 205)
+ (x ABMON_6.0. 205)
+ (x ABMON_7.0. 205)
+ (x ABMON_8.0. 205)
+ (x ABMON_9.0. 205)
+ (x ABMON_10.0. 205)
+ (x ABMON_11.0. 207)
+ (x ABMON_12.0. 207)
+ (x ERA.0. 207)
+ (x ERA_D_FMT.0. 197)
+ (x ERA_D_T_FMT.0. 209)
+ (x ERA_T_FMT.0. 213)
+ (x ALT_DIGITS.0. 209)
+ (x RADIXCHAR.0. 211)
+ (x THOUSEP.0. 209)
+ (x YESEXPR.0. 205)
+ (x NOEXPR.0. 205)
+ (x CRNCYSTR.0. 203)
+ (x LC_ALL.0. 207)
+ (x LC_COLLATE.0. 201)
+ (x LC_CTYPE.0. 209)
+ (x LC_MESSAGES.0. 205)
+ (x LC_MONETARY.0. 211)
+ (x LC_NUMERIC.0. 211)
+ (x LC_TIME.0. 209)
+ (x IPPORT_RESERVED.0. 203)
+ (x HOST_NOT_FOUND.0. 218)
+ (x NO_DATA.0. 216)
+ (x NO_RECOVERY.0. 202)
+ (x TRY_AGAIN.0. 210)
+ (x AI_PASSIVE.0. 206)
+ (x AI_CANONNAME.0. 208)
+ (x AI_NUMERICHOST.0. 212)
+ (x AI_NUMERICSERV.0. 216)
+ (x AI_V4MAPPED.0. 216)
+ (x AI_ALL.0. 210)
+ (x AI_ADDRCONFIG.0. 200)
+ (x NI_NOFQDN.0. 214)
+ (x NI_NUMERICHOST.0. 206)
+ (x NI_NAMEREQD.0. 216)
+ (x NI_NUMERICSERV.0. 210)
+ (x NI_NUMERICSCOPE.0. 216)
+ (x NI_DGRAM.0. 218)
+ (x EAI_AGAIN.0. 204)
+ (x EAI_BADFLAGS.0. 206)
+ (x EAI_FAIL.0. 212)
+ (x EAI_FAMILY.0. 204)
+ (x EAI_MEMORY.0. 208)
+ (x EAI_NONAME.0. 208)
+ (x EAI_SERVICE.0. 208)
+ (x EAI_SOCKTYPE.0. 210)
+ (x EAI_SYSTEM.0. 212)
+ (x EAI_OVERFLOW.0. 208)
+ (x IF_NAMESIZE.0. 212)
+ (x IPPROTO_IP.0. 211)
+ (x IPPROTO_IPV6.0. 213)
+ (x IPPROTO_ICMP.0. 217)
+ (x IPPROTO_ICMPV6.0. 217)
+ (x IPPROTO_RAW.0. 221)
+ (x IPPROTO_TCP.0. 215)
+ (x IPPROTO_UDP.0. 215)
+ (x INADDR_ANY.0. 215)
+ (x INADDR_LOOPBACK.0. 192)
+ (x INADDR_BROADCAST.0. 202)
+ (x INET_ADDRSTRLEN.0. 204)
+ (x INET6_ADDRSTRLEN.0. 223)
+ (x IPV6_JOIN_GROUP.0. 225)
+ (x IPV6_LEAVE_GROUP.0. 223)
+ (x IPV6_MULTICAST_HOPS.0. 225)
+ (x IPV6_MULTICAST_IF.0. 231)
+ (x IPV6_MULTICAST_LOOP.0. 227)
+ (x IPV6_UNICAST_HOPS.0. 231)
+ (x IPV6_V6ONLY.0. 227)
+ (x TCP_NODELAY.0. 215)
+ (x NL_SETD.0. 216)
+ (x NL_CAT_LOCALE.0. 205)
+ (x POLLIN.0. 217)
+ (x POLLRDNORM.0. 201)
+ (x POLLRDBAND.0. 209)
+ (x POLLPRI.0. 209)
+ (x POLLOUT.0. 203)
+ (x POLLWRNORM.0. 203)
+ (x POLLWRBAND.0. 209)
+ (x POLLERR.0. 209)
+ (x POLLHUP.0. 203)
+ (x POLLNVAL.0. 203)
+ (x PTHREAD_BARRIER_SERIAL_THREAD.0. 205)
+ (x PTHREAD_CANCEL_ASYNCHRONOUS.0. 248)
+ (x PTHREAD_CANCEL_ENABLE.0. 244)
+ (x PTHREAD_CANCEL_DEFERRED.0. 232)
+ (x PTHREAD_CANCEL_DISABLE.0. 236)
+ (x PTHREAD_CREATE_DETACHED.0. 234)
+ (x PTHREAD_CREATE_JOINABLE.0. 236)
+ (x PTHREAD_EXPLICIT_SCHED.0. 236)
+ (x PTHREAD_INHERIT_SCHED.0. 234)
+ (x PTHREAD_MUTEX_DEFAULT.0. 232)
+ (x PTHREAD_MUTEX_ERRORCHECK.0. 232)
+ (x PTHREAD_MUTEX_NORMAL.0. 238)
+ (x PTHREAD_MUTEX_RECURSIVE.0. 230)
+ (x PTHREAD_PRIO_INHERIT.0. 236)
+ (x PTHREAD_PRIO_NONE.0. 230)
+ (x PTHREAD_PRIO_PROTECT.0. 224)
+ (x PTHREAD_PROCESS_SHARED.0. 230)
+ (x PTHREAD_PROCESS_PRIVATE.0. 234)
+ (x PTHREAD_SCOPE_PROCESS.0. 236)
+ (x PTHREAD_SCOPE_SYSTEM.0. 232)
+ (x SCHED_FIFO.0. 230)
+ (x SCHED_RR.0. 208)
+ (x SCHED_SPORADIC.0. 204)
+ (x SCHED_OTHER.0. 216)
+ (x SEM_FAILED.0. 210)
+ (x SIGEV_NONE.0. 164)
+ (x SIGEV_SIGNAL.0. 209)
+ (x SIGEV_THREAD.0. 213)
+ (x SIGABRT.0. 213)
+ (x SIGALRM.0. 203)
+ (x SIGBUS.0. 203)
+ (x SIGCHLD.0. 201)
+ (h SIGCONT.0. 203)
+ (x SIGFPE.0. 164)
+ (x SIGHUP.0. 201)
+ (x SIGILL.0. 201)
+ (x SIGINT.0. 201)
+ (h SIGKILL.0. 201)
+ (x SIGPIPE.0. 163)
+ (x SIGQUIT.0. 203)
+ (x SIGSEGV.0. 203)
+ (h SIGSTOP.0. 203)
+ (h SIGTERM.0. 164)
+ (x SIGTSTP.0. 164)
+ (x SIGTTIN.0. 203)
+ (x SIGTTOU.0. 203)
+ (x SIGUSR1.0. 203)
+ (x SIGUSR2.0. 203)
+ (x SIGPOLL.0. 203)
+ (x SIGPROF.0. 203)
+ (x SIGSYS.0. 203)
+ (x SIGTRAP.0. 201)
+ (x SIGURG.0. 203)
+ (x SIGVTALRM.0. 201)
+ (x SIGXCPU.0. 207)
+ (x SIGXFSZ.0. 203)
+ (x SA_NOCLDSTOP.0. 203)
+ (x SIG_BLOCK.0. 213)
+ (x SIG_UNBLOCK.0. 207)
+ (x SIG_SETMASK.0. 211)
+ (x SA_ONSTACK.0. 211)
+ (x SA_RESETHAND.0. 209)
+ (x SA_RESTART.0. 213)
+ (x SA_SIGINFO.0. 209)
+ (x SA_NOCLDWAIT.0. 209)
+ (x SA_NODEFER.0. 213)
+ (x SS_ONSTACK.0. 209)
+ (x SS_DISABLE.0. 209)
+ (x MINSIGSTKSZ.0. 209)
+ (x SIGSTKSZ.0. 211)
+ (x SIG_HOLD.0. 205)
+ (x SIG_DFL.0. 225)
+ (x SIG_ERR.0. 223)
+ (x SIG_IGN.0. 223)
+ (x IPC_CREAT.0. 223)
+ (x IPC_EXCL.0. 208)
+ (x IPC_NOWAIT.0. 206)
+ (x IPC_PRIVATE.0. 210)
+ (x IPC_RMID.0. 212)
+ (x IPC_SET.0. 206)
+ (x IPC_STAT.0. 204)
+ (h PROT_READ.0. 206)
+ (h PROT_WRITE.0. 165)
+ (x PROT_EXEC.0. 166)
+ (x PROT_NONE.0. 209)
+ (x MAP_ANONYMOUS.0. 209)
+ (x MAP_FIXED_NOREPLACE.0. 217)
+ (x MAP_NORESERVE.0. 229)
+ (h MAP_SHARED.0. 217)
+ (h MAP_PRIVATE.0. 166)
+ (x MAP_FIXED.0. 167)
+ (x MS_ASYNC.0. 209)
+ (x MS_SYNC.0. 207)
+ (x MS_INVALIDATE.0. 205)
+ (x MCL_CURRENT.0. 217)
+ (x MCL_FUTURE.0. 213)
+ (h MAP_FAILED.0. 211)
+ (x POSIX_MADV_NORMAL.0. 178)
+ (x POSIX_MADV_SEQUENTIAL.0. 225)
+ (x POSIX_MADV_RANDOM.0. 233)
+ (x POSIX_MADV_WILLNEED.0. 225)
+ (x POSIX_MADV_DONTNEED.0. 229)
+ (x POSIX_TYPED_MEM_ALLOCATE.0. 229)
+ (x POSIX_TYPED_MEM_ALLOCATE_CONTIG.0. 239)
+ (x POSIX_TYPED_MEM_MAP_ALLOCATABLE.0. 253)
+ (x RLIMIT_NOFILE.0. 253)
+ (x RLIMIT_STACK.0. 221)
+ (x FD_SETSIZE.0. 219)
+ (x MSG_CTRUNC.0. 213)
+ (x MSG_DONTROUTE.0. 213)
+ (x MSG_EOR.0. 219)
+ (x MSG_OOB.0. 207)
+ (x SCM_RIGHTS.0. 207)
+ (x SO_ACCEPTCONN.0. 213)
+ (x SO_BINDTODEVICE.0. 219)
+ (x SO_BROADCAST.0. 223)
+ (x SO_DEBUG.0. 217)
+ (x SO_DONTROUTE.0. 209)
+ (x SO_ERROR.0. 217)
+ (x SO_KEEPALIVE.0. 209)
+ (x SO_LINGER.0. 217)
+ (x SO_OOBINLINE.0. 211)
+ (x SO_RCVBUF.0. 217)
+ (x SO_RCVLOWAT.0. 211)
+ (x SO_RCVTIMEO.0. 215)
+ (x SO_REUSEADDR.0. 215)
+ (x SO_SNDBUF.0. 217)
+ (x SO_SNDLOWAT.0. 211)
+ (x SO_SNDTIMEO.0. 215)
+ (x SO_TYPE.0. 215)
+ (x SOCK_DGRAM.0. 207)
+ (x SOCK_RAW.0. 213)
+ (x SOCK_SEQPACKET.0. 209)
+ (x SOMAXCONN.0. 221)
+ (x SOCK_STREAM.0. 211)
+ (x SOL_SOCKET.0. 215)
+ (x MSG_PEEK.0. 213)
+ (x MSG_TRUNC.0. 209)
+ (x MSG_WAITALL.0. 211)
+ (x AF_INET.0. 215)
+ (x AF_INET6.0. 207)
+ (x AF_UNIX.0. 209)
+ (x AF_UNSPEC.0. 207)
+ (x SHUT_RD.0. 211)
+ (x SHUT_RDWR.0. 207)
+ (x SHUT_WR.0. 211)
+ (x S_IFBLK.0. 207)
+ (x S_IFCHR.0. 205)
+ (x S_IFDIR.0. 205)
+ (x S_IFIFO.0. 205)
+ (x S_IFLNK.0. 205)
+ (x S_IFMT.0. 205)
+ (x S_IFREG.0. 203)
+ (x S_IFSOCK.0. 205)
+ (x S_IRGRP.0. 207)
+ (x S_IROTH.0. 205)
+ (h S_IRUSR.0. 205)
+ (x S_IRWXG.0. 165)
+ (x S_IRWXO.0. 205)
+ (x S_IRWXU.0. 205)
+ (x S_ISGID.0. 205)
+ (x S_ISUID.0. 205)
+ (x S_ISVTX.0. 205)
+ (x S_IWGRP.0. 205)
+ (x S_IWOTH.0. 205)
+ (h S_IWUSR.0. 205)
+ (x S_IXGRP.0. 165)
+ (x S_IXOTH.0. 205)
+ (x S_IXUSR.0. 205)
+ (x ST_RDONLY.0. 205)
+ (x ST_NOSUID.0. 212)
+ (h WNOHANG.0. 212)
+ (x WUNTRACED.0. 163)
+ (x WEXITED.0. 209)
+ (x WSTOPPED.0. 205)
+ (h WCONTINUED.0. 207)
+ (x WNOWAIT.0. 166)
+ (x P_ALL.0. 205)
+ (x P_PID.0. 201)
+ (x P_PGID.0. 201)
+ (x POSIX_SPAWN_RESETIDS.0. 203)
+ (x POSIX_SPAWN_SETPGROUP.0. 228)
+ (x POSIX_SPAWN_SETSCHEDPARAM.0. 230)
+ (x POSIX_SPAWN_SETSCHEDULER.0. 238)
+ (x POSIX_SPAWN_SETSIGDEF.0. 236)
+ (x POSIX_SPAWN_SETSIGMASK.0. 230)
+ (x IOFBF.0. 232)
+ (x IONBF.0. 199)
+ (x CLOCKS_PER_SEC.0. 199)
+ (x CLOCK_PROCESS_CPUTIME_ID.0. 216)
+ (x CLOCK_THREAD_CPUTIME_ID.0. 235)
+ (h CLOCK_REALTIME.0. 233)
+ (h CLOCK_MONOTONIC.0. 170)
+ (h TIMER_ABSTIME.0. 171)
+ (x POSIX_ASYNC_IO.0. 169)
+ (x POSIX_PRIO_IO.0. 218)
+ (x POSIX_SYNC_IO.0. 216)
+ (x F_OK.0. 216)
+ (x R_OK.0. 197)
+ (x W_OK.0. 197)
+ (x X_OK.0. 197)
+ (x CS_PATH.0. 197)
+ (x CS_POSIX_V6_ILP32_OFF32_CFLAGS.0. 204)
+ (x CS_POSIX_V6_ILP32_OFF32_LDFLAGS.0. 250)
+ (x CS_POSIX_V6_ILP32_OFF32_LIBS.0. 252)
+ (x CS_POSIX_V6_ILP32_OFFBIG_CFLAGS.0. 246)
+ (x CS_POSIX_V6_ILP32_OFFBIG_LDFLAGS.0. 252)
+ (x CS_POSIX_V6_ILP32_OFFBIG_LIBS.0. 254)
+ (x CS_POSIX_V6_LP64_OFF64_CFLAGS.0. 248)
+ (x CS_POSIX_V6_LP64_OFF64_LDFLAGS.0. 248)
+ (x CS_POSIX_V6_LP64_OFF64_LIBS.0. 250)
+ (x CS_POSIX_V6_LPBIG_OFFBIG_CFLAGS.0. 244)
+ (x CS_POSIX_V6_LPBIG_OFFBIG_LDFLAGS.0. 252)
+ (x CS_POSIX_V6_LPBIG_OFFBIG_LIBS.0. 254)
+ (x CS_POSIX_V6_WIDTH_RESTRICTED_ENVS.0. 248)
+ (x F_LOCK.0. 256)
+ (x F_TEST.0. 201)
+ (x F_TLOCK.0. 201)
+ (x F_ULOCK.0. 203)
+ (x PC_2_SYMLINKS.0. 203)
+ (x PC_ALLOC_SIZE_MIN.0. 216)
+ (x PC_ASYNC_IO.0. 224)
+ (x PC_CHOWN_RESTRICTED.0. 212)
+ (x PC_FILESIZEBITS.0. 228)
+ (x PC_LINK_MAX.0. 220)
+ (x PC_MAX_CANON.0. 212)
+ (x PC_MAX_INPUT.0. 214)
+ (x PC_NAME_MAX.0. 214)
+ (x PC_NO_TRUNC.0. 212)
+ (x PC_PATH_MAX.0. 212)
+ (x PC_PIPE_BUF.0. 212)
+ (x PC_PRIO_IO.0. 212)
+ (x PC_REC_INCR_XFER_SIZE.0. 210)
+ (x PC_REC_MIN_XFER_SIZE.0. 232)
+ (x PC_REC_XFER_ALIGN.0. 230)
+ (x PC_SYMLINK_MAX.0. 224)
+ (x PC_SYNC_IO.0. 218)
+ (x PC_VDISABLE.0. 210)
+ (x SC_2_C_BIND.0. 212)
+ (x SC_2_C_DEV.0. 212)
+ (x SC_2_CHAR_TERM.0. 210)
+ (x SC_2_FORT_DEV.0. 218)
+ (x SC_2_FORT_RUN.0. 216)
+ (x SC_2_LOCALEDEF.0. 216)
+ (x SC_2_PBS.0. 218)
+ (x SC_2_PBS_ACCOUNTING.0. 206)
+ (x SC_2_PBS_CHECKPOINT.0. 228)
+ (x SC_2_PBS_LOCATE.0. 228)
+ (x SC_2_PBS_MESSAGE.0. 220)
+ (x SC_2_PBS_TRACK.0. 222)
+ (x SC_2_SW_DEV.0. 218)
+ (x SC_2_UPE.0. 212)
+ (x SC_2_VERSION.0. 206)
+ (x SC_ADVISORY_INFO.0. 214)
+ (x SC_AIO_LISTIO_MAX.0. 222)
+ (x SC_AIO_MAX.0. 224)
+ (x SC_AIO_PRIO_DELTA_MAX.0. 210)
+ (x SC_ARG_MAX.0. 232)
+ (x SC_ASYNCHRONOUS_IO.0. 210)
+ (x SC_ATEXIT_MAX.0. 226)
+ (x SC_BARRIERS.0. 216)
+ (x SC_BC_BASE_MAX.0. 212)
+ (x SC_BC_DIM_MAX.0. 218)
+ (x SC_BC_SCALE_MAX.0. 216)
+ (x SC_BC_STRING_MAX.0. 220)
+ (x SC_CHILD_MAX.0. 222)
+ (x SC_CLK_TCK.0. 214)
+ (x SC_CLOCK_SELECTION.0. 210)
+ (x SC_COLL_WEIGHTS_MAX.0. 226)
+ (x SC_CPUTIME.0. 228)
+ (x SC_DELAYTIMER_MAX.0. 210)
+ (x SC_EXPR_NEST_MAX.0. 224)
+ (x SC_FSYNC.0. 222)
+ (x SC_GETGR_R_SIZE_MAX.0. 206)
+ (x SC_GETPW_R_SIZE_MAX.0. 228)
+ (x SC_HOST_NAME_MAX.0. 228)
+ (x SC_IOV_MAX.0. 222)
+ (x SC_IPV6.0. 210)
+ (x SC_JOB_CONTROL.0. 204)
+ (x SC_LINE_MAX.0. 218)
+ (x SC_LOGIN_NAME_MAX.0. 212)
+ (x SC_MAPPED_FILES.0. 224)
+ (x SC_MEMLOCK.0. 220)
+ (x SC_MEMLOCK_RANGE.0. 210)
+ (x SC_MEMORY_PROTECTION.0. 222)
+ (x SC_MESSAGE_PASSING.0. 230)
+ (x SC_MONOTONIC_CLOCK.0. 226)
+ (x SC_MQ_OPEN_MAX.0. 226)
+ (x SC_MQ_PRIO_MAX.0. 218)
+ (x SC_NGROUPS_MAX.0. 218)
+ (x SC_OPEN_MAX.0. 218)
+ (x SC_PAGESIZE.0. 212)
+ (x SC_PRIORITIZED_IO.0. 212)
+ (x SC_PRIORITY_SCHEDULING.0. 224)
+ (x SC_RAW_SOCKETS.0. 234)
+ (x SC_RE_DUP_MAX.0. 218)
+ (x SC_READER_WRITER_LOCKS.0. 216)
+ (x SC_REALTIME_SIGNALS.0. 234)
+ (x SC_REGEXP.0. 228)
+ (x SC_RTSIG_MAX.0. 208)
+ (x SC_SAVED_IDS.0. 214)
+ (x SC_SEM_NSEMS_MAX.0. 214)
+ (x SC_SEM_VALUE_MAX.0. 222)
+ (x SC_SEMAPHORES.0. 222)
+ (x SC_SHARED_MEMORY_OBJECTS.0. 216)
+ (x SC_SHELL.0. 238)
+ (x SC_SIGQUEUE_MAX.0. 206)
+ (x SC_SPAWN.0. 220)
+ (x SC_SPIN_LOCKS.0. 206)
+ (x SC_SPORADIC_SERVER.0. 216)
+ (x SC_SS_REPL_MAX.0. 226)
+ (x SC_STREAM_MAX.0. 218)
+ (x SC_SYMLOOP_MAX.0. 216)
+ (x SC_SYNCHRONIZED_IO.0. 218)
+ (x SC_THREAD_ATTR_STACKADDR.0. 226)
+ (x SC_THREAD_ATTR_STACKSIZE.0. 238)
+ (x SC_THREAD_CPUTIME.0. 238)
+ (x SC_THREAD_DESTRUCTOR_ITERATIONS.0. 224)
+ (x SC_THREAD_KEYS_MAX.0. 252)
+ (x SC_THREAD_PRIO_INHERIT.0. 226)
+ (x SC_THREAD_PRIO_PROTECT.0. 234)
+ (x SC_THREAD_PRIORITY_SCHEDULING.0. 234)
+ (x SC_THREAD_PROCESS_SHARED.0. 248)
+ (x SC_THREAD_SAFE_FUNCTIONS.0. 238)
+ (x SC_THREAD_SPORADIC_SERVER.0. 238)
+ (x SC_THREAD_STACK_MIN.0. 240)
+ (x SC_THREAD_THREADS_MAX.0. 228)
+ (x SC_THREADS.0. 232)
+ (x SC_TIMEOUTS.0. 210)
+ (x SC_TIMER_MAX.0. 212)
+ (x SC_TIMERS.0. 214)
+ (x SC_TRACE.0. 208)
+ (x SC_TRACE_EVENT_FILTER.0. 206)
+ (x SC_TRACE_EVENT_NAME_MAX.0. 232)
+ (x SC_TRACE_INHERIT.0. 236)
+ (x SC_TRACE_LOG.0. 222)
+ (x SC_TRACE_NAME_MAX.0. 214)
+ (x SC_TRACE_SYS_MAX.0. 224)
+ (x SC_TRACE_USER_EVENT_MAX.0. 222)
+ (x SC_TTY_NAME_MAX.0. 236)
+ (x SC_TYPED_MEMORY_OBJECTS.0. 220)
+ (x SC_TZNAME_MAX.0. 236)
+ (x SC_V6_ILP32_OFF32.0. 216)
+ (x SC_V6_ILP32_OFFBIG.0. 224)
+ (x SC_V6_LP64_OFF64.0. 226)
+ (x SC_V6_LPBIG_OFFBIG.0. 222)
+ (x SC_VERSION.0. 226)
+ (x SC_XBS5_ILP32_OFF32.0. 210)
+ (x SC_XBS5_ILP32_OFFBIG.0. 228)
+ (x SC_XBS5_LP64_OFF64.0. 230)
+ (x SC_XBS5_LPBIG_OFFBIG.0. 226)
+ (x SC_XOPEN_CRYPT.0. 230)
+ (x SC_XOPEN_ENH_I18N.0. 218)
+ (x SC_XOPEN_LEGACY.0. 224)
+ (x SC_XOPEN_REALTIME.0. 220)
+ (x SC_XOPEN_REALTIME_THREADS.0. 224)
+ (x SC_XOPEN_SHM.0. 240)
+ (x SC_XOPEN_STREAMS.0. 214)
+ (x SC_XOPEN_UNIX.0. 222)
+ (x SC_XOPEN_VERSION.0. 216)
+ (x SC_NPROCESSORS_ONLN.0. 222)
+ (x SEEK_SET.0. 228)
+ (x SEEK_CUR.0. 205)
+ (x SEEK_END.0. 205)
+ (h ClockId.0. 205)
+ (x Time.0. 136)
+ (x Timespec.0. 203)
+ (x IOVec.0. 366)
+ (x SockLen.0. 309)
+ (x TSa_Family.0. 282)
+ (x SockAddr.0. 209)
+ (x Tmsghdr.0. 322)
+ (x MAP_POPULATE.0. 898)
+ (h InAddrScalar.0. 208)
+ (h Sighandler.0. 44)
+ (h FileHandle.0. 83)
+ (h SocketHandle.0. 99)
+ (x Mode.0. 101)
+ (x Off.0. 156)
+ (x Dev.0. 148)
+ (x Ino.0. 148)
+ (x Stat.0. 148)
+ (h StatHasNanoseconds.0. 815)
+ (x fcntl.0. 107)
+ (x open.0. 461)
+ (x open.1. 470)
+ (x ftruncate.0. 356)
+ (x posix_fallocate.0. 416)
+ (x close.0. 536)
+ (x fstat.0. 299)
+ (x lstat.0. 360)
+ (x stat.0. 311)
+ (x S_ISBLK.0. 309)
+ (x S_ISCHR.0. 251)
+ (x S_ISDIR.0. 251)
+ (x S_ISFIFO.0. 251)
+ (x S_ISREG.0. 253)
+ (x S_ISLNK.0. 251)
+ (x S_ISSOCK.0. 251)
+ (x mmap.0. 253)
+ (x munmap.0. 690)
+ (x errnoVar.0. 306)
+ (x clock_gettime.0. 154)
+ (x getcwd.0. 378)
+ (x chdir.0. 255)
+ (x realpath.0. 252)
+ (x readlink.0. 275)
+ (x symlink.0. 311)
+ (x DIR.0. 316)
+ (x Dirent.0. 98)
+ (x opendir.0. 272)
+ (x closedir.0. 207)
+ (x readdir.0. 256)
+ (x mkdir.0. 208)
+ (x rmdir.0. 369)
+ (x unlink.0. 252)
+ (h DT_UNKNOWN.0. 254)
+ (h DT_FIFO.0. 64)
+ (h DT_CHR.0. 61)
+ (h DT_DIR.0. 60)
+ (h DT_BLK.0. 60)
+ (h DT_REG.0. 60)
+ (h DT_LNK.0. 60)
+ (h DT_SOCK.0. 61)
+ (h DT_WHT.0. 62)
+ (x sysconf.0. 61)
+ (x WEXITSTATUS.0. 247)
+ (x WTERMSIG.0. 590)
+ (x WSTOPSIG.0. 500)
+ (x WIFEXITED.0. 532)
+ (x WIFSIGNALED.0. 535)
+ (x WIFSTOPPED.0. 882)
+ (x WIFCONTINUED.0. 521)
+ (x Pid.0. 412)
+ (x CChar.0. 223)
+ (h CCharArray.0. 101)
+ (x pipe.0. 90)
+ (x dup2.0. 310)
+ (x fork.0. 412)
+ (x execvp.0. 257)
+ (x execve.0. 363)
+ (x waitpid.0. 471)
+ (x kill.0. 689)
+ (x setpgid.0. 479)
+ (x exitnow.0. 557)
+ (x read.0. 238)
+ (x write.0. 359)
+ (x Sigset.0. 361)
+ (x Tposix_spawnattr.0. 106)
+ (x Tposix_spawn_file_actions.0. 128)
+ (x posix_spawn.0. 146)
+ (x posix_spawnp.0. 854)
+ (x posix_spawn_file_actions_init.0. 856)
+ (x posix_spawn_file_actions_destroy.0. 326)
+ (x posix_spawn_file_actions_addclose.0. 332)
+ (x posix_spawn_file_actions_adddup2.0. 449)
+ (x posix_spawn_file_actions_addchdir_np.0. 567)
+ (x posix_spawnattr_init.0. 406)
+ (x posix_spawnattr_destroy.0. 292)
+ (x posix_spawnattr_setflags.0. 300)
+ (x posix_spawnattr_setpgroup.0. 421)
+ (x posix_spawnattr_setsigmask.0. 493)
+ (x posix_spawnattr_setsigdefault.0. 374)
+ (x sigemptyset.0. 380)
+ (x sigfillset.0. 265)
+ (x sigaddset.0. 263)
+ (x posix_environ.0. 371)
+ (x strerror.0. 127)
+ (x nanosleep.0. 260)
+ (h `t.0.IAiS32AimportcSUintUZZSEAnoconvZAfalseZAR31. 324)
+ (h `t.0.IAarrayAcS8ZS256. 216)
+ (h `iniGuard.0. 102)
+ (x `ini.0. 34))

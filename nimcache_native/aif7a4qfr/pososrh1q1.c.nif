@@ -1,0 +1,296 @@
+(.nif27)
+(.indexat 6819             )
+(stmts@,1,../nimony/lib/std/posix/posix.nim
+ (type@B,8,../nimony/lib/std/posix/posix_other.nim :ClockId.0.~9 .
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")))
+ (type@y,g,../nimony/lib/std/posix/posix_other.nim :Time.0.~u
+  (pragmas~o
+   (importc "time_t")
+   (nodecl)
+   (header "<time.h>"))
+  (i@f,S,../nimony/lib/std/system/ctypes.nim 64
+   (importc "long")))
+ (type@p,j,../nimony/lib/std/posix/posix_other.nim :Timespec.0.~l,~1
+  (pragmas~b,~1
+   (importc "struct timespec")
+   (header "<time.h>"))
+  (object@2 .
+   (fld~d,1 :tv_sec.0~8
+    (pragmas
+     (exportc "tv_sec"))Time.0.@E)
+   (fld~c,2 :tv_nsec.0~9
+    (pragmas
+     (exportc "tv_nsec"))
+    (i@f,S,../nimony/lib/std/system/ctypes.nim 64
+     (importc "long")))))
+ (type@a,o,../nimony/lib/std/posix/posix_other.nim :IOVec.0.~W,~1
+  (pragmas~P,~1
+   (importc "struct iovec")
+   (header "<sys/uio.h>"))
+  (object@2 .
+   (fld~O,1 :iov_base.0~8 .
+    (ptr@3
+     (void)))
+   (fld~P,2 :iov_len.0~7 .
+    (u@h,g,../nimony/lib/std/system/ctypes.nim 64
+     (importc "size_t")))))
+ (type@12,s,../nimony/lib/std/posix/posix_other.nim :SockLen.0.~y
+  (pragmas~p
+   (importc "socklen_t")
+   (header "<sys/socket.h>"))
+  (u@l,w,../nimony/lib/std/system/ctypes.nim 32
+   (importc "socklen_t")
+   (header "<sys/socket.h>"@j,s,../nimony/lib/std/posix/posix_other.nim)))
+ (type@17,t,../nimony/lib/std/posix/posix_other.nim :TSa_Family.0.~13
+  (pragmas~r
+   (importc "sa_family_t")
+   (header "<sys/socket.h>"))
+  (u@2 8
+   (importc "sa_family_t")
+   (header "<sys/socket.h>"~L)))
+ (type@U,w,../nimony/lib/std/posix/posix_other.nim :SockAddr.0.~Q,~1
+  (pragmas~G,~1
+   (importc "struct sockaddr")
+   (header "<sys/socket.h>"))
+  (object@2 .
+   (fld~H,1 :sa_family.0~9 .
+    (u@u,~4 8
+     (importc "sa_family_t")
+     (header "<sys/socket.h>"~L)))
+   (fld~J,2 :sa_data.0~7 . `t.0.IAarrayAcS8ZS256.@8)))
+ (type@e,11,../nimony/lib/std/posix/posix_other.nim :Tmsghdr.0.~a,~1
+  (pragmas~R,~1
+   (importc "struct msghdr")
+   (header "<sys/socket.h>"))
+  (object@2 .
+   (fld~S,1 :msg_name.0~8 .
+    (ptr@3
+     (void)))
+   (fld~P,2 :msg_namelen.0~B .
+    (u@l,w,../nimony/lib/std/system/ctypes.nim 32
+     (importc "socklen_t")
+     (header "<sys/socket.h>"@j,s,../nimony/lib/std/posix/posix_other.nim)))
+   (fld~T,3 :msg_iov.0~7 .
+    (ptr@3 IOVec.0.@4))
+   (fld~Q,4 :msg_iovlen.0~A .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int")))
+   (fld~P,5 :msg_control.0~B .
+    (ptr@3
+     (void)))
+   (fld~M,6 :msg_controllen.0~E .
+    (u@l,w,../nimony/lib/std/system/ctypes.nim 32
+     (importc "socklen_t")
+     (header "<sys/socket.h>"@j,s,../nimony/lib/std/posix/posix_other.nim)))
+   (fld~R,7 :msg_flags.0~9 .
+    (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+     (importc "int")))))
+ (type@I,D :InAddrScalar.0.~E .
+  (u@2 32))
+ (type@F,E :Sighandler.0.~B . `t.0.IAiS32AimportcSUintUZZSEAnoconvZAfalseZAR31.@7)
+ (type@G,F :FileHandle.0.~C .
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")))
+ (type@I,G :SocketHandle.0.~E .
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int")))
+ (type@x,1I :Mode.0.~r
+  (pragmas~l
+   (importc "mode_t")
+   (header "<sys/types.h>"))
+  (u~n,5 32
+   (importc "mode_t")
+   (header "<sys/types.h>"@V,~5)))
+ (type@v,1Q :Off.0.~p
+  (pragmas~k
+   (importc "off_t")
+   (header "<sys/types.h>"))
+  (i@2 64
+   (importc "off_t")
+   (header "<sys/types.h>"~K)))
+ (type@v,1S :Dev.0.~p
+  (pragmas~k
+   (importc "dev_t")
+   (header "<sys/types.h>"))
+  (u@2 64
+   (importc "dev_t")
+   (header "<sys/types.h>"~K)))
+ (type@v,1T :Ino.0.~p
+  (pragmas~k
+   (importc "ino_t")
+   (header "<sys/types.h>"))
+  (u@2 64
+   (importc "ino_t")
+   (header "<sys/types.h>"~K)))
+ (type@r,1W :Stat.0.~l,~1
+  (pragmas~f,~1
+   (importc "struct stat")
+   (header "<sys/stat.h>"))
+  (object@2 .
+   (fld~d,1 :st_dev.0~8
+    (pragmas
+     (importc "st_dev"))
+    (u@h,~5 64
+     (importc "dev_t")
+     (header "<sys/types.h>"~K)))
+   (fld~d,2 :st_ino.0~8
+    (pragmas
+     (importc "st_ino"))
+    (u@h,~5 64
+     (importc "ino_t")
+     (header "<sys/types.h>"~K)))
+   (fld~c,3 :st_size.0~9
+    (pragmas
+     (importc "st_size"))
+    (i@g,~9 64
+     (importc "off_t")
+     (header "<sys/types.h>"~K)))
+   (fld~c,A :st_mode.0~9
+    (pragmas
+     (importc "st_mode"))
+    (u~7,~J 32
+     (importc "mode_t")
+     (header "<sys/types.h>"@V,~5)))
+   (fld~Z,H :st_mtime.0~A
+    (pragmas
+     (importc "st_mtime"))
+    (i@Q 64))
+   (fld~a,I :st_mtim.0~9
+    (pragmas
+     (importc "st_mtim"))Timespec.0.@P)))
+ (proc@4,34 :stat.0.@5
+  (params@A
+   (param@1 :a1.8 .
+    (ptr@4
+     (c 8)))
+   (param@E :a2.7 .
+    (ptr@4 Stat.0.@4)))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "int"))
+  (pragmas@i
+   (importc "stat")
+   (header "<sys/stat.h>")
+   (smry~i
+    (param 0 0)
+    (param 1 1)))
+  (stmts .))
+ (proc@4,3S :S_ISREG.0.@5
+  (params@D
+   (param@1 :m.4 .
+    (u~8,~25 32
+     (importc "mode_t")
+     (header "<sys/types.h>"@V,~5))))
+  (bool@B)
+  (pragmas@T
+   (importc "S_ISREG")
+   (header "<sys/stat.h>")
+   (smry~T
+    (param 0 0)))
+  (stmts .))
+ (type@18,6L :DIR.0.~12
+  (pragmas~x
+   (importc "DIR")
+   (header "<dirent.h>"))
+  (object@2 .))
+ (type@13,6M :Dirent.0.~x
+  (pragmas~p
+   (importc "struct dirent")
+   (header "<dirent.h>"))
+  (object@2 .
+   (fld~p,1 :d_type.0~8
+    (pragmas
+     (importc "d_type"))
+    (u@N 8))
+   (fld~p,2 :d_name.0~8
+    (pragmas
+     (importc "d_name"))`t.0.IAarrayAcS8ZS256.@S)))
+ (type@y,7H :Pid.0.~p
+  (pragmas~k
+   (importc "pid_t")
+   (header "<sys/types.h>"))
+  (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+   (importc "pid_t")
+   (header "<sys/types.h>"@g,7I,../nimony/lib/std/posix/posix.nim)))
+ (type@g,7M :CChar.0.~Z
+  (pragmas~S
+   (importc "char")
+   (nodecl))
+  (i@2 8
+   (importc "char")))
+ (type@J,7N :CCharArray.0.~C .
+  (ptr@6
+   (ptr@N
+    (i~4,~1 8
+     (importc "char")))))
+ (type@1D,9A :Sigset.0.~15
+  (pragmas~x
+   (importc "sigset_t")
+   (header "<signal.h>"))
+  (object@2 .))
+ (type@l,9C :Tposix_spawnattr.0.~d,~1
+  (pragmas~L,~1
+   (importc "posix_spawnattr_t")
+   (header "<spawn.h>"))
+  (object@2 .))
+ (type@l,9E :Tposix_spawn_file_actions.0.~d,~1
+  (pragmas~C,~1
+   (importc "posix_spawn_file_actions_t")
+   (header "<spawn.h>"))
+  (object@2 .))
+ (type@M,E :`t.0.IAiS32AimportcSUintUZZSEAnoconvZAfalseZAR31. .
+  (proctype .
+   (params
+    (param@1 :a.0 .
+     (i@b,e,../nimony/lib/std/system/ctypes.nim 32
+      (importc "int")))).
+   (pragmas@A
+    (noconv))))
+ (type@L,y,../nimony/lib/std/posix/posix_other.nim :`t.0.IAarrayAcS8ZS256. .
+  (array
+   (c@9 8)256))
+ (gvar :`iniGuard.0. .
+  (bool).)
+ (proc :`ini.0.
+  (params).
+  (pragmas
+   (smry callsUnknown))
+  (stmts
+   (if
+    (elif `iniGuard.0.
+     (stmts
+      (ret .))))
+   (asgn `iniGuard.0.
+    (true))
+   (call `ini.0.sysvq0asl))))(.index@,1,../nimony/lib/std/posix/posix.nim
+ (h ClockId.0. 81)
+ (x Time.0. 136)
+ (x Timespec.0. 203)
+ (x IOVec.0. 366)
+ (x SockLen.0. 309)
+ (x TSa_Family.0. 282)
+ (x SockAddr.0. 209)
+ (x Tmsghdr.0. 322)
+ (h InAddrScalar.0. 898)
+ (h Sighandler.0. 44)
+ (h FileHandle.0. 83)
+ (h SocketHandle.0. 99)
+ (x Mode.0. 101)
+ (x Off.0. 156)
+ (x Dev.0. 148)
+ (x Ino.0. 148)
+ (x Stat.0. 148)
+ (x stat.0. 815)
+ (x S_ISREG.0. 309)
+ (x DIR.0. 251)
+ (x Dirent.0. 98)
+ (x Pid.0. 272)
+ (x CChar.0. 223)
+ (h CCharArray.0. 101)
+ (x Sigset.0. 90)
+ (x Tposix_spawnattr.0. 106)
+ (x Tposix_spawn_file_actions.0. 128)
+ (h `t.0.IAiS32AimportcSUintUZZSEAnoconvZAfalseZAR31. 146)
+ (h `t.0.IAarrayAcS8ZS256. 216)
+ (h `iniGuard.0. 102)
+ (x `ini.0. 34))

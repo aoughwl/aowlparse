@@ -1,0 +1,136 @@
+(.nif27)
+(.vendor "Nifler")
+(.dialect "nim-parsed")
+(stmts@,6,../nimony/lib/std/private/osseps.nim
+ (comment)
+ (const@J,3 doslikeFileSystem~H x . .
+  (infix@b or
+   (infix~G or
+    (call~A defined~7 windows@1)
+    (call@A defined~7 OS2@1))
+   (call@A defined~7 DOS@1)))
+ (const@8,6 CurDir~6 x . .
+  (when~4,1
+   (elif@5
+    (call@7 defined~7 macos@1)
+    (stmts@G '\3A'))
+   (elif@5,1
+    (call@7 defined~7 genode@1)
+    (stmts@H '/'))
+   (else@,2
+    (stmts@6 '.'))))
+ (const@8,F ParDir~6 x . .
+  (when~4,1
+   (elif@5
+    (call@7 defined~7 macos@1)
+    (stmts@G "\3A\3A"))
+   (else@,1
+    (stmts@6 ".."))))
+ (const@8,N DirSep~6 x . .
+  (when~4,1
+   (elif@5
+    (call@7 defined~7 macos@1)
+    (stmts@G '\3A'))
+   (elif@5,1
+    (infix@I or doslikeFileSystem~I
+     (call@A defined~7 vxworks@1))
+    (stmts@d '\5C'))
+   (elif@5,2
+    (call@7 defined~7 RISCOS@1)
+    (stmts@H '.'))
+   (else@,3
+    (stmts@6 '/'))))
+ (const@8,W AltSep~6 x . .
+  (when~4,1
+   (elif@5 doslikeFileSystem
+    (stmts@J '/'))
+   (else@,1
+    (stmts@6 DirSep))))
+ (const@9,e PathSep~7 x . .
+  (when~5,1
+   (elif@5
+    (infix@F or
+     (call~8 defined~7 macos@1)
+     (call@A defined~7 RISCOS@1))
+    (stmts@Z ','))
+   (elif@5,1
+    (infix@I or doslikeFileSystem~I
+     (call@A defined~7 vxworks@1))
+    (stmts@d ';'))
+   (elif@5,2
+    (infix@G or
+     (call~9 defined~7 PalmOS@1)
+     (call@A defined~7 MorphOS@1))
+    (stmts@b '\3A'))
+   (else@,3
+    (stmts@6 '\3A'))))
+ (const@P,n FileSystemCaseSensitive~N x . .
+  (when~L,1
+   (elif@5
+    (infix@G,1 or
+     (infix@x,~1 or
+      (infix~K or
+       (infix~L or
+        (infix~J or
+         (call~8 defined~7 macos@1)
+         (call@A defined~7 macosx@1))doslikeFileSystem@3)
+       (call@A defined~7 vxworks@1))
+      (call~16,1 defined~7 PalmOS@1))
+     (call@A defined~7 MorphOS@1))
+    (stmts@b,1 false))
+   (else@,2
+    (stmts@6 true))))
+ (const@8,u ExeExt~6 x . .
+  (when~4,1
+   (elif@5 doslikeFileSystem
+    (stmts@J "exe"))
+   (elif@5,1
+    (call@7 defined~7 atari@1)
+    (stmts@G "tpp"))
+   (elif@5,2
+    (call@7 defined~7 netware@1)
+    (stmts@I "nlm"))
+   (elif@5,3
+    (call@7 defined~7 vxworks@1)
+    (stmts@I "vxe"))
+   (elif@5,4
+    (call@7 defined~7 nintendoswitch@1)
+    (stmts@P "elf"))
+   (else@,5
+    (stmts@6 ""))))
+ (const@B,14 ScriptExt~9 x . .
+  (when~7,1
+   (elif@5 doslikeFileSystem
+    (stmts@J "bat"))
+   (else@,1
+    (stmts@6 ""))))
+ (const@E,1A DynlibFormat~C x . .
+  (when~A,1
+   (elif@5
+    (call@7 defined~7 macos@1)
+    (stmts@G "$1.dylib"))
+   (elif@5,1
+    (call@7 defined~7 macosx@1)
+    (stmts@H "lib$1.dylib"))
+   (elif@5,2
+    (infix@I or doslikeFileSystem~I
+     (call@A defined~7 atari@1))
+    (stmts@b "$1.dll"))
+   (elif@5,3
+    (call@7 defined~7 MorphOS@1)
+    (stmts@I "$1.prc"))
+   (elif@5,4
+    (call@7 defined~7 PalmOS@1)
+    (stmts@H "$1.prc"))
+   (elif@5,5
+    (call@7 defined~7 genode@1)
+    (stmts@H "$1.lib.so"))
+   (elif@5,6
+    (call@7 defined~7 netware@1)
+    (stmts@I "$1.nlm"))
+   (elif@5,7
+    (call@7 defined~7 amiga@1)
+    (stmts@G "$1.Library"))
+   (else@,8
+    (stmts@6 "lib$1.so"))))
+ (const@8,1N ExtSep~6 x . . '.'@4))
