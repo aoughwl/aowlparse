@@ -50,7 +50,15 @@ proc typeExprEnd(ps: var Parser; lo: int): int =
   while ps.tok(i).kind != tkEof:
     let t = ps.tok(i)
     if depth == 0 and t.kind == tkCurlyLe:
-      break                       # depth-0 '{' starts a pragma → ends the type
+      # A proc/iterator TYPE owns a SAME-LINE trailing `{.pragma.}` (`proc (x): T
+      # {.noconv.}`) — consume it into the type so the enclosing routine does not
+      # re-grab it as its OWN pragma. A pragma on a CONTINUATION line (object proc
+      # fields) is left to the caller's own multi-line handling. Any other depth-0
+      # `{` starts a pragma that ends the type.
+      if procType and ps.tok(i + 1).kind == tkDot and t.line == ps.tok(i - 1).line:
+        i = ps.matchClose(i)      # jump to the closing '}'; loop `inc i` steps past
+      else:
+        break
     elif isOpenBracket(t.kind):
       inc depth
     elif isCloseBracket(t.kind):
