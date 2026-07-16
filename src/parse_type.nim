@@ -1120,7 +1120,12 @@ proc parseRoutine(ps: var Parser; b: var Builder; kwIdx: int; pl, pc: int32;
       b.addEmpty  # return type slot
   # pragmas: `{.` … `.}`. In curly mode a bare `{` (no leading dot) is a block
   # BODY, not pragmas — leave it for the body handler below.
-  if ps.tok(i).kind == tkCurlyLe and
+  # A `{.` on a NEW line that is not indented past the proc keyword is a separate
+  # `{.push/pop.}` statement, NOT this (bodiless) proc's pragmas — nifler keeps it
+  # as a sibling. Only fold pragmas on the signature's line or an indented
+  # continuation.
+  let pragOnSig = ps.tok(i).line == ps.tok(i - 1).line or ps.tok(i).indent > kw.col
+  if ps.tok(i).kind == tkCurlyLe and pragOnSig and
      (not ps.curly or ps.tok(i + 1).kind == tkDot):
     i = ps.parsePragmas(b, i, aTok.line, aTok.col)
   else:
