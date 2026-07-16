@@ -721,7 +721,17 @@ proc tokenize*(src: string; opts: LexOptions; errors: var int): seq[Token] =
         while lx.pos < lx.n and lx.cur != '\n':
           advance lx
     elif c == '"':
-      let t = lexString(lx)
+      # A `"` immediately adjacent to a preceding ident/keyword (no space) is a
+      # GENERALIZED string literal (`fmt"..."`, `re"(\w+)"`): it is RAW — escapes
+      # are NOT decoded — and the parser emits it with the "R" suffix. Only the
+      # single-quoted form needs interception; `"""..."""` is already raw.
+      let adj = result.len > 0 and
+                (result[result.len-1].kind == tkIdent or
+                 result[result.len-1].kind == tkKeyword) and
+                result[result.len-1].line == lx.line and
+                result[result.len-1].endCol == lx.col
+      let isTriple = lx.peek(1) == '"' and lx.peek(2) == '"'
+      let t = if adj and not isTriple: lexRawString(lx) else: lexString(lx)
       lx.atLineStart = false
       result.add t
     elif (c == 'r' or c == 'R') and lx.peek(1) == '"':

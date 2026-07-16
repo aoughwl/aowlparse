@@ -304,7 +304,11 @@ proc findSplit(ps: Parser; lo, hi: int; typeCtx = false): int =
          # operand. Guarding on the previous token keeps the `|` chain splitting on
          # `|` (precedence 8) instead of on the `ptr` (precedence 3).
          not isBinaryOp(ps.tok(i - 1)) and
-         ps.tok(i - 1).s != "ptr" and ps.tok(i - 1).s != "ref":
+         # A left neighbour that is a PREFIX type modifier (`var ref T`, `sink ptr
+         # X`, `lent ref Y`) makes `ref`/`ptr` that modifier's operand, not an
+         # infix — otherwise `var ref T` mis-splits into `(infix ref (mut) T)`.
+         ps.tok(i - 1).s notin ["ptr", "ref", "var", "out", "lent", "sink",
+                                "distinct", "static", "type", "mut", "owned"]:
       if 3 <= bestPrec:
         bestPrec = 3
         result = i
@@ -361,8 +365,10 @@ proc splitPragmaItems(ps: Parser; lo, hi: int): seq[int] =
       let prev = ps.tok(i - 1)
       if t.kind == tkComma:
         if i + 1 < hi: result.add(i + 1)
-      elif prev.kind != tkComma and t.line != prev.line and
-           not continuesLine(prev):
+      elif prev.kind != tkComma and prev.kind != tkColon and
+           t.line != prev.line and not continuesLine(prev):
+        # A trailing `key:` colon dangling at end of line means the value sits on
+        # the NEXT physical line (`{.deprecated:⏎ "msg".}`) — one item, not two.
         result.add i          # newline-separated item (missing comma)
     inc i
 
