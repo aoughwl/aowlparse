@@ -705,6 +705,18 @@ proc parseSectionDef(ps: var Parser; b: var Builder; lo, hi: int; tag: string;
       b.addEmpty
     b.endTree()
 
+proc extendPastTypeColon(ps: Parser; startIdx, e0: int): int =
+  ## A var/let/const def whose line ends in a dangling TYPE colon carries its type
+  ## on the next, deeper-indented line (`var x {.p.}:⏎  ptr T`). Pull that line in.
+  ## Only when the def has no depth-0 `=` — otherwise the colon lives inside a
+  ## value expression (`var x = if c:` …) and the block belongs to that expr.
+  result = e0
+  while result > startIdx and ps.tok(result - 1).kind == tkColon and
+        ps.tok(result).kind != tkEof and
+        ps.tok(result).indent > ps.tok(startIdx).indent and
+        ps.findAssign(startIdx, result) < 0:
+    result = ps.lineEnd(result)
+
 proc parseSection(ps: var Parser; b: var Builder; kwIdx: int; pl, pc: int32;
                   tag: string): int =
   let kw = ps.tok(kwIdx)
@@ -727,13 +739,13 @@ proc parseSection(ps: var Parser; b: var Builder; kwIdx: int; pl, pc: int32;
           ps.emitInfo(b, ct.line, ct.col, pl, pc, false)
           b.endTree()
         inc i; continue
-      let dhi = ps.lineEnd(i)
+      let dhi = ps.extendPastTypeColon(i, ps.lineEnd(i))
       let consumed = ps.parseSectionDef(b, i, dhi, tag, pl, pc)
       i = if consumed > dhi: consumed else: dhi
     result = i
   else:
     # inline single ident-def on the keyword's line, bounded at the next `;`
-    let hi = ps.semiEnd(kwIdx, ps.lineEnd(kwIdx))
+    let hi = ps.extendPastTypeColon(kwIdx, ps.semiEnd(kwIdx, ps.lineEnd(kwIdx)))
     result = ps.parseSectionDef(b, kwIdx + 1, hi, tag, pl, pc)
 
 proc parsePragmaStmt(ps: var Parser; b: var Builder; braceIdx: int; pl, pc: int32): int =
