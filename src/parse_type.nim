@@ -80,7 +80,10 @@ proc parseTypeRangeImpl(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32) =
   if first.kind == tkKeyword and isPrefixTypeKw(first.s):
     b.addTree prefixTypeTag(first.s)
     ps.emitInfo(b, first.line, first.col, pl, pc, false)
-    parseTypeRange(ps, b, lo + 1, hi, first.line, first.col)
+    # a BARE keyword with no operand (`ptr` alone, e.g. `nil (ptr)`) → `(ptr)`
+    # with no child; nifler emits an empty node, not `(ptr .)`.
+    if int(lo) + 1 < int(hi):
+      parseTypeRange(ps, b, lo + 1, hi, first.line, first.col)
     b.endTree()
     return
   # proc / iterator type
@@ -100,9 +103,18 @@ proc parseTypeRangeImpl(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32) =
     parseTupleInline(ps, b, lo, hi, pl, pc)
     return
   # parenthesized anonymous tuple type: `(string, int)` → `(tup string int)`,
-  # `(line: int32, col: int32)` → `(tup (kv line int32) …)`.
+  # `(line: int32, col: int32)` → `(tup (kv line int32) …)`. A SINGLE grouped
+  # element with no `,`/`:` is a grouping paren, not a tuple → `(par x)`
+  # (e.g. `nil (ptr)` = `(cmd (nil) (par (ptr)))`).
   if first.kind == tkParLe and ps.matchClose(int(lo)) == int(hi) - 1:
     let rb = int(hi) - 1
+    let elems0 = ps.splitArgs(int(lo) + 1, rb)
+    if elems0.len == 1 and elems0[0] < rb and ps.depth0Colon(elems0[0], rb) < 0:
+      b.addTree "par"
+      ps.emitInfo(b, first.line, first.col, pl, pc, false)
+      parseTypeRange(ps, b, int32(elems0[0]), int32(rb), first.line, first.col)
+      b.endTree()
+      return
     b.addTree "tup"
     ps.emitInfo(b, first.line, first.col, pl, pc, false)
     let elems = ps.splitArgs(int(lo) + 1, rb)
@@ -123,8 +135,8 @@ proc parseTypeRangeImpl(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32) =
         parseTypeRange(ps, b, int32(eLo), int32(eHi), first.line, first.col)
     b.endTree()
     return
-  # top-level binary operator (e.g. `T | U`) → infix
-  let sp = ps.findSplit(int(lo), int(hi))
+  # top-level binary operator (e.g. `T | U`, or `ptr`/`ref` as infix) → infix
+  let sp = ps.findSplit(int(lo), int(hi), typeCtx = true)
   if sp >= 0:
     let op = ps.tok(sp)
     b.addTree "infix"

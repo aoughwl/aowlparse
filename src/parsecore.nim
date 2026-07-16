@@ -260,8 +260,11 @@ proc matchOpen(ps: Parser; closeIdx: int): int =
     dec i
   result = closeIdx
 
-proc findSplit(ps: Parser; lo, hi: int): int =
+proc findSplit(ps: Parser; lo, hi: int; typeCtx = false): int =
   ## Rightmost lowest-precedence binary operator at depth 0 in `[lo, hi)`, or -1.
+  ## In TYPE context (`typeCtx`) the prefix-type keywords `ptr`/`ref` also act as
+  ## infix operators when they sit between operands (`nil ptr uint32` →
+  ## `(infix ptr (nil) uint32)`); nifler gives them precedence 3 (like `or`).
   var depth = 0
   var bestPrec = 1000
   result = -1
@@ -275,6 +278,11 @@ proc findSplit(ps: Parser; lo, hi: int): int =
       let p = precedenceOf(t)
       if p <= bestPrec:
         bestPrec = p
+        result = i
+    elif depth == 0 and i > lo and i + 1 < hi and typeCtx and
+         t.kind == tkKeyword and (t.s == "ptr" or t.s == "ref"):
+      if 3 <= bestPrec:
+        bestPrec = 3
         result = i
     inc i
 
