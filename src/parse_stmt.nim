@@ -880,6 +880,17 @@ proc parsePostExprBlock(ps: var Parser; b: var Builder; headLo, colonIdx: int;
       elif d == 0 and t.kind == tkKeyword and t.s == "do":
         doIdx = k; break
       inc k
+    if doIdx > headLo and ps.tok(doIdx + 1).kind != tkParLe:
+      # paramless `do:` — `expr do: body` / `quote do: body` collapses to
+      # `(call <callee> (stmts body))`, the `do` (and its empty params) folded
+      # away entirely, matching nifler's handling.
+      let anchor = ps.calleeAnchor(headLo, doIdx)
+      b.addTree "call"
+      ps.emitInfo(b, anchor.line, anchor.col, pl, pc, false)
+      ps.parseExprRange(b, int32(headLo), int32(doIdx), anchor.line, anchor.col)  # callee
+      result = ps.emitBody(b, colonIdx, refIndent, anchor.line, anchor.col)       # (stmts body)
+      b.endTree()   # call
+      return
     if doIdx > headLo and ps.tok(doIdx + 1).kind == tkParLe:
       # Anchoring (reverse-engineered from nifler on `expr do (…) -> T: body`):
       #  • the CALL node anchors at the callee expression's info — the `.` of a
@@ -1023,6 +1034,35 @@ proc parseOneStmt(ps: var Parser; b: var Builder; startIdx: int; pl, pc: int32;
         inc k
       if not cf:
         return ps.parsePostExprBlock(b, startIdx, pcolon, pl, pc)
+    # assignment-RHS postExprBlock: `result = foo(x):` / `result = foo: a = b` —
+    # the `:` block belongs to the RHS call. Emit `(asgn lhs (call … (stmts …)))`.
+    if pcolon > startIdx:
+      let eqi = ps.findAssign(startIdx, pcolon)
+      if eqi > startIdx and eqi + 1 < pcolon:
+        # exclude a control-flow / anon-routine RHS (`x = if c: a`) — that colon
+        # is the expression's, not a block.
+        var cf = false
+        var d = 0
+        var k = eqi + 1
+        while k < pcolon:
+          let t = ps.tok(k)
+          if isOpenBracket(t.kind): inc d
+          elif isCloseBracket(t.kind):
+            if d > 0: dec d
+          elif d == 0 and t.kind == tkKeyword and
+               (t.s == "if" or t.s == "when" or t.s == "case" or
+                t.s == "elif" or t.s == "else" or t.s == "of" or
+                t.s == "proc" or t.s == "func" or t.s == "iterator"):
+            cf = true; break
+          inc k
+        if not cf:
+          let op = ps.tok(eqi)
+          b.addTree "asgn"
+          ps.emitInfo(b, op.line, op.col, pl, pc, false)
+          ps.parseExprRange(b, int32(startIdx), int32(eqi), op.line, op.col)   # LHS
+          result = ps.parsePostExprBlock(b, eqi + 1, pcolon, op.line, op.col)  # RHS call
+          b.endTree()   # asgn
+          return
     # Fallback: the first depth-0 `:` belonged to an if/case/proc in the args, but
     # the head LINE still ends with a real block colon —
     # `addUIntTypedOp dest, if k: A else: B, 8, info:` with the body on the next
