@@ -61,6 +61,21 @@ proc parseExprStmt(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32): int =
        (rt.s == "if" or rt.s == "when" or rt.s == "try" or
         rt.s == "case" or rt.s == "block"):
       result = ps.parseCtrlFlowValue(b, eqi + 1, op.line, op.col)
+    elif rt.kind == tkKeyword and
+         (rt.s == "proc" or rt.s == "func" or rt.s == "iterator"):
+      # anonymous routine RHS (`w.f = proc(...) =⏎ <indented body>`): the body
+      # block is indented past the ENCLOSING statement, but the RHS range stops at
+      # this line's end, so it would be dropped. Extend the range to cover every
+      # following line indented deeper than the statement, then let parseRoutine's
+      # anon-body branch capture it.
+      let stmtIndent = if ps.tok(lo).indent >= 0: int(ps.tok(lo).indent)
+                       else: int(ps.tok(lo).col)
+      var newHi = int(hi)
+      while ps.tok(newHi).kind != tkEof and ps.tok(newHi).indent >= 0 and
+            int(ps.tok(newHi).indent) > stmtIndent:
+        newHi = ps.lineEnd(newHi)
+      ps.parseExprRange(b, int32(eqi) + 1, int32(newHi), op.line, op.col)
+      result = newHi
     else:
       ps.parseExprRange(b, int32(eqi) + 1, hi, op.line, op.col)
     b.endTree()
