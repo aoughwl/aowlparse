@@ -860,6 +860,17 @@ proc semiEnd(ps: Parser; startIdx, bound: int): int =
     inc i
   result = bound
 
+proc appendTrailingDo(ps: var Parser; b: var Builder; start: int;
+                      refIndent: int; pl, pc: int32): int =
+  ## After a colon-block call/command, fold any trailing paramless `do:` blocks
+  ## (aligned at the call's reference indent) into the still-open call node as
+  ## extra `(stmts …)` args — `foo(x):⏎ a⏎do:⏎ b` → `(call foo x (stmts a) (stmts b))`.
+  result = start
+  while ps.tok(result).kind == tkKeyword and ps.tok(result).s == "do" and
+        int(ps.tok(result).indent) == refIndent and
+        ps.tok(result + 1).kind == tkColon:
+    result = ps.emitBody(b, result + 1, int32(refIndent), pl, pc)
+
 proc parsePostExprBlock(ps: var Parser; b: var Builder; headLo, colonIdx: int;
                         pl, pc: int32): int =
   ## Nim postExprBlocks: `call(args): body` / `cmd a, b: body` — the trailing
@@ -929,6 +940,7 @@ proc parsePostExprBlock(ps: var Parser; b: var Builder; headLo, colonIdx: int;
     ps.parseExprRange(b, int32(headLo), int32(ce), anchor.line, anchor.col)   # callee
     ps.parseArgList(b, int32(ce), int32(colonIdx), anchor.line, anchor.col)
     result = ps.emitBody(b, colonIdx, refIndent, anchor.line, anchor.col)     # (stmts body) arg
+    result = ps.appendTrailingDo(b, result, int(refIndent), anchor.line, anchor.col)
     b.endTree()
   else:
     # call form: `foo: body` / `c.into: body` / `foo(args): body`
@@ -944,6 +956,7 @@ proc parsePostExprBlock(ps: var Parser; b: var Builder; headLo, colonIdx: int;
       ps.parseExprRange(b, int32(headLo), int32(lparen), lp.line, lp.col)     # callee
       ps.parseArgList(b, int32(lparen + 1), int32(rparen), lp.line, lp.col)   # args
       result = ps.emitBody(b, colonIdx, refIndent, lp.line, lp.col)     # (stmts body) arg
+      result = ps.appendTrailingDo(b, result, int(refIndent), lp.line, lp.col)
     else:
       # bare callee `foo: body` / `c.into: body` — postExprBlocks wraps the callee,
       # so the call anchors at the callee expression's info (the `.` for a dotted
@@ -952,6 +965,7 @@ proc parsePostExprBlock(ps: var Parser; b: var Builder; headLo, colonIdx: int;
       ps.emitInfo(b, anchor.line, anchor.col, pl, pc, false)
       ps.parseExprRange(b, int32(headLo), int32(colonIdx), anchor.line, anchor.col)  # bare callee
       result = ps.emitBody(b, colonIdx, refIndent, anchor.line, anchor.col)  # (stmts body) arg
+      result = ps.appendTrailingDo(b, result, int(refIndent), anchor.line, anchor.col)
     b.endTree()
 
 proc parseOneStmt(ps: var Parser; b: var Builder; startIdx: int; pl, pc: int32;
