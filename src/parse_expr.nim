@@ -71,6 +71,25 @@ proc parseArg(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32) =
   ## `iterator` literals (`sort(proc (a): int = …)` — the return `:` and default
   ## `=` are the routine's, not a `kv`/`vv` pair).
   let head = ps.tok(int(lo))
+  # `block: body` / `block name: body` as a call argument → `(block <label>
+  # (stmts body))` — nifler wraps the body in `(stmts …)` here, unlike the bare
+  # single-statement paren form. The leading `:` is the block's, not a `kv`.
+  if head.kind == tkKeyword and head.s == "block":
+    let bcolon = ps.depth0Colon(int(lo), int(hi))
+    if bcolon >= 0:
+      b.addTree "block"
+      ps.emitInfo(b, head.line, head.col, pl, pc, false)
+      if int(lo) + 1 < bcolon and ps.tok(int(lo) + 1).kind == tkIdent:
+        ps.emitName(b, ps.tok(int(lo) + 1), head.line, head.col)   # label
+      else:
+        b.addEmpty
+      let bt = ps.tok(bcolon + 1)
+      b.addTree "stmts"
+      ps.emitInfo(b, bt.line, bt.col, head.line, head.col, false)
+      ps.parseExprRange(b, int32(bcolon) + 1, hi, bt.line, bt.col)
+      b.endTree()
+      b.endTree()
+      return
   let guardKw = head.kind == tkKeyword and
                 (head.s == "if" or head.s == "when" or head.s == "case" or
                  head.s == "try" or head.s == "proc" or head.s == "func" or
