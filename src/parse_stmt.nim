@@ -901,7 +901,16 @@ proc parsePostExprBlock(ps: var Parser; b: var Builder; headLo, colonIdx: int;
       let anchor = ps.calleeAnchor(headLo, doIdx)
       b.addTree "call"
       ps.emitInfo(b, anchor.line, anchor.col, pl, pc, false)
-      ps.parseExprRange(b, int32(headLo), int32(doIdx), anchor.line, anchor.col)  # callee
+      # callee before `do`: a parenthesized call `foo(x) do:` splits into
+      # callee+args folded into THIS call (`(call foo x (stmts))`), not a nested
+      # `(call (call foo x) (stmts))`; a bare callee is parsed whole.
+      if ps.tok(doIdx - 1).kind == tkParRi:
+        let rparen = doIdx - 1
+        let lparen = ps.matchOpen(rparen)
+        ps.parseExprRange(b, int32(headLo), int32(lparen), anchor.line, anchor.col)   # callee
+        ps.parseArgList(b, int32(lparen + 1), int32(rparen), anchor.line, anchor.col) # args
+      else:
+        ps.parseExprRange(b, int32(headLo), int32(doIdx), anchor.line, anchor.col)    # callee
       result = ps.emitBody(b, colonIdx, refIndent, anchor.line, anchor.col)       # (stmts body)
       b.endTree()   # call
       return

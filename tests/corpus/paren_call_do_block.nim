@@ -1,0 +1,2 @@
+result = quote("@") do:
+  discard
