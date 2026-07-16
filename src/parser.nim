@@ -36,7 +36,7 @@ proc parseModule*(ps: var Parser; b: var Builder) =
   # comparing against the nifler oracle.
   b.addRaw "(.aif27)\n"
   b.addRaw "(.vendor "
-  b.addStrLit "aifparser"
+  b.addStrLit "aowlparser"
   b.addRaw ")\n"
   b.addRaw "(.dialect "
   b.addStrLit "nim-parsed"
