@@ -1,5 +1,0 @@
-(.nif27)
-(index
-(fromexport "/home/savant/nimony/lib/std/private/oscommons.nim" pcLinkToFile pcFile pcLinkToDir pcDir PathComponent)(fromexport "/home/savant/nimony/lib/std/paths.nim" / path $ Path)
-(checksum "5B15E644AF191291A4FC877F595633A601CE2B1C")
-)

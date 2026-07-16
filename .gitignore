@@ -7,3 +7,4 @@ __pycache__/
 /webtest/nc/
 /webtest/.*.tmp
 /nimcache_check/
+/nimcache_native/

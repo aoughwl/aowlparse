@@ -1,8 +1,0 @@
-(.nif27)
-(index
-(converter
- (kv openArray.0.sysvq0asl toOpenArray.0.sysvq0asl)
- (kv openArray.0.sysvq0asl toOpenArray.1.sysvq0asl)
- (kv openArray.0.sysvq0asl toOpenArray.2.sysvq0asl))
-(checksum "B99F53B0672A36BCD60FFA91B070B66762CE0F11")
-)

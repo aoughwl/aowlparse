@@ -1,5 +1,0 @@
-(.nif27)
-(index
-(fromexport "/home/savant/nimony/src/lib/vfs.nim" OnlyIfChanged AlwaysWrite FileWriteMode)
-(checksum "43703E9FC0FFAAD03EDE66976C7E0544BF470058")
-)
