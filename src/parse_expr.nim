@@ -72,8 +72,9 @@ proc parseArg(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32) =
   ## `=` are the routine's, not a `kv`/`vv` pair).
   let head = ps.tok(int(lo))
   let guardKw = head.kind == tkKeyword and
-                (head.s == "if" or head.s == "case" or head.s == "proc" or
-                 head.s == "func" or head.s == "iterator")
+                (head.s == "if" or head.s == "when" or head.s == "case" or
+                 head.s == "try" or head.s == "proc" or head.s == "func" or
+                 head.s == "iterator")
   if not guardKw:
     let ci = ps.depth0Colon(int(lo), int(hi))
     if ci >= 0:
