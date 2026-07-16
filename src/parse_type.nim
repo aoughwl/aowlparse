@@ -332,8 +332,9 @@ proc parseProcType(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32) =
       b.addEmpty                                            # pragmas
     b.addEmpty 2                                            # exceptions, body
   else:
+    # a BARE `proc`/`iterator` type (`(proc)`, no params) → `(proctype)` with no
+    # children — nifler emits an empty node, not 8 empty slots.
     ps.emitInfo(b, kw.line, kw.col, pl, pc, false)
-    b.addEmpty 8
   b.endTree()
 
 # --- pragmas -----------------------------------------------------------------
