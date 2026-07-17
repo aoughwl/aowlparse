@@ -285,6 +285,23 @@ proc parseTypeRangeImpl(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32) =
   # — which the expression emitter renders correctly (an int must not be
   # `addIdent`-escaped to `\34`, a call must keep its arguments).
   let t = ps.tok(int(lo))
+  # A type constructor applied to a PROC/ITERATOR type — `owned(proc (…) {.….})`,
+  # `sink(iterator …)` — is a call in type position whose argument is itself a
+  # type. The generic expression fallthrough would parse that argument as a
+  # routine LITERAL (`(proc …)`), not a `(proctype …)`, so route it through the
+  # type parser: `(call owned (proctype …))`.
+  if (t.kind == tkIdent or t.kind == tkKeyword) and int(lo) + 2 < int(hi) and
+     ps.tok(int(lo) + 1).kind == tkParLe and
+     ps.matchClose(int(lo) + 1) == int(hi) - 1 and
+     ps.tok(int(lo) + 2).kind == tkKeyword and
+     (ps.tok(int(lo) + 2).s == "proc" or ps.tok(int(lo) + 2).s == "iterator"):
+    let rb = int(hi) - 1
+    b.addTree "call"
+    ps.emitInfo(b, t.line, t.col, pl, pc, false)
+    ps.emitName(b, t, t.line, t.col)                                  # callee
+    parseTypeRange(ps, b, int32(int(lo) + 2), int32(rb), t.line, t.col)  # proc-type arg
+    b.endTree()
+    return
   if int(lo) + 1 >= int(hi) and (t.kind == tkIdent or t.kind == tkKeyword):
     ps.emitName(b, t, pl, pc)
   else:
