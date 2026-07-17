@@ -1223,6 +1223,7 @@ proc parseOneStmt(ps: var Parser; b: var Builder; startIdx: int; pl, pc: int32;
             if d > 0: dec d
           elif d == 0 and t.kind == tkKeyword and
                (t.s == "if" or t.s == "when" or t.s == "case" or
+                t.s == "try" or t.s == "block" or
                 t.s == "elif" or t.s == "else" or t.s == "of" or
                 t.s == "proc" or t.s == "func" or t.s == "iterator"):
             cf = true; break
