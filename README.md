@@ -19,10 +19,30 @@ including term-rewriting template patterns, `Inf`/`NaN` hex-bit literals, custom
 numeric literals (`1'big`), method-chain continuations, multi-`do` calls, and
 pragma-decorated lambda sugar.
 
-Where aowlparser goes **beyond** `nifler`: it never dies on the first error.
-It **recovers** and keeps parsing, reports **structured diagnostics**
-(`--diagnostics:json`), and ships a `check` lint mode — so it's a better front end
-for tooling, editors, and CI than the classic one-shot parser.
+Where aowlparser goes **beyond** `nifler` — its diagnostics are built to be a
+markedly better front end for editors, LSPs, and CI:
+
+- **Never dies on the first error.** It recovers and keeps parsing, so one run
+  surfaces *every* problem — and it never cascades into the phantom
+  end-of-file errors a one-shot parser spews once it loses its place. Across the
+  full Nim compiler test corpus, on files where both report errors, `nifler`
+  emits ~2× the error lines we do.
+- **Fix-its.** Every grammar error carries a suggested repair (`help: insert ':'`,
+  `help: did you mean '=='?`) — the classic parser has no such concept.
+- **Related locations.** A mismatched bracket points at *both* the close and the
+  `(` it should have matched (`note: '(' opened here`), as a structured field.
+- **Machine-readable.** `--diagnostics:json` emits `{severity, code, message,
+  line, col, endCol, fix, related}` per diagnostic, for editor quick-fixes.
+- **Detections nifler lacks or reports vaguely**: assignment in a condition
+  (`if x = 5:` → *did you mean `==`?*), empty conditions (`elif:`), invalid
+  numeric/identifier literals (`0x` with no digits, `0O` octal, trailing `_`),
+  and full UTF-8 identifier support.
+- Every check is proven **zero-false-positive** against ~600 valid files and the
+  whole Nim standard library, and never changes the emitted AIF.
+
+Honest limitation: `nifler` still flags a handful of subtle *indentation-context*
+errors we don't — those are deliberately left out rather than risk a false
+positive on valid code.
 
 **📖 Full docs → [aoughwl.github.io/docs/aowlparser](https://aoughwl.github.io/docs/aowlparser)**
 

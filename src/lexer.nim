@@ -586,6 +586,20 @@ proc lexNumber(lx: var Lexer): Token =
       elif sufl == "i16": width = 16
       if (result.iVal and (1'i64 shl (width - 1))) != 0'i64:
         result.iVal = result.iVal - (1'i64 shl width)
+    # A value that exceeds its UNSIGNED small type's range (`0x123'u8` = 291 > 255)
+    # is out of range — nifler rejects it. Only the small unsigned types are
+    # checked here: their max fits in int64 with no sign/two's-complement
+    # ambiguity, so the comparison is exact and cannot false-positive on a valid
+    # literal (`0xFF'u8` = 255 = max stays fine). u64/i64 boundary checks would
+    # need wider-than-int64 arithmetic and are left out.
+    var umax = -1'i64
+    if sufl == "u8": umax = 255'i64
+    elif sufl == "u16": umax = 65535'i64
+    elif sufl == "u32": umax = 4294967295'i64
+    if umax >= 0 and result.iVal > umax:
+      lx.addDiag(sevError, "number-out-of-range",
+                 "value exceeds the range of '" & sufl & "' (max " & $umax & ")",
+                 result.line, result.col, lx.col)
 
 # ---------------------------------------------------------------------------
 # operators / identifiers

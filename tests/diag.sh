@@ -126,6 +126,15 @@ for src in 'elif:' 'if:' 'while:'; do
     echo "FAIL: '$src' should report expected-condition"; fail=1; }
 done
 
+# (4i) integer literal exceeding its unsigned type's range.
+printf "let x = 0x123'u8\n" > "$WORK/oor.nim"
+grep -q 'number-out-of-range' <<<"$("$NP" check "$WORK/oor.nim" 2>&1)" || {
+  echo "FAIL: 0x123'u8 should be number-out-of-range"; fail=1; }
+for ok in "0xFF'u8" "255'u8" "0xFFFFFFFF'u32"; do
+  printf 'let x = %s\n' "$ok" > "$WORK/oor.nim"
+  [ -z "$("$NP" check "$WORK/oor.nim" 2>&1)" ] || { echo "FAIL: '$ok' (= max) must be silent"; fail=1; }
+done
+
 # (5) diagnostics are emitted in SOURCE ORDER (top-to-bottom), not validator order.
 printf 'let a = (1\nvar b = {2\n' > "$WORK/ord.nim"
 lines="$("$NP" check "$WORK/ord.nim" 2>&1)"
