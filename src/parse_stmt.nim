@@ -310,8 +310,11 @@ proc emitBody(ps: var Parser; b: var Builder; colonIdx: int; refIndent: int32;
             sawCf = true
           elif d == 0 and k > i and not sawCf and kk.kind == tkKeyword and
                kk.indent < 0 and
-               (kk.s == "elif" or kk.s == "else" or kk.s == "of" or
-                kk.s == "except" or kk.s == "finally"):
+               (kk.s == "elif" or kk.s == "else" or kk.s == "except" or
+                kk.s == "finally" or
+                # `of` is ALSO the infix type-test operator (`base of Base`); it
+                # is a case BRANCH only when a depth-0 block `:` follows it here.
+                (kk.s == "of" and ps.depth0Colon(k + 1, lend) >= 0)):
             # a branch keyword that belongs to the ENCLOSING control flow
             # (`if c:\n  body() else: x`), not to an if/case EXPRESSION in this
             # statement's own args (`f(if c: a else: b)`).
