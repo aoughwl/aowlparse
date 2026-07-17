@@ -847,9 +847,19 @@ proc parseConcept(ps: var Parser; b: var Builder; conceptIdx, defIndent: int;
     b.addTree "stmts"
     let pfirst = ps.tok(conceptIdx + 1)
     ps.emitInfo(b, pfirst.line, pfirst.col, kw.line, kw.col, false)
-    var pi = conceptIdx + 1
-    while pi < hi and ps.tok(pi).kind != tkEof:
-      pi = ps.parseStmt(b, pi, pfirst.line, pfirst.col, hi)
+    # comma-separated refinement params: `a, type T` → `a` and `(typeof T)`.
+    let starts = ps.splitArgs(conceptIdx + 1, hi)
+    for ai in 0 ..< starts.len:
+      let pLo = starts[ai]
+      let pHi = if ai + 1 < starts.len: starts[ai + 1] - 1 else: hi
+      let pt = ps.tok(pLo)
+      if pt.kind == tkKeyword and pt.s == "type" and pLo + 1 < pHi:
+        b.addTree "typeof"
+        ps.emitInfo(b, pt.line, pt.col, pfirst.line, pfirst.col, false)
+        ps.parseExprRange(b, int32(pLo + 1), int32(pHi), pt.line, pt.col)
+        b.endTree()
+      else:
+        ps.parseExprRange(b, int32(pLo), int32(pHi), pfirst.line, pfirst.col)
     b.endTree()   # params
   else:
     b.addEmpty
