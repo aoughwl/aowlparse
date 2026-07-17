@@ -1228,7 +1228,22 @@ proc parseRoutine(ps: var Parser; b: var Builder; kwIdx: int; pl, pc: int32;
     b.addRaw " x"
   else:
     b.addEmpty
-  b.addEmpty  # pattern
+  # term-rewriting template PATTERN `{ … }` (`template t*{swap(a,b)}(…) = …`) —
+  # a `{` that is NOT a `{.pragma.}`. nifler emits it in the pattern slot as
+  # `(stmts <pattern-expr>)`.
+  if not anon and ps.tok(i).kind == tkCurlyLe and ps.tok(i + 1).kind != tkDot:
+    let lb = ps.tok(i)
+    let rb = ps.matchClose(i)
+    b.addTree "stmts"
+    ps.emitInfo(b, lb.line, lb.col, aTok.line, aTok.col, false)
+    var j = i + 1
+    while j < rb and ps.tok(j).kind != tkEof:
+      if ps.tok(j).kind == tkComment: inc j; continue
+      j = ps.parseStmt(b, j, lb.line, lb.col, rb)
+    b.endTree()
+    i = rb + 1
+  else:
+    b.addEmpty  # pattern
   # generics
   if ps.tok(i).kind == tkBracketLe:
     i = ps.parseGenerics(b, i, aTok.line, aTok.col)
