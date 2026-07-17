@@ -234,7 +234,10 @@ proc lineEnd(ps: Parser; startIdx: int): int =
       # multi-line token (a triple-quoted string / long-string literal), whose
       # `line` is its START line: a token that follows the CLOSE on the same
       # physical line (`… """ == x`) has indent -1 and must stay a continuation.
-      if t.indent >= 0 and t.line != prev.line and not continuesLine(prev):
+      # A line that OPENS with a `.` is a method-chain continuation of the prior
+      # line (`foo()⏎  .then(x)⏎  .catch(y)`), never a new statement.
+      if t.indent >= 0 and t.line != prev.line and not continuesLine(prev) and
+         t.kind != tkDot:
         # A DEEPER-indented `elif`/`else` on the next line continues an if/case
         # EXPRESSION (`return if c: a⏎   else: b`). A STATEMENT's `else` aligns
         # with its `if` (same indent), so the strict `>` keeps if-statements —
