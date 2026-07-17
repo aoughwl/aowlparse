@@ -7,10 +7,19 @@ so it can be compiled to JavaScript and run in the browser.
 
 Its output is **byte-for-byte identical** to native `nifler` — save for one line
 it owns on purpose, the `(.vendor "aowlparser")` header (aowlparser stamps its own
-identity rather than impersonating `nifler`). The entire nimony standard library
-round-trips structurally, and 46 of 47 corpus programs match to the byte apart
-from that header; the differential harness neutralizes it and holds the rest
-strict.
+identity rather than impersonating `nifler`). The entire **nimony** source tree and
+standard library round-trip (184/184 nimony/src byte-exact, 105/105 nimony/lib
+structural parity), and all 151 corpus programs pass — 140 of them byte-for-byte.
+
+Beyond nimony's own tree, aowlparser is validated against the **full upstream Nim
+standard library** by differential fuzzing: **295 of 310 `Nim/lib` files** now
+round-trip structure-identical to `nifler`, with the remaining handful being
+rare multi-construct edge cases under active reduction (0 crashes, 0 hangs).
+
+Where aowlparser goes **beyond** `nifler`: it never dies on the first error.
+It **recovers** and keeps parsing, reports **structured diagnostics**
+(`--diagnostics:json`), and ships a `check` lint mode — so it's a better front end
+for tooling, editors, and CI than the classic one-shot parser.
 
 **📖 Full docs → [aoughwl.github.io/docs/aowlparser](https://aoughwl.github.io/docs/aowlparser)**
 
@@ -21,7 +30,9 @@ strict.
 - [Known gaps](https://aoughwl.github.io/docs/aowlparser/known-gaps) — the honest edge-case catalog
 
 ```sh
-aowlparser p in.nim out.p.aif      # parse Nim source -> nifler-compatible AIF
+aowlparser p in.nim out.p.aif           # parse Nim source -> nifler-compatible AIF
+aowlparser check in.nim                  # lint / report diagnostics, recovering past errors
+aowlparser p --diagnostics:json in.nim out.p.aif   # structured diagnostics for tooling
 ```
 
 Everything is off by default, so a plain run is byte-compatible with `nifler`.
