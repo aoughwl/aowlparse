@@ -92,6 +92,7 @@ type
     sawSpaceInIndent: bool   ## tpBoth mixing detection: state for current line
     sawTabInIndent: bool
     warnedMixThisLine: bool
+    tabErrThisLine: bool     ## tpSpaces: already flagged an illegal tab on this line
     errors: int              ## unknown/illegal bytes seen (drives --strict)
     prevIndent: int32        ## indent column of the previous first-on-line token
     indentUnit: int32        ## derived indentation step (--indent-consistency)
@@ -141,6 +142,7 @@ proc advance(lx: var Lexer) =
       lx.sawSpaceInIndent = false
       lx.sawTabInIndent = false
       lx.warnedMixThisLine = false
+      lx.tabErrThisLine = false
     elif ch == '\t' and lx.opts.tabPolicy != tpSpaces:
       # A tab counts as `tabWidth` columns once tabs are permitted, so a
       # tab-indented line reports the same `indent` as its space-expanded
@@ -158,7 +160,13 @@ proc advance(lx: var Lexer) =
     inc lx.pos
 
 proc isIdentStart(c: char): bool =
-  c == '_' or (c >= 'a' and c <= 'z') or (c >= 'A' and c <= 'Z')
+  ## Nim identifiers are UTF-8: any byte >= 0x80 (a unicode lead/continuation
+  ## byte) is a valid identifier character, so `café`, `åäö`, Cyrillic and CJK
+  ## names lex as single identifiers rather than a run of illegal bytes. The
+  ## classic lexer does the same (it never validates UTF-8 here — it just accepts
+  ## high bytes and emits them verbatim).
+  c == '_' or (c >= 'a' and c <= 'z') or (c >= 'A' and c <= 'Z') or
+    (uint8(c) >= 0x80'u8)
 
 proc isIdentCont(c: char): bool =
   isIdentStart(c) or (c >= '0' and c <= '9')
@@ -377,12 +385,26 @@ proc lexChar(lx: var Lexer): Token =
   result = startToken(lx, tkCharLit)
   advance lx # opening quote
   var s = ""
-  if lx.cur == '\\':
-    decodeEscape(lx, s)
+  if lx.cur == '\'':
+    # `''` — an empty character literal has no content to name a byte value.
+    lx.addDiag(sevError, "invalid-character-literal",
+               "invalid character literal — a char must hold exactly one character",
+               result.line, result.col, lx.col)
+    advance lx # consume the closing quote so lexing recovers past it
   else:
-    s.add lx.cur
-    advance lx
-  if lx.cur == '\'': advance lx
+    if lx.cur == '\\':
+      decodeEscape(lx, s)
+    else:
+      s.add lx.cur
+      advance lx
+    if lx.cur == '\'': advance lx
+    else:
+      # No closing quote where one is required: either a run-on literal
+      # (`'ab'`) or one cut off by end-of-line/file (`'a`). nifler reports both
+      # as a missing closing quote.
+      lx.addDiag(sevError, "unterminated-char",
+                 "missing closing ' for character literal",
+                 result.line, result.col, lx.col)
   if s.len > 0:
     result.iVal = int64(ord(s[0]))
   result.s = s
@@ -428,8 +450,15 @@ proc lexNumber(lx: var Lexer): Token =
   var isFloat = false
 
   # ---- base prefix -------------------------------------------------------
+  # `0O…` (capital O) is NOT a valid octal prefix in Nim — it's too easily
+  # confused with a `0` followed by the letter O. nifler rejects it outright.
+  if lx.cur == '0' and lx.peek(1) == 'O':
+    lx.addDiag(sevError, "invalid-int-literal",
+               "'0O' is not a valid octal prefix — use lowercase '0o'",
+               lx.line, lx.col, lx.col + 2)
   if lx.cur == '0' and lx.peek(1) in {'x', 'X', 'o', 'b', 'B', 'c', 'C'}:
     let b = lx.peek(1)
+    let pcol = lx.col
     advance lx # '0'
     advance lx # base char
     case b
@@ -449,6 +478,10 @@ proc lexNumber(lx: var Lexer): Token =
         advance lx
       else:
         break
+    if digits.len == 0:
+      # a base prefix with NO digits: `0x`, `0b`, `0o` (nifler: "invalid number").
+      lx.addDiag(sevError, "invalid-number",
+                 "'0" & b & "' has no digits", lx.line, pcol, lx.col)
   else:
     # ---- decimal integer part ---------------------------------------------
     while true:
@@ -569,6 +602,20 @@ proc lexNumber(lx: var Lexer): Token =
       elif sufl == "i16": width = 16
       if (result.iVal and (1'i64 shl (width - 1))) != 0'i64:
         result.iVal = result.iVal - (1'i64 shl width)
+    # A value that exceeds its UNSIGNED small type's range (`0x123'u8` = 291 > 255)
+    # is out of range — nifler rejects it. Only the small unsigned types are
+    # checked here: their max fits in int64 with no sign/two's-complement
+    # ambiguity, so the comparison is exact and cannot false-positive on a valid
+    # literal (`0xFF'u8` = 255 = max stays fine). u64/i64 boundary checks would
+    # need wider-than-int64 arithmetic and are left out.
+    var umax = -1'i64
+    if sufl == "u8": umax = 255'i64
+    elif sufl == "u16": umax = 65535'i64
+    elif sufl == "u32": umax = 4294967295'i64
+    if umax >= 0 and result.iVal > umax:
+      lx.addDiag(sevError, "number-out-of-range",
+                 "value exceeds the range of '" & sufl & "' (max " & $umax & ")",
+                 result.line, result.col, lx.col)
 
 # ---------------------------------------------------------------------------
 # operators / identifiers
@@ -584,6 +631,7 @@ proc lexOperator(lx: var Lexer): Token =
 
 proc lexIdent(lx: var Lexer): Token =
   result = startToken(lx, tkIdent)
+  let scol = lx.col
   var s = ""
   while lx.pos < lx.n and isIdentCont(lx.cur):
     s.add lx.cur
@@ -591,6 +639,19 @@ proc lexIdent(lx: var Lexer): Token =
   result.s = s
   if isKeyword(s):
     result.kind = tkKeyword
+  # Nim identifiers may not END in '_' or contain '__' (an underscore must sit
+  # between two alphanumerics). nifler: "invalid token: trailing underscore".
+  # ASCII-only: a UTF-8 identifier legitimately contains high bytes, and '_'
+  # rules there are unchanged, so this only inspects '_' runs.
+  if s.len >= 2 and s[s.len - 1] == '_':
+    lx.addDiag(sevError, "invalid-identifier",
+               "identifier may not end with '_'", result.line, scol, lx.col)
+  else:
+    for i in 1 ..< s.len:
+      if s[i] == '_' and s[i-1] == '_':
+        lx.addDiag(sevError, "invalid-identifier",
+                   "identifier may not contain '__'", result.line, scol, lx.col)
+        break
 
 const QuoteMergeChars = OperatorChars + {'(', ')', '[', ']', '{', '}'} - {':'}
 
@@ -636,6 +697,8 @@ proc lexBackquotedIdent(lx: var Lexer): Token =
 
 proc skipBlockComment(lx: var Lexer) =
   ## `#[ ... ]#`, nesting-aware.
+  let startLine = lx.line
+  let startCol = lx.col
   advance lx # '#'
   advance lx # '['
   var depth = 1
@@ -646,10 +709,15 @@ proc skipBlockComment(lx: var Lexer) =
       advance lx; advance lx; dec depth
     else:
       advance lx
+  if depth > 0:
+    lx.addDiag(sevError, "unterminated-comment",
+               "end of multiline comment expected", startLine, startCol, lx.col)
 
 proc skipDocBlockComment(lx: var Lexer) =
   ## `##[ ... ]##` doc block comment, nesting-aware (nests on `##[`, closes on
   ## `]##`). Matches the classic lexer's `skipMultiLineComment(isDoc=true)`.
+  let startLine = lx.line
+  let startCol = lx.col
   advance lx; advance lx; advance lx # '##['
   var depth = 1
   while lx.pos < lx.n and depth > 0:
@@ -659,6 +727,9 @@ proc skipDocBlockComment(lx: var Lexer) =
       advance lx; advance lx; advance lx; dec depth
     else:
       advance lx
+  if depth > 0:
+    lx.addDiag(sevError, "unterminated-comment",
+               "end of multiline comment expected", startLine, startCol, lx.col)
 
 proc tokenize*(src: string): seq[Token]
 
@@ -670,19 +741,29 @@ proc tokenize*(src: string; opts: LexOptions; errors: var int): seq[Token] =
   var lx = initLexer(src, opts)
   result = @[]
   # --- leading UTF-8 BOM (EF BB BF) -------------------------------------------
-  if lx.opts.bomPolicy != bomDefault and lx.n >= 3 and
-     src[0] == '\xEF' and src[1] == '\xBB' and src[2] == '\xBF':
+  # A leading BOM is ALWAYS consumed (nifler strips it). This used to be gated on
+  # a non-default policy, relying on the BOM bytes falling through to the
+  # unknown-byte skip otherwise — but now that identifiers accept high bytes
+  # (UTF-8 names), an unstripped BOM would glue onto the first identifier. Consume
+  # the 3 bytes WITHOUT advancing the column so line-1 indentation is unaffected.
+  if lx.n >= 3 and src[0] == '\xEF' and src[1] == '\xBB' and src[2] == '\xBF':
     if lx.opts.bomPolicy == bomReject:
       lx.addDiag(sevError, "bom-rejected",
                  "leading UTF-8 BOM rejected [--bom:reject]", 1, 0, 0)
-    # Both strip and reject consume the 3 BOM bytes WITHOUT advancing the column,
-    # so line-1 indentation/columns are unaffected (fixes the latent col-shift of
-    # the legacy unknown-byte skip). The default (bomDefault) path is untouched.
     lx.pos = 3
   while lx.pos < lx.n:
     let before = result.len
     let c = lx.cur
     if c == ' ' or c == '\t' or c == '\r':
+      # Under the default (nifler-compatible) tpSpaces policy, a tab anywhere in
+      # the token stream — leading OR mid-line — is illegal Nim; only tabs inside
+      # string/char literals and comments (consumed elsewhere) are exempt. One
+      # diagnostic per line keeps a tab-indented block from spamming.
+      if c == '\t' and lx.opts.tabPolicy == tpSpaces and not lx.tabErrThisLine:
+        lx.addDiag(sevError, "tabs-not-allowed",
+                   "tabs are not allowed, use spaces instead",
+                   lx.line, lx.col, lx.col)
+        lx.tabErrThisLine = true
       # tpBoth mixing detection: flag a line whose leading whitespace uses both
       # tabs and spaces (classic Nim rejects tabs outright; we only warn).
       if lx.atLineStart and lx.opts.tabPolicy == tpBoth and c != '\r':

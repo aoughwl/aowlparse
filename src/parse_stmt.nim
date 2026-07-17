@@ -15,7 +15,8 @@
 ## `(unpackdecl value (unpacktup (let …)…))`. Indentation-delimited blocks
 ## threshold on `ps.tok(i).indent` (see `emitBody`).
 
-proc parseCommand(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32) =
+proc parseCommand(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32;
+                  singleArg = false) =
   # STATEMENT-context command (`parseExprStmt` → `newTree(nkCommand, a.info, a)`):
   # nkCommand.info = the CALLEE expression's info. For a dotted callee `a.b` that
   # is the `.` position, not the head ident — so anchor at the callee's emitted
@@ -25,7 +26,14 @@ proc parseCommand(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32) =
   b.addTree "cmd"
   ps.emitInfo(b, anchor.line, anchor.col, pl, pc, false)   # cmd node info = callee pos
   ps.parseExprRange(b, lo, int32(ce), anchor.line, anchor.col)   # callee (may be dotted)
-  ps.parseArgList(b, int32(ce), hi, anchor.line, anchor.col)
+  if singleArg:
+    # The sole argument is an anonymous routine whose indented BODY was folded
+    # into this range. Commas inside that body are statement separators, not
+    # argument separators, so splitting on them would tear the body apart (and
+    # the resulting garbage range recurses without progress → a hang).
+    ps.parseArg(b, int32(ce), hi, anchor.line, anchor.col)
+  else:
+    ps.parseArgList(b, int32(ce), hi, anchor.line, anchor.col)
   b.endTree()
 
 proc parseExprStmt(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32): int =
@@ -52,6 +60,7 @@ proc parseExprStmt(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32): int =
     # following indented lines, past this line's end. Extend the range to cover
     # them so parseCommand's arg parser captures the anon routine's body.
     var chi = int(hi)
+    var routineArg = false
     if ps.tok(ce).kind == tkKeyword and
        (ps.tok(ce).s == "proc" or ps.tok(ce).s == "func" or ps.tok(ce).s == "iterator"):
       let stmtIndent = if ps.tok(lo).indent >= 0: int(ps.tok(lo).indent)
@@ -59,7 +68,10 @@ proc parseExprStmt(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32): int =
       while ps.tok(chi).kind != tkEof and ps.tok(chi).indent >= 0 and
             int(ps.tok(chi).indent) > stmtIndent:
         chi = ps.lineEnd(chi)
-    ps.parseCommand(b, lo, int32(chi), pl, pc)
+      # The routine starts AT `ce`, so it is this command's only argument and the
+      # folded-in body must not be comma-split (see parseCommand's singleArg).
+      routineArg = chi > int(hi)
+    ps.parseCommand(b, lo, int32(chi), pl, pc, routineArg)
     return int(chi)
   let eqi = ps.findAssign(int(lo), int(hi))
   if eqi >= 0:
@@ -232,8 +244,13 @@ proc emitBody(ps: var Parser; b: var Builder; colonIdx: int; refIndent: int32;
   ## (`if c: stmt`) and the indented block (mirrors parseRoutine's body loop).
   ## `pl,pc` = the controlling branch node position (parent of the stmts node).
   if colonIdx < 0:
-    # No body-introducing `:` found (should not happen now that lineEnd handles
-    # continuations). Emit an empty body and do NOT restart at token 0.
+    # No body-introducing `:` found — the construct is malformed (`if c` with no
+    # colon, `while x`, a bare `try`). EVERY statement control-flow form funnels
+    # its body through here, so this one site reports them all. Emit an empty body
+    # and do NOT restart at token 0.
+    ps.perrAt("expected-colon",
+              "expected ':' to open this block's body", pl, pc,
+              fix = "insert ':' at the end of the line")
     b.addTree "stmts"; b.addEmpty; b.endTree()
     return colonIdx     # caller advances past this construct via its own lineEnd
   if ps.tok(colonIdx).kind == tkCurlyLe:
@@ -498,7 +515,15 @@ proc parseFor(ps: var Parser; b: var Builder; kwIdx: int; pl, pc: int32): int =
   b.addTree "for"
   ps.emitInfo(b, firstVar.line, firstVar.col, pl, pc, false)
   # iterator FIRST (parent = for node)
-  ps.parseExprRange(b, int32(inIdx + 1), int32(colon), firstVar.line, firstVar.col)
+  if inIdx < 0:
+    # `for x: body` with no `in` — nifler errors ("expected 'in'"). `inIdx + 1`
+    # would be token 0 and the iterator would be read from the start of the file,
+    # so emit an empty iterator and report instead.
+    ps.perr("expected-in", "expected 'in' in the 'for' header", kw,
+            fix = "write 'for <vars> in <iterable>: …'")
+    b.addEmpty
+  else:
+    ps.parseExprRange(b, int32(inIdx + 1), int32(colon), firstVar.line, firstVar.col)
   ps.emitForVars(b, kwIdx, inIdx, firstVar)
   # body LAST (parent = for node)
   result = ps.emitBody(b, colon, refIndent, firstVar.line, firstVar.col)
@@ -523,6 +548,23 @@ proc parseForExpr(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32; bare = 
       elif depth == 0 and t.kind == tkKeyword and t.s == "in":
         inIdx = j; break
       inc j
+  if colon < 0 or inIdx < 0:
+    # A malformed `for` — no body colon (`(for)`) or no `in` (`(for: )`). Both
+    # sentinels are -1, so `colon + 1` / `inIdx + 1` would index token 0 and the
+    # iterable/body would be parsed from the START OF FILE, recursing forever.
+    # Emit an empty `for` instead.
+    let kwT = ps.tok(kwIdx)
+    if inIdx < 0:
+      ps.perr("expected-in", "expected 'in' in the 'for' header", kwT,
+              fix = "write 'for <vars> in <iterable>: …'")
+    else:
+      ps.perr("expected-colon", "expected ':' to open the 'for' body", kwT,
+              fix = "insert ':' after the iterable")
+    b.addTree "for"
+    ps.emitInfo(b, kwT.line, kwT.col, pl, pc, false)
+    b.addEmpty 3   # iterable, vars, body
+    b.endTree()
+    return
   let firstVar = ps.tok(kwIdx + 1)
   b.addTree "for"
   ps.emitInfo(b, firstVar.line, firstVar.col, pl, pc, false)

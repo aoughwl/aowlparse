@@ -1,5 +1,5 @@
-## webmain.nim — browser/Node entry for aifparser, compiled through the
-## nimony-web JS backend (`nim_js`). It replaces aifparser.nim's file/stdout
+## webmain.nim — browser/Node entry for aowlparser, compiled through the
+## nimony-web JS backend (`nim_js`). It replaces the CLI driver's file/stdout
 ## bridges with in-memory equivalents so the parser runs with NO file I/O:
 ##
 ##   * INPUT   — the Nim source text arrives as a JS string in
@@ -7,131 +7,57 @@
 ##               The file-field path written into AIF line-info suffixes arrives
 ##               as `globalThis.__np_file` (defaults to "in.nim" if empty), so
 ##               the produced bytes can be made byte-identical to native nifler /
-##               `bin/aifparser` invoked on that same relative path.
-##   * PARSE   — identical to aifparser.parseToFile: tokenize -> initParser ->
+##               `bin/aowlparser` invoked on that same relative path.
+##   * PARSE   — identical to aowlparser's parse path: tokenize -> initParser ->
 ##               parseModule, but the builder is an in-MEMORY nifbuilder
 ##               (`open(sizeHint)`) whose bytes we `extract` instead of flushing
 ##               to a file.
-##   * OUTPUT  — the produced `.p.aif` bytes are handed back to JS on
-##               `globalThis.__np_out` (string). No filesystem, no stdout.
+##   * CHECK   — the SAME recoverable diagnostics `aowlparser check` produces:
+##               lexer diagnostics (`gLexDiags`), the bracket validator, the
+##               grammar validator (`checkGrammar`), AND the grammar errors the
+##               parser records as it copes (`ps.diags`) — merged, source-ordered,
+##               and serialised to JSON with the optional `fix` / `related`
+##               fields. This is what powers the playground's live squiggles,
+##               quick-fixes, and "opened here" markers.
+##   * OUTPUT  — the produced `.p.aif` bytes go back on `globalThis.__np_out`
+##               (string) and the diagnostics JSON on `globalThis.__np_diag`.
+##               No filesystem, no stdout.
 ##
-## This is the proof that aifparser (the parser half of client-side Tier 2) runs
-## in the browser. Modeled on nifi/src/nifi/webmain.nim.
+## This is the proof that aowlparser (the parser half of client-side Tier 2) runs
+## in the browser, now carrying the full `check` error surface.
 
 when defined(nimony):
   {.feature: "lenientnils".}
 
 import nifbuilder
-import tokens, lexer, parser   # lexer exports tokenize + gLexDiags; tokens exports Diagnostic/Severity
+import tokens, lexer, parser   # lexer exports tokenize + gLexDiags; parser exports initParser/parseModule + ps.diags
+import checks                  # shared, byte-faithful copy of the CLI check surface
 import jsffi
-
-proc jsonEscape(s: string): string =
-  result = ""
-  for c in s:
-    case c
-    of '"': result.add "\\\""
-    of '\\': result.add "\\\\"
-    of '\x08': result.add "\\b"
-    of '\x0C': result.add "\\f"
-    of '\x0A': result.add "\\n"
-    of '\x0D': result.add "\\r"
-    of '\x09': result.add "\\t"
-    else:
-      if c < ' ':
-        const hex = "0123456789abcdef"
-        result.add "\\u00"
-        result.add hex[(ord(c) shr 4) and 0xF]
-        result.add hex[ord(c) and 0xF]
-      else:
-        result.add c
-
-# --- structural bracket validator (mirrors aifparser.nim's checkBrackets) -----
-proc closerFor(k: TokKind): char =
-  case k
-  of tkParLe: ')'
-  of tkBracketLe: ']'
-  else: '}'
-proc openerFor(k: TokKind): char =
-  case k
-  of tkParLe: '('
-  of tkBracketLe: '['
-  else: '{'
-proc matchesClose(open, close: TokKind): bool =
-  (open == tkParLe and close == tkParRi) or
-  (open == tkBracketLe and close == tkBracketRi) or
-  (open == tkCurlyLe and close == tkCurlyRi)
-
-proc checkBrackets(toks: seq[Token]): seq[Diagnostic] =
-  ## Unbalanced/mismatched ()/[]/{} — a validator the range-splitter never
-  ## reports. Best-effort: it never blocks the emitted AIF.
-  result = @[]
-  var stack: seq[Token] = @[]
-  for t in toks:
-    case t.kind
-    of tkParLe, tkBracketLe, tkCurlyLe:
-      stack.add t
-    of tkParRi, tkBracketRi, tkCurlyRi:
-      if stack.len == 0:
-        result.add Diagnostic(severity: sevError, code: "unmatched-close",
-          message: "unmatched '" & closerFor(t.kind) & "'",
-          line: t.line, col: t.col, endCol: t.col + 1)
-      elif not matchesClose(stack[stack.len - 1].kind, t.kind):
-        let top = stack[stack.len - 1]
-        result.add Diagnostic(severity: sevError, code: "mismatched-bracket",
-          message: "'" & closerFor(t.kind) & "' does not match '" &
-                   openerFor(top.kind) & "' opened at " & $top.line & ":" & $top.col,
-          line: t.line, col: t.col, endCol: t.col + 1)
-        stack.setLen(stack.len - 1)
-      else:
-        stack.setLen(stack.len - 1)
-    else: discard
-  for t in stack:
-    result.add Diagnostic(severity: sevError, code: "unclosed-bracket",
-      message: "unclosed '" & openerFor(t.kind) & "'",
-      line: t.line, col: t.col, endCol: t.col + 1)
-
-proc sevName(s: Severity): string =
-  case s
-  of sevError: "error"
-  of sevWarn: "warning"
-  of sevHint: "hint"
-
-proc diagsToJson(ds: seq[Diagnostic]): string =
-  ## `[{"severity","code","message","line","col","endCol"}]` — line 1-based,
-  ## col/endCol 0-based (the JS glue converts to Monaco's 1-based cols). The
-  ## severity lets the editor show warnings/hints instead of blocking on style.
-  result = "["
-  for i in 0 ..< ds.len:
-    if i > 0: result.add ","
-    result.add "{\"severity\":\""
-    result.add sevName(ds[i].severity)
-    result.add "\",\"code\":\""
-    result.add ds[i].code
-    result.add "\",\"message\":\""
-    result.add jsonEscape(ds[i].message)
-    result.add "\",\"line\":"
-    result.add $ds[i].line
-    result.add ",\"col\":"
-    result.add $ds[i].col
-    result.add ",\"endCol\":"
-    result.add $ds[i].endCol
-    result.add "}"
-  result.add "]"
 
 proc parseToStr(src, fileField: string; curly: bool; diagJson: var string): string =
   ## Parse Nim source text from memory to the `.p.aif` byte string, and set
-  ## `diagJson` to the JSON array of RECOVERABLE structured diagnostics (lexer
-  ## checks + bracket validation). Parsing is never aborted by them — an editor
-  ## gets every problem at once. `curly` enables the experimental `{ … }` mode.
+  ## `diagJson` to the JSON array of RECOVERABLE structured diagnostics — the
+  ## exact set `aowlparser check --diagnostics:json` emits. Parsing is never
+  ## aborted by them, so an editor gets every problem at once. `curly` enables
+  ## the experimental `{ … }` block mode.
   var errors = 0
   let toks = tokenize(src, defaultLexOptions, errors)
-  var ds = gLexDiags                             # lexer diagnostics from tokenize
-  for d in checkBrackets(toks): ds.add d
-  diagJson = diagsToJson(ds)
+  # lexer diagnostics (unknown bytes, unterminated literals, style/portability)
+  var diags = gLexDiags
+  # structural + grammar validators over the token stream
+  for d in checkBrackets(toks): diags.add d
+  for d in checkGrammar(toks): diags.add d
+  # parse (in-memory builder); the parser records grammar errors at each coping
+  # point into ps.diags as it goes.
   var ps = initParser(toks, fileField, curly)
-  var b = nifbuilder.open(src.len * 4 + 256)   # in-memory builder
+  var b = nifbuilder.open(src.len * 4 + 256)
   parseModule(ps, b)
   result = extract(b)
+  # grammar diagnostics are produced BY the parse, so merge them only after it
+  # ran, then source-order the whole set for top-to-bottom reading.
+  for d in ps.diags: diags.add d
+  sortBySourceOrder(diags)
+  diagJson = diagsToJson(diags)
 
 proc npRun() =
   ## The whole browser entry, run as MODULE INIT (top-level). Like nifi's
