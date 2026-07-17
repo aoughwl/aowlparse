@@ -239,7 +239,7 @@ proc findColon(ps: Parser; lo, hi: int): int =
   result = brace
 
 proc emitBody(ps: var Parser; b: var Builder; colonIdx: int; refIndent: int32;
-              pl, pc: int32): int =
+              pl, pc: int32; hdrIndent: int32 = -1): int =
   ## Emit a `(stmts …)` body after a `:`. Handles both the one-line form
   ## (`if c: stmt`) and the indented block (mirrors parseRoutine's body loop).
   ## `pl,pc` = the controlling branch node position (parent of the stmts node).
@@ -302,10 +302,20 @@ proc emitBody(ps: var Parser; b: var Builder; colonIdx: int; refIndent: int32;
     while i < hi and ps.tok(i).kind != tkEof:
       i = ps.parseStmt(b, i, first.line, first.col, hi)
   else:
-    # indented block: statements at the body's own indentation (`first.indent`)
-    # or deeper. Thresholding on the body indent — not the caller's `refIndent`
-    # (the keyword column) — makes value-context bodies work too, e.g. the body
-    # of `let x = try:` sits mid-line so its keyword column is not its indent.
+    # A block body on a new line MUST be indented deeper than the STATEMENT line
+    # that introduces it (the off-side rule). If it is not, the body was forgotten
+    # or misindented (`if c:⏎x` — `x` is a sibling, not a body), which nifler
+    # reports as "invalid indentation". `hdrIndent` is the caller's real
+    # statement-line indent (`lineIndentOf(kwIdx)`), which — unlike the colon's
+    # own line — is correct even when the header condition spans several lines
+    # (`when a and⏎  b:`). Only enforced when the caller passes it (>= 0); value/
+    # argument-context blocks leave it -1 and are not checked. Zero-FP: a real
+    # block body is always strictly deeper than its statement line.
+    if hdrIndent >= 0 and first.indent <= hdrIndent:
+      ps.perrAt("expected-indented-body",
+        "this block's body must be indented deeper than its ':' line",
+        first.line, first.col,
+        fix = "indent the body under the ':'")
     let bodyRef = first.indent - 1
     while ps.tok(i).kind != tkEof and ps.tok(i).indent > bodyRef:
       # An inline branch keyword (`else`/`elif`/…) can follow the body on its own
@@ -365,14 +375,14 @@ proc parseIfLike(ps: var Parser; b: var Builder; kwIdx: int; pl, pc: int32;
       b.addTree "elif"
       ps.emitInfo(b, condTok.line, condTok.col, kw.line, kw.col, false)  # elif = cond pos
       ps.parseExprRange(b, int32(i + 1), int32(colon), condTok.line, condTok.col)
-      i = ps.emitBody(b, colon, refIndent, condTok.line, condTok.col)
+      i = ps.emitBody(b, colon, refIndent, condTok.line, condTok.col, ps.lineIndentOf(i))
       b.endTree()
     elif branch.kind == tkKeyword and branch.s == "else":
       let hi = ps.lineEnd(i)
       let colon = ps.findColon(i, hi)
       b.addTree "else"
       ps.emitInfo(b, branch.line, branch.col, kw.line, kw.col, false)   # else = keyword pos
-      i = ps.emitBody(b, colon, refIndent, branch.line, branch.col)
+      i = ps.emitBody(b, colon, refIndent, branch.line, branch.col, ps.lineIndentOf(i))
       b.endTree()
       break
     else:
@@ -397,7 +407,7 @@ proc parseWhile(ps: var Parser; b: var Builder; kwIdx: int; pl, pc: int32): int 
   b.addTree "while"
   ps.emitInfo(b, kw.line, kw.col, pl, pc, false)
   ps.parseExprRange(b, int32(kwIdx + 1), int32(colon), kw.line, kw.col)  # cond parent = while
-  result = ps.emitBody(b, colon, refIndent, kw.line, kw.col)
+  result = ps.emitBody(b, colon, refIndent, kw.line, kw.col, ps.lineIndentOf(kwIdx))
   b.endTree()
 
 proc parseCase(ps: var Parser; b: var Builder; kwIdx: int; pl, pc: int32): int =
@@ -430,19 +440,19 @@ proc parseCase(ps: var Parser; b: var Builder; kwIdx: int; pl, pc: int32): int =
         if aLo < aHi:
           ps.parseExprRange(b, int32(aLo), int32(aHi), br.line, br.col)  # value parent = of
       b.endTree()  # ranges
-      i = ps.emitBody(b, bcolon, refIndent, br.line, br.col)
+      i = ps.emitBody(b, bcolon, refIndent, br.line, br.col, ps.lineIndentOf(i))
       b.endTree()  # of
     elif br.s == "elif":
       b.addTree "elif"
       ps.emitInfo(b, br.line, br.col, kw.line, kw.col, false)
       let cEnd = if bcolon >= 0: bcolon else: bhi
       ps.parseExprRange(b, int32(i + 1), int32(cEnd), br.line, br.col)  # condition
-      i = ps.emitBody(b, bcolon, refIndent, br.line, br.col)
+      i = ps.emitBody(b, bcolon, refIndent, br.line, br.col, ps.lineIndentOf(i))
       b.endTree()  # elif
     else:
       b.addTree "else"
       ps.emitInfo(b, br.line, br.col, kw.line, kw.col, false)
-      i = ps.emitBody(b, bcolon, refIndent, br.line, br.col)
+      i = ps.emitBody(b, bcolon, refIndent, br.line, br.col, ps.lineIndentOf(i))
       b.endTree()
   b.endTree()  # case
   result = i
@@ -526,7 +536,7 @@ proc parseFor(ps: var Parser; b: var Builder; kwIdx: int; pl, pc: int32): int =
     ps.parseExprRange(b, int32(inIdx + 1), int32(colon), firstVar.line, firstVar.col)
   ps.emitForVars(b, kwIdx, inIdx, firstVar)
   # body LAST (parent = for node)
-  result = ps.emitBody(b, colon, refIndent, firstVar.line, firstVar.col)
+  result = ps.emitBody(b, colon, refIndent, firstVar.line, firstVar.col, ps.lineIndentOf(kwIdx))
   b.endTree()
 
 proc parseForExpr(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32; bare = true) =
@@ -647,7 +657,7 @@ proc parseTry(ps: var Parser; b: var Builder; kwIdx: int; pl, pc: int32): int =
   let colon = ps.findColon(kwIdx, hi)
   let bodyIndent = if colon >= 0 and ps.tok(colon + 1).indent >= 0:
                      ps.tok(colon + 1).indent else: int32(100000)
-  var i = ps.emitBody(b, colon, refIndent, kw.line, kw.col)   # try body, parent = try node
+  var i = ps.emitBody(b, colon, refIndent, kw.line, kw.col, ps.lineIndentOf(kwIdx))   # try body, parent = try node
   while ps.tok(i).kind == tkKeyword and
         (ps.tok(i).indent < 0 or
          (ps.tok(i).indent >= lineIndent and ps.tok(i).indent < bodyIndent)) and
@@ -668,12 +678,12 @@ proc parseTry(ps: var Parser; b: var Builder; kwIdx: int; pl, pc: int32): int =
             ps.parseExprRange(b, int32(aLo), int32(aHi), br.line, br.col)
       else:
         b.addEmpty   # bare `except:` → `.`
-      i = ps.emitBody(b, bcolon, refIndent, br.line, br.col)
+      i = ps.emitBody(b, bcolon, refIndent, br.line, br.col, ps.lineIndentOf(i))
       b.endTree()
     else:
       b.addTree "fin"
       ps.emitInfo(b, br.line, br.col, kw.line, kw.col, false)
-      i = ps.emitBody(b, bcolon, refIndent, br.line, br.col)
+      i = ps.emitBody(b, bcolon, refIndent, br.line, br.col, ps.lineIndentOf(i))
       b.endTree()
   b.endTree()  # try
   result = i
@@ -690,7 +700,7 @@ proc parseBlock(ps: var Parser; b: var Builder; kwIdx: int; pl, pc: int32): int 
     ps.emitName(b, lbl, kw.line, kw.col)   # block label, or `(quoted …)`
   else:
     b.addEmpty
-  result = ps.emitBody(b, colon, refIndent, kw.line, kw.col)
+  result = ps.emitBody(b, colon, refIndent, kw.line, kw.col, ps.lineIndentOf(kwIdx))
   b.endTree()
 
 proc parseBreakLike(ps: var Parser; b: var Builder; kwIdx: int; pl, pc: int32;
@@ -715,7 +725,7 @@ proc parseDefer(ps: var Parser; b: var Builder; kwIdx: int; pl, pc: int32): int 
   ps.emitInfo(b, kw.line, kw.col, pl, pc, false)
   let hi = ps.lineEnd(kwIdx)
   let colon = ps.findColon(kwIdx, hi)
-  result = ps.emitBody(b, colon, refIndent, kw.line, kw.col)
+  result = ps.emitBody(b, colon, refIndent, kw.line, kw.col, ps.lineIndentOf(kwIdx))
   b.endTree()
 
 # ---------------------------------------------------------------------------
@@ -980,7 +990,7 @@ proc parseStatic(ps: var Parser; b: var Builder; kwIdx: int; pl, pc: int32): int
   ps.emitInfo(b, kw.line, kw.col, pl, pc, false)
   let hi = ps.lineEnd(kwIdx)
   let colon = ps.findColon(kwIdx, hi)
-  result = ps.emitBody(b, colon, kw.col, kw.line, kw.col)
+  result = ps.emitBody(b, colon, kw.col, kw.line, kw.col, ps.lineIndentOf(kwIdx))
   b.endTree()
 
 proc semiEnd(ps: Parser; startIdx, bound: int): int =

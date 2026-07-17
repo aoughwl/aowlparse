@@ -245,6 +245,26 @@ for ok in 'proc f() =\n  echo 1' 'proc f()\ntype T = int' 'proc c(): cint {.impo
     echo "FAIL: valid '$ok' must be silent"; fail=1; }
 done
 
+# (4o) a colon-block whose body is not indented deeper than its statement line —
+# `if c:⏎x` where `x` is a sibling, not a body (the classic misindent). nifler
+# says only "invalid indentation"; we name the rule and offer the fix. Must NOT
+# fire on one-liners, properly-indented bodies, nested bodies, value-context
+# blocks, or MULTI-LINE headers (the condition spanning several lines).
+for bad in 'if true:\nlet x = 1' 'for i in 0..3:\necho 1' 'while true:\ndiscard' 'block:\ndiscard'; do
+  printf "$bad\n" > "$WORK/ib.nim"
+  out="$("$NP" check "$WORK/ib.nim" 2>&1)"
+  grep -q 'expected-indented-body' <<<"$out" || {
+    echo "FAIL: '$bad' should report expected-indented-body"; fail=1; }
+  grep -q 'help: ' <<<"$out" || { echo "FAIL: expected-indented-body should carry a fix"; fail=1; }
+done
+for ok in 'if true: discard' 'if true:\n  discard' 'proc f() =\n  if c:\n    a' \
+          'let x = if c:\n    1\n  else:\n    2' \
+          'when a and\n     b:\n  discard'; do
+  printf "$ok\n" > "$WORK/ib.nim"
+  grep -q 'expected-indented-body' <<<"$("$NP" check "$WORK/ib.nim" 2>&1)" && {
+    echo "FAIL: valid '$ok' must be silent"; fail=1; }
+done
+
 # (5) diagnostics are emitted in SOURCE ORDER (top-to-bottom), not validator order.
 printf 'let a = (1\nvar b = {2\n' > "$WORK/ord.nim"
 lines="$("$NP" check "$WORK/ord.nim" 2>&1)"
