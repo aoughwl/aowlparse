@@ -742,6 +742,22 @@ proc parsePrimaryRangeImpl(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32
         let trailComma = rpIdx > int(lo) + 1 and ps.tok(rpIdx - 1).kind == tkComma
         let named = ps.depth0Colon(starts[0], rpIdx) >= 0
         if not trailComma and not named: tag = "par"
+      # A single grouping-paren element containing a depth-0 `=` is a
+      # parenthesized ASSIGNMENT statement (`(witness = 2)` as a lambda body),
+      # a StmtListExpr → `(par (asgn lhs rhs))`. The `=` here is NOT a named-arg
+      # `k = v` (those live in a CALL's arg list, handled by pkCall directly).
+      let asgnEq = if tag == "par": ps.findAssign(starts[0], rpIdx) else: -1
+      if asgnEq >= 0:
+        let eqt = ps.tok(asgnEq)
+        b.addTree "par"
+        ps.emitInfo(b, t.line, t.col, pl, pc, false)
+        b.addTree "asgn"
+        ps.emitInfo(b, eqt.line, eqt.col, t.line, t.col, false)
+        ps.parseExprRange(b, int32(starts[0]), int32(asgnEq), eqt.line, eqt.col)
+        ps.parseExprRange(b, int32(asgnEq) + 1, int32(rpIdx), eqt.line, eqt.col)
+        b.endTree()   # asgn
+        b.endTree()   # par
+        return
       b.addTree tag
       ps.emitInfo(b, t.line, t.col, pl, pc, false)
       ps.parseArgList(b, int32(int(lo) + 1), int32(rpIdx), t.line, t.col)
