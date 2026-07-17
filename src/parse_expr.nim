@@ -158,8 +158,19 @@ proc parseBareResultBody(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32) 
   let ce = ps.cmdCalleeEnd(int(lo), int(hi))
   if head.kind == tkIdent and ce < int(hi) and ps.startsArg(ce, int(hi)):
     ps.parseCommand(b, lo, hi, pl, pc)
-  else:
-    ps.parseExprRange(b, lo, hi, pl, pc)
+    return
+  # An assignment statement as a branch body (`(if c: result = a else: result =
+  # b)`) → `(asgn lhs rhs)`, not an expression.
+  let eqi = ps.findAssign(int(lo), int(hi))
+  if eqi >= 0:
+    let op = ps.tok(eqi)
+    b.addTree "asgn"
+    ps.emitInfo(b, op.line, op.col, pl, pc, false)
+    ps.parseExprRange(b, lo, int32(eqi), op.line, op.col)
+    ps.parseExprRange(b, int32(eqi) + 1, hi, op.line, op.col)
+    b.endTree()
+    return
+  ps.parseExprRange(b, lo, hi, pl, pc)
 
 proc parseIfExpr(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32;
                  bare: bool; tag: string) =
