@@ -675,6 +675,15 @@ proc emitFieldBody(ps: var Parser; b: var Builder; colonIdx, defIndent: int;
     ps.emitFieldLine(b, bodyStart, hi, kl, kc)
     result = hi
   else:
+    # An empty variant branch — `of X:` with nothing deeper than the branch
+    # (the next token is a sibling `of`/`else` at the same indent, or a dedent) —
+    # is illegal: a branch needs at least a field, `nil`, or `discard`. nifler
+    # reports the cryptic "identifier expected, but got 'keyword of'"; we name it.
+    if first.indent <= int32(defIndent):
+      ps.perrAt("empty-variant-branch",
+        "this variant branch has no fields — a branch body must not be empty",
+        ps.tok(colonIdx).line, ps.tok(colonIdx).col,
+        fix = "add a field, or 'nil' / 'discard' for an intentionally empty branch")
     # indented block of fields wrapped in stmts
     b.addTree "stmts"
     ps.emitInfo(b, first.line, first.col, kl, kc, false)

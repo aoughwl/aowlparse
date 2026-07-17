@@ -315,6 +315,22 @@ for ok in 'type E = enum\n  a\n  b\n  c' 'type E = enum\n  a = 1\n  b = 2' \
     echo "FAIL: valid '$ok' must be silent"; fail=1; }
 done
 
+# (4s) an empty object-variant branch — `of X:` with no field, `nil`, or
+# `discard`. nifler emits a cryptic "identifier expected, but got 'keyword of'"
+# pointing at the NEXT branch; we point at the empty branch itself and offer the
+# fix. Must NOT fire on branches with fields or an explicit `nil`/`discard`.
+printf 'type T = object\n  case k: bool\n  of true:\n  of false: x: int\n' > "$WORK/cv.nim"
+out="$("$NP" check "$WORK/cv.nim" 2>&1)"
+grep -q 'empty-variant-branch' <<<"$out" || { echo "FAIL: empty variant branch should be flagged"; fail=1; }
+grep -q 'help: ' <<<"$out" || { echo "FAIL: empty-variant-branch should carry a fix"; fail=1; }
+for ok in 'type T = object\n  case k: bool\n  of true: x: int\n  of false: y: int' \
+          'type T = object\n  case k: bool\n  of true: nil\n  of false: y: int' \
+          'type T = object\n  case k: bool\n  of true:\n    x: int\n  else: discard'; do
+  printf "$ok\n" > "$WORK/cv.nim"
+  grep -q 'empty-variant-branch' <<<"$("$NP" check "$WORK/cv.nim" 2>&1)" && {
+    echo "FAIL: valid '$ok' must be silent"; fail=1; }
+done
+
 # (5) diagnostics are emitted in SOURCE ORDER (top-to-bottom), not validator order.
 printf 'let a = (1\nvar b = {2\n' > "$WORK/ord.nim"
 lines="$("$NP" check "$WORK/ord.nim" 2>&1)"
