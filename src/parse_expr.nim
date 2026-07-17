@@ -792,13 +792,24 @@ proc parsePrimaryRangeImpl(ps: var Parser; b: var Builder; lo, hi, pl, pc: int32
       var tag = "tup"
       if starts.len == 1:
         let trailComma = rpIdx > int(lo) + 1 and ps.tok(rpIdx - 1).kind == tkComma
-        let named = ps.depth0Colon(starts[0], rpIdx) >= 0
+        # a proc/func/iterator literal's depth-0 `:` is its RETURN colon, not a
+        # `name: value` tuple field — `(proc (y: int): int = …)` is `(par (proc …))`.
+        let e0 = ps.tok(starts[0])
+        let e0Proc = e0.kind == tkKeyword and
+                     (e0.s == "proc" or e0.s == "func" or e0.s == "iterator")
+        let named = ps.depth0Colon(starts[0], rpIdx) >= 0 and not e0Proc
         if not trailComma and not named: tag = "par"
       # A single grouping-paren element containing a depth-0 `=` is a
       # parenthesized ASSIGNMENT statement (`(witness = 2)` as a lambda body),
       # a StmtListExpr → `(par (asgn lhs rhs))`. The `=` here is NOT a named-arg
-      # `k = v` (those live in a CALL's arg list, handled by pkCall directly).
-      let asgnEq = if tag == "par": ps.findAssign(starts[0], rpIdx) else: -1
+      # `k = v` (those live in a CALL's arg list) NOR a proc literal's body `=`
+      # (`(proc (): int = …)` — that stays a plain `(par (proc …))`).
+      let asgnLed =
+        tag == "par" and
+        not (ps.tok(starts[0]).kind == tkKeyword and
+             (ps.tok(starts[0]).s == "proc" or ps.tok(starts[0]).s == "func" or
+              ps.tok(starts[0]).s == "iterator"))
+      let asgnEq = if asgnLed: ps.findAssign(starts[0], rpIdx) else: -1
       if asgnEq >= 0:
         let eqt = ps.tok(asgnEq)
         b.addTree "par"
