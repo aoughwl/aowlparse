@@ -252,6 +252,24 @@ for ok in 'fn(x)' 'let function = 5' 'echo fun(x)' 'result = fn(a, b)' 'fun(a) +
     echo "FAIL: valid '$ok' must NOT flag foreign-function-keyword"; fail=1; }
 done
 
+# (4f3h) foreign-block-keyword — an OO/type/module block from another language
+# (class/struct/interface/impl/trait/namespace/module) with a C-style '{ }' body.
+# Nim declares types with 'type Name = object'. Must NOT flag a variable/call use
+# of those words, or a real 'type … = object'.
+for bad in 'class Foo {\n  discard\n}' 'struct P {\n  x: int\n}' 'interface I {\n  discard\n}' \
+           'impl Foo {\n  discard\n}' 'trait T {\n  discard\n}' 'namespace N {\n  discard\n}' \
+           'module M {\n  discard\n}'; do
+  printf '%b\n' "$bad" > "$WORK/fb.nim"
+  grep -q 'foreign-block-keyword' <<<"$("$NP" check "$WORK/fb.nim" 2>&1)" || {
+    echo "FAIL: '$(echo "$bad"|head -1)' should flag foreign-block-keyword"; fail=1; }
+done
+for ok in 'type Foo = object' 'let class = 5' 'echo struct(x)' 'var impl = f()' \
+          'namespace(a, b)' 'module.foo()'; do
+  printf '%b\n' "$ok" > "$WORK/fb.nim"
+  grep -q 'foreign-block-keyword' <<<"$("$NP" check "$WORK/fb.nim" 2>&1)" && {
+    echo "FAIL: valid '$ok' must NOT flag foreign-block-keyword"; fail=1; }
+done
+
 # (4f4) c-style-operator — OPT-IN only (--c-operators:warn). '&&'/'||' are Nim's
 # 'and'/'or'. Off by default (they are definable operators); on, they warn but
 # never touch a real 'and'/'or'.

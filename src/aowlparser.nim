@@ -437,6 +437,63 @@ proc checkGrammar(toks: seq[Token]; opts: LexOptions): seq[Diagnostic] =
             elif depth == 0 and t2.kind == tkOperator and t2.s == "=": break
             inc m
     inc ffi
+  # `class Foo { … }` / `struct` / `interface` / `impl` / `trait` / `namespace` /
+  # `module` — an OO/type/module block from another language, with a C-style `{ }`
+  # body. Nim declares types with `type Name = object`, and a module IS a file (no
+  # `namespace` block). These words are valid Nim identifiers, so we demand the
+  # block shape: the word FIRST on its line and a depth-0 `{` that ENDS its line (a
+  # real body opener, which a single-line set-literal argument can't be). A depth-0
+  # `=` before the `{` (a genuine assignment) bails.
+  const foreignBlockKw = ["class", "struct", "interface", "impl", "trait",
+                          "namespace", "module"]
+  var fbi = 0
+  while fbi < toks.len:
+    let k = toks[fbi]
+    var isFbk = false
+    if k.kind == tkIdent or k.kind == tkKeyword:  # 'interface' is a legacy keyword
+      for bk in foreignBlockKw:
+        if k.s == bk: isFbk = true
+    if isFbk:
+      var p = fbi - 1
+      while p >= 0 and toks[p].kind == tkComment: dec p
+      if p < 0 or toks[p].line != k.line:
+        var nm = ""                              # first ident after the keyword
+        var jn = fbi + 1
+        while jn < toks.len and toks[jn].kind == tkComment: inc jn
+        if jn < toks.len and toks[jn].kind == tkIdent and toks[jn].line == k.line:
+          nm = toks[jn].s
+        var depth = 0
+        var m = fbi + 1
+        while m < toks.len:
+          let t2 = toks[m]
+          if t2.kind == tkEof or t2.line != k.line: break
+          if t2.kind == tkParLe or t2.kind == tkBracketLe: inc depth
+          elif t2.kind == tkParRi or t2.kind == tkBracketRi:
+            if depth > 0: dec depth
+          elif depth == 0 and t2.kind == tkOperator and t2.s == "=": break
+          elif t2.kind == tkCurlyLe and depth == 0:
+            var q = m + 1                         # is the `{` last on its line?
+            while q < toks.len and toks[q].kind == tkComment: inc q
+            let lastOnLine = q >= toks.len or toks[q].kind == tkEof or
+                             toks[q].line != k.line
+            let nextIsDot = m + 1 < toks.len and toks[m + 1].kind == tkDot
+            if lastOnLine and not nextIsDot:
+              let target = if nm.len > 0: nm else: "Name"
+              let advice =
+                if k.s == "namespace" or k.s == "module":
+                  "a Nim module is a file — import it (there is no '" & k.s & "' block)"
+                else:
+                  "declare a type with 'type " & target & " = object'"
+              result.add Diagnostic(severity: sevError,
+                code: "foreign-block-keyword",
+                message: "'" & k.s & "' is not a Nim keyword — " & advice,
+                line: k.line, col: k.col, endCol: k.endCol,
+                fix: advice)
+            break
+          elif t2.kind == tkCurlyLe: inc depth
+          elif t2.kind == tkCurlyRi and depth > 0: dec depth
+          inc m
+    inc fbi
   # `->` as a return-type arrow (`proc f() -> int`, a Rust/Python-3/C++ habit).
   # Nim writes the return type after a colon: `proc f(): int`. Found via the nifler
   # differential. Delicate: `->` is ALSO the std/sugar lambda-type operator
