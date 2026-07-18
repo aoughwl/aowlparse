@@ -143,17 +143,30 @@ proc checkGrammar(toks: seq[Token]): seq[Diagnostic] =
           fix: "did you mean '=='?")
         break
       inc j
-  # `==` where `=` was meant in a `let`/`const` binding — the mirror of
+  # `==` where `=` was meant in a `let`/`const`/`var` binding — the mirror of
   # `assignment-in-condition`. `let`/`const` are always statement-level (never a
   # type modifier, never nested in an expression), so at the keyword we are always
-  # at depth 0. The first depth-0 operator that introduces the value must be `=`;
-  # a `==` reaching that position instead compares and is always malformed. We
-  # STOP at the first depth-0 `=`, so `let x = a == b` — a real comparison in the
-  # value — is never seen, and we only look at the keyword's own line so a `let`
-  # block's later bindings aren't misattributed. Zero false positives on valid Nim.
+  # at depth 0. `var` ALSO doubles as a type modifier (`x: var int`), so we accept
+  # it only when it is the FIRST significant token on its line — a binding
+  # position, never a param/return-type modifier. The first depth-0 operator that
+  # introduces the value must be `=`; a `==` reaching that position instead
+  # compares and is always malformed. We STOP at the first depth-0 `=`, so
+  # `let x = a == b` — a real comparison in the value — is never seen, and we only
+  # look at the keyword's own line. Zero false positives on valid Nim.
   for i in 0 ..< toks.len:
     let k = toks[i]
-    if k.kind != tkKeyword or (k.s != "let" and k.s != "const"): continue
+    if k.kind != tkKeyword: continue
+    let isBinding =
+      if k.s == "let" or k.s == "const":
+        true
+      elif k.s == "var":
+        # first significant (non-comment) token on its line?
+        var p = i - 1
+        while p >= 0 and toks[p].kind == tkComment: dec p
+        p < 0 or toks[p].line != k.line
+      else:
+        false
+    if not isBinding: continue
     var depth = 0
     var j = i + 1
     while j < toks.len:

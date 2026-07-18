@@ -106,12 +106,15 @@ done
 # (4f2) comparison-in-binding — the MIRROR: '==' where '=' was meant in a
 # let/const binding ('let x == 5'). Fires on the typo, silent when '==' is a
 # real comparison in the value (after the binding '=').
-for bad in 'let x == 5' 'const C == 5' 'let x: int == 5' 'let (a, b) == p'; do
+for bad in 'let x == 5' 'const C == 5' 'let x: int == 5' 'let (a, b) == p' 'var v == 5'; do
   printf '%s\n' "$bad" > "$WORK/cb.nim"
   grep -q 'comparison-in-binding' <<<"$("$NP" check "$WORK/cb.nim" 2>&1)" || {
     echo "FAIL: '$bad' should flag comparison-in-binding"; fail=1; }
 done
-for ok in 'let x = a == b' 'const C = (1 == 1)' 'let ok = f(x == y)' 'let z = 1'; do
+# 'var' as a TYPE MODIFIER (not a binding) must never flag — it is only a binding
+# when it starts its line.
+for ok in 'let x = a == b' 'const C = (1 == 1)' 'let ok = f(x == y)' 'let z = 1' \
+          'proc f(x: var int) = discard' 'proc g(): var int = q'; do
   printf '%s\n' "$ok" > "$WORK/cb.nim"
   grep -q 'comparison-in-binding' <<<"$("$NP" check "$WORK/cb.nim" 2>&1)" && {
     echo "FAIL: '$ok' must NOT flag comparison-in-binding"; fail=1; }
