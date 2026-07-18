@@ -342,6 +342,24 @@ for ok in 'type Foo = object' 'type Foo = object of Bar' 'type Foo = ref object 
     echo "FAIL: valid '$ok' must NOT flag extends-inheritance"; fail=1; }
 done
 
+# (4f3n) yield-from ('yield from xs') + async-routine-prefix ('async proc f()').
+# Nim iterates+yields and marks async with a '{.async.}' pragma. Must NOT flag a
+# bare 'yield x', 'from m import x', 'await'/'async' calls, or an anonymous proc.
+printf 'iterator it(): int =\n  yield from xs\n' > "$WORK/y.nim"
+grep -q 'yield-from' <<<"$("$NP" check "$WORK/y.nim" 2>&1)" || {
+  echo "FAIL: 'yield from' should flag yield-from"; fail=1; }
+for bad in 'async proc f() = discard' 'async func g(): int = 1'; do
+  printf '%b\n' "$bad" > "$WORK/y.nim"
+  grep -q 'async-routine-prefix' <<<"$("$NP" check "$WORK/y.nim" 2>&1)" || {
+    echo "FAIL: '$bad' should flag async-routine-prefix"; fail=1; }
+done
+for ok in 'let x = await foo()' 'async foo()' 'let f = proc() = discard' \
+          'proc f() {.async.} = discard' 'let async = 5' 'from m import x'; do
+  printf '%b\n' "$ok" > "$WORK/y.nim"
+  grep -qE 'yield-from|async-routine-prefix' <<<"$("$NP" check "$WORK/y.nim" 2>&1)" && {
+    echo "FAIL: valid '$ok' must NOT flag an async/yield habit"; fail=1; }
+done
+
 # (4f4) c-style-operator — OPT-IN only (--c-operators:warn). '&&'/'||' are Nim's
 # 'and'/'or'. Off by default (they are definable operators); on, they warn but
 # never touch a real 'and'/'or'.

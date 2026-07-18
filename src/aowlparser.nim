@@ -609,6 +609,47 @@ proc checkGrammar(toks: seq[Token]; opts: LexOptions): seq[Diagnostic] =
             break
           inc m
     inc exi
+  # `yield from xs` — the Python generator-delegation form. Nim iterates and yields:
+  # `for x in xs: yield x`. `yield` and `from` are both keywords; `from` can never
+  # follow `yield` (yield takes an expression), so the pair is always this habit.
+  var yfi = 0
+  while yfi + 1 < toks.len:
+    let t = toks[yfi]
+    if t.kind == tkKeyword and t.s == "yield":
+      var j = yfi + 1
+      while j < toks.len and toks[j].kind == tkComment: inc j
+      if j < toks.len and toks[j].kind == tkKeyword and toks[j].s == "from" and
+         toks[j].line == t.line:
+        result.add Diagnostic(severity: sevError, code: "yield-from",
+          message: "Nim has no 'yield from' — iterate and yield: 'for x in xs: yield x'",
+          line: t.line, col: t.col, endCol: toks[j].endCol,
+          fix: "iterate and yield each item: 'for x in xs: yield x'")
+    inc yfi
+  # `async proc f() … ` — the JS/Python/C#/Rust async routine prefix. Nim marks a
+  # routine async with the `{.async.}` pragma. `async` is a valid identifier and
+  # `async foo()` / `async proc() = …` (an ANONYMOUS proc) are valid command calls,
+  # so we require `async` + a routine keyword + a NAME ident — a named routine
+  # definition can't be a command-call argument, so this shape is always the habit.
+  var asi = 0
+  while asi + 2 < toks.len:
+    let t = toks[asi]
+    if t.kind == tkIdent and t.s == "async":
+      var j = asi + 1
+      while j < toks.len and toks[j].kind == tkComment: inc j
+      var isRoutine = false
+      if j < toks.len and toks[j].kind == tkKeyword:
+        for rk in routineKw:
+          if toks[j].s == rk: isRoutine = true
+      if isRoutine and toks[j].line == t.line:
+        var n = j + 1
+        while n < toks.len and toks[n].kind == tkComment: inc n
+        if n < toks.len and toks[n].kind == tkIdent and toks[n].line == t.line:
+          result.add Diagnostic(severity: sevError, code: "async-routine-prefix",
+            message: "'async' is not a Nim keyword — mark a routine with the " &
+                     "'{.async.}' pragma",
+            line: t.line, col: t.col, endCol: t.endCol,
+            fix: "write 'proc " & toks[n].s & "() {.async.} = …' (Nim has no 'async' prefix)")
+    inc asi
   # `->` as a return-type arrow (`proc f() -> int`, a Rust/Python-3/C++ habit).
   # Nim writes the return type after a colon: `proc f(): int`. Found via the nifler
   # differential. Delicate: `->` is ALSO the std/sugar lambda-type operator
