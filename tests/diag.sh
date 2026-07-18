@@ -193,6 +193,20 @@ printf 'proc f() =\n  discard\n' > "$WORK/se.nim"
 grep -q 'stray-end' <<<"$("$NP" check "$WORK/se.nim" 2>&1)" && {
   echo "FAIL: valid code must NOT flag stray-end"; fail=1; }
 
+# (4f3e2) mut-not-a-keyword — the Rust 'let mut x' habit. Nim has no 'mut'
+# keyword; a mutable binding is 'var'. Flag 'let/var/const mut <name>' only.
+# Must NOT flag 'let mut = 5' (a variable NAMED mut) or 'x: var int' modifier.
+for bad in 'let mut x = 5' 'var mut y = 1' 'const mut z = 2'; do
+  printf '%b\n' "$bad" > "$WORK/mk.nim"
+  grep -q 'mut-not-a-keyword' <<<"$("$NP" check "$WORK/mk.nim" 2>&1)" || {
+    echo "FAIL: '$bad' should flag mut-not-a-keyword"; fail=1; }
+done
+for ok in 'let mut = 5' 'let mutable = 5' 'let mut_x = 5' 'proc f(x: var int) = discard'; do
+  printf '%b\n' "$ok" > "$WORK/mk.nim"
+  grep -q 'mut-not-a-keyword' <<<"$("$NP" check "$WORK/mk.nim" 2>&1)" && {
+    echo "FAIL: valid '$ok' must NOT flag mut-not-a-keyword"; fail=1; }
+done
+
 # (4f3f) c-brace-body — the C/Java/JS-style '{ }' block body ('proc f() { }').
 # Nim uses an indented body after '='. Must NOT flag a pragma '{.….}', a set
 # literal, or a term-rewriting template pattern ('template t{pat}(…)').

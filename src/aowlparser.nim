@@ -243,6 +243,31 @@ proc checkGrammar(toks: seq[Token]; opts: LexOptions): seq[Diagnostic] =
         message: "'::' is not valid Nim — use '.' to qualify (a.b), or a single ':'",
         line: t.line, col: t.col, endCol: t.endCol,
         fix: "use '.' to qualify (std.vector) or ':' for a type annotation")
+  # `let mut x` — the Rust mutable-binding habit. Nim has no `mut` keyword; a
+  # mutable binding is `var`. `mut` is a valid IDENTIFIER, so `let mut = 5` (a
+  # variable NAMED mut) stays valid — we flag only `let/var/const mut <name>`,
+  # i.e. `mut` followed by ANOTHER name. The span covers `<keyword> mut` so the
+  # fix can rewrite the whole run to `var`.
+  var mi = 0
+  while mi < toks.len:
+    let k = toks[mi]
+    var isBind = k.kind == tkKeyword and
+                 (k.s == "let" or k.s == "const" or k.s == "var")
+    if isBind and k.s == "var":                   # var doubles as a type modifier
+      var p = mi - 1
+      while p >= 0 and toks[p].kind == tkComment: dec p
+      isBind = p < 0 or toks[p].line != k.line     # only a binding at line start
+    if isBind:
+      var j = mi + 1
+      while j < toks.len and toks[j].kind == tkComment: inc j
+      if j < toks.len and toks[j].kind == tkIdent and toks[j].s == "mut" and
+         toks[j].line == k.line and
+         j + 1 < toks.len and toks[j + 1].kind == tkIdent:
+        result.add Diagnostic(severity: sevError, code: "mut-not-a-keyword",
+          message: "Nim has no 'mut' — a mutable binding is 'var'",
+          line: k.line, col: k.col, endCol: toks[j].endCol,
+          fix: "use 'var' for a mutable binding (drop 'mut')")
+    inc mi
   # A bare `end` — the Ruby/Pascal/Lua block terminator. `end` is a reserved Nim
   # keyword with no statement form, so an `end` that is the FIRST significant token
   # on its line is always malformed; Nim delimits blocks by indentation.
