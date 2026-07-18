@@ -243,6 +243,21 @@ proc checkGrammar(toks: seq[Token]; opts: LexOptions): seq[Diagnostic] =
         message: "'::' is not valid Nim — use '.' to qualify (a.b), or a single ':'",
         line: t.line, col: t.col, endCol: t.endCol,
         fix: "use '.' to qualify (std.vector) or ':' for a type annotation")
+  # A bare `end` — the Ruby/Pascal/Lua block terminator. `end` is a reserved Nim
+  # keyword with no statement form, so an `end` that is the FIRST significant token
+  # on its line is always malformed; Nim delimits blocks by indentation.
+  var endi = 0
+  while endi < toks.len:
+    let t = toks[endi]
+    if t.kind == tkKeyword and t.s == "end":
+      var p = endi - 1
+      while p >= 0 and toks[p].kind == tkComment: dec p
+      if p < 0 or toks[p].line != t.line:
+        result.add Diagnostic(severity: sevError, code: "stray-end",
+          message: "'end' is not a Nim statement — blocks are delimited by indentation",
+          line: t.line, col: t.col, endCol: t.endCol,
+          fix: "remove the 'end' — Nim uses indentation, not an 'end' keyword")
+    inc endi
   # `<T>` angle-bracket generics on a routine (`proc f<T>()`, a C++/Java/Rust/TS
   # habit). Nim uses `[T]`. Found via the nifler differential. `<` is the compare
   # operator, so we flag it ONLY immediately after a routine NAME (after the

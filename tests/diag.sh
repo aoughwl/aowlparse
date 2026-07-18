@@ -183,6 +183,16 @@ for ok in 'proc f[T](x: T) = discard' 'proc `<`(a, b: int): bool = a < b' 'let z
     echo "FAIL: '$ok' must NOT flag angle-bracket-generics"; fail=1; }
 done
 
+# (4f3e) stray-end — the Ruby/Pascal/Lua block terminator ('end' on its own
+# line). 'end' is a reserved Nim keyword with no statement form.
+printf 'proc f() =\n  discard\nend\n' > "$WORK/se.nim"
+grep -q 'stray-end' <<<"$("$NP" check "$WORK/se.nim" 2>&1)" || {
+  echo "FAIL: a trailing 'end' should flag stray-end"; fail=1; }
+# valid code must not flag
+printf 'proc f() =\n  discard\n' > "$WORK/se.nim"
+grep -q 'stray-end' <<<"$("$NP" check "$WORK/se.nim" 2>&1)" && {
+  echo "FAIL: valid code must NOT flag stray-end"; fail=1; }
+
 # (4f4) c-style-operator — OPT-IN only (--c-operators:warn). '&&'/'||' are Nim's
 # 'and'/'or'. Off by default (they are definable operators); on, they warn but
 # never touch a real 'and'/'or'.
